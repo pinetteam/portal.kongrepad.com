@@ -44,7 +44,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">
+                    <a class="nav-link" aria-current="page" href="{{ route("portal.meeting.index") }}">
                         <i class="nav-icon fa-duotone fa-bee"></i>
                         {{ __('common.meetings') }}
                     </a>
@@ -103,7 +103,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">
                         <i class="nav-icon fa-duotone fa-hotel"></i>
-                        {{ __('common.halls') }}
+                        {{ __('common.rooms') }}
                     </a>
                 </li>
                 <li class="nav-item">

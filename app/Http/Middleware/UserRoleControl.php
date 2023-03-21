@@ -17,7 +17,7 @@ class UserRoleControl
             if(in_array($route, $user_routes)) {
                 return $next($request);
             } else {
-                return back()->with("error","Bunu yapmaya izniniz yok!");
+                return back()->with('error',__('common.you-are-not-authorized-to-do-this'));
             }
         } else {
             return redirect()->route('auth.login.index');

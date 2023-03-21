@@ -33,9 +33,9 @@ class SettingController extends Controller
                 $customer->setting = $settings;
             }
             if ($customer->save()) {
-                return back()->with('success', __('common.updated-successfully'));
+                return back()->with('success', __('common.edited-successfully'));
             } else {
-                return back()->with('error', __('common.an-unexpected-error-has-occurred'))->withInput();
+                return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();
             }
         }
 

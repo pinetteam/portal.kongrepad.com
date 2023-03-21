@@ -3,6 +3,7 @@
 namespace App\Models\Customer;
 
 
+use App\Models\Meeting\Meeting;
 use App\Models\User\Role\UserRole;
 use App\Models\User\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -40,5 +41,9 @@ class Customer extends Model
     public function users()
     {
         return $this->hasMany(User::class, 'customer_id', 'id');
+    }
+    public function meetings()
+    {
+        return $this->hasMany(Meeting::class, 'customer_id', 'id');
     }
 }
