@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('last_name', 255);
             $table->string('email', 255)->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('phone_country_code', 7)->nullable();
             $table->unsignedBigInteger('phone_country_id')->index()->nullable();
             $table->string('phone', 31)->nullable();
             $table->timestamp('phone_verified_at')->nullable();

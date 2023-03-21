@@ -13,7 +13,7 @@
                             @csrf
                             <input name="_method" type="hidden" value="PATCH" />
                             <div class="card-header">
-                                <h1 class="m-0 text-center">{{ __('common.edit-logo') }}</h1>
+                                <h2 class="m-0 text-center">{{ __('common.edit-logo') }}</h2>
                             </div>
                             <div class="card-body p-0">
                                 <div class="d-block text-center">

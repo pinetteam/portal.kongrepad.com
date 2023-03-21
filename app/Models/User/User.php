@@ -29,7 +29,7 @@ class User extends Authenticatable
         'last_name',
         'email',
         'email_verified_at',
-        'phone_country_code',
+        'phone_country_id',
         'phone',
         'phone_verified_at',
         'password',
@@ -61,11 +61,6 @@ class User extends Authenticatable
         return "$this->first_name $this->last_name";
     }
 
-    public function getFullPhoneNumberAttribute()
-    {
-        return "$this->phone_country_code $this->phone";
-    }
-
     public function getLastLoginAttribute()
     {
         if(isset($this->last_login_datetime)) {
@@ -78,7 +73,6 @@ class User extends Authenticatable
     public function customer()
     {
         return $this->belongsTo(Customer::class, 'customer_id', 'id');
-
     }
 
     public function phone_country()
