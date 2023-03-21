@@ -13,6 +13,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(["middleware" => ['guest']], function () {
+    Route::get('/auth/login', [\App\Http\Controllers\Auth\LoginController::class, 'index'])->name('auth.login.index');
+    Route::post('/auth/login', [\App\Http\Controllers\Auth\LoginController::class, 'store'])->name('auth.login.store');
+});
+
+Route::group(["middleware" => ['auth']], function () {
+    Route::post('/auth/logout', [\App\Http\Controllers\Auth\LogoutController::class, 'store'])->name('auth.logout.store');
+});
+Route::prefix('portal')->name('portal.')->group(function () {
+    //Route::group(["middleware" => ['auth','user.role.control']], function () {
+    Route::group(["middleware" => ['auth']], function () {
+        Route::get('/', [\App\Http\Controllers\Portal\DashboardController::class, 'index'])->name('dashboard.index');
+        Route::resource('/setting', \App\Http\Controllers\Portal\Setting\SettingController::class)->only(['index', 'update']);
+        Route::resource('/user', \App\Http\Controllers\Portal\User\UserController::class)->except(['create']);
+        Route::resource('/user-role', \App\Http\Controllers\Portal\User\Role\UserRoleController::class)->except(['create']);
+    });
 });

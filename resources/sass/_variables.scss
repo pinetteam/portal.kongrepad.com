@@ -1,0 +1,43 @@
+// Colors CSS
+$primary:    #0052CC;
+$secondary:  #6554C0;
+$success:    #57D9A3;
+$info:       #2684FF;
+$warning:    #FFC400;
+$danger:     #FF5630;
+$light: #f4f5f7;
+$dark:       #344563;
+
+// Colors
+$theme-colors: (
+    "primary":    $primary,
+    "secondary":  $secondary,
+    "success":    $success,
+    "info":       $info,
+    "warning":    $warning,
+    "danger":     $danger,
+    "light":      $light,
+    "dark":       $dark
+);
+
+// Body
+$body-bg: #f8fafc;
+$enable-rounded: false;
+
+// Typography
+$font-family-sans-serif: 'Nunito', sans-serif;
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+
+// Modal
+$modal-header-border-color: $light;
+$modal-footer-border-width: 0;
+$modal-content-color: $light;
+
+
+// Nav-tabs
+$nav-tabs-link-active-bg:           $light;
+$nav-link-color:                    $light;
+$nav-tabs-link-active-color:        $dark;
+$nav-tabs-border-width:             0;
+$nav-link-disabled-color: #dadada;
