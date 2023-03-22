@@ -37,7 +37,7 @@
                 </div>
                 <div class="col-lg-9 col-md-12 col-sm-12">
                     <div class="table-responsive">
-                        <table class="table table-dark table-striped table-hover table-bordered">
+                        <table class="table table-dark table-striped table-hover table-bordered mb-0">
                             <thead class="thead-dark">
                             <tr>
                                 <th scope="col"><span class="fa-regular fa-sliders-simple mx-1"></span> {{__('common.variable')}}</th>

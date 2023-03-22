@@ -55,9 +55,9 @@
             </div>
             <ul class="nav nav-tabs flex-column">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">
-                        <i class="nav-icon fa-duotone fa-microphone-stand"></i>
-                        {{ __('common.speakers-and-chairs') }}
+                    <a class="nav-link" aria-current="page" href="{{ route("portal.participant.index") }}">
+                        <i class="nav-icon fa-duotone fa-screen-users"></i>
+                        {{ __('common.participants') }}
                     </a>
                 </li>
                 <li class="nav-item">

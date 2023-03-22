@@ -1,4 +1,8 @@
-php artisan make:model User/Session/UserSession -m
-php artisan make:request Portal/Meeting/Room/MeetingRoomRequest
-php artisan make:resource Portal/Meeting/Room/MeetingRoomResource
-php artisan make:controller Portal/Meeting/Room/MeetingRoomController --resource
+php artisan make:model Participant/Participant -m
+php artisan make:request Portal/Participant/ParticipantRequest
+php artisan make:resource Portal/Participant/ParticipantResource
+php artisan make:controller Portal/Participant/ParticipantController --resource
+
+php artisan make:request Portal/AttendeeAndTeam/AttendeeAndTeamRequest
+php artisan make:resource Portal/AttendeeAndTeam/AttendeeAndTeamResource
+php artisan make:controller Portal/AttendeeAndTeam/AttendeeAndTeamController --resource

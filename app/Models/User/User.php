@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -53,15 +54,7 @@ class User extends Authenticatable
     ];
     public function getFullNameAttribute()
     {
-        return "$this->first_name $this->last_name";
-    }
-    public function getLastActivityAttribute()
-    {
-        if($this->userSessions()->max('last_activity') !== null) {
-            return $this->userSessions()->max('last_activity');
-        } else {
-            return __('common.not-logged-in-yet');
-        }
+        return Str::of("$this->first_name $this->last_name")->trim();
     }
     public function getActivityStatusAttribute()
     {

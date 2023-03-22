@@ -4,6 +4,7 @@ namespace App\Models\Customer;
 
 use App\Models\Meeting\Meeting;
 use App\Models\Meeting\Hall\MeetingHall;
+use App\Models\Participant\Participant;
 use App\Models\User\Role\UserRole;
 use App\Models\User\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -31,6 +32,10 @@ class Customer extends Model
     protected $casts = [
         'setting' => 'array',
     ];
+    public function participants()
+    {
+        return $this->hasOneThrough(Participant::class, Meeting::class, 'customer_id', 'meeting_id', 'id', 'id');
+    }
     public function meetings()
     {
         return $this->hasMany(Meeting::class, 'customer_id', 'id');

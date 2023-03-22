@@ -19,7 +19,6 @@ class MeetingHallController extends Controller
             'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
         return view('portal.meeting-hall.index', compact(['meeting_halls', 'meetings', 'status_options']));
-
     }
     public function store(MeetingHallRequest $request)
     {
@@ -43,7 +42,6 @@ class MeetingHallController extends Controller
     {
         $meeting_hall = Auth::user()->customer->meetingHalls()->findOrFail($id);
         return new MeetingHallResource($meeting_hall);
-
     }
     public function update(MeetingHallRequest $request, string $id)
     {
