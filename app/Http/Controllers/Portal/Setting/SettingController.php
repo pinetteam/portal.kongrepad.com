@@ -23,20 +23,19 @@ class SettingController extends Controller
     public function update(Request $request, $system_config)
     {
 
-            $customer = Auth::user()->customer;
-            $settings = Auth::user()->customer->setting;
-            if ($request->has('logo')) {
-                $logo = Image::make($request->file('logo'))->encode('data-url');
-                $customer->logo = $logo;
-            } else if ($request->has('value')){
-                $settings[$system_config] = $request->input('value');
-                $customer->setting = $settings;
-            }
-            if ($customer->save()) {
-                return back()->with('success', __('common.edited-successfully'));
-            } else {
-                return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();
-            }
+        $customer = Auth::user()->customer;
+        $settings = Auth::user()->customer->setting;
+        if ($request->has('logo')) {
+            $logo = Image::make($request->file('logo'))->encode('data-url');
+            $customer->logo = $logo;
+        } else if ($request->has('value')) {
+            $settings[$system_config] = $request->input('value');
+            $customer->setting = $settings;
         }
-
+        if ($customer->save()) {
+            return back()->with('success', __('common.edited-successfully'));
+        } else {
+            return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();
+        }
+    }
 }

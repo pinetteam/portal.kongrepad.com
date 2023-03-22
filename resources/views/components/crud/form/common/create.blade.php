@@ -1,7 +1,7 @@
 <div class="modal fade" id="create-modal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="create-modal-label" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content bg-dark">
-            <form method="POST" action="" name="create-form" id="create-form" enctype="multipart/form-data">
+            <form method="POST" action="" name="create-form" id="create-form" enctype="multipart/form-data" autocomplete="nope">
                 @csrf
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="create-modal-label">{{ __('common.create') }}</h1>

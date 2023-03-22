@@ -2,7 +2,7 @@
 <div class="modal fade" id="edit-modal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="edit-modal-label" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content bg-dark">
-            <form method="POST" action="" name="edit-form" id="edit-form" enctype="multipart/form-data">
+            <form method="POST" action="" name="edit-form" id="edit-form" enctype="multipart/form-data" autocomplete="nope">
                 @csrf
                 <input name="_method" type="hidden" value="PATCH" />
                 <div class="modal-header">
@@ -38,10 +38,14 @@
                 })
                 .then((data) => {
                     const resource = data.data;
-
                     document.getElementById('edit-form').action = resource.route
                     for (const [key, value] of Object.entries(resource)) {
                         if(value['type'] == 'text') {
+                            const textElement = editModal.querySelector('#{{ $method }}-' + key);
+                            if (textElement !== null) {
+                                textElement.value = value['value'];
+                            }
+                        } else if(value['type'] == 'date') {
                             const textElement = editModal.querySelector('#{{ $method }}-' + key);
                             if (textElement !== null) {
                                 textElement.value = value['value'];

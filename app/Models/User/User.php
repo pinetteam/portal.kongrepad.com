@@ -5,6 +5,7 @@ namespace App\Models\User;
 use App\Models\Customer\Customer;
 use App\Models\System\Country\SystemCountry;
 use App\Models\User\Role\UserRole;
+use App\Models\User\Session\UserSession;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -35,6 +36,7 @@ class User extends Authenticatable
         'last_login_ip',
         'last_login_agent',
         'last_login_datetime',
+        'deleted_by',
     ];
     protected $hidden = [
         'password',
@@ -52,6 +54,29 @@ class User extends Authenticatable
     public function getFullNameAttribute()
     {
         return "$this->first_name $this->last_name";
+    }
+    public function getLastActivityAttribute()
+    {
+        if($this->userSessions()->max('last_activity') !== null) {
+            return $this->userSessions()->max('last_activity');
+        } else {
+            return __('common.not-logged-in-yet');
+        }
+    }
+    public function getActivityStatusAttribute()
+    {
+        if($this->userSessions()->max('last_activity') !== null) {
+            $now = Carbon::now()->timestamp;
+            $last_activity = $this->userSessions()->max('last_activity');
+            $diff_in_seconds = $now-$last_activity;
+            if($diff_in_seconds<300) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
     public function getLastLoginAttribute()
     {
@@ -72,5 +97,9 @@ class User extends Authenticatable
     public function role()
     {
         return $this->belongsTo(UserRole::class, 'user_role_id', 'id');
+    }
+    public function userSessions()
+    {
+        return $this->hasMany(UserSession::class, 'user_id', 'id');
     }
 }

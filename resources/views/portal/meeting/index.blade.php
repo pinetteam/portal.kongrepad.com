@@ -13,24 +13,36 @@
                     </caption>
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col"><span class="fa-regular fa-id-card mx-1"></span>{{ __('common.title') }}</th>
-                            <th scope="col"><span class="fa-regular fa-user mx-1"></span>{{ __('common.start-at') }}</th>
-                            <th scope="col"><span class="fa-regular fa-user-helmet-safety mx-1"></span>{{ __('common.finish-at') }}</th>
-                            <th scope="col"><span class="fa-regular fa-dashboard mx-1"></span>{{ __('common.status') }}</th>
+                            <th scope="col"><span class="fa-regular fa-input-text mx-1"></span>{{ __('common.title') }}</th>
+                            <th scope="col"><span class="fa-regular fa-calendar-arrow-up mx-1"></span>{{ __('common.start-at') }}</th>
+                            <th scope="col"><span class="fa-regular fa-calendar-arrow-down mx-1"></span>{{ __('common.finish-at') }}</th>
+                            <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}</th>
                             <th scope="col" class="text-end"></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($meetings as $meeting)
                             <tr>
-                                <td>{{ $meeting->title }} </td>
-                                <td>{{ $meeting->start_at }}</td>
-                                <td>{{ $meeting->finish_at }}</td>
-                                <td >
-                                    @if($meeting->status)
-                                        <i style="color:green" class="fa-solid fa-check-square fa-lg"></i>
+                                <td>{{ $meeting->title }}</td>
+                                <td>
+                                    @if($meeting->start_at)
+                                        {{ Carbon::create($meeting->start_at)->format(Auth::user()->customer->setting['date-format']) }}
                                     @else
-                                        <i style="color:red" class="fa-solid fa-square-xmark fa-lg"></i>
+                                        {{ __('common.unspecified') }}
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($meeting->finish_at)
+                                        {{ Carbon::create($meeting->finish_at)->format(Auth::user()->customer->setting['date-format']) }}
+                                    @else
+                                        {{ __('common.unspecified') }}
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($meeting->status)
+                                        <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
+                                    @else
+                                        <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
                                     @endif
                                 </td>
                                 <td class="text-end">
@@ -64,19 +76,19 @@
     </div>
     <x-crud.form.common.create>
         @section('create-form')
-            <x-input.text method="c" type="text" name="title" title="title" icon="user" />
-            <x-input.text method="c" type="date" name="start_at" title="start-at" icon="pen-nib" />
-            <x-input.text method="c" type="date" name="finish_at" title="finish-at" icon="id-card" />
-            <x-input.radio method="c" name="status" title="status" :options="$status_options" option_value="value" option_name="title" icon="gauge" />
+            <x-input.text method="c" type="text" name="title" title="title" icon="input-text" />
+            <x-input.date method="c" type="date" name="start_at" title="start-at" icon="calendar-arrow-up" />
+            <x-input.date method="c" type="date" name="finish_at" title="finish-at" icon="calendar-arrow-down" />
+            <x-input.radio method="c" name="status" title="status" :options="$status_options" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.create>
     <x-crud.form.common.delete/>
     <x-crud.form.common.edit method="e">
         @section('edit-form')
-            <x-input.text method="e" type="text" name="title" title="title" icon="user" />
-            <x-input.text method="e" type="date" name="start_at" title="start-at" icon="pen-nib" />
-            <x-input.text method="e" type="date" name="finish_at" title="finish-at" icon="id-card" />
-            <x-input.radio method="e" name="status" title="status" :options="$status_options" option_value="value" option_name="title" icon="gauge" />
+            <x-input.text method="e" type="text" name="title" title="title" icon="input-text" />
+            <x-input.date method="e" type="date" name="start_at" title="start-at" icon="calendar-arrow-up" />
+            <x-input.date method="e" type="date" name="finish_at" title="finish-at" icon="calendar-arrow-down" />
+            <x-input.radio method="e" name="status" title="status" :options="$status_options" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.edit>
 @endsection

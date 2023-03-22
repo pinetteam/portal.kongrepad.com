@@ -13,14 +13,14 @@
                             @csrf
                             <input name="_method" type="hidden" value="PATCH" />
                             <div class="card-header">
-                                <h2 class="m-0 text-center">{{ __('common.edit-logo') }}</h2>
+                                <h3 class="m-0 text-center">{{ __('common.edit-logo') }}</h3>
                             </div>
                             <div class="card-body p-0">
                                 <div class="d-block text-center">
                                     @if($customer->logo)
-                                        <img src="{{ $customer->logo }}" alt="Red dot" class="my-2 img-thumbnail img-fluid bg-dark" />
+                                        <img src="{{ $customer->logo }}" alt="Red dot" class="img-thumbnail img-fluid bg-dark" />
                                     @else
-                                        <img src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==" alt="Red dot" width="200" height="200" class="mb-2 img-thumbnail bg-dark" />
+                                        <img src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==" alt="Red dot" width="200" height="200" class="img-thumbnail bg-dark" />
                                     @endif
                                     <div class="custom-file">
                                         <input type="file" name="logo" class="form-control form-control-sm" id="logo" accept="image/jpg,image/png,image/gif,image/bmp,image/webp">
@@ -28,8 +28,8 @@
                                 </div>
                             </div>
                             <div class="card-footer p-0">
-                                <button type="submit" name="submit" class="btn btn-lg btn-primary w-100">
-                                    {{__('common.edit-logo')}}
+                                <button type="submit" name="submit" class="btn btn-lg btn-success w-100">
+                                    <i class="fa-solid fa-image"></i> {{__('common.edit-logo')}}
                                 </button>
                             </div>
                         </form>
@@ -37,11 +37,11 @@
                 </div>
                 <div class="col-lg-9 col-md-12 col-sm-12">
                     <div class="table-responsive">
-                        <table class="table table-dark table-striped table-hover">
+                        <table class="table table-dark table-striped table-hover table-bordered">
                             <thead class="thead-dark">
                             <tr>
-                                <th scope="col">{{__('common.variable')}}</th>
-                                <th scope="col">{{__('common.value')}}</th>
+                                <th scope="col"><span class="fa-regular fa-sliders-simple mx-1"></span> {{__('common.variable')}}</th>
+                                <th scope="col"><span class="fa-regular fa-screwdriver-wrench mx-1"></span> {{__('common.value')}}</th>
                                 <th scope="col" class="text-end"></th>
                             </tr>
                             </thead>
@@ -69,7 +69,7 @@
                                                             <div class="modal-body">
                                                                 <div class="form-group mb-3 text-center">
                                                                     <label for="value-{{ $system_config }}" class="form-label">
-                                                                        <i class="fa-regular fa-gear"></i> {{ __('common.value') }}
+                                                                        <i class="fa-regular fa-screwdriver-wrench"></i> {{ __('common.value') }}
                                                                     </label>
                                                                     <input type="text" name="value" class="form-control @error('value')is-invalid @enderror" id="value-{{ $system_config }}" placeholder="{{ $value }}" value="{{ $value }}">
                                                                     @error('value')

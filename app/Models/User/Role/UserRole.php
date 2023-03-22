@@ -15,6 +15,7 @@ class UserRole extends Model
         'title',
         'access_scopes',
         'status',
+        'deleted_by',
     ];
     protected $dates = [
         'deleted_at',

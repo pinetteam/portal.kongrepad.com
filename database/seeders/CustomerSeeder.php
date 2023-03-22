@@ -17,6 +17,8 @@ class CustomerSeeder extends Seeder
     {
         $customer_setting = [
             'timezone' => 'Europe/Istanbul',
+            'date-format' => 'd/m/Y',
+            'time-format' => 'H:i',
             'address' => 'İçerenköy Mah. Çayır Cad. No:5 Bay Plaza Kat:12 Ataşehir İstanbul',
         ];
         Customer::insert([

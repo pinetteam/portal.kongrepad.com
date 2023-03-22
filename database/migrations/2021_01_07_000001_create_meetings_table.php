@@ -19,8 +19,10 @@ return new class extends Migration
             $table->date('finish_at')->nullable();
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
             $table->timestamps();
+            $table->unsignedBigInteger('deleted_by')->index()->nullable();
             $table->softDeletes();
             $table->foreign('customer_id')->on('customers')->references('id');
+            $table->foreign('deleted_by')->on('users')->references('id');
         });
     }
 

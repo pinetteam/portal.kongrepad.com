@@ -3,7 +3,7 @@
 namespace App\Models\Customer;
 
 use App\Models\Meeting\Meeting;
-use App\Models\Meeting\Room\MeetingRoom;
+use App\Models\Meeting\Hall\MeetingHall;
 use App\Models\User\Role\UserRole;
 use App\Models\User\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -23,6 +23,7 @@ class Customer extends Model
         'language',
         'setting',
         'status',
+        'deleted_by',
     ];
     protected $dates = [
         'deleted_at',
@@ -34,9 +35,9 @@ class Customer extends Model
     {
         return $this->hasMany(Meeting::class, 'customer_id', 'id');
     }
-    public function meetingRooms()
+    public function meetingHalls()
     {
-        return $this->hasOneThrough(MeetingRoom::class, Meeting::class, 'customer_id', 'meeting_id', 'id', 'id');
+        return $this->hasOneThrough(MeetingHall::class, Meeting::class, 'customer_id', 'meeting_id', 'id', 'id');
     }
     public function users()
     {

@@ -1,7 +1,7 @@
 <div class="modal fade" id="delete-modal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="delete-modal-label" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content bg-dark">
-            <form method="POST" action="" name="delete-form" id="delete-form">
+            <form method="POST" action="" name="delete-form" id="delete-form" autocomplete="nope">
                 @csrf
                 <input name="_method" type="hidden" value="DELETE">
                 <div class="modal-header">

@@ -7,7 +7,6 @@ use App\Http\Requests\Portal\User\UserRequest;
 use App\Http\Resources\Portal\User\UserResource;
 use App\Models\System\Country\SystemCountry;
 use App\Models\User\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -24,10 +23,7 @@ class UserController extends Controller
             'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
         return view('portal.user.index', compact(['users', 'branches', 'user_roles', 'status_options', 'countries']));
-
-
     }
-
     public function store(UserRequest $request)
     {
         if ($request->validated()) {
@@ -49,23 +45,17 @@ class UserController extends Controller
             }
         }
     }
-
-
     public function show($id)
     {
 
     }
-
     public function edit($id)
     {
         $user = Auth::user()->customer->users()->findOrFail($id);
         return new UserResource($user);
     }
-
     public function update(UserRequest $request, $id)
     {
-
-
         if ($request->validated()) {
             $user = Auth::user()->customer->users()->findOrFail($id);
             $user->user_role_id = $request->input('user_role_id');
@@ -86,19 +76,18 @@ class UserController extends Controller
             }
         }
     }
-
     public function destroy($id)
     {
         $user = Auth::user()->customer->users()->findOrFail($id);
         if(Auth::user()->id == $id){
-            return back()->with('error',__('common.you-can-not-delete-your-own-record'));
+            return back()->with('warning',__('common.you-can-not-delete-your-own-record'));
         }
         else if ($user->delete()) {
+            $user->deleted_by = Auth::user()->id;
+            $user->save();
             return back()->with('success', __('common.deleted-successfully'));
         } else {
             return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();
         }
     }
-
-
 }

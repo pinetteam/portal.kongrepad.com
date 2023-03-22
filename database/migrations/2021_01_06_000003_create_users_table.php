@@ -34,10 +34,15 @@ return new class extends Migration
             $table->string('last_login_agent', 511)->nullable();
             $table->dateTime('last_login_datetime')->nullable();
             $table->timestamps();
+            $table->unsignedBigInteger('deleted_by')->index()->nullable();
             $table->softDeletes();
             $table->foreign('customer_id')->on('customers')->references('id');
-            $table->foreign('user_role_id')->on('user_roles')->references('id');
+            $table->foreign('deleted_by')->on('users')->references('id');
             $table->foreign('phone_country_id')->on('system_countries')->references('id');
+            $table->foreign('user_role_id')->on('user_roles')->references('id');
+        });
+        Schema::table('user_roles', function (Blueprint $table) {
+            $table->foreign('deleted_by')->on('users')->references('id');
         });
     }
 
@@ -49,5 +54,8 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('users');
+        Schema::table('user_roles', function (Blueprint $table) {
+            $table->foreign('deleted_by')->on('users')->references('id');
+        });
     }
 };

@@ -16,6 +16,7 @@ class Meeting extends Model
         'start_at',
         'finish_at',
         'status',
+        'deleted_by',
     ];
     protected $dates = [
         'start_at',

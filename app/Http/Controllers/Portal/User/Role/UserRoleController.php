@@ -7,7 +7,6 @@ use App\Http\Requests\Portal\User\Role\UserRoleRequest;
 use App\Http\Resources\Portal\User\Role\UserRoleResource;
 use App\Models\User\Role\Scope\UserRoleScope;
 use App\Models\User\Role\UserRole;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UserRoleController extends Controller
@@ -22,7 +21,6 @@ class UserRoleController extends Controller
         $user_roles = Auth()->user()->customer->userRoles()->paginate(20);
         return view('portal.user-role.index', compact(['user_roles', 'status_options','scopes']));
     }
-
     public function store(UserRoleRequest $request)
     {
         if ($request->validated()) {
@@ -39,26 +37,16 @@ class UserRoleController extends Controller
             }
         }
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $user_role = Auth::user()->customer->userRoles()->findOrFail($id);
         return dd($user_role->scopes);
     }
-
-
     public function edit($id)
     {
         $user_role = Auth::user()->customer->userRoles()->findOrFail($id);
         return new UserRoleResource($user_role);
     }
-
     public function update(UserRoleRequest $request, $id)
     {
         if ($request->validated()) {
@@ -75,11 +63,12 @@ class UserRoleController extends Controller
             }
         }
     }
-
     public function destroy($id)
     {
         $user_role = UserRole::findOrFail($id);
         if ($user_role->delete()) {
+            $user_role->deleted_by = Auth::user()->id;
+            $user_role->save();
             return back()->with('success', __('common.deleted-successfully'));
         } else {
             return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();

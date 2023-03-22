@@ -25,7 +25,7 @@ class LoginController extends Controller
                 return redirect()->route('portal.dashboard.index')->with('success', __('common.you-have-successfully-logged-in'));
             } else {
                 Auth::logout();
-                return redirect()->route('auth.login.index');
+                return redirect()->route('auth.login.index')->with('error', __('common.your-account-has-been-locked'));
             }
         } else {
             return back()->with('error', __('common.your-credentials-do-not-match'));

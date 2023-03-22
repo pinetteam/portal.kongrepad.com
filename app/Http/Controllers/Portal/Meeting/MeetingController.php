@@ -6,14 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Portal\Meeting\MeetingRequest;
 use App\Http\Resources\Portal\Meeting\MeetingResource;
 use App\Models\Meeting\Meeting;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class MeetingController extends Controller
 {
     public function index()
     {
-
         $meetings = Meeting::paginate(20);
         $status_options = [
             'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
@@ -21,7 +19,6 @@ class MeetingController extends Controller
         ];
         return view('portal.meeting.index', compact(['meetings', 'status_options']));
     }
-
     public function store(MeetingRequest $request)
     {
         if ($request->validated()) {
@@ -38,19 +35,15 @@ class MeetingController extends Controller
             }
         }
     }
-
-
     public function show($id)
     {
 
     }
-
     public function edit($id)
     {
         $user = Auth::user()->customer->meetings()->findOrFail($id);
         return new MeetingResource($user);
     }
-
     public function update(MeetingRequest $request, $id)
     {
         if ($request->validated()) {
@@ -66,11 +59,12 @@ class MeetingController extends Controller
             }
         }
     }
-
     public function destroy($id)
     {
         $user = Auth::user()->customer->meetings()->findOrFail($id);
         if ($user->delete()) {
+            $user->deleted_by = Auth::user()->id;
+            $user->save();
             return back()->with('success', __('common.deleted-successfully'));
         } else {
             return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();

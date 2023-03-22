@@ -4,16 +4,15 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>{{ucwords(__('common.log-in'))}}</title>
+    <title>{{ucwords(__('common.log-in'))}} | {{ config('app.name') }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}"/>
     @vite(['resources/sass/app.scss'])
     @vite(['resources/js/app.js'])
 </head>
-
 <body class="d-flex align-items-center bg-dark h-100">
 <header class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow-lg" id="mp-header">
-    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">KongrePad</a>
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="{{ route('auth.login.index') }}">{{ config('app.name') }}</a>
 </header>
 <div class="container mt-4">
     <div class="row vertical-offset-100 d-flex justify-content-center">
@@ -30,16 +29,16 @@
                                 @csrf
                                 <fieldset>
                                     <p>
-                                        <x-input.text name="username" title="username" icon="user"/>
+                                        <x-input.text name="username" title="username" icon="user" />
                                     </p>
                                     <p>
-                                        <x-input.text name="password" type="password" title="password" icon="lock"/>
+                                        <x-input.text name="password" type="password" title="password" icon="lock" />
                                     </p>
                                     <div class="d-flex justify-content-between">
                                         <div class="checkbox ">
                                             <label>
-                                                <input id="remember "name="remember" type="checkbox"
-                                                       value="Remember Me"> {{ __('common.remember-me') }}
+                                                <input id="remember" name="remember" type="checkbox" value="remember">
+                                                {{ __('common.remember-me') }}
                                             </label>
                                         </div>
                                         <div>
