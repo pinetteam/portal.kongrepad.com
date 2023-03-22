@@ -1,25 +1,21 @@
 <?php
 
-namespace App\Models\User\Role;
+namespace App\Models\Meeting\Room;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class UserRole extends Model
+class MeetingRoom extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $table = 'user_roles';
+    protected $table = 'meeting_rooms';
     protected $fillable = [
-        'customer_id',
+        'meeting_id',
         'title',
-        'access_scopes',
         'status',
     ];
     protected $dates = [
         'deleted_at',
-    ];
-    protected $casts = [
-        'access_scopes' => 'array',
     ];
 }

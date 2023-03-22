@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Portal\User\Role;
+namespace App\Http\Requests\Portal\Meeting\Room;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class UserRoleRequest extends FormRequest
+class MeetingRoomRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -16,11 +15,11 @@ class UserRoleRequest extends FormRequest
     {
         switch($this->method())
         {
-            case 'POST' || 'PATCH' || 'PUT':
+            case 'POST' ||  'PATCH' || 'PUT':
             {
                 return [
+                    'meeting_id' => 'required|exists:meetings,id',
                     'title' => 'required|max:255',
-                    'access_scopes' => 'nullable|array',
                     'status' => 'required|boolean',
                 ];
             }
@@ -30,7 +29,7 @@ class UserRoleRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'access_scopes' => __('common.access-scopes'),
+            'meeting_id' => __('common.meeting'),
         ];
     }
     public function filters(): array

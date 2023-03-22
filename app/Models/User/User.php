@@ -2,7 +2,6 @@
 
 namespace App\Models\User;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Customer\Customer;
 use App\Models\System\Country\SystemCountry;
 use App\Models\User\Role\UserRole;
@@ -11,15 +10,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Validation\Rule;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
-
     protected $table = 'users';
-
     protected $fillable = [
         'branch_id',
         'customer_id',
@@ -40,27 +36,23 @@ class User extends Authenticatable
         'last_login_agent',
         'last_login_datetime',
     ];
-
     protected $hidden = [
         'password',
         'remember_token',
     ];
-
     protected $casts = [
         'email_verified_at' => 'datetime',
         'last_login_datetime' => 'datetime',
     ];
-
     protected $dates = [
-        'deleted_at',
+        'email_verified_at',
         'last_login_datetime',
+        'deleted_at',
     ];
-
     public function getFullNameAttribute()
     {
         return "$this->first_name $this->last_name";
     }
-
     public function getLastLoginAttribute()
     {
         if(isset($this->last_login_datetime)) {
@@ -69,20 +61,16 @@ class User extends Authenticatable
             return __('common.not-logged-in-yet');
         }
     }
-
     public function customer()
     {
         return $this->belongsTo(Customer::class, 'customer_id', 'id');
     }
-
-    public function phone_country()
+    public function phoneCountry()
     {
         return $this->belongsTo(SystemCountry::class, 'phone_country_id', 'id');
     }
-
     public function role()
     {
         return $this->belongsTo(UserRole::class, 'user_role_id', 'id');
     }
-
 }

@@ -56,6 +56,7 @@
         </div>
     </div>
 </div>
+<x-common.popup.default />
 </body>
 </html>
 

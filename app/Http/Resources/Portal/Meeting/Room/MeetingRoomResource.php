@@ -1,20 +1,19 @@
 <?php
 
-namespace App\Http\Resources\Portal\Meeting;
+namespace App\Http\Resources\Portal\Meeting\Room;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class MeetingResource extends JsonResource
+class MeetingRoomResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
         return [
+            'meeting_id' => ['value'=>$this->meeting_id, 'type'=>'select'],
             'title' => ['value'=>$this->title, 'type'=>'text'],
-            'start_at' => ['value'=>$this->start_at, 'type'=>'date'],
-            'finish_at' => ['value'=>$this->finish_at, 'type'=>'date'],
             'status' => ['value'=>$this->status, 'type'=>'radio'],
-            'route' => route('portal.meeting.update', $this->id),
+            'route' => route('portal.meeting-room.update', $this->id),
         ];
     }
 }

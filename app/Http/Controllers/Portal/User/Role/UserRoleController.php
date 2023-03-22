@@ -82,7 +82,7 @@ class UserRoleController extends Controller
         if ($user_role->delete()) {
             return back()->with('success', __('common.deleted-successfully'));
         } else {
-            return back()->with('error', __('common.an-unexpected-error-has-occurred'))->withInput();
+            return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();
         }
     }
 }

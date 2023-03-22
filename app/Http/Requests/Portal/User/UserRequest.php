@@ -8,21 +8,10 @@ use Illuminate\Validation\Rule;
 
 class UserRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize(): bool
     {
         return true;
     }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, mixed>
-     */
     public function rules(): array
     {
         switch($this->method())
@@ -30,7 +19,6 @@ class UserRequest extends FormRequest
             case 'POST':
             {
                 return [
-                    'user_role_id' => 'required|exists:user_roles,id',
                     'username' => 'required|unique|max:255',
                     'first_name' => 'required|max:255',
                     'last_name' => 'required|max:255',
@@ -38,35 +26,43 @@ class UserRequest extends FormRequest
                     'phone_country_id' => 'nullable|exists:system_countries,id|required_with:phone,phone-country-code',
                     'phone' => 'nullable|max:31|required_with:phone_country_id,phone',
                     'password' => 'required|max:255',
+                    'user_role_id' => 'required|exists:user_roles,id',
                     'status' => 'required|boolean',
                 ];
             }
             case 'PATCH' || 'PUT':
             {
                 return [
-                    'user_role_id' => 'required|exists:user_roles,id',
                     'username' => ['required', Rule::unique('users','username')->ignore($this->username,'username'), 'max:255'],
                     'first_name' => 'required|max:255',
                     'last_name' => 'required|max:255',
-                    'email' => ['required', Rule::unique('users','email')->ignore($this->email,'email'), 'max:255'],
+                    'email' => ['required', 'email', Rule::unique('users','email')->ignore($this->email,'email'), 'max:255'],
                     'phone_country_id' => 'nullable|exists:system_countries,id|required_with:phone,phone-country-code',
                     'phone' => 'nullable|max:31|required_with:phone_country_id,phone',
                     'password' => 'nullable|max:255',
+                    'user_role_id' => 'required|exists:user_roles,id',
                     'status' => 'required|boolean',
                 ];
             }
             default:break;
         }
     }
-
-    public function filters()
+    public function attributes(): array
     {
         return [
-            'email' => 'trim|lowercase',
-            'username' => 'trim|lowercase|escape'
+            'first_name' => __('common.first-name'),
+            'last_name' => __('common.last-name'),
+            'phone_country_id' => __('common.phone-country-code'),
+            'user_role_id' => __('common.user-role'),
         ];
     }
-
+    public function filters(): array
+    {
+        return [
+            'username' => 'trim|lowercase|escape',
+            'email' => 'trim|lowercase',
+        ];
+    }
     public function failedValidation(Validator $validator)
     {
         return back()->with('method', $this->method())->with('route', url()->current())->withErrors($this->validator)->withInput();
