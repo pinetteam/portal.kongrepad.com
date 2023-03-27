@@ -70,7 +70,7 @@ class DocumentController extends Controller
             $document->title = $request->input('title');
             if ($request->hasFile('file')) {
                 $file = $request->file('file');
-                $file_name = Str::uuid()->toString();
+                $file_name = $document->file_name;
                 $file_extension = $file->getClientOriginalExtension();
                 if(Storage::putFileAs('documents', $request->file('file'), $file_name.'.'.$file_extension)) {
                     $document->file_name = $file_name;
