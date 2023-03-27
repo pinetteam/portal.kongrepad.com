@@ -20,6 +20,7 @@ return [
     'error-modal-close' => '<i class="fa-regular fa-circle-xmark"></i> Close',
     'log-in' => 'Log In',
     'username' => 'Username',
+    'view' => 'View',
     'agent' => 'Agent',
     'score-game' => 'Score Game',
     'attendee' => 'Attendee',

@@ -27,7 +27,7 @@
                                 <td>{{ $document->title }}</td>
                                 <td>{{ $document->participant->full_name }}</td>
                                 <td>{{ __('common.'.$document->type) }}</td>
-                                <td>{{ $document->file_name }}</td>
+                                <td><a href="{{ route('portal.document-download.index', $document->file_name) }}" class="btn btn-sm btn-info w-100"><span class="fa-regular fa-file-arrow-down"></span> {{ __('common.view') }}</a></td>
                                 <td>
                                     @if($document->status)
                                         <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>

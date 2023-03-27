@@ -7,6 +7,8 @@ use App\Http\Requests\Portal\Document\DocumentRequest;
 use App\Http\Resources\Portal\Document\DocumentResource;
 use App\Models\Document\Document;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class DocumentController extends Controller
 {
@@ -31,6 +33,17 @@ class DocumentController extends Controller
             $document = new Document();
             $document->participant_id = $request->input('participant_id');
             $document->title = $request->input('title');
+            if ($request->hasFile('file')) {
+                $file = $request->file('file');
+                $file_name = Str::uuid()->toString();
+                $file_extension = $file->getClientOriginalExtension();
+                if(Storage::putFileAs('documents', $request->file('file'), $file_name.'.'.$file_extension)) {
+                    $document->file_name = $file_name;
+                    $document->file_extension = $file_extension;
+                } else {
+                    return back()->with('create_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
+                }
+            }
             $document->type = $request->input('type');
             $document->status = $request->input('status');
             if ($document->save()) {
@@ -55,6 +68,17 @@ class DocumentController extends Controller
             $document = Auth::user()->customer->documents()->findOrFail($id);
             $document->participant_id = $request->input('participant_id');
             $document->title = $request->input('title');
+            if ($request->hasFile('file')) {
+                $file = $request->file('file');
+                $file_name = Str::uuid()->toString();
+                $file_extension = $file->getClientOriginalExtension();
+                if(Storage::putFileAs('documents', $request->file('file'), $file_name.'.'.$file_extension)) {
+                    $document->file_name = $file_name;
+                    $document->file_extension = $file_extension;
+                } else {
+                    return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
+                }
+            }
             $document->type = $request->input('type');
             $document->status = $request->input('status');
             if ($document->save()) {

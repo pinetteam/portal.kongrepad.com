@@ -4,6 +4,7 @@ namespace App\Http\Requests\Portal\Document;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\File;
 
 class DocumentRequest extends FormRequest
 {
@@ -19,7 +20,7 @@ class DocumentRequest extends FormRequest
             {
                 return [
                     'participant_id' => 'required|exists:participants,id',
-                    'file' => 'required',
+                    'file' => ['required', File::types(['pdf', 'pptx', 'xls', 'xlsx'])->max(10240)],
                     'title' => 'nullable|max:255',
                     'type' => 'required|in:presentation,publication,other',
                     'status' => 'required|boolean',
@@ -29,7 +30,7 @@ class DocumentRequest extends FormRequest
             {
                 return [
                     'participant_id' => 'required|exists:participants,id',
-                    'file' => 'nullable',
+                    'file' => ['nullable', File::types(['pdf', 'pptx', 'xls', 'xlsx'])->max(10240)],
                     'title' => 'nullable|max:255',
                     'type' => 'required|in:presentation,publication,other',
                     'status' => 'required|boolean',
