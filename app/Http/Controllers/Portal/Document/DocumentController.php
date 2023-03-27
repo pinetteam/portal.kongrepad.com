@@ -15,6 +15,7 @@ class DocumentController extends Controller
     public function index()
     {
         $documents = Auth::user()->customer->documents()->paginate(20);
+
         $participants = Auth::user()->customer->participants()->get();
         $types = [
             'presentation' => ["value" => "presentation", "title" => __('common.presentation')],
