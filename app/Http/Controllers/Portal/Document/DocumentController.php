@@ -49,6 +49,7 @@ class DocumentController extends Controller
                 }
             }
             $document->type = $request->input('type');
+            $document->sharing_via_email = $request->input('sharing_via_email');
             $document->status = $request->input('status');
             if ($document->save()) {
                 return back()->with('success', __('common.created-successfully'));
