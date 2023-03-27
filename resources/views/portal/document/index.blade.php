@@ -14,7 +14,6 @@
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col"><span class="fa-regular fa-bee mx-1"></span> {{ __('common.title') }}</th>
-                            <th scope="col"><span class="fa-regular fa-id-card-clip mx-1"></span> {{ __('common.meeting') }}</th>
                             <th scope="col"><span class="fa-regular fa-id-card mx-1"></span> {{ __('common.participant') }}</th>
                             <th scope="col"><span class="fa-regular fa-person-military-pointing mx-1"></span> {{ __('common.type') }}</th>
                             <th scope="col"><span class="fa-regular fa-right-to-bracket mx-1"></span> {{ __('common.file') }}</th>
@@ -26,7 +25,6 @@
                         @foreach($documents as $document)
                             <tr>
                                 <td>{{ $document->title }}</td>
-                                <td>{{ $document->meeting->title }}</td>
                                 <td>{{ $document->participant->full_name }}</td>
                                 <td>{{ __('common.'.$document->type) }}</td>
                                 <td>{{ $document->file_name }}</td>
@@ -68,8 +66,7 @@
     </div>
     <x-crud.form.common.create>
         @section('create-form')
-            <x-input.select method="c" name="meeting_id" title="meeting" :options="$meetings" option_value="id" option_name="title" icon="bee" />
-            <x-input.select method="c" name="participant_id" title="participant" :options="$participants" option_value="id" option_name="title" icon="screen-users" />
+            <x-input.select method="c" name="participant_id" title="participant" :options="$participants" option_value="id" option_name="full_name" icon="screen-users" />
             <x-input.text method="c" type="text" name="title" title="title" icon="input-text" />
             <x-input.select method="c" name="type" title="type" :options="$types" option_value="value" option_name="title" icon="person-military-pointing" />
             <x-input.radio method="c" name="status" title="status" :options="$status_options" option_value="value" option_name="title" icon="toggle-large-on" />
@@ -78,8 +75,7 @@
     <x-crud.form.common.delete/>
     <x-crud.form.common.edit method="e">
         @section('edit-form')
-            <x-input.select method="e" name="meeting_id" title="meeting" :options="$meetings" option_value="id" option_name="title" icon="bee" />
-            <x-input.select method="e" name="participant_id" title="participant" :options="$participants" option_value="id" option_name="title" icon="screen-users" />
+            <x-input.select method="e" name="participant_id" title="participant" :options="$participants" option_value="id" option_name="full_name" icon="screen-users" />
             <x-input.text method="e" type="text" name="title" title="title" icon="input-text" />
             <x-input.select method="e" name="type" title="type" :options="$types" option_value="value" option_name="title" icon="person-military-pointing" />
             <x-input.radio method="e" name="status" title="status" :options="$status_options" option_value="value" option_name="title" icon="toggle-large-on" />

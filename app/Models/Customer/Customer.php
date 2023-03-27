@@ -33,13 +33,17 @@ class Customer extends Model
     protected $casts = [
         'setting' => 'array',
     ];
+    public function documents()
+    {
+        $documents = Document::select('documents.*')->join('participants', 'documents.participant_id', '=', 'participants.id')
+            ->join('meetings', 'participants.meeting_id', '=', 'meetings.id')
+            ->join('customers', 'meetings.customer_id', '=', 'customers.id')
+            ->where('customers.id', $this->getkey());
+        return $documents;
+    }
     public function participants()
     {
         return $this->hasOneThrough(Participant::class, Meeting::class, 'customer_id', 'meeting_id', 'id', 'id');
-    }
-    public function documents()
-    {
-        return $this->hasOneThrough(Document::class, Meeting::class, 'customer_id', 'meeting_id', 'id', 'id');
     }
     public function meetings()
     {

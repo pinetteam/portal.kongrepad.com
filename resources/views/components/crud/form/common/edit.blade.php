@@ -45,11 +45,6 @@
                             if (textElement !== null) {
                                 textElement.value = value['value'];
                             }
-                        } else if(value['type'] == 'date') {
-                            const textElement = editModal.querySelector('#{{ $method }}-' + key);
-                            if (textElement !== null) {
-                                textElement.value = value['value'];
-                            }
                         } else if(value['type'] == 'select') {
                             const selectElement = editModal.querySelector('#{{ $method }}-' + key);
                             if (selectElement !== null) {

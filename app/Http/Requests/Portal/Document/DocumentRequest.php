@@ -15,11 +15,10 @@ class DocumentRequest extends FormRequest
     {
         switch($this->method())
         {
-            case 'POST' || 'PATCH' || 'PUT':
+            case 'POST':
             {
                 return [
-                    'meeting_id' => 'required|exists:meetings,id',
-                    'participant_id' => 'nullable|exists:meetings,id',
+                    'participant_id' => 'required|exists:participants,id',
                     'file' => 'required',
                     'title' => 'nullable|max:255',
                     'type' => 'required|in:presentation,publication,other',
@@ -29,8 +28,7 @@ class DocumentRequest extends FormRequest
             case 'PATCH' || 'PUT':
             {
                 return [
-                    'meeting_id' => 'required|exists:meetings,id',
-                    'participant_id' => 'nullable|exists:meetings,id',
+                    'participant_id' => 'required|exists:participants,id',
                     'file' => 'nullable',
                     'title' => 'nullable|max:255',
                     'type' => 'required|in:presentation,publication,other',
@@ -43,7 +41,6 @@ class DocumentRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'meeting_id' => __('common.meeting'),
             'participant_id' => __('common.participant'),
         ];
     }

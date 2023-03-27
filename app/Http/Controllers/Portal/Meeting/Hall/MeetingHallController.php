@@ -12,7 +12,7 @@ class MeetingHallController extends Controller
 {
     public function index()
     {
-        $meeting_halls = MeetingHall::paginate(20);
+        $meeting_halls = Auth::user()->customer->meetingHalls()->paginate(20);
         $meetings = Auth::user()->customer->meetings;
         $status_options = [
             'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],

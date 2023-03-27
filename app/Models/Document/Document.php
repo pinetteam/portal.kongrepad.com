@@ -2,7 +2,6 @@
 
 namespace App\Models\Document;
 
-use App\Models\Meeting\Meeting;
 use App\Models\Participant\Participant;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -24,10 +23,6 @@ class Document extends Model
     protected $dates = [
         'deleted_at',
     ];
-    public function meeting()
-    {
-        return $this->belongsTo(Meeting::class, 'meeting_id', 'id');
-    }
     public function participant()
     {
         return $this->belongsTo(Participant::class, 'participant_id', 'id');

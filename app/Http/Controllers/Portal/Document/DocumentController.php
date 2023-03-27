@@ -13,8 +13,7 @@ class DocumentController extends Controller
     public function index()
     {
         $documents = Auth::user()->customer->documents()->paginate(20);
-        $meetings = Auth::user()->customer->meetings;
-        $participants = Auth::user()->customer->participants;
+        $participants = Auth::user()->customer->participants()->get();
         $types = [
             'presentation' => ["value" => "presentation", "title" => __('common.presentation')],
             'publication' => ["value" => "publication", "title" => __('common.publication')],
@@ -24,13 +23,12 @@ class DocumentController extends Controller
             'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.document.index', compact(['documents', 'meetings', 'participants', 'types', 'status_options']));
+        return view('portal.document.index', compact(['documents', 'participants', 'types', 'status_options']));
     }
     public function store(DocumentRequest $request)
     {
         if ($request->validated()) {
             $document = new Document();
-            $document->meeting_id = $request->input('meeting_id');
             $document->participant_id = $request->input('participant_id');
             $document->title = $request->input('title');
             $document->type = $request->input('type');
@@ -55,7 +53,6 @@ class DocumentController extends Controller
     {
         if ($request->validated()) {
             $document = Auth::user()->customer->documents()->findOrFail($id);
-            $document->meeting_id = $request->input('meeting_id');
             $document->participant_id = $request->input('participant_id');
             $document->title = $request->input('title');
             $document->type = $request->input('type');
