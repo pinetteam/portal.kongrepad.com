@@ -69,6 +69,7 @@
             <x-input.select method="c" name="participant_id" title="participant" :options="$participants" option_value="id" option_name="full_name" icon="screen-users" />
             <x-input.text method="c" type="text" name="title" title="title" icon="input-text" />
             <x-input.select method="c" name="type" title="type" :options="$types" option_value="value" option_name="title" icon="person-military-pointing" />
+            <x-input.file method="c" type="file" name="file" title="file" icon="file-import" />
             <x-input.radio method="c" name="status" title="status" :options="$status_options" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.create>
@@ -78,6 +79,7 @@
             <x-input.select method="e" name="participant_id" title="participant" :options="$participants" option_value="id" option_name="full_name" icon="screen-users" />
             <x-input.text method="e" type="text" name="title" title="title" icon="input-text" />
             <x-input.select method="e" name="type" title="type" :options="$types" option_value="value" option_name="title" icon="person-military-pointing" />
+            <x-input.file method="e" type="file" name="file" title="file" icon="file-import" />
             <x-input.radio method="e" name="status" title="status" :options="$status_options" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.edit>
