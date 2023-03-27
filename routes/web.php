@@ -25,6 +25,7 @@ Route::prefix('portal')->name('portal.')->group(function () {
     //Route::group(["middleware" => ['auth','user.role.control']], function () {
     Route::group(["middleware" => ['auth']], function () {
         Route::get('/', [\App\Http\Controllers\Portal\DashboardController::class, 'index'])->name('dashboard.index');
+        Route::resource('/document', \App\Http\Controllers\Portal\Document\DocumentController::class)->except(['create']);
         Route::resource('/meeting', \App\Http\Controllers\Portal\Meeting\MeetingController::class)->except(['create']);
         Route::resource('/meeting-hall', \App\Http\Controllers\Portal\Meeting\Hall\MeetingHallController::class)->except(['create']);
         Route::resource('/participant', \App\Http\Controllers\Portal\Participant\ParticipantController::class)->except(['create']);

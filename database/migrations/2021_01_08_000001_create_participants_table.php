@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('title', 255)->nullable();
             $table->string('first_name', 255);
             $table->string('last_name', 255);
+            $table->string('organisation', 255)->nullable();
             $table->string('identification_number', 255)->nullable();
             $table->string('email', 255)->nullable();
             $table->unsignedBigInteger('phone_country_id')->index()->nullable();
@@ -28,6 +29,7 @@ return new class extends Migration
             $table->dateTime('last_login_datetime')->nullable();
             $table->timestamp('last_activity')->nullable();
             $table->enum('type', ['agent', 'attendee', 'chair', 'speaker', 'team'])->default('attendee');
+            $table->boolean('confirmation')->default(0)->comment('0=not-approved;1=approved');
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
             $table->timestamps();
             $table->unsignedBigInteger('deleted_by')->index()->nullable();

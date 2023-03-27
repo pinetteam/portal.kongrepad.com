@@ -21,6 +21,7 @@ class Participant extends Model
         'first_name',
         'last_name',
         'identification_number',
+        'organisation',
         'email',
         'phone_country_id',
         'phone',
@@ -29,6 +30,8 @@ class Participant extends Model
         'last_login_agent',
         'last_login_datetime',
         'type',
+        'confirmation',
+        'status',
         'deleted_by',
     ];
     protected $dates = [

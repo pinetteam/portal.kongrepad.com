@@ -24,11 +24,14 @@ class ParticipantRequest extends FormRequest
                     'title' => 'nullable|max:255',
                     'first_name' => 'required|max:255',
                     'last_name' => 'required|max:255',
+                    'identification_number' => 'max:255',
+                    'organisation' => 'max:255',
                     'email' => 'required|email|max:255',
                     'phone_country_id' => 'nullable|exists:system_countries,id|required_with:phone',
                     'phone' => 'nullable|max:31|required_with:phone_country_id',
                     'password' => 'required|max:255',
                     'type' => 'required|in:agent,attendee,chair,speaker,team',
+                    'confirmation' => 'required|boolean',
                     'status' => 'required|boolean',
                 ];
             }
@@ -40,11 +43,14 @@ class ParticipantRequest extends FormRequest
                     'title' => 'nullable|max:255',
                     'first_name' => 'required|max:255',
                     'last_name' => 'required|max:255',
+                    'identification_number' => 'max:255',
+                    'organisation' => 'max:255',
                     'email' => 'required|email|max:255',
                     'phone_country_id' => 'nullable|exists:system_countries,id|required_with:phone',
                     'phone' => 'nullable|max:31|required_with:phone_country_id',
-                    'password' => 'required|max:255',
+                    'password' => 'nullable|max:255',
                     'type' => 'required|in:agent,attendee,chair,speaker,team',
+                    'confirmation' => 'required|boolean',
                     'status' => 'required|boolean',
                 ];
             }

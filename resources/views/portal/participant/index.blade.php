@@ -80,10 +80,13 @@
             <x-input.text method="c" type="text" name="title" title="title" icon="input-text" />
             <x-input.text method="c" type="text" name="first_name" title="first-name" icon="id-card" />
             <x-input.text method="c" type="text" name="last_name" title="last-name" icon="id-card" />
+            <x-input.text method="c" type="text" name="identification_number" title="identification-number" icon="fingerprint" />
+            <x-input.text method="c" type="text" name="organisation" title="organisation" icon="building-columns" />
             <x-input.text method="c" type="email" name="email" title="email" icon="envelope" />
             <x-input.select method="c" name="phone_country_id" title="phone-country-code" :options="$countries" option_value="id" option_name="NameAndCode" icon="flag" />
             <x-input.text method="c" type="number" name="phone" title="phone" icon="mobile-screen" />
             <x-input.text method="c" type="text" name="password" title="password" icon="lock" />
+            <x-input.radio method="c" name="confirmation" title="confirmation" :options="$confirmation_options" option_value="value" option_name="title" icon="check-to-slot" />
             <x-input.select method="c" name="type" title="type" :options="$types" option_value="value" option_name="title" icon="person-military-pointing" />
             <x-input.radio method="c" name="status" title="status" :options="$status_options" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
@@ -96,10 +99,13 @@
             <x-input.text method="e" type="text" name="title" title="title" icon="input-text" />
             <x-input.text method="e" type="text" name="first_name" title="first-name" icon="id-card" />
             <x-input.text method="e" type="text" name="last_name" title="last-name" icon="id-card" />
+            <x-input.text method="e" type="text" name="identification_number" title="identification-number" icon="fingerprint" />
+            <x-input.text method="e" type="text" name="organisation" title="organisation" icon="building-columns" />
             <x-input.text method="e" type="email" name="email" title="email" icon="envelope" />
             <x-input.select method="e" name="phone_country_id" title="phone-country-code" :options="$countries" option_value="id" option_name="NameAndCode" icon="flag" />
             <x-input.text method="e" type="number" name="phone" title="phone" icon="mobile-screen" />
             <x-input.text method="e" type="text" name="password" title="password" icon="lock" />
+            <x-input.radio method="e" name="confirmation" title="confirmation" :options="$confirmation_options" option_value="value" option_name="title" icon="check-to-slot" />
             <x-input.select method="e" name="type" title="type" :options="$types" option_value="value" option_name="title" icon="person-military-pointing" />
             <x-input.radio method="e" name="status" title="status" :options="$status_options" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection

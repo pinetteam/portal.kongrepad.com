@@ -61,9 +61,9 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">
+                    <a class="nav-link" aria-current="page" href="{{ route("portal.document.index") }}">
                         <i class="nav-icon fa-duotone fa-presentation-screen"></i>
-                        {{ __('common.presentations-and-publications') }}
+                        {{ __('common.documents') }}
                     </a>
                 </li>
                 <li class="nav-item">
@@ -93,6 +93,12 @@
                     <a class="nav-link" href="#">
                         <i class="nav-icon fa-duotone fa-square-poll-horizontal"></i>
                         {{ __('common.surveys') }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="nav-icon fa-duotone fa-hundred-points"></i>
+                        {{ __('common.score-game') }}
                     </a>
                 </li>
             </ul>

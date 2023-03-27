@@ -13,9 +13,13 @@ class ParticipantController extends Controller
 {
     public function index()
     {
-        $participants = Participant::paginate(20);
+        $participants = Auth::user()->customer->participants()->paginate(20);
         $meetings = Auth::user()->customer->meetings;
         $countries = SystemCountry::get();
+        $confirmation_options = [
+            'not-approved' => ["value" => 0, "title" => __('common.not-approved'), 'color' => 'danger'],
+            'approved' => ["value" => 1, "title" => __('common.approved'), 'color' => 'success'],
+        ];
         $status_options = [
             'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
@@ -27,7 +31,7 @@ class ParticipantController extends Controller
             'speaker' => ["value" => "speaker", "title" => __('common.speaker')],
             'passteamive' => ["value" => "team", "title" => __('common.team')],
         ];
-        return view('portal.participant.index', compact(['participants', 'meetings', 'countries', 'status_options', 'types']));
+        return view('portal.participant.index', compact(['participants', 'meetings', 'countries', 'confirmation_options', 'status_options', 'types']));
     }
     public function store(ParticipantRequest $request)
     {
@@ -39,11 +43,13 @@ class ParticipantController extends Controller
             $participant->first_name = $request->input('first_name');
             $participant->last_name = $request->input('last_name');
             $participant->identification_number = $request->input('identification_number');
+            $participant->organisation = $request->input('organisation');
             $participant->email = $request->input('email');
             $participant->phone_country_id = $request->input('phone_country_id');
             $participant->phone = $request->input('phone');
             $participant->password = $request->input('password');
             $participant->type = $request->input('type');
+            $participant->confirmation = $request->input('confirmation');
             $participant->status = $request->input('status');
             if ($participant->save()) {
                 return back()->with('success', __('common.created-successfully'));
@@ -71,11 +77,15 @@ class ParticipantController extends Controller
             $participant->first_name = $request->input('first_name');
             $participant->last_name = $request->input('last_name');
             $participant->identification_number = $request->input('identification_number');
+            $participant->organisation = $request->input('organisation');
             $participant->email = $request->input('email');
             $participant->phone_country_id = $request->input('phone_country_id');
             $participant->phone = $request->input('phone');
-            $participant->password = $request->input('password');
+            if ($request->has('password')) {
+                $participant->password = $request->input('password');
+            }
             $participant->type = $request->input('type');
+            $participant->confirmation = $request->input('confirmation');
             $participant->status = $request->input('status');
             if ($participant->save()) {
                 return back()->with('success',__('common.edited-successfully'));

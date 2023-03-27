@@ -2,6 +2,7 @@
 
 namespace App\Models\Customer;
 
+use App\Models\Document\Document;
 use App\Models\Meeting\Meeting;
 use App\Models\Meeting\Hall\MeetingHall;
 use App\Models\Participant\Participant;
@@ -35,6 +36,10 @@ class Customer extends Model
     public function participants()
     {
         return $this->hasOneThrough(Participant::class, Meeting::class, 'customer_id', 'meeting_id', 'id', 'id');
+    }
+    public function documents()
+    {
+        return $this->hasOneThrough(Document::class, Meeting::class, 'customer_id', 'meeting_id', 'id', 'id');
     }
     public function meetings()
     {
