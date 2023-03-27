@@ -23,6 +23,7 @@ class DocumentRequest extends FormRequest
                     'file' => ['required', File::types(['pdf', 'pptx', 'xls', 'xlsx'])->max(10240)],
                     'title' => 'nullable|max:255',
                     'type' => 'required|in:presentation,publication,other',
+                    'sharing_via_email' => 'required|boolean',
                     'status' => 'required|boolean',
                 ];
             }
@@ -33,6 +34,7 @@ class DocumentRequest extends FormRequest
                     'file' => ['nullable', File::types(['pdf', 'pptx', 'xls', 'xlsx'])->max(10240)],
                     'title' => 'nullable|max:255',
                     'type' => 'required|in:presentation,publication,other',
+                    'sharing_via_email' => 'required|boolean',
                     'status' => 'required|boolean',
                 ];
             }

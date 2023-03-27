@@ -21,11 +21,15 @@ class DocumentController extends Controller
             'publication' => ["value" => "publication", "title" => __('common.publication')],
             'other' => ["value" => "other", "title" => __('common.other')],
         ];
+        $sharing_via_email_options = [
+            'not-allowed' => ["value" => 0, "title" => __('common.not-allowed'), 'color' => 'danger'],
+            'allowed' => ["value" => 1, "title" => __('common.allowed'), 'color' => 'success'],
+        ];
         $status_options = [
             'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.document.index', compact(['documents', 'participants', 'types', 'status_options']));
+        return view('portal.document.index', compact(['documents', 'participants', 'types', 'sharing_via_email_options', 'status_options']));
     }
     public function store(DocumentRequest $request)
     {
@@ -80,6 +84,7 @@ class DocumentController extends Controller
                 }
             }
             $document->type = $request->input('type');
+            $document->sharing_via_email = $request->input('sharing_via_email');
             $document->status = $request->input('status');
             if ($document->save()) {
                 return back()->with('success',__('common.edited-successfully'));

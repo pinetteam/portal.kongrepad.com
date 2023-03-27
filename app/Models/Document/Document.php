@@ -17,6 +17,7 @@ class Document extends Model
         'file_extension',
         'title',
         'type',
+        'sharing_via_email',
         'status',
         'deleted_by',
     ];

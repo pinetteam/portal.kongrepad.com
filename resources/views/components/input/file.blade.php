@@ -7,7 +7,7 @@
         <input type="{{ $type }}" name="{{ $name }}" class="form-control @error($name)is-invalid @enderror" id="{{ $method }}-{{ $name }}"             value="{{ old($name) }}">
     </div>
     @error($name)
-        <div class="invalid-feedback">
+        <div class="invalid-feedback d-block">
             <i class="fa-regular fa-triangle-exclamation"></i> {{ $message }}
         </div>
     @enderror

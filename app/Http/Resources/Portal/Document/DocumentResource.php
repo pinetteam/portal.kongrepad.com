@@ -13,6 +13,7 @@ class DocumentResource extends JsonResource
             'participant_id' => ['value'=>$this->participant_id, 'type'=>'select'],
             'title' => ['value'=>$this->title, 'type'=>'text'],
             'type' => ['value'=>$this->type, 'type'=>'select'],
+            'sharing_via_email' => ['value'=>$this->sharing_via_email, 'type'=>'radio'],
             'status' => ['value'=>$this->status, 'type'=>'radio'],
             'route' => route('portal.document.update', $this->id),
         ];
