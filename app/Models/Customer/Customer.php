@@ -32,6 +32,7 @@ class Customer extends Model
     ];
     protected $casts = [
         'setting' => 'array',
+        'status' => 'boolean',
     ];
     public function documents()
     {
