@@ -23,7 +23,7 @@
                                         <img src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==" alt="Red dot" width="200" height="200" class="img-thumbnail bg-dark" />
                                     @endif
                                     <div class="custom-file">
-                                        <input type="file" name="logo" class="form-control form-control-sm" id="logo" accept="image/jpg,image/png,image/gif,image/bmp,image/webp">
+                                        <input type="file" name="logo" class="form-control form-control-sm" id="logo" accept="image/jpeg,image/jpg,image/png,image/gif,image/bmp,image/webp">
                                     </div>
                                 </div>
                             </div>

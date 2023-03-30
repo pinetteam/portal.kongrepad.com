@@ -26,9 +26,9 @@ return new class extends Migration
             $table->timestamps();
             $table->unsignedBigInteger('deleted_by')->index()->nullable();
             $table->softDeletes();
-            $table->foreign('session_id')->on('sessions')->references('id');
             $table->foreign('deleted_by')->on('users')->references('id');
             $table->foreign('meeting_hall_id')->on('meeting_halls')->references('id');
+            $table->foreign('session_id')->on('sessions')->references('id');
         });
     }
 
