@@ -18,6 +18,7 @@ class MeetingRequest extends FormRequest
             case 'POST' || 'PATCH' || 'PUT':
             {
                 return [
+                    'code' => 'required|max:255',
                     'title' => 'required|max:255',
                     'start_at' => 'nullable|date|before_or_equal:finish_at',
                     'finish_at' => 'nullable|date|after_or_equal:start_at',
@@ -30,8 +31,11 @@ class MeetingRequest extends FormRequest
     public function attributes(): array
     {
         return [
+            'code' => __('common.code'),
+            'title' => __('common.title'),
             'start_at' => __('common.start-at'),
             'finish_at' => __('common.finish-at'),
+            'status' => __('common.status'),
         ];
     }
     public function filters(): array

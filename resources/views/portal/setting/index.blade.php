@@ -71,7 +71,7 @@
                                                                     <label for="value-{{ $system_config }}" class="form-label">
                                                                         <i class="fa-regular fa-screwdriver-wrench"></i> {{ __('common.value') }}
                                                                     </label>
-                                                                    <input type="text" name="value" class="form-control @error('value')is-invalid @enderror" id="value-{{ $system_config }}" placeholder="{{ $value }}" value="{{ $value }}">
+                                                                    <input type="text" name="value" class="form-control @error('value')is-invalid @enderror" id="value-{{ $system_config }}" placeholder="{{ $value }}" value="{{ $value }}" />
                                                                     @error('value')
                                                                     <div class="invalid-feedback">
                                                                         <i class="fa-regular fa-triangle-exclamation"></i> {{ $message }}

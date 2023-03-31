@@ -14,9 +14,9 @@ class UserResource extends JsonResource
             'username' => ['value'=>$this->username, 'type'=>'text'],
             'first_name' => ['value'=>$this->first_name, 'type'=>'text'],
             'last_name' => ['value'=>$this->last_name, 'type'=>'text'],
-            'email' => ['value'=>$this->email, 'type'=>'text'],
+            'email' => ['value'=>$this->email, 'type'=>'email'],
             'phone_country_id' => ['value'=>$this->phone_country_id, 'type'=>'select'],
-            'phone' => ['value'=>$this->phone, 'type'=>'text'],
+            'phone' => ['value'=>$this->phone, 'type'=>'number'],
             'status' => ['value'=>$this->status, 'type'=>'radio'],
             'route' => route('portal.user.update', $this->id),
         ];

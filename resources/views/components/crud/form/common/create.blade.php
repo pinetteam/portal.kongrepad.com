@@ -17,7 +17,7 @@
                 <div class="modal-footer">
                     <div class="btn-group w-100" role="group" aria-label="{{ __('common.processes') }}">
                         <button type="button" class="btn btn-danger w-25" data-bs-dismiss="modal">{{__('common.close')}}</button>
-                        <button type="submit" class="btn btn-success w-75">{{ __('common.create') }}</button>
+                        <button type="submit" class="btn btn-success w-75" id="create-form-submit">{{ __('common.create') }}</button>
                     </div>
                 </div>
             </form>
@@ -27,11 +27,11 @@
 <script type="module">
     const createModal = document.getElementById('create-modal');
     createModal.addEventListener('show.bs.modal', event => {
-        const button = event.relatedTarget
+        const button = event.relatedTarget;
         if(button) {
-            document.getElementById('create-form').action = button.getAttribute('data-route')
+            document.getElementById('create-form').action = button.getAttribute('data-route');
         }
-    })
+    });
     createModal.addEventListener('hide.bs.modal', event => {
         const formControl = document.querySelectorAll('.form-control');
         const invalidFeedback = document.querySelectorAll('.invalid-feedback');
@@ -42,7 +42,13 @@
             element.classList.remove("is-invalid");
             element.value = null;
         });
-    })
+    });
+    const createFormSubmit = document.getElementById('create-form-submit');
+    createFormSubmit.addEventListener('click', function() {
+        createFormSubmit.disabled = true;
+        createFormSubmit.innerHTML = '<div class="spinner-border spinner-border-sm" role="status"></div> {{ __('common.creating') }}';
+        document.getElementById('create-form').submit();
+    });
 </script>
 @if($errors->any() && session('method'))
     @if(session('method')=='POST')

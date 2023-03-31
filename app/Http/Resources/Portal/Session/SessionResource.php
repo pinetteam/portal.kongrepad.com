@@ -12,7 +12,7 @@ class SessionResource extends JsonResource
         return [
             'session_id' => ['value'=>$this->session_id, 'type'=>'select'],
             'meeting_hall_id' => ['value'=>$this->meeting_hall_id, 'type'=>'select'],
-            'sort_id' => ['value'=>$this->sort_id, 'type'=>'text'],
+            'sort_id' => ['value'=>$this->sort_id, 'type'=>'number'],
             'code' => ['value'=>$this->code, 'type'=>'text'],
             'title' => ['value'=>$this->title, 'type'=>'text'],
             'description' => ['value'=>$this->description, 'type'=>'text'],

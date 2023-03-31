@@ -27,5 +27,6 @@ class Session extends Model
         'deleted_at',
     ];
     protected $casts = [
+        'deleted_at' => 'datetime',
     ];
 }

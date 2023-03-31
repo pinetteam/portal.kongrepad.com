@@ -71,17 +71,15 @@
     })
     editModal.addEventListener('hide.bs.modal', event => {
         const formControl = document.querySelectorAll('.form-control');
-        const formCheckInput = document.querySelectorAll('.form-check-input');
+        const invalidFeedback = document.querySelectorAll('.invalid-feedback');
+        invalidFeedback.forEach(element => {
+            element.classList.remove("d-block");
+        });
         formControl.forEach(element => {
             element.classList.remove("is-invalid");
             element.value = null;
-            element.removeAttribute('checked')
         });
-        formCheckInput.forEach(element => {
-            element.removeAttribute('checked')
-        });
-
-    })
+    });
 </script>
 @if($errors->any() && session('method') && session('route'))
     @if(session('method')=='PATCH' || session('method')=='PUT')

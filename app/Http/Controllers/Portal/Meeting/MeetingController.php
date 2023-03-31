@@ -14,8 +14,8 @@ class MeetingController extends Controller
     {
         $meetings = Auth::user()->customer->meetings()->paginate(20);
         $status_options = [
-            'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-            'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
+            'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
+            'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
         return view('portal.meeting.index', compact(['meetings', 'status_options']));
     }
@@ -24,6 +24,7 @@ class MeetingController extends Controller
         if ($request->validated()) {
             $meeting = new Meeting();
             $meeting->customer_id = Auth::user()->customer->id;
+            $meeting->code = $request->input('code');
             $meeting->title = $request->input('title');
             $meeting->start_at = $request->input('start_at');
             $meeting->finish_at = $request->input('finish_at');
@@ -48,6 +49,7 @@ class MeetingController extends Controller
     {
         if ($request->validated()) {
             $meeting = Auth::user()->customer->meetings()->findOrFail($id);
+            $meeting->code = $request->input('code');
             $meeting->title = $request->input('title');
             $meeting->start_at = $request->input('start_at');
             $meeting->finish_at = $request->input('finish_at');

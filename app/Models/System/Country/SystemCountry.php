@@ -20,6 +20,9 @@ class SystemCountry extends Model
     protected $dates = [
         'deleted_at',
     ];
+    protected $casts = [
+        'deleted_at' => 'datetime',
+    ];
     public function getNameAndCodeAttribute()
     {
         return $this->name . " | +". $this->phone_code;

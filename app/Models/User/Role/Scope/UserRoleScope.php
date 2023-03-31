@@ -17,4 +17,7 @@ class UserRoleScope extends Model
     protected $dates = [
         'deleted_at',
     ];
+    protected $casts = [
+        'deleted_at' => 'datetime',
+    ];
 }

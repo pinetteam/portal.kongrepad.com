@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('meetings', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('customer_id')->index();
+            $table->string('code', 511);
             $table->string('title', 511);
             $table->date('start_at')->nullable();
             $table->date('finish_at')->nullable();

@@ -19,7 +19,7 @@ class ParticipantResource extends JsonResource
             'organisation' => ['value'=>$this->organisation, 'type'=>'text'],
             'email' => ['value'=>$this->email, 'type'=>'text'],
             'phone_country_id' => ['value'=>$this->phone_country_id, 'type'=>'select'],
-            'phone' => ['value'=>$this->phone, 'type'=>'text'],
+            'phone' => ['value'=>$this->phone, 'type'=>'number'],
             'password' => ['value'=>$this->password, 'type'=>'text'],
             'type' => ['value'=>$this->type, 'type'=>'select'],
             'confirmation' => ['value'=>$this->confirmation, 'type'=>'radio'],

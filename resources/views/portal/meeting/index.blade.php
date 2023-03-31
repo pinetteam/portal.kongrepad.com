@@ -13,6 +13,7 @@
                     </caption>
                     <thead class="thead-dark">
                         <tr>
+                            <th scope="col"><span class="fa-regular fa-code-simple mx-1"></span>{{ __('common.code') }}</th>
                             <th scope="col"><span class="fa-regular fa-input-text mx-1"></span>{{ __('common.title') }}</th>
                             <th scope="col"><span class="fa-regular fa-calendar-arrow-up mx-1"></span>{{ __('common.start-at') }}</th>
                             <th scope="col"><span class="fa-regular fa-calendar-arrow-down mx-1"></span>{{ __('common.finish-at') }}</th>
@@ -23,17 +24,18 @@
                     <tbody>
                         @foreach($meetings as $meeting)
                             <tr>
+                                <td>{{ $meeting->code }}</td>
                                 <td>{{ $meeting->title }}</td>
                                 <td>
                                     @if($meeting->start_at)
-                                        {{ Carbon::create($meeting->start_at)->format(Auth::user()->customer->setting['date-format']) }}
+                                        {{ Carbon::create($meeting->start_at)->format(Auth::user()->customer->settings['date-format']) }}
                                     @else
                                         {{ __('common.unspecified') }}
                                     @endif
                                 </td>
                                 <td>
                                     @if($meeting->finish_at)
-                                        {{ Carbon::create($meeting->finish_at)->format(Auth::user()->customer->setting['date-format']) }}
+                                        {{ Carbon::create($meeting->finish_at)->format(Auth::user()->customer->settings['date-format']) }}
                                     @else
                                         {{ __('common.unspecified') }}
                                     @endif
@@ -76,6 +78,7 @@
     </div>
     <x-crud.form.common.create>
         @section('create-form')
+            <x-input.text method="c" type="text" name="code" title="code" icon="code-simple" />
             <x-input.text method="c" type="text" name="title" title="title" icon="input-text" />
             <x-input.text method="c" type="date" name="start_at" title="start-at" icon="calendar-arrow-up" />
             <x-input.text method="c" type="date" name="finish_at" title="finish-at" icon="calendar-arrow-down" />
@@ -85,6 +88,7 @@
     <x-crud.form.common.delete/>
     <x-crud.form.common.edit method="e">
         @section('edit-form')
+            <x-input.text method="e" type="text" name="code" title="code" icon="code-simple" />
             <x-input.text method="e" type="text" name="title" title="title" icon="input-text" />
             <x-input.text method="e" type="date" name="start_at" title="start-at" icon="calendar-arrow-up" />
             <x-input.text method="e" type="date" name="finish_at" title="finish-at" icon="calendar-arrow-down" />

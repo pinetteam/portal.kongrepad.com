@@ -12,6 +12,7 @@ class Meeting extends Model
     protected $table = 'meetings';
     protected $fillable = [
         'customer_id',
+        'code',
         'title',
         'start_at',
         'finish_at',
@@ -22,5 +23,10 @@ class Meeting extends Model
         'start_at',
         'finish_at',
         'deleted_at',
+    ];
+    protected $casts = [
+        'start_at' => 'date',
+        'finish_at' => 'date',
+        'deleted_at' => 'datetime',
     ];
 }
