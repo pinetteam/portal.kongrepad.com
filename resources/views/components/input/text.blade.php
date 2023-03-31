@@ -7,9 +7,15 @@
            name="{{ $name }}"
            class="form-control @error($name)is-invalid @enderror"
            id="{{ $method }}-{{ $name }}"
-           placeholder="{{ __('common.'.$title) }}"
            @if($type!=='password')
             value="{{ old($name) }}"
+           @endif
+           @if($type=='date')
+               placeholder="{{ old($name) }}"
+               min="{{ Carbon::create('1000-01-01')->format(Auth::user()->customer->setting['date-format']) }}"
+               max="{{ Carbon::create('9999-12-31')->format(Auth::user()->customer->setting['date-format']) }}"
+           @else
+               placeholder="{{ __('common.'.$title) }}"
            @endif
     />
     @error($name)

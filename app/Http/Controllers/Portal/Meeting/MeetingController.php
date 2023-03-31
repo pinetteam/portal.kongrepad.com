@@ -12,7 +12,7 @@ class MeetingController extends Controller
 {
     public function index()
     {
-        $meetings = Meeting::paginate(20);
+        $meetings = Auth::user()->customer->meetings()->paginate(20);
         $status_options = [
             'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],

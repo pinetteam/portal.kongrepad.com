@@ -20,7 +20,7 @@ class UserRoleRequest extends FormRequest
             {
                 return [
                     'title' => 'required|max:255',
-                    'access_scopes' => 'nullable|array',
+                    'access_scopes' => 'sometimes|required|array',
                     'status' => 'required|boolean',
                 ];
             }
@@ -30,13 +30,9 @@ class UserRoleRequest extends FormRequest
     public function attributes(): array
     {
         return [
+            'title' => __('common.title'),
             'access_scopes' => __('common.access-scopes'),
-        ];
-    }
-    public function filters(): array
-    {
-        return [
-            'title' => 'trim',
+            'status' => __('common.status'),
         ];
     }
     public function failedValidation(Validator $validator)

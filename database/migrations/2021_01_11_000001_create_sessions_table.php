@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('sessions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('session_id')->index()->nullable();
-            $table->unsignedBigInteger('meeting_hall_id')->index()->nullable();
+            $table->unsignedBigInteger('meeting_hall_id')->index();
             $table->integer('sort_id')->nullable();
             $table->string('code', 255)->nullable();
-            $table->string('title', 255)->nullable();
+            $table->string('title', 255);
+            $table->text('description')->nullable();
             $table->date('date')->nullable();
             $table->time('start_at', $precision = 0)->nullable();
             $table->time('finish_at', $precision = 0)->nullable();

@@ -67,7 +67,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">
+                    <a class="nav-link" aria-current="page" href="{{ route("portal.session.index") }}">
                         <i class="nav-icon fa-duotone fa-users-between-lines"></i>
                         {{ __('common.sessions') }}
                     </a>

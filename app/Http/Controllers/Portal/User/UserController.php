@@ -13,16 +13,14 @@ class UserController extends Controller
 {
     public function index()
     {
-
-        $users = User::paginate(20);
-        $branches = Auth()->user()->customer->branches;
-        $user_roles = Auth()->user()->customer->userRoles;
-        $countries = SystemCountry::get();
-        $status_options = [
+        $users = Auth::user()->customer->users()->paginate(20);
+        $user_roles = Auth::user()->customer->userRoles;
+        $phone_countries = SystemCountry::get();
+        $statuses = [
             'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.user.index', compact(['users', 'branches', 'user_roles', 'status_options', 'countries']));
+        return view('portal.user.index', compact(['users', 'user_roles', 'phone_countries', 'statuses']));
     }
     public function store(UserRequest $request)
     {

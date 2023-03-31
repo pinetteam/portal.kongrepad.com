@@ -11,7 +11,8 @@ class SystemCountry extends Model
     use HasFactory, SoftDeletes;
     protected $table = 'system_countries';
     protected $fillable = [
-        'long_name',
+        'name',
+        'code',
         'short_name_2d',
         'short_name_3d',
         'phone_code',

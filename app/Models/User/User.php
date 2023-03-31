@@ -19,8 +19,6 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
     protected $table = 'users';
     protected $fillable = [
-        'branch_id',
-        'customer_id',
         'user_role_id',
         'username',
         'first_name',
@@ -31,36 +29,32 @@ class User extends Authenticatable
         'phone',
         'phone_verified_at',
         'password',
-        'status',
         'register_ip',
         'register_user_agent',
         'last_login_ip',
         'last_login_agent',
         'last_login_datetime',
+        'status',
         'deleted_by',
     ];
     protected $hidden = [
         'password',
         'remember_token',
     ];
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'last_login_datetime' => 'datetime',
-    ];
     protected $dates = [
         'email_verified_at',
         'last_login_datetime',
         'deleted_at',
     ];
-    public function getFullNameAttribute()
-    {
-        return Str::of("$this->first_name $this->last_name")->trim();
-    }
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'last_login_datetime' => 'datetime',
+    ];
     public function getActivityStatusAttribute()
     {
-        if($this->userSessions()->max('last_activity') !== null) {
+        if($this->sessions()->max('last_activity') !== null) {
             $now = Carbon::now()->timestamp;
-            $last_activity = $this->userSessions()->max('last_activity');
+            $last_activity = $this->sessions()->max('last_activity');
             $diff_in_seconds = $now-$last_activity;
             if($diff_in_seconds<300) {
                 return true;
@@ -70,6 +64,10 @@ class User extends Authenticatable
         } else {
             return false;
         }
+    }
+    public function getFullNameAttribute()
+    {
+        return Str::of("$this->first_name $this->last_name")->trim();
     }
     public function getLastLoginAttribute()
     {
@@ -87,11 +85,11 @@ class User extends Authenticatable
     {
         return $this->belongsTo(SystemCountry::class, 'phone_country_id', 'id');
     }
-    public function role()
+    public function userRole()
     {
         return $this->belongsTo(UserRole::class, 'user_role_id', 'id');
     }
-    public function userSessions()
+    public function sessions()
     {
         return $this->hasMany(UserSession::class, 'user_id', 'id');
     }

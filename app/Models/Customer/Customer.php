@@ -2,10 +2,12 @@
 
 namespace App\Models\Customer;
 
+use App\Casts\JSON;
 use App\Models\Document\Document;
 use App\Models\Meeting\Meeting;
 use App\Models\Meeting\Hall\MeetingHall;
 use App\Models\Participant\Participant;
+use App\Models\Session\Session;
 use App\Models\User\Role\UserRole;
 use App\Models\User\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -23,7 +25,7 @@ class Customer extends Model
         'logo',
         'policy_status',
         'language',
-        'setting',
+        'settings',
         'status',
         'deleted_by',
     ];
@@ -31,20 +33,17 @@ class Customer extends Model
         'deleted_at',
     ];
     protected $casts = [
-        'setting' => 'array',
+        'settings' => JSON::class,
         'status' => 'boolean',
     ];
     public function documents()
     {
-        $documents = Document::select('documents.*')->join('participants', 'documents.participant_id', '=', 'participants.id')
+        $documents = Document::select('documents.*')
+            ->join('participants', 'documents.participant_id', '=', 'participants.id')
             ->join('meetings', 'participants.meeting_id', '=', 'meetings.id')
             ->join('customers', 'meetings.customer_id', '=', 'customers.id')
             ->where('customers.id', $this->getkey());
         return $documents;
-    }
-    public function participants()
-    {
-        return $this->hasOneThrough(Participant::class, Meeting::class, 'customer_id', 'meeting_id', 'id', 'id');
     }
     public function meetings()
     {
@@ -53,6 +52,19 @@ class Customer extends Model
     public function meetingHalls()
     {
         return $this->hasOneThrough(MeetingHall::class, Meeting::class, 'customer_id', 'meeting_id', 'id', 'id');
+    }
+    public function participants()
+    {
+        return $this->hasOneThrough(Participant::class, Meeting::class, 'customer_id', 'meeting_id', 'id', 'id');
+    }
+    public function sessions()
+    {
+        $sessions = Session::select('sessions.*')
+            ->join('meeting_halls', 'sessions.meeting_hall_id', '=', 'meeting_halls.id')
+            ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
+            ->join('customers', 'meetings.customer_id', '=', 'customers.id')
+            ->where('customers.id', $this->getkey());
+        return $sessions;
     }
     public function users()
     {

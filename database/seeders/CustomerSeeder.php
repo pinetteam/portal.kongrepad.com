@@ -15,7 +15,7 @@ class CustomerSeeder extends Seeder
      */
     public function run()
     {
-        $customer_setting = [
+        $settings = [
             'timezone' => 'Europe/Istanbul',
             'date-format' => 'd/m/Y',
             'time-format' => 'H:i',
@@ -23,11 +23,11 @@ class CustomerSeeder extends Seeder
         ];
         Customer::insert([
             [
-                'title' => 'D Event',
-                'description' => 'D Event Turizm Organizasyon',
+                'title' => 'D-Event',
+                'description' => 'D-Event Turizm Organizasyon',
                 'policy_status' => '1',
                 'language' => 'en',
-                'setting' => json_encode($customer_setting),
+                'settings' => json_encode($settings),
                 'status' => '1',
             ],
         ]);

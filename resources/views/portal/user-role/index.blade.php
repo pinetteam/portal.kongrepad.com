@@ -14,6 +14,7 @@
                     <thead class="thead-dark">
                     <tr>
                         <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}</th>
+                        <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.total-scopes') }}</th>
                         <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}</th>
                         <th scope="col" class="text-end"></th>
                     </tr>
@@ -22,6 +23,7 @@
                         @foreach($user_roles as $user_role)
                             <tr>
                                 <td>{{ $user_role->title }}</td>
+                                <td>{{ count($user_role->access_scopes) }}</td>
                                 <td>
                                     @if($user_role->status)
                                         <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
@@ -61,16 +63,16 @@
     <x-crud.form.common.create>
         @section('create-form')
             <x-input.text method="c" type="text" name="title" title="title" icon="input-text" />
-            <x-input.radio method="c" name="status" title="status" :options="$status_options" option_value="value" option_name="title" icon="toggle-large-on" />
-            <x-input.checkbox method="c" name="access_scopes" title="scopes" :options="$scopes" option_value="route" option_name="code" icon="ballot-check" />
+            <x-input.checkbox method="c" name="access_scopes" title="scopes" :options="$user_role_scopes" option_value="route" option_name="code" icon="ballot-check" />
+            <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.create>
     <x-crud.form.common.delete/>
     <x-crud.form.common.edit method="e">
         @section('edit-form')
             <x-input.text method="e" type="text" name="title" title="title" icon="input-text" />
-            <x-input.radio method="e" name="status" title="status" :options="$status_options" option_value="value" option_name="title" icon="toggle-large-on" />
-            <x-input.checkbox method="e" name="access_scopes" title="scopes" :options="$scopes" option_value="route" option_name="code" icon="ballot-check" />
+            <x-input.checkbox method="e" name="access_scopes" title="scopes" :options="$user_role_scopes" option_value="route" option_name="code" icon="ballot-check" />
+            <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.edit>
 @endsection

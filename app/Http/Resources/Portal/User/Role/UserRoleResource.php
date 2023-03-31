@@ -11,8 +11,8 @@ class UserRoleResource extends JsonResource
     {
         return [
             'title' => ['value'=>$this->title, 'type'=>'text'],
-            'status' => ['value'=>$this->status, 'type'=>'radio'],
             'access_scopes' => ['value'=>$this->access_scopes, 'type'=>'checkbox'],
+            'status' => ['value'=>$this->status, 'type'=>'radio'],
             'route' => route('portal.user-role.update', $this->id),
         ];
     }

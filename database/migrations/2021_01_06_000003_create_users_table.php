@@ -27,12 +27,12 @@ return new class extends Migration
             $table->timestamp('phone_verified_at')->nullable();
             $table->string('password', 255);
             $table->rememberToken();
-            $table->boolean('status')->default(1)->comment('0=passive;1=active');
             $table->ipAddress('register_ip')->nullable();
             $table->string('register_user_agent', 511)->nullable();
             $table->ipAddress('last_login_ip')->nullable();
             $table->string('last_login_agent', 511)->nullable();
             $table->dateTime('last_login_datetime')->nullable();
+            $table->boolean('status')->default(1)->comment('0=passive;1=active');
             $table->timestamps();
             $table->unsignedBigInteger('deleted_by')->index()->nullable();
             $table->softDeletes();

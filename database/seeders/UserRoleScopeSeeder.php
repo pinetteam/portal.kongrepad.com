@@ -21,6 +21,14 @@ class UserRoleScopeSeeder extends Seeder
                     'code' => 'show-dashboard',
                     'route' => 'portal.dashboard.index',
                 ],
+                [
+                    'code' => 'show-meetings',
+                    'route' => 'portal.meeting.index',
+                ],
+                [
+                    'code' => 'show-participants',
+                    'route' => 'portal.participant.index',
+                ],
             ]
         );
     }
