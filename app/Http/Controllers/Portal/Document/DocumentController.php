@@ -15,29 +15,27 @@ class DocumentController extends Controller
     public function index()
     {
         $documents = Auth::user()->customer->documents()->paginate(20);
-
         $participants = Auth::user()->customer->participants()->get();
+        $sharing_via_emails = [
+            'not-allowed' => ["value" => 0, "title" => __('common.not-allowed'), 'color' => 'danger'],
+            'allowed' => ["value" => 1, "title" => __('common.allowed'), 'color' => 'success'],
+        ];
         $types = [
             'presentation' => ["value" => "presentation", "title" => __('common.presentation')],
             'publication' => ["value" => "publication", "title" => __('common.publication')],
             'other' => ["value" => "other", "title" => __('common.other')],
         ];
-        $sharing_via_email_options = [
-            'not-allowed' => ["value" => 0, "title" => __('common.not-allowed'), 'color' => 'danger'],
-            'allowed' => ["value" => 1, "title" => __('common.allowed'), 'color' => 'success'],
-        ];
-        $status_options = [
+        $statuses = [
             'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.document.index', compact(['documents', 'participants', 'types', 'sharing_via_email_options', 'status_options']));
+        return view('portal.document.index', compact(['documents', 'participants', 'sharing_via_emails', 'types', 'statuses']));
     }
     public function store(DocumentRequest $request)
     {
         if ($request->validated()) {
             $document = new Document();
             $document->participant_id = $request->input('participant_id');
-            $document->title = $request->input('title');
             if ($request->hasFile('file')) {
                 $file = $request->file('file');
                 $file_name = Str::uuid()->toString();
@@ -49,8 +47,9 @@ class DocumentController extends Controller
                     return back()->with('create_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
                 }
             }
-            $document->type = $request->input('type');
+            $document->title = $request->input('title');
             $document->sharing_via_email = $request->input('sharing_via_email');
+            $document->type = $request->input('type');
             $document->status = $request->input('status');
             if ($document->save()) {
                 return back()->with('success', __('common.created-successfully'));
@@ -73,7 +72,6 @@ class DocumentController extends Controller
         if ($request->validated()) {
             $document = Auth::user()->customer->documents()->findOrFail($id);
             $document->participant_id = $request->input('participant_id');
-            $document->title = $request->input('title');
             if ($request->hasFile('file')) {
                 $file = $request->file('file');
                 $file_name = $document->file_name;
@@ -85,8 +83,9 @@ class DocumentController extends Controller
                     return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
                 }
             }
-            $document->type = $request->input('type');
+            $document->title = $request->input('title');
             $document->sharing_via_email = $request->input('sharing_via_email');
+            $document->type = $request->input('type');
             $document->status = $request->input('status');
             if ($document->save()) {
                 return back()->with('success',__('common.edited-successfully'));

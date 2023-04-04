@@ -13,16 +13,11 @@ class SettingController extends Controller
 {
     public function index()
     {
-        $status_options = [
-            'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-            'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
-        ];
         $customer = Auth::user()->customer;
-        return view('portal.setting.index', compact(['customer', 'status_options']));
+        return view('portal.setting.index', compact(['customer']));
     }
     public function update(Request $request, $system_config)
     {
-
         $customer = Auth::user()->customer;
         $settings = Auth::user()->customer->setting;
         if ($request->has('logo')) {

@@ -14,12 +14,12 @@ class UserRoleController extends Controller
     public function index()
     {
         $user_roles = Auth()->user()->customer->userRoles()->paginate(20);
-        $user_role_scopes = UserRoleScope::get();
+        $access_scopes = UserRoleScope::get();
         $statuses = [
             'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.user-role.index', compact(['user_roles', 'user_role_scopes','statuses']));
+        return view('portal.user-role.index', compact(['user_roles', 'access_scopes','statuses']));
     }
     public function store(UserRoleRequest $request)
     {

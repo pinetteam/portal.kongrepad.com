@@ -14,11 +14,11 @@ class MeetingHallController extends Controller
     {
         $meeting_halls = Auth::user()->customer->meetingHalls()->paginate(20);
         $meetings = Auth::user()->customer->meetings;
-        $status_options = [
+        $statuses = [
             'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.meeting-hall.index', compact(['meeting_halls', 'meetings', 'status_options']));
+        return view('portal.meeting-hall.index', compact(['meeting_halls', 'meetings', 'statuses']));
     }
     public function store(MeetingHallRequest $request)
     {

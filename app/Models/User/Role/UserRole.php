@@ -12,6 +12,7 @@ class UserRole extends Model
     use HasFactory, SoftDeletes;
     protected $table = 'user_roles';
     protected $fillable = [
+        'customer_id',
         'title',
         'access_scopes',
         'status',

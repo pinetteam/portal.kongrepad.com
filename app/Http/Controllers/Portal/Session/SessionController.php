@@ -23,11 +23,11 @@ class SessionController extends Controller
             'break' => ["value" => "break", "title" => __('common.break')],
             'other' => ["value" => "break", "title" => __('common.other')],
         ];
-        $status_options = [
+        $statuses = [
             'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.session.index', compact(['sessions', 'main_sessions', 'meeting_halls', 'types', 'status_options']));
+        return view('portal.session.index', compact(['sessions', 'main_sessions', 'meeting_halls', 'types', 'statuses']));
     }
     public function store(SessionRequest $request)
     {
