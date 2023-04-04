@@ -37,13 +37,7 @@
                                 </td>
                                 <td>{{ $user->full_name }}</td>
                                 <td>{{ $user->email }}</td>
-                                <td>
-                                    @if($user->phone_country_id && $user->phone)
-                                        +{{ $user->phoneCountry->phone_code }} {{ $user->phone }}
-                                    @else
-                                        {{ __('common.unspecified') }}
-                                    @endif
-                                </td>
+                                <td>{{ $user->full_phone }}</td>
                                 <td>
                                     @if($user->status)
                                         <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
@@ -94,8 +88,8 @@
             <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.create>
-    <x-crud.form.common.delete/>
-    <x-crud.form.common.edit method="e">
+    <x-crud.form.common.delete />
+    <x-crud.form.common.edit>
         @section('edit-form')
             <x-input.select method="e" name="user_role_id" title="user-role" :options="$user_roles" option_value="id" option_name="title" icon="person-military-pointing" />
             <x-input.text method="e" name="username" title="username" icon="id-card-clip" />

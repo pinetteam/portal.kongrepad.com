@@ -68,6 +68,14 @@ class Participant extends Model
     {
         return $this->belongsTo(SystemCountry::class, 'phone_country_id', 'id');
     }
+    public function getFullPhoneAttribute()
+    {
+        if(isset($this->phone_country_id) && isset($this->phone)) {
+            return Str::of($this->phone_country->phone_code.$this->phone)->trim();
+        } else {
+            return __('common.unspecified');
+        }
+    }
     public function getLastLoginAttribute()
     {
         if(isset($this->last_login_datetime)) {

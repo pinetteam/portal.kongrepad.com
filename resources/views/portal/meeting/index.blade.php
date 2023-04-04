@@ -78,21 +78,21 @@
     </div>
     <x-crud.form.common.create>
         @section('create-form')
-            <x-input.text method="c" type="text" name="code" title="code" icon="code-simple" />
-            <x-input.text method="c" type="text" name="title" title="title" icon="input-text" />
-            <x-input.text method="c" type="date" name="start_at" title="start-at" icon="calendar-arrow-up" />
-            <x-input.text method="c" type="date" name="finish_at" title="finish-at" icon="calendar-arrow-down" />
-            <x-input.radio method="c" name="status" title="status" :options="$status_options" option_value="value" option_name="title" icon="toggle-large-on" />
+            <x-input.text method="c" name="code" title="code" icon="code-simple" />
+            <x-input.text method="c" name="title" title="title" icon="input-text" />
+            <x-input.date method="c" name="start_at" title="start-at" icon="calendar-arrow-up" />
+            <x-input.date method="c" name="finish_at" title="finish-at" icon="calendar-arrow-down" />
+            <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.create>
-    <x-crud.form.common.delete/>
-    <x-crud.form.common.edit method="e">
+    <x-crud.form.common.delete />
+    <x-crud.form.common.edit>
         @section('edit-form')
-            <x-input.text method="e" type="text" name="code" title="code" icon="code-simple" />
-            <x-input.text method="e" type="text" name="title" title="title" icon="input-text" />
-            <x-input.text method="e" type="date" name="start_at" title="start-at" icon="calendar-arrow-up" />
-            <x-input.text method="e" type="date" name="finish_at" title="finish-at" icon="calendar-arrow-down" />
-            <x-input.radio method="e" name="status" title="status" :options="$status_options" option_value="value" option_name="title" icon="toggle-large-on" />
+            <x-input.text method="e" name="code" title="code" icon="code-simple" />
+            <x-input.text method="e" name="title" title="title" icon="input-text" />
+            <x-input.date method="e" name="start_at" title="start-at" icon="calendar-arrow-up" />
+            <x-input.date method="e" name="finish_at" title="finish-at" icon="calendar-arrow-down" />
+            <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.edit>
 @endsection

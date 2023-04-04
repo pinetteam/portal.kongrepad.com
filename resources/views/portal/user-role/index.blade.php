@@ -12,12 +12,12 @@
                         {{ $user_roles->links() }}
                     </caption>
                     <thead class="thead-dark">
-                    <tr>
-                        <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}</th>
-                        <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.total-scopes') }}</th>
-                        <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}</th>
-                        <th scope="col" class="text-end"></th>
-                    </tr>
+                        <tr>
+                            <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}</th>
+                            <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.total-scopes') }}</th>
+                            <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}</th>
+                            <th scope="col" class="text-end"></th>
+                        </tr>
                     </thead>
                     <tbody>
                         @foreach($user_roles as $user_role)
@@ -63,15 +63,15 @@
     <x-crud.form.common.create>
         @section('create-form')
             <x-input.text method="c" name="title" title="title" icon="input-text" />
-            <x-input.checkbox method="c" name="access_scopes" title="scopes" :options="$user_role_scopes" option_value="route" option_name="code" icon="ballot-check" />
+            <x-input.checkbox method="c" name="access_scopes" title="scopes" :options="$access_scopes" option_value="route" option_name="code" icon="ballot-check" />
             <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.create>
-    <x-crud.form.common.delete/>
-    <x-crud.form.common.edit method="e">
+    <x-crud.form.common.delete />
+    <x-crud.form.common.edit>
         @section('edit-form')
             <x-input.text method="e" name="title" title="title" icon="input-text" />
-            <x-input.checkbox method="e" name="access_scopes" title="scopes" :options="$user_role_scopes" option_value="route" option_name="code" icon="ballot-check" />
+            <x-input.checkbox method="e" name="access_scopes" title="scopes" :options="$access_scopes" option_value="route" option_name="code" icon="ballot-check" />
             <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.edit>

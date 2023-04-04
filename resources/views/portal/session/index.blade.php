@@ -89,8 +89,8 @@
             <x-input.radio method="c" name="status" title="status" :options="$status_options" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.create>
-    <x-crud.form.common.delete/>
-    <x-crud.form.common.edit method="e">
+    <x-crud.form.common.delete />
+    <x-crud.form.common.edit>
         @section('edit-form')
             <x-input.select method="e" name="session_id" title="main-session" :options="$main_sessions" option_value="id" option_name="title" icon="bee" />
             <x-input.select method="e" name="meeting_hall_id" title="meeting-halls" :options="$meeting_halls" option_value="id" option_name="title" icon="bee" />

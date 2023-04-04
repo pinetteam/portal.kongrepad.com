@@ -16,7 +16,12 @@
                             <th scope="col"><span class="fa-regular fa-bee mx-1"></span> {{ __('common.meeting') }}</th>
                             <th scope="col"><span class="fa-regular fa-id-card-clip mx-1"></span> {{ __('common.username') }}</th>
                             <th scope="col"><span class="fa-regular fa-id-card mx-1"></span> {{ __('common.name') }}</th>
+                            <th scope="col"><span class="fa-regular fa-building-columns mx-1"></span> {{ __('common.organisation') }}</th>
+                            <th scope="col"><span class="fa-regular fa-fingerprint mx-1"></span> {{ __('common.identification-number') }}</th>
+                            <th scope="col"><span class="fa-regular fa-envelope mx-1"></span> {{ __('common.email') }}</th>
+                            <th scope="col"><span class="fa-regular fa-mobile-screen mx-1"></span> {{ __('common.phone') }}</th>
                             <th scope="col"><span class="fa-regular fa-person-military-pointing mx-1"></span> {{ __('common.type') }}</th>
+                            <th scope="col"><span class="fa-regular fa-check-to-slot mx-1"></span> {{ __('common.confirmation') }}</th>
                             <th scope="col"><span class="fa-regular fa-right-to-bracket mx-1"></span> {{ __('common.last-login') }}</th>
                             <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}</th>
                             <th scope="col" class="text-end"></th>
@@ -35,7 +40,12 @@
                                     {{ $participant->username }}
                                 </td>
                                 <td>{{ $participant->full_name }}</td>
+                                <td>{{ $participant->organisation }}</td>
+                                <td>{{ $participant->identification_number }}</td>
+                                <td>{{ $participant->email }}</td>
+                                <td>{{ $participant->full_phone }}</td>
                                 <td>{{ __('common.'.$participant->type) }}</td>
+                                <td>{{ __('common.'.$participant->confirmation) }}</td>
                                 <td>{{ $participant->last_login }}</td>
                                 <td>
                                     @if($participant->status)
@@ -76,38 +86,38 @@
     <x-crud.form.common.create>
         @section('create-form')
             <x-input.select method="c" name="meeting_id" title="meeting" :options="$meetings" option_value="id" option_name="title" icon="bee" />
-            <x-input.text method="c" type="text" name="username" title="username" icon="id-card-clip" />
-            <x-input.text method="c" type="text" name="title" title="title" icon="input-text" />
-            <x-input.text method="c" type="text" name="first_name" title="first-name" icon="id-card" />
-            <x-input.text method="c" type="text" name="last_name" title="last-name" icon="id-card" />
-            <x-input.text method="c" type="text" name="identification_number" title="identification-number" icon="fingerprint" />
-            <x-input.text method="c" type="text" name="organisation" title="organisation" icon="building-columns" />
-            <x-input.text method="c" type="email" name="email" title="email" icon="envelope" />
-            <x-input.select method="c" name="phone_country_id" title="phone-country-code" :options="$countries" option_value="id" option_name="NameAndCode" icon="flag" />
-            <x-input.text method="c" type="number" name="phone" title="phone" icon="mobile-screen" />
-            <x-input.text method="c" type="text" name="password" title="password" icon="lock" />
-            <x-input.radio method="c" name="confirmation" title="confirmation" :options="$confirmation_options" option_value="value" option_name="title" icon="check-to-slot" />
+            <x-input.text method="c" name="username" title="username" icon="id-card-clip" />
+            <x-input.text method="c" name="title" title="title" icon="input-text" />
+            <x-input.text method="c" name="first_name" title="first-name" icon="id-card" />
+            <x-input.text method="c" name="last_name" title="last-name" icon="id-card" />
+            <x-input.text method="c" name="organisation" title="organisation" icon="building-columns" />
+            <x-input.text method="c" name="identification_number" title="identification-number" icon="fingerprint" />
+            <x-input.email method="c" name="email" title="email" icon="envelope" />
+            <x-input.select method="c" name="phone_country_id" title="phone-country-code" :options="$phone_countries" option_value="id" option_name="NameAndCode" icon="flag" />
+            <x-input.number method="c" name="phone" title="phone" icon="mobile-screen" />
+            <x-input.text method="c" name="password" title="password" icon="lock" />
             <x-input.select method="c" name="type" title="type" :options="$types" option_value="value" option_name="title" icon="person-military-pointing" />
-            <x-input.radio method="c" name="status" title="status" :options="$status_options" option_value="value" option_name="title" icon="toggle-large-on" />
+            <x-input.radio method="c" name="confirmation" title="confirmation" :options="$confirmations" option_value="value" option_name="title" icon="check-to-slot" />
+            <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.create>
-    <x-crud.form.common.delete/>
-    <x-crud.form.common.edit method="e">
+    <x-crud.form.common.delete />
+    <x-crud.form.common.edit>
         @section('edit-form')
             <x-input.select method="e" name="meeting_id" title="meeting" :options="$meetings" option_value="id" option_name="title" icon="bee" />
-            <x-input.text method="e" type="text" name="username" title="username" icon="id-card-clip" />
-            <x-input.text method="e" type="text" name="title" title="title" icon="input-text" />
-            <x-input.text method="e" type="text" name="first_name" title="first-name" icon="id-card" />
-            <x-input.text method="e" type="text" name="last_name" title="last-name" icon="id-card" />
-            <x-input.text method="e" type="text" name="identification_number" title="identification-number" icon="fingerprint" />
-            <x-input.text method="e" type="text" name="organisation" title="organisation" icon="building-columns" />
-            <x-input.text method="e" type="email" name="email" title="email" icon="envelope" />
-            <x-input.select method="e" name="phone_country_id" title="phone-country-code" :options="$countries" option_value="id" option_name="NameAndCode" icon="flag" />
-            <x-input.text method="e" type="number" name="phone" title="phone" icon="mobile-screen" />
-            <x-input.text method="e" type="text" name="password" title="password" icon="lock" />
-            <x-input.radio method="e" name="confirmation" title="confirmation" :options="$confirmation_options" option_value="value" option_name="title" icon="check-to-slot" />
+            <x-input.text method="e" name="username" title="username" icon="id-card-clip" />
+            <x-input.text method="e" name="title" title="title" icon="input-text" />
+            <x-input.text method="e" name="first_name" title="first-name" icon="id-card" />
+            <x-input.text method="e" name="last_name" title="last-name" icon="id-card" />
+            <x-input.text method="e" name="organisation" title="organisation" icon="building-columns" />
+            <x-input.text method="e" name="identification_number" title="identification-number" icon="fingerprint" />
+            <x-input.email method="e" name="email" title="email" icon="envelope" />
+            <x-input.select method="e" name="phone_country_id" title="phone-country-code" :options="$phone_countries" option_value="id" option_name="NameAndCode" icon="flag" />
+            <x-input.number method="e" name="phone" title="phone" icon="mobile-screen" />
+            <x-input.text method="e" name="password" title="password" icon="lock" />
             <x-input.select method="e" name="type" title="type" :options="$types" option_value="value" option_name="title" icon="person-military-pointing" />
-            <x-input.radio method="e" name="status" title="status" :options="$status_options" option_value="value" option_name="title" icon="toggle-large-on" />
+            <x-input.radio method="e" name="confirmation" title="confirmation" :options="$confirmations" option_value="value" option_name="title" icon="check-to-slot" />
+            <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.edit>
 @endsection
