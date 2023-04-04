@@ -15,7 +15,7 @@ class SessionRequest extends FormRequest
     {
         switch($this->method())
         {
-            case 'POST' || 'PATCH' || 'PUT':
+            case 'POST':
             {
                 return [
                     'main_session_id' => 'nullable|exists:sessions,id',
@@ -27,6 +27,19 @@ class SessionRequest extends FormRequest
                     'start_at' => 'nullable|date|before_or_equal:finish_at|required_with:finish_at',
                     'finish_at' => 'nullable|date|after_or_equal:start_at|required_with:start_at',
                     'type' => 'required|in:main-session,event,course,presentation,break,other',
+                    'status' => 'required|boolean',
+                ];
+            } case 'PATCH' || 'PUT':
+            {
+                return [
+                    'main_session_id' => 'nullable|exists:sessions,id',
+                    'meeting_hall_id' => 'required|exists:meeting_halls,id',
+                    'sort_id' => 'nullable|integer',
+                    'code' => 'nullable|max:255',
+                    'title' => 'required|max:255',
+                    'description' => 'nullable|max:65535',
+                    'start_at' => 'nullable|date|before_or_equal:finish_at|required_with:finish_at',
+                    'finish_at' => 'nullable|date|after_or_equal:start_at|required_with:start_at',
                     'status' => 'required|boolean',
                 ];
             }

@@ -13,10 +13,10 @@
                     </caption>
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col"><span class="fa-regular fa-code-simple mx-1"></span>{{ __('common.code') }}</th>
-                            <th scope="col"><span class="fa-regular fa-input-text mx-1"></span>{{ __('common.title') }}</th>
-                            <th scope="col"><span class="fa-regular fa-calendar-arrow-up mx-1"></span>{{ __('common.start-at') }}</th>
-                            <th scope="col"><span class="fa-regular fa-calendar-arrow-down mx-1"></span>{{ __('common.finish-at') }}</th>
+                            <th scope="col"><span class="fa-regular fa-code-simple mx-1"></span> {{ __('common.code') }}</th>
+                            <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}</th>
+                            <th scope="col"><span class="fa-regular fa-calendar-arrow-up mx-1"></span> {{ __('common.start-at') }}</th>
+                            <th scope="col"><span class="fa-regular fa-calendar-arrow-down mx-1"></span> {{ __('common.finish-at') }}</th>
                             <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}</th>
                             <th scope="col" class="text-end"></th>
                         </tr>

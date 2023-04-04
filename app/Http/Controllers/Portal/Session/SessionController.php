@@ -13,8 +13,8 @@ class SessionController extends Controller
     public function index()
     {
         $sessions = Auth::user()->customer->sessions()->paginate(20);
-        $main_sessions = Auth::user()->customer->sessions()->where('type', 'main-session')->whereNull('session_id')->where('status', 1)->get();
-        $meeting_halls = Auth::user()->customer->meetingHalls()->where('status', 1)->get();
+        $main_sessions = Auth::user()->customer->sessions()->where('sessions.type', 'main-session')->where('sessions.status', 1)->whereNull('main_session_id')->get();
+        $meeting_halls = Auth::user()->customer->meetingHalls()->where('meeting_halls.status', 1)->get();
         $types = [
             'main-session' => ["value" => "main-session", "title" => __('common.main-session')],
             'event' => ["value" => "event", "title" => __('common.event')],
@@ -33,13 +33,12 @@ class SessionController extends Controller
     {
         if ($request->validated()) {
             $session = new Session();
-            $session->session_id = $request->input('session_id');
+            $session->main_session_id = $request->input('main_session_id');
             $session->meeting_hall_id = $request->input('meeting_hall_id');
             $session->sort_id = $request->input('sort_id');
             $session->code = $request->input('code');
             $session->title = $request->input('title');
             $session->description = $request->input('description');
-            $session->date = $request->input('date');
             $session->start_at = $request->input('start_at');
             $session->finish_at = $request->input('finish_at');
             $session->type = $request->input('type');
@@ -64,16 +63,17 @@ class SessionController extends Controller
     {
         if ($request->validated()) {
             $session = Auth::user()->customer->sessions()->findOrFail($id);
-            $session->session_id = $request->input('session_id');
+            $session->main_session_id = $request->input('main_session_id');
             $session->meeting_hall_id = $request->input('meeting_hall_id');
             $session->sort_id = $request->input('sort_id');
             $session->code = $request->input('code');
             $session->title = $request->input('title');
             $session->description = $request->input('description');
-            $session->date = $request->input('date');
             $session->start_at = $request->input('start_at');
             $session->finish_at = $request->input('finish_at');
-            $session->type = $request->input('type');
+            if ($request->has('type')) {
+                $session->type = $request->input('type');
+            }
             $session->status = $request->input('status');
             if ($session->save()) {
                 return back()->with('success',__('common.edited-successfully'));

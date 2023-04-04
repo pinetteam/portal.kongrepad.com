@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('main_session_id')->index()->nullable();
             $table->unsignedBigInteger('meeting_hall_id')->index();
-            $table->integer('sort_id')->nullable();
+            $table->unsignedInteger('sort_id')->nullable();
             $table->string('code', 255)->nullable();
             $table->string('title', 255);
             $table->text('description')->nullable();

@@ -13,9 +13,14 @@
                     </caption>
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col"><span class="fa-regular fa-input-text mx-1"></span>{{ __('common.title') }}</th>
-                            <th scope="col"><span class="fa-regular fa-calendar-arrow-up mx-1"></span>{{ __('common.start-at') }}</th>
-                            <th scope="col"><span class="fa-regular fa-calendar-arrow-down mx-1"></span>{{ __('common.finish-at') }}</th>
+                            <th scope="col"><span class="fa-regular fa-users-between-lines mx-1"></span> {{ __('common.main-session') }}</th>
+                            <th scope="col"><span class="fa-regular fa-hotel mx-1"></span> {{ __('common.meeting-hall') }}</th>
+                            <th scope="col"><span class="fa-regular fa-circle-sort mx-1"></span> {{ __('common.sort') }}</th>
+                            <th scope="col"><span class="fa-regular fa-code-simple mx-1"></span> {{ __('common.code') }}</th>
+                            <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}</th>
+                            <th scope="col"><span class="fa-regular fa-calendar-arrow-up mx-1"></span> {{ __('common.start-at') }}</th>
+                            <th scope="col"><span class="fa-regular fa-calendar-arrow-down mx-1"></span> {{ __('common.finish-at') }}</th>
+                            <th scope="col"><span class="fa-regular fa-person-military-pointing mx-1"></span> {{ __('common.type') }}</th>
                             <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}</th>
                             <th scope="col" class="text-end"></th>
                         </tr>
@@ -23,21 +28,26 @@
                     <tbody>
                         @foreach($sessions as $session)
                             <tr>
+                                <td>
+                                    @if($session->main_session_id)
+                                        {{ $session->mainSession->title }}
+                                    @else
+                                        {{ __('common.unspecified') }}
+                                    @endif
+                                </td>
+                                <td>{{ $session->meetingHall->title }}</td>
+                                <td>
+                                    @if($session->sort_id)
+                                        {{ $session->sort_id }}
+                                    @else
+                                        {{ __('common.unspecified') }}
+                                    @endif
+                                </td>
+                                <td>{{ $session->code }}</td>
                                 <td>{{ $session->title }}</td>
-                                <td>
-                                    @if($session->start_at)
-                                        {{ $session->start_at }}
-                                    @else
-                                        {{ __('common.unspecified') }}
-                                    @endif
-                                </td>
-                                <td>
-                                    @if($session->finish_at)
-                                        {{ $session->finish_at }}
-                                    @else
-                                        {{ __('common.unspecified') }}
-                                    @endif
-                                </td>
+                                <td>{{ $session->start_at }}</td>
+                                <td>{{ $session->finish_at }}</td>
+                                <td>{{ __('common.'.$session->type) }}</td>
                                 <td>
                                     @if($session->status)
                                         <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
@@ -76,33 +86,30 @@
     </div>
     <x-crud.form.common.create>
         @section('create-form')
-            <x-input.select method="c" name="session_id" title="main-session" :options="$main_sessions" option_value="id" option_name="title" icon="bee" />
-            <x-input.select method="c" name="meeting_hall_id" title="meeting-halls" :options="$meeting_halls" option_value="id" option_name="title" icon="bee" />
-            <x-input.text method="c" type="text" name="sort_id" title="sort" icon="input-text" />
-            <x-input.text method="c" type="text" name="code" title="code" icon="input-text" />
-            <x-input.text method="c" type="text" name="title" title="title" icon="input-text" />
-            <x-input.text method="c" type="text" name="description" title="description" icon="input-text" />
-            <x-input.text method="c" type="date" name="date" title="date" icon="calendar-arrow-up" />
-            <x-input.text method="c" type="date" name="start_at" title="start-at" icon="calendar-arrow-down" />
-            <x-input.text method="c" type="date" name="finish_at" title="finish-at" icon="calendar-arrow-down" />
+            <x-input.select method="c" name="main_session_id" title="main-session" :options="$main_sessions" option_value="id" option_name="title" icon="users-between-lines" />
+            <x-input.select method="c" name="meeting_hall_id" title="meeting-hall" :options="$meeting_halls" option_value="id" option_name="title" icon="hotel" />
+            <x-input.number method="c" name="sort_id" title="sort" icon="circle-sort" />
+            <x-input.text method="c" name="code" title="code" icon="code-simple" />
+            <x-input.text method="c" name="title" title="title" icon="input-text" />
+            <x-input.text method="c" name="description" title="description" icon="comment-dots" />
+            <x-input.datetime method="c" name="start_at" title="start-at" icon="calendar-arrow-down" />
+            <x-input.datetime method="c" name="finish_at" title="finish-at" icon="calendar-arrow-down" />
             <x-input.select method="c" name="type" title="type" :options="$types" option_value="value" option_name="title" icon="person-military-pointing" />
-            <x-input.radio method="c" name="status" title="status" :options="$status_options" option_value="value" option_name="title" icon="toggle-large-on" />
+            <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.create>
     <x-crud.form.common.delete />
     <x-crud.form.common.edit>
         @section('edit-form')
-            <x-input.select method="e" name="session_id" title="main-session" :options="$main_sessions" option_value="id" option_name="title" icon="bee" />
-            <x-input.select method="e" name="meeting_hall_id" title="meeting-halls" :options="$meeting_halls" option_value="id" option_name="title" icon="bee" />
-            <x-input.text method="e" type="text" name="sort_id" title="sort" icon="input-text" />
-            <x-input.text method="e" type="text" name="code" title="code" icon="input-text" />
-            <x-input.text method="e" type="text" name="title" title="title" icon="input-text" />
-            <x-input.text method="e" type="text" name="description" title="description" icon="input-text" />
-            <x-input.text method="e" type="date" name="date" title="date" icon="calendar-arrow-up" />
-            <x-input.text method="e" type="date" name="start_at" title="start-at" icon="calendar-arrow-down" />
-            <x-input.text method="e" type="date" name="finish_at" title="finish-at" icon="calendar-arrow-down" />
-            <x-input.select method="e" name="type" title="type" :options="$types" option_value="value" option_name="title" icon="person-military-pointing" />
-            <x-input.radio method="e" name="status" title="status" :options="$status_options" option_value="value" option_name="title" icon="toggle-large-on" />
+            <x-input.select method="e" name="main_session_id" title="main-session" :options="$main_sessions" option_value="id" option_name="title" icon="users-between-lines" />
+            <x-input.select method="e" name="meeting_hall_id" title="meeting-hall" :options="$meeting_halls" option_value="id" option_name="title" icon="hotel" />
+            <x-input.number method="e" name="sort_id" title="sort" icon="circle-sort" />
+            <x-input.text method="e" name="code" title="code" icon="code-simple" />
+            <x-input.text method="e" name="title" title="title" icon="input-text" />
+            <x-input.text method="e" name="description" title="description" icon="comment-dots" />
+            <x-input.datetime method="e" name="start_at" title="start-at" icon="calendar-arrow-down" />
+            <x-input.datetime method="e" name="finish_at" title="finish-at" icon="calendar-arrow-down" />
+            <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.edit>
 @endsection
