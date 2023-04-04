@@ -13,7 +13,7 @@ class MeetingHallController extends Controller
     public function index()
     {
         $meeting_halls = Auth::user()->customer->meetingHalls()->paginate(20);
-        $meetings = Auth::user()->customer->meetings;
+        $meetings = Auth::user()->customer->meetings()->where('status', 1)->get();
         $statuses = [
             'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],

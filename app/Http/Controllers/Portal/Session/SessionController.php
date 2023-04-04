@@ -13,8 +13,8 @@ class SessionController extends Controller
     public function index()
     {
         $sessions = Auth::user()->customer->sessions()->paginate(20);
-        $main_sessions = Auth::user()->customer->sessions()->where('type', 'main-session')->whereNull('session_id')->get();
-        $meeting_halls = Auth::user()->customer->meetingHalls()->get();
+        $main_sessions = Auth::user()->customer->sessions()->where('type', 'main-session')->whereNull('session_id')->where('status', 1)->get();
+        $meeting_halls = Auth::user()->customer->meetingHalls()->where('status', 1)->get();
         $types = [
             'main-session' => ["value" => "main-session", "title" => __('common.main-session')],
             'event' => ["value" => "event", "title" => __('common.event')],

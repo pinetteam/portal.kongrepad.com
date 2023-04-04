@@ -10,7 +10,7 @@ class DocumentDownloadController extends Controller
 {
     public function index(string $file)
     {
-        $document = Document::where('file_name', $file)->first();
+        $document = Document::where('file_name', $file)->where('status', 1)->first();
         return Storage::download('documents/'.$document->file_name.'.'.$document->file_extension);
     }
 }

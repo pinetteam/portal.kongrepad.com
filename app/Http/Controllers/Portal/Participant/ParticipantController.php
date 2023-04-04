@@ -14,7 +14,7 @@ class ParticipantController extends Controller
     public function index()
     {
         $participants = Auth::user()->customer->participants()->paginate(20);
-        $meetings = Auth::user()->customer->meetings;
+        $meetings = Auth::user()->customer->meetings()->where('status', 1)->get();
         $phone_countries = SystemCountry::get();
         $types = [
             'agent' => ["value" => "agent", "title" => __('common.agent')],

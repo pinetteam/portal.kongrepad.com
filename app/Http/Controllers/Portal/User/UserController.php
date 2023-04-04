@@ -14,7 +14,7 @@ class UserController extends Controller
     public function index()
     {
         $users = Auth::user()->customer->users()->paginate(20);
-        $user_roles = Auth::user()->customer->userRoles;
+        $user_roles = Auth::user()->customer->userRoles()->where('status', 1)->get();
         $phone_countries = SystemCountry::get();
         $statuses = [
             'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],

@@ -15,7 +15,7 @@ class DocumentController extends Controller
     public function index()
     {
         $documents = Auth::user()->customer->documents()->paginate(20);
-        $participants = Auth::user()->customer->participants()->get();
+        $participants = Auth::user()->customer->participants()->where('status', 1)->get();
         $sharing_via_emails = [
             'not-allowed' => ["value" => 0, "title" => __('common.not-allowed'), 'color' => 'danger'],
             'allowed' => ["value" => 1, "title" => __('common.allowed'), 'color' => 'success'],

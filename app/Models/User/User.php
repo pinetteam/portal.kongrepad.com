@@ -73,7 +73,7 @@ class User extends Authenticatable
     public function getFullPhoneAttribute()
     {
         if(isset($this->phone_country_id) && isset($this->phone)) {
-            return Str::of($this->phone_country->phone_code.$this->phone)->trim();
+            return Str::of('+'.$this->phoneCountry->phone_code.$this->phone)->trim();
         } else {
             return __('common.unspecified');
         }
