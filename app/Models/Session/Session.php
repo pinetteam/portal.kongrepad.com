@@ -11,13 +11,12 @@ class Session extends Model
     use HasFactory, SoftDeletes;
     protected $table = 'sessions';
     protected $fillable = [
-        'session_id',
+        'main_session_id',
         'meeting_hall_id',
         'sort_id',
         'code',
         'title',
         'description',
-        'date',
         'start_at',
         'finish_at',
         'type',
@@ -25,15 +24,13 @@ class Session extends Model
         'deleted_by',
     ];
     protected $dates = [
-        'date',
         'start_at',
         'finish_at',
         'deleted_at',
     ];
     protected $casts = [
-        'date' => 'date',
-        'start_at' => 'datetime:H:i',
-        'finish_at' => 'datetime:H:i',
+        'start_at' => 'datetime',
+        'finish_at' => 'datetime',
         'deleted_at' => 'datetime',
     ];
 }

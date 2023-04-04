@@ -10,15 +10,14 @@ class SessionResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'session_id' => ['value'=>$this->session_id, 'type'=>'select'],
+            'main_session_id' => ['value'=>$this->main_session_id, 'type'=>'select'],
             'meeting_hall_id' => ['value'=>$this->meeting_hall_id, 'type'=>'select'],
             'sort_id' => ['value'=>$this->sort_id, 'type'=>'number'],
             'code' => ['value'=>$this->code, 'type'=>'text'],
             'title' => ['value'=>$this->title, 'type'=>'text'],
             'description' => ['value'=>$this->description, 'type'=>'text'],
-            'date' => ['value'=>$this->date, 'type'=>'date'],
-            'start_at' => ['value'=>$this->start_at, 'type'=>'time'],
-            'finish_at' => ['value'=>$this->finish_at, 'type'=>'time'],
+            'start_at' => ['value'=>$this->start_at, 'type'=>'datetime'],
+            'finish_at' => ['value'=>$this->finish_at, 'type'=>'datetime'],
             'type' => ['value'=>$this->type, 'type'=>'select'],
             'status' => ['value'=>$this->status, 'type'=>'radio'],
             'route' => route('portal.session.update', $this->id),

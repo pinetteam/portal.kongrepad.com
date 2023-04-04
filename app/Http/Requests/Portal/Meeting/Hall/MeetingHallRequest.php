@@ -30,12 +30,8 @@ class MeetingHallRequest extends FormRequest
     {
         return [
             'meeting_id' => __('common.meeting'),
-        ];
-    }
-    public function filters(): array
-    {
-        return [
-            'title' => 'trim',
+            'title' => __('common.title'),
+            'status' => __('common.status'),
         ];
     }
     public function failedValidation(Validator $validator)

@@ -20,8 +20,8 @@ class MeetingRequest extends FormRequest
                 return [
                     'code' => 'required|max:255',
                     'title' => 'required|max:255',
-                    'start_at' => 'nullable|date|before_or_equal:finish_at',
-                    'finish_at' => 'nullable|date|after_or_equal:start_at',
+                    'start_at' => 'nullable|date|before_or_equal:finish_at|required_with:finish_at',
+                    'finish_at' => 'nullable|date|after_or_equal:start_at|required_with:start_at',
                     'status' => 'required|boolean',
                 ];
             }
@@ -36,12 +36,6 @@ class MeetingRequest extends FormRequest
             'start_at' => __('common.start-at'),
             'finish_at' => __('common.finish-at'),
             'status' => __('common.status'),
-        ];
-    }
-    public function filters(): array
-    {
-        return [
-            'title' => 'trim',
         ];
     }
     public function failedValidation(Validator $validator)

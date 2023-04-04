@@ -55,7 +55,7 @@ class UserRequest extends FormRequest
             'first_name' => __('common.first-name'),
             'last_name' => __('common.last-name'),
             'email' => __('common.email'),
-            'phone_country_id' => __('common.phone-country-code'),
+            'phone_country_id' => __('common.phone-country'),
             'phone' => __('common.phone'),
             'password' => __('common.password'),
             'status' => __('common.status'),

@@ -52,6 +52,11 @@
                             if (dateElement !== null) {
                                 dateElement.value = value['value'];
                             }
+                        } else if(value['type'] === 'datetime') {
+                            const datetimeElement = editModal.querySelector('#{{ $method }}-' + key);
+                            if (datetimeElement !== null) {
+                                datetimeElement.value = value['value'];
+                            }
                         } else if(value['type'] === 'email') {
                             const emailElement = editModal.querySelector('#{{ $method }}-' + key);
                             if (emailElement !== null) {

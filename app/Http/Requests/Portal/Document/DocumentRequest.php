@@ -45,12 +45,11 @@ class DocumentRequest extends FormRequest
     {
         return [
             'participant_id' => __('common.participant'),
-        ];
-    }
-    public function filters(): array
-    {
-        return [
-            'title' => 'trim',
+            'file' => __('common.file'),
+            'title' => __('common.title'),
+            'type' => __('common.type'),
+            'sharing_via_email' => __('common.sharing-via-email'),
+            'status' => __('common.status'),
         ];
     }
     public function failedValidation(Validator $validator)

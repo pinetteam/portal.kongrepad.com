@@ -20,12 +20,12 @@ class ParticipantRequest extends FormRequest
             {
                 return [
                     'meeting_id' => 'required|exists:meetings,id',
-                    'username' => 'required|unique:participants,username|max:255',
+                    'username' => 'required|max:255|unique:participants,username',
                     'title' => 'nullable|max:255',
                     'first_name' => 'required|max:255',
                     'last_name' => 'required|max:255',
-                    'identification_number' => 'max:255',
                     'organisation' => 'max:255',
+                    'identification_number' => 'max:255',
                     'email' => 'required|email|max:255',
                     'phone_country_id' => 'nullable|exists:system_countries,id|required_with:phone',
                     'phone' => 'nullable|max:31|required_with:phone_country_id',
@@ -39,12 +39,12 @@ class ParticipantRequest extends FormRequest
             {
                 return [
                     'meeting_id' => 'required|exists:meetings,id',
-                    'username' => ['required', Rule::unique('participants','username')->ignore($this->username, 'username'), 'max:255'],
+                    'username' => ['required', 'max:255', Rule::unique('participants','username')->ignore($this->username, 'username')],
                     'title' => 'nullable|max:255',
                     'first_name' => 'required|max:255',
                     'last_name' => 'required|max:255',
-                    'identification_number' => 'max:255',
                     'organisation' => 'max:255',
+                    'identification_number' => 'max:255',
                     'email' => 'required|email|max:255',
                     'phone_country_id' => 'nullable|exists:system_countries,id|required_with:phone',
                     'phone' => 'nullable|max:31|required_with:phone_country_id',
@@ -60,16 +60,20 @@ class ParticipantRequest extends FormRequest
     public function attributes(): array
     {
         return [
+            'meeting_id' => __('common.meeting'),
+            'username' => __('common.username'),
+            'title' => __('common.title'),
             'first_name' => __('common.first-name'),
             'last_name' => __('common.last-name'),
-            'phone_country_id' => __('common.phone-country-code'),
-        ];
-    }
-    public function filters(): array
-    {
-        return [
-            'username' => 'trim|lowercase|escape',
-            'email' => 'trim|lowercase',
+            'organisation' => __('common.organisation'),
+            'identification_number' => __('common.identification-number'),
+            'email' => __('common.email'),
+            'phone_country_id' => __('common.phone-country'),
+            'phone' => __('common.phone'),
+            'password' => __('common.password'),
+            'type' => __('common.type'),
+            'confirmation' => __('common.confirmation'),
+            'status' => __('common.status'),
         ];
     }
     public function failedValidation(Validator $validator)
