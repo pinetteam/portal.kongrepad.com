@@ -1,4 +1,4 @@
-@props(['method' => 'edit'])
+@props(['method' => 'e'])
 <div class="modal fade" id="edit-modal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="edit-modal-label" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content bg-dark">
@@ -19,7 +19,7 @@
                 <div class="modal-footer">
                     <div class="btn-group w-100" role="group" aria-label="{{ __('common.processes') }}">
                         <button type="button" class="btn btn-danger w-25" data-bs-dismiss="modal">{{ __('common.close') }}</button>
-                        <button type="submit" class="btn btn-success w-75">{{ __('common.edit') }}</button>
+                        <button type="submit" class="btn btn-success w-75" id="edit-form-submit">{{ __('common.edit') }}</button>
                     </div>
                 </div>
             </form>
@@ -30,39 +30,57 @@
     const editModal = document.getElementById('edit-modal');
     editModal.addEventListener('show.bs.modal', event => {
         if(event.relatedTarget) {
-            const button = event.relatedTarget
-            let url = button.getAttribute('data-resource')
+            const button = event.relatedTarget;
+            let url = button.getAttribute('data-resource');
             fetch(url)
                 .then((response) => {
                     return response.json();
                 })
                 .then((data) => {
                     const resource = data.data;
-                    document.getElementById('edit-form').action = resource.route
+                    document.getElementById('edit-form').action = resource.route;
                     for (const [key, value] of Object.entries(resource)) {
-                        if(value['type'] == 'text') {
-                            const textElement = editModal.querySelector('#{{ $method }}-' + key);
-                            if (textElement !== null) {
-                                textElement.value = value['value'];
+                        if(value['type'] === 'checkbox') {
+                            value['value'].forEach(title => {
+                                const checkboxElement = editModal.querySelector('#{{ $method }}-' + key + '-' + title.replaceAll('.',"\\."));
+                                if (checkboxElement !== null) {
+                                    checkboxElement.setAttribute('checked', 'checked');
+                                }
+                            });
+                        } else if(value['type'] === 'date') {
+                            const dateElement = editModal.querySelector('#{{ $method }}-' + key);
+                            if (dateElement !== null) {
+                                dateElement.value = value['value'];
                             }
-                        } else if(value['type'] == 'select') {
-                            const selectElement = editModal.querySelector('#{{ $method }}-' + key);
-                            if (selectElement !== null) {
-                                selectElement.value = value['value'];
+                        } else if(value['type'] === 'email') {
+                            const emailElement = editModal.querySelector('#{{ $method }}-' + key);
+                            if (emailElement !== null) {
+                                emailElement.value = value['value'];
                             }
-                        } else if(value['type'] == 'radio') {
+                        } else if(value['type'] === 'file') {
+
+                        } else if(value['type'] === 'number') {
+                            const numberElement = editModal.querySelector('#{{ $method }}-' + key);
+                            if (numberElement !== null) {
+                                numberElement.value = value['value'];
+                            }
+                        } else if(value['type'] === 'password') {
+
+                        } else if(value['type'] === 'radio') {
                             const radioElement = editModal.querySelector('#{{ $method }}-' + key + '-' + value['value']);
                             if (radioElement !== null) {
                                 radioElement.setAttribute('checked', 'checked');
                             }
-                        }else if(value['type'] == 'checkbox') {
-                            value['value'].forEach(title => {
-                                const checkElement = editModal.querySelector('#{{ $method }}-' + key + '-' + title.replaceAll('.',"\\."));
-                                if (checkElement !== null) {
-                                    checkElement.setAttribute('checked', 'checked');
-                                }
-                            });
-
+                        } else if(value['type'] === 'select') {
+                            const selectElement = editModal.querySelector('#{{ $method }}-' + key);
+                            if (selectElement !== null) {
+                                selectElement.value = value['value'];
+                            }
+                        } else if(value['type'] === 'text') {
+                            const textElement = editModal.querySelector('#{{ $method }}-' + key);
+                            if (textElement !== null) {
+                                textElement.value = value['value'];
+                            }
                         }
                     }
                 })
@@ -79,6 +97,12 @@
             element.classList.remove("is-invalid");
             element.value = null;
         });
+    });
+    const editFormSubmit = document.getElementById('edit-form-submit');
+    editFormSubmit.addEventListener('click', function() {
+        editFormSubmit.disabled = true;
+        editFormSubmit.innerHTML = '<div class="spinner-border spinner-border-sm" role="status"></div> {{ __('common.editing') }}';
+        document.getElementById('edit-form').submit();
     });
 </script>
 @if($errors->any() && session('method') && session('route'))
