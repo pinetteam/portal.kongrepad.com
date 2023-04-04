@@ -20,6 +20,9 @@ class MeetingHall extends Model
     protected $dates = [
         'deleted_at',
     ];
+    protected $casts = [
+        'deleted_at' => 'datetime',
+    ];
     public function meeting()
     {
         return $this->belongsTo(Meeting::class, 'meeting_id', 'id');

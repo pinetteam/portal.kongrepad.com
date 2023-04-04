@@ -16,6 +16,7 @@ class Session extends Model
         'sort_id',
         'code',
         'title',
+        'description',
         'date',
         'start_at',
         'finish_at',
@@ -24,9 +25,15 @@ class Session extends Model
         'deleted_by',
     ];
     protected $dates = [
+        'date',
+        'start_at',
+        'finish_at',
         'deleted_at',
     ];
     protected $casts = [
+        'date' => 'date',
+        'start_at' => 'datetime:H:i',
+        'finish_at' => 'datetime:H:i',
         'deleted_at' => 'datetime',
     ];
 }

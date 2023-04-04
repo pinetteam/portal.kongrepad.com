@@ -16,13 +16,16 @@ class Document extends Model
         'file_name',
         'file_extension',
         'title',
-        'type',
         'sharing_via_email',
+        'type',
         'status',
         'deleted_by',
     ];
     protected $dates = [
         'deleted_at',
+    ];
+    protected $casts = [
+        'deleted_at' => 'datetime',
     ];
     public function participant()
     {

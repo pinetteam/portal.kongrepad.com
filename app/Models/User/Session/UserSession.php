@@ -10,11 +10,13 @@ class UserSession extends Model
     use HasFactory;
     protected $table = 'user_sessions';
     protected $fillable = [
-        'id',
         'user_id',
         'ip_address',
         'user_agent',
         'payload',
+        'last_activity',
+    ];
+    protected $dates = [
         'last_activity',
     ];
     protected $casts = [

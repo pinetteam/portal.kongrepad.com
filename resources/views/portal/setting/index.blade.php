@@ -46,7 +46,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                                @foreach($customer->setting as $system_config => $value)
+                                @foreach($customer->settings as $system_config => $value)
                                     <tr>
                                         <th scope="row">{{ __('common.'.$system_config) }}</th>
                                         <td>{{ $value }}</td>

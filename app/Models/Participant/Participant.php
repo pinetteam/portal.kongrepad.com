@@ -20,8 +20,8 @@ class Participant extends Model
         'title',
         'first_name',
         'last_name',
-        'identification_number',
         'organisation',
+        'identification_number',
         'email',
         'phone_country_id',
         'phone',
@@ -29,6 +29,7 @@ class Participant extends Model
         'last_login_ip',
         'last_login_agent',
         'last_login_datetime',
+        'last_activity',
         'type',
         'confirmation',
         'status',
@@ -36,10 +37,13 @@ class Participant extends Model
     ];
     protected $dates = [
         'last_login_datetime',
+        'last_activity',
         'deleted_at',
     ];
     protected $casts = [
+        'last_login_datetime' => 'datetime',
         'last_activity' => 'timestamp',
+        'deleted_at' => 'datetime',
     ];
     public function meeting()
     {

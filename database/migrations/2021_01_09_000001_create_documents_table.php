@@ -17,8 +17,8 @@ return new class extends Migration
             $table->uuid('file_name')->unique();
             $table->string('file_extension', 31)->nullable();
             $table->string('title', 255)->nullable();
-            $table->enum('type', ['presentation', 'publication', 'other'])->default('presentation');
             $table->boolean('sharing_via_email')->default(0)->comment('0=not-allowed;1=allowed');
+            $table->enum('type', ['presentation', 'publication', 'other'])->default('presentation');
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
             $table->timestamps();
             $table->unsignedBigInteger('deleted_by')->index()->nullable();

@@ -5,6 +5,7 @@ namespace App\Models\System\Country;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 class SystemCountry extends Model
 {
@@ -25,6 +26,6 @@ class SystemCountry extends Model
     ];
     public function getNameAndCodeAttribute()
     {
-        return $this->name . " | +". $this->phone_code;
+        return Str::of($this->name . " | +". $this->phone_code)->trim();
     }
 }
