@@ -32,7 +32,7 @@
                                     @if($session->main_session_id)
                                         {{ $session->mainSession->title }}
                                     @else
-                                        {{ __('common.unspecified') }}
+                                        <i class="text-info">{{ __('common.unspecified') }}</i>
                                     @endif
                                 </td>
                                 <td>{{ $session->meetingHall->title }}</td>
@@ -40,7 +40,7 @@
                                     @if($session->sort_id)
                                         {{ $session->sort_id }}
                                     @else
-                                        {{ __('common.unspecified') }}
+                                        <i class="text-info">{{ __('common.unspecified') }}</i>
                                     @endif
                                 </td>
                                 <td>{{ $session->code }}</td>
