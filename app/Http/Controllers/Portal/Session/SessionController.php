@@ -12,7 +12,7 @@ class SessionController extends Controller
 {
     public function index()
     {
-        $sessions = Auth::user()->customer->sessions()->paginate(20);
+        $sessions = Auth::user()->customer->sessions()->orderBy('sort_id')->paginate(20);
         $meeting_halls = Auth::user()->customer->meetingHalls()->where('meeting_halls.status', 1)->get();
         $types = [
             'session' => ["value" => "session", "title" => __('common.session')],
@@ -58,7 +58,6 @@ class SessionController extends Controller
     {
         if ($request->validated()) {
             $session = Auth::user()->customer->sessions()->findOrFail($id);
-            $session->main_session_id = $request->input('main_session_id');
             $session->meeting_hall_id = $request->input('meeting_hall_id');
             $session->sort_id = $request->input('sort_id');
             $session->code = $request->input('code');

@@ -39,6 +39,5 @@ class MeetingSeeder extends Seeder
                 'status' => 1,
             ],
         ]);
-
     }
 }
