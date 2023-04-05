@@ -13,13 +13,9 @@ class SessionController extends Controller
     public function index()
     {
         $sessions = Auth::user()->customer->sessions()->paginate(20);
-        $main_sessions = Auth::user()->customer->sessions()->where('sessions.type', 'main-session')->where('sessions.status', 1)->whereNull('main_session_id')->get();
         $meeting_halls = Auth::user()->customer->meetingHalls()->where('meeting_halls.status', 1)->get();
         $types = [
-            'main-session' => ["value" => "main-session", "title" => __('common.main-session')],
-            'event' => ["value" => "event", "title" => __('common.event')],
-            'course' => ["value" => "course", "title" => __('common.course')],
-            'presentation' => ["value" => "presentation", "title" => __('common.presentation')],
+            'session' => ["value" => "session", "title" => __('common.session')],
             'break' => ["value" => "break", "title" => __('common.break')],
             'other' => ["value" => "break", "title" => __('common.other')],
         ];
@@ -27,13 +23,12 @@ class SessionController extends Controller
             'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.session.index', compact(['sessions', 'main_sessions', 'meeting_halls', 'types', 'statuses']));
+        return view('portal.session.index', compact(['sessions', 'meeting_halls', 'types', 'statuses']));
     }
     public function store(SessionRequest $request)
     {
         if ($request->validated()) {
             $session = new Session();
-            $session->main_session_id = $request->input('main_session_id');
             $session->meeting_hall_id = $request->input('meeting_hall_id');
             $session->sort_id = $request->input('sort_id');
             $session->code = $request->input('code');
@@ -71,9 +66,6 @@ class SessionController extends Controller
             $session->description = $request->input('description');
             $session->start_at = $request->input('start_at');
             $session->finish_at = $request->input('finish_at');
-            if ($request->has('type')) {
-                $session->type = $request->input('type');
-            }
             $session->status = $request->input('status');
             if ($session->save()) {
                 return back()->with('success',__('common.edited-successfully'));

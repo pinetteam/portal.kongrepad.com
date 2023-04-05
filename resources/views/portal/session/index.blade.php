@@ -13,7 +13,6 @@
                     </caption>
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col"><span class="fa-regular fa-users-between-lines mx-1"></span> {{ __('common.main-session') }}</th>
                             <th scope="col"><span class="fa-regular fa-hotel mx-1"></span> {{ __('common.meeting-hall') }}</th>
                             <th scope="col"><span class="fa-regular fa-circle-sort mx-1"></span> {{ __('common.sort') }}</th>
                             <th scope="col"><span class="fa-regular fa-code-simple mx-1"></span> {{ __('common.code') }}</th>
@@ -28,13 +27,6 @@
                     <tbody>
                         @foreach($sessions as $session)
                             <tr>
-                                <td>
-                                    @if($session->main_session_id)
-                                        {{ $session->mainSession->title }}
-                                    @else
-                                        <i class="text-info">{{ __('common.unspecified') }}</i>
-                                    @endif
-                                </td>
                                 <td>{{ $session->meetingHall->title }}</td>
                                 <td>
                                     @if($session->sort_id)
@@ -86,7 +78,6 @@
     </div>
     <x-crud.form.common.create>
         @section('create-form')
-            <x-input.select method="c" name="main_session_id" title="main-session" :options="$main_sessions" option_value="id" option_name="title" icon="users-between-lines" />
             <x-input.select method="c" name="meeting_hall_id" title="meeting-hall" :options="$meeting_halls" option_value="id" option_name="title" icon="hotel" />
             <x-input.number method="c" name="sort_id" title="sort" icon="circle-sort" />
             <x-input.text method="c" name="code" title="code" icon="code-simple" />
@@ -101,7 +92,6 @@
     <x-crud.form.common.delete />
     <x-crud.form.common.edit>
         @section('edit-form')
-            <x-input.select method="e" name="main_session_id" title="main-session" :options="$main_sessions" option_value="id" option_name="title" icon="users-between-lines" />
             <x-input.select method="e" name="meeting_hall_id" title="meeting-hall" :options="$meeting_halls" option_value="id" option_name="title" icon="hotel" />
             <x-input.number method="e" name="sort_id" title="sort" icon="circle-sort" />
             <x-input.text method="e" name="code" title="code" icon="code-simple" />

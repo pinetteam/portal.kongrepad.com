@@ -15,7 +15,6 @@ class Session extends Model
     use HasFactory, SoftDeletes;
     protected $table = 'sessions';
     protected $fillable = [
-        'main_session_id',
         'meeting_hall_id',
         'sort_id',
         'code',
@@ -50,10 +49,6 @@ class Session extends Model
             get: fn (string $finishAt) => Carbon::createFromFormat('Y-m-d H:i:s', $finishAt)->format(Auth::user()->customer->settings['date-format'].' '.Auth::user()->customer->settings['time-format']),
             set: fn (string $finishAt) => Carbon::createFromFormat('d/m/Y H:i', $finishAt)->format('Y-m-d H:i:s'),
         );
-    }
-    public function mainSession()
-    {
-        return $this->belongsTo(Session::class, 'main_session_id', 'id');
     }
     public function meetingHall()
     {
