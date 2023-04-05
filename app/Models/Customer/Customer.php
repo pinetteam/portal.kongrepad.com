@@ -7,7 +7,7 @@ use App\Models\Document\Document;
 use App\Models\Meeting\Meeting;
 use App\Models\Meeting\Hall\MeetingHall;
 use App\Models\Participant\Participant;
-use App\Models\Session\Session;
+use App\Models\Program\Program;
 use App\Models\User\Role\UserRole;
 use App\Models\User\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -57,14 +57,14 @@ class Customer extends Model
     {
         return $this->hasOneThrough(Participant::class, Meeting::class, 'customer_id', 'meeting_id', 'id', 'id');
     }
-    public function sessions()
+    public function programs()
     {
-        $sessions = Session::select('sessions.*')
-            ->join('meeting_halls', 'sessions.meeting_hall_id', '=', 'meeting_halls.id')
+        $programs = Program::select('programs.*')
+            ->join('meeting_halls', 'programs.meeting_hall_id', '=', 'meeting_halls.id')
             ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
             ->join('customers', 'meetings.customer_id', '=', 'customers.id')
             ->where('customers.id', $this->getkey());
-        return $sessions;
+        return $programs;
     }
     public function users()
     {

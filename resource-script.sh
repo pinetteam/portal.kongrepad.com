@@ -1,4 +1,4 @@
-php artisan make:model Session/Session -m
-php artisan make:request Portal/Session/SessionRequest
-php artisan make:resource Portal/Session/SessionResource
-php artisan make:controller Portal/Session/SessionController --resource
+php artisan make:model Program/Session/ProgramSession -m
+php artisan make:request Portal/Program/Session/ProgramSessionRequest
+php artisan make:resource Portal/Program/Session/ProgramSessionResource
+php artisan make:controller Portal/Program/Session/ProgramSessionController --resource

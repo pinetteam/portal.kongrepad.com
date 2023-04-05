@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Session;
+namespace App\Models\Program;
 
 use App\Models\Meeting\Hall\MeetingHall;
 use Carbon\Carbon;
@@ -10,10 +10,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
-class Session extends Model
+class Program extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $table = 'sessions';
+    protected $table = 'programs';
     protected $fillable = [
         'meeting_hall_id',
         'sort_id',

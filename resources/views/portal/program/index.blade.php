@@ -1,15 +1,15 @@
 @extends('layout.portal.common')
-@section('title', __('common.sessions'))
+@section('title', __('common.programs'))
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">
-            <h1 class="m-0 text-center">{{ __('common.sessions') }}</h1>
+            <h1 class="m-0 text-center">{{ __('common.programs') }}</h1>
         </div>
         <div class="card-body p-0">
             <div class="table-responsive">
                 <table class="table table-dark table-striped table-hover ">
                     <caption class="text-end me-3">
-                        {{ $sessions->links() }}
+                        {{ $programs->links() }}
                     </caption>
                     <thead class="thead-dark">
                         <tr>
@@ -25,23 +25,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($sessions as $session)
+                        @foreach($programs as $program)
                             <tr>
-                                <td>{{ $session->meetingHall->title }}</td>
+                                <td>{{ $program->meetingHall->title }}</td>
                                 <td>
-                                    @if($session->sort_id)
-                                        {{ $session->sort_id }}
+                                    @if($program->sort_id)
+                                        {{ $program->sort_id }}
                                     @else
                                         <i class="text-info">{{ __('common.unspecified') }}</i>
                                     @endif
                                 </td>
-                                <td>{{ $session->code }}</td>
-                                <td>{{ $session->title }}</td>
-                                <td>{{ $session->start_at }}</td>
-                                <td>{{ $session->finish_at }}</td>
-                                <td>{{ __('common.'.$session->type) }}</td>
+                                <td>{{ $program->code }}</td>
+                                <td>{{ $program->title }}</td>
+                                <td>{{ $program->start_at }}</td>
+                                <td>{{ $program->finish_at }}</td>
+                                <td>{{ __('common.'.$program->type) }}</td>
                                 <td>
-                                    @if($session->status)
+                                    @if($program->status)
                                         <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
                                     @else
                                         <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
@@ -49,16 +49,16 @@
                                 </td>
                                 <td class="text-end">
                                     <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
-                                        <a class="btn btn-info btn-sm" href="{{ route('portal.session.show', $session->id) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
+                                        <a class="btn btn-info btn-sm" href="{{ route('portal.program.show', $program->id) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
                                             <span class="fa-regular fa-eye"></span>
                                         </a>
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.edit') }}">
-                                            <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#edit-modal" data-route="{{ route('portal.session.update', $session->id) }}" data-resource="{{ route('portal.session.edit', $session->id) }}" data-id="{{ $session->id }}">
+                                            <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#edit-modal" data-route="{{ route('portal.program.update', $program->id) }}" data-resource="{{ route('portal.program.edit', $program->id) }}" data-id="{{ $program->id }}">
                                                 <span class="fa-regular fa-pen-to-square"></span>
                                             </button>
                                         </div>
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
-                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#delete-modal" data-route="{{ route('portal.session.destroy', $session->id) }}" data-record="{{ $session->title }}">
+                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#delete-modal" data-route="{{ route('portal.program.destroy', $program->id) }}" data-record="{{ $program->title }}">
                                                 <span class="fa-regular fa-trash"></span>
                                             </button>
                                         </div>
@@ -71,8 +71,8 @@
             </div>
         </div>
         <div class="card-footer d-flex justify-content-center">
-            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#create-modal" data-route="{{ route('portal.session.store') }}">
-                <i class="fa-solid fa-plus"></i> {{ __('common.create-new-session') }}
+            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#create-modal" data-route="{{ route('portal.program.store') }}">
+                <i class="fa-solid fa-plus"></i> {{ __('common.create-new-program') }}
             </button>
         </div>
     </div>

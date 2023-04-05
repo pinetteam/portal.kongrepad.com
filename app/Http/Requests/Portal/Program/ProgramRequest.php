@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Portal\Session;
+namespace App\Http\Requests\Portal\Program;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
-class SessionRequest extends FormRequest
+class ProgramRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -25,29 +25,28 @@ class SessionRequest extends FormRequest
                     'description' => 'nullable|max:65535',
                     'start_at' => 'nullable|date_format:d/m/Y H:i|before_or_equal:finish_at|required_with:finish_at',
                     'finish_at' => 'nullable|date_format:d/m/Y H:i|after_or_equal:start_at|required_with:start_at',
-                    'type' => 'required|in:session,break,other',
+                    'type' => 'required|in:session,break,event,other',
                     'status' => 'required|boolean',
                 ];
             } case 'PATCH' || 'PUT':
-            {
-                return [
-                    'meeting_hall_id' => 'required|exists:meeting_halls,id',
-                    'sort_id' => 'nullable|integer',
-                    'code' => 'nullable|max:255',
-                    'title' => 'required|max:255',
-                    'description' => 'nullable|max:65535',
-                    'start_at' => 'nullable|date_format:d/m/Y H:i|before_or_equal:finish_at|required_with:finish_at',
-                    'finish_at' => 'nullable|date_format:d/m/Y H:i|after_or_equal:start_at|required_with:start_at',
-                    'status' => 'required|boolean',
-                ];
-            }
+        {
+            return [
+                'meeting_hall_id' => 'required|exists:meeting_halls,id',
+                'sort_id' => 'nullable|integer',
+                'code' => 'nullable|max:255',
+                'title' => 'required|max:255',
+                'description' => 'nullable|max:65535',
+                'start_at' => 'nullable|date_format:d/m/Y H:i|before_or_equal:finish_at|required_with:finish_at',
+                'finish_at' => 'nullable|date_format:d/m/Y H:i|after_or_equal:start_at|required_with:start_at',
+                'status' => 'required|boolean',
+            ];
+        }
             default:break;
         }
     }
     public function attributes(): array
     {
         return [
-            'main_session_id' => __('common.main-session'),
             'meeting_hall_id' => __('common.meeting-hall'),
             'sort_id' => __('common.sort'),
             'code' => __('common.code'),

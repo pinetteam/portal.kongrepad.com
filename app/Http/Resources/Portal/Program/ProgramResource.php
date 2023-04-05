@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Resources\Portal\Session;
+namespace App\Http\Resources\Portal\Program;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
 
-class SessionResource extends JsonResource
+class ProgramResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
@@ -21,7 +21,7 @@ class SessionResource extends JsonResource
             'finish_at' => ['value'=>Carbon::createFromFormat(Auth::user()->customer->settings['date-format'].' '.Auth::user()->customer->settings['time-format'], $this->finish_at)->format('d/m/Y H:i'), 'type'=>'datetime'],
             'type' => ['value'=>$this->type, 'type'=>'select'],
             'status' => ['value'=>$this->status, 'type'=>'radio'],
-            'route' => route('portal.session.update', $this->id),
+            'route' => route('portal.program.update', $this->id),
         ];
     }
 }

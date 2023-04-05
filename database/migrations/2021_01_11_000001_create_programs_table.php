@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sessions', function (Blueprint $table) {
+        Schema::create('programs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('meeting_hall_id')->index();
             $table->unsignedInteger('sort_id')->nullable();
@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->dateTime('start_at')->nullable();
             $table->dateTime('finish_at')->nullable();
-            $table->enum('type', ['session', 'break', 'other'])->default('session');
+            $table->enum('type', ['session', 'break', 'event', 'other'])->default('session');
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
             $table->timestamps();
             $table->unsignedBigInteger('deleted_by')->index()->nullable();
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sessions');
+        Schema::dropIfExists('programs');
     }
 };

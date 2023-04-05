@@ -2,18 +2,18 @@
 
 namespace Database\Seeders;
 
-use App\Models\Session\Session;
+use App\Models\Program\Program;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class SessionSeeder extends Seeder
+class ProgramSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Session::insert([
+        Program::insert([
             [
                 'meeting_hall_id' => '3',
                 'sort_id' => '10',

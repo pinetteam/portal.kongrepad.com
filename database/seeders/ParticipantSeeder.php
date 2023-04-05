@@ -68,7 +68,7 @@ class ParticipantSeeder extends Seeder
                 'title' => '',
                 'first_name' => 'Uğur',
                 'last_name' => 'Erdoğan',
-                'organisation' => 'Anadolu Üniversitesi',
+                'organisation' => 'Karadeniz Teknik Üniversitesi',
                 'identification_number' => '12345678904',
                 'email' => 'ugurerdogan@kongrepad.com',
                 'phone_country_id' => '223',
