@@ -2,8 +2,10 @@
 
 namespace App\Http\Resources\Portal\Session;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Auth;
 
 class SessionResource extends JsonResource
 {
@@ -16,8 +18,8 @@ class SessionResource extends JsonResource
             'code' => ['value'=>$this->code, 'type'=>'text'],
             'title' => ['value'=>$this->title, 'type'=>'text'],
             'description' => ['value'=>$this->description, 'type'=>'text'],
-            'start_at' => ['value'=>$this->start_at, 'type'=>'datetime'],
-            'finish_at' => ['value'=>$this->finish_at, 'type'=>'datetime'],
+            'start_at' => ['value'=>Carbon::createFromFormat(Auth::user()->customer->settings['date-format'].' '.Auth::user()->customer->settings['time-format'], $this->start_at)->format('d/m/Y H:i'), 'type'=>'datetime'],
+            'finish_at' => ['value'=>Carbon::createFromFormat(Auth::user()->customer->settings['date-format'].' '.Auth::user()->customer->settings['time-format'], $this->finish_at)->format('d/m/Y H:i'), 'type'=>'datetime'],
             'type' => ['value'=>$this->type, 'type'=>'select'],
             'status' => ['value'=>$this->status, 'type'=>'radio'],
             'route' => route('portal.session.update', $this->id),

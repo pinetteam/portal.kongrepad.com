@@ -30,5 +30,4 @@
             picker{{ $name }}.dates.setValue(tempusDominus.DateTime.convert(moment().toDate()));
         }
     });
-
 </script>

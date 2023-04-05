@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('code', 255)->nullable();
             $table->string('title', 255);
             $table->text('description')->nullable();
-            $table->date('start_at')->nullable();
-            $table->date('finish_at')->nullable();
+            $table->dateTime('start_at')->nullable();
+            $table->dateTime('finish_at')->nullable();
             $table->enum('type', ['main-session', 'event', 'course', 'presentation', 'break', 'other'])->default('other');
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
             $table->timestamps();

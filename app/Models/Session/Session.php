@@ -3,9 +3,12 @@
 namespace App\Models\Session;
 
 use App\Models\Meeting\Hall\MeetingHall;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Session extends Model
 {
@@ -34,6 +37,20 @@ class Session extends Model
         'finish_at' => 'datetime',
         'deleted_at' => 'datetime',
     ];
+    protected function startAt(): Attribute
+    {
+        return Attribute::make(
+            get: fn (string $startAt) => Carbon::createFromFormat('Y-m-d H:i:s', $startAt)->format(Auth::user()->customer->settings['date-format'].' '.Auth::user()->customer->settings['time-format']),
+            set: fn (string $startAt) => Carbon::createFromFormat('d/m/Y H:i', $startAt)->format('Y-m-d H:i:s'),
+        );
+    }
+    protected function finishAt(): Attribute
+    {
+        return Attribute::make(
+            get: fn (string $finishAt) => Carbon::createFromFormat('Y-m-d H:i:s', $finishAt)->format(Auth::user()->customer->settings['date-format'].' '.Auth::user()->customer->settings['time-format']),
+            set: fn (string $finishAt) => Carbon::createFromFormat('d/m/Y H:i', $finishAt)->format('Y-m-d H:i:s'),
+        );
+    }
     public function mainSession()
     {
         return $this->belongsTo(Session::class, 'main_session_id', 'id');
