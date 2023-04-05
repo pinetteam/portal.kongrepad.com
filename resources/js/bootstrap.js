@@ -3,6 +3,9 @@
 import * as bootstrap from 'bootstrap';
 window.bootstrap = bootstrap;
 
+import * as Popper from '@popperjs/core'
+window.Popper = Popper
+
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the

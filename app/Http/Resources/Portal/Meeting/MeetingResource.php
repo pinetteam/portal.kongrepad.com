@@ -14,8 +14,8 @@ class MeetingResource extends JsonResource
         return [
             'code' => ['value'=>$this->code, 'type'=>'text'],
             'title' => ['value'=>$this->title, 'type'=>'text'],
-            'start_at' => ['value'=>$this->start_at, 'type'=>'date'],
-            'finish_at' => ['value'=>$this->finish_at, 'type'=>'date'],
+            'start_at' => ['value'=>Carbon::createFromFormat(Auth::user()->customer->settings['date-format'], $this->start_at)->format('d/m/Y'), 'type'=>'date'],
+            'finish_at' => ['value'=>Carbon::createFromFormat(Auth::user()->customer->settings['date-format'], $this->finish_at)->format('d/m/Y'), 'type'=>'date'],
             'status' => ['value'=>$this->status, 'type'=>'radio'],
             'route' => route('portal.meeting.update', $this->id),
         ];

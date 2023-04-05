@@ -28,14 +28,14 @@
                                 <td>{{ $meeting->title }}</td>
                                 <td>
                                     @if($meeting->start_at)
-                                        {{ Carbon::create($meeting->start_at)->format(Auth::user()->customer->settings['date-format']) }}
+                                        {{ $meeting->start_at }}
                                     @else
                                         <i class="text-info">{{ __('common.unspecified') }}</i>
                                     @endif
                                 </td>
                                 <td>
                                     @if($meeting->finish_at)
-                                        {{ Carbon::create($meeting->finish_at)->format(Auth::user()->customer->settings['date-format']) }}
+                                        {{ $meeting->finish_at }}
                                     @else
                                         <i class="text-info">{{ __('common.unspecified') }}</i>
                                     @endif

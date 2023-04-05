@@ -11,7 +11,24 @@
     @enderror
 </div>
 <script type="module">
-    new TempusDominus(document.getElementById('{{ $method }}-{{ $name }}'), {
-        //put your config here
+    const picker{{ $name }} = new tempusDominus.TempusDominus(document.getElementById('{{ $method }}-{{ $name }}'), {
+        useCurrent: false,
+        display: {
+            components: {
+                clock: false
+            }
+        },
+        localization: {
+            locale: '{{ Auth::user()->customer->language }}',
+            format: 'dd/MM/yyyy'
+        }
     });
+    document.getElementById('{{ $method }}-{{ $name }}').addEventListener('click', (event) => {
+        if(event.target.value) {
+            picker{{ $name }}.dates.setValue(tempusDominus.DateTime.convert(moment(event.target.value, 'DD/MM/YYYY').toDate()));
+        } else {
+            picker{{ $name }}.dates.setValue(tempusDominus.DateTime.convert(moment().toDate()));
+        }
+    });
+
 </script>

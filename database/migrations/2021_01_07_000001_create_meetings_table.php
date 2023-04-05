@@ -16,8 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('customer_id')->index();
             $table->string('code', 511);
             $table->string('title', 511);
-            $table->date('start_at')->nullable();
-            $table->date('finish_at')->nullable();
+            $table->date('start_at');
+            $table->date('finish_at');
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
             $table->timestamps();
             $table->unsignedBigInteger('deleted_by')->index()->nullable();
