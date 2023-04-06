@@ -3,6 +3,7 @@
 namespace App\Models\Program;
 
 use App\Models\Meeting\Hall\MeetingHall;
+use App\Models\Program\Moderator\ProgramModerator;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -20,6 +21,7 @@ class Program extends Model
         'code',
         'title',
         'description',
+        'logo',
         'start_at',
         'finish_at',
         'type',
@@ -53,5 +55,9 @@ class Program extends Model
     public function meetingHall()
     {
         return $this->belongsTo(MeetingHall::class, 'meeting_hall_id', 'id');
+    }
+    public function programModerators()
+    {
+        return $this->hasMany(ProgramModerator::class, 'program_id', 'id');
     }
 }

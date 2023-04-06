@@ -4,6 +4,7 @@ namespace App\Http\Requests\Portal\Program;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\File;
 
 class ProgramRequest extends FormRequest
 {
@@ -23,6 +24,7 @@ class ProgramRequest extends FormRequest
                     'code' => 'nullable|max:255',
                     'title' => 'required|max:255',
                     'description' => 'nullable|max:65535',
+                    'logo' => ['nullable', File::types(['png'])->max(12 * 1024),],
                     'start_at' => 'nullable|date_format:d/m/Y H:i|before_or_equal:finish_at|required_with:finish_at',
                     'finish_at' => 'nullable|date_format:d/m/Y H:i|after_or_equal:start_at|required_with:start_at',
                     'type' => 'required|in:session,break,event,other',
@@ -36,6 +38,7 @@ class ProgramRequest extends FormRequest
                 'code' => 'nullable|max:255',
                 'title' => 'required|max:255',
                 'description' => 'nullable|max:65535',
+                'logo' => ['nullable', File::types(['png'])->max(12 * 1024),],
                 'start_at' => 'nullable|date_format:d/m/Y H:i|before_or_equal:finish_at|required_with:finish_at',
                 'finish_at' => 'nullable|date_format:d/m/Y H:i|after_or_equal:start_at|required_with:start_at',
                 'status' => 'required|boolean',
@@ -52,6 +55,7 @@ class ProgramRequest extends FormRequest
             'code' => __('common.code'),
             'title' => __('common.title'),
             'description' => __('common.description'),
+            'logo' => __('common.logo'),
             'start_at' => __('common.start-at'),
             'finish_at' => __('common.finish-at'),
             'type' => __('common.type'),

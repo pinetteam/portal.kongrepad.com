@@ -66,12 +66,12 @@
                                             <span class="fa-regular fa-eye"></span>
                                         </a>
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.edit') }}">
-                                            <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#edit-modal" data-route="{{ route('portal.participant.update', $participant->id) }}" data-resource="{{ route('portal.participant.edit', $participant->id) }}" data-id="{{ $participant->id }}">
+                                            <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#default-edit-modal" data-route="{{ route('portal.participant.update', $participant->id) }}" data-resource="{{ route('portal.participant.edit', $participant->id) }}" data-id="{{ $participant->id }}">
                                                 <span class="fa-regular fa-pen-to-square"></span>
                                             </button>
                                         </div>
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
-                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#delete-modal" data-route="{{ route('portal.participant.destroy', $participant->id) }}" data-record="{{ $participant->full_name }}">
+                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#default-delete-modal" data-route="{{ route('portal.participant.destroy', $participant->id) }}" data-record="{{ $participant->full_name }}">
                                                 <span class="fa-regular fa-trash"></span>
                                             </button>
                                         </div>
@@ -84,7 +84,7 @@
             </div>
         </div>
         <div class="card-footer d-flex justify-content-center">
-            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#create-modal" data-route="{{ route('portal.participant.store') }}">
+            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#default-create-modal" data-route="{{ route('portal.participant.store') }}">
                 <i class="fa-solid fa-plus"></i> {{ __('common.create-new-participant') }}
             </button>
         </div>
@@ -121,7 +121,6 @@
             <x-input.select method="e" name="phone_country_id" title="phone-country" :options="$phone_countries" option_value="id" option_name="NameAndCode" icon="flag" />
             <x-input.number method="e" name="phone" title="phone" icon="mobile-screen" />
             <x-input.text method="e" name="password" title="password" icon="lock" />
-            <x-input.select method="e" name="type" title="type" :options="$types" option_value="value" option_name="title" icon="person-military-pointing" />
             <x-input.radio method="e" name="confirmation" title="confirmation" :options="$confirmations" option_value="value" option_name="title" icon="check-to-slot" />
             <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection

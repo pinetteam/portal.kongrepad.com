@@ -7,7 +7,7 @@
         </div>
         <div class="card-body p-0">
             <div class="table-responsive">
-                <table class="table table-dark table-striped table-hover ">
+                <table class="table table-dark table-striped table-hover">
                     <caption class="text-end me-3">
                         {{ $documents->links() }}
                     </caption>
@@ -51,12 +51,12 @@
                                             <span class="fa-regular fa-eye"></span>
                                         </a>
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.edit') }}">
-                                            <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#edit-modal" data-route="{{ route('portal.document.update', $document->id) }}" data-resource="{{ route('portal.document.edit', $document->id) }}" data-id="{{ $document->id }}">
+                                            <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#default-edit-modal" data-route="{{ route('portal.document.update', $document->id) }}" data-resource="{{ route('portal.document.edit', $document->id) }}" data-id="{{ $document->id }}">
                                                 <span class="fa-regular fa-pen-to-square"></span>
                                             </button>
                                         </div>
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
-                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#delete-modal" data-route="{{ route('portal.document.destroy', $document->id) }}" data-record="{{ $document->title }}">
+                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#default-delete-modal" data-route="{{ route('portal.document.destroy', $document->id) }}" data-record="{{ $document->title }}">
                                                 <span class="fa-regular fa-trash"></span>
                                             </button>
                                         </div>
@@ -69,7 +69,7 @@
             </div>
         </div>
         <div class="card-footer d-flex justify-content-center">
-            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#create-modal" data-route="{{ route('portal.document.store') }}">
+            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#default-create-modal" data-route="{{ route('portal.document.store') }}">
                 <i class="fa-solid fa-plus"></i> {{ __('common.create-new-document') }}
             </button>
         </div>

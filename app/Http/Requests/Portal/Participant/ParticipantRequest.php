@@ -30,7 +30,7 @@ class ParticipantRequest extends FormRequest
                     'phone_country_id' => 'nullable|exists:system_countries,id|required_with:phone',
                     'phone' => 'nullable|max:31|required_with:phone_country_id',
                     'password' => 'required|max:255',
-                    'type' => 'required|in:agent,attendee,chair,speaker,team',
+                    'type' => 'required|in:agent,attendee,team',
                     'confirmation' => 'required|boolean',
                     'status' => 'required|boolean',
                 ];
@@ -49,7 +49,6 @@ class ParticipantRequest extends FormRequest
                     'phone_country_id' => 'nullable|exists:system_countries,id|required_with:phone',
                     'phone' => 'nullable|max:31|required_with:phone_country_id',
                     'password' => 'nullable|max:255',
-                    'type' => 'required|in:agent,attendee,chair,speaker,team',
                     'confirmation' => 'required|boolean',
                     'status' => 'required|boolean',
                 ];

@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('last_login_agent', 511)->nullable();
             $table->dateTime('last_login_datetime')->nullable();
             $table->timestamp('last_activity')->nullable();
-            $table->enum('type', ['agent', 'attendee', 'chair', 'speaker', 'team'])->default('attendee');
+            $table->enum('type', ['agent', 'attendee', 'team'])->default('attendee');
             $table->boolean('confirmation')->default(0)->comment('0=not-approved;1=approved');
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
             $table->timestamps();

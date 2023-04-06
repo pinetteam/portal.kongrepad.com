@@ -7,6 +7,7 @@ use App\Http\Requests\Portal\Program\ProgramRequest;
 use App\Http\Resources\Portal\Program\ProgramResource;
 use App\Models\Program\Program;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 
 class ProgramController extends Controller
 {
@@ -15,10 +16,10 @@ class ProgramController extends Controller
         $programs = Auth::user()->customer->programs()->orderBy('sort_id')->paginate(20);
         $meeting_halls = Auth::user()->customer->meetingHalls()->where('meeting_halls.status', 1)->get();
         $types = [
-            'session' => ["value" => "session", "title" => __('common.session')],
             'break' => ["value" => "break", "title" => __('common.break')],
             'event' => ["value" => "event", "title" => __('common.event')],
             'other' => ["value" => "break", "title" => __('common.other')],
+            'session' => ["value" => "session", "title" => __('common.session')],
         ];
         $statuses = [
             'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
@@ -35,6 +36,10 @@ class ProgramController extends Controller
             $program->code = $request->input('code');
             $program->title = $request->input('title');
             $program->description = $request->input('description');
+            if ($request->has('logo')) {
+                $logo = Image::make($request->file('logo'))->encode('data-url');
+                $program->logo = $logo;
+            }
             $program->start_at = $request->input('start_at');
             $program->finish_at = $request->input('finish_at');
             $program->type = $request->input('type');
@@ -48,7 +53,16 @@ class ProgramController extends Controller
     }
     public function show($id)
     {
-
+        $program = Auth::user()->customer->programs()->findOrFail($id);
+        if($program->type=='session') {
+            $moderators = Auth::user()->customer->participants()->where('type', 'agent')->orWhere('type', 'attendee')->get();
+            $program_moderators = $program->programModerators()->get();
+            $statuses = [
+                'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
+                'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
+            ];
+            return view('portal.program.show-session', compact(['moderators', 'program', 'program_moderators', 'statuses']));
+        }
     }
     public function edit($id)
     {
@@ -64,6 +78,10 @@ class ProgramController extends Controller
             $program->code = $request->input('code');
             $program->title = $request->input('title');
             $program->description = $request->input('description');
+            if ($request->has('logo')) {
+                $logo = Image::make($request->file('logo'))->encode('data-url');
+                $program->logo = $logo;
+            }
             $program->start_at = $request->input('start_at');
             $program->finish_at = $request->input('finish_at');
             $program->status = $request->input('status');

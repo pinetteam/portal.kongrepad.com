@@ -19,9 +19,7 @@ class ParticipantController extends Controller
         $types = [
             'agent' => ["value" => "agent", "title" => __('common.agent')],
             'attendee' => ["value" => "attendee", "title" => __('common.attendee')],
-            'chair' => ["value" => "chair", "title" => __('common.chair')],
-            'speaker' => ["value" => "speaker", "title" => __('common.speaker')],
-            'passteamive' => ["value" => "team", "title" => __('common.team')],
+            'team' => ["value" => "team", "title" => __('common.team')],
         ];
         $confirmations = [
             'not-approved' => ["value" => 0, "title" => __('common.not-approved'), 'color' => 'danger'],
@@ -84,7 +82,6 @@ class ParticipantController extends Controller
             if ($request->has('password')) {
                 $participant->password = $request->input('password');
             }
-            $participant->type = $request->input('type');
             $participant->confirmation = $request->input('confirmation');
             $participant->status = $request->input('status');
             if ($participant->save()) {

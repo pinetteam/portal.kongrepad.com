@@ -17,6 +17,7 @@ class ProgramResource extends JsonResource
             'code' => ['value'=>$this->code, 'type'=>'text'],
             'title' => ['value'=>$this->title, 'type'=>'text'],
             'description' => ['value'=>$this->description, 'type'=>'text'],
+            'logo' => ['value'=>$this->logo, 'type'=>'file'],
             'start_at' => ['value'=>Carbon::createFromFormat(Auth::user()->customer->settings['date-format'].' '.Auth::user()->customer->settings['time-format'], $this->start_at)->format('d/m/Y H:i'), 'type'=>'datetime'],
             'finish_at' => ['value'=>Carbon::createFromFormat(Auth::user()->customer->settings['date-format'].' '.Auth::user()->customer->settings['time-format'], $this->finish_at)->format('d/m/Y H:i'), 'type'=>'datetime'],
             'type' => ['value'=>$this->type, 'type'=>'select'],

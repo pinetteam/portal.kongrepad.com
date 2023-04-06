@@ -1,35 +1,30 @@
 <?php
 
-namespace App\Models\Program\Session;
+namespace App\Models\Program\Moderator;
 
+use App\Models\Participant\Participant;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ProgramSession extends Model
+class ProgramModerator extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $table = 'program_sessions';
+    protected $table = 'program_moderators';
     protected $fillable = [
         'program_id',
-        'sort_id',
-        'code',
-        'title',
-        'description',
-        'start_at',
-        'finish_at',
-        'questions',
+        'moderator_id',
         'status',
         'deleted_by',
     ];
     protected $dates = [
-        'start_at',
-        'finish_at',
         'deleted_at',
     ];
     protected $casts = [
-        'start_at' => 'datetime',
-        'finish_at' => 'datetime',
         'deleted_at' => 'datetime',
     ];
+    public function moderator()
+    {
+        return $this->belongsTo(Participant::class, 'moderator_id', 'id');
+    }
 }

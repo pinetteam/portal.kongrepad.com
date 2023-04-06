@@ -7,6 +7,7 @@ use App\Models\Document\Document;
 use App\Models\Meeting\Meeting;
 use App\Models\Meeting\Hall\MeetingHall;
 use App\Models\Participant\Participant;
+use App\Models\Program\Moderator\ProgramModerator;
 use App\Models\Program\Program;
 use App\Models\User\Role\UserRole;
 use App\Models\User\User;
@@ -65,6 +66,16 @@ class Customer extends Model
             ->join('customers', 'meetings.customer_id', '=', 'customers.id')
             ->where('customers.id', $this->getkey());
         return $programs;
+    }
+    public function programModerators()
+    {
+        $program_moderators = ProgramModerator::select('program_moderators.*')
+            ->join('programs', 'program_moderators.program_id', '=', 'programs.id')
+            ->join('meeting_halls', 'programs.meeting_hall_id', '=', 'meeting_halls.id')
+            ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
+            ->join('customers', 'meetings.customer_id', '=', 'customers.id')
+            ->where('customers.id', $this->getkey());
+        return $program_moderators;
     }
     public function users()
     {

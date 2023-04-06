@@ -7,7 +7,7 @@
         </div>
         <div class="card-body p-0">
             <div class="table-responsive">
-                <table class="table table-dark table-striped table-hover ">
+                <table class="table table-dark table-striped table-hover">
                     <caption class="text-end me-3">
                         {{ $meetings->links() }}
                     </caption>
@@ -53,12 +53,12 @@
                                             <span class="fa-regular fa-eye"></span>
                                         </a>
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.edit') }}">
-                                            <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#edit-modal" data-route="{{ route('portal.meeting.update', $meeting->id) }}" data-resource="{{ route('portal.meeting.edit', $meeting->id) }}" data-id="{{ $meeting->id }}">
+                                            <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#default-edit-modal" data-route="{{ route('portal.meeting.update', $meeting->id) }}" data-resource="{{ route('portal.meeting.edit', $meeting->id) }}" data-id="{{ $meeting->id }}">
                                                 <span class="fa-regular fa-pen-to-square"></span>
                                             </button>
                                         </div>
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
-                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#delete-modal" data-route="{{ route('portal.meeting.destroy', $meeting->id) }}" data-record="{{ $meeting->title }}">
+                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#default-delete-modal" data-route="{{ route('portal.meeting.destroy', $meeting->id) }}" data-record="{{ $meeting->title }}">
                                                 <span class="fa-regular fa-trash"></span>
                                             </button>
                                         </div>
@@ -71,7 +71,7 @@
             </div>
         </div>
         <div class="card-footer d-flex justify-content-center">
-            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#create-modal" data-route="{{ route('portal.meeting.store') }}">
+            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#default-create-modal" data-route="{{ route('portal.meeting.store') }}">
                 <i class="fa-solid fa-plus"></i> {{ __('common.create-new-meeting') }}
             </button>
         </div>

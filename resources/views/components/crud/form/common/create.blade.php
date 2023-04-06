@@ -1,10 +1,11 @@
-<div class="modal fade" id="create-modal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="create-modal-label" aria-hidden="true">
+@props(['name' => 'default'])
+<div class="modal fade" id="{{ $name }}-create-modal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="{{ $name }}-create-modal-label" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content bg-dark">
-            <form method="POST" action="" name="create-form" id="create-form" enctype="multipart/form-data" autocomplete="nope">
+            <form method="POST" action="" name="{{ $name }}-create-form" id="{{ $name }}-create-form" enctype="multipart/form-data" autocomplete="nope">
                 @csrf
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="create-modal-label">{{ __('common.create') }}</h1>
+                    <h1 class="modal-title fs-5" id="{{ $name }}-create-modal-label">{{ __('common.create') }}</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -17,7 +18,7 @@
                 <div class="modal-footer">
                     <div class="btn-group w-100" role="group" aria-label="{{ __('common.processes') }}">
                         <button type="button" class="btn btn-danger w-25" data-bs-dismiss="modal">{{__('common.close')}}</button>
-                        <button type="submit" class="btn btn-success w-75" id="create-form-submit">{{ __('common.create') }}</button>
+                        <button type="submit" class="btn btn-success w-75" id="{{ $name }}-create-form-submit">{{ __('common.create') }}</button>
                     </div>
                 </div>
             </form>
@@ -25,11 +26,11 @@
     </div>
 </div>
 <script type="module">
-    const createModal = document.getElementById('create-modal');
+    const createModal = document.getElementById('{{ $name }}-create-modal');
     createModal.addEventListener('show.bs.modal', event => {
         const button = event.relatedTarget;
         if(button) {
-            document.getElementById('create-form').action = button.getAttribute('data-route');
+            document.getElementById('{{ $name }}-create-form').action = button.getAttribute('data-route');
         }
     });
     createModal.addEventListener('hide.bs.modal', event => {
@@ -43,18 +44,18 @@
             element.value = null;
         });
     });
-    const createFormSubmit = document.getElementById('create-form-submit');
+    const createFormSubmit = document.getElementById('{{ $name }}-create-form-submit');
     createFormSubmit.addEventListener('click', function() {
         createFormSubmit.disabled = true;
         createFormSubmit.innerHTML = '<div class="spinner-border spinner-border-sm" role="status"></div> {{ __('common.creating') }}';
-        document.getElementById('create-form').submit();
+        document.getElementById('{{ $name }}-create-form').submit();
     });
 </script>
 @if($errors->any() && session('method'))
     @if(session('method')=='POST')
         <script type="module">
-            new bootstrap.Modal('#create-modal', {}).show();
-            document.getElementById('create-form').action = '{{ session('route') }}';
+            new bootstrap.Modal('#{{ $name }}-create-modal', {}).show();
+            document.getElementById('{{ $name }}-create-form').action = '{{ session('route') }}';
         </script>
     @endif
 @endif
