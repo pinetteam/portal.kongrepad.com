@@ -40,8 +40,7 @@ class Customer extends Model
     public function documents()
     {
         $documents = Document::select('documents.*')
-            ->join('participants', 'documents.participant_id', '=', 'participants.id')
-            ->join('meetings', 'participants.meeting_id', '=', 'meetings.id')
+            ->join('meetings', 'documents.meeting_id', '=', 'meetings.id')
             ->join('customers', 'meetings.customer_id', '=', 'customers.id')
             ->where('customers.id', $this->getkey());
         return $documents;

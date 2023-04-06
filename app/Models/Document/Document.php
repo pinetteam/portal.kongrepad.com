@@ -2,7 +2,7 @@
 
 namespace App\Models\Document;
 
-use App\Models\Participant\Participant;
+use App\Models\Meeting\Meeting;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -12,7 +12,7 @@ class Document extends Model
     use HasFactory, SoftDeletes;
     protected $table = 'documents';
     protected $fillable = [
-        'participant_id',
+        'meeting_id',
         'file_name',
         'file_extension',
         'title',
@@ -27,8 +27,8 @@ class Document extends Model
     protected $casts = [
         'deleted_at' => 'datetime',
     ];
-    public function participant()
+    public function meeting()
     {
-        return $this->belongsTo(Participant::class, 'participant_id', 'id');
+        return $this->belongsTo(Meeting::class, 'meeting_id', 'id');
     }
 }

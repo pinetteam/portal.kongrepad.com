@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('participant_id')->index();
+            $table->unsignedBigInteger('meeting_id')->index();
             $table->uuid('file_name')->unique();
             $table->string('file_extension', 31)->nullable();
             $table->string('title', 255)->nullable();
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->unsignedBigInteger('deleted_by')->index()->nullable();
             $table->softDeletes();
             $table->foreign('deleted_by')->on('users')->references('id');
-            $table->foreign('participant_id')->on('participants')->references('id');
+            $table->foreign('meeting_id')->on('meetings')->references('id');
         });
     }
 

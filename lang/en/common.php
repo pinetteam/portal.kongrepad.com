@@ -29,6 +29,7 @@ return [
     'attendee' => 'Attendee',
     'moderator' => 'Moderator',
     'add-new-moderator' => 'Add New Moderator',
+    'add-new-session' => 'Add New Session',
     'team' => 'Team',
     'logo' => 'Logo',
     'moderators' => 'Moderators',

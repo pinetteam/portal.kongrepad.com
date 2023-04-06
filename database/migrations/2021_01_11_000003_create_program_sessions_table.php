@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('program_sessions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('program_id')->index();
+            $table->unsignedBigInteger('presenter_id')->index();
+            $table->unsignedBigInteger('document_id')->index()->nullable();
             $table->unsignedInteger('sort_id')->nullable();
             $table->string('code', 255)->nullable();
             $table->string('title', 255);
@@ -26,6 +28,8 @@ return new class extends Migration
             $table->unsignedBigInteger('deleted_by')->index()->nullable();
             $table->softDeletes();
             $table->foreign('deleted_by')->on('users')->references('id');
+            $table->foreign('document_id')->on('documents')->references('id');
+            $table->foreign('presenter_id')->on('participants')->references('id');
             $table->foreign('program_id')->on('programs')->references('id');
         });
     }

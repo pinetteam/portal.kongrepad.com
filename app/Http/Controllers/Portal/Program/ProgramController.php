@@ -57,7 +57,8 @@ class ProgramController extends Controller
         if($program->type=='session') {
             $moderators = Auth::user()->customer->participants()->whereNotIn('participants.id', $program->programModerators()->pluck('program_moderators.moderator_id'))->whereNot('participants.type', 'team')->get();
             $program_moderators = $program->programModerators()->get();
-            return view('portal.program.show-session', compact(['moderators', 'program', 'program_moderators']));
+            $program_sessions = $program->programSessions()->get();
+            return view('portal.program.show-session', compact(['moderators', 'program', 'program_moderators', 'program_sessions']));
         }
     }
     public function edit($id)

@@ -4,6 +4,7 @@ namespace App\Models\Program;
 
 use App\Models\Meeting\Hall\MeetingHall;
 use App\Models\Program\Moderator\ProgramModerator;
+use App\Models\Program\Session\ProgramSession;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -59,5 +60,9 @@ class Program extends Model
     public function programModerators()
     {
         return $this->hasMany(ProgramModerator::class, 'program_id', 'id');
+    }
+    public function programSessions()
+    {
+        return $this->hasMany(ProgramSession::class, 'program_id', 'id');
     }
 }

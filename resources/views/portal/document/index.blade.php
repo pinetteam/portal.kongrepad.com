@@ -13,8 +13,8 @@
                     </caption>
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col"><span class="fa-regular fa-id-card mx-1"></span> {{ __('common.participant') }}</th>
-                            <th scope="col"><span class="fa-regular fa-bee mx-1"></span> {{ __('common.title') }}</th>
+                            <th scope="col"><span class="fa-regular fa-bee mx-1"></span> {{ __('common.meeting') }}</th>
+                            <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}</th>
                             <th scope="col"><span class="fa-regular fa-envelope mx-1"></span> {{ __('common.sharing-via-email') }}</th>
                             <th scope="col"><span class="fa-regular fa-person-military-pointing mx-1"></span> {{ __('common.type') }}</th>
                             <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}</th>
@@ -24,7 +24,7 @@
                     <tbody>
                         @foreach($documents as $document)
                             <tr>
-                                <td>{{ $document->participant->full_name }}</td>
+                                <td>{{ $document->meeting->title }}</td>
                                 <td>
                                     <a href="{{ route('portal.document-download.index', $document->file_name) }}" class="btn btn-sm btn-info w-100" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.view') }}">
                                         <span class="fa-regular fa-file-arrow-down"></span> {{ $document->title }}
@@ -76,7 +76,7 @@
     </div>
     <x-crud.form.common.create>
         @section('create-form')
-            <x-input.select method="c" name="participant_id" title="participant" :options="$participants" option_value="id" option_name="full_name" icon="screen-users" />
+            <x-input.select method="c" name="meeting_id" title="meeting" :options="$meetings" option_value="id" option_name="title" icon="bee" />
             <x-input.file method="c" name="file" title="file" icon="file-import" />
             <x-input.text method="c" name="title" title="title" icon="input-text" />
             <x-input.radio method="c" name="sharing_via_email" title="sharing-via-email" :options="$sharing_via_emails" option_value="value" option_name="title" icon="envelope" />
@@ -87,7 +87,7 @@
     <x-crud.form.common.delete />
     <x-crud.form.common.edit>
         @section('edit-form')
-            <x-input.select method="e" name="participant_id" title="participant" :options="$participants" option_value="id" option_name="full_name" icon="screen-users" />
+            <x-input.select method="e" name="meeting_id" title="meeting" :options="$meetings" option_value="id" option_name="title" icon="bee" />
             <x-input.file method="e" name="file" title="file" icon="file-import" />
             <x-input.text method="e" name="title" title="title" icon="input-text" />
             <x-input.radio method="e" name="sharing_via_email" title="sharing-via-email" :options="$sharing_via_emails" option_value="value" option_name="title" icon="envelope" />

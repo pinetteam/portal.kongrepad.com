@@ -19,7 +19,7 @@ class DocumentRequest extends FormRequest
             case 'POST':
             {
                 return [
-                    'participant_id' => 'required|exists:participants,id',
+                    'meeting_id' => 'required|exists:meetings,id',
                     'file' => ['required', File::types(['pdf', 'pptx', 'xls', 'xlsx'])->max(10240)],
                     'title' => 'nullable|max:255',
                     'type' => 'required|in:presentation,publication,other',
@@ -30,7 +30,7 @@ class DocumentRequest extends FormRequest
             case 'PATCH' || 'PUT':
             {
                 return [
-                    'participant_id' => 'required|exists:participants,id',
+                    'meeting_id' => 'required|exists:meetings,id',
                     'file' => ['nullable', File::types(['pdf', 'pptx', 'xls', 'xlsx'])->max(10240)],
                     'title' => 'nullable|max:255',
                     'type' => 'required|in:presentation,publication,other',
@@ -44,7 +44,7 @@ class DocumentRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'participant_id' => __('common.participant'),
+            'meeting_id' => __('common.meeting'),
             'file' => __('common.file'),
             'title' => __('common.title'),
             'type' => __('common.type'),

@@ -15,7 +15,7 @@ class DocumentController extends Controller
     public function index()
     {
         $documents = Auth::user()->customer->documents()->paginate(20);
-        $participants = Auth::user()->customer->participants()->where('participants.status', 1)->get();
+        $meetings = Auth::user()->customer->meetings()->where('meetings.status', 1)->get();
         $sharing_via_emails = [
             'not-allowed' => ["value" => 0, "title" => __('common.not-allowed'), 'color' => 'danger'],
             'allowed' => ["value" => 1, "title" => __('common.allowed'), 'color' => 'success'],
@@ -29,13 +29,13 @@ class DocumentController extends Controller
             'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.document.index', compact(['documents', 'participants', 'sharing_via_emails', 'types', 'statuses']));
+        return view('portal.document.index', compact(['documents', 'meetings', 'sharing_via_emails', 'types', 'statuses']));
     }
     public function store(DocumentRequest $request)
     {
         if ($request->validated()) {
             $document = new Document();
-            $document->participant_id = $request->input('participant_id');
+            $document->meeting_id = $request->input('meeting_id');
             if ($request->hasFile('file')) {
                 $file = $request->file('file');
                 $file_name = Str::uuid()->toString();
@@ -71,7 +71,7 @@ class DocumentController extends Controller
     {
         if ($request->validated()) {
             $document = Auth::user()->customer->documents()->findOrFail($id);
-            $document->participant_id = $request->input('participant_id');
+            $document->meeting_id = $request->input('meeting_id');
             if ($request->hasFile('file')) {
                 $file = $request->file('file');
                 $file_name = $document->file_name;
