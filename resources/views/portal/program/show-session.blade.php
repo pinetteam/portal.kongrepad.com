@@ -42,7 +42,7 @@
                                 <thead class="thead-dark">
                                 <tr>
                                     <th scope="col"><span class="fa-regular fa-id-card mx-1"></span> {{ __('common.name') }}</th>
-                                    <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}</th>
+                                    <th scope="col"><span class="fa-regular fa-person-military-pointing mx-1"></span> {{ __('common.type') }}</th>
                                     <th scope="col" class="text-end"></th>
                                 </tr>
                                 </thead>
@@ -50,13 +50,7 @@
                                     @foreach($program_moderators as $program_moderator)
                                         <tr>
                                             <td>{{ $program_moderator->moderator->full_name }}</td>
-                                            <td>
-                                                @if($program_moderator->status)
-                                                    <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
-                                                @else
-                                                    <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
-                                                @endif
-                                            </td>
+                                            <td>{{ __('common.'.$program_moderator->moderator->type) }}</td>
                                             <td class="text-end">
                                                 <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
                                                     <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
@@ -81,7 +75,6 @@
                         @section('create-form')
                             <x-input.hidden method="c" name="program_id" :value="$program->id" />
                             <x-input.select method="c" name="moderator_id" title="moderator" :options="$moderators" option_value="id" option_name="full_name" icon="id-card" />
-                            <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
                         @endsection
                     </x-crud.form.common.create>
                     <x-crud.form.common.delete name="moderator" />
@@ -89,7 +82,6 @@
                         @section('edit-form')
                             <x-input.hidden method="e" name="program_id" :value="$program->id" />
                             <x-input.select method="e" name="moderator_id" title="moderator" :options="$moderators" option_value="id" option_name="full_name" icon="id-card" />
-                            <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
                         @endsection
                     </x-crud.form.common.edit>
                 </div>

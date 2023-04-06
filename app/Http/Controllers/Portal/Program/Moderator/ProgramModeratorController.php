@@ -15,7 +15,6 @@ class ProgramModeratorController extends Controller
             $program_moderator = new ProgramModerator();
             $program_moderator->program_id = $request->input('program_id');
             $program_moderator->moderator_id = $request->input('moderator_id');
-            $program_moderator->status = $request->input('status');
             if ($program_moderator->save()) {
                 return back()->with('success', __('common.created-successfully'));
             } else {

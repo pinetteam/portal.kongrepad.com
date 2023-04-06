@@ -1,5 +1,5 @@
 @props(['name' => 'default'])
-<div class="modal fade" id="{{ $name }}-create-modal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="{{ $name }}-create-modal-label" aria-hidden="true">
+<div class="modal fade" id="{{ $name }}-create-modal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="#{{ $name }}-create-modal-label" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content bg-dark">
             <form method="POST" action="" name="{{ $name }}-create-form" id="{{ $name }}-create-form" enctype="multipart/form-data" autocomplete="nope">

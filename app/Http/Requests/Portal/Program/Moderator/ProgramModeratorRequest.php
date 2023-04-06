@@ -20,7 +20,6 @@ class ProgramModeratorRequest extends FormRequest
                 return [
                     'program_id' => 'required|exists:programs,id',
                     'moderator_id' => 'required|exists:participants,id',
-                    'status' => 'required|boolean',
                 ];
             }
             default:break;
@@ -31,7 +30,6 @@ class ProgramModeratorRequest extends FormRequest
         return [
             'program_id' => __('common.program'),
             'moderator_id' => __('common.moderator'),
-            'status' => __('common.status'),
         ];
     }
     public function failedValidation(Validator $validator)

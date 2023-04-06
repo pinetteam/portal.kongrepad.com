@@ -1,12 +1,12 @@
 @props(['name' => 'default'])
-<div class="modal fade" id="{{ $name }}-delete-modal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="{{ $name }}-delete-modal-label" aria-hidden="true">
+<div class="modal fade" id="{{ $name }}-delete-modal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="#{{ $name }}-delete-modal-label" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content bg-dark">
             <form method="POST" action="" name="{{ $name }}-delete-form" id="{{ $name }}-delete-form" autocomplete="nope">
                 @csrf
                 <input name="_method" type="hidden" value="DELETE">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="delete-modal-label">{{ __('common.delete') }}</h1>
+                    <h1 class="modal-title fs-5" id="{{ $name }}-delete-modal-label">{{ __('common.delete') }}</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">

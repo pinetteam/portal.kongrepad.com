@@ -14,7 +14,6 @@ class ProgramModerator extends Model
     protected $fillable = [
         'program_id',
         'moderator_id',
-        'status',
         'deleted_by',
     ];
     protected $dates = [

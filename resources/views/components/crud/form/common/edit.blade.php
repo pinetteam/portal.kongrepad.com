@@ -1,5 +1,5 @@
 @props(['name' => 'default', 'method' => 'e'])
-<div class="modal fade" id="{{ $name }}-edit-modal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="{{ $name }}-edit-modal-label" aria-hidden="true">
+<div class="modal fade" id="{{ $name }}-edit-modal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="#{{ $name }}-edit-modal-label" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content bg-dark">
             <form method="POST" action="" name="{{ $name }}-edit-form" id="{{ $name }}-edit-form" enctype="multipart/form-data" autocomplete="nope">

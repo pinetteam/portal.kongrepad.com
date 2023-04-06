@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('program_id')->index();
             $table->unsignedBigInteger('moderator_id')->index();
-            $table->boolean('status')->default(1)->comment('0=passive;1=active');
             $table->timestamps();
             $table->unsignedBigInteger('deleted_by')->index()->nullable();
             $table->softDeletes();
