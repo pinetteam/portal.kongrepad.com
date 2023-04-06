@@ -13,7 +13,7 @@ class ProgramController extends Controller
 {
     public function index()
     {
-        $programs = Auth::user()->customer->programs()->orderBy('sort_id')->paginate(20);
+        $programs = Auth::user()->customer->programs()->orderBy('programs.sort_id')->paginate(20);
         $meeting_halls = Auth::user()->customer->meetingHalls()->where('meeting_halls.status', 1)->get();
         $types = [
             'break' => ["value" => "break", "title" => __('common.break')],
@@ -55,7 +55,7 @@ class ProgramController extends Controller
     {
         $program = Auth::user()->customer->programs()->findOrFail($id);
         if($program->type=='session') {
-            $moderators = Auth::user()->customer->participants()->where('type', 'agent')->orWhere('type', 'attendee')->get();
+            $moderators = Auth::user()->customer->participants()->where('participants.type', 'agent')->orWhere('participants.type', 'attendee')->whereNotIn('participants.id', $program->programModerators()->pluck('program_moderators.moderator_id'))->get();
             $program_moderators = $program->programModerators()->get();
             $statuses = [
                 'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
