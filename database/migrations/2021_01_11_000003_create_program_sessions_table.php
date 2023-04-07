@@ -23,7 +23,7 @@ return new class extends Migration
             $table->dateTime('start_at')->nullable();
             $table->dateTime('finish_at')->nullable();
             $table->boolean('questions')->default(0)->comment('0=passive;1=active');
-            $table->unsignedInteger('question_limit')->default(0);
+            $table->unsignedInteger('question_limit')->default(0)->comment('0=passive;1=active');
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
             $table->timestamps();
             $table->unsignedBigInteger('deleted_by')->index()->nullable();
