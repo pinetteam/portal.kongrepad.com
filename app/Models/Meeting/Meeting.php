@@ -31,6 +31,7 @@ class Meeting extends Model
         'start_at' => 'datetime:Y-m-d',
         'finish_at' => 'datetime:Y-m-d',
         'deleted_at' => 'datetime',
+        'status' => 'boolean',
     ];
     protected function startAt(): Attribute
     {

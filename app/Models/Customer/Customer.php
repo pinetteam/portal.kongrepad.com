@@ -9,6 +9,7 @@ use App\Models\Meeting\Hall\MeetingHall;
 use App\Models\Participant\Participant;
 use App\Models\Program\Moderator\ProgramModerator;
 use App\Models\Program\Program;
+use App\Models\Program\Session\ProgramSession;
 use App\Models\User\Role\UserRole;
 use App\Models\User\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -34,8 +35,9 @@ class Customer extends Model
         'deleted_at',
     ];
     protected $casts = [
-        'settings' => JSON::class,
         'deleted_at' => 'datetime',
+        'settings' => JSON::class,
+        'status' => 'boolean',
     ];
     public function documents()
     {
@@ -75,6 +77,16 @@ class Customer extends Model
             ->join('customers', 'meetings.customer_id', '=', 'customers.id')
             ->where('customers.id', $this->getkey());
         return $program_moderators;
+    }
+    public function programSessions()
+    {
+        $program_sessions = ProgramSession::select('program_sessions.*')
+            ->join('programs', 'program_sessions.program_id', '=', 'programs.id')
+            ->join('meeting_halls', 'programs.meeting_hall_id', '=', 'meeting_halls.id')
+            ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
+            ->join('customers', 'meetings.customer_id', '=', 'customers.id')
+            ->where('customers.id', $this->getkey());
+        return $program_sessions;
     }
     public function users()
     {

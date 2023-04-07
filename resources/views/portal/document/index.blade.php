@@ -75,7 +75,7 @@
         </div>
     </div>
     <x-crud.form.common.create>
-        @section('create-form')
+        @section('default-create-form')
             <x-input.select method="c" name="meeting_id" title="meeting" :options="$meetings" option_value="id" option_name="title" icon="bee" />
             <x-input.file method="c" name="file" title="file" icon="file-import" />
             <x-input.text method="c" name="title" title="title" icon="input-text" />
@@ -86,7 +86,7 @@
     </x-crud.form.common.create>
     <x-crud.form.common.delete />
     <x-crud.form.common.edit>
-        @section('edit-form')
+        @section('default-edit-form')
             <x-input.select method="e" name="meeting_id" title="meeting" :options="$meetings" option_value="id" option_name="title" icon="bee" />
             <x-input.file method="e" name="file" title="file" icon="file-import" />
             <x-input.text method="e" name="title" title="title" icon="input-text" />

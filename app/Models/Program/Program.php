@@ -38,6 +38,7 @@ class Program extends Model
         'start_at' => 'datetime',
         'finish_at' => 'datetime',
         'deleted_at' => 'datetime',
+        'status' => 'boolean',
     ];
     protected function startAt(): Attribute
     {

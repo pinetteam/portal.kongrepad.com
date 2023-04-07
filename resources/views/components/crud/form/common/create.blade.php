@@ -11,7 +11,7 @@
                 <div class="modal-body">
                     <div class="container-fluid">
                         <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-3 justify-content-center">
-                            @yield('create-form')
+                            @yield($name.'-create-form')
                         </div>
                     </div>
                 </div>

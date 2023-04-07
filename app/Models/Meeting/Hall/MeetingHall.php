@@ -22,6 +22,7 @@ class MeetingHall extends Model
     ];
     protected $casts = [
         'deleted_at' => 'datetime',
+        'status' => 'boolean',
     ];
     public function meeting()
     {

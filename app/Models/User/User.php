@@ -50,6 +50,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'last_login_datetime' => 'datetime',
         'deleted_at' => 'datetime',
+        'status' => 'boolean',
     ];
     public function getActivityStatusAttribute()
     {

@@ -24,5 +24,6 @@ class UserRole extends Model
     protected $casts = [
         'access_scopes' => JSON::class,
         'deleted_at' => 'datetime',
+        'status' => 'boolean',
     ];
 }

@@ -19,7 +19,17 @@ class ProgramSessionRequest extends FormRequest
             {
                 return [
                     'program_id' => 'required|exists:programs,id',
-                    'moderator_id' => 'required|exists:participants,id',
+                    'presenter_id' => 'required|exists:participants,id',
+                    'document_id' => 'nullable|exists:documents,id',
+                    'sort_id' => 'nullable|integer',
+                    'code' => 'nullable|max:255',
+                    'title' => 'required|max:255',
+                    'description' => 'nullable|max:65535',
+                    'start_at' => 'nullable|date_format:d/m/Y H:i|before_or_equal:finish_at|required_with:finish_at',
+                    'finish_at' => 'nullable|date_format:d/m/Y H:i|after_or_equal:start_at|required_with:start_at',
+                    'questions' => 'required|boolean',
+                    'question_limit' => 'required|integer',
+                    'status' => 'required|boolean',
                 ];
             }
             default:break;
@@ -29,7 +39,17 @@ class ProgramSessionRequest extends FormRequest
     {
         return [
             'program_id' => __('common.program'),
-            'moderator_id' => __('common.moderator'),
+            'presenter_id' => __('common.presenter'),
+            'document_id' => __('common.document'),
+            'sort_id' => __('common.sort'),
+            'code' => __('common.code'),
+            'title' => __('common.title'),
+            'description' => __('common.description'),
+            'start_at' => __('common.start-at'),
+            'finish_at' => __('common.finish-at'),
+            'questions' => __('common.questions'),
+            'question_limit' => __('common.question-limit'),
+            'status' => __('common.status'),
         ];
     }
     public function failedValidation(Validator $validator)

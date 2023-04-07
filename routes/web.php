@@ -32,7 +32,7 @@ Route::prefix('portal')->name('portal.')->group(function () {
         Route::resource('/participant', \App\Http\Controllers\Portal\Participant\ParticipantController::class)->except(['create']);
         Route::resource('/program', \App\Http\Controllers\Portal\Program\ProgramController::class)->except(['create']);
         Route::resource('/program-moderator', \App\Http\Controllers\Portal\Program\Moderator\ProgramModeratorController::class)->only(['store', 'destroy']);
-        Route::resource('/program-session', \App\Http\Controllers\Portal\Program\Session\ProgramSessionController::class)->except(['create']);
+        Route::resource('/program-session', \App\Http\Controllers\Portal\Program\Session\ProgramSessionController::class)->except(['index', 'create']);
         Route::resource('/user', \App\Http\Controllers\Portal\User\UserController::class)->except(['create']);
         Route::resource('/user-role', \App\Http\Controllers\Portal\User\Role\UserRoleController::class)->except(['create']);
         Route::resource('/setting', \App\Http\Controllers\Portal\Setting\SettingController::class)->only(['index', 'update']);

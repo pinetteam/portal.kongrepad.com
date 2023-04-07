@@ -76,7 +76,7 @@
         </div>
     </div>
     <x-crud.form.common.create>
-        @section('create-form')
+        @section('default-create-form')
             <x-input.select method="c" name="user_role_id" title="user-role" :options="$user_roles" option_value="id" option_name="title" icon="person-military-pointing" />
             <x-input.text method="c" name="username" title="username" icon="id-card-clip" />
             <x-input.text method="c" name="first_name" title="first-name" icon="id-card" />
@@ -90,7 +90,7 @@
     </x-crud.form.common.create>
     <x-crud.form.common.delete />
     <x-crud.form.common.edit>
-        @section('edit-form')
+        @section('default-edit-form')
             <x-input.select method="e" name="user_role_id" title="user-role" :options="$user_roles" option_value="id" option_name="title" icon="person-military-pointing" />
             <x-input.text method="e" name="username" title="username" icon="id-card-clip" />
             <x-input.text method="e" name="first_name" title="first-name" icon="id-card" />

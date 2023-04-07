@@ -61,7 +61,7 @@
         </div>
     </div>
     <x-crud.form.common.create>
-        @section('create-form')
+        @section('default-create-form')
             <x-input.text method="c" name="title" title="title" icon="input-text" />
             <x-input.checkbox method="c" name="access_scopes" title="access-scopes" :options="$access_scopes" option_value="route" option_name="code" icon="ballot-check" />
             <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
@@ -69,7 +69,7 @@
     </x-crud.form.common.create>
     <x-crud.form.common.delete />
     <x-crud.form.common.edit>
-        @section('edit-form')
+        @section('default-edit-form')
             <x-input.text method="e" name="title" title="title" icon="input-text" />
             <x-input.checkbox method="e" name="access_scopes" title="access-scopes" :options="$access_scopes" option_value="route" option_name="code" icon="ballot-check" />
             <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />

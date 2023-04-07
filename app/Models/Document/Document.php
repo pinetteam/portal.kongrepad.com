@@ -26,6 +26,8 @@ class Document extends Model
     ];
     protected $casts = [
         'deleted_at' => 'datetime',
+        'sharing_via_email' => 'boolean',
+        'status' => 'boolean',
     ];
     public function meeting()
     {

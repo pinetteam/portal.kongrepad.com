@@ -85,7 +85,7 @@
         </div>
     </div>
     <x-crud.form.common.create>
-        @section('create-form')
+        @section('default-create-form')
             <x-input.select method="c" name="meeting_hall_id" title="meeting-hall" :options="$meeting_halls" option_value="id" option_name="title" icon="hotel" />
             <x-input.number method="c" name="sort_id" title="sort" icon="circle-sort" />
             <x-input.text method="c" name="code" title="code" icon="code-simple" />
@@ -100,7 +100,7 @@
     </x-crud.form.common.create>
     <x-crud.form.common.delete />
     <x-crud.form.common.edit>
-        @section('edit-form')
+        @section('default-edit-form')
             <x-input.select method="e" name="meeting_hall_id" title="meeting-hall" :options="$meeting_halls" option_value="id" option_name="title" icon="hotel" />
             <x-input.number method="e" name="sort_id" title="sort" icon="circle-sort" />
             <x-input.text method="e" name="code" title="code" icon="code-simple" />

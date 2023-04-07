@@ -77,7 +77,7 @@
         </div>
     </div>
     <x-crud.form.common.create>
-        @section('create-form')
+        @section('default-create-form')
             <x-input.text method="c" name="code" title="code" icon="code-simple" />
             <x-input.text method="c" name="title" title="title" icon="input-text" />
             <x-input.date method="c" name="start_at" title="start-at" icon="calendar-arrow-up" />
@@ -87,7 +87,7 @@
     </x-crud.form.common.create>
     <x-crud.form.common.delete />
     <x-crud.form.common.edit>
-        @section('edit-form')
+        @section('default-edit-form')
             <x-input.text method="e" name="code" title="code" icon="code-simple" />
             <x-input.text method="e" name="title" title="title" icon="input-text" />
             <x-input.date method="e" name="start_at" title="start-at" icon="calendar-arrow-up" />

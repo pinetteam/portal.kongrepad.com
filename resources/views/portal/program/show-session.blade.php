@@ -72,14 +72,14 @@
                         </button>
                     </div>
                     <x-crud.form.common.create name="moderator">
-                        @section('create-form')
+                        @section('moderator-create-form')
                             <x-input.hidden method="c" name="program_id" :value="$program->id" />
                             <x-input.select method="c" name="moderator_id" title="moderator" :options="$moderators" option_value="id" option_name="full_name" icon="id-card" />
                         @endsection
                     </x-crud.form.common.create>
                     <x-crud.form.common.delete name="moderator" />
                     <x-crud.form.common.edit name="moderator">
-                        @section('edit-form')
+                        @section('moderator-edit-form')
                             <x-input.hidden method="e" name="program_id" :value="$program->id" />
                             <x-input.select method="e" name="moderator_id" title="moderator" :options="$moderators" option_value="id" option_name="full_name" icon="id-card" />
                         @endsection
@@ -100,14 +100,15 @@
                     </caption>
                     <thead class="thead-dark">
                     <tr>
-                        <th scope="col"><span class="fa-regular fa-hotel mx-1"></span> {{ __('common.meeting-hall') }}</th>
+                        <th scope="col"><span class="fa-regular fa-person-chalkboard mx-1"></span> {{ __('common.presenter') }}</th>
+                        <th scope="col"><span class="fa-regular fa-presentation-screen mx-1"></span> {{ __('common.document') }}</th>
                         <th scope="col"><span class="fa-regular fa-circle-sort mx-1"></span> {{ __('common.sort') }}</th>
                         <th scope="col"><span class="fa-regular fa-code-simple mx-1"></span> {{ __('common.code') }}</th>
                         <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}</th>
-                        <th scope="col"><span class="fa-regular fa-image mx-1"></span> {{ __('common.logo') }}</th>
                         <th scope="col"><span class="fa-regular fa-calendar-arrow-up mx-1"></span> {{ __('common.start-at') }}</th>
                         <th scope="col"><span class="fa-regular fa-calendar-arrow-down mx-1"></span> {{ __('common.finish-at') }}</th>
-                        <th scope="col"><span class="fa-regular fa-person-military-pointing mx-1"></span> {{ __('common.type') }}</th>
+                        <th scope="col"><span class="fa-regular fa-block-question mx-1"></span> {{ __('common.questions') }}</th>
+                        <th scope="col"><span class="fa-regular fa-circle-1 mx-1"></span> {{ __('common.question-limit') }}</th>
                         <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}</th>
                         <th scope="col" class="text-end"></th>
                     </tr>
@@ -115,6 +116,29 @@
                     <tbody>
                         @foreach($program_sessions as $program_session)
                             <tr>
+                                <td>{{ $program_session->presenter->full_name }}</td>
+                                <td>
+                                    @if($program_session->document_id)
+                                        <a href="{{ route('portal.document-download.index', $program_session->document->file_name) }}" class="btn btn-sm btn-info w-100" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.view') }}">
+                                            <span class="fa-regular fa-file-arrow-down"></span> {{ $program_session->document->title }}
+                                        </a>
+                                    @else
+                                        <i class="text-info">{{ __('common.unspecified') }}</i>
+                                    @endif
+                                </td>
+                                <td>{{ $program_session->sort_id }}</td>
+                                <td>{{ $program_session->code }}</td>
+                                <td>{{ $program_session->title }}</td>
+                                <td>{{ $program_session->start_at }}</td>
+                                <td>{{ $program_session->finish_at }}</td>
+                                <td>
+                                    @if($program_session->questions)
+                                        <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
+                                    @else
+                                        <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
+                                    @endif
+                                </td>
+                                <td>{{ $program_session->question_limit }}</td>
                                 <td>
                                     @if($program_session->status)
                                         <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
@@ -150,5 +174,38 @@
                 <i class="fa-solid fa-plus"></i> {{ __('common.add-new-session') }}
             </button>
         </div>
+        <x-crud.form.common.create name="session">
+            @section('session-create-form')
+                <x-input.hidden method="c" name="program_id" :value="$program->id" />
+                <x-input.select method="c" name="presenter_id" title="presenter" :options="$presenters" option_value="id" option_name="full_name" icon="person-chalkboard" />
+                <x-input.select method="c" name="document_id" title="document" :options="$documents" option_value="id" option_name="title" icon="presentation-screen" />
+                <x-input.number method="c" name="sort_id" title="sort" icon="circle-sort" />
+                <x-input.text method="c" name="code" title="code" icon="code-simple" />
+                <x-input.text method="c" name="title" title="title" icon="input-text" />
+                <x-input.text method="c" name="description" title="description" icon="comment-dots" />
+                <x-input.datetime method="c" name="start_at" title="start-at" icon="calendar-arrow-down" />
+                <x-input.datetime method="c" name="finish_at" title="finish-at" icon="calendar-arrow-down" />
+                <x-input.radio method="c" name="questions" title="questions" :options="$questions" option_value="value" option_name="title" icon="block-question" />
+                <x-input.number method="c" name="question_limit" title="question-limit" icon="circle-1" />
+                <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
+            @endsection
+        </x-crud.form.common.create>
+        <x-crud.form.common.delete name="session" />
+        <x-crud.form.common.edit name="session">
+            @section('session-edit-form')
+                <x-input.hidden method="e" name="program_id" :value="$program->id" />
+                <x-input.select method="e" name="presenter_id" title="presenter" :options="$presenters" option_value="id" option_name="full_name" icon="person-chalkboard" />
+                <x-input.select method="e" name="document_id" title="document" :options="$documents" option_value="id" option_name="title" icon="presentation-screen" />
+                <x-input.number method="e" name="sort_id" title="sort" icon="circle-sort" />
+                <x-input.text method="e" name="code" title="code" icon="code-simple" />
+                <x-input.text method="e" name="title" title="title" icon="input-text" />
+                <x-input.text method="e" name="description" title="description" icon="comment-dots" />
+                <x-input.datetime method="e" name="start_at" title="start-at" icon="calendar-arrow-down" />
+                <x-input.datetime method="e" name="finish_at" title="finish-at" icon="calendar-arrow-down" />
+                <x-input.radio method="e" name="questions" title="questions" :options="$questions" option_value="value" option_name="title" icon="block-question" />
+                <x-input.number method="e" name="question_limit" title="question-limit" icon="circle-1" />
+                <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
+            @endsection
+        </x-crud.form.common.edit>
     </div>
 @endsection
