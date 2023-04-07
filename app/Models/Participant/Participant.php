@@ -44,8 +44,6 @@ class Participant extends Model
         'last_login_datetime' => 'datetime',
         'last_activity' => 'timestamp',
         'deleted_at' => 'datetime',
-        'confirmation' => 'boolean',
-        'status' => 'boolean',
     ];
     public function meeting()
     {

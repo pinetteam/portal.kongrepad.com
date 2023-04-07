@@ -37,7 +37,6 @@ class Customer extends Model
     protected $casts = [
         'deleted_at' => 'datetime',
         'settings' => JSON::class,
-        'status' => 'boolean',
     ];
     public function documents()
     {

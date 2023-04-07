@@ -37,8 +37,6 @@ class ProgramSession extends Model
         'start_at' => 'datetime',
         'finish_at' => 'datetime',
         'deleted_at' => 'datetime',
-        'questions' => 'boolean',
-        'status' => 'boolean',
     ];
     protected function startAt(): Attribute
     {
