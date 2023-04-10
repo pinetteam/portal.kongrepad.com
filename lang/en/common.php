@@ -32,6 +32,7 @@ return [
     'add-new-session' => 'Add New Session',
     'team' => 'Team',
     'logo' => 'Logo',
+    'keypads' => 'Keypads',
     'moderators' => 'Moderators',
     'participant' => 'Participant',
     'file' => 'File',

@@ -85,14 +85,20 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">
+                        <i class="nav-icon fa-duotone fa-hundred-points"></i>
+                        {{ __('common.score-game') }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
                         <i class="nav-icon fa-duotone fa-square-poll-horizontal"></i>
                         {{ __('common.surveys') }}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">
-                        <i class="nav-icon fa-duotone fa-hundred-points"></i>
-                        {{ __('common.score-game') }}
+                        <i class="nav-icon fa-duotone fa-tablet"></i>
+                        {{ __('common.keypads') }}
                     </a>
                 </li>
             </ul>
