@@ -10,6 +10,8 @@ use App\Models\Participant\Participant;
 use App\Models\Program\Moderator\ProgramModerator;
 use App\Models\Program\Program;
 use App\Models\Program\Session\ProgramSession;
+use App\Models\ScoreGame\QrCode\QrCode;
+use App\Models\ScoreGame\ScoreGame;
 use App\Models\User\Role\UserRole;
 use App\Models\User\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,6 +20,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Customer extends Model
 {
+    use \Staudenmeir\EloquentHasManyDeep\HasRelationships;
     use HasFactory, SoftDeletes;
     protected $table = 'customers';
     protected $fillable = [
@@ -87,6 +90,14 @@ class Customer extends Model
             ->where('customers.id', $this->getkey());
         return $program_sessions;
     }
+    public function scoreGames()
+    {
+        return $this->hasOneThrough(ScoreGame::class, Meeting::class, 'customer_id', 'meeting_id', 'id', 'id');
+    }
+    public function qrCodes()
+    {
+        return $this->hasManyDeep(QrCode::class, [Meeting::class, ScoreGame::class]);
+        }
     public function users()
     {
         return $this->hasMany(User::class, 'customer_id', 'id');

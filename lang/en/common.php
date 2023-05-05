@@ -139,5 +139,13 @@ return [
     'choose' => 'Choose...',
     'are-you-sure-you-want-to-delete' => 'Are you sure you want to delete:',
     'phone-country' => 'Phone Country',
+    'score-games' => 'Score Games',
+    'create-new-score-game' => 'Create New Score Game',
+    'types' => 'Types',
+    'scores' => 'Scores',
+    'score' => 'Score',
+    'qr-codes' => 'Qr Codes',
+    'add-new-qr-code' => 'Add New Qr Code',
+    'download' => 'Download',
     'not-logged-in-yet' => 'Not logged in yet!',
 ];

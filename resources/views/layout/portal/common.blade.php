@@ -84,7 +84,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{ route("portal.score-game.index") }}">
                         <i class="nav-icon fa-duotone fa-hundred-points"></i>
                         {{ __('common.score-game') }}
                     </a>
