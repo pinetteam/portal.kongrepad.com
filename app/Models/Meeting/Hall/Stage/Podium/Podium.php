@@ -1,19 +1,18 @@
 <?php
 
-namespace App\Models\Meeting\Hall;
+namespace App\Models\Meeting\Hall\Stage\Podium;
 
 use App\Models\Meeting\Hall\Stage\Stage;
-use App\Models\Meeting\Meeting;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class MeetingHall extends Model
+class Podium extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $table = 'meeting_halls';
+    protected $table = 'podiums';
     protected $fillable = [
-        'meeting_id',
+        'stage_id',
         'title',
         'status',
         'deleted_by',
@@ -24,12 +23,8 @@ class MeetingHall extends Model
     protected $casts = [
         'deleted_at' => 'datetime',
     ];
-    public function meeting()
+    public function stage()
     {
-        return $this->belongsTo(Meeting::class, 'meeting_id', 'id');
-    }
-    public function stages()
-    {
-        return $this->hasMany(Stage::class, 'meeting_hall_id', 'id');
+        return $this->belongsTo(Stage::class, 'meeting_hall_id', 'id');
     }
 }

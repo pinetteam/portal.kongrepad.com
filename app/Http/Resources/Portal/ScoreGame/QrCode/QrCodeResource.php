@@ -15,7 +15,7 @@ class QrCodeResource extends JsonResource
         return [
             'score_game_id' => ['value'=>$this->score_game_id, 'type'=>'select'],
             'title' => ['value'=>$this->title, 'type'=>'text'],
-            'score' => ['value'=>$this->title, 'type'=>'number'],
+            'score' => ['value'=>$this->score, 'type'=>'number'],
             'start_at' => ['value'=>Carbon::createFromFormat(Auth::user()->customer->settings['date-format'].' '.Auth::user()->customer->settings['time-format'], $this->start_at)->format('d/m/Y H:i'), 'type'=>'datetime'],
             'finish_at' => ['value'=>Carbon::createFromFormat(Auth::user()->customer->settings['date-format'].' '.Auth::user()->customer->settings['time-format'], $this->finish_at)->format('d/m/Y H:i'), 'type'=>'datetime'],
             'status' => ['value'=>$this->status, 'type'=>'radio'],

@@ -4,6 +4,8 @@ namespace App\Models\Customer;
 
 use App\Casts\JSON;
 use App\Models\Document\Document;
+use App\Models\Meeting\Hall\Stage\Podium\Podium;
+use App\Models\Meeting\Hall\Stage\Stage;
 use App\Models\Meeting\Meeting;
 use App\Models\Meeting\Hall\MeetingHall;
 use App\Models\Participant\Participant;
@@ -97,7 +99,15 @@ class Customer extends Model
     public function qrCodes()
     {
         return $this->hasManyDeep(QrCode::class, [Meeting::class, ScoreGame::class]);
-        }
+    }
+    public function stages()
+    {
+        return $this->hasManyDeep(Stage::class, [Meeting::class, MeetingHall::class]);
+    }
+    public function podiums()
+    {
+        return $this->hasManyDeep(Podium::class, [Meeting::class, MeetingHall::class, Stage::class]);
+    }
     public function users()
     {
         return $this->hasMany(User::class, 'customer_id', 'id');

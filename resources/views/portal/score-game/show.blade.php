@@ -14,7 +14,7 @@
                     <div class="card-body p-0">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-hotel mx-1"></span> {{ __('common.meeting') }}:</b> {{ $score_game->meeting->title }}</li>
-                            <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-hotel mx-1"></span> {{ __('common.title') }}:</b> {{ $score_game->title }}</li>
+                            <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}:</b> {{ $score_game->title }}</li>
                             <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-calendar-arrow-up mx-1"></span> {{ __('common.start-at') }}:</b> {{ $score_game->start_at }}</li>
                             <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-calendar-arrow-down mx-1"></span> {{ __('common.finish-at') }}:</b> {{ $score_game->finish_at }}</li>
                             <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-person-military-pointing mx-1"></span> {{ __('common.types') }}:</b> @foreach($score_game->types as $type){{__('common.'.$type)}} @endforeach</li>
