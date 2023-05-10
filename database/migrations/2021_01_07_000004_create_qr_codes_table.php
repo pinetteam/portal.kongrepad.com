@@ -21,8 +21,12 @@ return new class extends Migration
             $table->datetime('finish_at');
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
             $table->timestamps();
+            $table->unsignedBigInteger('created_by')->index()->nullable();
+            $table->unsignedBigInteger('edited_by')->index()->nullable();
             $table->unsignedBigInteger('deleted_by')->index()->nullable();
             $table->softDeletes();
+            $table->foreign('created_by')->on('users')->references('id');
+            $table->foreign('edited_by')->on('users')->references('id');
             $table->foreign('deleted_by')->on('users')->references('id');
             $table->foreign('score_game_id')->on('score_games')->references('id');
         });

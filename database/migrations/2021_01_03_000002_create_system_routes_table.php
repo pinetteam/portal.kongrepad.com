@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('user_role_scopes', function (Blueprint $table) {
+        Schema::create('system_routes', function (Blueprint $table) {
             $table->id();
             $table->string('code', 63)->unique();
             $table->string('route', 255)->unique();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_role_scopes');
+        Schema::dropIfExists('system_routes');
     }
 };

@@ -22,7 +22,6 @@ return new class extends Migration
             $table->binary('logo')->nullable();
             $table->boolean('policy_status')->default(0)->comment('0=rejected;1=accepted');
             $table->enum('language', ['en', 'tr'])->default('en');
-            $table->longText('settings')->nullable();
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
             $table->timestamps();
             $table->softDeletes();

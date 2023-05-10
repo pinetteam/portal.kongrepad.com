@@ -2,6 +2,7 @@
 
 namespace App\Models\Meeting;
 
+use App\Models\Customer\Setting\Variable\Variable;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -35,14 +36,14 @@ class Meeting extends Model
     protected function startAt(): Attribute
     {
         return Attribute::make(
-            get: fn (string $startAt) => Carbon::createFromFormat('Y-m-d', $startAt)->format(Auth::user()->customer->settings['date-format']),
+            get: fn (string $startAt) => Carbon::createFromFormat('Y-m-d', $startAt)->format(Variable::where('variable','date_format')->first()->settings()->where('customer_id',Auth::user()->customer->id)->first()->value),
             set: fn (string $startAt) => Carbon::createFromFormat('d/m/Y', $startAt)->format('Y-m-d'),
         );
     }
     protected function finishAt(): Attribute
     {
         return Attribute::make(
-            get: fn (string $finishAt) => Carbon::createFromFormat('Y-m-d', $finishAt)->format(Auth::user()->customer->settings['date-format']),
+            get: fn (string $finishAt) => Carbon::createFromFormat('Y-m-d', $finishAt)->format(Variable::where('variable','date_format')->first()->settings()->where('customer_id',Auth::user()->customer->id)->first()->value),
             set: fn (string $finishAt) => Carbon::createFromFormat('d/m/Y', $finishAt)->format('Y-m-d'),
         );
     }

@@ -61,7 +61,7 @@ return [
     'organisation' => 'Organisation',
     'approved' => 'Approved',
     'environment' => 'Environment',
-    'stages' => 'Stages',
+    'screens' => 'Screens',
     'podiums' => 'Podiums',
     'type' => 'Type',
     'description' => 'Description',

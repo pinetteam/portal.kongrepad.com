@@ -39,7 +39,7 @@ class ParticipantRequest extends FormRequest
             {
                 return [
                     'meeting_id' => 'required|exists:meetings,id',
-                    'username' => ['required', 'max:255', Rule::unique('participants','username')->ignore($this->username, 'username')],
+                    'username' => ['required', 'max:255', Rule::unique('meeting_participants','username')->ignore($this->username, 'username')],
                     'title' => 'nullable|max:255',
                     'first_name' => 'required|max:255',
                     'last_name' => 'required|max:255',

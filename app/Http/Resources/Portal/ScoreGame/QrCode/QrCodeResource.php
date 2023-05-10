@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Portal\ScoreGame\QrCode;
 
+use App\Models\Customer\Setting\Variable\Variable;
 use App\Models\ScoreGame\QrCode\QrCode;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -16,8 +17,8 @@ class QrCodeResource extends JsonResource
             'score_game_id' => ['value'=>$this->score_game_id, 'type'=>'select'],
             'title' => ['value'=>$this->title, 'type'=>'text'],
             'score' => ['value'=>$this->score, 'type'=>'number'],
-            'start_at' => ['value'=>Carbon::createFromFormat(Auth::user()->customer->settings['date-format'].' '.Auth::user()->customer->settings['time-format'], $this->start_at)->format('d/m/Y H:i'), 'type'=>'datetime'],
-            'finish_at' => ['value'=>Carbon::createFromFormat(Auth::user()->customer->settings['date-format'].' '.Auth::user()->customer->settings['time-format'], $this->finish_at)->format('d/m/Y H:i'), 'type'=>'datetime'],
+            'start_at' => ['value'=>Carbon::createFromFormat(Variable::where('variable','date_format')->first()->settings()->where('customer_id',Auth::user()->customer->id)->first()->value.' '.Variable::where('variable','time_format')->first()->settings()->where('customer_id',Auth::user()->customer->id)->first()->value, $this->start_at)->format('d/m/Y H:i'), 'type'=>'datetime'],
+            'finish_at' => ['value'=>Carbon::createFromFormat(Variable::where('variable','date_format')->first()->settings()->where('customer_id',Auth::user()->customer->id)->first()->value.' '.Variable::where('variable','time_format')->first()->settings()->where('customer_id',Auth::user()->customer->id)->first()->value, $this->finish_at)->format('d/m/Y H:i'), 'type'=>'datetime'],
             'status' => ['value'=>$this->status, 'type'=>'radio'],
             'route' => route('portal.qr-code.update', $this->id),
         ];

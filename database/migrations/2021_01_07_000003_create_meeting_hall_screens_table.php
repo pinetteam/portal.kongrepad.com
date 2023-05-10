@@ -11,20 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('documents', function (Blueprint $table) {
+        Schema::create('meeting_hall_screens', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('meeting_id')->index();
-            $table->uuid('file_name')->unique();
-            $table->string('file_extension', 31)->nullable();
-            $table->string('title', 255)->nullable();
-            $table->boolean('sharing_via_email')->default(0)->comment('0=not-allowed;1=allowed');
-            $table->enum('type', ['presentation', 'publication', 'other'])->default('presentation');
+            $table->unsignedBigInteger('meeting_hall_id')->index();
+            $table->string('title', 511);
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
             $table->timestamps();
+            $table->unsignedBigInteger('created_by')->index()->nullable();
+            $table->unsignedBigInteger('edited_by')->index()->nullable();
             $table->unsignedBigInteger('deleted_by')->index()->nullable();
             $table->softDeletes();
+            $table->foreign('created_by')->on('users')->references('id');
+            $table->foreign('edited_by')->on('users')->references('id');
             $table->foreign('deleted_by')->on('users')->references('id');
-            $table->foreign('meeting_id')->on('meetings')->references('id');
+            $table->foreign('meeting_hall_id')->on('meeting_halls')->references('id');
         });
     }
 
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('documents');
+        Schema::dropIfExists('meeting_hall_screens');
     }
 };

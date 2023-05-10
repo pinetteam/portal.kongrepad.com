@@ -3,9 +3,9 @@
 namespace App\Models\Customer;
 
 use App\Casts\JSON;
+use App\Models\Customer\Setting\Setting;
 use App\Models\Document\Document;
-use App\Models\Meeting\Hall\Stage\Podium\Podium;
-use App\Models\Meeting\Hall\Stage\Stage;
+use App\Models\Meeting\Hall\Screen\Screen;
 use App\Models\Meeting\Meeting;
 use App\Models\Meeting\Hall\MeetingHall;
 use App\Models\Participant\Participant;
@@ -32,7 +32,6 @@ class Customer extends Model
         'logo',
         'policy_status',
         'language',
-        'settings',
         'status',
         'deleted_by',
     ];
@@ -41,7 +40,6 @@ class Customer extends Model
     ];
     protected $casts = [
         'deleted_at' => 'datetime',
-        'settings' => JSON::class,
     ];
     public function documents()
     {
@@ -65,8 +63,8 @@ class Customer extends Model
     }
     public function programs()
     {
-        $programs = Program::select('programs.*')
-            ->join('meeting_halls', 'programs.meeting_hall_id', '=', 'meeting_halls.id')
+        $programs = Program::select('meeting_hall_programs.*')
+            ->join('meeting_halls', 'meeting_hall_programs.meeting_hall_id', '=', 'meeting_halls.id')
             ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
             ->join('customers', 'meetings.customer_id', '=', 'customers.id')
             ->where('customers.id', $this->getkey());
@@ -75,8 +73,8 @@ class Customer extends Model
     public function programModerators()
     {
         $program_moderators = ProgramModerator::select('program_moderators.*')
-            ->join('programs', 'program_moderators.program_id', '=', 'programs.id')
-            ->join('meeting_halls', 'programs.meeting_hall_id', '=', 'meeting_halls.id')
+            ->join('meeting_hall_programs', 'program_moderators.program_id', '=', 'meeting_hall_programs.id')
+            ->join('meeting_halls', 'meeting_hall_programs.meeting_hall_id', '=', 'meeting_halls.id')
             ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
             ->join('customers', 'meetings.customer_id', '=', 'customers.id')
             ->where('customers.id', $this->getkey());
@@ -85,8 +83,8 @@ class Customer extends Model
     public function programSessions()
     {
         $program_sessions = ProgramSession::select('program_sessions.*')
-            ->join('programs', 'program_sessions.program_id', '=', 'programs.id')
-            ->join('meeting_halls', 'programs.meeting_hall_id', '=', 'meeting_halls.id')
+            ->join('meeting_hall_programs', 'program_sessions.program_id', '=', 'meeting_hall_programs.id')
+            ->join('meeting_halls', 'meeting_hall_programs.meeting_hall_id', '=', 'meeting_halls.id')
             ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
             ->join('customers', 'meetings.customer_id', '=', 'customers.id')
             ->where('customers.id', $this->getkey());
@@ -100,13 +98,9 @@ class Customer extends Model
     {
         return $this->hasManyDeep(QrCode::class, [Meeting::class, ScoreGame::class]);
     }
-    public function stages()
+    public function screens()
     {
-        return $this->hasManyDeep(Stage::class, [Meeting::class, MeetingHall::class]);
-    }
-    public function podiums()
-    {
-        return $this->hasManyDeep(Podium::class, [Meeting::class, MeetingHall::class, Stage::class]);
+        return $this->hasManyDeep(Screen::class, [Meeting::class, MeetingHall::class]);
     }
     public function users()
     {
@@ -115,5 +109,9 @@ class Customer extends Model
     public function userRoles()
     {
         return $this->hasMany(UserRole::class, 'customer_id', 'id');
+    }
+    public function settings()
+    {
+        return $this->hasMany(Setting::class, 'customer_id', 'id');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Portal\Meeting;
 
+use App\Models\Customer\Setting\Variable\Variable;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -14,8 +15,8 @@ class MeetingResource extends JsonResource
         return [
             'code' => ['value'=>$this->code, 'type'=>'text'],
             'title' => ['value'=>$this->title, 'type'=>'text'],
-            'start_at' => ['value'=>Carbon::createFromFormat(Auth::user()->customer->settings['date-format'], $this->start_at)->format('d/m/Y'), 'type'=>'date'],
-            'finish_at' => ['value'=>Carbon::createFromFormat(Auth::user()->customer->settings['date-format'], $this->finish_at)->format('d/m/Y'), 'type'=>'date'],
+            'start_at' => ['value'=>Carbon::createFromFormat(Variable::where('variable','date_format')->first()->settings()->where('customer_id',Auth::user()->customer->id)->first()->value, $this->start_at)->format('d/m/Y'), 'type'=>'date'],
+            'finish_at' => ['value'=>Carbon::createFromFormat(Variable::where('variable','date_format')->first()->settings()->where('customer_id',Auth::user()->customer->id)->first()->value, $this->finish_at)->format('d/m/Y'), 'type'=>'date'],
             'status' => ['value'=>$this->status, 'type'=>'radio'],
             'route' => route('portal.meeting.update', $this->id),
         ];

@@ -36,9 +36,8 @@ Route::prefix('portal')->name('portal.')->group(function () {
         Route::resource('/score-game', \App\Http\Controllers\Portal\ScoreGame\ScoreGameController::class)->except(['create']);
         Route::resource('/user', \App\Http\Controllers\Portal\User\UserController::class)->except(['create']);
         Route::resource('/user-role', \App\Http\Controllers\Portal\User\Role\UserRoleController::class)->except(['create']);
-        Route::resource('/podium', \App\Http\Controllers\Portal\Meeting\Hall\Stage\Podium\PodiumController::class)->except(['create']);
         Route::resource('/setting', \App\Http\Controllers\Portal\Setting\SettingController::class)->only(['index', 'update']);
-        Route::resource('/stage', \App\Http\Controllers\Portal\Meeting\Hall\Stage\StageController::class)->except(['create']);
+        Route::resource('/screen', \App\Http\Controllers\Portal\Meeting\Hall\Screen\ScreenController::class)->except(['create']);
         Route::resource('/qr-code', \App\Http\Controllers\Portal\ScoreGame\QrCode\QrCodeController::class)->except(['create']);
         Route::get('/qr-code-download/{id}', [\App\Http\Controllers\Portal\ScoreGame\QrCode\QrCodeController::class,'download'])->name('qr-code-download');
     });

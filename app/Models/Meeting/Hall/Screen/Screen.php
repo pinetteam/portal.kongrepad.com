@@ -1,17 +1,16 @@
 <?php
 
-namespace App\Models\Meeting\Hall\Stage;
+namespace App\Models\Meeting\Hall\Screen;
 
 use App\Models\Meeting\Hall\MeetingHall;
-use App\Models\Meeting\Hall\Stage\Podium\Podium;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Stage extends Model
+class Screen extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $table = 'stages';
+    protected $table = 'screens';
     protected $fillable = [
         'meeting_hall_id',
         'title',
@@ -27,9 +26,5 @@ class Stage extends Model
     public function meetingHall()
     {
         return $this->belongsTo(MeetingHall::class, 'meeting_hall_id', 'id');
-    }
-    public function podiums()
-    {
-        return $this->hasMany(Podium::class, 'stage_id', 'id');
     }
 }

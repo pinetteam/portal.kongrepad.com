@@ -13,19 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('user_roles', function (Blueprint $table) {
+        Schema::create('system_setting_variables', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('customer_id')->index();
+            $table->unsignedInteger('sort_id')->nullable();
+            $table->enum('group', ['system', 'localisation']);
             $table->string('title', 255);
-            $table->longText('routes');
+            $table->string('variable', 255);
+            $table->enum('type', ['checkbox','number', 'radio', 'select', 'text']);
+            $table->json('type_variables')->nullable();
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
             $table->timestamps();
-            $table->unsignedBigInteger('created_by')->index()->nullable();
-            $table->unsignedBigInteger('edited_by')->index()->nullable();
-            $table->unsignedBigInteger('deleted_by')->index()->nullable();
-            $table->softDeletes();
-            $table->foreign('customer_id')->on('customers')->references('id');
         });
+
     }
 
     /**
@@ -35,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_roles');
+        Schema::dropIfExists('system_setting_variables');
     }
 };

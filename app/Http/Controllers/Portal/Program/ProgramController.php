@@ -13,7 +13,7 @@ class ProgramController extends Controller
 {
     public function index()
     {
-        $programs = Auth::user()->customer->programs()->orderBy('programs.sort_id')->paginate(20);
+        $programs = Auth::user()->customer->programs()->orderBy('meeting_hall_programs.sort_id')->paginate(20);
         $meeting_halls = Auth::user()->customer->meetingHalls()->where('meeting_halls.status', 1)->get();
         $types = [
             'break' => ["value" => "break", "title" => __('common.break')],

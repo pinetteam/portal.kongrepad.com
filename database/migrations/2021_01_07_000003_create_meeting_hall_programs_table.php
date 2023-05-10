@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('programs', function (Blueprint $table) {
+        Schema::create('meeting_hall_programs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('meeting_hall_id')->index();
             $table->unsignedInteger('sort_id')->nullable();
@@ -25,12 +25,16 @@ return new class extends Migration
             $table->enum('type', ['break', 'event', 'other', 'session'])->default('session');
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
             $table->timestamps();
+            $table->unsignedBigInteger('created_by')->index()->nullable();
+            $table->unsignedBigInteger('edited_by')->index()->nullable();
             $table->unsignedBigInteger('deleted_by')->index()->nullable();
             $table->softDeletes();
+            $table->foreign('created_by')->on('users')->references('id');
+            $table->foreign('edited_by')->on('users')->references('id');
             $table->foreign('deleted_by')->on('users')->references('id');
             $table->foreign('meeting_hall_id')->on('meeting_halls')->references('id');
         });
-        DB::statement('ALTER TABLE programs MODIFY logo MEDIUMBLOB NULL');
+        DB::statement('ALTER TABLE meeting_hall_programs MODIFY logo MEDIUMBLOB NULL');
     }
 
     /**
@@ -38,6 +42,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('programs');
+        Schema::dropIfExists('meeting_hall_programs');
     }
 };

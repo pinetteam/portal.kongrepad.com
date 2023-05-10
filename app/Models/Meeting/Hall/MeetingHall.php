@@ -2,7 +2,7 @@
 
 namespace App\Models\Meeting\Hall;
 
-use App\Models\Meeting\Hall\Stage\Stage;
+use App\Models\Meeting\Hall\Screen\Screen;
 use App\Models\Meeting\Meeting;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -28,8 +28,8 @@ class MeetingHall extends Model
     {
         return $this->belongsTo(Meeting::class, 'meeting_id', 'id');
     }
-    public function stages()
+    public function screen()
     {
-        return $this->hasMany(Stage::class, 'meeting_hall_id', 'id');
+        return $this->hasMany(Screen::class, 'meeting_hall_id', 'id');
     }
 }

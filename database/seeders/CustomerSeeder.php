@@ -15,19 +15,12 @@ class CustomerSeeder extends Seeder
      */
     public function run()
     {
-        $settings = [
-            'timezone' => 'Europe/Istanbul',
-            'date-format' => 'd/m/Y',
-            'time-format' => 'H:i',
-            'address' => 'İçerenköy Mah. Çayır Cad. No:5 Bay Plaza Kat:12 Ataşehir İstanbul',
-        ];
         Customer::insert([
             [
                 'title' => 'D-Event',
                 'description' => 'D-Event Turizm Organizasyon',
                 'policy_status' => '1',
                 'language' => 'en',
-                'settings' => json_encode($settings),
                 'status' => '1',
             ],
         ]);

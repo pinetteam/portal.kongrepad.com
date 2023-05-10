@@ -46,36 +46,38 @@
                             </tr>
                             </thead>
                             <tbody>
-                                @foreach($customer->settings as $system_config => $value)
+                                @foreach($customer->settings as $setting)
                                     <tr>
-                                        <th scope="row">{{ __('common.'.$system_config) }}</th>
-                                        <td>{{ $value }}</td>
+                                        <th scope="row">{{ __('common.'.$setting->variable->title) }}</th>
+                                        <td>{{ $setting->value }}</td>
                                         <td class="text-end">
                                             <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.edit') }}">
-                                                <button class="btn btn-warning btn-sm w-100" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#edit-modal-{{ $system_config }}" data-id="{{ $system_config }}">
+                                                <button class="btn btn-warning btn-sm w-100" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#edit-modal-{{ $setting->variable->variable }}" data-id="{{ $setting->variable->variable }}">
                                                     <span class="fa-regular fa-pen-to-square"></span>
                                                 </button>
                                             </div>
-                                            <div class="modal fade" id="edit-modal-{{ $system_config }}" data-bs-backdrop="static" tabindex="-1" aria-labelledby="edit-modal-label-{{ $system_config }}" aria-hidden="true">
+                                            <div class="modal fade" id="edit-modal-{{ $setting->variable->variable }}" data-bs-backdrop="static" tabindex="-1" aria-labelledby="edit-modal-label-{{ $setting->variable->variable }}" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                                     <div class="modal-content bg-dark">
-                                                        <form method="post" action="{{ route('portal.setting.update', $system_config) }}">
+                                                        <form method="post" action="{{ route('portal.setting.update', $setting->id) }}">
                                                             @csrf
                                                             <input name="_method" type="hidden" value="PATCH" />
                                                             <div class="modal-header">
-                                                                <h1 class="modal-title fs-5" id="edit-modal-label-{{ $system_config }}">{{ __('common.edit') . " " . __('common.'.$system_config) }}</h1>
+                                                                <h1 class="modal-title fs-5" id="edit-modal-label-{{ $setting->variable->variable }}">{{ __('common.edit') . " " . __('common.'.$setting->variable->title) }}</h1>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="form-group mb-3 text-center">
-                                                                    <label for="value-{{ $system_config }}" class="form-label">
-                                                                        <i class="fa-regular fa-screwdriver-wrench"></i> {{ __('common.value') }}
-                                                                    </label>
-                                                                    <input type="text" name="value" class="form-control @error('value')is-invalid @enderror" id="value-{{ $system_config }}" placeholder="{{ $value }}" value="{{ $value }}" />
+                                                                    @if($setting->variable->type == 'text')
+                                                                        <input type="text" name="value" class="form-control @error('value')is-invalid @enderror" id="value-{{ $setting->variable->variable }}" placeholder="{{ $setting->value }}" value="{{ $setting->value }}" />
+                                                                    @elseif($setting->variable->type == 'select')
+                                                                        <select name="value" class="form-select @error('value')is-invalid @enderror">
+                                                                            @foreach(json_decode($setting->variable->type_variables, true) as $option)
+                                                                                    <option value="{{$option}}"{{ $setting->value == $option ? ' selected' : '' }}>{{ $option }}</option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                    @endif
                                                                     @error('value')
-                                                                    <div class="invalid-feedback">
-                                                                        <i class="fa-regular fa-triangle-exclamation"></i> {{ $message }}
-                                                                    </div>
                                                                     @enderror
                                                                 </div>
                                                             </div>
@@ -95,6 +97,7 @@
                             </tbody>
                         </table>
                     </div>
+
                 </div>
             </div>
         </div>

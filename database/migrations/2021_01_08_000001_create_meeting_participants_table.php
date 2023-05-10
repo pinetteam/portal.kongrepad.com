@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('participants', function (Blueprint $table) {
+        Schema::create('meeting_participants', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('meeting_id')->index();
+            $table->string('uuid')->unique();
             $table->string('username', 255)->unique();
             $table->string('title', 255)->nullable();
             $table->string('first_name', 255);
@@ -29,11 +30,15 @@ return new class extends Migration
             $table->dateTime('last_login_datetime')->nullable();
             $table->timestamp('last_activity')->nullable();
             $table->enum('type', ['agent', 'attendee', 'team'])->default('attendee');
-            $table->boolean('confirmation')->default(0)->comment('0=not-approved;1=approved');
+            $table->boolean('gdpr_confirmation')->default(0)->comment('0=not-approved;1=approved');
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
             $table->timestamps();
+            $table->unsignedBigInteger('created_by')->index()->nullable();
+            $table->unsignedBigInteger('edited_by')->index()->nullable();
             $table->unsignedBigInteger('deleted_by')->index()->nullable();
             $table->softDeletes();
+            $table->foreign('created_by')->on('users')->references('id');
+            $table->foreign('edited_by')->on('users')->references('id');
             $table->foreign('deleted_by')->on('users')->references('id');
             $table->foreign('meeting_id')->on('meetings')->references('id');
             $table->foreign('phone_country_id')->on('system_countries')->references('id');
@@ -45,6 +50,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('participants');
+        Schema::dropIfExists('meeting_participants');
     }
 };

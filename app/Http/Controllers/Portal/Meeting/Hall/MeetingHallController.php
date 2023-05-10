@@ -38,12 +38,12 @@ class MeetingHallController extends Controller
     {
         $meeting_hall = Auth::user()->customer->meetingHalls()->findOrFail($id);
         $meeting_halls = Auth::user()->customer->meetingHalls()->where('meeting_halls.status', 1)->get();
-        $meeting_hall_stages = $meeting_hall->stages()->get();
+        $meeting_hall_screens = $meeting_hall->screens()->get();
         $statuses = [
             'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.meeting-hall.show', compact(['meeting_hall', 'meeting_halls', 'meeting_hall_stages', 'statuses']));
+        return view('portal.meeting-hall.show', compact(['meeting_hall', 'meeting_halls', 'meeting_hall_screenss', 'statuses']));
     }
     public function edit(string $id)
     {

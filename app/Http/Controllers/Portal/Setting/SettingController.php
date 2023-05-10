@@ -14,20 +14,20 @@ class SettingController extends Controller
     public function index()
     {
         $customer = Auth::user()->customer;
+        $settings = Auth::user()->customer->settings;
         return view('portal.setting.index', compact(['customer']));
     }
-    public function update(Request $request, $system_config)
+    public function update(Request $request, $setting_id)
     {
         $customer = Auth::user()->customer;
-        $settings = Auth::user()->customer->settings;
+        $setting = Auth::user()->customer->settings()->findOrFail($setting_id);
         if ($request->has('logo')) {
             $logo = Image::make($request->file('logo'))->encode('data-url');
             $customer->logo = $logo;
         } else if ($request->has('value')) {
-            $settings[$system_config] = $request->input('value');
-            $customer->settings = $settings;
+            $setting->value = $request->input('value');
         }
-        if ($customer->save()) {
+        if ($customer->save() && $setting->save()) {
             return back()->with('success', __('common.edited-successfully'));
         } else {
             return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();

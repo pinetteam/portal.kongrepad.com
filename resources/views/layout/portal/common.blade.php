@@ -113,13 +113,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route("portal.stage.index") }}">
+                    <a class="nav-link" href="{{ route("portal.screen.index") }}">
                         <i class="nav-icon fa-duotone fa-ranking-star"></i>
                         {{ __('common.stages') }}
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route("portal.podium.index") }}">
+                    <a class="nav-link" href="#">
                         <i class="nav-icon fa-duotone fa-podium-star"></i>
                         {{ __('common.podiums') }}
                     </a>

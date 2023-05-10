@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class UserRoleScope extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $table = 'user_role_scopes';
+    protected $table = 'system_routes';
     protected $fillable = [
         'code',
         'route',

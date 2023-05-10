@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Participant\Participant;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class ParticipantSeeder extends Seeder
 {
@@ -16,6 +17,7 @@ class ParticipantSeeder extends Seeder
         Participant::insert([
             [
                 'meeting_id' => '3',
+                'uuid' => Str::uuid()->toString(),
                 'username' => 'alierdemsunar',
                 'title' => '',
                 'first_name' => 'Ali Erdem',
@@ -27,11 +29,12 @@ class ParticipantSeeder extends Seeder
                 'phone' => '5308266897',
                 'password' => '123456',
                 'type' => 'agent',
-                'confirmation' => 1,
+                'gdpr_confirmation' => 1,
                 'status' => 1,
             ],
             [
                 'meeting_id' => '3',
+                'uuid' => Str::uuid()->toString(),
                 'username' => 'erkanozkan',
                 'title' => '',
                 'first_name' => 'Erkan',
@@ -43,11 +46,12 @@ class ParticipantSeeder extends Seeder
                 'phone' => '5326359203',
                 'password' => '123456',
                 'type' => 'attendee',
-                'confirmation' => 1,
+                'gdpr_confirmation' => 1,
                 'status' => 1,
             ],
             [
                 'meeting_id' => '3',
+                'uuid' => Str::uuid()->toString(),
                 'username' => 'ismailcelik',
                 'title' => 'Prof. Dr.',
                 'first_name' => 'İsmail',
@@ -64,6 +68,7 @@ class ParticipantSeeder extends Seeder
             ],
             [
                 'meeting_id' => '3',
+                'uuid' => Str::uuid()->toString(),
                 'username' => 'ugurerdogan',
                 'title' => '',
                 'first_name' => 'Uğur',
@@ -75,11 +80,12 @@ class ParticipantSeeder extends Seeder
                 'phone' => '5353258705',
                 'password' => '123456',
                 'type' => 'attendee',
-                'confirmation' => 1,
+                'gdpr_confirmation' => 1,
                 'status' => 1,
             ],
             [
                 'meeting_id' => '3',
+                'uuid' => Str::uuid()->toString(),
                 'username' => 'mertdemirbag',
                 'title' => '',
                 'first_name' => 'Mert',
@@ -91,7 +97,7 @@ class ParticipantSeeder extends Seeder
                 'phone' => '5531304177',
                 'password' => '123456',
                 'type' => 'team',
-                'confirmation' => 1,
+                'gdpr_confirmation' => 1,
                 'status' => 1,
             ],
         ]);

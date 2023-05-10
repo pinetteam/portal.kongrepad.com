@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
 class Participant extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $table = 'participants';
+    protected $table = 'meeting_participants';
     protected $fillable = [
         'meeting_id',
         'username',

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Portal\Meeting\Hall\Stage;
+namespace App\Http\Requests\Portal\Meeting\Hall\Screen;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StageRequest extends FormRequest
+class ScreenRequest extends FormRequest
 {
     public function authorize(): bool
     {

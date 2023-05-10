@@ -34,10 +34,14 @@ return new class extends Migration
             $table->dateTime('last_login_datetime')->nullable();
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
             $table->timestamps();
+            $table->unsignedBigInteger('created_by')->index()->nullable();
+            $table->unsignedBigInteger('edited_by')->index()->nullable();
             $table->unsignedBigInteger('deleted_by')->index()->nullable();
             $table->softDeletes();
-            $table->foreign('customer_id')->on('customers')->references('id');
+            $table->foreign('created_by')->on('users')->references('id');
+            $table->foreign('edited_by')->on('users')->references('id');
             $table->foreign('deleted_by')->on('users')->references('id');
+            $table->foreign('customer_id')->on('customers')->references('id');
             $table->foreign('phone_country_id')->on('system_countries')->references('id');
             $table->foreign('user_role_id')->on('user_roles')->references('id');
         });
