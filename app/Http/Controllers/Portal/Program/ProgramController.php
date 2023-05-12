@@ -56,8 +56,8 @@ class ProgramController extends Controller
         $program = Auth::user()->customer->programs()->findOrFail($id);
         if($program->type=='session') {
             $documents = Auth::user()->customer->documents()->get();
-            $moderators = Auth::user()->customer->participants()->whereNotIn('participants.id', $program->programModerators()->pluck('program_moderators.moderator_id'))->whereNot('participants.type', 'team')->get();
-            $presenters = Auth::user()->customer->participants()->whereNot('participants.type', 'team')->get();
+            $moderators = Auth::user()->customer->participants()->whereNotIn('meeting_participants.id', $program->programModerators()->pluck('program_moderators.moderator_id'))->whereNot('meeting_participants.type', 'team')->get();
+            $presenters = Auth::user()->customer->participants()->whereNot('meeting_participants.type', 'team')->get();
             $program_moderators = $program->programModerators()->get();
             $program_sessions = $program->programSessions()->get();
             $questions = [

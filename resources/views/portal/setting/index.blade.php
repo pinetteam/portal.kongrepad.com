@@ -68,14 +68,28 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="form-group mb-3 text-center">
-                                                                    @if($setting->variable->type == 'text')
-                                                                        <input type="text" name="value" class="form-control @error('value')is-invalid @enderror" id="value-{{ $setting->variable->variable }}" placeholder="{{ $setting->value }}" value="{{ $setting->value }}" />
+                                                                    @if($setting->variable->type == 'text' || $setting->variable->type == 'number')
+                                                                        <input type="{{$setting->variable->type}}" name="value" class="form-control @error('value')is-invalid @enderror" id="value-{{ $setting->variable->variable }}" placeholder="{{ $setting->value }}" value="{{ $setting->value }}" />
                                                                     @elseif($setting->variable->type == 'select')
                                                                         <select name="value" class="form-select @error('value')is-invalid @enderror">
                                                                             @foreach(json_decode($setting->variable->type_variables, true) as $option)
                                                                                     <option value="{{$option}}"{{ $setting->value == $option ? ' selected' : '' }}>{{ $option }}</option>
                                                                             @endforeach
                                                                         </select>
+                                                                    @elseif($setting->variable->type == 'radio')
+                                                                        <div class="btn-group w-100 @error('value')is-invalid @enderror" role="group" aria-label="{{ __('common.'.$setting->variable->title) }}">
+                                                                            @foreach(json_decode($setting->variable->type_variables, true) as $option)
+                                                                                <input type="radio" name="value" class="btn-check" id="value-{{ $option }}" value="{{ $option }}"{{ (( $setting->value !== null) && $setting->value == $option) ? ' checked' : '' }} />
+                                                                                <label class="btn btn-outline-{{ $value['color'] }}" for="value-{{ $option }}">{{ $option }}</label>
+                                                                            @endforeach
+                                                                        </div>
+                                                                    @elseif($setting->variable->type == 'checkbox')
+                                                                        <div class="btn-group w-100 @error('value')is-invalid @enderror" role="group" aria-label="{{ __('common.'.$setting->variable->title) }}">
+                                                                            @foreach(json_decode($setting->variable->type_variables, true) as $option)
+                                                                                <input type="checkbox" name="value" class="form-check-input" id="value-{{ $option }}" value="{{ $option }}"{{ (( $setting->value !== null) && $setting->value == $option) ? ' checked' : '' }} />
+                                                                                <label class="btn btn-outline-{{ $value['color'] }}" for="value-{{ $option }}">{{ $option }}</label>
+                                                                            @endforeach
+                                                                        </div>
                                                                     @endif
                                                                     @error('value')
                                                                     @enderror

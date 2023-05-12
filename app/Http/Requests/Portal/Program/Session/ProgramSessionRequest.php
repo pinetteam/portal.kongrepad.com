@@ -18,9 +18,9 @@ class ProgramSessionRequest extends FormRequest
             case 'POST' || 'PATCH' || 'PUT':
             {
                 return [
-                    'program_id' => 'required|exists:programs,id',
-                    'presenter_id' => 'required|exists:participants,id',
-                    'document_id' => 'nullable|exists:documents,id',
+                    'program_id' => 'required|exists:meeting_hall_programs,id',
+                    'presenter_id' => 'required|exists:meeting_participants,id',
+                    'document_id' => 'nullable|exists:meeting_documents,id',
                     'sort_id' => 'nullable|integer',
                     'code' => 'nullable|max:255',
                     'title' => 'required|max:255',

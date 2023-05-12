@@ -18,8 +18,8 @@ class ProgramModeratorRequest extends FormRequest
             case 'POST' || 'PATCH' || 'PUT':
             {
                 return [
-                    'program_id' => 'required|exists:programs,id',
-                    'moderator_id' => 'required|exists:participants,id',
+                    'program_id' => 'required|exists:meeting_hall_programs,id',
+                    'moderator_id' => 'required|exists:meeting_participants,id',
                 ];
             }
             default:break;

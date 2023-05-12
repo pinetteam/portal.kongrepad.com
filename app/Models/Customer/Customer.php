@@ -43,8 +43,8 @@ class Customer extends Model
     ];
     public function documents()
     {
-        $documents = Document::select('documents.*')
-            ->join('meetings', 'documents.meeting_id', '=', 'meetings.id')
+        $documents = Document::select('meeting_documents.*')
+            ->join('meetings', 'meeting_documents.meeting_id', '=', 'meetings.id')
             ->join('customers', 'meetings.customer_id', '=', 'customers.id')
             ->where('customers.id', $this->getkey());
         return $documents;
@@ -82,8 +82,8 @@ class Customer extends Model
     }
     public function programSessions()
     {
-        $program_sessions = ProgramSession::select('program_sessions.*')
-            ->join('meeting_hall_programs', 'program_sessions.program_id', '=', 'meeting_hall_programs.id')
+        $program_sessions = ProgramSession::select('meeting_hall_program_sessions.*')
+            ->join('meeting_hall_programs', 'meeting_hall_program_sessions.program_id', '=', 'meeting_hall_programs.id')
             ->join('meeting_halls', 'meeting_hall_programs.meeting_hall_id', '=', 'meeting_halls.id')
             ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
             ->join('customers', 'meetings.customer_id', '=', 'customers.id')
