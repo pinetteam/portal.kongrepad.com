@@ -37,7 +37,7 @@
     </div>
     <div class="card text-bg-dark mt-2">
         <div class="card-header">
-            <h1 class="m-0 text-center">{{ __('common.stages') }}</h1>
+            <h1 class="m-0 text-center">{{ __('common.screens') }}</h1>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -50,11 +50,11 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($meeting_hall_stages as $stage)
+                    @foreach($meeting_hall_screens as $screen)
                         <tr>
-                            <td>{{ $stage->title }}</td>
+                            <td>{{ $screen->title }}</td>
                             <td>
-                                @if($stage->status)
+                                @if($screen->status)
                                     <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
                                 @else
                                     <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
@@ -62,16 +62,16 @@
                             </td>
                             <td class="text-end">
                                 <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
-                                    <a class="btn btn-info btn-sm" href="{{ route('portal.stage.show', $stage->id) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
+                                    <a class="btn btn-info btn-sm" href="{{ route('portal.screen.show', $screen->id) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
                                         <span class="fa-regular fa-eye"></span>
                                     </a>
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.edit') }}">
-                                        <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#stage-edit-modal" data-route="{{ route('portal.stage.update', $stage->id) }}" data-resource="{{ route('portal.stage.edit', $stage->id) }}" data-id="{{ $stage->id }}">
+                                        <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#screen-edit-modal" data-route="{{ route('portal.screen.update', $screen->id) }}" data-resource="{{ route('portal.screen.edit', $screen->id) }}" data-id="{{ $screen->id }}">
                                             <span class="fa-regular fa-pen-to-square"></span>
                                         </button>
                                     </div>
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
-                                        <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#stage-delete-modal" data-route="{{ route('portal.stage.destroy', $stage->id) }}" data-record="{{ $stage->title }}">
+                                        <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#screen-delete-modal" data-route="{{ route('portal.screen.destroy', $screen->id) }}" data-record="{{ $screen->title }}">
                                             <span class="fa-regular fa-trash"></span>
                                         </button>
                                     </div>
@@ -84,20 +84,20 @@
             </div>
         </div>
         <div class="card-footer d-flex justify-content-center">
-            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#stage-create-modal" data-route="{{ route('portal.stage.store') }}">
-                <i class="fa-solid fa-plus"></i> {{ __('common.add-new-stage') }}
+            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#screen-create-modal" data-route="{{ route('portal.screen.store') }}">
+                <i class="fa-solid fa-plus"></i> {{ __('common.add-new-screen') }}
             </button>
         </div>
-        <x-crud.form.common.create name="stage">
-            @section('stage-create-form')
+        <x-crud.form.common.create name="screen">
+            @section('screen-create-form')
                 <x-input.text method="c" name="title" title="title" icon="input-text" />
                 <x-input.select method="c" name="meeting_hall_id" title="meeting-hall" :options="$meeting_halls" option_value="id" option_name="title" icon="hundred-points" />
                 <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
             @endsection
         </x-crud.form.common.create>
-        <x-crud.form.common.delete name="stage" />
-        <x-crud.form.common.edit name="stage">
-            @section('stage-edit-form')
+        <x-crud.form.common.delete name="screen" />
+        <x-crud.form.common.edit name="screen">
+            @section('screen-edit-form')
                 <x-input.text method="e" name="title" title="title" icon="input-text" />
                 <x-input.select method="e" name="meeting_hall_id" title="meeting-hall" :options="$meeting_halls" option_value="id" option_name="title" icon="hundred-points" />
                 <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />

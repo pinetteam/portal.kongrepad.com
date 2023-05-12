@@ -13,7 +13,7 @@ class ScreenController extends Controller
     public function index()
     {
         $meeting_halls = Auth::user()->customer->meetingHalls()->get();
-        $screens = Auth::user()->customer->screens()->where('screens.status', 1)->paginate(20);
+        $screens = Auth::user()->customer->screens()->where('meeting_hall_screens.status', 1)->paginate(20);
         $statuses = [
             'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
@@ -37,7 +37,7 @@ class ScreenController extends Controller
     public function show(string $id)
     {
         $screen = Auth::user()->customer->screens()->findOrFail($id);
-        $screens = Auth::user()->customer->screens()->where('screens.status', 1)->get();
+        $screens = Auth::user()->customer->screens()->where('meeting_hall_screens.status', 1)->get();
         $statuses = [
             'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],

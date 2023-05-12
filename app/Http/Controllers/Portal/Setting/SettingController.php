@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Portal\Setting;
 
 use App\Http\Controllers\Controller;
 use App\Models\Customer\Customer;
+use App\Models\Customer\Setting\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -14,8 +15,9 @@ class SettingController extends Controller
     public function index()
     {
         $customer = Auth::user()->customer;
-        $settings = Auth::user()->customer->settings;
-        return view('portal.setting.index', compact(['customer']));
+        $setting_groups = Auth::user()->customer->settingGroups()->first();
+        dd($setting_groups);
+        return view('portal.setting.index', compact(['customer', 'setting_groups']));
     }
     public function update(Request $request, $setting_id)
     {

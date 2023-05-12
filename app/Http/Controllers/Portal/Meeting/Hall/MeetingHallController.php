@@ -43,7 +43,7 @@ class MeetingHallController extends Controller
             'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.meeting-hall.show', compact(['meeting_hall', 'meeting_halls', 'meeting_hall_screenss', 'statuses']));
+        return view('portal.meeting-hall.show', compact(['meeting_hall', 'meeting_halls', 'meeting_hall_screens', 'statuses']));
     }
     public function edit(string $id)
     {

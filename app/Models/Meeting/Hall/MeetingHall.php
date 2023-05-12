@@ -28,7 +28,7 @@ class MeetingHall extends Model
     {
         return $this->belongsTo(Meeting::class, 'meeting_id', 'id');
     }
-    public function screen()
+    public function screens()
     {
         return $this->hasMany(Screen::class, 'meeting_hall_id', 'id');
     }

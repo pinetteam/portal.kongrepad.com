@@ -115,7 +115,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route("portal.screen.index") }}">
                         <i class="nav-icon fa-duotone fa-ranking-star"></i>
-                        {{ __('common.stages') }}
+                        {{ __('common.screens') }}
                     </a>
                 </li>
                 <li class="nav-item">

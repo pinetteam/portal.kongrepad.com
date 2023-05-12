@@ -90,6 +90,14 @@ class Customer extends Model
             ->where('customers.id', $this->getkey());
         return $program_sessions;
     }
+    public function settingGroups()
+    {
+        $settings = Setting::select('customer_settings.*')
+            ->join('system_setting_variables', 'system_setting_variables.id', '=', 'customer_settings.variable_id')->groupBy('group')
+            ->join('customers', 'customer_settings.customer_id', '=', 'customers.id')
+            ->where('customers.id', $this->getkey());
+        return $settings;
+    }
     public function scoreGames()
     {
         return $this->hasOneThrough(ScoreGame::class, Meeting::class, 'customer_id', 'meeting_id', 'id', 'id');
@@ -110,8 +118,5 @@ class Customer extends Model
     {
         return $this->hasMany(UserRole::class, 'customer_id', 'id');
     }
-    public function settings()
-    {
-        return $this->hasMany(Setting::class, 'customer_id', 'id');
-    }
+
 }
