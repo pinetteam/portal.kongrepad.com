@@ -25,6 +25,7 @@ Route::prefix('portal')->name('portal.')->group(function () {
     //Route::group(["middleware" => ['auth','user.role.control']], function () {
     Route::group(["middleware" => ['auth']], function () {
         Route::get('/', [\App\Http\Controllers\Portal\DashboardController::class, 'index'])->name('dashboard.index');
+        Route::get('/operator-board', [\App\Http\Controllers\Portal\OperatorBoardController::class, 'index'])->name('operator-board.index');
         Route::resource('/document', \App\Http\Controllers\Portal\Document\DocumentController::class)->except(['create']);
         Route::get('/document-download/{file}', [\App\Http\Controllers\Portal\Document\DocumentDownloadController::class, 'index'])->name('document-download.index');
         Route::resource('/meeting', \App\Http\Controllers\Portal\Meeting\MeetingController::class)->except(['create']);

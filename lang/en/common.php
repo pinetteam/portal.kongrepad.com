@@ -47,7 +47,7 @@ return [
     'remember-me' => 'Remember me',
     'forgot-password' => 'Forgot password?',
     'dashboard' => 'Dashboard',
-    'check-in-board' => 'Check-in Board',
+    'operator-board' => 'Check-in Board',
     'preparation' => 'Preparation',
     'meetings' => 'Meetings',
     'unspecified' => 'Unspecified',
