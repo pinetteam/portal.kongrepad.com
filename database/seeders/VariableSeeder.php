@@ -25,7 +25,7 @@ class VariableSeeder extends Seeder
         ];
         Variable::insert([
             [
-                'sort_id' => '10',
+                'sort_order' => '10',
                 'group' => 'localisation',
                 'title' => 'date-format',
                 'variable' => 'date_format',
@@ -34,7 +34,7 @@ class VariableSeeder extends Seeder
                 'status' => '1',
             ],
             [
-                'sort_id' => '20',
+                'sort_order' => '20',
                 'group' => 'localisation',
                 'title' => 'time-format',
                 'variable' => 'time_format',
@@ -43,7 +43,7 @@ class VariableSeeder extends Seeder
                 'status' => '1',
             ],
             [
-                'sort_id' => '30',
+                'sort_order' => '30',
                 'group' => 'localisation',
                 'title' => 'timezone',
                 'variable' => 'timezone',
@@ -52,7 +52,7 @@ class VariableSeeder extends Seeder
                 'status' => '1',
             ],
             [
-                'sort_id' => '10',
+                'sort_order' => '10',
                 'group' => 'localisation',
                 'title' => 'address',
                 'variable' => 'address',

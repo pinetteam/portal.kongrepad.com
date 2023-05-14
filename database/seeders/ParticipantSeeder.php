@@ -2,8 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Participant\Participant;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Meeting\Participant\Participant;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
@@ -17,8 +16,7 @@ class ParticipantSeeder extends Seeder
         Participant::insert([
             [
                 'meeting_id' => '3',
-                'uuid' => Str::uuid()->toString(),
-                'username' => 'alierdemsunar',
+                'username' => Str::uuid()->toString(),
                 'title' => '',
                 'first_name' => 'Ali Erdem',
                 'last_name' => 'Sunar',
@@ -29,13 +27,12 @@ class ParticipantSeeder extends Seeder
                 'phone' => '5308266897',
                 'password' => '123456',
                 'type' => 'agent',
-                'gdpr_confirmation' => 1,
+                'gdpr_consent' => 1,
                 'status' => 1,
             ],
             [
                 'meeting_id' => '3',
-                'uuid' => Str::uuid()->toString(),
-                'username' => 'erkanozkan',
+                'username' => Str::uuid()->toString(),
                 'title' => '',
                 'first_name' => 'Erkan',
                 'last_name' => 'Özkan',
@@ -46,13 +43,12 @@ class ParticipantSeeder extends Seeder
                 'phone' => '5326359203',
                 'password' => '123456',
                 'type' => 'attendee',
-                'gdpr_confirmation' => 1,
+                'gdpr_consent' => 1,
                 'status' => 1,
             ],
             [
                 'meeting_id' => '3',
-                'uuid' => Str::uuid()->toString(),
-                'username' => 'ismailcelik',
+                'username' => Str::uuid()->toString(),
                 'title' => 'Prof. Dr.',
                 'first_name' => 'İsmail',
                 'last_name' => 'Çelik',
@@ -68,8 +64,7 @@ class ParticipantSeeder extends Seeder
             ],
             [
                 'meeting_id' => '3',
-                'uuid' => Str::uuid()->toString(),
-                'username' => 'ugurerdogan',
+                'username' => Str::uuid()->toString(),
                 'title' => '',
                 'first_name' => 'Uğur',
                 'last_name' => 'Erdoğan',
@@ -80,13 +75,12 @@ class ParticipantSeeder extends Seeder
                 'phone' => '5353258705',
                 'password' => '123456',
                 'type' => 'attendee',
-                'gdpr_confirmation' => 1,
+                'gdpr_consent' => 1,
                 'status' => 1,
             ],
             [
                 'meeting_id' => '3',
-                'uuid' => Str::uuid()->toString(),
-                'username' => 'mertdemirbag',
+                'username' => Str::uuid()->toString(),
                 'title' => '',
                 'first_name' => 'Mert',
                 'last_name' => 'Demirbağ',
@@ -97,7 +91,7 @@ class ParticipantSeeder extends Seeder
                 'phone' => '5531304177',
                 'password' => '123456',
                 'type' => 'team',
-                'gdpr_confirmation' => 1,
+                'gdpr_consent' => 1,
                 'status' => 1,
             ],
         ]);

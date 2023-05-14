@@ -17,7 +17,6 @@
                             <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}:</b> {{ $score_game->title }}</li>
                             <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-calendar-arrow-up mx-1"></span> {{ __('common.start-at') }}:</b> {{ $score_game->start_at }}</li>
                             <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-calendar-arrow-down mx-1"></span> {{ __('common.finish-at') }}:</b> {{ $score_game->finish_at }}</li>
-                            <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-person-military-pointing mx-1"></span> {{ __('common.types') }}:</b> @foreach($score_game->types as $type){{__('common.'.$type)}} @endforeach</li>
                             <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}:</b>
                                 @if($score_game->status)
                                     {{ __('common.active') }}
@@ -30,7 +29,7 @@
                 </div>
                 <div class="col card text-bg-dark p-0">
                     <div class="card-header">
-                        <h2 class="m-0 text-center h3">{{ __('common.scores') }}</h2>
+                        <h2 class="m-0 text-center h3">{{ __('common.points') }}</h2>
                     </div>
                     <div class="card-body p-0">
                         <div class="table-responsive">
@@ -38,14 +37,14 @@
                                 <thead class="thead-dark">
                                 <tr>
                                     <th scope="col"><span class="fa-regular fa-id-card mx-1"></span> {{ __('common.name') }}</th>
-                                    <th scope="col"><span class="fa-regular fa-hundred-points mx-1"></span> {{ __('common.score') }}</th>
+                                    <th scope="col"><span class="fa-regular fa-hundred-points mx-1"></span> {{ __('common.point') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($scores as $score)
+                                @foreach($points as $point)
                                     <tr>
-                                        <td>{{ $score->user->full_name }}</td>
-                                        <td>{{ $score->score }}</td>
+                                        <td>{{ $point->owner->full_name }}</td>
+                                        <td>{{ $point->qrCode->title }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -68,7 +67,7 @@
                         <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}</th>
                         <th scope="col"><span class="fa-regular fa-calendar-arrow-up mx-1"></span> {{ __('common.start-at') }}</th>
                         <th scope="col"><span class="fa-regular fa-calendar-arrow-down mx-1"></span> {{ __('common.finish-at') }}</th>
-                        <th scope="col"><span class="fa-regular fa-hundred-points mx-1"></span> {{ __('common.score') }}</th>
+                        <th scope="col"><span class="fa-regular fa-hundred-points mx-1"></span> {{ __('common.point') }}</th>
                         <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}</th>
                         <th scope="col" class="text-end"></th>
                     </tr>
@@ -83,7 +82,7 @@
                                 </td>
                                 <td>{{ $qr_code->start_at }}</td>
                                 <td>{{ $qr_code->finish_at }}</td>
-                                <td>{{ $qr_code->score }}</td>
+                                <td>{{ $qr_code->point }}</td>
                                 <td>
                                     @if($qr_code->status)
                                         <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
@@ -121,22 +120,22 @@
         </div>
         <x-crud.form.common.create name="qr-code">
             @section('qr-code-create-form')
+                <x-input.hidden method="c" name="score_game_id" :value="$score_game->id" />
                 <x-input.text method="c" name="title" title="title" icon="input-text" />
                 <x-input.datetime method="c" name="start_at" title="start-at" icon="calendar-arrow-down" />
                 <x-input.datetime method="c" name="finish_at" title="finish-at" icon="calendar-arrow-down" />
-                <x-input.number method="e" name="score" title="score" icon="hundred-points" />
-                <x-input.select method="c" name="score_game_id" title="score-game" :options="$score_games" option_value="id" option_name="title" icon="hundred-points" />
+                <x-input.number method="e" name="point" title="point" icon="hundred-points" />
                 <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
             @endsection
         </x-crud.form.common.create>
         <x-crud.form.common.delete name="qr-code" />
         <x-crud.form.common.edit name="qr-code">
             @section('qr-code-edit-form')
+                <x-input.hidden method="e" name="score_game_id" :value="$score_game->id" />
                 <x-input.text method="e" name="title" title="title" icon="input-text" />
                 <x-input.datetime method="e" name="start_at" title="start-at" icon="calendar-arrow-down" />
                 <x-input.datetime method="e" name="finish_at" title="finish-at" icon="calendar-arrow-down" />
-                <x-input.number method="e" name="score" title="score" icon="hundred-points" />
-                <x-input.select method="e" name="score_game_id" title="score-game" :options="$score_games" option_value="id" option_name="title" icon="hundred-points" />
+                <x-input.number method="e" name="point" title="point" icon="hundred-points" />
                 <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
             @endsection
         </x-crud.form.common.edit>

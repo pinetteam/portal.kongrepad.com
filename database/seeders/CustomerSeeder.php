@@ -18,8 +18,6 @@ class CustomerSeeder extends Seeder
         Customer::insert([
             [
                 'title' => 'D-Event',
-                'description' => 'D-Event Turizm Organizasyon',
-                'policy_status' => '1',
                 'language' => 'en',
                 'status' => '1',
             ],

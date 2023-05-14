@@ -17,7 +17,6 @@
                             <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}</th>
                             <th scope="col"><span class="fa-regular fa-calendar-arrow-up mx-1"></span> {{ __('common.start-at') }}</th>
                             <th scope="col"><span class="fa-regular fa-calendar-arrow-down mx-1"></span> {{ __('common.finish-at') }}</th>
-                            <th scope="col"><span class="fa-regular fa-calendar-arrow-down mx-1"></span> {{ __('common.types') }}</th>
                             <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}</th>
                             <th scope="col" class="text-end"></th>
                         </tr>
@@ -40,11 +39,6 @@
                                     @else
                                         <i class="text-info">{{ __('common.unspecified') }}</i>
                                     @endif
-                                </td>
-                                <td>
-                                    @foreach($score_game->types as $type)
-                                        {{__('common.'.$type)}}
-                                    @endforeach
                                 </td>
                                 <td>
                                     @if($score_game->status)
@@ -88,7 +82,6 @@
             <x-input.text method="c" name="title" title="title" icon="input-text" />
             <x-input.datetime method="c" name="start_at" title="start-at" icon="calendar-arrow-down" />
             <x-input.datetime method="c" name="finish_at" title="finish-at" icon="calendar-arrow-down" />
-            <x-input.checkbox method="c" name="types" title="types" :options="$types" option_value="value" option_name="value" icon="person-military-pointing" />
             <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.create>
@@ -99,7 +92,6 @@
             <x-input.text method="e" name="title" title="title" icon="input-text" />
             <x-input.datetime method="e" name="start_at" title="start-at" icon="calendar-arrow-down" />
             <x-input.datetime method="e" name="finish_at" title="finish-at" icon="calendar-arrow-down" />
-            <x-input.checkbox method="e" name="types" title="types" :options="$types" option_value="value" option_name="value" icon="person-military-pointing" />
             <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.edit>

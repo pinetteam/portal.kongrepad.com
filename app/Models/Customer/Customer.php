@@ -2,18 +2,21 @@
 
 namespace App\Models\Customer;
 
-use App\Casts\JSON;
 use App\Models\Customer\Setting\Setting;
-use App\Models\Document\Document;
-use App\Models\Meeting\Hall\Screen\Screen;
-use App\Models\Meeting\Meeting;
+use App\Models\Meeting\Document\Document;
 use App\Models\Meeting\Hall\MeetingHall;
-use App\Models\Participant\Participant;
-use App\Models\Program\Moderator\ProgramModerator;
-use App\Models\Program\Program;
-use App\Models\Program\Session\ProgramSession;
-use App\Models\ScoreGame\QrCode\QrCode;
-use App\Models\ScoreGame\ScoreGame;
+use App\Models\Meeting\Hall\Program\Chair\Chair;
+use App\Models\Meeting\Hall\Program\Debate\Debate;
+use App\Models\Meeting\Hall\Program\Debate\Team\Team;
+use App\Models\Meeting\Hall\Program\Debate\Vote\Vote;
+use App\Models\Meeting\Hall\Program\Program;
+use App\Models\Meeting\Hall\Program\Session\Keypad\Keypad;
+use App\Models\Meeting\Hall\Program\Session\Keypad\Option\Option;
+use App\Models\Meeting\Hall\Program\Session\ProgramSession;
+use App\Models\Meeting\Meeting;
+use App\Models\Meeting\Participant\Participant;
+use App\Models\Meeting\ScoreGame\QrCode\QrCode;
+use App\Models\Meeting\ScoreGame\ScoreGame;
 use App\Models\User\Role\UserRole;
 use App\Models\User\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -70,15 +73,15 @@ class Customer extends Model
             ->where('customers.id', $this->getkey());
         return $programs;
     }
-    public function programModerators()
+    public function programChairs()
     {
-        $program_moderators = ProgramModerator::select('program_moderators.*')
-            ->join('meeting_hall_programs', 'program_moderators.program_id', '=', 'meeting_hall_programs.id')
+        $chairs = Chair::select('meeting_hall_program_chairs.*')
+            ->join('meeting_hall_programs', 'meeting_hall_program_chairs.program_id', '=', 'meeting_hall_programs.id')
             ->join('meeting_halls', 'meeting_hall_programs.meeting_hall_id', '=', 'meeting_halls.id')
             ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
             ->join('customers', 'meetings.customer_id', '=', 'customers.id')
             ->where('customers.id', $this->getkey());
-        return $program_moderators;
+        return $chairs;
     }
     public function programSessions()
     {
@@ -90,6 +93,47 @@ class Customer extends Model
             ->where('customers.id', $this->getkey());
         return $program_sessions;
     }
+
+    public function debates()
+    {
+        return $this->hasManyDeep(Debate::class, [Meeting::class, MeetingHall::class, Program::class]);
+    }
+
+    public function teams()
+    {
+        return $this->hasManyDeep(Team::class, [Meeting::class, MeetingHall::class, Program::class, Debate::class]);
+    }
+
+    public function keypads()
+    {
+        $keypads = Keypad::select('meeting_hall_program_session_keypads.*')
+            ->join('meeting_hall_program_sessions', 'meeting_hall_program_session_keypads.session_id', '=', 'meeting_hall_program_sessions.id')
+            ->join('meeting_hall_programs', 'meeting_hall_program_sessions.program_id', '=', 'meeting_hall_programs.id')
+            ->join('meeting_halls', 'meeting_hall_programs.meeting_hall_id', '=', 'meeting_halls.id')
+            ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
+            ->join('customers', 'meetings.customer_id', '=', 'customers.id')
+            ->where('customers.id', $this->getkey());
+        return $keypads;
+    }
+
+    public function options()
+    {
+        $keypads = Option::select('meeting_hall_program_session_keypad_options.*')
+            ->join('meeting_hall_program_session_keypads', 'meeting_hall_program_session_keypad_options.keypad_id', '=', 'meeting_hall_program_session_keypads.id')
+            ->join('meeting_hall_program_sessions', 'meeting_hall_program_session_keypads.session_id', '=', 'meeting_hall_program_sessions.id')
+            ->join('meeting_hall_programs', 'meeting_hall_program_sessions.program_id', '=', 'meeting_hall_programs.id')
+            ->join('meeting_halls', 'meeting_hall_programs.meeting_hall_id', '=', 'meeting_halls.id')
+            ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
+            ->join('customers', 'meetings.customer_id', '=', 'customers.id')
+            ->where('customers.id', $this->getkey());
+        return $keypads;
+    }
+
+    public function debateVotes()
+    {
+        return $this->hasManyDeep(Vote::class, [Meeting::class, MeetingHall::class, Program::class, Debate::class, Team::class]);
+    }
+
     public function settingGroups()
     {
         $settings = Setting::select('customer_settings.*')
@@ -105,10 +149,6 @@ class Customer extends Model
     public function qrCodes()
     {
         return $this->hasManyDeep(QrCode::class, [Meeting::class, ScoreGame::class]);
-    }
-    public function screens()
-    {
-        return $this->hasManyDeep(Screen::class, [Meeting::class, MeetingHall::class]);
     }
     public function users()
     {

@@ -30,8 +30,8 @@
                             <tr>
                                 <td>{{ $program->meetingHall->title }}</td>
                                 <td>
-                                    @if($program->sort_id)
-                                        {{ $program->sort_id }}
+                                    @if($program->sort_order)
+                                        {{ $program->sort_order }}
                                     @else
                                         <i class="text-info">{{ __('common.unspecified') }}</i>
                                     @endif
@@ -87,7 +87,7 @@
     <x-crud.form.common.create>
         @section('default-create-form')
             <x-input.select method="c" name="meeting_hall_id" title="meeting-hall" :options="$meeting_halls" option_value="id" option_name="title" icon="hotel" />
-            <x-input.number method="c" name="sort_id" title="sort" icon="circle-sort" />
+            <x-input.number method="c" name="sort_order" title="sort" icon="circle-sort" />
             <x-input.text method="c" name="code" title="code" icon="code-simple" />
             <x-input.text method="c" name="title" title="title" icon="input-text" />
             <x-input.text method="c" name="description" title="description" icon="comment-dots" />
@@ -102,13 +102,14 @@
     <x-crud.form.common.edit>
         @section('default-edit-form')
             <x-input.select method="e" name="meeting_hall_id" title="meeting-hall" :options="$meeting_halls" option_value="id" option_name="title" icon="hotel" />
-            <x-input.number method="e" name="sort_id" title="sort" icon="circle-sort" />
+            <x-input.number method="e" name="sort_order" title="sort" icon="circle-sort" />
             <x-input.text method="e" name="code" title="code" icon="code-simple" />
             <x-input.text method="e" name="title" title="title" icon="input-text" />
             <x-input.text method="e" name="description" title="description" icon="comment-dots" />
             <x-input.file method="e" name="logo" title="logo" icon="image" />
             <x-input.datetime method="e" name="start_at" title="start-at" icon="calendar-arrow-down" />
             <x-input.datetime method="e" name="finish_at" title="finish-at" icon="calendar-arrow-down" />
+            <x-input.select method="e" name="type" title="type" :options="$types" option_value="value" option_name="title" icon="person-military-pointing" />
             <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.edit>

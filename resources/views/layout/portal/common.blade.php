@@ -113,7 +113,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route("portal.screen.index") }}">
+                    <a class="nav-link" href="#">
                         <i class="nav-icon fa-duotone fa-ranking-star"></i>
                         {{ __('common.screens') }}
                     </a>

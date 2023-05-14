@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('system_setting_variables', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('sort_id')->nullable();
+            $table->unsignedInteger('sort_order')->nullable();
             $table->enum('group', ['system', 'localisation']);
             $table->string('title', 255);
             $table->string('variable', 255);

@@ -16,7 +16,6 @@
                             <th scope="col"><span class="fa-regular fa-bee mx-1"></span> {{ __('common.meeting') }}</th>
                             <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}</th>
                             <th scope="col"><span class="fa-regular fa-envelope mx-1"></span> {{ __('common.sharing-via-email') }}</th>
-                            <th scope="col"><span class="fa-regular fa-person-military-pointing mx-1"></span> {{ __('common.type') }}</th>
                             <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}</th>
                             <th scope="col" class="text-end"></th>
                         </tr>
@@ -37,7 +36,6 @@
                                         <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
                                     @endif
                                 </td>
-                                <td>{{ __('common.'.$document->type) }}</td>
                                 <td>
                                     @if($document->status)
                                         <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
@@ -80,7 +78,6 @@
             <x-input.file method="c" name="file" title="file" icon="file-import" />
             <x-input.text method="c" name="title" title="title" icon="input-text" />
             <x-input.radio method="c" name="sharing_via_email" title="sharing-via-email" :options="$sharing_via_emails" option_value="value" option_name="title" icon="envelope" />
-            <x-input.select method="c" name="type" title="type" :options="$types" option_value="value" option_name="title" icon="person-military-pointing" />
             <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.create>
@@ -91,7 +88,6 @@
             <x-input.file method="e" name="file" title="file" icon="file-import" />
             <x-input.text method="e" name="title" title="title" icon="input-text" />
             <x-input.radio method="e" name="sharing_via_email" title="sharing-via-email" :options="$sharing_via_emails" option_value="value" option_name="title" icon="envelope" />
-            <x-input.select method="e" name="type" title="type" :options="$types" option_value="value" option_name="title" icon="person-military-pointing" />
             <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.edit>
