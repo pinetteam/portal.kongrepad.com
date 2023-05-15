@@ -3,6 +3,7 @@
 namespace App\Models\Customer;
 
 use App\Models\Customer\Setting\Setting;
+use App\Models\Customer\Setting\Variable\Variable;
 use App\Models\Meeting\Document\Document;
 use App\Models\Meeting\Hall\MeetingHall;
 use App\Models\Meeting\Hall\Program\Chair\Chair;
@@ -134,10 +135,10 @@ class Customer extends Model
         return $this->hasManyDeep(Vote::class, [Meeting::class, MeetingHall::class, Program::class, Debate::class, Team::class]);
     }
 
-    public function settingGroups()
+    public function settings()
     {
-        $settings = Setting::select('customer_settings.*')
-            ->join('system_setting_variables', 'system_setting_variables.id', '=', 'customer_settings.variable_id')->groupBy('group')
+     $settings = Setting::select('customer_settings.*')
+            ->join('system_setting_variables', 'customer_settings.variable_id','=', 'system_setting_variables.id')
             ->join('customers', 'customer_settings.customer_id', '=', 'customers.id')
             ->where('customers.id', $this->getkey());
         return $settings;

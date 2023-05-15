@@ -46,9 +46,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($setting_groups as $setting_group)
-                                <h1>ads</h1>
-                                @foreach($setting_group as $setting)
+                                @foreach($settings as $setting)
                                     <tr>
                                         <th scope="row">{{ __('common.'.$setting->variable->title) }}</th>
                                         <td>{{ $setting->value }}</td>
@@ -110,7 +108,6 @@
                                         </td>
                                     </tr>
                                 @endforeach
-                            @endforeach
                             </tbody>
                         </table>
                     </div>

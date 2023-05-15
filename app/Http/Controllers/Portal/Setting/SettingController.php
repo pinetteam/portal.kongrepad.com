@@ -15,9 +15,8 @@ class SettingController extends Controller
     public function index()
     {
         $customer = Auth::user()->customer;
-        $setting_groups = Auth::user()->customer->settingGroups()->first();
-        dd($setting_groups);
-        return view('portal.setting.index', compact(['customer', 'setting_groups']));
+        $settings = Auth::user()->customer->settings()->get();
+        return view('portal.setting.index', compact(['customer', 'settings']));
     }
     public function update(Request $request, $setting_id)
     {
