@@ -38,7 +38,7 @@ class OptionController extends Controller
         if ($request->validated()) {
             $option = Auth::user()->customer->options()->findOrFail($id);
             $option->keypad_id = $request->input('keypad_id');
-            $option->code = $request->input('sort_order');
+            $option->sort_order = $request->input('sort_order');
             $option->title = $request->input('title');
             if ($option->save()) {
                 return back()->with('success',__('common.created-successfully'));
