@@ -131,7 +131,7 @@ class ProgramSeeder extends Seeder
                 'description' => null,
                 'start_at' => '2022-10-22 17:10',
                 'finish_at' => '2022-10-22 18:40',
-                'type' => 'session',
+                'type' => 'debate',
                 'status' => 1,
             ],
         ]);

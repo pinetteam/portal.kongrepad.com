@@ -23,6 +23,12 @@ class SettingController extends Controller
         $customer = Auth::user()->customer;
         $setting = Auth::user()->customer->settings()->findOrFail($setting_id);
         if ($request->has('logo')) {
+            $validated = $request->validate([
+                'logo' => 'required|mimes:png',
+            ]);
+            if(!$validated){
+                return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();
+            }
             $logo = Image::make($request->file('logo'))->encode('data-url');
             $customer->logo = $logo;
         } else if ($request->has('value')) {

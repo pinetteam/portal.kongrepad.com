@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('title', 255)->nullable();
             $table->string('first_name', 255);
             $table->string('last_name', 255);
+            $table->text('qr_code');
             $table->string('identification_number', 255)->nullable();
             $table->string('organisation', 255)->nullable();
             $table->string('email', 255)->nullable();

@@ -4,6 +4,7 @@ namespace App\Http\Requests\Portal\Meeting\Hall\Program\Debate\Team;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\File;
 
 class TeamRequest extends FormRequest
 {
@@ -20,6 +21,7 @@ class TeamRequest extends FormRequest
                 return [
                     'debate_id' => 'required|exists:meeting_hall_program_debates,id',
                     'code' => 'nullable|max:255',
+                    'logo' => ['nullable', File::types(['png'])->max(12 * 1024),],
                     'title' => 'required|max:255',
                     'description' => 'nullable|max:65535',
                 ];

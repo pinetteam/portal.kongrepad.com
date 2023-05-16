@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('debate_id')->index();
             $table->string('code', 255)->nullable();
+            $table->binary('logo')->nullable();
             $table->string('title', 255);
             $table->text('description')->nullable();
             $table->timestamps();

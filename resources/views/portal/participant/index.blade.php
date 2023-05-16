@@ -14,14 +14,13 @@
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col"><span class="fa-regular fa-bee mx-1"></span> {{ __('common.meeting') }}</th>
-                            <th scope="col"><span class="fa-regular fa-id-card-clip mx-1"></span> {{ __('common.username') }}</th>
+                            <th scope="col"><span class="fa-regular fa-id-card-clip mx-1"></span> {{ __('common.activity') }}</th>
                             <th scope="col"><span class="fa-regular fa-id-card mx-1"></span> {{ __('common.name') }}</th>
                             <th scope="col"><span class="fa-regular fa-building-columns mx-1"></span> {{ __('common.organisation') }}</th>
                             <th scope="col"><span class="fa-regular fa-fingerprint mx-1"></span> {{ __('common.identification-number') }}</th>
                             <th scope="col"><span class="fa-regular fa-envelope mx-1"></span> {{ __('common.email') }}</th>
                             <th scope="col"><span class="fa-regular fa-mobile-screen mx-1"></span> {{ __('common.phone') }}</th>
                             <th scope="col"><span class="fa-regular fa-person-military-pointing mx-1"></span> {{ __('common.type') }}</th>
-                            <th scope="col"><span class="fa-regular fa-check-to-slot mx-1"></span> {{ __('common.confirmation') }}</th>
                             <th scope="col"><span class="fa-regular fa-right-to-bracket mx-1"></span> {{ __('common.last-login') }}</th>
                             <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}</th>
                             <th scope="col" class="text-end"></th>
@@ -37,7 +36,6 @@
                                     @else
                                         <div class="spinner-border spinner-border-sm text-danger" role="status"></div>
                                     @endif
-                                    {{ $participant->username }}
                                 </td>
                                 <td>{{ $participant->full_name }}</td>
                                 <td>{{ $participant->organisation }}</td>
@@ -45,13 +43,6 @@
                                 <td>{{ $participant->email }}</td>
                                 <td>{{ $participant->full_phone }}</td>
                                 <td>{{ __('common.'.$participant->type) }}</td>
-                                <td>
-                                    @if($participant->confirmation)
-                                        <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
-                                    @else
-                                        <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
-                                    @endif
-                                </td>
                                 <td>{{ $participant->last_login }}</td>
                                 <td>
                                     @if($participant->status)
@@ -62,6 +53,9 @@
                                 </td>
                                 <td class="text-end">
                                     <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
+                                        <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#showQr" data-bs-code="{{$participant->qr_code}}" title="{{ __('common.show') }}">
+                                            <span class="fa-regular fa-eye"></span>
+                                        </button>
                                         <a class="btn btn-info btn-sm" href="{{ route('portal.participant.show', $participant->id) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
                                             <span class="fa-regular fa-eye"></span>
                                         </a>
@@ -92,7 +86,6 @@
     <x-crud.form.common.create>
         @section('default-create-form')
             <x-input.select method="c" name="meeting_id" title="meeting" :options="$meetings" option_value="id" option_name="title" icon="bee" />
-            <x-input.text method="c" name="username" title="username" icon="id-card-clip" />
             <x-input.text method="c" name="title" title="title" icon="input-text" />
             <x-input.text method="c" name="first_name" title="first-name" icon="id-card" />
             <x-input.text method="c" name="last_name" title="last-name" icon="id-card" />
@@ -103,7 +96,6 @@
             <x-input.number method="c" name="phone" title="phone" icon="mobile-screen" />
             <x-input.text method="c" name="password" title="password" icon="lock" />
             <x-input.select method="c" name="type" title="type" :options="$types" option_value="value" option_name="title" icon="person-military-pointing" />
-            <x-input.radio method="c" name="confirmation" title="confirmation" :options="$confirmations" option_value="value" option_name="title" icon="check-to-slot" />
             <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.create>
@@ -111,7 +103,6 @@
     <x-crud.form.common.edit>
         @section('default-edit-form')
             <x-input.select method="e" name="meeting_id" title="meeting" :options="$meetings" option_value="id" option_name="title" icon="bee" />
-            <x-input.text method="e" name="username" title="username" icon="id-card-clip" />
             <x-input.text method="e" name="title" title="title" icon="input-text" />
             <x-input.text method="e" name="first_name" title="first-name" icon="id-card" />
             <x-input.text method="e" name="last_name" title="last-name" icon="id-card" />
@@ -121,8 +112,35 @@
             <x-input.select method="e" name="phone_country_id" title="phone-country" :options="$phone_countries" option_value="id" option_name="NameAndCode" icon="flag" />
             <x-input.number method="e" name="phone" title="phone" icon="mobile-screen" />
             <x-input.text method="e" name="password" title="password" icon="lock" />
-            <x-input.radio method="e" name="confirmation" title="confirmation" :options="$confirmations" option_value="value" option_name="title" icon="check-to-slot" />
             <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.edit>
+    <div class="modal fade" id="showQr" tabindex="-1" aria-labelledby="showQr" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel">{{__('common.show-qr-code')}}</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div id="qr-code" class="mb-3">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="module">
+        var showQrModal = document.getElementById('showQr')
+        showQrModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget
+            var code = button.getAttribute('data-bs-code')
+            var qrCode = document.getElementById('qr-code')
+
+            qrCode.innerHTML = code
+        })
+    </script>
 @endsection

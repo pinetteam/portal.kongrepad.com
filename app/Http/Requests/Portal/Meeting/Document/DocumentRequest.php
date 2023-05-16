@@ -20,7 +20,7 @@ class DocumentRequest extends FormRequest
             {
                 return [
                     'meeting_id' => 'required|exists:meetings,id',
-                    'file' => ['required', File::types(['pdf', 'pptx', 'xls', 'xlsx'])->max(10240)],
+                    'file' => ['required', File::types(['pdf', 'pptx', 'ppt'])->max(10240)],
                     'title' => 'nullable|max:255',
                     'type' => 'required|in:presentation,publication,other',
                     'sharing_via_email' => 'required|boolean',
@@ -31,7 +31,7 @@ class DocumentRequest extends FormRequest
             {
                 return [
                     'meeting_id' => 'required|exists:meetings,id',
-                    'file' => ['nullable', File::types(['pdf', 'pptx', 'xls', 'xlsx'])->max(10240)],
+                    'file' => ['nullable', File::types(['pdf', 'pptx', 'ppt'])->max(10240)],
                     'title' => 'nullable|max:255',
                     'type' => 'required|in:presentation,publication,other',
                     'sharing_via_email' => 'required|boolean',

@@ -15,6 +15,7 @@ class TeamResource extends JsonResource
         return [
             'debate_id' => ['value'=>$this->debate_id, 'type'=>'hidden'],
             'code' => ['value'=>$this->code, 'type'=>'text'],
+            'logo' => ['value'=>$this->logo, 'type'=>'file'],
             'title' => ['value'=>$this->title, 'type'=>'text'],
             'description' => ['value'=>$this->description, 'type'=>'text'],
             'route' => route('portal.team.update', $this->id),

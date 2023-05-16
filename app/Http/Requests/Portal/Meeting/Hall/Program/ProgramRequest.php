@@ -27,7 +27,7 @@ class ProgramRequest extends FormRequest
                     'logo' => ['nullable', File::types(['png'])->max(12 * 1024),],
                     'start_at' => 'nullable|date_format:d/m/Y H:i|before_or_equal:finish_at|required_with:finish_at',
                     'finish_at' => 'nullable|date_format:d/m/Y H:i|after_or_equal:start_at|required_with:start_at',
-                    'type' => 'required|in:session,break,event,other',
+                    'type' => 'required|in:session,debate,other',
                     'status' => 'required|boolean',
                 ];
             } case 'PATCH' || 'PUT':

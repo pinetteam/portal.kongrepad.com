@@ -34,6 +34,7 @@ class DebateController extends Controller
         $debate = Auth::user()->customer->debates()->findOrFail($id);
         $votes = $debate->votes()->get();
         $teams = $debate->teams()->get();
+        //dd($teams);
         $statuses = [
             'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],

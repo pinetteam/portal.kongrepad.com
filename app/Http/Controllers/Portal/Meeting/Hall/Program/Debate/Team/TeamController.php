@@ -7,6 +7,7 @@ use App\Http\Requests\Portal\Meeting\Hall\Program\Debate\Team\TeamRequest;
 use App\Http\Resources\Portal\Meeting\Hall\Program\Debate\Team\TeamResource;
 use App\Models\Meeting\Hall\Program\Debate\Team\Team;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 
 class TeamController extends Controller
 {
@@ -16,6 +17,10 @@ class TeamController extends Controller
             $team = new Team();
             $team->debate_id = $request->input('debate_id');
             $team->code = $request->input('code');
+            if ($request->has('logo')) {
+                $logo = Image::make($request->file('logo'))->encode('data-url');
+                $team->logo = $logo;
+            }
             $team->title = $request->input('title');
             $team->description = $request->input('description');
             if ($team->save()) {
@@ -41,6 +46,10 @@ class TeamController extends Controller
             $team = Auth::user()->customer->teams()->findOrFail($id);
             $team->debate_id = $request->input('debate_id');
             $team->code = $request->input('code');
+            if ($request->has('logo')) {
+                $logo = Image::make($request->file('logo'))->encode('data-url');
+                $team->logo = $logo;
+            }
             $team->title = $request->input('title');
             $team->description = $request->input('description');
             if ($team->save()) {

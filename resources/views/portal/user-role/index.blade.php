@@ -23,7 +23,7 @@
                         @foreach($user_roles as $user_role)
                             <tr>
                                 <td>{{ $user_role->title }}</td>
-                                <td>{{ count($user_role->access_scopes) }}</td>
+                                <td>{{ $user_role->access_scopes }}</td>
                                 <td>
                                     @if($user_role->status)
                                         <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>

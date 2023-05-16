@@ -37,6 +37,7 @@
                             <table class="table table-dark table-striped table-hover">
                                 <thead class="thead-dark">
                                 <tr>
+                                    <th scope="col"><span class="fa-regular fa-image mx-1"></span> {{ __('common.logo') }}</th>
                                     <th scope="col"><span class="fa-regular fa-id-card mx-1"></span> {{ __('common.code') }}</th>
                                     <th scope="col"><span class="fa-regular fa-person-military-pointing mx-1"></span> {{ __('common.title') }}</th>
                                     <th scope="col" class="text-end"></th>
@@ -45,6 +46,13 @@
                                 <tbody>
                                     @foreach($teams as $team)
                                         <tr>
+                                            <td>
+                                                @if($team->logo)
+                                                    <img src="{{ $team->logo }}" alt="{{ $team->title }}" class="img-thumbnail" style="height:36px;" />
+                                                @else
+                                                    <i class="text-info">{{ __('common.unspecified') }}</i>
+                                                @endif
+                                            </td>
                                             <td>{{ $team->code }}</td>
                                             <td>{{ $team->title }}</td>
                                             <td class="text-end">
@@ -79,6 +87,7 @@
                         @section('team-create-form')
                             <x-input.hidden method="c" name="debate_id" :value="$debate->id" />
                             <x-input.text method="c" name="code" title="code" icon="code-simple" />
+                            <x-input.file method="c" name="logo" title="logo" icon="image" />
                             <x-input.text method="c" name="title" title="title" icon="input-text" />
                             <x-input.text method="c" name="description" title="description" icon="comment-dots" />
                         @endsection
@@ -88,6 +97,7 @@
                         @section('team-edit-form')
                             <x-input.hidden method="e" name="debate_id" :value="$debate->id" />
                             <x-input.text method="e" name="code" title="code" icon="code-simple" />
+                            <x-input.file method="e" name="logo" title="logo" icon="image" />
                             <x-input.text method="e" name="title" title="title" icon="input-text" />
                             <x-input.text method="e" name="description" title="description" icon="comment-dots" />
                         @endsection

@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-lg-3 col-md-12 col-sm-12">
                     <div class="card text-bg-dark">
-                        <form action="{{ route('portal.setting.update', 'logo') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('portal.setting.update', $customer->id) }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <input name="_method" type="hidden" value="PATCH" />
                             <div class="card-header">
@@ -23,7 +23,7 @@
                                         <img src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==" alt="Red dot" width="200" height="200" class="img-thumbnail bg-dark" />
                                     @endif
                                     <div class="custom-file">
-                                        <input type="file" name="logo" class="form-control form-control-sm" id="logo" accept="image/jpeg,image/jpg,image/png,image/gif,image/bmp,image/webp">
+                                        <input type="file" name="logo" class="form-control form-control-sm" id="logo" accept="image/png">
                                     </div>
                                 </div>
                             </div>
