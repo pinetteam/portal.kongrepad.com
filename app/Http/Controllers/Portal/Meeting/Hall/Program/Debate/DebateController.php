@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class DebateController extends Controller
 {
-    public function store(DebateRequest $request)
+    public function store(DebateRequest $request, string $program_id)
     {
         if ($request->validated()) {
             $debate = new Debate();
@@ -29,7 +29,7 @@ class DebateController extends Controller
             }
         }
     }
-    public function show(string $id)
+    public function show(string $program_id, string $id)
     {
         $debate = Auth::user()->customer->debates()->findOrFail($id);
         $votes = $debate->votes()->get();
@@ -39,15 +39,15 @@ class DebateController extends Controller
             'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.debate.show', compact(['teams', 'votes', 'debate', 'statuses']));
+        return view('portal.program.debate.show', compact(['teams', 'votes', 'debate', 'statuses']));
 
     }
-    public function edit(string $id)
+    public function edit(string $program_id, string $id)
     {
         $debate = Auth::user()->customer->debates()->findOrFail($id);
         return new DebateResource($debate);
     }
-    public function update(DebateRequest $request, string $id)
+    public function update(DebateRequest $request, string $program_id, string $id)
     {
         if ($request->validated()) {
             $debate = Auth::user()->customer->programSessions()->findOrFail($id);
@@ -66,7 +66,7 @@ class DebateController extends Controller
             }
         }
     }
-    public function destroy(string $id)
+    public function destroy(string $program_id, string $id)
     {
         $debate = Auth::user()->customer->debates()->findOrFail($id);
         if ($debate->delete()) {

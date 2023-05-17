@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ProgramSessionController extends Controller
 {
-    public function store(ProgramSessionRequest $request)
+    public function store(ProgramSessionRequest $request, string $program_id)
     {
         if ($request->validated()) {
             $program_session = new ProgramSession();
@@ -33,7 +33,7 @@ class ProgramSessionController extends Controller
             }
         }
     }
-    public function show(string $id)
+    public function show(string $program_id, string $id)
     {
         $session = Auth::user()->customer->programSessions()->findOrFail($id);
         $keypads = $session->keypads()->get();
@@ -41,14 +41,14 @@ class ProgramSessionController extends Controller
             'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.session.show', compact(['keypads', 'session', 'statuses']));
+        return view('portal.program.session.show', compact(['keypads', 'session', 'statuses']));
     }
-    public function edit(string $id)
+    public function edit(string $program_id, string $id)
     {
         $program_session = Auth::user()->customer->programSessions()->findOrFail($id);
         return new ProgramSessionResource($program_session);
     }
-    public function update(ProgramSessionRequest $request, string $id)
+    public function update(ProgramSessionRequest $request, string $program_id, string $id)
     {
         if ($request->validated()) {
             $program_session = Auth::user()->customer->programSessions()->findOrFail($id);
@@ -70,7 +70,7 @@ class ProgramSessionController extends Controller
             }
         }
     }
-    public function destroy(string $id)
+    public function destroy(string $program_id, string $id)
     {
         $program_session = Auth::user()->customer->programSessions()->findOrFail($id);
         if ($program_session->delete()) {

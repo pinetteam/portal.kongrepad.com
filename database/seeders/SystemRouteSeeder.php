@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\User\Role\Scope\UserRoleScope;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\System\Route\Route;
 use Illuminate\Database\Seeder;
 
-class UserRoleScopeSeeder extends Seeder
+class SystemRouteSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,7 +14,7 @@ class UserRoleScopeSeeder extends Seeder
      */
     public function run()
     {
-        UserRoleScope::insert(
+        Route::insert(
             [
                 [
                     'code' => 'show-dashboard',

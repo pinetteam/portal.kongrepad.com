@@ -16,7 +16,6 @@
                             @if($session->logo)
                                 <li class="list-group-item bg-dark text-center"><img src="{{ $session->logo }}" alt="{{ $session->title }}" class="img-thumbnail img-fluid" /></li>
                             @endif
-                            <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-hotel mx-1"></span> {{ __('common.meeting-hall') }}:</b> {{ $session->title }}</li>
                             <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-code-simple mx-1"></span> {{ __('common.code') }}:</b> {{ $session->code }}</li>
                             <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-hotel mx-1"></span> {{ __('common.meeting-hall') }}:</b> {{ $session->title }}</li>
                             <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-calendar-arrow-up mx-1"></span> {{ __('common.start-at') }}:</b> {{ $session->start_at }}</li>
@@ -85,16 +84,16 @@
                             </td>
                             <td class="text-end">
                                 <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
-                                    <a class="btn btn-info btn-sm" href="{{ route('portal.keypad.show', $keypad->id) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
+                                    <a class="btn btn-info btn-sm" href="{{ route('portal.keypad.show', [$session->id, $session->program_id, $keypad->id]) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
                                         <span class="fa-regular fa-eye"></span>
                                     </a>
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.edit') }}">
-                                        <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#keypad-edit-modal" data-route="{{ route('portal.keypad.update', $keypad->id) }}" data-resource="{{ route('portal.keypad.edit', $keypad->id) }}" data-id="{{ $keypad->id }}">
+                                        <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#keypad-edit-modal" data-route="{{ route('portal.keypad.update', [$session->id, $session->program_id, $keypad->id]) }}" data-resource="{{ route('portal.keypad.edit', [$session->id, $session->program_id, $keypad->id]) }}" data-id="{{ $keypad->id }}">
                                             <span class="fa-regular fa-pen-to-square"></span>
                                         </button>
                                     </div>
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
-                                        <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#keypad-delete-modal" data-route="{{ route('portal.keypad.destroy', $keypad->id) }}" data-record="{{ $keypad->title }}">
+                                        <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#keypad-delete-modal" data-route="{{ route('portal.keypad.destroy', [$session->id, $session->program_id, $keypad->id]) }}" data-record="{{ $keypad->title }}">
                                             <span class="fa-regular fa-trash"></span>
                                         </button>
                                     </div>
@@ -107,7 +106,7 @@
             </div>
         </div>
         <div class="card-footer d-flex justify-content-center">
-            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#keypad-create-modal" data-route="{{ route('portal.keypad.store') }}">
+            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#keypad-create-modal" data-route="{{ route('portal.keypad.store', [$session->id, $session->program_id]) }}">
                 <i class="fa-solid fa-plus"></i> {{ __('common.add-new-keypad') }}
             </button>
         </div>

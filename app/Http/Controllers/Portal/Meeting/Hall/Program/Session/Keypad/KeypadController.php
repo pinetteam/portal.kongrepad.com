@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class KeypadController extends Controller
 {
-    public function store(KeypadRequest $request)
+    public function store(KeypadRequest $request, string $program_id, string $session_id)
     {
         if ($request->validated()) {
             $keypad = new Keypad();
@@ -27,7 +27,7 @@ class KeypadController extends Controller
             }
         }
     }
-    public function show(string $id)
+    public function show(string $program_id, string $session_id, string $id)
     {
         $keypad = Auth::user()->customer->keypads()->findOrFail($id);
         $votes = $keypad->votes()->get();
@@ -36,14 +36,14 @@ class KeypadController extends Controller
             'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.keypad.show', compact(['options', 'votes', 'keypad', 'statuses']));
+        return view('portal.program.session.keypad.show', compact(['options', 'votes', 'keypad', 'statuses']));
     }
-    public function edit(string $id)
+    public function edit(string $program_id, string $session_id, string $id)
     {
         $keypad = Auth::user()->customer->keypads()->findOrFail($id);
         return new KeypadResource($keypad);
     }
-    public function update(KeypadRequest $request, string $id)
+    public function update(KeypadRequest $request, string $program_id, string $session_id, string $id)
     {
         if ($request->validated()) {
             $keypad = Auth::user()->customer->keypads()->findOrFail($id);
@@ -60,7 +60,7 @@ class KeypadController extends Controller
             }
         }
     }
-    public function destroy(string $id)
+    public function destroy(string $program_id, string $session_id, string $id)
     {
         $keypad = Auth::user()->customer->keypads()->findOrFail($id);
         if ($keypad->delete()) {

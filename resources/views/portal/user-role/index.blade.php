@@ -23,7 +23,7 @@
                         @foreach($user_roles as $user_role)
                             <tr>
                                 <td>{{ $user_role->title }}</td>
-                                <td>{{ $user_role->access_scopes }}</td>
+                                <td>{{ $user_role->routes }}</td>
                                 <td>
                                     @if($user_role->status)
                                         <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
@@ -63,7 +63,7 @@
     <x-crud.form.common.create>
         @section('default-create-form')
             <x-input.text method="c" name="title" title="title" icon="input-text" />
-            <x-input.checkbox method="c" name="access_scopes" title="access-scopes" :options="$access_scopes" option_value="route" option_name="code" icon="ballot-check" />
+            <x-input.checkbox method="c" name="routes" title="access-scopes" :options="$routes" option_value="route" option_name="code" icon="ballot-check" />
             <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.create>
@@ -71,7 +71,7 @@
     <x-crud.form.common.edit>
         @section('default-edit-form')
             <x-input.text method="e" name="title" title="title" icon="input-text" />
-            <x-input.checkbox method="e" name="access_scopes" title="access-scopes" :options="$access_scopes" option_value="route" option_name="code" icon="ballot-check" />
+            <x-input.checkbox method="e" name="routes" title="access-scopes" :options="$routes" option_value="route" option_name="code" icon="ballot-check" />
             <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.edit>

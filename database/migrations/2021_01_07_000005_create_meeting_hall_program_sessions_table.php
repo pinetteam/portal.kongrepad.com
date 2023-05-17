@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedInteger('sort_order')->nullable();
             $table->unsignedBigInteger('program_id')->index();
             $table->unsignedBigInteger('speaker_id')->index();
-            $table->unsignedBigInteger('document_id')->index();
+            $table->unsignedBigInteger('document_id')->index()->nullable();
             $table->boolean('document_sharing_via_email')->default(0)->comment('0=passive;1=active');
             $table->string('code', 255)->nullable();
             $table->string('title', 255);

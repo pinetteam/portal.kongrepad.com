@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Portal\User\Role;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Portal\User\Role\UserRoleRequest;
 use App\Http\Resources\Portal\User\Role\UserRoleResource;
-use App\Models\User\Role\Scope\UserRoleScope;
+use App\Models\System\Route\Route;
 use App\Models\User\Role\UserRole;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,12 +14,12 @@ class UserRoleController extends Controller
     public function index()
     {
         $user_roles = Auth()->user()->customer->userRoles()->paginate(20);
-        $access_scopes = UserRoleScope::get();
+        $routes = Route::get();
         $statuses = [
             'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.user-role.index', compact(['user_roles', 'access_scopes','statuses']));
+        return view('portal.user-role.index', compact(['user_roles', 'routes','statuses']));
     }
     public function store(UserRoleRequest $request)
     {

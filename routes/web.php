@@ -25,7 +25,7 @@ Route::prefix('portal')->name('portal.')->group(function () {
     //Route::group(["middleware" => ['auth','user.role.control']], function () {
     Route::group(["middleware" => ['auth']], function () {
         Route::get('/', [\App\Http\Controllers\Portal\DashboardController::class, 'index'])->name('dashboard.index');
-        Route::get('/operator-board', [\App\Http\Controllers\Portal\OperatorBoardController::class, 'index'])->name('operator-board.index');
+        Route::get('/meeting-hall/{meeting_hall_id}/operator-board', [\App\Http\Controllers\Portal\OperatorBoardController::class, 'index'])->name('operator-board.index');
         Route::resource('/document', \App\Http\Controllers\Portal\Meeting\Document\DocumentController::class)->except(['create']);
         Route::get('/document-download/{file}', [\App\Http\Controllers\Portal\Meeting\Document\DocumentDownloadController::class, 'index'])->name('document-download.index');
         Route::resource('/meeting', \App\Http\Controllers\Portal\Meeting\MeetingController::class)->except(['create']);
@@ -33,9 +33,9 @@ Route::prefix('portal')->name('portal.')->group(function () {
         Route::resource('/participant', \App\Http\Controllers\Portal\Meeting\Participant\ParticipantController::class)->except(['create']);
         Route::resource('/program', \App\Http\Controllers\Portal\Meeting\Hall\Program\ProgramController::class)->except(['create']);
         Route::resource('/chair', \App\Http\Controllers\Portal\Meeting\Hall\Program\Chair\ChairController::class)->only(['store', 'destroy']);
-        Route::resource('/session', \App\Http\Controllers\Portal\Meeting\Hall\Program\Session\ProgramSessionController::class)->except(['index', 'create']);
-        Route::resource('/keypad', \App\Http\Controllers\Portal\Meeting\Hall\Program\Session\Keypad\KeypadController::class)->except(['index', 'create']);
-        Route::resource('/debate', \App\Http\Controllers\Portal\Meeting\Hall\Program\Debate\DebateController::class)->except(['index', 'create']);
+        Route::resource('/program/{program_id}/session', \App\Http\Controllers\Portal\Meeting\Hall\Program\Session\ProgramSessionController::class)->except(['index', 'create']);
+        Route::resource('/program/{program_id}/session/{session_id}/keypad', \App\Http\Controllers\Portal\Meeting\Hall\Program\Session\Keypad\KeypadController::class)->except(['index', 'create']);
+        Route::resource('/program/{program_id}/debate', \App\Http\Controllers\Portal\Meeting\Hall\Program\Debate\DebateController::class)->except(['index', 'create']);
         Route::resource('/score-game', \App\Http\Controllers\Portal\Meeting\ScoreGame\ScoreGameController::class)->except(['create']);
         Route::resource('/user', \App\Http\Controllers\Portal\User\UserController::class)->except(['create']);
         Route::resource('/user-role', \App\Http\Controllers\Portal\User\Role\UserRoleController::class)->except(['create']);
