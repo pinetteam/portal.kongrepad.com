@@ -35,6 +35,16 @@ class SettingSeeder extends Seeder
                 'variable_id' => '4',
                 'value' => 'İçerenköy Mah. Çayır Cad. No:5 Bay Plaza Kat:12 Ataşehir İstanbul',
             ],
+            [
+                'customer_id' => '1',
+                'variable_id' => '5',
+                'value' => 'deneme',
+            ],
+            [
+                'customer_id' => '1',
+                'variable_id' => '6',
+                'value' => 'deneme2',
+            ],
 
         ]);
 

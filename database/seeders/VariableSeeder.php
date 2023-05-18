@@ -311,6 +311,24 @@ class VariableSeeder extends Seeder
                 'type_variables' => null,
                 'status' => '1',
             ],
+            [
+                'sort_order' => '10',
+                'group' => 'system',
+                'title' => 'deneme',
+                'variable' => 'deneme',
+                'type' => 'text',
+                'type_variables' => null,
+                'status' => '1',
+            ],
+            [
+                'sort_order' => '10',
+                'group' => 'system',
+                'title' => 'deneme2',
+                'variable' => 'deneme2',
+                'type' => 'text',
+                'type_variables' => null,
+                'status' => '1',
+            ],
         ]);
 
     }

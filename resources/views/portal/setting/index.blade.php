@@ -36,6 +36,8 @@
                     </div>
                 </div>
                 <div class="col-lg-9 col-md-12 col-sm-12">
+                    @foreach($setting_groups as $group => $settings)
+                        <h1>{{$group}}</h1>
                     <div class="table-responsive">
                         <table class="table table-dark table-striped table-hover table-bordered mb-0">
                             <thead class="thead-dark">
@@ -48,44 +50,44 @@
                             <tbody>
                                 @foreach($settings as $setting)
                                     <tr>
-                                        <th scope="row">{{ __('common.'.$setting->variable->title) }}</th>
+                                        <th scope="row">{{ __('common.'.$setting->title) }}</th>
                                         <td>{{ $setting->value }}</td>
                                         <td class="text-end">
                                             <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.edit') }}">
-                                                <button class="btn btn-warning btn-sm w-100" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#edit-modal-{{ $setting->variable->variable }}" data-id="{{ $setting->variable->variable }}">
+                                                <button class="btn btn-warning btn-sm w-100" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#edit-modal-{{ $setting->variable }}" data-id="{{ $setting->variable }}">
                                                     <span class="fa-regular fa-pen-to-square"></span>
                                                 </button>
                                             </div>
-                                            <div class="modal fade" id="edit-modal-{{ $setting->variable->variable }}" data-bs-backdrop="static" tabindex="-1" aria-labelledby="edit-modal-label-{{ $setting->variable->variable }}" aria-hidden="true">
+                                            <div class="modal fade" id="edit-modal-{{ $setting->variable }}" data-bs-backdrop="static" tabindex="-1" aria-labelledby="edit-modal-label-{{ $setting->variable }}" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                                     <div class="modal-content bg-dark">
                                                         <form method="post" action="{{ route('portal.setting.update', $setting->id) }}">
                                                             @csrf
                                                             <input name="_method" type="hidden" value="PATCH" />
                                                             <div class="modal-header">
-                                                                <h1 class="modal-title fs-5" id="edit-modal-label-{{ $setting->variable->variable }}">{{ __('common.edit') . " " . __('common.'.$setting->variable->title) }}</h1>
+                                                                <h1 class="modal-title fs-5" id="edit-modal-label-{{ $setting->variable }}">{{ __('common.edit') . " " . __('common.'.$setting->title) }}</h1>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="form-group mb-3 text-center">
-                                                                    @if($setting->variable->type == 'text' || $setting->variable->type == 'number')
-                                                                        <input type="{{$setting->variable->type}}" name="value" class="form-control @error('value')is-invalid @enderror" id="value-{{ $setting->variable->variable }}" placeholder="{{ $setting->value }}" value="{{ $setting->value }}" />
-                                                                    @elseif($setting->variable->type == 'select')
+                                                                    @if($setting->type == 'text' || $setting->type == 'number')
+                                                                        <input type="{{$setting->type}}" name="value" class="form-control @error('value')is-invalid @enderror" id="value-{{ $setting->variable }}" placeholder="{{ $setting->value }}" value="{{ $setting->value }}" />
+                                                                    @elseif($setting->type == 'select')
                                                                         <select name="value" class="form-select @error('value')is-invalid @enderror">
-                                                                            @foreach(json_decode($setting->variable->type_variables, true) as $option)
-                                                                                    <option value="{{$option}}"{{ $setting->value == $option ? ' selected' : '' }}>{{ $option }}</option>
+                                                                            @foreach(json_decode($setting->type_variables, true) as $option)
+                                                                                <option value="{{$option}}"{{ $setting->value == $option ? ' selected' : '' }}>{{ $option }}</option>
                                                                             @endforeach
                                                                         </select>
-                                                                    @elseif($setting->variable->type == 'radio')
-                                                                        <div class="btn-group w-100 @error('value')is-invalid @enderror" role="group" aria-label="{{ __('common.'.$setting->variable->title) }}">
-                                                                            @foreach(json_decode($setting->variable->type_variables, true) as $option)
+                                                                    @elseif($setting->type == 'radio')
+                                                                        <div class="btn-group w-100 @error('value')is-invalid @enderror" role="group" aria-label="{{ __('common.'.$setting->title) }}">
+                                                                            @foreach(json_decode($setting->type_variables, true) as $option)
                                                                                 <input type="radio" name="value" class="btn-check" id="value-{{ $option }}" value="{{ $option }}"{{ (( $setting->value !== null) && $setting->value == $option) ? ' checked' : '' }} />
                                                                                 <label class="btn btn-outline-{{ $value['color'] }}" for="value-{{ $option }}">{{ $option }}</label>
                                                                             @endforeach
                                                                         </div>
-                                                                    @elseif($setting->variable->type == 'checkbox')
-                                                                        <div class="btn-group w-100 @error('value')is-invalid @enderror" role="group" aria-label="{{ __('common.'.$setting->variable->title) }}">
-                                                                            @foreach(json_decode($setting->variable->type_variables, true) as $option)
+                                                                    @elseif($setting->type == 'checkbox')
+                                                                        <div class="btn-group w-100 @error('value')is-invalid @enderror" role="group" aria-label="{{ __('common.'.$setting->title) }}">
+                                                                            @foreach(json_decode($setting->type_variables, true) as $option)
                                                                                 <input type="checkbox" name="value" class="form-check-input" id="value-{{ $option }}" value="{{ $option }}"{{ (( $setting->value !== null) && $setting->value == $option) ? ' checked' : '' }} />
                                                                                 <label class="btn btn-outline-{{ $value['color'] }}" for="value-{{ $option }}">{{ $option }}</label>
                                                                             @endforeach
@@ -107,9 +109,10 @@
                                             </div>
                                         </td>
                                     </tr>
-                                @endforeach
+                            @endforeach
                             </tbody>
                         </table>
+                        @endforeach
                     </div>
                 </div>
             </div>

@@ -137,7 +137,7 @@ class Customer extends Model
 
     public function settings()
     {
-     $settings = Setting::select('customer_settings.*')
+     $settings = Setting::select('customer_settings.*','system_setting_variables.*')
             ->join('system_setting_variables', 'customer_settings.variable_id','=', 'system_setting_variables.id')
             ->join('customers', 'customer_settings.customer_id', '=', 'customers.id')
             ->where('customers.id', $this->getkey());
