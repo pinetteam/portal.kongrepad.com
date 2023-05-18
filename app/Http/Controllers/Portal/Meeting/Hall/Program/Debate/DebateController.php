@@ -32,14 +32,12 @@ class DebateController extends Controller
     public function show(string $program_id, string $id)
     {
         $debate = Auth::user()->customer->debates()->findOrFail($id);
-        $votes = $debate->votes()->get();
         $teams = $debate->teams()->get();
-        //dd($teams);
         $statuses = [
             'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.program.debate.show', compact(['teams', 'votes', 'debate', 'statuses']));
+        return view('portal.program.debate.show', compact(['teams', 'debate', 'statuses']));
 
     }
     public function edit(string $program_id, string $id)

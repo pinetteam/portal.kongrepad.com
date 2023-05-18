@@ -56,7 +56,12 @@ class ParticipantController extends Controller
     }
     public function show(string $id)
     {
-        //
+        $participant = Auth::user()->customer->participants()->findOrFail($id);
+        $statuses = [
+            'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
+            'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
+        ];
+        return view('portal.participant.show', compact(['participant', 'statuses']));
     }
     public function edit(string $id)
     {

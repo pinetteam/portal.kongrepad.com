@@ -54,7 +54,8 @@ class DocumentController extends Controller
     }
     public function show(string $id)
     {
-        //
+        $document = Auth::user()->customer->documents()->findOrFail($id);
+        return response()->file(storage_path('app/documents/'.$document->file_name.'.'.$document->file_extension));
     }
     public function edit(string $id)
     {

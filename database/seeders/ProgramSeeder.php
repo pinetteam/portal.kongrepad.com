@@ -43,7 +43,7 @@ class ProgramSeeder extends Seeder
                 'description' => null,
                 'start_at' => '2022-10-22 11:00',
                 'finish_at' => '2022-10-22 11:20',
-                'type' => 'break',
+                'type' => 'other',
                 'status' => 1,
             ],
             [
@@ -76,7 +76,7 @@ class ProgramSeeder extends Seeder
                 'description' => null,
                 'start_at' => '2022-10-22 12:30',
                 'finish_at' => '2022-10-22 14:00',
-                'type' => 'break',
+                'type' => 'other',
                 'status' => 1,
             ],
             [
@@ -98,7 +98,7 @@ class ProgramSeeder extends Seeder
                 'description' => null,
                 'start_at' => '2022-10-22 15:40',
                 'finish_at' => '2022-10-22 16:00',
-                'type' => 'break',
+                'type' => 'other',
                 'status' => 1,
             ],
             [

@@ -45,7 +45,12 @@ class UserController extends Controller
     }
     public function show($id)
     {
-
+        $user = Auth::user()->customer->users()->findOrFail($id);
+        $statuses = [
+            'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
+            'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
+        ];
+        return view('portal.user.show', compact(['user', 'statuses']));
     }
     public function edit($id)
     {

@@ -30,13 +30,12 @@ class KeypadController extends Controller
     public function show(string $program_id, string $session_id, string $id)
     {
         $keypad = Auth::user()->customer->keypads()->findOrFail($id);
-        $votes = $keypad->votes()->get();
         $options = $keypad->options()->get();
         $statuses = [
             'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.program.session.keypad.show', compact(['options', 'votes', 'keypad', 'statuses']));
+        return view('portal.program.session.keypad.show', compact(['options', 'keypad', 'statuses']));
     }
     public function edit(string $program_id, string $session_id, string $id)
     {
