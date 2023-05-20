@@ -14,8 +14,8 @@
                     <div class="card-body p-0">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}:</b> {{ $meeting->title }}</li>
-                            <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.start-at') }}:</b> {{ $meeting->start_at }}</li>
-                            <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.finish-at') }}:</b> {{ $meeting->finish_at }}</li>
+                            <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-calendar-arrow-up mx-1"></span> {{ __('common.start-at') }}:</b> {{ $meeting->start_at }}</li>
+                            <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-calendar-arrow-down mx-1"></span> {{ __('common.finish-at') }}:</b> {{ $meeting->finish_at }}</li>
                             <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}:</b>
                                 @if($meeting->status)
                                     {{ __('common.active') }}
@@ -28,7 +28,6 @@
                 </div>
                 <div class="col card text-bg-dark p-0">
                     <div class="card-header">
-                        <h2 class="m-0 text-center h3">{{ __('common.scores') }}</h2>
                     </div>
                     <div class="card-body p-0">
                     </div>

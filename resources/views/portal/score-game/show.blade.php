@@ -29,27 +29,8 @@
                 </div>
                 <div class="col card text-bg-dark p-0">
                     <div class="card-header">
-                        <h2 class="m-0 text-center h3">{{ __('common.points') }}</h2>
                     </div>
                     <div class="card-body p-0">
-                        <div class="table-responsive">
-                            <table class="table table-dark table-striped table-hover">
-                                <thead class="thead-dark">
-                                <tr>
-                                    <th scope="col"><span class="fa-regular fa-id-card mx-1"></span> {{ __('common.name') }}</th>
-                                    <th scope="col"><span class="fa-regular fa-hundred-points mx-1"></span> {{ __('common.point') }}</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($points as $point)
-                                    <tr>
-                                        <td>{{ $point->owner->full_name }}</td>
-                                        <td>{{ $point->qrCode->title }}</td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                        </div>
                     </div>
                 </div>
             </div>

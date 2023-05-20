@@ -54,7 +54,7 @@
                                 <td class="text-end">
                                     <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
                                         <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#showQr" data-bs-code="{{$participant->qr_code}}" title="{{ __('common.show') }}">
-                                            <span class="fa-regular fa-eye"></span>
+                                            <span class="fa-regular fa-qrcode"></span>
                                         </button>
                                         <a class="btn btn-info btn-sm" href="{{ route('portal.participant.show', $participant->id) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
                                             <span class="fa-regular fa-eye"></span>
