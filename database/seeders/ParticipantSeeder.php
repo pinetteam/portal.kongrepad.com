@@ -13,10 +13,18 @@ class ParticipantSeeder extends Seeder
      */
     public function run(): void
     {
+        $usernames = [
+            Str::uuid()->toString(),
+            Str::uuid()->toString(),
+            Str::uuid()->toString(),
+            Str::uuid()->toString(),
+            Str::uuid()->toString(),
+        ];
         Participant::insert([
             [
                 'meeting_id' => '3',
-                'username' => Str::uuid()->toString(),
+                'username' => $usernames[0],
+                'qr_code' => \SimpleSoftwareIO\QrCode\Facades\QrCode::size(200)->generate($usernames[0]),
                 'title' => '',
                 'first_name' => 'Ali Erdem',
                 'last_name' => 'Sunar',
@@ -32,7 +40,8 @@ class ParticipantSeeder extends Seeder
             ],
             [
                 'meeting_id' => '3',
-                'username' => Str::uuid()->toString(),
+                'username' => $usernames[1],
+                'qr_code' => \SimpleSoftwareIO\QrCode\Facades\QrCode::size(200)->generate($usernames[1]),
                 'title' => '',
                 'first_name' => 'Erkan',
                 'last_name' => 'Özkan',
@@ -48,7 +57,8 @@ class ParticipantSeeder extends Seeder
             ],
             [
                 'meeting_id' => '3',
-                'username' => Str::uuid()->toString(),
+                'username' => $usernames[2],
+                'qr_code' => \SimpleSoftwareIO\QrCode\Facades\QrCode::size(200)->generate($usernames[2]),
                 'title' => 'Prof. Dr.',
                 'first_name' => 'İsmail',
                 'last_name' => 'Çelik',
@@ -59,12 +69,13 @@ class ParticipantSeeder extends Seeder
                 'phone' => '5323563185',
                 'password' => '123456',
                 'type' => 'attendee',
-                'confirmation' => 1,
+                'gdpr_consent' => 1,
                 'status' => 1,
             ],
             [
                 'meeting_id' => '3',
-                'username' => Str::uuid()->toString(),
+                'username' => $usernames[3],
+                'qr_code' => \SimpleSoftwareIO\QrCode\Facades\QrCode::size(200)->generate($usernames[3]),
                 'title' => '',
                 'first_name' => 'Uğur',
                 'last_name' => 'Erdoğan',
@@ -80,7 +91,8 @@ class ParticipantSeeder extends Seeder
             ],
             [
                 'meeting_id' => '3',
-                'username' => Str::uuid()->toString(),
+                'username' => $usernames[4],
+                'qr_code' => \SimpleSoftwareIO\QrCode\Facades\QrCode::size(200)->generate($usernames[4]),
                 'title' => '',
                 'first_name' => 'Mert',
                 'last_name' => 'Demirbağ',

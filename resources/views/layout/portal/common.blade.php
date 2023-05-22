@@ -112,18 +112,6 @@
                         {{ __('common.meeting-halls') }}
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="nav-icon fa-duotone fa-ranking-star"></i>
-                        {{ __('common.screens') }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="nav-icon fa-duotone fa-podium-star"></i>
-                        {{ __('common.podiums') }}
-                    </a>
-                </li>
             </ul>
             <div class="sidebar-heading">
                 <i class="nav-icon fa-duotone fa-arrow-turn-down-right"></i> {{ __('common.application') }}

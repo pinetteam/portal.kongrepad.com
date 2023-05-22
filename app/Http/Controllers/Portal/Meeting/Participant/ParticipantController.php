@@ -35,7 +35,6 @@ class ParticipantController extends Controller
             $participant->meeting_id = $request->input('meeting_id');
             $participant->username = Str::uuid()->toString();
             $participant->qr_code = \SimpleSoftwareIO\QrCode\Facades\QrCode::size(200)->generate($participant->username);
-            \SimpleSoftwareIO\QrCode\Facades\QrCode::size(200)->generate($participant->username, storage_path('app/qrcodes/qrcode-'.$participant->username.'.svg'));
             $participant->title = $request->input('title');
             $participant->first_name = $request->input('first_name');
             $participant->last_name = $request->input('last_name');

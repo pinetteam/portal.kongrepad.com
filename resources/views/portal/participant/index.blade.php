@@ -14,7 +14,6 @@
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col"><span class="fa-regular fa-bee mx-1"></span> {{ __('common.meeting') }}</th>
-                            <th scope="col"><span class="fa-regular fa-id-card-clip mx-1"></span> {{ __('common.activity') }}</th>
                             <th scope="col"><span class="fa-regular fa-id-card mx-1"></span> {{ __('common.name') }}</th>
                             <th scope="col"><span class="fa-regular fa-building-columns mx-1"></span> {{ __('common.organisation') }}</th>
                             <th scope="col"><span class="fa-regular fa-fingerprint mx-1"></span> {{ __('common.identification-number') }}</th>
@@ -36,8 +35,8 @@
                                     @else
                                         <div class="spinner-border spinner-border-sm text-danger" role="status"></div>
                                     @endif
+                                    {{ $participant->full_name }}
                                 </td>
-                                <td>{{ $participant->full_name }}</td>
                                 <td>{{ $participant->organisation }}</td>
                                 <td>{{ $participant->identification_number }}</td>
                                 <td>{{ $participant->email }}</td>
