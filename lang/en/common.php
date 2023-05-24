@@ -47,7 +47,7 @@ return [
     'remember-me' => 'Remember me',
     'forgot-password' => 'Forgot password?',
     'dashboard' => 'Dashboard',
-    'operator-board' => 'Check-in Board',
+    'operator-board' => 'Operator Board',
     'preparation' => 'Preparation',
     'meetings' => 'Meetings',
     'unspecified' => 'Unspecified',
@@ -132,6 +132,7 @@ return [
     'close' => 'Close',
     'title' => 'Title',
     'timezone' => 'Timezone',
+    'time' => 'Time',
     'address' => 'Address',
     'access-scopes' => 'Access Scopes',
     'create-new-user-role' => 'Create New User Role',
@@ -164,4 +165,6 @@ return [
     'add-new-option' => 'Add New Option',
     'add-new-debate' => 'Add New Debate',
     'add-new-team' => 'Add New Team',
+    'there-is-not-any-program-before' => 'There is not any program before',
+    'this-is-the-last-program' => 'This is the last program',
 ];

@@ -1,56 +1,153 @@
 @extends('layout.portal.common')
-@section('title', __('common.dashboard'))
+@section('title', __('common.operator-board'))
 @section('body')
     <div class="container-fluid h-100">
         <div class="row h-100">
-            <div class="col-12 col-lg-1 p-0 mb-4" id="operator-dashboard-left">
+            <div class="col-12 col-lg-1 p-0 mb-4" id="operator-board-left">
+                <a href="{{ route('portal.operator-board.index',[ $meeting_hall->id, (int)\Route::current()->parameter('program_order') - 1]) }}" >
                 <button type="button" class="btn btn-dark w-100 h-100 text-center text-white"><i class="fa-solid fa-chevron-left display-1"></i></button>
+                </a>
             </div>
-            <div class="col-12 col-lg-10 mb-4 card text-bg-dark" id="operator-dashboard-main">
+            <div class="col-12 col-lg-10 mb-4 card text-bg-dark" id="operator-board-main">
                 <div class="card-header">
-                    <h2 class="m-0 text-center h3">Operator Board <small>(Main Hall)</small></h2>
+                    <h2 class="m-0 text-center h3">{{__('common.operator-board')}}<small> {{ $meeting_hall->title }}</small></h2>
                 </div>
                 <div class="card-body p-0">
-                    <div class="row row-cols-2">
+                    <div class="row row-cols-1">
                         <div class="col card text-bg-dark p-0">
                             <div class="card-header">
-                                <h2 class="m-0 text-center h3">{{ __('common.program') }}</h2>
+                                <h2 class="m-0 text-center h3">{{ $program->title }}</h2>
                             </div>
                             <div class="card-body p-0">
                                 <ul class="list-group list-group-flush">
+                                    @isset($program)
                                     <li class="list-group-item bg-dark text-center"><img src="" alt="" class="img-thumbnail img-fluid" /></li>
-                                    <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-hotel mx-1"></span> {{ __('common.meeting-hall') }}:</b> Başlık</li>
-                                    <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-calendar-arrow-up mx-1"></span> {{ __('common.start-at') }}:</b> Başlama Tarihi</li>
-                                    <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-calendar-arrow-down mx-1"></span> {{ __('common.finish-at') }}:</b> Bitiş tarihi</li>
-                                    <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-person-military-pointing mx-1"></span> {{ __('common.type') }}:</b> Tür</li>
-                                    <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}:</b> Aktif</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col card text-bg-dark p-0">
-                            <div class="card-header">
-                                <h2 class="m-0 text-center h3">{{ __('common.session') }}</h2>
-                            </div>
-                            <div class="card-body p-0">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item bg-dark text-center"><img src="" alt="" class="img-thumbnail img-fluid" /></li>
-                                    <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-hotel mx-1"></span> {{ __('common.meeting-hall') }}:</b> Başlık</li>
-                                    <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-calendar-arrow-up mx-1"></span> {{ __('common.start-at') }}:</b> Başlama Tarihi</li>
-                                    <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-calendar-arrow-down mx-1"></span> {{ __('common.finish-at') }}:</b> Bitiş tarihi</li>
-                                    <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-person-military-pointing mx-1"></span> {{ __('common.type') }}:</b> Tür</li>
-                                    <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}:</b> Aktif</li>
+                                    <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-hotel mx-1"></span> {{ __('common.meeting-hall') }}:</b> {{ $meeting_hall->title }}</li>
+                                    <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-calendar-arrow-up mx-1"></span> {{ __('common.start-at') }}:</b> {{ $program->start_at }}</li>
+                                    <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-calendar-arrow-down mx-1"></span> {{ __('common.finish-at') }}:</b> {{ $program->finish_at }}</li>
+                                    <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-person-military-pointing mx-1"></span> {{ __('common.type') }}:</b> {{ __('common.'.$program->type) }}</li>
+                                    <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}:</b>
+                                        @if($program->status)
+                                            {{ __('common.active') }}
+                                        @else
+                                            {{ __('common.passive') }}
+                                        @endif
+                                    </li>
+                                    @endisset
                                 </ul>
                             </div>
                         </div>
                     </div>
+                    @isset($sessions)
+                        <div class="row row-cols-1">
+                            <div class="col card text-bg-dark p-0">
+
+                                <div class="card-header">
+                                    <h1 class="m-0 text-center">{{ __('common.sessions') }}</h1>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-dark table-striped table-hover">
+                                            <caption class="text-end me-3">
+                                                Total Session
+                                            </caption>
+                                            <thead class="thead-dark">
+                                            <tr>
+                                                <th scope="col"><span class="fa-regular fa-person-chalkboard mx-1"></span> {{ __('common.speaker') }}</th>
+                                                <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}</th>
+                                                <th scope="col"><span class="fa-regular fa-calendar-arrow-up mx-1"></span> {{ __('common.start-at') }}</th>
+                                                <th scope="col"><span class="fa-regular fa-calendar-arrow-down mx-1"></span> {{ __('common.finish-at') }}</th>
+                                                <th scope="col"><span class="fa-regular fa-block-question mx-1"></span> {{ __('common.questions') }}</th>
+                                                <th scope="col"><span class="fa-regular fa-circle-1 mx-1"></span> {{ __('common.question-limit') }}</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($sessions as $session)
+                                                <tr>
+                                                    <td>{{ $session->speaker->full_name }}</td>
+                                                    <td>{{ $session->title }}</td>
+                                                    <td>{{ $session->start_at }}</td>
+                                                    <td>{{ $session->finish_at }}</td>
+                                                    <td>
+                                                        @if($session->questions)
+                                                            <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
+                                                        @else
+                                                            <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
+                                                        @endif
+                                                    </td>
+                                                    <td>{{ $session->question_limit }}</td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endisset
+                    @isset($debates)
+                        <div class="row row-cols-1">
+                            <div class="col card text-bg-dark p-0">
+                                <div class="card-header">
+                                    <h1 class="m-0 text-center">{{ __('common.debates') }}</h1>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-dark table-striped table-hover">
+                                            <caption class="text-end me-3">
+                                                Total Session
+                                            </caption>
+                                            <thead class="thead-dark">
+                                            <tr>
+                                                <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}</th>
+                                                <th scope="col"><span class="fa-regular fa-comment-dots mx-1"></span> {{ __('common.description') }}</th>
+                                                <th scope="col"><span class="fa-regular fa-calendar-arrow-up mx-1"></span> {{ __('common.voting-started-at') }}</th>
+                                                <th scope="col"><span class="fa-regular fa-calendar-arrow-down mx-1"></span> {{ __('common.voting-finished-at') }}</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($debates as $debate)
+                                                <tr>
+                                                    <td>{{ $debate->title }}</td>
+                                                    <td>{{ $debate->description }}</td>
+                                                    <td>{{ $debate->voting_started_at }}</td>
+                                                    <td>{{ $debate->voting_finished_at }}</td>
+                                                    <td>
+                                                        @if($debate->status)
+                                                            <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
+                                                        @else
+                                                            <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endisset
                 </div>
                 <div class="card-footer">
-                    <h2 class="m-0 text-center h3">Saat</h2>
+                    <h2 class="m-0 text-center h3"><div id="time"></div></h2>
                 </div>
             </div>
-            <div class="col-12 col-lg-1 p-0 mb-4" id="operator-dashboard-right">
-                <button type="button" class="btn btn-dark w-100 h-100 text-center text-white"><i class="fa-solid fa-chevron-right display-1"></i></button>
+
+            <div class="col-12 col-lg-1 p-0 mb-4" id="operator-board-right">
+                <a href="{{ route('portal.operator-board.index',[ $meeting_hall->id, (int)\Route::current()->parameter('program_order') + 1]) }}" >
+                <button title="{{ __('common.operator-board') }}" type="button" class="btn btn-dark w-100 h-100 text-center text-white"><i class="fa-solid fa-chevron-right display-1"></i></button>
+                </a>
             </div>
+
         </div>
     </div>
+    <script type="text/javascript">
+        function showTime() {
+            var date = new Date()
+            document.getElementById('time').innerHTML = 'Time: ' + date.toLocaleTimeString('en-US');
+        }
+
+        setInterval(showTime, 1000);
+    </script>
 @endsection
