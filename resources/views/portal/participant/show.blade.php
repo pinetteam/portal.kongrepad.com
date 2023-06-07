@@ -3,10 +3,10 @@
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">
-            <h1 class="m-0 text-center">{{ __('common.participant').' | '.$participant->title }}</h1>
+            <h1 class="m-0 text-center">{{ __('common.participant') }}</h1>
         </div>
         <div class="card-body">
-            <div class="row row-cols-1 row-cols-sm-2 flex-shrink-0 g-2">
+            <div class="row flex-shrink-0 g-2">
                 <div class="col card text-bg-dark p-0">
                     <div class="card-header">
                         <h2 class="m-0 text-center h3">{{ __('common.participant') }}</h2>
@@ -33,13 +33,6 @@
                                 @endif
                             </li>
                         </ul>
-                    </div>
-                </div>
-                <div class="col card text-bg-dark p-0">
-                    <div class="card-header">
-                        <h2 class="m-0 text-center h3">{{ __('common.scores') }}</h2>
-                    </div>
-                    <div class="card-body p-0">
                     </div>
                 </div>
             </div>

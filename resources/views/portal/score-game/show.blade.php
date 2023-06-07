@@ -58,7 +58,7 @@
                             <tr>
                                 <td>
                                     <a href="{{ route('portal.qr-code-download', $qr_code->id) }}" class="btn btn-sm btn-info w-100" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.download') }}">
-                                        <span class="fa-regular fa-file-arrow-down"></span>{{ $qr_code->title }}
+                                        <span class="fa-regular fa-file-arrow-down"></span> {{ $qr_code->title }}
                                     </a>
                                 </td>
                                 <td>{{ $qr_code->start_at }}</td>

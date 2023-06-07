@@ -53,6 +53,10 @@ class ProgramController extends Controller
     public function show($id)
     {
         $program = Auth::user()->customer->programs()->findOrFail($id);
+        $statuses = [
+            'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
+            'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
+        ];
         if($program->type=='session') {
             $documents = Auth::user()->customer->documents()->get();
             $chairs = Auth::user()->customer->participants()->whereNotIn('meeting_participants.id', $program->programChairs()->pluck('meeting_hall_program_chairs.chair_id'))->whereNot('meeting_participants.type', 'team')->get();
@@ -63,20 +67,14 @@ class ProgramController extends Controller
                 'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
                 'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
             ];
-            $statuses = [
-                'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-                'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
-            ];
             return view('portal.program.show-session', compact(['documents', 'chairs', 'speakers', 'program', 'program_chairs', 'program_sessions', 'questions', 'statuses']));
         } else if($program->type=='debate') {
             $debates = $program->debates()->get();
             $chairs = Auth::user()->customer->participants()->whereNotIn('meeting_participants.id', $program->programChairs()->pluck('meeting_hall_program_chairs.chair_id'))->whereNot('meeting_participants.type', 'team')->get();
             $program_chairs = $program->programChairs()->get();
-            $statuses = [
-                'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-                'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
-            ];
             return view('portal.program.show-debate', compact(['program', 'program_chairs', 'chairs', 'debates', 'statuses']));
+        } else if($program->type=='other') {
+            return view('portal.program.show-other', compact(['program', 'statuses']));
         }
     }
     public function edit($id)
