@@ -32,7 +32,12 @@ class TeamController extends Controller
     }
     public function show(string $id)
     {
-        //
+        $team = Auth::user()->customer->teams()->findOrFail($id);
+        $statuses = [
+            'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
+            'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
+        ];
+        return view('portal.program.debate.team.show', compact(['team', 'statuses']));
     }
     public function edit(string $id)
     {

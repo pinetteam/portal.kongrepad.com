@@ -147,7 +147,6 @@
             var date = new Date()
             document.getElementById('time').innerHTML = 'Time: ' + date.toLocaleTimeString('en-US');
         }
-
         setInterval(showTime, 1000);
     </script>
 @endsection

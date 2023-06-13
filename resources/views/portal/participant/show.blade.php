@@ -14,6 +14,7 @@
                     <div class="card-body p-0">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}:</b> {{ $participant->title }}</li>
+                            <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-bee mx-1"></span> {{ __('common.meeting') }}:</b> {{ $participant->meeting->title }}</li>
                             <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-id-card mx-1"></span> {{ __('common.name') }}:</b> @if($participant->activity_status)
                                     <div class="spinner-grow spinner-grow-sm text-success" role="status"></div>
                                 @else

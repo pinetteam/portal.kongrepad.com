@@ -3,6 +3,7 @@
 namespace App\Models\Meeting;
 
 use App\Models\Customer\Setting\Variable\Variable;
+use App\Models\Meeting\Hall\MeetingHall;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -46,5 +47,10 @@ class Meeting extends Model
             get: fn (string $finishAt) => Carbon::createFromFormat('Y-m-d', $finishAt)->format(Variable::where('variable','date_format')->first()->settings()->where('customer_id',Auth::user()->customer->id)->first()->value),
             set: fn (string $finishAt) => Carbon::createFromFormat('d/m/Y', $finishAt)->format('Y-m-d'),
         );
+    }
+
+    public function halls()
+    {
+        return $this->hasMany(MeetingHall::class, 'meeting_id', 'id');
     }
 }
