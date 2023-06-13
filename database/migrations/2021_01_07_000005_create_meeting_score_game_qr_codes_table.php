@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('score_game_id')->index();
             $table->string('title', 511);
             $table->text('code');
+            $table->binary('logo')->nullable();
             $table->integer('point');
             $table->datetime('start_at');
             $table->datetime('finish_at');

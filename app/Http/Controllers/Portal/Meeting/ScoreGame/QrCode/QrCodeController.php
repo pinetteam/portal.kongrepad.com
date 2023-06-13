@@ -7,6 +7,7 @@ use App\Http\Requests\Portal\Meeting\ScoreGame\QrCode\QrCodeRequest;
 use App\Http\Resources\Portal\Meeting\ScoreGame\QrCode\QrCodeResource;
 use App\Models\Meeting\ScoreGame\QrCode\QrCode;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 
 class QrCodeController extends Controller
 {
@@ -28,6 +29,10 @@ class QrCodeController extends Controller
             $qr_code->start_at = $request->input('start_at');
             $qr_code->finish_at = $request->input('finish_at');
             $qr_code->point = $request->input('point');
+            if ($request->has('logo')) {
+                $logo = Image::make($request->file('logo'))->encode('data-url');
+                $qr_code->logo = $logo;
+            }
             $qr_code->code = \SimpleSoftwareIO\QrCode\Facades\QrCode::size(200)->generate('http://kongrepad.com/qr/'.$qr_code->id);
             $qr_code->title = $request->input('title');
             $qr_code->status = $request->input('status');

@@ -14,6 +14,11 @@
                     <div class="card-body p-0">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-code-simple mx-1"></span> {{ __('common.code') }}:</b> {{ $team->code }}</li>
+                            @if($team->logo)
+                            <li class="list-group-item bg-dark text-center"><img src="{{ $team->logo }}" alt="{{ $team->title }}" class="img-thumbnail img-fluid" /></li>
+                            @else
+                                <i class="text-info">{{ __('common.unspecified') }}</i>
+                            @endif
                             <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}:</b> {{ $team->title }}</li>
                             <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-face-party mx-1"></span> {{ __('common.debate') }}:</b> {{ $team->debate->title }}</li>
                             <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}:</b>

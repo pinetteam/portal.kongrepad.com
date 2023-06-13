@@ -28,7 +28,7 @@ class SettingSeeder extends Seeder
             [
                 'customer_id' => '1',
                 'variable_id' => '3',
-                'value' => 'Europe/Istanbul',
+                'value' => 'Turkey (UTC+02:00)',
             ],
             [
                 'customer_id' => '1',
