@@ -32,6 +32,8 @@ class Participant extends Model
         'last_activity',
         'gdpr_consent',
         'status',
+        'created_by',
+        'edited_by',
         'deleted_by',
     ];
     protected $dates = [

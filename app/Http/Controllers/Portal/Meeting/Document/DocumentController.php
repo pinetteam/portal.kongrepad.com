@@ -46,6 +46,8 @@ class DocumentController extends Controller
             $document->sharing_via_email = $request->input('sharing_via_email');
             $document->status = $request->input('status');
             if ($document->save()) {
+                $document->created_by = Auth::user()->id;
+                $document->save();
                 return back()->with('success', __('common.created-successfully'));
             } else {
                 return back()->with('create_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
@@ -82,6 +84,8 @@ class DocumentController extends Controller
             $document->sharing_via_email = $request->input('sharing_via_email');
             $document->status = $request->input('status');
             if ($document->save()) {
+                $document->edited_by = Auth::user()->id;
+                $document->save();
                 return back()->with('success',__('common.edited-successfully'));
             } else {
                 return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();

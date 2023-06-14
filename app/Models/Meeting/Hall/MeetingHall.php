@@ -17,6 +17,8 @@ class MeetingHall extends Model
         'meeting_id',
         'title',
         'status',
+        'created_by',
+        'edited_by',
         'deleted_by',
     ];
     protected $dates = [

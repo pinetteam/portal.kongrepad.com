@@ -27,6 +27,8 @@ class ProgramSessionController extends Controller
             $program_session->question_limit = $request->input('question_limit');
             $program_session->status = $request->input('status');
             if ($program_session->save()) {
+                $program_session->created_by = Auth::user()->id;
+                $program_session->save();
                 return back()->with('success',__('common.created-successfully'));
             } else {
                 return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
@@ -64,6 +66,8 @@ class ProgramSessionController extends Controller
             $program_session->question_limit = $request->input('question_limit');
             $program_session->status = $request->input('status');
             if ($program_session->save()) {
+                $program_session->edited_by = Auth::user()->id;
+                $program_session->save();
                 return back()->with('success',__('common.edited-successfully'));
             } else {
                 return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();

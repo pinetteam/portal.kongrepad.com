@@ -47,6 +47,8 @@ class ParticipantController extends Controller
             $participant->type = $request->input('type');
             $participant->status = $request->input('status');
             if ($participant->save()) {
+                $participant->created_by = Auth::user()->id;
+                $participant->save();
                 return back()->with('success', __('common.created-successfully'));
             } else {
                 return back()->with('create_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
@@ -81,6 +83,8 @@ class ParticipantController extends Controller
             $participant->phone_country_id = $request->input('phone_country_id');
             $participant->phone = $request->input('phone');
             if ($request->has('password')) {
+                $participant->edited_by = Auth::user()->id;
+                $participant->save();
                 $participant->password = $request->input('password');
             }
             $participant->status = $request->input('status');

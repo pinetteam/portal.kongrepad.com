@@ -35,6 +35,8 @@ class ScoreGameController extends Controller
             $score_game->title = $request->input('title');
             $score_game->status = $request->input('status');
             if ($score_game->save()) {
+                $score_game->created_by = Auth::user()->id;
+                $score_game->save();
                 return back()->with('success', __('common.created-successfully'));
             } else {
                 return back()->with('create_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
@@ -78,6 +80,8 @@ class ScoreGameController extends Controller
             $score_game->finish_at = $request->input('finish_at');
             $score_game->status = $request->input('status');
             if ($score_game->save()) {
+                $score_game->edited_by = Auth::user()->id;
+                $score_game->save();
                 return back()->with('success',__('common.edited-successfully'));
             } else {
                 return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();

@@ -16,6 +16,8 @@ class ChairController extends Controller
             $chair->program_id = $request->input('program_id');
             $chair->chair_id = $request->input('chair_id');
             if ($chair->save()) {
+                $chair->created_by = Auth::user()->id;
+                $chair->save();
                 return back()->with('success', __('common.created-successfully'));
             } else {
                 return back()->with('create_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();

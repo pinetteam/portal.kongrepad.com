@@ -18,6 +18,8 @@ class OptionController extends Controller
             $option->sort_order = $request->input('sort_order');
             $option->title = $request->input('title');
             if ($option->save()) {
+                $option->created_by = Auth::user()->id;
+                $option->save();
                 return back()->with('success',__('common.created-successfully'));
             } else {
                 return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
@@ -41,6 +43,8 @@ class OptionController extends Controller
             $option->sort_order = $request->input('sort_order');
             $option->title = $request->input('title');
             if ($option->save()) {
+                $option->edited_by = Auth::user()->id;
+                $option->save();
                 return back()->with('success',__('common.created-successfully'));
             } else {
                 return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();

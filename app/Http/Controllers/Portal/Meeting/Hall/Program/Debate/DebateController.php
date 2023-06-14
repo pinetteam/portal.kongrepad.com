@@ -21,6 +21,8 @@ class DebateController extends Controller
             $debate->description = $request->input('description');
             $debate->status = $request->input('status');
             if ($debate->save()) {
+                $debate->created_by = Auth::user()->id;
+                $debate->save();
                 return back()->with('success',__('common.created-successfully'));
             } else {
                 return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
@@ -54,6 +56,8 @@ class DebateController extends Controller
             $debate->description = $request->input('description');
             $debate->status = $request->input('status');
             if ($debate->save()) {
+                $debate->edited_by = Auth::user()->id;
+                $debate->save();
                 return back()->with('success',__('common.edited-successfully'));
             } else {
                 return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
@@ -83,7 +87,7 @@ class DebateController extends Controller
                 return back()->with('success',__('common.voting-started'));
             }
             else{
-                $debate->voting_finished_at = now()->format('d/m/Y H:i');;
+                $debate->voting_finished_at = now()->format('d/m/Y H:i');
                 $debate->save();
                 return back()->with('success',__('common.voting-stopped'));
             }

@@ -18,6 +18,8 @@ class Document extends Model
         'file_size',
         'title',
         'status',
+        'created_by',
+        'edited_by',
         'deleted_by',
     ];
     protected $dates = [

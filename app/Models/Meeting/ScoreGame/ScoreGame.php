@@ -24,6 +24,8 @@ class ScoreGame extends Model
         'status',
         'start_at',
         'finish_at',
+        'created_by',
+        'edited_by',
         'deleted_by',
     ];
     protected $dates = [

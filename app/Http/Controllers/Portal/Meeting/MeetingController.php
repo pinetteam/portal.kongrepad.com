@@ -30,6 +30,8 @@ class MeetingController extends Controller
             $meeting->finish_at = $request->input('finish_at');
             $meeting->status = $request->input('status');
             if ($meeting->save()) {
+                $meeting->created_by = Auth::user()->id;
+                $meeting->save();
                 return back()->with('success', __('common.created-successfully'));
             } else {
                 return back()->with('create_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
@@ -62,6 +64,8 @@ class MeetingController extends Controller
             $meeting->finish_at = $request->input('finish_at');
             $meeting->status = $request->input('status');
             if ($meeting->save()) {
+                $meeting->edited_by = Auth::user()->id;
+                $meeting->save();
                 return back()->with('success',__('common.edited-successfully'));
             } else {
                 return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();

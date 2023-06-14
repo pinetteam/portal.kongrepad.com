@@ -30,6 +30,8 @@ class Program extends Model
         'type',
         'on_air',
         'status',
+        'created_by',
+        'edited_by',
         'deleted_by',
     ];
     protected $dates = [

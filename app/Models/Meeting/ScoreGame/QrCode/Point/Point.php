@@ -17,6 +17,8 @@ class Point extends Model
         'qr_code_id',
         'score',
         'status',
+        'created_by',
+        'edited_by',
         'deleted_by',
     ];
     protected $dates = [

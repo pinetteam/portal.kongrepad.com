@@ -18,9 +18,10 @@ class KeypadController extends Controller
             $keypad->sort_order = $request->input('sort_order');
             $keypad->code = $request->input('code');
             $keypad->title = $request->input('title');
-            $keypad->voting_started_at = $request->input('voting_started_at');
-            $keypad->voting_finished_at = $request->input('voting_finished_at');
+            $keypad->description = $request->input('description');
             if ($keypad->save()) {
+                $keypad->created_by = Auth::user()->id;
+                $keypad->save();
                 return back()->with('success',__('common.created-successfully'));
             } else {
                 return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
@@ -50,9 +51,10 @@ class KeypadController extends Controller
             $keypad->sort_order = $request->input('sort_order');
             $keypad->code = $request->input('code');
             $keypad->title = $request->input('title');
-            $keypad->voting_started_at = $request->input('voting_started_at');
-            $keypad->voting_finished_at = $request->input('voting_finished_at');
+            $keypad->description = $request->input('description');
             if ($keypad->save()) {
+                $keypad->edited_by = Auth::user()->id;
+                $keypad->save();
                 return back()->with('success',__('common.created-successfully'));
             } else {
                 return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
@@ -68,6 +70,27 @@ class KeypadController extends Controller
             return back()->with('success', __('common.deleted-successfully'));
         } else {
             return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();
+        }
+    }
+
+    public function start_stop_voting(string $program_id, string $session_id, string $id)
+    {
+        $keypad = Auth::user()->customer->keypads()->findOrFail($id);
+        $keypad->on_vote = !$keypad->on_vote;
+        if ($keypad->save()) {
+            if($keypad->on_vote){
+                $keypad->voting_started_at = now()->format('d/m/Y H:i');;
+                $keypad->voting_finished_at = null;
+                $keypad->save();
+                return back()->with('success',__('common.voting-started'));
+            }
+            else{
+                $keypad->voting_finished_at = now()->format('d/m/Y H:i');;
+                $keypad->save();
+                return back()->with('success',__('common.voting-stopped'));
+            }
+        } else {
+            return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
         }
     }
 }

@@ -15,6 +15,8 @@ class Chair extends Model
         'program_id',
         'chair_id',
         'sort_order',
+        'created_by',
+        'edited_by',
         'deleted_by',
     ];
     protected $dates = [

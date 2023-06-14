@@ -51,9 +51,6 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-dark table-striped table-hover">
-                    <caption class="text-end me-3">
-                        {{__('common.total-keypad')}}
-                    </caption>
                     <thead class="thead-dark">
                     <tr>
                         <th scope="col"><span class="fa-regular fa-circle-sort mx-1"></span> {{ __('common.sort') }}</th>
@@ -117,8 +114,6 @@
                 <x-input.text method="c" name="code" title="code" icon="code-simple" />
                 <x-input.text method="c" name="title" title="title" icon="input-text" />
                 <x-input.text method="c" name="description" title="description" icon="comment-dots" />
-                <x-input.datetime method="c" name="voting_started_at" title="voting-started-at" icon="calendar-arrow-down" />
-                <x-input.datetime method="c" name="voting_finished_at" title="voting-finished-at" icon="calendar-arrow-down" />
                 @endsection
         </x-crud.form.common.create>
         <x-crud.form.common.delete name="keypad" />
@@ -129,9 +124,7 @@
                 <x-input.text method="e" name="code" title="code" icon="code-simple" />
                 <x-input.text method="e" name="title" title="title" icon="input-text" />
                 <x-input.text method="e" name="description" title="description" icon="comment-dots" />
-                <x-input.datetime method="e" name="voting_started_at" title="voting-started-at" icon="calendar-arrow-down" />
-                <x-input.datetime method="e" name="voting_finished_at" title="voting-finished-at" icon="calendar-arrow-down" />
-            @endsection
+                @endsection
         </x-crud.form.common.edit>
     </div>
 @endsection

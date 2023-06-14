@@ -28,6 +28,8 @@ class MeetingHallController extends Controller
             $meeting_hall->title = $request->input('title');
             $meeting_hall->status = $request->input('status');
             if ($meeting_hall->save()) {
+                $meeting_hall->created_by = Auth::user()->id;
+                $meeting_hall->save();
                 return back()->with('success', __('common.created-successfully'));
             } else {
                 return back()->with('create_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
@@ -57,6 +59,8 @@ class MeetingHallController extends Controller
             $meeting_hall->title = $request->input('title');
             $meeting_hall->status = $request->input('status');
             if ($meeting_hall->save()) {
+                $meeting_hall->edited_by = Auth::user()->id;
+                $meeting_hall->save();
                 return back()->with('success',__('common.edited-successfully'));
             } else {
                 return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();

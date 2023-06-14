@@ -38,6 +38,8 @@ class QrCodeController extends Controller
             $qr_code->status = $request->input('status');
             if ($qr_code->save()) {
                 $qr_code->code = \SimpleSoftwareIO\QrCode\Facades\QrCode::size(200)->generate('http://kongrepad.com/qr/'.$qr_code->id, storage_path('app/qrcodes/qrcode-'.$qr_code->id.'.svg'));
+                $qr_code->created_by = Auth::user()->id;
+                $qr_code->save();
                 return back()->with('success', __('common.created-successfully'));
             } else {
                 return back()->with('create_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
@@ -70,6 +72,8 @@ class QrCodeController extends Controller
             $qr_code->point = $request->input('point');
             $qr_code->status = $request->input('status');
             if ($qr_code->save()) {
+                $qr_code->edited_by = Auth::user()->id;
+                $qr_code->save();
                 return back()->with('success',__('common.edited-successfully'));
             } else {
                 return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();

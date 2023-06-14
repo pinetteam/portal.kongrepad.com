@@ -24,6 +24,8 @@ class TeamController extends Controller
             $team->title = $request->input('title');
             $team->description = $request->input('description');
             if ($team->save()) {
+                $team->created_by = Auth::user()->id;
+                $team->save();
                 return back()->with('success',__('common.created-successfully'));
             } else {
                 return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
@@ -58,6 +60,8 @@ class TeamController extends Controller
             $team->title = $request->input('title');
             $team->description = $request->input('description');
             if ($team->save()) {
+                $team->edited_by = Auth::user()->id;
+                $team->save();
                 return back()->with('success',__('common.edited-successfully'));
             } else {
                 return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();

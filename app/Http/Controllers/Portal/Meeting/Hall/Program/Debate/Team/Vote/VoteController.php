@@ -17,6 +17,8 @@ class VoteController extends Controller
             $vote->team_id = $request->input('team_id');
             $vote->participant_id = $request->input('participant_id');
             if ($vote->save()) {
+                $vote->created_by = Auth::user()->id;
+                $vote->save();
                 return back()->with('success',__('common.created-successfully'));
             } else {
                 return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
@@ -39,6 +41,8 @@ class VoteController extends Controller
             $vote->team_id = $request->input('team_id');
             $vote->participant_id = $request->input('participant_id');
             if ($vote->save()) {
+                $vote->edited_by = Auth::user()->id;
+                $vote->save();
                 return back()->with('success',__('common.edited-successfully'));
             } else {
                 return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();

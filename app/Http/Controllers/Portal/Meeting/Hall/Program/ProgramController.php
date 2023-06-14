@@ -44,6 +44,8 @@ class ProgramController extends Controller
             $program->type = $request->input('type');
             $program->status = $request->input('status');
             if ($program->save()) {
+                $program->created_by = Auth::user()->id;
+                $program->save();
                 return back()->with('success', __('common.created-successfully'));
             } else {
                 return back()->with('create_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
@@ -100,6 +102,8 @@ class ProgramController extends Controller
             $program->type = $request->input('type');
             $program->status = $request->input('status');
             if ($program->save()) {
+                $program->edited_by = Auth::user()->id;
+                $program->save();
                 return back()->with('success',__('common.edited-successfully'));
             } else {
                 return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();

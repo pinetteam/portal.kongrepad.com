@@ -26,6 +26,8 @@ class QrCode extends Model
         'start_at',
         'finish_at',
         'status',
+        'created_by',
+        'edited_by',
         'deleted_by',
     ];
     protected $dates = [
