@@ -38,12 +38,6 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">
-                        <i class="nav-icon fa-duotone fa-users-rectangle"></i>
-                        {{ __('common.operator-board') }}
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="{{ route("portal.meeting.index") }}">
                         <i class="nav-icon fa-duotone fa-bee"></i>
                         {{ __('common.meetings') }}

@@ -19,8 +19,6 @@ class DebateController extends Controller
             $debate->code = $request->input('code');
             $debate->title = $request->input('title');
             $debate->description = $request->input('description');
-            $debate->voting_started_at = $request->input('voting_started_at');
-            $debate->voting_finished_at = $request->input('voting_finished_at');
             $debate->status = $request->input('status');
             if ($debate->save()) {
                 return back()->with('success',__('common.created-successfully'));
@@ -54,8 +52,6 @@ class DebateController extends Controller
             $debate->code = $request->input('code');
             $debate->title = $request->input('title');
             $debate->description = $request->input('description');
-            $debate->voting_started_at = $request->input('voting_started_at');
-            $debate->voting_finished_at = $request->input('voting_finished_at');
             $debate->status = $request->input('status');
             if ($debate->save()) {
                 return back()->with('success',__('common.edited-successfully'));
@@ -73,6 +69,26 @@ class DebateController extends Controller
             return back()->with('success', __('common.deleted-successfully'));
         } else {
             return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();
+        }
+    }
+    public function start_stop_voting(string $program_id, string $id)
+    {
+        $debate = Auth::user()->customer->debates()->findOrFail($id);
+        $debate->on_vote = !$debate->on_vote;
+        if ($debate->save()) {
+            if($debate->on_vote){
+                $debate->voting_started_at = now()->format('d/m/Y H:i');;
+                $debate->voting_finished_at = null;
+                $debate->save();
+                return back()->with('success',__('common.voting-started'));
+            }
+            else{
+                $debate->voting_finished_at = now()->format('d/m/Y H:i');;
+                $debate->save();
+                return back()->with('success',__('common.voting-stopped'));
+            }
+        } else {
+            return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
         }
     }
 }

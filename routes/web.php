@@ -34,8 +34,11 @@ Route::prefix('portal')->name('portal.')->group(function () {
         Route::resource('/program', \App\Http\Controllers\Portal\Meeting\Hall\Program\ProgramController::class)->except(['create']);
         Route::resource('/chair', \App\Http\Controllers\Portal\Meeting\Hall\Program\Chair\ChairController::class)->only(['store', 'destroy']);
         Route::resource('/program/{program_id}/session', \App\Http\Controllers\Portal\Meeting\Hall\Program\Session\ProgramSessionController::class)->except(['index', 'create']);
+        Route::get('/program/{program_id}/start-stop-session/{session}', [\App\Http\Controllers\Portal\Meeting\Hall\Program\Session\ProgramSessionController::class,'start_stop'])->name('session.start-stop');
+        Route::get('/program/{program_id}/start-stop-session-questions/{session}', [\App\Http\Controllers\Portal\Meeting\Hall\Program\Session\ProgramSessionController::class,'start_stop_questions'])->name('session.start-stop-questions');
         Route::resource('/program/{program_id}/session/{session_id}/keypad', \App\Http\Controllers\Portal\Meeting\Hall\Program\Session\Keypad\KeypadController::class)->except(['index', 'create']);
         Route::resource('/program/{program_id}/debate', \App\Http\Controllers\Portal\Meeting\Hall\Program\Debate\DebateController::class)->except(['index', 'create']);
+        Route::get('/program/{program_id}/start-stop-debate-voting/{debate}', [\App\Http\Controllers\Portal\Meeting\Hall\Program\Debate\DebateController::class,'start_stop_voting'])->name('debate.start-stop-voting');
         Route::resource('/score-game', \App\Http\Controllers\Portal\Meeting\ScoreGame\ScoreGameController::class)->except(['create']);
         Route::resource('/user', \App\Http\Controllers\Portal\User\UserController::class)->except(['create']);
         Route::resource('/user-role', \App\Http\Controllers\Portal\User\Role\UserRoleController::class)->except(['create']);

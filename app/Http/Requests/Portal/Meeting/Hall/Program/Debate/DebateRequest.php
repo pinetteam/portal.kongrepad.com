@@ -23,8 +23,6 @@ class DebateRequest extends FormRequest
                     'code' => 'nullable|max:255',
                     'title' => 'required|max:255',
                     'description' => 'nullable|max:65535',
-                    'voting_started_at' => 'nullable|date_format:d/m/Y H:i|before_or_equal:voting_finished_at|required_with:voting_finished_at',
-                    'voting_finished_at' => 'nullable|date_format:d/m/Y H:i|after_or_equal:voting_started_at|required_with:voting_started_at',
                     'status' => 'boolean|required',
                     ];
             }

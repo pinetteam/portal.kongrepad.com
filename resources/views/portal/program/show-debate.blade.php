@@ -161,8 +161,6 @@
                 <x-input.text method="c" name="code" title="code" icon="code-simple" />
                 <x-input.text method="c" name="title" title="title" icon="input-text" />
                 <x-input.text method="c" name="description" title="description" icon="comment-dots" />
-                <x-input.datetime method="c" name="voting_started_at" title="voting-started-at" icon="calendar-arrow-down" />
-                <x-input.datetime method="c" name="voting_finished_at" title="voting-finished-at" icon="calendar-arrow-down" />
                 <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
             @endsection
         </x-crud.form.common.create>
@@ -174,8 +172,6 @@
                 <x-input.text method="e" name="code" title="code" icon="code-simple" />
                 <x-input.text method="e" name="title" title="title" icon="input-text" />
                 <x-input.text method="e" name="description" title="description" icon="comment-dots" />
-                <x-input.datetime method="e" name="voting_started_at" title="voting-started-at" icon="calendar-arrow-down" />
-                <x-input.datetime method="e" name="voting_finished_at" title="voting-finished-at" icon="calendar-arrow-down" />
                 <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
             @endsection
         </x-crud.form.common.edit>

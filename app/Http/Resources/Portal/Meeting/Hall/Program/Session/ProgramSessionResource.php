@@ -22,6 +22,7 @@ class ProgramSessionResource extends JsonResource
             'description' => ['value'=>$this->description, 'type'=>'text'],
             'start_at' => ['value'=>Carbon::createFromFormat(Variable::where('variable','date_format')->first()->settings()->where('customer_id',Auth::user()->customer->id)->first()->value.' '.Variable::where('variable','time_format')->first()->settings()->where('customer_id',Auth::user()->customer->id)->first()->value, $this->start_at)->format('d/m/Y H:i'), 'type'=>'datetime'],
             'finish_at' => ['value'=>Carbon::createFromFormat(Variable::where('variable','date_format')->first()->settings()->where('customer_id',Auth::user()->customer->id)->first()->value.' '.Variable::where('variable','time_format')->first()->settings()->where('customer_id',Auth::user()->customer->id)->first()->value, $this->finish_at)->format('d/m/Y H:i'), 'type'=>'datetime'],
+            'is_started' => ['value'=>$this->is_started, 'type'=>'radio'],
             'questions' => ['value'=>$this->questions, 'type'=>'radio'],
             'question_limit' => ['value'=>$this->question_limit, 'type'=>'number'],
             'status' => ['value'=>$this->status, 'type'=>'radio'],

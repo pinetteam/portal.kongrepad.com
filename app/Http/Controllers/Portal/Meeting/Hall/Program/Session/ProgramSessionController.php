@@ -81,4 +81,31 @@ class ProgramSessionController extends Controller
             return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();
         }
     }
+
+    public function start_stop(string $program_id, string $id)
+    {
+        $program_session = Auth::user()->customer->programSessions()->findOrFail($id);
+        $program_session->is_started = !$program_session->is_started;
+        if ($program_session->save()) {
+            if($program_session->is_started)
+                return back()->with('success',__('common.program-started'));
+            else
+                return back()->with('success',__('common.program-stopped'));
+        } else {
+            return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
+        }
+    }
+    public function start_stop_questions(string $program_id, string $id)
+    {
+        $program_session = Auth::user()->customer->programSessions()->findOrFail($id);
+        $program_session->is_questions_started = !$program_session->is_questions_started;
+        if ($program_session->save()) {
+            if($program_session->is_questions_started)
+                return back()->with('success',__('common.program-questions-started'));
+            else
+                return back()->with('success',__('common.program-questions-stopped'));
+        } else {
+            return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
+        }
+    }
 }

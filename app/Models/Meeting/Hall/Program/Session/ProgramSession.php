@@ -28,6 +28,7 @@ class ProgramSession extends Model
         'description',
         'start_at',
         'finish_at',
+        'is_started',
         'questions',
         'question_limit',
         'status',
