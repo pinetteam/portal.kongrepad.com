@@ -3,7 +3,7 @@
     <label for="{{ $method }}-{{ $name }}" class="form-label">
         <i class="fa-regular fa-{{ $icon }}"></i> {{ __('common.'.$title) }}
     </label>
-    <input type="text" name="{{ $name }}" class="date-time-picker form-control @error($name)is-invalid @enderror" id="{{ $method }}-{{ $name }}" value="{{ old($name) }}" placeholder="{{ __('common.'.$title) }}" />
+    <input type="text" name="{{ $name }}" class="time-picker form-control @error($name)is-invalid @enderror" id="{{ $method }}-{{ $name }}" value="{{ old($name) }}" placeholder="{{ __('common.'.$title) }}" />
     @error($name)
         <div class="invalid-feedback d-block">
             <i class="fa-regular fa-triangle-exclamation"></i> {{ $message }}
