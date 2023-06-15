@@ -26,7 +26,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Customer extends Model
 {
-    use \Staudenmeir\EloquentHasManyDeep\HasRelationships;
     use HasFactory, SoftDeletes;
     protected $table = 'customers';
     protected $fillable = [
@@ -97,12 +96,25 @@ class Customer extends Model
 
     public function debates()
     {
-        return $this->hasManyDeep(Debate::class, [Meeting::class, MeetingHall::class, Program::class]);
+        $debates = Debate::select('meeting_hall_program_debates.*')
+            ->join('meeting_hall_programs', 'meeting_hall_program_debates.program_id', '=', 'meeting_hall_programs.id')
+            ->join('meeting_halls', 'meeting_hall_programs.meeting_hall_id', '=', 'meeting_halls.id')
+            ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
+            ->join('customers', 'meetings.customer_id', '=', 'customers.id')
+            ->where('customers.id', $this->getkey());
+        return $debates;
     }
 
     public function teams()
     {
-        return $this->hasManyDeep(Team::class, [Meeting::class, MeetingHall::class, Program::class, Debate::class]);
+        $teams = Team::select('meeting_hall_program_debate_teams.*')
+            ->join('meeting_hall_program_debates', 'meeting_hall_program_debate_teams.debate_id', '=', 'meeting_hall_program_debates.id')
+            ->join('meeting_hall_programs', 'meeting_hall_program_debates.program_id', '=', 'meeting_hall_programs.id')
+            ->join('meeting_halls', 'meeting_hall_programs.meeting_hall_id', '=', 'meeting_halls.id')
+            ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
+            ->join('customers', 'meetings.customer_id', '=', 'customers.id')
+            ->where('customers.id', $this->getkey());
+        return $teams;
     }
 
     public function keypads()
@@ -132,7 +144,14 @@ class Customer extends Model
 
     public function debateVotes()
     {
-        return $this->hasManyDeep(Vote::class, [Meeting::class, MeetingHall::class, Program::class, Debate::class, Team::class]);
+        $votes = Vote::select('meeting_hall_program_debate_votes.*')
+            ->join('meeting_hall_program_debates', 'meeting_hall_program_debate_votes.debate_id', '=', 'meeting_hall_program_debates.id')
+            ->join('meeting_hall_programs', 'meeting_hall_program_debates.program_id', '=', 'meeting_hall_programs.id')
+            ->join('meeting_halls', 'meeting_hall_programs.meeting_hall_id', '=', 'meeting_halls.id')
+            ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
+            ->join('customers', 'meetings.customer_id', '=', 'customers.id')
+            ->where('customers.id', $this->getkey());
+        return $votes;
     }
 
     public function settings()
@@ -149,7 +168,12 @@ class Customer extends Model
     }
     public function qrCodes()
     {
-        return $this->hasManyDeep(QrCode::class, [Meeting::class, ScoreGame::class]);
+        $qrcodes = Team::select('meeting_hall_score_game_qr_codes.*')
+            ->join('meeting_score_games', 'meeting_hall_score_game_qr_codes.score_game_id', '=', 'meeting_hall_score_games.id')
+            ->join('meetings', 'meeting_score_games.meeting_id', '=', 'meetings.id')
+            ->join('customers', 'meetings.customer_id', '=', 'customers.id')
+            ->where('customers.id', $this->getkey());
+        return $qrcodes;
     }
     public function users()
     {
