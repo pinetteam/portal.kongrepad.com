@@ -80,6 +80,10 @@
         @section('default-create-form')
             <x-input.text method="c" name="code" title="code" icon="code-simple" />
             <x-input.text method="c" name="title" title="title" icon="input-text" />
+
+            <x-input.time method="c" name="time" title="time" icon="calendar-arrow-up" />
+            <x-input.datetime method="c" name="datetime" title="datetime" icon="calendar-arrow-up" />
+
             <x-input.date method="c" name="start_at" title="start-at" icon="calendar-arrow-up" />
             <x-input.date method="c" name="finish_at" title="finish-at" icon="calendar-arrow-down" />
             <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />

@@ -10,13 +10,26 @@ function initializeDatePicker(element) {
     const datePicker = new TempusDominus(element, {
         localization: {
             locale: 'tr-TR',
-            format: 'YYYY-MM-DD',
+            format: 'YYYY-MM-DD'
         },
         display: {
-            buttons: {
-                today: true,
+            viewMode: 'calendar',
+            components: {
+                calendar: true,
+                date: true,
+                month: true,
+                year: true,
+                decades: true,
+                clock: false,
+                hours: false,
+                minutes: false,
+                seconds: false
             },
-        },
+            buttons: {
+                today: false,
+                clear: false
+            }
+        }
     });
     datePicker.dates.formatInput = date => moment(date).format('YYYY-MM-DD');
 }
@@ -26,20 +39,27 @@ function initializeTimePicker(element) {
     const timePicker = new TempusDominus(element, {
         localization: {
             locale: 'tr-TR',
-            format: 'HH:mm',
+            format: 'HH:mm'
         },
         display: {
             viewMode: 'clock',
             components: {
-                decades: false,
-                year: false,
-                month: false,
+                calendar: false,
                 date: false,
+                month: false,
+                year: false,
+                decades: false,
+                clock: true,
                 hours: true,
                 minutes: true,
-                seconds: false
+                seconds: false,
+                useTwentyfourHour: true
+            },
+            buttons: {
+                today: false,
+                clear: false
             }
-        },
+        }
     });
     timePicker.dates.formatInput = date => moment(date).format('HH:mm');
 }
@@ -49,14 +69,27 @@ function initializeDateTimePicker(element) {
     const dateTimePicker = new TempusDominus(element, {
         localization: {
             locale: 'tr-TR',
-            format: 'YYYY-MM-DD HH:mm',
+            format: 'YYYY-MM-DD HH:mm'
         },
         display: {
-            buttons: {
-                today: true,
-                clear: true,
+            viewMode: 'calendar',
+            components: {
+                calendar: true,
+                date: true,
+                month: true,
+                year: true,
+                decades: true,
+                clock: true,
+                hours: true,
+                minutes: true,
+                seconds: false,
+                useTwentyfourHour: true
             },
-        },
+            buttons: {
+                today: false,
+                clear: false
+            }
+        }
     });
     dateTimePicker.dates.formatInput = date => moment(date).format('YYYY-MM-DD HH:mm');
 }
