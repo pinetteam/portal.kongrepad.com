@@ -32,7 +32,7 @@
                                         <x-input.text name="username" title="username" icon="user" />
                                     </p>
                                     <p>
-                                        <x-input.text name="password" type="password" title="password" icon="lock" />
+                                        <x-input.password name="password" title="password" icon="lock" />
                                     </p>
                                     <div class="d-flex justify-content-between">
                                         <div class="checkbox ">
