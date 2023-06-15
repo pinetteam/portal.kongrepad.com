@@ -30,6 +30,7 @@ class ProgramSession extends Model
         'finish_at',
         'is_started',
         'questions',
+        'questions_auto_start',
         'question_limit',
         'status',
         'created_by',

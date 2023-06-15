@@ -24,6 +24,8 @@ class ProgramSessionController extends Controller
             $program_session->start_at = $request->input('start_at');
             $program_session->finish_at = $request->input('finish_at');
             $program_session->questions = $request->input('questions');
+            $program_session->questions_auto_start = $request->input('questions_auto_start');
+            $program_session->is_questions_started = $request->input('questions_auto_start');
             $program_session->question_limit = $request->input('question_limit');
             $program_session->status = $request->input('status');
             if ($program_session->save()) {
@@ -63,6 +65,8 @@ class ProgramSessionController extends Controller
             $program_session->start_at = $request->input('start_at');
             $program_session->finish_at = $request->input('finish_at');
             $program_session->questions = $request->input('questions');
+            $program_session->questions_auto_start = $request->input('questions_auto_start');
+            $program_session->is_questions_started = $request->input('questions_auto_start');
             $program_session->question_limit = $request->input('question_limit');
             $program_session->status = $request->input('status');
             if ($program_session->save()) {
@@ -88,6 +92,14 @@ class ProgramSessionController extends Controller
 
     public function start_stop(string $program_id, string $id)
     {
+        $program = Auth::user()->customer->programs()->findOrFail($program_id);
+        foreach($program->programSessions as $session){
+            if($session->id == $id)
+                continue;
+            $current_session = Auth::user()->customer->programSessions()->findOrFail($session->id);
+            $current_session->is_started = 0;
+            $current_session->save();
+        }
         $program_session = Auth::user()->customer->programSessions()->findOrFail($id);
         $program_session->is_started = !$program_session->is_started;
         if ($program_session->save()) {

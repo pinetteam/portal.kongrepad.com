@@ -77,6 +77,14 @@ class DebateController extends Controller
     }
     public function start_stop_voting(string $program_id, string $id)
     {
+        $program = Auth::user()->customer->programs()->findOrFail($program_id);
+        foreach($program->debates as $debate){
+            if($debate->id == $id)
+                continue;
+            $debate = Auth::user()->customer->debates()->findOrFail($debate->id);
+            $debate->on_vote = 0;
+            $debate->save();
+        }
         $debate = Auth::user()->customer->debates()->findOrFail($id);
         $debate->on_vote = !$debate->on_vote;
         if ($debate->save()) {

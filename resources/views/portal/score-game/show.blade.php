@@ -73,7 +73,7 @@
                                 </td>
                                 <td class="text-end">
                                     <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
-                                        <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#showQr" data-bs-code="{{$qr_code->code}}" title="{{ __('common.show') }}">
+                                        <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#showQr-{{$qr_code->id}}" title="{{ __('common.show') }}">
                                             <span class="fa-regular fa-eye"></span>
                                         </button>
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.edit') }}">
@@ -123,15 +123,17 @@
             @endsection
         </x-crud.form.common.edit>
     </div>
-    <div class="modal fade" id="showQr" tabindex="-1" aria-labelledby="showQr" aria-hidden="true">
+    @foreach($score_game_qr_codes as $qr_code)
+    <div class="modal fade" id="showQr-{{$qr_code->id}}" tabindex="-1" aria-labelledby="showQr-{{$qr_code->id}}" aria-hidden="true">
         <div class="modal-dialog modal-sm">
-            <div class="modal-content">
+            <div class="modal-content bg-dark">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalLabel">{{__('common.show-qr-code')}}</h5>
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
                         <div id="qr-code" class="mb-3">
+                            {!! $qr_code->code  !!}
                         </div>
                     </div>
                 </div>
@@ -141,14 +143,5 @@
             </div>
         </div>
     </div>
-    <script type="module">
-            var showQrModal = document.getElementById('showQr')
-            showQrModal.addEventListener('show.bs.modal', function (event) {
-                var button = event.relatedTarget
-                var code = button.getAttribute('data-bs-code')
-                var qrCode = document.getElementById('qr-code')
-
-                qrCode.innerHTML = code
-            })
-    </script>
+@endforeach
 @endsection

@@ -75,6 +75,14 @@ class KeypadController extends Controller
 
     public function start_stop_voting(string $program_id, string $session_id, string $id)
     {
+        $session = Auth::user()->customer->programSessions()->findOrFail($session_id);
+        foreach($session->keypads as $keypad){
+            if($keypad->id == $id)
+                continue;
+            $keypad = Auth::user()->customer->keypads()->findOrFail($keypad->id);
+            $keypad->on_vote = 0;
+            $keypad->save();
+        }
         $keypad = Auth::user()->customer->keypads()->findOrFail($id);
         $keypad->on_vote = !$keypad->on_vote;
         if ($keypad->save()) {

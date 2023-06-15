@@ -24,9 +24,10 @@ class ProgramSessionResource extends JsonResource
             'finish_at' => ['value'=>Carbon::createFromFormat(Variable::where('variable','date_format')->first()->settings()->where('customer_id',Auth::user()->customer->id)->first()->value.' '.Variable::where('variable','time_format')->first()->settings()->where('customer_id',Auth::user()->customer->id)->first()->value, $this->finish_at)->format('d/m/Y H:i'), 'type'=>'datetime'],
             'is_started' => ['value'=>$this->is_started, 'type'=>'radio'],
             'questions' => ['value'=>$this->questions, 'type'=>'radio'],
+            'questions_auto_start' => ['value'=>$this->questions, 'type'=>'radio'],
             'question_limit' => ['value'=>$this->question_limit, 'type'=>'number'],
             'status' => ['value'=>$this->status, 'type'=>'radio'],
-            'route' => route('portal.program-session.update', $this->id),
+            'route' => route('portal.program-session.update', [$this->program->id, $this->id]),
         ];
     }
 }

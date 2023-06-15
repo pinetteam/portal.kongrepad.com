@@ -28,7 +28,8 @@ class ProgramSessionRequest extends FormRequest
                     'start_at' => 'nullable|date_format:d/m/Y H:i|before_or_equal:finish_at|required_with:finish_at',
                     'finish_at' => 'nullable|date_format:d/m/Y H:i|after_or_equal:start_at|required_with:start_at',
                     'questions' => 'boolean|required',
-                    'question_limit' => 'required|integer',
+                    'questions_auto_start' => 'boolean|required_if:questions,1',
+                    'question_limit' => 'integer|required_if:questions,1',
                     'status' => 'boolean|required',
                 ];
             }

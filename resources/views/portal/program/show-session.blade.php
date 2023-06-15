@@ -183,6 +183,7 @@
                 <x-input.datetime method="c" name="start_at" title="start-at" icon="calendar-arrow-down" />
                 <x-input.datetime method="c" name="finish_at" title="finish-at" icon="calendar-arrow-down" />
                 <x-input.radio method="c" name="questions" title="questions" :options="$questions" option_value="value" option_name="title" icon="block-question" />
+                <x-input.radio method="c" name="questions_auto_start" title="questions-auto-start" :options="$questions_auto_start" option_value="value" option_name="title" icon="block-question" />
                 <x-input.number method="c" name="question_limit" title="question-limit" icon="circle-1" />
                 <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
             @endsection
@@ -200,6 +201,7 @@
                 <x-input.datetime method="e" name="start_at" title="start-at" icon="calendar-arrow-down" />
                 <x-input.datetime method="e" name="finish_at" title="finish-at" icon="calendar-arrow-down" />
                 <x-input.radio method="e" name="questions" title="questions" :options="$questions" option_value="value" option_name="title" icon="block-question" />
+                <x-input.radio method="e" name="questions_auto_start" title="questions-auto-start" :options="$questions_auto_start" option_value="value" option_name="title" icon="block-question" />
                 <x-input.number method="e" name="question_limit" title="question-limit" icon="circle-1" />
                 <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
             @endsection

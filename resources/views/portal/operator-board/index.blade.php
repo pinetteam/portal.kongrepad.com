@@ -59,18 +59,20 @@
                                                 <th scope="col"><span class="fa-regular fa-block-question mx-1"></span> {{ __('common.questions') }}</th>
                                                 <th scope="col"><span class="fa-regular fa-circle-play mx-1"></span> {{ __('common.is-questions-started') }}</th>
                                                 <th scope="col"><span class="fa-regular fa-circle-1 mx-1"></span> {{ __('common.question-limit') }}</th>
-                                                <th scope="col" class="text-end"></th>
+                                                <th scope="col"><span class="fa-regular fa-tablet mx-1"></span> {{ __('common.keypads') }}</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             @foreach($sessions as $session)
                                                 <tr>
                                                     <td>
-                                                        @if($session->is_started)
-                                                            <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
-                                                        @else
-                                                            <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
-                                                        @endif
+                                                        <a href =""  title="{{ __('common.start-stop') }}" data-bs-toggle="modal" data-bs-target="#start-session-confirmation-modal" data-route="{{ route('portal.session.start-stop', ['program_id' => $program->id, 'session' => $session->id]) }}" data-record="{{ $session->title }}" data-start-stop="{{ $session->is_started }}">
+                                                                @if($session->is_started)
+                                                                    <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
+                                                                @else
+                                                                    <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
+                                                                @endif
+                                                        </a>
                                                     </td>
                                                     <td>{{ $session->speaker->full_name }}</td>
                                                     <td>
@@ -93,20 +95,17 @@
                                                         @endif
                                                     </td>
                                                     <td>
+                                                        <a href="{{ route('portal.session.start-stop-questions', ['program_id' => $program->id, 'session' => $session->id]) }}" title="{{ __('common.start-stop-questions') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.start-stop-questions') }}">
                                                         @if($session->is_questions_started)
                                                             <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
                                                         @else
                                                             <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
                                                         @endif
+                                                        </a>
                                                     </td>
-                                                    <td>{{ $session->question_limit }}</td><td class="text-end">
+                                                    <td>{{ $session->question_limit }}</td>
+                                                    <td>
                                                         <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
-                                                            <a class="btn btn-success btn-sm" href="{{ route('portal.session.start-stop', ['program_id' => $program->id, 'session' => $session->id]) }}" title="{{ __('common.start-stop') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.start-stop') }}">
-                                                                <span class="fa-regular fa-play-pause"></span>
-                                                            </a>
-                                                            <a class="btn btn-info btn-sm" href="{{ route('portal.session.start-stop-questions', ['program_id' => $program->id, 'session' => $session->id]) }}" title="{{ __('common.start-stop-questions') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.start-stop-questions') }}">
-                                                                <span class="fa-regular fa-block-question"></span>
-                                                            </a>
                                                             <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.keypads') }}">
                                                                 <button class="btn btn-warning btn-sm" title="{{ __('common.keypads') }}" data-bs-toggle="modal" data-bs-target="#session-keypads-modal-{{$session->id}}" >
                                                                     <span class="fa-regular fa-tablet"></span>
@@ -147,11 +146,13 @@
                                                             <td>{{ $keypad->sort_order }}</td>
                                                             <td>{{ $keypad->title }}</td>
                                                             <td>
-                                                                @if($keypad->on_vote)
-                                                                    <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
-                                                                @else
-                                                                    <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
-                                                                @endif
+                                                                <a href =""  title="{{ __('common.start-stop-voting') }}" data-bs-toggle="modal" data-bs-target="#start-keypad-confirmation-modal" data-route="{{ route('portal.keypad.start-stop-voting', ['program_id' => $program->id, 'session_id' => $session->id, 'keypad' => $keypad->id]) }}" data-record="{{ $keypad->title }}" data-start-stop="{{ $keypad->on_vote }}">
+                                                                    @if($keypad->on_vote)
+                                                                        <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
+                                                                    @else
+                                                                        <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
+                                                                    @endif
+                                                                </a>
                                                             </td>
                                                             <td class="text-end">
                                                                 <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
@@ -166,13 +167,118 @@
                                                 </table>
                                             </div>
                                         </div>
-                                        <div class="modal-footer">
-
-                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="modal fade" id="start-keypad-confirmation-modal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="#start-keypad-confirmation-modal-label" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content bg-dark">
+                                        <form method="GET" action="" name="start-keypad-confirmation-form" id="start-keypad-confirmation-form" autocomplete="nope">
+                                            @csrf
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="start-keypad-confirmation-modal-label">{{ __('common.confirmation') }}</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p><p id="start-keypad-start-stop-record"></p><strong id="start-keypad-confirmation-record" class="text-danger"></strong>?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <div class="btn-group w-100" role="group" aria-label="{{ __('common.processes') }}">
+                                                    <button type="button" class="btn btn-danger w-25" data-bs-dismiss="modal">{{ __('common.no') }}</button>
+                                                    <button type="submit" class="btn btn-success w-75" id="start-keypad-confirmation-form-submit">{{ __('common.confirmation') }}</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <script type="module">
+                                const confirmationFormSubmit = document.getElementById('start-keypad-confirmation-form-submit');
+                                const confirmationModal = document.getElementById('start-keypad-confirmation-modal');
+                                var waitForSeconds, countdown;
+                                confirmationModal.addEventListener('show.bs.modal', event => {
+                                    const button = event.relatedTarget;
+                                    if(button) {
+                                        confirmationFormSubmit.disabled = true;
+                                        waitForSeconds = 5;
+                                        clearInterval(countdown);
+                                        document.getElementById('start-keypad-confirmation-form').action = button.getAttribute('data-route');
+                                        confirmationModal.querySelector('#start-keypad-confirmation-record').textContent = button.getAttribute('data-record');
+                                        if(button.getAttribute('data-start-stop') == 0)
+                                            confirmationModal.querySelector('#start-keypad-start-stop-record').textContent = '{{ __('common.are-you-sure-you-want-to-stop-other-keypads-and-start') }}';
+                                        else
+                                            confirmationModal.querySelector('#start-keypad-start-stop-record').textContent = '{{ __('common.are-you-sure-you-want-to-stop-this-keypad') }}';
+                                        countdown = setInterval(function() {
+                                            confirmationFormSubmit.innerHTML = '{{ __('common.yes') }} (' + (--waitForSeconds) + ')';
+                                            if (waitForSeconds <= 0) {
+                                                confirmationFormSubmit.innerHTML = '{{ __('common.yes') }}';
+                                                confirmationFormSubmit.disabled = false;
+                                            }
+                                        }, 1000);
+                                    }
+                                    confirmationFormSubmit.innerHTML = '{{ __('common.yes') }} (' + (waitForSeconds) + ')';
+                                });
+                                confirmationFormSubmit.addEventListener('click', function() {
+                                    confirmationFormSubmit.disabled = true;
+                                    confirmationFormSubmit.innerHTML = '<div class="spinner-border spinner-border-sm" role="status"></div> {{ __('common.deleting') }}';
+                                    document.getElementById('start-keypad-confirmation-form').submit();
+                                });
+                            </script>
                         @endforeach
+                        <div class="modal fade" id="start-session-confirmation-modal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="#start-session-confirmation-modal-label" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content bg-dark">
+                                    <form method="GET" action="" name="start-session-confirmation-form" id="start-session-confirmation-form" autocomplete="nope">
+                                        @csrf
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="start-session-confirmation-modal-label">{{ __('common.confirmation') }}</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p><p id="start-session-start-stop-record"></p><strong id="start-session-confirmation-record" class="text-danger"></strong>?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <div class="btn-group w-100" role="group" aria-label="{{ __('common.processes') }}">
+                                                <button type="button" class="btn btn-danger w-25" data-bs-dismiss="modal">{{ __('common.no') }}</button>
+                                                <button type="submit" class="btn btn-success w-75" id="start-session-confirmation-form-submit">{{ __('common.confirmation') }}</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <script type="module">
+                            const confirmationFormSubmit = document.getElementById('start-session-confirmation-form-submit');
+                            const confirmationModal = document.getElementById('start-session-confirmation-modal');
+                            var waitForSeconds, countdown;
+                            confirmationModal.addEventListener('show.bs.modal', event => {
+                                const button = event.relatedTarget;
+                                if(button) {
+                                    confirmationFormSubmit.disabled = true;
+                                    waitForSeconds = 5;
+                                    clearInterval(countdown);
+                                    document.getElementById('start-session-confirmation-form').action = button.getAttribute('data-route');
+                                    confirmationModal.querySelector('#start-session-confirmation-record').textContent = button.getAttribute('data-record');
+                                    if(button.getAttribute('data-start-stop') == 0)
+                                        confirmationModal.querySelector('#start-session-start-stop-record').textContent = '{{ __('common.are-you-sure-you-want-to-stop-other-sessions-and-start') }}';
+                                    else
+                                        confirmationModal.querySelector('#start-session-start-stop-record').textContent = '{{ __('common.are-you-sure-you-want-to-stop-this-session') }}';
+                                    countdown = setInterval(function() {
+                                        confirmationFormSubmit.innerHTML = '{{ __('common.yes') }} (' + (--waitForSeconds) + ')';
+                                        if (waitForSeconds <= 0) {
+                                            confirmationFormSubmit.innerHTML = '{{ __('common.yes') }}';
+                                            confirmationFormSubmit.disabled = false;
+                                        }
+                                    }, 1000);
+                                }
+                                confirmationFormSubmit.innerHTML = '{{ __('common.yes') }} (' + (waitForSeconds) + ')';
+                            });
+                            confirmationFormSubmit.addEventListener('click', function() {
+                                confirmationFormSubmit.disabled = true;
+                                confirmationFormSubmit.innerHTML = '<div class="spinner-border spinner-border-sm" role="status"></div> {{ __('common.deleting') }}';
+                                document.getElementById('start-session-confirmation-form').submit();
+                            });
+                        </script>
                     @endisset
                     @isset($debates)
                         <div class="row row-cols-1">
@@ -199,11 +305,13 @@
                                                     <td>{{ $debate->title }}</td>
                                                     <td>{{ $debate->description }}</td>
                                                     <td>
-                                                        @if($debate->on_vote)
+                                                        <a href =""  title="{{ __('common.start-stop') }}" data-bs-toggle="modal" data-bs-target="#start-debate-confirmation-modal" data-route="{{ route('portal.debate.start-stop-voting', ['program_id' => $program->id, 'debate' => $debate->id]) }}" data-record="{{ $debate->title }}" data-start-stop="{{ $debate->on_vote }}">
+                                                            @if($debate->on_vote)
                                                             <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
-                                                        @else
+                                                            @else
                                                             <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
-                                                        @endif
+                                                            @endif
+                                                        </a>
                                                     </td>
                                                     <td>{{ $debate->voting_started_at }}</td>
                                                     <td>{{ $debate->voting_finished_at }}</td>
@@ -222,6 +330,60 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="modal fade" id="start-debate-confirmation-modal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="#start-debate-confirmation-modal-label" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content bg-dark">
+                                    <form method="GET" action="" name="start-debate-confirmation-form" id="start-debate-confirmation-form" autocomplete="nope">
+                                        @csrf
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="start-debate-confirmation-modal-label">{{ __('common.confirmation') }}</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p><p id="start-debate-start-stop-record"></p><strong id="start-debate-confirmation-record" class="text-danger"></strong>?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <div class="btn-group w-100" role="group" aria-label="{{ __('common.processes') }}">
+                                                <button type="button" class="btn btn-danger w-25" data-bs-dismiss="modal">{{ __('common.no') }}</button>
+                                                <button type="submit" class="btn btn-success w-75" id="start-debate-confirmation-form-submit">{{ __('common.confirmation') }}</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <script type="module">
+                            const confirmationFormSubmit = document.getElementById('start-debate-confirmation-form-submit');
+                            const confirmationModal = document.getElementById('start-debate-confirmation-modal');
+                            var waitForSeconds, countdown;
+                            confirmationModal.addEventListener('show.bs.modal', event => {
+                                const button = event.relatedTarget;
+                                if(button) {
+                                    confirmationFormSubmit.disabled = true;
+                                    waitForSeconds = 5;
+                                    clearInterval(countdown);
+                                    document.getElementById('start-debate-confirmation-form').action = button.getAttribute('data-route');
+                                    confirmationModal.querySelector('#start-debate-confirmation-record').textContent = button.getAttribute('data-record');
+                                    if(button.getAttribute('data-start-stop') == 0)
+                                        confirmationModal.querySelector('#start-debate-start-stop-record').textContent = '{{ __('common.are-you-sure-you-want-to-stop-other-debates-and-start') }}';
+                                    else
+                                        confirmationModal.querySelector('#start-debate-start-stop-record').textContent = '{{ __('common.are-you-sure-you-want-to-stop-this-debate') }}';
+                                    countdown = setInterval(function() {
+                                        confirmationFormSubmit.innerHTML = '{{ __('common.yes') }} (' + (--waitForSeconds) + ')';
+                                        if (waitForSeconds <= 0) {
+                                            confirmationFormSubmit.innerHTML = '{{ __('common.yes') }}';
+                                            confirmationFormSubmit.disabled = false;
+                                        }
+                                    }, 1000);
+                                }
+                                confirmationFormSubmit.innerHTML = '{{ __('common.yes') }} (' + (waitForSeconds) + ')';
+                            });
+                            confirmationFormSubmit.addEventListener('click', function() {
+                                confirmationFormSubmit.disabled = true;
+                                confirmationFormSubmit.innerHTML = '<div class="spinner-border spinner-border-sm" role="status"></div> {{ __('common.deleting') }}';
+                                document.getElementById('start-debate-confirmation-form').submit();
+                            });
+                        </script>
                     @endisset
                 </div>
                 <div class="card-footer">

@@ -69,7 +69,11 @@ class ProgramController extends Controller
                 'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
                 'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
             ];
-            return view('portal.program.show-session', compact(['documents', 'chairs', 'speakers', 'program', 'program_chairs', 'program_sessions', 'questions', 'statuses']));
+            $questions_auto_start = [
+                'no' => ["value" => 0, "title" => __('common.no'), 'color' => 'danger'],
+                'yes' => ["value" => 1, "title" => __('common.yes'), 'color' => 'success'],
+            ];
+            return view('portal.program.show-session', compact(['documents', 'chairs', 'speakers', 'program', 'program_chairs', 'program_sessions', 'questions', 'questions_auto_start', 'statuses']));
         } else if($program->type=='debate') {
             $debates = $program->debates()->get();
             $chairs = Auth::user()->customer->participants()->whereNotIn('meeting_participants.id', $program->programChairs()->pluck('meeting_hall_program_chairs.chair_id'))->whereNot('meeting_participants.type', 'team')->get();

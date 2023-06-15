@@ -28,6 +28,7 @@ return new class extends Migration
             $table->boolean('is_started')->default(0)->comment('0=passive;1=active');
             $table->boolean('is_questions_started')->default(0)->comment('0=passive;1=active');
             $table->boolean('questions')->default(0)->comment('0=passive;1=active');
+            $table->boolean('questions_auto_start')->default(0)->comment('0=passive;1=active');
             $table->unsignedInteger('question_limit')->default(0);
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
             $table->timestamps();
