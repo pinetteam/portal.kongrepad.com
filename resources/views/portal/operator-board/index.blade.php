@@ -136,11 +136,7 @@
                                                     <thead class="thead-dark">
                                                     <tr>
                                                         <th scope="col"><span class="fa-regular fa-circle-sort mx-1"></span> {{ __('common.sort') }}</th>
-                                                        <th scope="col"><span class="fa-regular fa-code-simple mx-1"></span> {{ __('common.code') }}</th>
                                                         <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}</th>
-                                                        <th scope="col"><span class="fa-regular fa-comment-dots mx-1"></span> {{ __('common.description') }}</th>
-                                                        <th scope="col"><span class="fa-regular fa-calendar-arrow-up mx-1"></span> {{ __('common.voting-started-at') }}</th>
-                                                        <th scope="col"><span class="fa-regular fa-calendar-arrow-down mx-1"></span> {{ __('common.voting-finished-at') }}</th>
                                                         <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.on-vote') }}</th>
                                                         <th scope="col" class="text-end"></th>
                                                     </tr>
@@ -149,11 +145,7 @@
                                                     @foreach($session->keypads as $keypad)
                                                         <tr>
                                                             <td>{{ $keypad->sort_order }}</td>
-                                                            <td>{{ $keypad->code }}</td>
                                                             <td>{{ $keypad->title }}</td>
-                                                            <td>{{ $keypad->description }}</td>
-                                                            <td>{{ $keypad->voting_started_at }}</td>
-                                                            <td>{{ $keypad->voting_finished_at }}</td>
                                                             <td>
                                                                 @if($keypad->on_vote)
                                                                     <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
