@@ -37,7 +37,7 @@ class QrCodeController extends Controller
             $qr_code->title = $request->input('title');
             $qr_code->status = $request->input('status');
             if ($qr_code->save()) {
-                $qr_code->code = \SimpleSoftwareIO\QrCode\Facades\QrCode::size(200)->generate('http://kongrepad.com/qr/'.$qr_code->id, storage_path('app/qrcodes/qrcode-'.$qr_code->id.'.svg'));
+                \SimpleSoftwareIO\QrCode\Facades\QrCode::size(200)->generate('http://kongrepad.com/qr/'.$qr_code->id, storage_path('app/qrcodes/qrcode-'.$qr_code->id.'.svg'));
                 $qr_code->created_by = Auth::user()->id;
                 $qr_code->save();
                 return back()->with('success', __('common.created-successfully'));

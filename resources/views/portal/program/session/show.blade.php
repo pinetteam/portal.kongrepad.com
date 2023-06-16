@@ -6,7 +6,7 @@
             <h1 class="m-0 text-center">{{ __('common.session').' | '.$session->title }}</h1>
         </div>
         <div class="card-body">
-            <div class="row row-cols-1 row-cols-sm-2 flex-shrink-0 g-2">
+            <div class="row">
                 <div class="col card text-bg-dark p-0">
                     <div class="card-header">
                         <h2 class="m-0 text-center h3">{{ __('common.session') }}</h2>
@@ -28,17 +28,6 @@
                                 @endif
                             </li>
                         </ul>
-                    </div>
-                </div>
-                <div class="col card text-bg-dark p-0">
-                    <div class="card-header">
-                        <h2 class="m-0 text-center h3">{{ __('common.teams') }}</h2>
-                    </div>
-                    <div class="card-body p-0">
-                        <div class="table-responsive">
-                        </div>
-                    </div>
-                    <div class="card-footer d-flex justify-content-center">
                     </div>
                 </div>
             </div>

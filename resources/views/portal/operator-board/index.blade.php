@@ -107,11 +107,11 @@
                                                     </td>
                                                     <td>
                                                         @if($session->questions)
-                                                            <a href ="{{ route('portal.session.edit-question-limit', ['program_id' => $program->id, 'session' => $session->id, 'increment' => -1]) }}"  title="{{ __('common.start-stop') }}" >
+                                                            <a href ="{{ route('portal.session.edit-question-limit', ['program_id' => $program->id, 'session' => $session->id, 'increment' => -1]) }}"  title="{{ __('common.decrement') }}" >
                                                                 <i style="color:red" class="fa-regular fa-square-minus fa-lg"></i>
                                                             </a>
                                                             {{ $session->question_limit }}
-                                                            <a href ="{{ route('portal.session.edit-question-limit', ['program_id' => $program->id, 'session' => $session->id, 'increment' => 1]) }}"  title="{{ __('common.start-stop') }}">
+                                                            <a href ="{{ route('portal.session.edit-question-limit', ['program_id' => $program->id, 'session' => $session->id, 'increment' => 1]) }}"  title="{{ __('common.increment') }}">
                                                                 <i style="color:green" class="fa-regular fa-square-plus fa-lg"></i>
                                                             </a>
                                                         @endif
@@ -149,7 +149,6 @@
                                                         <th scope="col"><span class="fa-regular fa-circle-sort mx-1"></span> {{ __('common.sort') }}</th>
                                                         <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}</th>
                                                         <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.on-vote') }}</th>
-                                                        <th scope="col" class="text-end"></th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -165,13 +164,6 @@
                                                                         <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
                                                                     @endif
                                                                 </a>
-                                                            </td>
-                                                            <td class="text-end">
-                                                                <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
-                                                                    <a class="btn btn-success btn-sm" href="{{ route('portal.keypad.start-stop-voting', ['program_id' => $program->id, 'session_id' => $session->id, 'keypad' => $keypad->id]) }}" title="{{ __('common.start-stop-voting') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.start-stop-voting') }}">
-                                                                        <span class="fa-regular fa-box-ballot"></span>
-                                                                    </a>
-                                                                </div>
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -217,9 +209,9 @@
                                         document.getElementById('start-keypad-confirmation-form').action = button.getAttribute('data-route');
                                         confirmationModal.querySelector('#start-keypad-confirmation-record').textContent = button.getAttribute('data-record');
                                         if(button.getAttribute('data-start-stop') == 0)
-                                            confirmationModal.querySelector('#start-keypad-start-stop-record').textContent = '{{ __('common.are-you-sure-you-want-to-stop-other-keypads-and-start') }}';
+                                            confirmationModal.querySelector('#start-keypad-start-stop-record').textContent = '{{ __('common.are-you-sure-you-want-to-stop-voting-other-keypads-and-start') }}';
                                         else
-                                            confirmationModal.querySelector('#start-keypad-start-stop-record').textContent = '{{ __('common.are-you-sure-you-want-to-stop-this-keypad') }}';
+                                            confirmationModal.querySelector('#start-keypad-start-stop-record').textContent = '{{ __('common.are-you-sure-you-want-to-stop-voting') }}';
                                         countdown = setInterval(function() {
                                             confirmationFormSubmit.innerHTML = '{{ __('common.yes') }} (' + (--waitForSeconds) + ')';
                                             if (waitForSeconds <= 0) {
@@ -274,7 +266,7 @@
                                     if(button.getAttribute('data-start-stop') == 0)
                                         confirmationModal.querySelector('#start-session-start-stop-record').textContent = '{{ __('common.are-you-sure-you-want-to-stop-other-sessions-and-start') }}';
                                     else
-                                        confirmationModal.querySelector('#start-session-start-stop-record').textContent = '{{ __('common.are-you-sure-you-want-to-stop-this-session') }}';
+                                        confirmationModal.querySelector('#start-session-start-stop-record').textContent = '{{ __('common.are-you-sure-you-want-to-stop') }}';
                                     countdown = setInterval(function() {
                                         confirmationFormSubmit.innerHTML = '{{ __('common.yes') }} (' + (--waitForSeconds) + ')';
                                         if (waitForSeconds <= 0) {
@@ -308,7 +300,6 @@
                                                 <th scope="col"><span class="fa-regular fa-box-ballot mx-1"></span> {{ __('common.on-vote') }}</th>
                                                 <th scope="col"><span class="fa-regular fa-calendar-arrow-up mx-1"></span> {{ __('common.voting-started-at') }}</th>
                                                 <th scope="col"><span class="fa-regular fa-calendar-arrow-down mx-1"></span> {{ __('common.voting-finished-at') }}</th>
-                                                <th scope="col" class="text-end"></th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -327,13 +318,6 @@
                                                     </td>
                                                     <td>{{ $debate->voting_started_at }}</td>
                                                     <td>{{ $debate->voting_finished_at }}</td>
-                                                    <td class="text-end">
-                                                        <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
-                                                            <a class="btn btn-success btn-sm" href="{{ route('portal.debate.start-stop-voting', ['program_id' => $program->id, 'debate' => $debate->id]) }}" title="{{ __('common.start-stop-voting') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.start-stop-voting') }}">
-                                                                <span class="fa-regular fa-box-ballot"></span>
-                                                            </a>
-                                                        </div>
-                                                    </td>
                                                 </tr>
                                             @endforeach
                                             </tbody>
@@ -377,9 +361,9 @@
                                     document.getElementById('start-debate-confirmation-form').action = button.getAttribute('data-route');
                                     confirmationModal.querySelector('#start-debate-confirmation-record').textContent = button.getAttribute('data-record');
                                     if(button.getAttribute('data-start-stop') == 0)
-                                        confirmationModal.querySelector('#start-debate-start-stop-record').textContent = '{{ __('common.are-you-sure-you-want-to-stop-other-debates-and-start') }}';
+                                        confirmationModal.querySelector('#start-debate-start-stop-record').textContent = '{{ __('common.are-you-sure-you-want-to-stop-voting-other-debates-and-start-voting') }}';
                                     else
-                                        confirmationModal.querySelector('#start-debate-start-stop-record').textContent = '{{ __('common.are-you-sure-you-want-to-stop-this-debate') }}';
+                                        confirmationModal.querySelector('#start-debate-start-stop-record').textContent = '{{ __('common.are-you-sure-you-want-to-stop-voting') }}';
                                     countdown = setInterval(function() {
                                         confirmationFormSubmit.innerHTML = '{{ __('common.yes') }} (' + (--waitForSeconds) + ')';
                                         if (waitForSeconds <= 0) {
