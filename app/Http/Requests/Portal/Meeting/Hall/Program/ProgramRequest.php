@@ -25,8 +25,8 @@ class ProgramRequest extends FormRequest
                     'title' => 'required|max:255',
                     'description' => 'nullable|max:65535',
                     'logo' => ['nullable', File::types(['png'])->max(12 * 1024),],
-                    'start_at' => 'nullable|date_format:d/m/Y H:i|before_or_equal:finish_at|required_with:finish_at',
-                    'finish_at' => 'nullable|date_format:d/m/Y H:i|after_or_equal:start_at|required_with:start_at',
+                    'start_at' => 'nullable|date_format:Y-m-d H:i|before_or_equal:finish_at|required_with:finish_at',
+                    'finish_at' => 'nullable|date_format:Y-m-d H:i|after_or_equal:start_at|required_with:start_at',
                     'type' => 'required|in:session,debate,other',
                     'status' => 'required|boolean',
                 ];
@@ -39,8 +39,8 @@ class ProgramRequest extends FormRequest
                     'title' => 'required|max:255',
                     'description' => 'nullable|max:65535',
                     'logo' => ['nullable', File::types(['png'])->max(12 * 1024),],
-                    'start_at' => 'nullable|date_format:d/m/Y H:i|before_or_equal:finish_at|required_with:finish_at',
-                    'finish_at' => 'nullable|date_format:d/m/Y H:i|after_or_equal:start_at|required_with:start_at',
+                    'start_at' => 'nullable|date_format:Y-m-d H:i|before_or_equal:finish_at|required_with:finish_at',
+                    'finish_at' => 'nullable|date_format:Y-m-d H:i|after_or_equal:start_at|required_with:start_at',
                     'status' => 'required|boolean',
                 ];
             }

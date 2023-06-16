@@ -17,7 +17,7 @@ class ProgramController extends Controller
         $meeting_halls = Auth::user()->customer->meetingHalls()->where('meeting_halls.status', 1)->get();
         $types = [
             'debate' => ["value" => "debate", "title" => __('common.debate')],
-            'other' => ["value" => "break", "title" => __('common.other')],
+            'other' => ["value" => "other", "title" => __('common.other')],
             'session' => ["value" => "session", "title" => __('common.session')],
         ];
         $statuses = [

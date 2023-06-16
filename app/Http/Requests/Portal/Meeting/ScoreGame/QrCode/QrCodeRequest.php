@@ -23,8 +23,8 @@ class QrCodeRequest extends FormRequest
                     'title' => 'required|max:255',
                     'score' => 'required|max:255',
                     'logo' => ['nullable', File::types(['png'])->max(12 * 1024),],
-                    'start_at' => 'nullable|date_format:d/m/Y H:i|before_or_equal:finish_at|required_with:finish_at',
-                    'finish_at' => 'nullable|date_format:d/m/Y H:i|after_or_equal:start_at|required_with:start_at',
+                    'start_at' => 'nullable|date_format:Y-m-d H:i|before_or_equal:finish_at|required_with:finish_at',
+                    'finish_at' => 'nullable|date_format:Y-m-d H:i|after_or_equal:start_at|required_with:start_at',
                     'status' => 'required|boolean',
                 ];
             }
@@ -34,9 +34,10 @@ class QrCodeRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'meeting_id' => __('common.meeting'),
+            'score_game_id' => __('common.score-game'),
             'title' => __('common.title'),
             'score' => __('common.score'),
+            'logo' => __('common.logo'),
             'start_at' => __('common.start-at'),
             'finish_at' => __('common.finish-at'),
             'status' => __('common.status'),

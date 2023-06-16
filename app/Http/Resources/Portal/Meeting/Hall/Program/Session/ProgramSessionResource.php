@@ -27,7 +27,7 @@ class ProgramSessionResource extends JsonResource
             'questions_auto_start' => ['value'=>$this->questions, 'type'=>'radio'],
             'question_limit' => ['value'=>$this->question_limit, 'type'=>'number'],
             'status' => ['value'=>$this->status, 'type'=>'radio'],
-            'route' => route('portal.program-session.update', [$this->program->id, $this->id]),
+            'route' => route('portal.session.update', [$this->program_id, $this->id]),
         ];
     }
 }

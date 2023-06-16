@@ -153,6 +153,7 @@ return [
     'debate' => 'Debate',
     'keypad' => 'Keypad',
     'point' => 'Point',
+    'chair' => 'Chair',
     'chairs' => 'Chairs',
     'teams' => 'Teams',
     'speaker' => 'Speaker',

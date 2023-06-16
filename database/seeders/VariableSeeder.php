@@ -269,7 +269,7 @@ class VariableSeeder extends Seeder
 
         ];
         $date_format_variables = [
-            'd/m/Y', 'm/d/Y'
+            'd/m/Y', 'm/d/Y',  'm-d-Y',  'Y-m-d'
         ];
         $time_format_variables = [
             'H:i', 'H:i:s'

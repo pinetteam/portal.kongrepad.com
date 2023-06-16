@@ -40,14 +40,14 @@ class Meeting extends Model
     {
         return Attribute::make(
             get: fn (string $startAt) => Carbon::createFromFormat('Y-m-d', $startAt)->format(Variable::where('variable','date_format')->first()->settings()->where('customer_id',Auth::user()->customer->id)->first()->value),
-            set: fn (string $startAt) => Carbon::createFromFormat('d/m/Y', $startAt)->format('Y-m-d'),
+            set: fn (string $startAt) => Carbon::createFromFormat('Y-m-d', $startAt)->format('Y-m-d'),
         );
     }
     protected function finishAt(): Attribute
     {
         return Attribute::make(
             get: fn (string $finishAt) => Carbon::createFromFormat('Y-m-d', $finishAt)->format(Variable::where('variable','date_format')->first()->settings()->where('customer_id',Auth::user()->customer->id)->first()->value),
-            set: fn (string $finishAt) => Carbon::createFromFormat('d/m/Y', $finishAt)->format('Y-m-d'),
+            set: fn (string $finishAt) => Carbon::createFromFormat('Y-m-d', $finishAt)->format('Y-m-d'),
         );
     }
 
