@@ -96,9 +96,8 @@ class ProgramSessionController extends Controller
         foreach($program->programSessions as $session){
             if($session->id == $id)
                 continue;
-            $current_session = Auth::user()->customer->programSessions()->findOrFail($session->id);
-            $current_session->is_started = 0;
-            $current_session->save();
+            $session->is_started = 0;
+            $session->save();
         }
         $program_session = Auth::user()->customer->programSessions()->findOrFail($id);
         $program_session->is_started = !$program_session->is_started;
@@ -123,5 +122,13 @@ class ProgramSessionController extends Controller
         } else {
             return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
         }
+    }
+
+    public function edit_question_limit(string $program_id, string $id, int $increment){
+        $program_session = Auth::user()->customer->programSessions()->findOrFail($id);
+        $program_session->question_limit = $program_session->question_limit + $increment;
+        if($program_session->question_limit > 0)
+            $program_session->save();
+        return back();
     }
 }

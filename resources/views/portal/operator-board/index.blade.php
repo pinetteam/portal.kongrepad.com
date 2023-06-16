@@ -66,7 +66,7 @@
                                             @foreach($sessions as $session)
                                                 <tr>
                                                     <td>
-                                                        <a href =""  title="{{ __('common.start-stop') }}" data-bs-toggle="modal" data-bs-target="#start-session-confirmation-modal" data-route="{{ route('portal.session.start-stop', ['program_id' => $program->id, 'session' => $session->id]) }}" data-record="{{ $session->title }}" data-start-stop="{{ $session->is_started }}">
+                                                        <a href =""  title="{{ __('common.start-stop') }}" data-bs-toggle="modal" data-bs-target="#start-session-confirmation-modal" data-route="{{ route('portal.session.start-stop', ['program_id' => $program->id, 'session' => $session->id]) }}" data-record="{{ $session->title }}" data-start-stop="{{ $session->is_started }} " data-bs-title="{{ __('common.start-stop') }}">
                                                                 @if($session->is_started)
                                                                     <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
                                                                 @else
@@ -95,15 +95,27 @@
                                                         @endif
                                                     </td>
                                                     <td>
-                                                        <a href="{{ route('portal.session.start-stop-questions', ['program_id' => $program->id, 'session' => $session->id]) }}" title="{{ __('common.start-stop-questions') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.start-stop-questions') }}">
-                                                        @if($session->is_questions_started)
-                                                            <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
-                                                        @else
-                                                            <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
+                                                        @if($session->questions)
+                                                            <a href="{{ route('portal.session.start-stop-questions', ['program_id' => $program->id, 'session' => $session->id]) }}" title="{{ __('common.start-stop-questions') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.start-stop-questions') }}">
+                                                            @if($session->is_questions_started)
+                                                                <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
+                                                            @else
+                                                                <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
+                                                            @endif
+                                                            </a>
                                                         @endif
-                                                        </a>
                                                     </td>
-                                                    <td>{{ $session->question_limit }}</td>
+                                                    <td>
+                                                        @if($session->questions)
+                                                            <a href ="{{ route('portal.session.edit-question-limit', ['program_id' => $program->id, 'session' => $session->id, 'increment' => -1]) }}"  title="{{ __('common.start-stop') }}" >
+                                                                <i style="color:red" class="fa-regular fa-square-minus fa-lg"></i>
+                                                            </a>
+                                                            {{ $session->question_limit }}
+                                                            <a href ="{{ route('portal.session.edit-question-limit', ['program_id' => $program->id, 'session' => $session->id, 'increment' => 1]) }}"  title="{{ __('common.start-stop') }}">
+                                                                <i style="color:green" class="fa-regular fa-square-plus fa-lg"></i>
+                                                            </a>
+                                                        @endif
+                                                    </td>
                                                     <td>
                                                         <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
                                                             <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.keypads') }}">

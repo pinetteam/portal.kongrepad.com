@@ -25,11 +25,11 @@ class ProgramSessionRequest extends FormRequest
                     'code' => 'nullable|max:255',
                     'title' => 'required|max:255',
                     'description' => 'nullable|max:65535',
-                    'start_at' => 'nullable|date_format:d/m/Y H:i|before_or_equal:finish_at|required_with:finish_at',
-                    'finish_at' => 'nullable|date_format:d/m/Y H:i|after_or_equal:start_at|required_with:start_at',
+                    'start_at' => 'nullable|date_format:Y-m-d H:i|before_or_equal:finish_at|required_with:finish_at',
+                    'finish_at' => 'nullable|date_format:Y-m-d H:i|after_or_equal:start_at|required_with:start_at',
                     'questions' => 'boolean|required',
                     'questions_auto_start' => 'boolean|required_if:questions,1',
-                    'question_limit' => 'integer|required_if:questions,1',
+                    'question_limit' => 'required_if:questions,1|integer',
                     'status' => 'boolean|required',
                 ];
             }

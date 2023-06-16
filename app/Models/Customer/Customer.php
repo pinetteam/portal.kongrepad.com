@@ -168,7 +168,7 @@ class Customer extends Model
     }
     public function qrCodes()
     {
-        $qrcodes = Team::select('meeting_hall_score_game_qr_codes.*')
+        $qrcodes = QrCode::select('meeting_hall_score_game_qr_codes.*')
             ->join('meeting_score_games', 'meeting_hall_score_game_qr_codes.score_game_id', '=', 'meeting_hall_score_games.id')
             ->join('meetings', 'meeting_score_games.meeting_id', '=', 'meetings.id')
             ->join('customers', 'meetings.customer_id', '=', 'customers.id')
