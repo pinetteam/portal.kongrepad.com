@@ -18,6 +18,7 @@ use App\Models\Meeting\Meeting;
 use App\Models\Meeting\Participant\Participant;
 use App\Models\Meeting\ScoreGame\QrCode\QrCode;
 use App\Models\Meeting\ScoreGame\ScoreGame;
+use App\Models\Meeting\Survey\Question\Question;
 use App\Models\Meeting\Survey\Survey;
 use App\Models\User\Role\UserRole;
 use App\Models\User\User;
@@ -153,7 +154,7 @@ class Customer extends Model
     }
     public function surveyOptions()
     {
-        $options = Option::select('meeting_survey_question_options.*')
+        $options = \App\Models\Meeting\Survey\Question\Option\Option::select('meeting_survey_question_options.*')
             ->join('meeting_survey_questions', 'meeting_survey_question_options.question_id', '=', 'meeting_survey_questions.id')
             ->join('meeting_surveys', 'meeting_survey_questions.survey_id', '=', 'meeting_surveys.id')
             ->join('meetings', 'meeting_surveys.meeting_id', '=', 'meetings.id')
@@ -163,7 +164,7 @@ class Customer extends Model
     }
     public function surveyQuestions()
     {
-        $questions = Option::select('meeting_survey_questions.*')
+        $questions = Question::select('meeting_survey_questions.*')
             ->join('meeting_surveys', 'meeting_survey_questions.survey_id', '=', 'meeting_surveys.id')
             ->join('meetings', 'meeting_surveys.meeting_id', '=', 'meetings.id')
             ->join('customers', 'meetings.customer_id', '=', 'customers.id')

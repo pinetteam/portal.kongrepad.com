@@ -42,11 +42,12 @@ class MeetingController extends Controller
     {
         $meeting = Auth::user()->customer->meetings()->findOrFail($id);
         $meeting_halls = $meeting->halls()->get();
+        $surveys = $meeting->surveys()->get();
         $statuses = [
             'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.meeting.show', compact(['meeting','meeting_halls', 'statuses']));
+        return view('portal.meeting.show', compact(['meeting', 'meeting_halls', 'surveys', 'statuses']));
 
     }
     public function edit($id)

@@ -5,11 +5,22 @@ namespace App\Http\Controllers\Portal\Meeting\Survey;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Portal\Meeting\Survey\SurveyRequest;
 use App\Http\Resources\Portal\Meeting\Survey\SurveyResource;
+use App\Models\Customer\Setting\Variable\Variable;
 use App\Models\Meeting\Survey\Survey;
 use Illuminate\Support\Facades\Auth;
 
 class SurveyController extends Controller
 {
+    public function index()
+    {
+        $surveys = Auth::user()->customer->surveys()->paginate(20);
+        $meetings = Auth::user()->customer->meetings()->paginate(20);
+        $statuses = [
+            'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
+            'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
+        ];
+        return view('portal.survey.index', compact(['meetings', 'surveys', 'statuses']));
+    }
     public function store(SurveyRequest $request, string $meeting_id)
     {
         if ($request->validated()) {

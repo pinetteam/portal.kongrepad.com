@@ -30,12 +30,12 @@ class OptionController extends Controller
     {
         //
     }
-    public function edit(string $id)
+    public function edit(string $meeting_id, string $survey_id, string $question_id,string $id)
     {
         $option = Auth::user()->customer->surveyOptions()->findOrFail($id);
         return new OptionResource($option);
     }
-    public function update(OptionRequest $request, string $id)
+    public function update(OptionRequest $request, string $meeting_id, string $survey_id, string $question_id,string $id)
     {
         if ($request->validated()) {
             $option = Auth::user()->customer->surveyOptions()->findOrFail($id);
@@ -51,7 +51,7 @@ class OptionController extends Controller
             }
         }
     }
-    public function destroy(string $id)
+    public function destroy(string $meeting_id, string $survey_id, string $question_id,string $id)
     {
         $option = Auth::user()->customer->surveyOptions()->findOrFail($id);
         if ($option->delete()) {

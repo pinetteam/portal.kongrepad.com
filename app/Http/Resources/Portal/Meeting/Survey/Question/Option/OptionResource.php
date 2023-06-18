@@ -12,7 +12,9 @@ class OptionResource extends JsonResource
         return [
             'question_id' => ['value'=>$this->question_id, 'type'=>'hidden'],
             'sort_order' => ['value'=>$this->sort_order, 'type'=>'number'],
+            'status' => ['value'=>$this->status, 'type'=>'radio'],
             'title' => ['value'=>$this->title, 'type'=>'text'],
+            'route' => route('portal.survey-option.update', [$this->question->survey->meeting_id, $this->question->survey_id, $this->question_id, $this->id]),
         ];
     }
 }

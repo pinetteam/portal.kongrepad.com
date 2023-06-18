@@ -186,6 +186,7 @@ return [
     'statistics' => 'Statistics',
     'last-users' => 'Last Users',
     'start-stop-questions' => 'Start-Stop Questions',
+    'questions-auto-start' => 'Questions Auto Start',
     'start-stop-voting' => 'Start-Stop Voting',
     'session-started' => 'Session Started',
     'session-stopped' => 'Session Stopped',
