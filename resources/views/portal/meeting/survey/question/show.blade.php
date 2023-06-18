@@ -13,9 +13,9 @@
                     </div>
                     <div class="card-body p-0">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}:</b> {{ $question->title }}</li>
-                            <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.survey') }}:</b> {{ $question->survey->title }}</li>
-                            <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.description') }}:</b> {{ $question->description }}</li>
+                            <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-messages-question mx-1"></span> {{ __('common.title') }}:</b> {{ $question->title }}</li>
+                            <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-pen-field mx-1"></span> {{ __('common.survey') }}:</b> {{ $question->survey->title }}</li>
+                            <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-comment-dots mx-1"></span> {{ __('common.description') }}:</b> {{ $question->description }}</li>
                             <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}:</b>
                                 @if($question->status)
                                     {{ __('common.active') }}
@@ -42,8 +42,8 @@
                     <thead class="thead-dark">
                     <tr>
 
-                        <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.option-title') }}</th>
-                        <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.sort-order') }}</th>
+                        <th scope="col"><span class="fa-regular fa-list-dropdown mx-1"></span> {{ __('common.option-title') }}</th>
+                        <th scope="col"><span class="fa-regular fa-circle-sort mx-1"></span> {{ __('common.sort-order') }}</th>
                         <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}</th>
                         <th scope="col" class="text-end"></th>
                     </tr>
@@ -93,7 +93,7 @@
         <x-crud.form.common.create >
             @section('default-create-form')
                 <x-input.hidden method="c" name="question_id" :value="$question->id"/>
-                <x-input.text method="c" name="title" title="title" icon="input-text" />
+                <x-input.text method="c" name="title" title="title" icon="list-dropdown" />
                 <x-input.number method="c" name="sort_order" title="sort" icon="circle-sort" />
                 <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
             @endsection
@@ -105,7 +105,7 @@
         <x-crud.form.common.edit>
             @section('default-edit-form')
                 <x-input.hidden method="c" name="question_id" :value="$question->id"/>
-                <x-input.text method="e" name="title" title="title" icon="input-text" />
+                <x-input.text method="e" name="title" title="title" icon="list-dropdown" />
                 <x-input.number method="e" name="sort_order" title="sort" icon="circle-sort" />
                 <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
             @endsection

@@ -40,7 +40,7 @@
 
                     <thead class="thead-dark">
                     <tr>
-                        <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}</th>
+                        <th scope="col"><span class="fa-regular fa-pen-field mx-1"></span> {{ __('common.title') }}</th>
                         <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.meeting-title') }}</th>
                         <th scope="col"><span class="fa-regular fa-calendar-arrow-up mx-1"></span> {{ __('common.start-at') }}</th>
                         <th scope="col"><span class="fa-regular fa-calendar-arrow-down mx-1"></span> {{ __('common.finish-at') }}</th>
@@ -113,7 +113,7 @@
                 <x-input.hidden method="c" name="meeting_id" :value="$meeting->id"/>
                 <x-input.number method="c" name="sort_order" title="sort" icon="circle-sort" />
                 {{--<x-input.text method="c" name="code" title="code" icon="code-simple" />--}}
-                <x-input.text method="c" name="title" title="title" icon="input-text" />
+                <x-input.text method="c" name="title" title="title" icon="pen-field" />
                 <x-input.text method="c" name="description" title="description" icon="comment-dots" />
                 <x-input.datetime method="c" name="start_at" title="start-at" icon="calendar-arrow-down" />
                 <x-input.datetime method="c" name="finish_at" title="finish-at" icon="calendar-arrow-down" />
@@ -127,7 +127,7 @@
             @section('survey-edit-form')
                 <x-input.number method="e" name="sort_order" title="sort" icon="circle-sort" />
                 <x-input.text method="e" name="code" title="code" icon="code-simple" />
-                <x-input.text method="e" name="title" title="title" icon="input-text" />
+                <x-input.text method="e" name="title" title="title" icon="pen-field" />
                 <x-input.text method="e" name="description" title="description" icon="comment-dots" />
                 <x-input.datetime method="e" name="start_at" title="start-at" icon="calendar-arrow-down" />
                 <x-input.datetime method="e" name="finish_at" title="finish-at" icon="calendar-arrow-down" />
