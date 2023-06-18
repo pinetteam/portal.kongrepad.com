@@ -15,8 +15,8 @@ class MeetingResource extends JsonResource
         return [
             'code' => ['value'=>$this->code, 'type'=>'text'],
             'title' => ['value'=>$this->title, 'type'=>'text'],
-            'start_at' => ['value'=>Carbon::createFromFormat(Variable::where('variable','date_format')->first()->settings()->where('customer_id',Auth::user()->customer->id)->first()->value, $this->start_at)->format('d/m/Y'), 'type'=>'date'],
-            'finish_at' => ['value'=>Carbon::createFromFormat(Variable::where('variable','date_format')->first()->settings()->where('customer_id',Auth::user()->customer->id)->first()->value, $this->finish_at)->format('d/m/Y'), 'type'=>'date'],
+            'start_at' => ['value'=>Carbon::createFromFormat(Variable::where('variable','date_format')->first()->settings()->where('customer_id',Auth::user()->customer->id)->first()->value, $this->start_at)->format('Y-m-d'), 'type'=>'date'],
+            'finish_at' => ['value'=>Carbon::createFromFormat(Variable::where('variable','date_format')->first()->settings()->where('customer_id',Auth::user()->customer->id)->first()->value, $this->finish_at)->format('Y-m-d'), 'type'=>'date'],
             'status' => ['value'=>$this->status, 'type'=>'radio'],
             'route' => route('portal.meeting.update', $this->id),
         ];

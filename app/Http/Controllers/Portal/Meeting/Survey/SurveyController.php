@@ -16,7 +16,6 @@ class SurveyController extends Controller
             $survey = new Survey();
             $survey->meeting_id = $request->input('meeting_id');
             $survey->sort_order = $request->input('sort_order');
-            $survey->code = $request->input('code');
             $survey->title = $request->input('title');
             $survey->description = $request->input('description');
             $survey->start_at = $request->input('start_at');
@@ -52,7 +51,6 @@ class SurveyController extends Controller
             $survey = Auth::user()->customer->surveys()->findOrFail($id);
             $survey->meeting_id = $request->input('meeting_id');
             $survey->sort_order = $request->input('sort_order');
-            $survey->code = $request->input('code');
             $survey->title = $request->input('title');
             $survey->description = $request->input('description');
             $survey->start_at = $request->input('start_at');

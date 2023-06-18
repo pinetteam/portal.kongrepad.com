@@ -72,12 +72,6 @@
             </div>
             <ul class="nav nav-tabs flex-column">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="nav-icon fa-duotone fa-face-party"></i>
-                        {{ __('common.debates') }}
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="{{ route("portal.score-game.index") }}">
                         <i class="nav-icon fa-duotone fa-hundred-points"></i>
                         {{ __('common.score-game') }}
@@ -87,12 +81,6 @@
                     <a class="nav-link" href="#">
                         <i class="nav-icon fa-duotone fa-square-poll-horizontal"></i>
                         {{ __('common.surveys') }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="nav-icon fa-duotone fa-tablet"></i>
-                        {{ __('common.keypads') }}
                     </a>
                 </li>
             </ul>

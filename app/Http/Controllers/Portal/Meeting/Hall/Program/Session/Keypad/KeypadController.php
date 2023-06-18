@@ -87,13 +87,13 @@ class KeypadController extends Controller
         $keypad->on_vote = !$keypad->on_vote;
         if ($keypad->save()) {
             if($keypad->on_vote){
-                $keypad->voting_started_at = now()->format('d/m/Y H:i');;
+                $keypad->voting_started_at = now()->format('Y-m-d H:i');;
                 $keypad->voting_finished_at = null;
                 $keypad->save();
                 return back()->with('success',__('common.voting-started'));
             }
             else{
-                $keypad->voting_finished_at = now()->format('d/m/Y H:i');;
+                $keypad->voting_finished_at = now()->format('Y-m-d H:i');;
                 $keypad->save();
                 return back()->with('success',__('common.voting-stopped'));
             }

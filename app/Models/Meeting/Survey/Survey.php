@@ -44,14 +44,14 @@ class Survey extends Model
     {
         return Attribute::make(
             get: fn ($startAt) => $startAt ? Carbon::createFromFormat('Y-m-d H:i:s', $startAt)->format(Variable::where('variable','date_format')->first()->settings()->where('customer_id',Auth::user()->customer->id)->first()->value.' '.Variable::where('variable','time_format')->first()->settings()->where('customer_id',Auth::user()->customer->id)->first()->value) : null,
-            set: fn ($startAt) => $startAt ? Carbon::createFromFormat('d/m/Y H:i', $startAt)->format('Y-m-d H:i:s') : null,
+            set: fn ($startAt) => $startAt ? Carbon::createFromFormat('Y-m-d H:i', $startAt)->format('Y-m-d H:i:s') : null,
         );
     }
     protected function startAt(): Attribute
     {
         return Attribute::make(
             get: fn ($finishAt) => $finishAt ? Carbon::createFromFormat('Y-m-d H:i:s', $finishAt)->format(Variable::where('variable','date_format')->first()->settings()->where('customer_id',Auth::user()->customer->id)->first()->value.' '.Variable::where('variable','time_format')->first()->settings()->where('customer_id',Auth::user()->customer->id)->first()->value) : null,
-            set: fn ($finishAt) => $finishAt ? Carbon::createFromFormat('d/m/Y H:i', $finishAt)->format('Y-m-d H:i:s') : null,
+            set: fn ($finishAt) => $finishAt ? Carbon::createFromFormat('Y-m-d H:i', $finishAt)->format('Y-m-d H:i:s') : null,
         );
     }
     public function meeting()

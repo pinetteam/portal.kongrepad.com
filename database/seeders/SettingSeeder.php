@@ -18,7 +18,7 @@ class SettingSeeder extends Seeder
             [
                 'customer_id' => '1',
                 'variable_id' => '1',
-                'value' => 'd/m/Y',
+                'value' => 'Y-m-d',
             ],
             [
                 'customer_id' => '1',

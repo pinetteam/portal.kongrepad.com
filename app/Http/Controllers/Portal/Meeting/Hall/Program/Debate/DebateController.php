@@ -89,13 +89,13 @@ class DebateController extends Controller
         $debate->on_vote = !$debate->on_vote;
         if ($debate->save()) {
             if($debate->on_vote){
-                $debate->voting_started_at = now()->format('d/m/Y H:i');;
+                $debate->voting_started_at = now()->format('Y-m-d H:i');;
                 $debate->voting_finished_at = null;
                 $debate->save();
                 return back()->with('success',__('common.voting-started'));
             }
             else{
-                $debate->voting_finished_at = now()->format('d/m/Y H:i');
+                $debate->voting_finished_at = now()->format('Y-m-d H:i');
                 $debate->save();
                 return back()->with('success',__('common.voting-stopped'));
             }

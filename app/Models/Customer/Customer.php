@@ -70,6 +70,10 @@ class Customer extends Model
     {
         return $this->hasOneThrough(Participant::class, Meeting::class, 'customer_id', 'meeting_id', 'id', 'id');
     }
+    public function participantsLastLogin()
+    {
+        return $this->hasOneThrough(Participant::class, Meeting::class, 'customer_id', 'meeting_id', 'id', 'id')->orderBy('meeting_participants.last_login_datetime');
+    }
     public function programs()
     {
         $programs = Program::select('meeting_hall_programs.*')

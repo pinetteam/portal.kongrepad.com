@@ -3,7 +3,15 @@
 namespace App\Models\Meeting;
 
 use App\Models\Customer\Setting\Variable\Variable;
+use App\Models\Meeting\Document\Document;
 use App\Models\Meeting\Hall\MeetingHall;
+use App\Models\Meeting\Hall\Program\Chair\Chair;
+use App\Models\Meeting\Hall\Program\Debate\Debate;
+use App\Models\Meeting\Hall\Program\Program;
+use App\Models\Meeting\Hall\Program\Session\ProgramSession;
+use App\Models\Meeting\Participant\Participant;
+use App\Models\Meeting\ScoreGame\ScoreGame;
+use App\Models\Meeting\Survey\Survey;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -54,5 +62,60 @@ class Meeting extends Model
     public function halls()
     {
         return $this->hasMany(MeetingHall::class, 'meeting_id', 'id');
+    }
+
+    public function documents()
+    {
+        return $this->hasMany(Document::class, 'meeting_id', 'id');
+    }
+
+    public function surveys()
+    {
+        return $this->hasMany(Survey::class, 'meeting_id', 'id');
+    }
+
+    public function scoreGames()
+    {
+        return $this->hasMany(ScoreGame::class, 'meeting_id', 'id');
+    }
+
+    public function participants()
+    {
+        return $this->hasMany(Participant::class, 'meeting_id', 'id');
+    }
+
+    public function programs()
+    {
+        return $this->hasManyThrough(Program::class, MeetingHall::class, 'meeting_id', 'meeting_hall_id', 'id');
+    }
+
+    public function programSessions()
+    {
+        $program_sessions = ProgramSession::select('meeting_hall_program_sessions.*')
+            ->join('meeting_hall_programs', 'meeting_hall_program_sessions.program_id', '=', 'meeting_hall_programs.id')
+            ->join('meeting_halls', 'meeting_hall_programs.meeting_hall_id', '=', 'meeting_halls.id')
+            ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
+            ->where('meetings.id', $this->getkey());
+        return $program_sessions;
+    }
+
+    public function debates()
+    {
+        $debates = Debate::select('meeting_hall_program_debates.*')
+            ->join('meeting_hall_programs', 'meeting_hall_program_debates.program_id', '=', 'meeting_hall_programs.id')
+            ->join('meeting_halls', 'meeting_hall_programs.meeting_hall_id', '=', 'meeting_halls.id')
+            ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
+            ->where('meetings.id', $this->getkey());
+        return $debates;
+    }
+
+    public function programChairs()
+    {
+        $chairs = Chair::select('meeting_hall_program_chairs.*')
+            ->join('meeting_hall_programs', 'meeting_hall_program_chairs.program_id', '=', 'meeting_hall_programs.id')
+            ->join('meeting_halls', 'meeting_hall_programs.meeting_hall_id', '=', 'meeting_halls.id')
+            ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
+            ->where('meetings.id', $this->getkey());
+        return $chairs;
     }
 }
