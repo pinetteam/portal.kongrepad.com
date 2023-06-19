@@ -14,7 +14,7 @@
                     <thead class="thead-dark">
                     <tr>
                         <th scope="col"><span class="fa-regular fa-bee mx-1"></span> {{ __('common.meeting') }}</th>
-                        <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}</th>
+                        <th scope="col"><span class="fa-regular fa-pen-field mx-1"></span> {{ __('common.title') }}</th>
                         <th scope="col"><span class="fa-regular fa-calendar-arrow-up mx-1"></span> {{ __('common.start-at') }}</th>
                         <th scope="col"><span class="fa-regular fa-calendar-arrow-down mx-1"></span> {{ __('common.finish-at') }}</th>
                         <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}</th>
@@ -86,8 +86,7 @@
 
             <x-input.select method="c" name="meeting_id" title="meeting" :options="$meetings" option_value="id" option_name="title" icon="bee" />
             <x-input.number method="c" name="sort_order" title="sort" icon="circle-sort" />
-            <x-input.text method="c" name="code" title="code" icon="code-simple" />
-            <x-input.text method="c" name="title" title="title" icon="input-text" />
+            <x-input.text method="c" name="title" title="title" icon="pen-field" />
             <x-input.text method="c" name="description" title="description" icon="comment-dots" />
             <x-input.datetime method="c" name="start_at" title="start-at" icon="calendar-arrow-down" />
             <x-input.datetime method="c" name="finish_at" title="finish-at" icon="calendar-arrow-down" />
@@ -102,8 +101,7 @@
         @section('default-edit-form')
             <x-input.select method="e" name="meeting_id" title="meeting" :options="$meetings" option_value="id" option_name="title" icon="bee" />
             <x-input.number method="e" name="sort_order" title="sort" icon="circle-sort" />
-            <x-input.text method="e" name="code" title="code" icon="code-simple" />
-            <x-input.text method="e" name="title" title="title" icon="input-text" />
+            <x-input.text method="e" name="title" title="title" icon="pen-field" />
             <x-input.text method="e" name="description" title="description" icon="comment-dots" />
             <x-input.datetime method="e" name="start_at" title="start-at" icon="calendar-arrow-down" />
             <x-input.datetime method="e" name="finish_at" title="finish-at" icon="calendar-arrow-down" />

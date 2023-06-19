@@ -55,7 +55,7 @@
                             <td>{{$option->title}}</td>
                             <td>{{$option->sort_order}}</td>
                             <td>
-                                @if($question->status)
+                                @if($option->status)
                                     <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
                                 @else
                                     <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>

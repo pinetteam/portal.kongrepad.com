@@ -193,9 +193,9 @@
         <x-crud.form.common.delete name="survey"/>
         <x-crud.form.common.edit name="survey">
             @section('survey-edit-form')
+                <x-input.hidden method="e" name="meeting_id" :value="$meeting->id"/>
                 <x-input.number method="e" name="sort_order" title="sort" icon="circle-sort" />
-                <x-input.text method="e" name="code" title="code" icon="code-simple" />
-                <x-input.text method="e" name="title" title="title" icon="pen-field" />
+                <x-input.text method="e" name="title" title="title" icon="pen-to-square" />
                 <x-input.text method="e" name="description" title="description" icon="comment-dots" />
                 <x-input.datetime method="e" name="start_at" title="start-at" icon="calendar-arrow-down" />
                 <x-input.datetime method="e" name="finish_at" title="finish-at" icon="calendar-arrow-down" />

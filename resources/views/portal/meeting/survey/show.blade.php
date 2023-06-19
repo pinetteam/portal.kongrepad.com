@@ -57,7 +57,7 @@
                             <td>{{$question->title}}</td>
                             <td>{{$question->sort_order}}</td>
                             <td>
-                                @if($survey->status)
+                                @if($question->status)
                                     <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
                                 @else
                                     <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
@@ -110,7 +110,7 @@
         {{--edit form--}}
         <x-crud.form.common.edit>
             @section('default-edit-form')
-                <x-input.hidden method="c" name="survey_id" :value="$survey->id"/>
+                <x-input.hidden method="e" name="survey_id" :value="$survey->id"/>
                 <x-input.text method="e" name="title" title="title" icon="messages-question" />
                 <x-input.number method="e" name="sort_order" title="sort" icon="circle-sort" />
                 <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
