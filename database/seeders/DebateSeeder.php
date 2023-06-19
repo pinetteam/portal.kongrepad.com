@@ -19,14 +19,16 @@ class DebateSeeder extends Seeder
         Debate::insert([
             [
                 'program_id' => '11',
-                'title' => 'Debate1',
+                'title' => 'KHDAK’NDE İMMÜNOTERAPİ NEOADJUVANDA MI ADJUVANDA MI?',
+                'code'=>'KHDAK',
                 'status' => 1,
             ],
 
 
             [
                 'program_id' => '22',
-                'title' => 'Debate1',
+                'title' => 'KHDAK’NDE İMMÜNOTERAPİ NEOADJUVANDA MI ADJUVANDA MI?',
+                'code'=>'KHDAK',
                 'status' => 1,
             ],
 
