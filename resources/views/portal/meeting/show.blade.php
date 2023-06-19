@@ -193,6 +193,7 @@
         <x-crud.form.common.delete name="survey"/>
         <x-crud.form.common.edit name="survey">
             @section('survey-edit-form')
+                <x-input.hidden method="e" name="meeting_id" :value="$meeting->id"/>
                 <x-input.number method="e" name="sort_order" title="sort" icon="circle-sort" />
                 <x-input.text method="e" name="code" title="code" icon="code-simple" />
                 <x-input.text method="e" name="title" title="title" icon="pen-field" />

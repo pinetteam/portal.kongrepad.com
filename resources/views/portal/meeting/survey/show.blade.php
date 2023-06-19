@@ -57,7 +57,7 @@
                             <td>{{$question->title}}</td>
                             <td>{{$question->sort_order}}</td>
                             <td>
-                                @if($survey->status)
+                                @if($question->status)
                                     <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
                                 @else
                                     <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
