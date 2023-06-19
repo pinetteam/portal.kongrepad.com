@@ -3,10 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\Customer\Customer;
+use App\Models\Meeting\Hall\Program\Debate\Debate;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class CustomerSeeder extends Seeder
+class DebateSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,17 +16,22 @@ class CustomerSeeder extends Seeder
      */
     public function run()
     {
-        Customer::insert([
+        Debate::insert([
             [
-                'title' => 'D-Event',
-                'language' => 'en',
-                'status' => '1',
+                'program_id' => '11',
+                'title' => 'Debate1',
+                'status' => 1,
             ],
+
+
             [
-                'title' => 'P-E',
-                'language' => 'tr',
-                'status' => '1',
+                'program_id' => '22',
+                'title' => 'Debate1',
+                'status' => 1,
             ],
+
+
+
         ]);
 
     }

@@ -29,6 +29,21 @@ class MeetingHallSeeder extends Seeder
                 'title' => 'IOK 2022 Main Hall',
                 'status' => 1,
             ],
+            [
+                'meeting_id' => '4',
+                'title' => 'IOK 2020 Main Hall',
+                'status' => 1,
+            ],
+            [
+                'meeting_id' => '5',
+                'title' => 'IOK 2021 Main Hall',
+                'status' => 1,
+            ],
+            [
+                'meeting_id' => '6',
+                'title' => 'IOK 2022 Main Hall',
+                'status' => 1,
+            ],
         ]);
     }
 }

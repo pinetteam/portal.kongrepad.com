@@ -46,6 +46,16 @@ class UserSeeder extends Seeder
                 'password' => bcrypt('user'),
                 'status' => 1,
             ],
+            [
+                'customer_id' => '2',
+                'user_role_id' => '1',
+                'first_name' => 'PManager',
+                'last_name' => 'PManager',
+                'username' => 'PManager',
+                'email' => 'pmanager@kongrepad.com',
+                'password' => bcrypt('manager'),
+                'status' => 1,
+            ],
         ]);
     }
 }
