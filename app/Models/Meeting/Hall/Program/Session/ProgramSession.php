@@ -70,10 +70,6 @@ class ProgramSession extends Model
     {
         return $this->belongsTo(Program::class, 'program_id', 'id');
     }
-    public function speaker()
-    {
-        return $this->belongsTo(Participant::class, 'speaker_id', 'id');
-    }
     public function keypads()
     {
         return $this->hasMany(Keypad::class,'session_id','id');
