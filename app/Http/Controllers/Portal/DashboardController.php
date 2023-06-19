@@ -27,8 +27,7 @@ class DashboardController extends Controller
             $program_count += $meeting->programs()->where('meeting_hall_programs.status','1')->count();
             $session_count += $meeting->programSessions()->where('meeting_hall_program_sessions.status','1')->count();
             $debate_count += $meeting->debates()->where('meeting_hall_program_debates.status','1')->count();
-            // todo -> survey eklendikten sonra düzeltilecek
-            // $survey_count += $meeting->surveys()->where('meeting_hall_surveys.status','1')->count();
+            $survey_count += $meeting->surveys()->where('meeting_surveys.status','1')->count();
             $score_game_count += $meeting->scoreGames()->where('meeting_score_games.status','1')->count();
             $chair_count += $meeting->programChairs()->count();
         }
