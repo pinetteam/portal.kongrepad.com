@@ -10,7 +10,7 @@
                 <div class="col">
                 @foreach($meetings as $meeting)
                     @if($meeting->halls()->where('status','1')->count()>0)
-                    <div class="card text-bg-dark">
+                    <div class="card text-bg-dark mb-2">
                         <div class="card-header">
                             <h3 class="m-0 text-center">{{ $meeting->title }} | {{ __('common.meeting-halls') }}</h3>
                         </div>
@@ -43,43 +43,9 @@
                     </div>
                     @endif
                 @endforeach
-                    <div class="card text-bg-dark">
-                        <div class="card-header">
-                            <h3 class="m-0 text-center">{{ __('common.last-users') }}</h3>
-                        </div>
-                        <div class="card-body p-0">
-                            <div class="table-responsive">
-                                <table class="table table-dark table-striped table-hover">
-
-                                    <thead class="thead-dark">
-                                    <tr>
-                                        <th scope="col"><span class="fa-regular fa-bee mx-1"></span> {{ __('common.meeting') }}</th>
-                                        <th scope="col"><span class="fa-regular fa-id-card mx-1"></span> {{ __('common.name') }}</th>
-                                        <th scope="col"><span class="fa-regular fa-right-to-bracket mx-1"></span> {{ __('common.last-login') }}</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($participants as $participant)
-                                        <tr>
-                                            <td>{{ $participant->meeting->title }}</td>
-                                            <td>
-                                                @if($participant->activity_status)
-                                                    <div class="spinner-grow spinner-grow-sm text-success" role="status"></div>
-                                                @else
-                                                    <div class="spinner-border spinner-border-sm text-danger" role="status"></div>
-                                                @endif
-                                                {{ $participant->full_name }}
-                                            </td>
-                                            <td>{{ $participant->last_login }}</td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-                <div class="col card text-bg-dark p-0">
+                <div class="col">
+                    <div class="card text-bg-dark p-0 mb-2">
                     <div class="card-header">
                         <h2 class="m-0 text-center h3">{{ __('common.statistics') }}</h2>
                     </div>
@@ -131,6 +97,42 @@
                                 </tr>
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
+                </div>
+                    <div class="card text-bg-dark">
+                        <div class="card-header">
+                            <h3 class="m-0 text-center">{{ __('common.last-users') }}</h3>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-dark table-striped table-hover">
+
+                                    <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col"><span class="fa-regular fa-bee mx-1"></span> {{ __('common.meeting') }}</th>
+                                        <th scope="col"><span class="fa-regular fa-id-card mx-1"></span> {{ __('common.name') }}</th>
+                                        <th scope="col"><span class="fa-regular fa-right-to-bracket mx-1"></span> {{ __('common.last-login') }}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($participants as $participant)
+                                        <tr>
+                                            <td>{{ $participant->meeting->title }}</td>
+                                            <td>
+                                                @if($participant->activity_status)
+                                                    <div class="spinner-grow spinner-grow-sm text-success" role="status"></div>
+                                                @else
+                                                    <div class="spinner-border spinner-border-sm text-danger" role="status"></div>
+                                                @endif
+                                                {{ $participant->full_name }}
+                                            </td>
+                                            <td>{{ $participant->last_login }}</td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
