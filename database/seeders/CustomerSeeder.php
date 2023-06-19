@@ -21,6 +21,11 @@ class CustomerSeeder extends Seeder
                 'language' => 'en',
                 'status' => '1',
             ],
+            [
+                'title' => 'P-E',
+                'language' => 'tr',
+                'status' => '1',
+            ],
         ]);
 
     }
