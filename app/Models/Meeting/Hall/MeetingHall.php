@@ -3,6 +3,7 @@
 namespace App\Models\Meeting\Hall;
 
 use App\Models\Meeting\Hall\Program\Program;
+use App\Models\Meeting\Hall\Program\Session\ProgramSession;
 use App\Models\Meeting\Hall\Screen\Screen;
 use App\Models\Meeting\Meeting;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -34,5 +35,10 @@ class MeetingHall extends Model
     public function programs()
     {
         return $this->hasMany(Program::class, 'meeting_hall_id', 'id');
+    }
+
+    public function programSessions()
+    {
+        return $this->hasManyThrough(ProgramSession::class, Program::class, 'meeting_hall_id', 'program_id', 'id');
     }
 }

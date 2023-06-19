@@ -166,6 +166,8 @@ return [
     'chairs' => 'Chairs',
     'teams' => 'Teams',
     'speaker' => 'Speaker',
+    'current-speaker' => 'Current Speaker',
+    'current-chair' => 'Current Chair',
     'add-new-chair' => 'Add New Chair',
     'show-qr-code' => 'Show Qr Code',
     'on-vote' => 'On Vote',

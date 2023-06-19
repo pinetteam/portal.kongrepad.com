@@ -93,7 +93,8 @@ class ProgramSessionController extends Controller
     public function start_stop(string $program_id, string $id)
     {
         $program = Auth::user()->customer->programs()->findOrFail($program_id);
-        foreach($program->programSessions as $session){
+        $meeting_hall = Auth::user()->customer->meetingHalls()->findOrFail($program_id);
+        foreach($meeting_hall->programSessions as $session){
             if($session->id == $id)
                 continue;
             $session->is_started = 0;
