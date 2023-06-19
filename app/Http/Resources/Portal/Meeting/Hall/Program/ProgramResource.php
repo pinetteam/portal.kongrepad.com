@@ -21,6 +21,7 @@ class ProgramResource extends JsonResource
             'logo' => ['value'=>$this->logo, 'type'=>'file'],
             'start_at' => ['value'=>Carbon::createFromFormat(Variable::where('variable','date_format')->first()->settings()->where('customer_id',Auth::user()->customer->id)->first()->value.' '.Variable::where('variable','time_format')->first()->settings()->where('customer_id',Auth::user()->customer->id)->first()->value, $this->start_at)->format('Y-m-d H:i'), 'type'=>'datetime'],
             'finish_at' => ['value'=>Carbon::createFromFormat(Variable::where('variable','date_format')->first()->settings()->where('customer_id',Auth::user()->customer->id)->first()->value.' '.Variable::where('variable','time_format')->first()->settings()->where('customer_id',Auth::user()->customer->id)->first()->value, $this->finish_at)->format('Y-m-d H:i'), 'type'=>'datetime'],
+            'on_air' => ['value'=>$this->on_air, 'type'=>'radio'],
             'type' => ['value'=>$this->type, 'type'=>'select'],
             'status' => ['value'=>$this->status, 'type'=>'radio'],
             'route' => route('portal.program.update', $this->id),

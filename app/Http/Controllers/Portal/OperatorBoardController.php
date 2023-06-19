@@ -11,21 +11,30 @@ class OperatorBoardController extends Controller
     {
         $meeting_hall = Auth::user()->customer->meetingHalls()->findOrFail($meeting_hall_id);
         $programs = $meeting_hall->programs;
+        foreach($programs as $program){
+            $program->on_air = 0;
+            $program->save();
+        }
         $programs = $programs->values();
         if($program_order == -1)
             return back()->with('error', __('common.there-is-not-any-program-before'));
         elseif ($program_order == count($programs))
             return back()->with('error', __('common.this-is-the-last-program'));
-        else
+        else {
             $program = $programs->get($program_order);
+            $program->on_air = 1;
+            $program->save();
+        }
         if($program->type == 'session'){
+            $program_chairs = $program->programChairs()->get();
             $sessions = $program->programSessions()->get();;
-            return view('portal.operator-board.index',compact(['meeting_hall','program','sessions']));
+            return view('portal.operator-board.index',compact(['meeting_hall', 'program', 'program_chairs', 'sessions']));
         } elseif($program->type == 'debate'){
+            $program_chairs = $program->programChairs()->get();
             $debates = $program->debates()->get();
-            return view('portal.operator-board.index',compact(['meeting_hall','program','debates']));
+            return view('portal.operator-board.index',compact(['meeting_hall', 'program', 'program_chairs', 'debates']));
         } else {
-            return view('portal.operator-board.index',compact(['meeting_hall','program']));
+            return view('portal.operator-board.index',compact(['meeting_hall', 'program']));
         }
     }
 }

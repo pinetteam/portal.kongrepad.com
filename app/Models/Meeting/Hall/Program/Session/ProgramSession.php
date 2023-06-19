@@ -4,6 +4,7 @@ namespace App\Models\Meeting\Hall\Program\Session;
 
 use App\Models\Customer\Setting\Variable\Variable;
 use App\Models\Meeting\Document\Document;
+use App\Models\Meeting\Hall\Program\Program;
 use App\Models\Meeting\Hall\Program\Session\Keypad\Keypad;
 use App\Models\Meeting\Participant\Participant;
 use Carbon\Carbon;
@@ -64,6 +65,10 @@ class ProgramSession extends Model
     public function document()
     {
         return $this->belongsTo(Document::class, 'document_id', 'id');
+    }
+    public function program()
+    {
+        return $this->belongsTo(Program::class, 'program_id', 'id');
     }
     public function speaker()
     {

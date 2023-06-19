@@ -27,9 +27,62 @@
                 </div>
                 <div class="col card text-bg-dark p-0">
                     <div class="card-header">
-                        <h2 class="m-0 text-center h3">{{ __('common.scores') }}</h2>
+                        <h2 class="m-0 text-center h3">{{ __('common.chairs') }}</h2>
                     </div>
                     <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-dark table-striped table-hover">
+                                        <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col"><span class="fa-regular fa-id-card mx-1"></span> {{ __('common.name') }}</th>
+                                            <th scope="col" class="text-end"></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>{{ __('common.chair') }} 1</td>
+                                                <td class="text-end">
+                                                    <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
+                                                        <a class="btn btn-success btn-sm" href="{{ route('portal.current-chair.show',[ $meeting_hall->id, 1]) }}" title="{{ __('common.chair') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.chair') }}">
+                                                            <span class="fa-regular fa-presentation-screen"></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ __('common.chair') }} 2</td>
+                                                <td class="text-end">
+                                                    <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
+                                                        <a class="btn btn-success btn-sm" href="{{ route('portal.current-chair.show',[ $meeting_hall->id, 2]) }}" title="{{ __('common.chair') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.chair') }}">
+                                                            <span class="fa-regular fa-presentation-screen"></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ __('common.chair') }} 3</td>
+                                                <td class="text-end">
+                                                    <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
+                                                        <a class="btn btn-success btn-sm" href="{{ route('portal.current-chair.show',[ $meeting_hall->id, 3]) }}" title="{{ __('common.chair') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.chair') }}">
+                                                            <span class="fa-regular fa-presentation-screen"></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ __('common.speaker') }}</td>
+                                                <td class="text-end">
+                                                    <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
+                                                        <a class="btn btn-success btn-sm" href="{{ route('portal.current-speaker.show',[ $meeting_hall->id]) }}" title="{{ __('common.speaker') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.speaker') }}">
+                                                            <span class="fa-regular fa-presentation-screen"></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                        </div>
                     </div>
                 </div>
             </div>

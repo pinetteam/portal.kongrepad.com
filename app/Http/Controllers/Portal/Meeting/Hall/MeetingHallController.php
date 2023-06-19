@@ -78,4 +78,23 @@ class MeetingHallController extends Controller
             return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();
         }
     }
+
+    public function current_speaker(string $id)
+    {
+        $meeting_hall = Auth::user()->customer->meetingHalls()->findOrFail($id);
+        $session = $meeting_hall->programSessions()->where('is_started',1)->first();
+        $speaker = $session && $session->program->on_air && $session ? $session->speaker : null;
+        return view('portal.current-speaker.show', compact(['speaker']));
+    }
+
+    public function current_chair(string $id, string $chair_index)
+    {
+        $meeting_hall = Auth::user()->customer->meetingHalls()->findOrFail($id);
+        $program = $meeting_hall->programs()->where('on_air',1)->first();
+        if(isset($program))
+            $chair = $program->programChairs->values()->get($chair_index-1);
+        else
+            $chair = null;
+        return view('portal.program.chair.show', compact(['chair', 'chair_index']));
+    }
 }

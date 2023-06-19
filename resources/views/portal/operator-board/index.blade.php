@@ -13,7 +13,11 @@
                     <h2 class="m-0 text-center h3">{{__('common.operator-board')}}<small> {{ $meeting_hall->title }}</small></h2>
                 </div>
                 <div class="card-body p-0">
-                    <div class="row row-cols-1">
+                    @isset($program_chairs)
+                    <div class="row row-cols-1 row-cols-sm-2 flex-shrink-0 g-2">
+                        @else
+                            <div class="row">
+                        @endisset
                         <div class="col card text-bg-dark p-0">
                             <div class="card-header">
                                 <h2 class="m-0 text-center h3">{{ $program->title }}</h2>
@@ -21,7 +25,6 @@
                             <div class="card-body p-0">
                                 <ul class="list-group list-group-flush">
                                     @isset($program)
-                                    <li class="list-group-item bg-dark text-center"><img src="" alt="" class="img-thumbnail img-fluid" /></li>
                                     <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-hotel mx-1"></span> {{ __('common.meeting-hall') }}:</b> {{ $meeting_hall->title }}</li>
                                     <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-calendar-arrow-up mx-1"></span> {{ __('common.start-at') }}:</b> {{ $program->start_at }}</li>
                                     <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-calendar-arrow-down mx-1"></span> {{ __('common.finish-at') }}:</b> {{ $program->finish_at }}</li>
@@ -37,6 +40,33 @@
                                 </ul>
                             </div>
                         </div>
+                        @isset($program_chairs)
+                        <div class="col card text-bg-dark p-0">
+                            <div class="card-header">
+                                <h2 class="m-0 text-center h3">{{ __('common.chairs') }}</h2>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-dark table-striped table-hover">
+                                        <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col"><span class="fa-regular fa-id-card mx-1"></span> {{ __('common.name') }}</th>
+                                            <th scope="col"><span class="fa-regular fa-person-military-pointing mx-1"></span> {{ __('common.type') }}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($program_chairs as $program_chair)
+                                            <tr>
+                                                <td>{{ $program_chair->chair->full_name }}</td>
+                                                <td>{{ __('common.'.$program_chair->chair->type) }}</td>
+                                                </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        @endisset
                     </div>
                     @isset($sessions)
                         <div class="row row-cols-1">
@@ -382,9 +412,7 @@
                         </script>
                     @endisset
                 </div>
-                <div class="card-footer">
-                    <h2 class="m-0 text-center h3"><div id="time"></div></h2>
-                </div>
+                <h2 class="m-0 text-center h3"><div id="time"></div></h2>
             </div>
 
             <div class="col-12 col-lg-1 p-0 mb-4" id="operator-board-right">
