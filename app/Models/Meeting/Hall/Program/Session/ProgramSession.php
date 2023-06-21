@@ -6,6 +6,7 @@ use App\Models\Customer\Setting\Variable\Variable;
 use App\Models\Meeting\Document\Document;
 use App\Models\Meeting\Hall\Program\Program;
 use App\Models\Meeting\Hall\Program\Session\Keypad\Keypad;
+use App\Models\Meeting\Hall\Program\Session\Question\Question;
 use App\Models\Meeting\Participant\Participant;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -73,6 +74,10 @@ class ProgramSession extends Model
     public function keypads()
     {
         return $this->hasMany(Keypad::class,'session_id','id');
+    }
+    public function questions()
+    {
+        return $this->hasMany(Question::class,'session_id','id');
     }
     public function speaker()
     {

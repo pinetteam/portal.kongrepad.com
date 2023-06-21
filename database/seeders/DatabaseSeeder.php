@@ -28,5 +28,6 @@ class DatabaseSeeder extends Seeder
         $this->call(OptionSeeder::class);
         $this->call(DebateSeeder::class);
         $this->call(ProgramSessionSeeder::class);
+        $this->call(SessionQuestionSeeder::class);
     }
 }

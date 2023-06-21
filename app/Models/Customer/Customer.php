@@ -140,6 +140,18 @@ class Customer extends Model
         return $keypads;
     }
 
+    public function sessionQuestions()
+    {
+        $questions = \App\Models\Meeting\Hall\Program\Session\Question\Question::select('meeting_hall_program_session_questions.*')
+            ->join('meeting_hall_program_sessions', 'meeting_hall_program_session_questions.session_id', '=', 'meeting_hall_program_sessions.id')
+            ->join('meeting_hall_programs', 'meeting_hall_program_sessions.program_id', '=', 'meeting_hall_programs.id')
+            ->join('meeting_halls', 'meeting_hall_programs.meeting_hall_id', '=', 'meeting_halls.id')
+            ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
+            ->join('customers', 'meetings.customer_id', '=', 'customers.id')
+            ->where('customers.id', $this->getkey());
+        return $questions;
+    }
+
     public function options()
     {
         $keypads = Option::select('meeting_hall_program_session_keypad_options.*')

@@ -76,7 +76,7 @@
                                         </button>
                                     </div>
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
-                                        <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#default-delete-modal" data-route="{{ route('portal.question.show', ['meeting_id'=> $question->survey->meeting_id,'survey_id'=> $question->survey_id, 'question'=>$question->id,]) }}" data-record="{{ $question->title }}">
+                                        <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#default-delete-modal" data-route="{{ route('portal.question.destroy', ['meeting_id'=> $question->survey->meeting_id,'survey_id'=> $question->survey_id, 'question'=>$question->id,]) }}" data-record="{{ $question->title }}">
                                             <span class="fa-regular fa-trash"></span>
                                         </button>
                                     </div>

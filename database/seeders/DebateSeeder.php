@@ -32,8 +32,6 @@ class DebateSeeder extends Seeder
                 'status' => 1,
             ],
 
-
-
         ]);
 
     }
