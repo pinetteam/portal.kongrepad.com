@@ -6,6 +6,10 @@ import moment from'moment';
 //window.moment = Moment;
 import { TempusDominus } from '@eonasdan/tempus-dominus';
 
+window.onload = function() {
+    document.getElementById("kp-loading").style.visibility = "hidden";
+}
+
 function initializeDatePicker(element) {
     const datePicker = new TempusDominus(element, {
         localization: {

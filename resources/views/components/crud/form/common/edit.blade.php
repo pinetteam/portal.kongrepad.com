@@ -118,6 +118,7 @@
         editFormSubmit.disabled = true;
         editFormSubmit.innerHTML = '<div class="spinner-border spinner-border-sm" role="status"></div> {{ __('common.editing') }}';
         document.getElementById('{{ $name }}-edit-form').submit();
+        document.getElementById("kp-loading").style.visibility = "visible";
     });
 </script>
 @if($errors->any() && session('method') && session('route'))

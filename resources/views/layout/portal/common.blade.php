@@ -11,6 +11,11 @@
     @vite(['resources/js/app.js'])
 </head>
 <body class="d-flex flex-column h-100">
+<div id="kp-loading" class="d-flex align-items-center justify-content-center">
+    <div class="spinner-grow text-success" role="status">
+        <span class="visually-hidden">{{ __('common.loading') }}</span>
+    </div>
+</div>
 <header class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow" id="kp-header">
     <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 overflow-hidden text-center" href="{{ route("portal.dashboard.index") }}">
         @if(Auth()->check() && isset(Auth()->user()->customer->title))
@@ -19,10 +24,10 @@
             {{ config('app.name') }}
         @endif
     </a>
-    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#kp-menu" aria-controls="kp-menu" aria-expanded="false" aria-label="KongrePad Navigation">
+    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#kp-menu" aria-controls="kp-menu" aria-expanded="false">
         <i class="fa-regular fa-bars" id="kp-navbar-icon"></i>
     </button>
-    <input class="form-control w-100" id="kp-search-box" type="text" placeholder="Search..." aria-label="Search"/>
+    <input class="form-control w-100" id="kp-search-box" type="text" placeholder="{{ __('common.search') }}" aria-label="{{ __('common.search') }}" />
     <div class="navbar-nav d-none d-md-flex">
         <div class="nav-item text-nowrap"><a class="nav-link px-3" href="{{ route('auth.logout.store') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fa-regular fa-power-off"></i></a></div>
     </div>
@@ -33,133 +38,133 @@
             <ul class="nav nav-tabs flex-column">
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="{{ route("portal.dashboard.index") }}">
-                        <i class="nav-icon fa-duotone fa-clone"></i>
+                        <span class="nav-icon fa-duotone fa-clone fa-fade"></span>
                         {{ __('common.dashboard') }}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="{{ route("portal.meeting.index") }}">
-                        <i class="nav-icon fa-duotone fa-bee"></i>
+                        <span class="nav-icon fa-duotone fa-bee fa-fade"></span>
                         {{ __('common.meetings') }}
                     </a>
                 </li>
             </ul>
             <div class="sidebar-heading">
-                <i class="nav-icon fa-duotone fa-arrow-turn-down-right"></i> {{ __('common.preparation') }}
+                <span class="nav-icon fa-duotone fa-arrow-turn-down-right"></span> {{ __('common.preparation') }}
             </div>
             <ul class="nav nav-tabs flex-column">
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="{{ route("portal.participant.index") }}">
-                        <i class="nav-icon fa-duotone fa-screen-users"></i>
+                        <span class="nav-icon fa-duotone fa-screen-users fa-fade"></span>
                         {{ __('common.participants') }}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="{{ route("portal.document.index") }}">
-                        <i class="nav-icon fa-duotone fa-presentation-screen"></i>
+                        <span class="nav-icon fa-duotone fa-presentation-screen fa-fade"></span>
                         {{ __('common.documents') }}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="{{ route("portal.program.index") }}">
-                        <i class="nav-icon fa-duotone fa-newspaper"></i>
+                        <span class="nav-icon fa-duotone fa-newspaper fa-fade"></span>
                         {{ __('common.programs') }}
                     </a>
                 </li>
             </ul>
             <div class="sidebar-heading">
-                <i class="nav-icon fa-duotone fa-arrow-turn-down-right"></i> {{ __('common.event-and-activity') }}
+                <span class="nav-icon fa-duotone fa-arrow-turn-down-right"></span> {{ __('common.event-and-activity') }}
             </div>
             <ul class="nav nav-tabs flex-column">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route("portal.score-game.index") }}">
-                        <i class="nav-icon fa-duotone fa-hundred-points"></i>
+                        <span class="nav-icon fa-duotone fa-hundred-points fa-fade"></span>
                         {{ __('common.score-game') }}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route("portal.survey.index",0) }}">
-                        <i class="nav-icon fa-duotone fa-square-poll-horizontal"></i>
+                        <span class="nav-icon fa-duotone fa-square-poll-horizontal fa-fade"></span>
                         {{ __('common.surveys') }}
                     </a>
                 </li>
             </ul>
             <div class="sidebar-heading">
-                <i class="nav-icon fa-duotone fa-arrow-turn-down-right"></i> {{ __('common.environment') }}
+                <span class="nav-icon fa-duotone fa-arrow-turn-down-right"></span> {{ __('common.environment') }}
             </div>
             <ul class="nav nav-tabs flex-column">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route("portal.meeting-hall.index") }}">
-                        <i class="nav-icon fa-duotone fa-hotel"></i>
+                        <span class="nav-icon fa-duotone fa-hotel fa-fade"></span>
                         {{ __('common.meeting-halls') }}
                     </a>
                 </li>
             </ul>
             <div class="sidebar-heading">
-                <i class="nav-icon fa-duotone fa-arrow-turn-down-right"></i> {{ __('common.application') }}
+                <span class="nav-icon fa-duotone fa-arrow-turn-down-right"></span> {{ __('common.application') }}
             </div>
             <ul class="nav nav-tabs flex-column">
                 <li class="nav-item">
                     <a class="nav-link" href="#">
-                        <i class="nav-icon fa-duotone fa-brush"></i>
+                        <span class="nav-icon fa-duotone fa-brush fa-fade"></span>
                         {{ __('common.template-and-design') }}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">
-                        <i class="nav-icon fa-duotone fa-browser"></i>
+                        <span class="nav-icon fa-duotone fa-browser fa-fade"></span>
                         {{ __('common.virtual-stands') }}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">
-                        <i class="nav-icon fa-duotone fa-rectangle-ad"></i>
+                        <span class="nav-icon fa-duotone fa-rectangle-ad fa-fade"></span>
                         {{ __('common.advertisements') }}
                     </a>
                 </li>
             </ul>
             <div class="sidebar-heading">
-                <i class="nav-icon fa-duotone fa-arrow-turn-down-right"></i> {{ __('common.statistic-and-report') }}
+                <span class="nav-icon fa-duotone fa-arrow-turn-down-right"></span> {{ __('common.statistic-and-report') }}
             </div>
             <ul class="nav nav-tabs flex-column">
                 <li class="nav-item">
                     <a class="nav-link" href="#">
-                        <i class="nav-icon fa-duotone fa-wave-pulse"></i>
+                        <span class="nav-icon fa-duotone fa-wave-pulse fa-fade"></span>
                         {{ __('common.live-stats') }}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">
-                        <i class="nav-icon fa-duotone fa-chart-user"></i>
+                        <span class="nav-icon fa-duotone fa-chart-user fa-fade"></span>
                         {{ __('common.registration-reports') }}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">
-                        <i class="nav-icon fa-duotone fa-option"></i>
+                        <span class="nav-icon fa-duotone fa-option fa-fade"></span>
                         {{ __('common.survey-reports') }}
                     </a>
                 </li>
             </ul>
             <div class="sidebar-heading">
-                <i class="nav-icon fa-duotone fa-arrow-turn-down-right"></i> {{ __('common.system') }}
+                <span class="nav-icon fa-duotone fa-arrow-turn-down-right"></span> {{ __('common.system') }}
             </div>
             <ul class="nav nav-tabs flex-column">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route("portal.user.index") }}">
-                        <i class="nav-icon fa-duotone fa-users"></i>
+                        <span class="nav-icon fa-duotone fa-users fa-fade"></span>
                         {{ __('common.users') }}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route("portal.user-role.index") }}">
-                        <i class="nav-icon fa-duotone fa-person-military-pointing"></i>
+                        <span class="nav-icon fa-duotone fa-person-military-pointing fa-fade"></span>
                         {{ __('common.user-roles') }}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route("portal.setting.index") }}">
-                        <i class="nav-icon fa-duotone fa-gears"></i>
+                        <span class="nav-icon fa-duotone fa-gears fa-fade"></span>
                         {{ __('common.settings') }}
                     </a>
                 </li>

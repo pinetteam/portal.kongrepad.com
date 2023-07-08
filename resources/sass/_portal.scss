@@ -1,4 +1,19 @@
 /*
+ * Loading Block
+ */
+#kp-loading {
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    position: fixed;
+    display: block;
+    z-index: 9999;
+    background-color: $dark;
+    opacity: .95;
+}
+
+/*
  * Common Header
  */
 #kp-navbar-icon {

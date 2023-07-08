@@ -49,6 +49,7 @@
         createFormSubmit.disabled = true;
         createFormSubmit.innerHTML = '<div class="spinner-border spinner-border-sm" role="status"></div> {{ __('common.creating') }}';
         document.getElementById('{{ $name }}-create-form').submit();
+        document.getElementById("kp-loading").style.visibility = "visible";
     });
 </script>
 @if($errors->any() && session('method'))

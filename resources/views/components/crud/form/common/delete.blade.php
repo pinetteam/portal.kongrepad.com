@@ -48,5 +48,6 @@
         deleteFormSubmit.disabled = true;
         deleteFormSubmit.innerHTML = '<div class="spinner-border spinner-border-sm" role="status"></div> {{ __('common.deleting') }}';
         document.getElementById('{{ $name }}-delete-form').submit();
+        document.getElementById("kp-loading").style.visibility = "visible";
     });
 </script>
