@@ -29,11 +29,13 @@
 <script type="module">
     const editModal = document.getElementById('{{ $name }}-edit-modal');
     editModal.addEventListener('show.bs.modal', event => {
+        document.getElementById("kp-loading").style.visibility = "visible";
         if(event.relatedTarget) {
             const button = event.relatedTarget;
             let url = button.getAttribute('data-resource');
             fetch(url)
                 .then((response) => {
+                    document.getElementById("kp-loading").style.visibility = "hidden";
                     return response.json();
                 })
                 .then((data) => {
