@@ -5,7 +5,7 @@
     </label>
     <div class="btn-group w-100" role="group" aria-label="{{ __('common.'.$title) }}">
         @foreach($options as $option=>$value)
-            <input type="radio" name="{{ $name }}" class="btn-check @error($name)is-invalid @enderror" id="{{ $method }}-{{ $name }}-{{ $value[$option_value] }}" value="{{ $value[$option_value] }}"{{ ((old($name) !== null) && old($name) == $value[$option_value]) ? ' checked' : '' }} />
+            <input type="radio" name="{{ $name }}" class="btn-check @error($name)is-invalid @enderror" id="{{ $method }}-{{ $name }}-{{ $value[$option_value] }}" value="{{ $value[$option_value] }}" autocomplete="false"{{ ((old($name) !== null) && old($name) == $value[$option_value]) ? ' checked' : '' }} />
             <label class="btn btn-outline-{{ $value['color'] }}" for="{{ $method }}-{{ $name }}-{{ $value[$option_value] }}">{{ $value[$option_name] }}</label>
         @endforeach
     </div>

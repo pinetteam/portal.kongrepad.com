@@ -3,7 +3,7 @@
     <label for="{{ $method }}-{{ $name }}" class="form-label">
         <i class="fa-regular fa-{{ $icon }}"></i> {{ __('common.'.$title) }}
     </label>
-    <select multiple name="{{ $name }}" class="form-select @error($name)is-invalid @enderror" id="{{ $method }}-{{ $name }}" aria-label="{{ __('common.'.$title) }}">
+    <select multiple name="{{ $name }}" class="form-select @error($name)is-invalid @enderror" id="{{ $method }}-{{ $name }}" aria-label="{{ __('common.'.$title) }}" autocomplete="false">
         <option selected value="">{{ __('common.choose') }}</option>
         @foreach($options as $option)
             @if(is_array($option))

@@ -10,7 +10,10 @@ class LoginController extends Controller
 {
     public function index()
     {
-        return view('auth.login.index');
+        $remember = [
+            'remember' => ['value' => true, 'title' => 'always-login-on-this-device'],
+        ];
+        return view('auth.login.index', compact('remember'));
     }
     public function store(Request $request)
     {

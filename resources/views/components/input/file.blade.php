@@ -4,7 +4,7 @@
         <i class="fa-regular fa-{{ $icon }}"></i> {{ __('common.'.$title) }}
     </label>
     <div class="custom-file">
-        <input type="file" name="{{ $name }}" class="form-control @error($name)is-invalid @enderror" id="{{ $method }}-{{ $name }}" />
+        <input type="file" name="{{ $name }}" class="form-control @error($name)is-invalid @enderror" id="{{ $method }}-{{ $name }}" autocomplete="false" />
     </div>
     @error($name)
         <div class="invalid-feedback d-block">
