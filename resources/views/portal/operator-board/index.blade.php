@@ -14,10 +14,10 @@
                 </div>
                 <div class="card-body p-0">
                     @isset($program_chairs)
-                    <div class="row row-cols-1 row-cols-sm-2 flex-shrink-0 g-2">
-                        @else
-                            <div class="row">
-                        @endisset
+                        <div class="row row-cols-1 row-cols-sm-2 flex-shrink-0 g-2">
+                    @else
+                        <div class="row">
+                    @endisset
                         <div class="col card text-bg-dark p-0">
                             <div class="card-header">
                                 <h2 class="m-0 text-center h3">{{ $program->title }}</h2>
@@ -52,6 +52,7 @@
                                         <tr>
                                             <th scope="col"><span class="fa-regular fa-id-card mx-1"></span> {{ __('common.name') }}</th>
                                             <th scope="col"><span class="fa-regular fa-person-military-pointing mx-1"></span> {{ __('common.type') }}</th>
+                                            <th scope="col" class="text-end"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -59,13 +60,34 @@
                                             <tr>
                                                 <td>{{ $program_chair->chair->full_name }}</td>
                                                 <td>{{ __('common.'.$program_chair->chair->type) }}</td>
+                                                <td class="text-end">
+                                                    <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
+                                                        <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
+                                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#chair-delete-modal" data-route="{{ route('portal.chair.destroy', $program_chair->id) }}" data-record="{{ $program_chair->chair->full_name }}">
+                                                                <span class="fa-regular fa-trash"></span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </td>
                                                 </tr>
                                         @endforeach
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
+                            <div class="card-footer d-flex justify-content-center">
+                                <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#chair-create-modal" data-route="{{ route('portal.chair.store') }}">
+                                    <i class="fa-solid fa-plus"></i> {{ __('common.add-new-chair') }}
+                                </button>
+                            </div>
                         </div>
+                        <x-crud.form.common.create name="chair">
+                            @section('chair-create-form')
+                                <x-input.hidden method="c" name="program_id" :value="$program->id" />
+                                <x-input.select method="c" name="chair_id" title="chair" :options="$chairs" option_value="id" option_name="full_name" icon="id-card" />
+                            @endsection
+                        </x-crud.form.common.create>
+                        <x-crud.form.common.delete name="chair" />
                         @endisset
                     </div>
                     @isset($sessions)

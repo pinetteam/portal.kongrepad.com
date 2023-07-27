@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Auth;
 class Meeting extends Model
 {
     use HasFactory, SoftDeletes;
+
     protected $table = 'meetings';
     protected $fillable = [
         'customer_id',
@@ -44,18 +45,21 @@ class Meeting extends Model
         'finish_at' => 'datetime:Y-m-d',
         'deleted_at' => 'datetime',
     ];
+
     protected function startAt(): Attribute
     {
         return Attribute::make(
-            get: fn (string $startAt) => Carbon::createFromFormat('Y-m-d', $startAt)->format(Variable::where('variable','date_format')->first()->settings()->where('customer_id',Auth::user()->customer->id)->first()->value),
-            set: fn (string $startAt) => Carbon::createFromFormat('Y-m-d', $startAt)->format('Y-m-d'),
+            get: fn(string $startAt) => Carbon::createFromFormat('Y-m-d', $startAt)->format(Variable::where('variable', 'date_format')->first()->settings()->where('customer_id', Auth::user()->customer->id)->first()->value),
+            set: fn(string $startAt) => Carbon::createFromFormat('Y-m-d', $startAt)->format('Y-m-d'),
         );
+
     }
+
     protected function finishAt(): Attribute
     {
         return Attribute::make(
-            get: fn (string $finishAt) => Carbon::createFromFormat('Y-m-d', $finishAt)->format(Variable::where('variable','date_format')->first()->settings()->where('customer_id',Auth::user()->customer->id)->first()->value),
-            set: fn (string $finishAt) => Carbon::createFromFormat('Y-m-d', $finishAt)->format('Y-m-d'),
+            get: fn(string $finishAt) => Carbon::createFromFormat('Y-m-d', $finishAt)->format(Variable::where('variable', 'date_format')->first()->settings()->where('customer_id', Auth::user()->customer->id)->first()->value),
+            set: fn(string $finishAt) => Carbon::createFromFormat('Y-m-d', $finishAt)->format('Y-m-d'),
         );
     }
 

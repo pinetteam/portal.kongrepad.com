@@ -10,6 +10,23 @@
     @vite(['resources/sass/app.scss'])
     @vite(['resources/js/app.js'])
 </head>
+<script src="https://js.pusher.com/8.0.1/pusher.min.js"></script>
+<script>
+    Pusher.logToConsole = true;
+    var pusher = new Pusher('{{env('PUSHER_APP_KEY')}}', {
+        cluster: 'eu',
+        forceTLS: true
+    });
+
+    var channel = pusher.subscribe('my-channel');
+
+    channel.bind('form-submitted', function(data) {
+        var node = document.createElement('li');
+        var textNode = document.createTextNode(JSON.stringify(data.text));
+        node.appendChild(textNode);
+        document.getElementById('messages').appendChild(node);
+    });
+</script>
 <body class="d-flex flex-column h-100">
 <header class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow" id="kp-header">
     <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 overflow-hidden text-center" href="{{ route("portal.dashboard.index") }}">
@@ -23,6 +40,8 @@
 <main class="col-md-12 col-lg-12 ms-sm-auto px-md-4 flex-grow-1 d-flex align-items-stretch" id="kp-main">
     <div class="card text-center text-bg-dark w-100">
         <div class="card-body justify-content-center d-flex align-items-center">
+            <h1>Mesajlar</h1>
+            <ul id="messages"></ul>
             @isset($speaker)
                 <ul>
                     <li class = "list-group-item" ><h1 class="display-1" >{{ $speaker->full_name }}</h1></li>

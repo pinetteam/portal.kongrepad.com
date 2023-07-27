@@ -191,9 +191,6 @@ return [
     'decrement' => 'Decrement',
     'statistics' => 'Statistics',
     'last-users' => 'Last Users',
-    'chair-board' => 'Chair Board',
-    'on-screen' => 'On Screen',
-    'you-have-reached-the-question-limit' => 'You Have Reached The Question Limit',
     'start-stop-questions' => 'Start-Stop Questions',
     'questions-auto-start' => 'Questions Auto Start',
     'start-stop-voting' => 'Start-Stop Voting',
@@ -208,4 +205,8 @@ return [
     'are-you-sure-you-want-to-stop' => 'Are you sure you want to stop:',
     'are-you-sure-you-want-to-stop-other-sessions-and-start' => 'Are you sure you want to stop other sessions and start:',
     'are-you-sure-you-want-to-stop-voting-other-debates-and-start-voting' => 'Are you sure you want to stop voting other debates and start voting:',
+    // todo Türkçe karşılıkları yazılacak
+    'chair-board' => 'Chair Board',
+    'on-screen' => 'On Screen',
+    'you-have-reached-the-question-limit' => 'You Have Reached The Question Limit',
 ];

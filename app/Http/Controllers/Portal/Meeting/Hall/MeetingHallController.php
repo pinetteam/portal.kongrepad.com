@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Portal\Meeting\Hall;
 
+use App\Events\FormSubmitted;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Portal\Meeting\Hall\MeetingHallRequest;
 use App\Http\Resources\Portal\Meeting\Hall\MeetingHallResource;
@@ -84,6 +85,7 @@ class MeetingHallController extends Controller
         $meeting_hall = Auth::user()->customer->meetingHalls()->findOrFail($id);
         $session = $meeting_hall->programSessions()->where('is_started',1)->first();
         $speaker = $session && $session->program->on_air && $session ? $session->speaker : null;
+        event(new FormSubmitted("sdsdsd"));
         return view('portal.current-speaker.show', compact(['speaker']));
     }
 
