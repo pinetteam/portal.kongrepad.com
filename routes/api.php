@@ -25,6 +25,7 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
         Route::resource('/keypad', \App\Http\Controllers\API\Meeting\Hall\Program\Session\Keypad\KeypadController::class)->except(['create']);
         Route::resource('/program/{program_id}/session', \App\Http\Controllers\API\Meeting\Hall\Program\Session\ProgramSessionController::class)->except(['create']);
         Route::resource('/program/{program_id}/debate', \App\Http\Controllers\API\Meeting\Hall\Program\Debate\DebateController::class)->except(['create']);
+        Route::resource('/meeting-hall/{meeting_hall_id}/session-question', \App\Http\Controllers\API\Meeting\Hall\Program\Session\Question\QuestionController::class)->except(['create']);
         Route::get('participant', [\App\Http\Controllers\API\Participant\ParticipantController::class, 'index'])->name('participant.index');
     });
 });

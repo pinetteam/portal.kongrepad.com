@@ -16,26 +16,10 @@ class MeetingHallController extends Controller
     {
         return $request->user()->meeting->halls()->get();
     }
-    public function store(MeetingHallRequest $request)
-    {
-        if ($request->validated()) {
-            $meeting_hall = new MeetingHall();
-            $meeting_hall->meeting_id = $request->input('meeting_id');
-            $meeting_hall->title = $request->input('title');
-            $meeting_hall->status = $request->input('status');
-            if ($meeting_hall->save()) {
-                $meeting_hall->created_by = Auth::user()->id;
-                $meeting_hall->save();
-                return back()->with('success', __('common.created-successfully'));
-            } else {
-                return back()->with('create_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
-            }
-        }
-    }
     public function show(Request $request, string $meeting_id, string $meeting_hall_id)
     {
 
-        return new MeetingHallResource($request->user()->meeting->halls()->findOrFail($meeting_hall_id)) ;
+        return $request->user()->meeting->halls()->findOrFail($meeting_hall_id) ;
     }
     public function active_document(Request $request, string $meeting_id,string $id)
     {
