@@ -15,7 +15,7 @@ class DocumentResource extends JsonResource
             'sharing_via_email' => ['value'=>$this->sharing_via_email, 'type'=>'radio'],
             'type' => ['value'=>$this->type, 'type'=>'select'],
             'status' => ['value'=>$this->status, 'type'=>'radio'],
-            'route' => route('portal.document.update', $this->id),
+            'route' => route('portal.meeting.document.update', ['meeting' => $this->meeting_id, 'document' => $this->id]),
         ];
     }
 }

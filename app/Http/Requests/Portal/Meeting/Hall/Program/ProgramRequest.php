@@ -50,7 +50,7 @@ class ProgramRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'meeting_hall_id' => __('common.meeting-hall'),
+            'meeting_hall_id' => __('common.hall'),
             'sort_id' => __('common.sort'),
             'code' => __('common.code'),
             'title' => __('common.title'),

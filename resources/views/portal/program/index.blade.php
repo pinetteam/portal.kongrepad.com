@@ -13,7 +13,7 @@
                     </caption>
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col"><span class="fa-regular fa-hotel mx-1"></span> {{ __('common.meeting-hall') }}</th>
+                            <th scope="col"><span class="fa-regular fa-hotel mx-1"></span> {{ __('common.hall') }}</th>
                             <th scope="col"><span class="fa-regular fa-circle-sort mx-1"></span> {{ __('common.sort') }}</th>
                             <th scope="col"><span class="fa-regular fa-code-simple mx-1"></span> {{ __('common.code') }}</th>
                             <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}</th>

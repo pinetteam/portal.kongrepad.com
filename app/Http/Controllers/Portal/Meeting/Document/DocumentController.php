@@ -12,10 +12,10 @@ use Illuminate\Support\Str;
 
 class DocumentController extends Controller
 {
-    public function index()
+    public function index(int $meeting)
     {
         $documents = Auth::user()->customer->documents()->paginate(20);
-        $meetings = Auth::user()->customer->meetings()->where('meetings.status', 1)->get();
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
         $sharing_via_emails = [
             'not-allowed' => ["value" => 0, "title" => __('common.not-allowed'), 'color' => 'danger'],
             'allowed' => ["value" => 1, "title" => __('common.allowed'), 'color' => 'success'],
@@ -24,13 +24,13 @@ class DocumentController extends Controller
             'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.document.index', compact(['documents', 'meetings', 'sharing_via_emails', 'statuses']));
+        return view('portal.meeting.document.index', compact(['documents', 'meeting', 'sharing_via_emails', 'statuses']));
     }
-    public function store(DocumentRequest $request)
+    public function store(DocumentRequest $request, int $meeting)
     {
         if ($request->validated()) {
             $document = new Document();
-            $document->meeting_id = $request->input('meeting_id');
+            $document->meeting_id = $meeting;
             if ($request->hasFile('file')) {
                 $file = $request->file('file');
                 $file_name = Str::uuid()->toString();
@@ -54,21 +54,21 @@ class DocumentController extends Controller
             }
         }
     }
-    public function show(string $id)
+    public function show(int $meeting, int $id)
     {
-        $document = Auth::user()->customer->documents()->findOrFail($id);
+        $document = Auth::user()->customer->documents()->where('meeting_id', $meeting)->findOrFail($id);
         return response()->file(storage_path('app/documents/'.$document->file_name.'.'.$document->file_extension));
     }
-    public function edit(string $id)
+    public function edit(int $meeting, int $id)
     {
-        $document = Auth::user()->customer->documents()->findOrFail($id);
+        $document = Auth::user()->customer->documents()->where('meeting_id', $meeting)->findOrFail($id);
         return new DocumentResource($document);
     }
-    public function update(DocumentRequest $request, string $id)
+    public function update(DocumentRequest $request, int $meeting, int $id)
     {
         if ($request->validated()) {
-            $document = Auth::user()->customer->documents()->findOrFail($id);
-            $document->meeting_id = $request->input('meeting_id');
+            $document = Auth::user()->customer->documents()->where('meeting_id', $meeting)->findOrFail($id);
+            $document->meeting_id = $meeting;
             if ($request->hasFile('file')) {
                 $file = $request->file('file');
                 $file_name = $document->file_name;
@@ -92,9 +92,9 @@ class DocumentController extends Controller
             }
         }
     }
-    public function destroy(string $id)
+    public function destroy(int $meeting, int $id)
     {
-        $document = Auth::user()->customer->documents()->findOrFail($id);
+        $document = Auth::user()->customer->documents()->where('meeting_id', $meeting)->findOrFail($id);
         if ($document->delete()) {
             $document->deleted_by = Auth::user()->id;
             $document->save();

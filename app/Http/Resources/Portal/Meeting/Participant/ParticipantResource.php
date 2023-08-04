@@ -24,7 +24,7 @@ class ParticipantResource extends JsonResource
             'type' => ['value'=>$this->type, 'type'=>'select'],
             'confirmation' => ['value'=>$this->confirmation, 'type'=>'radio'],
             'status' => ['value'=>$this->status, 'type'=>'radio'],
-            'route' => route('portal.participant.update', $this->id),
+            'route' => route('portal.member.participant.update', ['meeting' => $this->meeting_id, 'participant' => $this->id]),
         ];
     }
 }

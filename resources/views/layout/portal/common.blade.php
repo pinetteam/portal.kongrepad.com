@@ -54,13 +54,13 @@
             </div>
             <ul class="nav nav-tabs flex-column">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{ route("portal.participant.index") }}">
+                    <a class="nav-link" aria-current="page" href="#">
                         <span class="nav-icon fa-duotone fa-screen-users fa-fade"></span>
                         {{ __('common.participants') }}
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{ route("portal.document.index") }}">
+                    <a class="nav-link" aria-current="page" href="#">
                         <span class="nav-icon fa-duotone fa-presentation-screen fa-fade"></span>
                         {{ __('common.documents') }}
                     </a>
@@ -83,7 +83,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route("portal.survey.index",0) }}">
+                    <a class="nav-link" href="#">
                         <span class="nav-icon fa-duotone fa-square-poll-horizontal fa-fade"></span>
                         {{ __('common.surveys') }}
                     </a>

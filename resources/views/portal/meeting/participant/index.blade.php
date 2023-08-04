@@ -1,9 +1,9 @@
 @extends('layout.portal.common')
-@section('title', __('common.participants'))
+@section('title', $meeting->title .' | ' . __('common.participants'))
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">
-            <h1 class="m-0 text-center">{{ __('common.participants') }}</h1>
+            <h1 class="m-0 text-center"><span class="fa-duotone fa-screen-users fa-fade"></span> <small>"{{ $meeting->title }}"</small> {{ __('common.participants') }}</h1>
         </div>
         <div class="card-body p-0">
             <div class="table-responsive">
@@ -53,20 +53,20 @@
                                 <td class="text-end">
                                     <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show-qr-code') }}">
-                                            <button class="btn btn-outline-success btn-sm" title="{{ __('common.show-qr-code') }}" data-bs-toggle="modal" data-bs-target="#show-qr-code-modal" data-resource="{{ route('portal.participant.qr-code.show', $participant->id) }}" data-id="{{ $participant->id }}">
+                                            <button class="btn btn-outline-success btn-sm" title="{{ __('common.show-qr-code') }}" data-bs-toggle="modal" data-bs-target="#show-qr-code-modal" data-resource="{{ route('portal.meeting.participant.qr-code', ['meeting' => $participant->meeting->id, 'participant' => $participant->id]) }}" data-id="{{ $participant->id }}">
                                                 <span class="fa-regular fa-qrcode"></span>
                                             </button>
                                         </div>
-                                        <a class="btn btn-info btn-sm" href="{{ route('portal.participant.show', $participant->id) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
+                                        <a class="btn btn-info btn-sm" href="{{ route('portal.meeting.participant.show', ['meeting' => $participant->meeting->id, 'participant' => $participant->id]) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
                                             <span class="fa-regular fa-eye"></span>
                                         </a>
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.edit') }}">
-                                            <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#default-edit-modal" data-route="{{ route('portal.participant.update', $participant->id) }}" data-resource="{{ route('portal.participant.edit', $participant->id) }}" data-id="{{ $participant->id }}">
+                                            <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#default-edit-modal" data-route="{{ route('portal.meeting.participant.update', ['meeting' => $participant->meeting->id, 'participant' => $participant->id]) }}" data-resource="{{ route('portal.meeting.participant.edit', ['meeting' => $participant->meeting->id, 'participant' => $participant->id]) }}" data-id="{{ $participant->id }}">
                                                 <span class="fa-regular fa-pen-to-square"></span>
                                             </button>
                                         </div>
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
-                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#default-delete-modal" data-route="{{ route('portal.participant.destroy', $participant->id) }}" data-record="{{ $participant->full_name }}">
+                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#default-delete-modal" data-route="{{ route('portal.meeting.participant.destroy', ['meeting' => $participant->meeting->id, 'participant' => $participant->id]) }}" data-record="{{ $participant->full_name }}">
                                                 <span class="fa-regular fa-trash"></span>
                                             </button>
                                         </div>
@@ -79,7 +79,7 @@
             </div>
         </div>
         <div class="card-footer d-flex justify-content-center">
-            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#default-create-modal" data-route="{{ route('portal.participant.store') }}">
+            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#default-create-modal" data-route="{{ route('portal.meeting.participant.store', ['meeting' => $meeting->id]) }}">
                 <i class="fa-solid fa-plus"></i> {{ __('common.create-new-participant') }}
             </button>
         </div>
@@ -87,7 +87,7 @@
     <x-common.popup.show name="show-qr-code" title="{{ __('common.show-qr-code') }}" />
     <x-crud.form.common.create>
         @section('default-create-form')
-            <x-input.select method="c" name="meeting_id" title="meeting" :options="$meetings" option_value="id" option_name="title" icon="bee" />
+            <x-input.hidden method="c" name="meeting_id" :value="$meeting->id" />
             <x-input.text method="c" name="title" title="title" icon="input-text" />
             <x-input.text method="c" name="first_name" title="first-name" icon="id-card" />
             <x-input.text method="c" name="last_name" title="last-name" icon="id-card" />
@@ -104,7 +104,7 @@
     <x-crud.form.common.delete />
     <x-crud.form.common.edit>
         @section('default-edit-form')
-            <x-input.select method="e" name="meeting_id" title="meeting" :options="$meetings" option_value="id" option_name="title" icon="bee" />
+            <x-input.hidden method="c" name="meeting_id" :value="$meeting->id" />
             <x-input.text method="e" name="title" title="title" icon="input-text" />
             <x-input.text method="e" name="first_name" title="first-name" icon="id-card" />
             <x-input.text method="e" name="last_name" title="last-name" icon="id-card" />

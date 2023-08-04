@@ -12,10 +12,10 @@ use Illuminate\Support\Str;
 
 class ParticipantController extends Controller
 {
-    public function index()
+    public function index(int $meeting)
     {
-        $participants = Auth::user()->customer->participants()->paginate(20);
-        $meetings = Auth::user()->customer->meetings()->where('status', 1)->get();
+        $participants = Auth::user()->customer->participants()->where('meeting_id', $meeting)->paginate(20);
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
         $phone_countries = SystemCountry::get();
         $types = [
             'agent' => ["value" => "agent", "title" => __('common.agent')],
@@ -26,13 +26,13 @@ class ParticipantController extends Controller
             'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.participant.index', compact(['participants', 'meetings', 'phone_countries', 'types', 'statuses']));
+        return view('portal.meeting.participant.index', compact(['participants', 'meeting', 'phone_countries', 'types', 'statuses']));
     }
-    public function store(ParticipantRequest $request)
+    public function store(ParticipantRequest $request, int $meeting)
     {
         if ($request->validated()) {
             $participant = new Participant();
-            $participant->meeting_id = $request->input('meeting_id');
+            $participant->meeting_id = $meeting;
             $participant->username = Str::uuid()->toString();
             $participant->qr_code = \SimpleSoftwareIO\QrCode\Facades\QrCode::size(200)->generate($participant->username);
             $participant->title = $request->input('title');
@@ -55,25 +55,25 @@ class ParticipantController extends Controller
             }
         }
     }
-    public function show(string $id)
+    public function show(int $id, int $meeting)
     {
-        $participant = Auth::user()->customer->participants()->findOrFail($id);
+        $participant = Auth::user()->customer->participants()->where('meeting_id', $meeting)->findOrFail($id);
         $statuses = [
             'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.participant.show', compact(['participant', 'statuses']));
+        return view('portal.meeting.participant.show', compact(['participant', 'statuses']));
     }
-    public function edit(string $id)
+    public function edit(int $id, int $meeting)
     {
-        $participant = Auth::user()->customer->participants()->findOrFail($id);
+        $participant = Auth::user()->customer->participants()->where('meeting_id', $meeting)->findOrFail($id);
         return new ParticipantResource($participant);
     }
-    public function update(ParticipantRequest $request, string $id)
+    public function update(ParticipantRequest $request, int $id, int $meeting)
     {
         if ($request->validated()) {
-            $participant = Auth::user()->customer->participants()->findOrFail($id);
-            $participant->meeting_id = $request->input('meeting_id');
+            $participant = Auth::user()->customer->participants()->where('meeting_id', $meeting)->findOrFail($id);
+            $participant->meeting_id = $meeting;
             $participant->title = $request->input('title');
             $participant->first_name = $request->input('first_name');
             $participant->last_name = $request->input('last_name');
@@ -95,9 +95,9 @@ class ParticipantController extends Controller
             }
         }
     }
-    public function destroy(string $id)
+    public function destroy(int $id, int $meeting)
     {
-        $participant = Auth::user()->customer->participants()->findOrFail($id);
+        $participant = Auth::user()->customer->participants()->where('meeting_id', $meeting)->findOrFail($id);
         if ($participant->delete()) {
             $participant->deleted_by = Auth::user()->id;
             $participant->save();
@@ -106,9 +106,9 @@ class ParticipantController extends Controller
             return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();
         }
     }
-    public function qr_code(string $id)
+    public function qr_code(int $meeting, int $id)
     {
-        $participant = Auth::user()->customer->participants()->findOrFail($id);
+        $participant = Auth::user()->customer->participants()->where('meeting_id', $meeting)->findOrFail($id);
         return $participant->qr_code;
     }
 }

@@ -13,7 +13,7 @@ class HallResource extends JsonResource
             'meeting_id' => ['value'=>$this->meeting_id, 'type'=>'select'],
             'title' => ['value'=>$this->title, 'type'=>'text'],
             'status' => ['value'=>$this->status, 'type'=>'radio'],
-            'route' => route('portal.meeting-hall.update', ['meeting' => $this->meeting_id, 'meeting_hall' => $this->id]),
+            'route' => route('portal.meeting.hall.update', ['meeting' => $this->meeting_id, 'hall' => $this->id]),
         ];
     }
 }
