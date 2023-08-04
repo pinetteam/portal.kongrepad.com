@@ -4,8 +4,8 @@ namespace App\Models\User;
 
 use App\Models\Customer\Customer;
 use App\Models\System\Country\SystemCountry;
-use App\Models\User\Role\UserRole;
-use App\Models\User\Session\UserSession;
+use App\Models\User\Role\Role;
+use App\Models\User\Session\Session;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -16,7 +16,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
+    use HasFactory, Notifiable, SoftDeletes;
     protected $table = 'users';
     protected $fillable = [
         'user_role_id',
@@ -96,10 +96,10 @@ class User extends Authenticatable
     }
     public function userRole()
     {
-        return $this->belongsTo(UserRole::class, 'user_role_id', 'id');
+        return $this->belongsTo(Role::class, 'user_role_id', 'id');
     }
     public function sessions()
     {
-        return $this->hasMany(UserSession::class, 'user_id', 'id');
+        return $this->hasMany(Session::class, 'user_id', 'id');
     }
 }

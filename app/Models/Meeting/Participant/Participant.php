@@ -13,7 +13,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Participant extends Model
 {
-    use HasApiTokens, HasFactory, SoftDeletes;
+    use HasApiTokens, SoftDeletes;
     protected $table = 'meeting_participants';
     protected $fillable = [
         'meeting_id',

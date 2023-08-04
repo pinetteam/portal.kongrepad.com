@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Resources\Portal\Meeting\Hall;
+namespace App\Http\Resources\Portal\User\Role;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class MeetingHallResource extends JsonResource
+class RoleResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
         return [
-            'meeting_id' => ['value'=>$this->meeting_id, 'type'=>'select'],
             'title' => ['value'=>$this->title, 'type'=>'text'],
+            'access_scopes' => ['value'=>$this->access_scopes, 'type'=>'checkbox'],
             'status' => ['value'=>$this->status, 'type'=>'radio'],
-            'route' => route('portal.meeting-hall.update', $this->id),
+            'route' => route('portal.user-role.update', $this->id),
         ];
     }
 }

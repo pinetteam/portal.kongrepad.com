@@ -21,7 +21,7 @@ class SurveyResource extends JsonResource
             'finish_at' => ['value'=>Carbon::createFromFormat(Variable::where('variable','date_format')->first()->settings()->where('customer_id',Auth::user()->customer->id)->first()->value.' '.Variable::where('variable','time_format')->first()->settings()->where('customer_id',Auth::user()->customer->id)->first()->value, $this->finish_at)->format('Y-m-d H:i'), 'type'=>'datetime'],
             'on_air' => ['value'=>$this->on_vote, 'type'=>'radio'],
             'status' => ['value'=>$this->status, 'type'=>'radio'],
-            'route' => route('portal.survey.update', [$this->meeting_id, $this->id]),
+            'route' => route('portal.survey.update', ['meeting' => $this->meeting_id, 'survey' => $this->id]),
         ];
     }
 }

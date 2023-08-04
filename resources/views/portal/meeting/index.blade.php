@@ -3,7 +3,7 @@
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">
-            <h1 class="m-0 text-center">{{ __('common.meetings') }}</h1>
+            <h1 class="m-0 text-center"><span class="fa-duotone fa-bee fa-fade"></span> {{ __('common.meetings') }}</h1>
         </div>
         <div class="card-body p-0">
             <div class="table-responsive">

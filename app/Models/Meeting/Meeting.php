@@ -4,7 +4,7 @@ namespace App\Models\Meeting;
 
 use App\Models\Customer\Setting\Variable\Variable;
 use App\Models\Meeting\Document\Document;
-use App\Models\Meeting\Hall\MeetingHall;
+use App\Models\Meeting\Hall\Hall;
 use App\Models\Meeting\Hall\Program\Chair\Chair;
 use App\Models\Meeting\Hall\Program\Debate\Debate;
 use App\Models\Meeting\Hall\Program\Program;
@@ -66,7 +66,7 @@ class Meeting extends Model
 
     public function halls()
     {
-        return $this->hasMany(MeetingHall::class, 'meeting_id', 'id');
+        return $this->hasMany(Hall::class, 'meeting_id', 'id');
     }
 
     public function documents()
@@ -91,7 +91,7 @@ class Meeting extends Model
 
     public function programs()
     {
-        return $this->hasManyThrough(Program::class, MeetingHall::class, 'meeting_id', 'meeting_hall_id', 'id');
+        return $this->hasManyThrough(Program::class, Hall::class, 'meeting_id', 'meeting_hall_id', 'id');
     }
 
     public function programSessions()

@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Portal\Meeting\Hall\Program\Session;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Portal\Meeting\Hall\Program\Session\ProgramSessionRequest;
-use App\Http\Resources\Portal\Meeting\Hall\Program\Session\ProgramSessionResource;
+use App\Http\Requests\Portal\Meeting\Hall\Program\Session\SessionRequest;
+use App\Http\Resources\Portal\Meeting\Hall\Program\Session\SessionResource;
 use App\Models\Meeting\Hall\Program\Session\ProgramSession;
 use Illuminate\Support\Facades\Auth;
 
 class ProgramSessionController extends Controller
 {
-    public function store(ProgramSessionRequest $request, string $program_id)
+    public function store(SessionRequest $request, string $program_id)
     {
         if ($request->validated()) {
             $program_session = new ProgramSession();
@@ -50,9 +50,9 @@ class ProgramSessionController extends Controller
     public function edit(string $program_id, string $id)
     {
         $program_session = Auth::user()->customer->programSessions()->findOrFail($id);
-        return new ProgramSessionResource($program_session);
+        return new SessionResource($program_session);
     }
-    public function update(ProgramSessionRequest $request, string $program_id, string $id)
+    public function update(SessionRequest $request, string $program_id, string $id)
     {
         if ($request->validated()) {
             $program_session = Auth::user()->customer->programSessions()->findOrFail($id);

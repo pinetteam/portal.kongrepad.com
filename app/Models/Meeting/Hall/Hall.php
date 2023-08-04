@@ -5,13 +5,12 @@ namespace App\Models\Meeting\Hall;
 use App\Models\Meeting\Hall\Program\Program;
 use App\Models\Meeting\Hall\Program\Session\Keypad\Keypad;
 use App\Models\Meeting\Hall\Program\Session\ProgramSession;
-use App\Models\Meeting\Hall\Screen\Screen;
 use App\Models\Meeting\Meeting;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class MeetingHall extends Model
+class Hall extends Model
 {
     use HasFactory, SoftDeletes;
     protected $table = 'meeting_halls';
@@ -37,7 +36,6 @@ class MeetingHall extends Model
     {
         return $this->hasMany(Program::class, 'meeting_hall_id', 'id');
     }
-
     public function keypads()
     {
         $keypads = Keypad::select('meeting_hall_program_session_keypads.*')

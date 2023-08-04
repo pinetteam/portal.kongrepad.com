@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Portal\Meeting\ScoreGame\QrCode;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Portal\Meeting\ScoreGame\QrCode\QrCodeRequest;
-use App\Http\Resources\Portal\Meeting\ScoreGame\QrCode\QrCodeResource;
+use App\Http\Resources\Portal\Meeting\ScoreGame\QRCode\QRCodeResource;
 use App\Models\Meeting\ScoreGame\QrCode\QrCode;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
@@ -59,7 +59,7 @@ class QrCodeController extends Controller
     public function edit(string $id)
     {
         $qr_code = Auth::user()->customer->qrCodes()->findOrFail($id);
-        return new QrCodeResource($qr_code);
+        return new QRCodeResource($qr_code);
     }
     public function update(QrCodeRequest $request, string $id)
     {

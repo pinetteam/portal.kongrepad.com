@@ -3,7 +3,7 @@
 namespace App\Models\Meeting\Hall\Program;
 
 use App\Models\Customer\Setting\Variable\Variable;
-use App\Models\Meeting\Hall\MeetingHall;
+use App\Models\Meeting\Hall\Hall;
 use App\Models\Meeting\Hall\Program\Chair\Chair;
 use App\Models\Meeting\Hall\Program\Debate\Debate;
 use App\Models\Meeting\Hall\Program\Session\ProgramSession;
@@ -60,7 +60,7 @@ class Program extends Model
     }
     public function meetingHall()
     {
-        return $this->belongsTo(MeetingHall::class, 'meeting_hall_id', 'id');
+        return $this->belongsTo(Hall::class, 'meeting_hall_id', 'id');
     }
     public function programChairs()
     {

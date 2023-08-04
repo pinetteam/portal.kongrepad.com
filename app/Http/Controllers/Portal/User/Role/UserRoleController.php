@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Portal\User\Role;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Portal\User\Role\UserRoleRequest;
-use App\Http\Resources\Portal\User\Role\UserRoleResource;
+use App\Http\Resources\Portal\User\Role\RoleResource;
 use App\Models\System\Route\Route;
-use App\Models\User\Role\UserRole;
+use App\Models\User\Role\Role;
 use Illuminate\Support\Facades\Auth;
 
 class UserRoleController extends Controller
@@ -24,7 +24,7 @@ class UserRoleController extends Controller
     public function store(UserRoleRequest $request)
     {
         if ($request->validated()) {
-            $user_role = new UserRole();
+            $user_role = new Role();
             $user_role->customer_id = Auth::user()->customer->id;
             $user_role->title = $request->input('title');
             if ($request->has('access_scopes')) {
@@ -47,7 +47,7 @@ class UserRoleController extends Controller
     public function edit($id)
     {
         $user_role = Auth::user()->customer->userRoles()->findOrFail($id);
-        return new UserRoleResource($user_role);
+        return new RoleResource($user_role);
     }
     public function update(UserRoleRequest $request, $id)
     {

@@ -94,7 +94,7 @@
             </div>
             <ul class="nav nav-tabs flex-column">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route("portal.meeting-hall.index") }}">
+                    <a class="nav-link" href="#">
                         <span class="nav-icon fa-duotone fa-hotel fa-fade"></span>
                         {{ __('common.meeting-halls') }}
                     </a>

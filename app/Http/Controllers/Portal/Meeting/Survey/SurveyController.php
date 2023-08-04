@@ -11,21 +11,21 @@ use Illuminate\Support\Facades\Auth;
 
 class SurveyController extends Controller
 {
-    public function index()
+    public function index(int $meeting)
     {
-        $surveys = Auth::user()->customer->surveys()->paginate(20);
-        $meetings = Auth::user()->customer->meetings()->paginate(20);
+        $surveys = Auth::user()->customer->surveys()->where('meeting_id', $meeting)->paginate(20);
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
         $statuses = [
             'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.survey.index', compact(['meetings', 'surveys', 'statuses']));
+        return view('portal.meeting.survey.index', compact(['surveys', 'meeting', 'statuses']));
     }
-    public function store(SurveyRequest $request, string $meeting_id)
+    public function store(SurveyRequest $request, int $meeting)
     {
         if ($request->validated()) {
             $survey = new Survey();
-            $survey->meeting_id = $request->input('meeting_id');
+            $survey->meeting_id = $meeting;
             $survey->sort_order = $request->input('sort_order');
             $survey->title = $request->input('title');
             $survey->description = $request->input('description');
@@ -41,9 +41,9 @@ class SurveyController extends Controller
             }
         }
     }
-    public function show(string $meeting_id, string $id)
+    public function show(int $meeting, int $id)
     {
-        $survey = Auth::user()->customer->surveys()->findOrFail($id);
+        $survey = Auth::user()->customer->surveys()->where('meeting_id', $meeting)->findOrFail($id);
         $questions = $survey->questions()->get();
         $statuses = [
             'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
@@ -51,16 +51,16 @@ class SurveyController extends Controller
         ];
         return view('portal.meeting.survey.show', compact(['questions', 'survey', 'statuses']));
     }
-    public function edit(string $meeting_id, string $id)
+    public function edit(string $meeting, string $id)
     {
-        $survey = Auth::user()->customer->surveys()->findOrFail($id);
+        $survey = Auth::user()->customer->surveys()->where('meeting_id', $meeting)->findOrFail($id);
         return new SurveyResource($survey);
     }
-    public function update(SurveyRequest $request, string $meeting_id, string $id)
+    public function update(SurveyRequest $request, int $meeting, int $id)
     {
         if ($request->validated()) {
-            $survey = Auth::user()->customer->surveys()->findOrFail($id);
-            $survey->meeting_id = $request->input('meeting_id');
+            $survey = Auth::user()->customer->surveys()->where('meeting_id', $meeting)->findOrFail($id);
+            $survey->meeting_id = $meeting;
             $survey->sort_order = $request->input('sort_order');
             $survey->title = $request->input('title');
             $survey->description = $request->input('description');
@@ -76,9 +76,9 @@ class SurveyController extends Controller
             }
         }
     }
-    public function destroy(string $meeting_id, string $id)
+    public function destroy(int $meeting, int $id)
     {
-        $survey = Auth::user()->customer->surveys()->findOrFail($id);
+        $survey = Auth::user()->customer->surveys()->where('meeting_id', $meeting)->findOrFail($id);
         if ($survey->delete()) {
             $survey->deleted_by = Auth::user()->id;
             $survey->save();

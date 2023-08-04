@@ -5,7 +5,7 @@ namespace App\Models\Customer;
 use App\Models\Customer\Setting\Setting;
 use App\Models\Customer\Setting\Variable\Variable;
 use App\Models\Meeting\Document\Document;
-use App\Models\Meeting\Hall\MeetingHall;
+use App\Models\Meeting\Hall\Hall;
 use App\Models\Meeting\Hall\Program\Chair\Chair;
 use App\Models\Meeting\Hall\Program\Debate\Debate;
 use App\Models\Meeting\Hall\Program\Debate\Team\Team;
@@ -20,7 +20,7 @@ use App\Models\Meeting\ScoreGame\QrCode\QrCode;
 use App\Models\Meeting\ScoreGame\ScoreGame;
 use App\Models\Meeting\Survey\Question\Question;
 use App\Models\Meeting\Survey\Survey;
-use App\Models\User\Role\UserRole;
+use App\Models\User\Role\Role;
 use App\Models\User\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -60,7 +60,7 @@ class Customer extends Model
     }
     public function meetingHalls()
     {
-        return $this->hasOneThrough(MeetingHall::class, Meeting::class, 'customer_id', 'meeting_id', 'id', 'id');
+        return $this->hasOneThrough(Hall::class, Meeting::class, 'customer_id', 'meeting_id', 'id', 'id');
     }
 
     public function surveys()
@@ -223,7 +223,7 @@ class Customer extends Model
     }
     public function userRoles()
     {
-        return $this->hasMany(UserRole::class, 'customer_id', 'id');
+        return $this->hasMany(Role::class, 'customer_id', 'id');
     }
 
 }

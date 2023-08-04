@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\User\Role\UserRole;
+use App\Models\User\Role\Role;
 use Illuminate\Database\Seeder;
 
 class UserRoleSeeder extends Seeder
@@ -18,7 +18,7 @@ class UserRoleSeeder extends Seeder
             'portal.dashboard.index',
         ];
 
-        UserRole::insert([
+        Role::insert([
             [
                 'customer_id' => 1,
                 'title' => 'Manager',

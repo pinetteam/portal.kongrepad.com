@@ -5,7 +5,7 @@ namespace App\Http\Requests\Portal\Meeting\Hall\Program\Session;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProgramSessionRequest extends FormRequest
+class SessionRequest extends FormRequest
 {
     public function authorize(): bool
     {

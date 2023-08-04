@@ -5,7 +5,7 @@ namespace App\Http\Requests\Portal\Meeting\Hall;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
-class MeetingHallRequest extends FormRequest
+class HallRequest extends FormRequest
 {
     public function authorize(): bool
     {

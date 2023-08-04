@@ -12,7 +12,7 @@ class MeetingController extends Controller
 {
     public function index()
     {
-        $meetings = Auth::user()->customer->meetings()->paginate(20);
+        $meetings = Auth::user()->customer->meetings()->paginate(25);
         $statuses = [
             'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
@@ -38,7 +38,7 @@ class MeetingController extends Controller
             }
         }
     }
-    public function show($id)
+    public function show(int $id)
     {
         $meeting = Auth::user()->customer->meetings()->findOrFail($id);
         $meeting_halls = $meeting->halls()->get();
@@ -50,12 +50,12 @@ class MeetingController extends Controller
         return view('portal.meeting.show', compact(['meeting', 'meeting_halls', 'surveys', 'statuses']));
 
     }
-    public function edit($id)
+    public function edit(int $id)
     {
-        $user = Auth::user()->customer->meetings()->findOrFail($id);
-        return new MeetingResource($user);
+        $meeting = Auth::user()->customer->meetings()->findOrFail($id);
+        return new MeetingResource($meeting);
     }
-    public function update(MeetingRequest $request, $id)
+    public function update(MeetingRequest $request, int $id)
     {
         if ($request->validated()) {
             $meeting = Auth::user()->customer->meetings()->findOrFail($id);

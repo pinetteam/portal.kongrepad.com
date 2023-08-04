@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Meeting\Hall\MeetingHall;
+use App\Models\Meeting\Hall\Hall;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,7 +13,7 @@ class MeetingHallSeeder extends Seeder
      */
     public function run(): void
     {
-        MeetingHall::insert([
+        Hall::insert([
             [
                 'meeting_id' => '1',
                 'title' => 'IOK 2020 Main Hall',
