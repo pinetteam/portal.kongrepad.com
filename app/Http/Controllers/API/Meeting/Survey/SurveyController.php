@@ -3,10 +3,7 @@
 namespace App\Http\Controllers\API\Meeting\Survey;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Portal\Meeting\Survey\SurveyRequest;
-use App\Models\Meeting\Survey\Survey;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class SurveyController extends Controller
 {

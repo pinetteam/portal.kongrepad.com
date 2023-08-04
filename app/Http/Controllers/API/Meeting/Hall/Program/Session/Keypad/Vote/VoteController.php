@@ -3,11 +3,8 @@
 namespace App\Http\Controllers\API\Meeting\Hall\Program\Session\Keypad\Vote;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Portal\Meeting\Hall\Program\Session\Keypad\Vote\VoteRequest;
-use App\Http\Resources\Portal\Meeting\Hall\Program\Session\Keypad\Vote\VoteResource;
 use App\Models\Meeting\Hall\Program\Session\Keypad\Vote\Vote;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class VoteController extends Controller
 {
