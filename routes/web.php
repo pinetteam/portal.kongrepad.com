@@ -33,6 +33,10 @@ Route::prefix('portal')->name('portal.')->group(function () {
         Route::prefix('meeting')->name('meeting.')->group(function () {
             Route::resource('/{meeting}/document', \App\Http\Controllers\Portal\Meeting\Document\DocumentController::class)->except(['create']);
             Route::resource('/{meeting}/hall', \App\Http\Controllers\Portal\Meeting\Hall\HallController::class)->except(['create']);
+
+            Route::name('hall.')->group(function () {
+                Route::resource('/{meeting}/hall/{hall}/program', \App\Http\Controllers\Portal\Meeting\Hall\Program\ProgramController::class)->except(['create']);
+            });
             Route::resource('/{meeting}/survey', \App\Http\Controllers\Portal\Meeting\Survey\SurveyController::class)->except(['create']);
             Route::resource('/{meeting}/participant', \App\Http\Controllers\Portal\Meeting\Participant\ParticipantController::class)->except(['create']);
             Route::get('/{meeting}/participant/{participant}/qr-code', [\App\Http\Controllers\Portal\Meeting\Participant\ParticipantController::class, 'qr_code'])->name('participant.qr-code');
@@ -64,7 +68,6 @@ Route::prefix('portal')->name('portal.')->group(function () {
 
 
         /* Survey routes */
-        Route::resource('/program', \App\Http\Controllers\Portal\Meeting\Hall\Program\ProgramController::class)->except(['create']);
         Route::resource('/chair', \App\Http\Controllers\Portal\Meeting\Hall\Program\Chair\ChairController::class)->only(['store', 'destroy']);
         Route::resource('/score-game', \App\Http\Controllers\Portal\Meeting\ScoreGame\ScoreGameController::class)->except(['create']);
         Route::resource('/user', \App\Http\Controllers\Portal\User\UserController::class)->except(['create']);

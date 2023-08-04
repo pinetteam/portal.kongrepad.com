@@ -66,7 +66,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{ route("portal.program.index") }}">
+                    <a class="nav-link" aria-current="page" href="#">
                         <span class="nav-icon fa-duotone fa-newspaper fa-fade"></span>
                         {{ __('common.programs') }}
                     </a>

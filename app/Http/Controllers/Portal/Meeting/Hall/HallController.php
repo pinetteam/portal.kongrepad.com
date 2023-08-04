@@ -40,12 +40,12 @@ class HallController extends Controller
     public function show(int $meeting, int $id)
     {
         $hall = Auth::user()->customer->halls()->where('meeting_id', $meeting)->findOrFail($id);
-        $halls = Auth::user()->customer->halls()->where('meeting_halls.status', 1)->get();
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
         $statuses = [
             'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.meeting.hall.show', compact(['hall', 'halls', 'statuses']));
+        return view('portal.meeting.hall.show', compact(['hall', 'meeting', 'statuses']));
     }
     public function edit(int $meeting, int $id)
     {

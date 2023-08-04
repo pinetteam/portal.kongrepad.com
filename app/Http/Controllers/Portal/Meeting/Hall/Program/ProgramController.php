@@ -11,10 +11,11 @@ use Intervention\Image\Facades\Image;
 
 class ProgramController extends Controller
 {
-    public function index()
+    public function index(int $meeting, int $hall)
     {
-        $programs = Auth::user()->customer->programs()->orderBy('meeting_hall_programs.sort_order')->paginate(20);
-        $meeting_halls = Auth::user()->customer->meetingHalls()->where('meeting_halls.status', 1)->get();
+        $programs = Auth::user()->customer->programs()->where('meeting_hall_id', $hall)->paginate(10);
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $hall = Auth::user()->customer->halls()->findOrFail($hall);
         $types = [
             'debate' => ["value" => "debate", "title" => __('common.debate')],
             'other' => ["value" => "other", "title" => __('common.other')],
@@ -24,9 +25,9 @@ class ProgramController extends Controller
             'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.program.index', compact(['programs', 'meeting_halls', 'types', 'statuses']));
+        return view('portal.meeting.hall.program.index', compact(['programs', 'meeting', 'hall', 'types', 'statuses']));
     }
-    public function store(ProgramRequest $request)
+    public function store(ProgramRequest $request, int $meeting, int $hall)
     {
         if ($request->validated()) {
             $program = new Program();
@@ -52,7 +53,7 @@ class ProgramController extends Controller
             }
         }
     }
-    public function show($id)
+    public function show(int $meeting, int $hall, int $id)
     {
         $program = Auth::user()->customer->programs()->findOrFail($id);
         $statuses = [
@@ -83,12 +84,12 @@ class ProgramController extends Controller
             return view('portal.program.show-other', compact(['program', 'statuses']));
         }
     }
-    public function edit($id)
+    public function edit(int $meeting, int $hall, int $id)
     {
         $program = Auth::user()->customer->programs()->findOrFail($id);
         return new ProgramResource($program);
     }
-    public function update(ProgramRequest $request, $id)
+    public function update(ProgramRequest $request, int $meeting, int $hall, int $id)
     {
         if ($request->validated()) {
             $program = Auth::user()->customer->programs()->findOrFail($id);
@@ -114,7 +115,7 @@ class ProgramController extends Controller
             }
         }
     }
-    public function destroy($id)
+    public function destroy(int $meeting, int $hall, int $id)
     {
         $program = Auth::user()->customer->programs()->findOrFail($id);
         if ($program->delete()) {

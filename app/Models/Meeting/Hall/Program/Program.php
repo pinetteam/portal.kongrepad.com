@@ -58,7 +58,7 @@ class Program extends Model
             set: fn (string $finishAt) => Carbon::createFromFormat('Y-m-d H:i', $finishAt)->format('Y-m-d H:i:s'),
         );
     }
-    public function meetingHall()
+    public function hall()
     {
         return $this->belongsTo(Hall::class, 'meeting_hall_id', 'id');
     }
