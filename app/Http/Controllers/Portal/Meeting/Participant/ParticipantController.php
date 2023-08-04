@@ -106,4 +106,9 @@ class ParticipantController extends Controller
             return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();
         }
     }
+    public function qr_code(string $id)
+    {
+        $participant = Auth::user()->customer->participants()->findOrFail($id);
+        return $participant->qr_code;
+    }
 }

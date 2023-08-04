@@ -37,6 +37,7 @@ Route::prefix('portal')->name('portal.')->group(function () {
         Route::get('/meeting-hall/{meeting_hall_id}/chair_board', [\App\Http\Controllers\Portal\Meeting\Hall\MeetingHallController::class, 'chair_board'])->name('chair-board.index');
         Route::get('/meeting-hall/{meeting_hall_id}/current_chair/{chair_index}', [\App\Http\Controllers\Portal\Meeting\Hall\MeetingHallController::class, 'current_chair'])->name('current-chair.show');
         Route::resource('/participant', \App\Http\Controllers\Portal\Meeting\Participant\ParticipantController::class)->except(['create']);
+        Route::get('/participant/{participant_id}/qr-code/', [\App\Http\Controllers\Portal\Meeting\Participant\ParticipantController::class, 'qr_code'])->name('participant.qr-code.show');
         Route::resource('/program', \App\Http\Controllers\Portal\Meeting\Hall\Program\ProgramController::class)->except(['create']);
         Route::resource('/chair', \App\Http\Controllers\Portal\Meeting\Hall\Program\Chair\ChairController::class)->only(['store', 'destroy']);
         Route::resource('/program/{program_id}/session', \App\Http\Controllers\Portal\Meeting\Hall\Program\Session\ProgramSessionController::class)->except(['index', 'create']);

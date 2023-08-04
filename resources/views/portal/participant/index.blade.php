@@ -52,9 +52,11 @@
                                 </td>
                                 <td class="text-end">
                                     <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
-                                        <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#showQr-{{$participant->id}}" title="{{ __('common.show') }}">
-                                            <span class="fa-regular fa-qrcode"></span>
-                                        </button>
+                                        <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show-qr-code') }}">
+                                            <button class="btn btn-outline-success btn-sm" title="{{ __('common.show-qr-code') }}" data-bs-toggle="modal" data-bs-target="#show-qr-code-modal" data-resource="{{ route('portal.participant.qr-code.show', $participant->id) }}" data-id="{{ $participant->id }}">
+                                                <span class="fa-regular fa-qrcode"></span>
+                                            </button>
+                                        </div>
                                         <a class="btn btn-info btn-sm" href="{{ route('portal.participant.show', $participant->id) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
                                             <span class="fa-regular fa-eye"></span>
                                         </a>
@@ -82,6 +84,11 @@
             </button>
         </div>
     </div>
+    <x-common.popup.show name="show-qr-code" title="Test">
+        @section('show-qr-code-yield')
+            Testtt
+        @endsection
+    </x-common.popup.show>
     <x-crud.form.common.create>
         @section('default-create-form')
             <x-input.select method="c" name="meeting_id" title="meeting" :options="$meetings" option_value="id" option_name="title" icon="bee" />
@@ -114,25 +121,4 @@
             <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.edit>
-    @foreach($participants as $participant)
-    <div class="modal fade" id="showQr-{{$participant->id}}" tabindex="-1" aria-labelledby="showQr-{{$participant->id}}" aria-hidden="true">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content bg-dark">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalLabel">{{__('common.show-qr-code')}}</h5>
-                </div>
-                <div class="modal-body">
-                    <div class="container-fluid">
-                        <div id="qr-code" class="mb-3">
-                            {!! $participant->qr_code !!}
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    @endforeach
 @endsection

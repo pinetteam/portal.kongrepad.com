@@ -1,7 +1,7 @@
-@props(['method' => 'm', 'name', 'title', 'options', 'option_value', 'option_name', 'icon' => 'question'])
+@props(['method' => 'm', 'name', 'title', 'options', 'option_value', 'option_name', 'icon' => 'question', 'fade' => 'off'])
 <div class="col form-group mb-3">
     <label for="{{ $method }}-{{ $name }}" class="form-label">
-        <i class="fa-regular fa-{{ $icon }}"></i> {{ __('common.'.$title) }}
+        <i class="fa-regular fa-{{ $icon }}{{ $fade=='on' ? ' fa-fade' : '' }}"></i> {{ __('common.'.$title) }}
     </label>
     <div class="btn-group w-100" role="group" aria-label="{{ __('common.'.$title) }}">
         @foreach($options as $option=>$value)
