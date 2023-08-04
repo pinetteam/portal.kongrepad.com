@@ -31,7 +31,7 @@ class Vote extends Model
         return $this->belongsTo(Option::class, 'option_id', 'id');
     }
 
-    public function participant()
+    public function owner()
     {
         return $this->belongsTo(Participant::class, 'participant_id', 'id');
     }

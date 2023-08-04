@@ -13,7 +13,7 @@
 <script src="https://js.pusher.com/8.0.1/pusher.min.js"></script>
 <script>
     Pusher.logToConsole = true;
-    var pusher = new Pusher('{{env('PUSHER_APP_KEY')}}', {
+    var pusher = new Pusher('1cf2459678ef9563476b', {
         cluster: 'eu',
         forceTLS: true
     });

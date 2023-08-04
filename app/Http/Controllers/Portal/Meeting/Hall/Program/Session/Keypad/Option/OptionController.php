@@ -28,7 +28,9 @@ class OptionController extends Controller
     }
     public function show(string $id)
     {
-        //
+        $option = Auth::user()->customer->options()->findOrFail($id);
+        $votes = $option->votes()->get();
+        return view('portal.program.session.keypad.option.show', compact(['option', 'votes']));
     }
     public function edit(string $id)
     {

@@ -1,65 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Portal\Meeting\Survey\Question\Option;
+namespace App\Http\Controllers\API\Meeting\Survey\Question\Option;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Portal\Meeting\Survey\Question\Option\OptionRequest;
-use App\Http\Resources\Portal\Meeting\Survey\Question\Option\OptionResource;
-use App\Models\Meeting\Survey\Question\Option\Option;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class OptionController extends Controller
 {
-    public function store(OptionRequest $request)
-    {
-        if ($request->validated()) {
-            $option = new Option();
-            $option->question_id = $request->input('question_id');
-            $option->sort_order = $request->input('sort_order');
-            $option->title = $request->input('title');
-            if ($option->save()) {
-                $option->created_by = Auth::user()->id;
-                $option->save();
-                return back()->with('success',__('common.created-successfully'));
-            } else {
-                return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
-            }
-        }
-    }
-    public function show(string $id)
-    {
-        //
-    }
-    public function edit(string $meeting_id, string $survey_id, string $question_id,string $id)
-    {
-        $option = Auth::user()->customer->surveyOptions()->findOrFail($id);
-        return new OptionResource($option);
-    }
-    public function update(OptionRequest $request, string $meeting_id, string $survey_id, string $question_id,string $id)
-    {
-        if ($request->validated()) {
-            $option = Auth::user()->customer->surveyOptions()->findOrFail($id);
-            $option->question_id = $request->input('question_id');
-            $option->sort_order = $request->input('sort_order');
-            $option->title = $request->input('title');
-            if ($option->save()) {
-                $option->edited_by = Auth::user()->id;
-                $option->save();
-                return back()->with('success',__('common.created-successfully'));
-            } else {
-                return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
-            }
-        }
-    }
-    public function destroy(string $meeting_id, string $survey_id, string $question_id,string $id)
-    {
-        $option = Auth::user()->customer->surveyOptions()->findOrFail($id);
-        if ($option->delete()) {
-            $option->deleted_by = Auth::user()->id;
-            $option->save();
-            return back()->with('success', __('common.deleted-successfully'));
-        } else {
-            return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();
-        }
+    public function index(Request $request, string $meeting_id, string $survey_id, string $question_id){
+        return $request->user()->meeting->surveys()->where('meeting_surveys.id',$survey_id)->first()->questions()->where('meeting_survey_questions.id', $question_id)->first()->options()->get();
     }
 }

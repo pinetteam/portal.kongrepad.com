@@ -38,6 +38,7 @@
                                 <thead class="thead-dark">
                                 <tr>
                                     <th scope="col"><span class="fa-regular fa-person-military-pointing mx-1"></span> {{ __('common.title') }}</th>
+                                    <th scope="col"><span class="fa-regular fa-person-military-pointing mx-1"></span> {{ __('common.votes') }}</th>
                                     <th scope="col" class="text-end"></th>
                                 </tr>
                                 </thead>
@@ -45,6 +46,7 @@
                                     @foreach($options as $option)
                                         <tr>
                                             <td>{{ $option->title }}</td>
+                                            <td>{{ $option->votes()->count() }}</td>
                                             <td class="text-end">
                                                 <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
                                                     <a class="btn btn-info btn-sm" href="{{ route('portal.option.show', $option->id) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">

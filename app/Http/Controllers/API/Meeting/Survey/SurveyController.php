@@ -16,6 +16,6 @@ class SurveyController extends Controller
     }
     public function show(Request $request, string $meeting_id, string $id)
     {
-        $request->user()->meeting->surveys()->where('meeting_surveys.id',$id)->first();
+        return $request->user()->meeting->surveys()->where('meeting_surveys.id',$id)->first();
     }
 }

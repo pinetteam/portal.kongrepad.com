@@ -21,8 +21,13 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
         Route::resource('/meeting/{meeting_id}/meeting-hall', \App\Http\Controllers\API\Meeting\Hall\MeetingHallController::class)->except(['create']);
         Route::resource('/meeting/{meeting_id}/program', \App\Http\Controllers\API\Meeting\Hall\Program\ProgramController::class)->except(['create']);
         Route::resource('/meeting/{meeting_id}/survey', \App\Http\Controllers\API\Meeting\Survey\SurveyController::class)->except(['create']);
-        Route::get('/meeting/{meeting_id}/meeting-hall/{meeting_hall_id}/active-document', [\App\Http\Controllers\API\Meeting\Hall\MeetingHallController::class, 'active_document'])->name('active_document.show');
+        Route::resource('/meeting/{meeting_id}/survey/{survey_id}/question', \App\Http\Controllers\API\Meeting\Survey\Question\QuestionController::class)->except(['create']);
+        Route::resource('/meeting/{meeting_id}/survey/{survey_id}/question/{question_id}/survey-option', \App\Http\Controllers\API\Meeting\Survey\Question\Option\OptionController::class)->except(['create']);
+        Route::get('/meeting/{meeting_id}/meeting-hall/{meeting_hall_id}/active-document', [\App\Http\Controllers\API\Meeting\Hall\MeetingHallController::class, 'active_document'])->name('active-document.show');
+        Route::get('/meeting-hall/{meeting_hall_id}/active-keypad', [\App\Http\Controllers\API\Meeting\Hall\MeetingHallController::class, 'active_keypad']);
         Route::resource('/keypad', \App\Http\Controllers\API\Meeting\Hall\Program\Session\Keypad\KeypadController::class)->except(['create']);
+        Route::resource('/keypad/{keypad_id}/option', \App\Http\Controllers\API\Meeting\Hall\Program\Session\Keypad\Option\OptionController::class)->except(['create']);
+        Route::resource('/keypad/{keypad_id}/vote', \App\Http\Controllers\API\Meeting\Hall\Program\Session\Keypad\Vote\VoteController::class)->except(['create']);
         Route::resource('/program/{program_id}/session', \App\Http\Controllers\API\Meeting\Hall\Program\Session\ProgramSessionController::class)->except(['create']);
         Route::resource('/program/{program_id}/debate', \App\Http\Controllers\API\Meeting\Hall\Program\Debate\DebateController::class)->except(['create']);
         Route::resource('/meeting-hall/{meeting_hall_id}/session-question', \App\Http\Controllers\API\Meeting\Hall\Program\Session\Question\QuestionController::class)->except(['create']);

@@ -8,6 +8,7 @@ use App\Models\Meeting\Hall\MeetingHall;
 use App\Models\Meeting\Hall\Program\Chair\Chair;
 use App\Models\Meeting\Hall\Program\Debate\Debate;
 use App\Models\Meeting\Hall\Program\Program;
+use App\Models\Meeting\Hall\Program\Session\Keypad\Keypad;
 use App\Models\Meeting\Hall\Program\Session\ProgramSession;
 use App\Models\Meeting\Participant\Participant;
 use App\Models\Meeting\ScoreGame\ScoreGame;
@@ -101,6 +102,17 @@ class Meeting extends Model
             ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
             ->where('meetings.id', $this->getkey());
         return $program_sessions;
+    }
+
+    public function keypads()
+    {
+        $keypads = Keypad::select('meeting_hall_program_session_keypads.*')
+            ->join('meeting_hall_program_sessions', 'meeting_hall_program_session_keypads.session_id', '=', 'meeting_hall_program_sessions.id')
+            ->join('meeting_hall_programs', 'meeting_hall_program_sessions.program_id', '=', 'meeting_hall_programs.id')
+            ->join('meeting_halls', 'meeting_hall_programs.meeting_hall_id', '=', 'meeting_halls.id')
+            ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
+            ->where('meetings.id', $this->getkey());
+        return $keypads;
     }
 
     public function debates()
