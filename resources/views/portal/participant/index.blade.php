@@ -84,11 +84,7 @@
             </button>
         </div>
     </div>
-    <x-common.popup.show name="show-qr-code" title="Test">
-        @section('show-qr-code-yield')
-            Testtt
-        @endsection
-    </x-common.popup.show>
+    <x-common.popup.show name="show-qr-code" title="{{ __('common.show-qr-code') }}" />
     <x-crud.form.common.create>
         @section('default-create-form')
             <x-input.select method="c" name="meeting_id" title="meeting" :options="$meetings" option_value="id" option_name="title" icon="bee" />
