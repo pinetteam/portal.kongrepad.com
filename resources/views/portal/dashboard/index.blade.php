@@ -29,7 +29,7 @@
                                             <td>{{ $meeting_hall->title }}</td>
                                             <td class="text-end">
                                                 <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
-                                                    <a class="btn btn-success btn-sm" href="{{ route('portal.operator-board.index',[ $meeting_hall->id, 0]) }}" title="{{ __('common.operator-board') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.operator-board') }}">
+                                                    <a class="btn btn-success btn-sm" href="" title="{{ __('common.operator-board') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.operator-board') }}">
                                                         <span class="fa-regular fa-presentation-screen"></span>
                                                     </a>
                                                     </div>

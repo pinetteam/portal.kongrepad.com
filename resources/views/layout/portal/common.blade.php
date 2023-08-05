@@ -50,57 +50,6 @@
                 </li>
             </ul>
             <div class="sidebar-heading">
-                <span class="nav-icon fa-duotone fa-arrow-turn-down-right"></span> {{ __('common.preparation') }}
-            </div>
-            <ul class="nav nav-tabs flex-column">
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">
-                        <span class="nav-icon fa-duotone fa-screen-users fa-fade"></span>
-                        {{ __('common.participants') }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">
-                        <span class="nav-icon fa-duotone fa-presentation-screen fa-fade"></span>
-                        {{ __('common.documents') }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">
-                        <span class="nav-icon fa-duotone fa-newspaper fa-fade"></span>
-                        {{ __('common.programs') }}
-                    </a>
-                </li>
-            </ul>
-            <div class="sidebar-heading">
-                <span class="nav-icon fa-duotone fa-arrow-turn-down-right"></span> {{ __('common.event-and-activity') }}
-            </div>
-            <ul class="nav nav-tabs flex-column">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route("portal.score-game.index") }}">
-                        <span class="nav-icon fa-duotone fa-hundred-points fa-fade"></span>
-                        {{ __('common.score-game') }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <span class="nav-icon fa-duotone fa-square-poll-horizontal fa-fade"></span>
-                        {{ __('common.surveys') }}
-                    </a>
-                </li>
-            </ul>
-            <div class="sidebar-heading">
-                <span class="nav-icon fa-duotone fa-arrow-turn-down-right"></span> {{ __('common.environment') }}
-            </div>
-            <ul class="nav nav-tabs flex-column">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <span class="nav-icon fa-duotone fa-hotel fa-fade"></span>
-                        {{ __('common.meeting-halls') }}
-                    </a>
-                </li>
-            </ul>
-            <div class="sidebar-heading">
                 <span class="nav-icon fa-duotone fa-arrow-turn-down-right"></span> {{ __('common.application') }}
             </div>
             <ul class="nav nav-tabs flex-column">
