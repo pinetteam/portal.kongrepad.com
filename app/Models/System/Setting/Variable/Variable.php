@@ -27,6 +27,6 @@ class Variable extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
         'deleted_at' => 'datetime',
-        'type_variables' => 'json',
+        'type_variables' => 'array',
     ];
 }

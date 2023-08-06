@@ -32,7 +32,7 @@ class SystemRouteSeeder extends Seeder
                     'group' => 'reporting',
                     'sort_order' => '10',
                     'code' => 'none',
-                    'route' => 'portal.dashboard.index',
+                    'route' => 'none',
                 ],
                 [
                     'group' => 'user-management',

@@ -27,6 +27,6 @@ class Role extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
         'deleted_at' => 'datetime',
-        'routes' => 'json',
+        'routes' => 'array',
     ];
 }
