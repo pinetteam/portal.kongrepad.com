@@ -29,8 +29,8 @@ return new class extends Migration
             $table->foreign('updated_by')->on('users')->references('id');
             $table->foreign('deleted_by')->on('users')->references('id');
             $table->foreign('debate_id')->on('meeting_hall_program_debates')->references('id');
-            DB::statement('ALTER TABLE meeting_hall_program_debate_teams MODIFY logo MEDIUMBLOB NULL');
         });
+        DB::statement('ALTER TABLE meeting_hall_program_debate_teams MODIFY logo MEDIUMBLOB NULL');
     }
 
     /**

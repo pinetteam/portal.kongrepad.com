@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,25 +12,15 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call(SystemCountrySeeder::class);
-        $this->call(SystemSettingVariablesSeeder::class);
-
-
-
-        $this->call(CustomerSeeder::class);
-        $this->call(VariableSeeder::class);
-        $this->call(SettingSeeder::class);
+        $this->call(SystemSettingVariableSeeder::class);
         $this->call(SystemRouteSeeder::class);
+        $this->call(CustomerSeeder::class);
+        $this->call(CustomerSettingSeeder::class);
         $this->call(UserRoleSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(MeetingSeeder::class);
         $this->call(MeetingHallSeeder::class);
-        $this->call(ParticipantSeeder::class);
-        $this->call(ProgramSeeder::class);
-        $this->call(SurveySeeder::class);
-        $this->call(QuestionSeeder::class);
-        $this->call(OptionSeeder::class);
-        $this->call(DebateSeeder::class);
-        $this->call(ProgramSessionSeeder::class);
-        $this->call(SessionQuestionSeeder::class);
+        $this->call(MeetingHallProgramSeeder::class);
+        $this->call(MeetingHallProgramSessionSeeder::class);
     }
 }

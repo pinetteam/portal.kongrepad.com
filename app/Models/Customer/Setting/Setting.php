@@ -23,8 +23,4 @@ class Setting extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
-    public function variable()
-    {
-        return $this->belongsTo(Variable::class, 'variable_id', 'id');
-    }
 }

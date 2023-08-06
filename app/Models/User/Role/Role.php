@@ -2,7 +2,6 @@
 
 namespace App\Models\User\Role;
 
-use App\Casts\JSON;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -28,6 +27,6 @@ class Role extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
         'deleted_at' => 'datetime',
-        'routes' => JSON::class,
+        'routes' => 'json',
     ];
 }

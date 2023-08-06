@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\Meeting\Hall\Program\Session\Session;
 use Illuminate\Database\Seeder;
 
-class ProgramSessionSeeder extends Seeder
+class MeetingHallProgramSessionSeeder extends Seeder
 {
     public function run(){
         Session::insert([

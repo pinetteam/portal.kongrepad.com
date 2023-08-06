@@ -17,16 +17,34 @@ class SystemRouteSeeder extends Seeder
         Route::insert(
             [
                 [
-                    'code' => 'show-dashboard',
+                    'group' => 'general',
+                    'sort_order' => '10',
+                    'code' => 'portal-dashboard-index',
                     'route' => 'portal.dashboard.index',
                 ],
                 [
-                    'code' => 'show-meetings',
+                    'group' => 'meeting',
+                    'sort_order' => '10',
+                    'code' => 'portal-meeting-index',
                     'route' => 'portal.meeting.index',
                 ],
                 [
-                    'code' => 'show-participants',
-                    'route' => 'portal.participant.index',
+                    'group' => 'reporting',
+                    'sort_order' => '10',
+                    'code' => 'none',
+                    'route' => 'portal.dashboard.index',
+                ],
+                [
+                    'group' => 'user-management',
+                    'sort_order' => '10',
+                    'code' => 'portal-user-index',
+                    'route' => 'portal.user.index',
+                ],
+                [
+                    'group' => 'system',
+                    'sort_order' => '10',
+                    'code' => 'portal-setting-index',
+                    'route' => 'portal.setting.index',
                 ],
             ]
         );
