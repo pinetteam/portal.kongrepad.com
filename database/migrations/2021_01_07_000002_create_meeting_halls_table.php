@@ -16,10 +16,10 @@ return new class extends Migration
             $table->unsignedBigInteger('meeting_id')->index();
             $table->string('title', 511);
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
-            $table->timestamps();
             $table->unsignedBigInteger('created_by')->index()->nullable();
             $table->unsignedBigInteger('updated_by')->index()->nullable();
             $table->unsignedBigInteger('deleted_by')->index()->nullable();
+            $table->timestamps();
             $table->softDeletes();
             $table->foreign('created_by')->on('users')->references('id');
             $table->foreign('updated_by')->on('users')->references('id');

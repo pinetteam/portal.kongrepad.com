@@ -23,10 +23,10 @@ return new class extends Migration
             $table->dateTime('voting_finished_at')->nullable();
             $table->boolean('on_vote')->default(0)->comment('0=passive;1=active');
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
-            $table->timestamps();
             $table->unsignedBigInteger('created_by')->index()->nullable();
             $table->unsignedBigInteger('updated_by')->index()->nullable();
             $table->unsignedBigInteger('deleted_by')->index()->nullable();
+            $table->timestamps();
             $table->softDeletes();
             $table->foreign('created_by')->on('users')->references('id');
             $table->foreign('updated_by')->on('users')->references('id');

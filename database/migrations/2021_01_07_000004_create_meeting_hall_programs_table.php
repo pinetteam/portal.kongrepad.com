@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('meeting_hall_programs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('meeting_hall_id')->index();
+            $table->unsignedBigInteger('hall_id')->index();
             $table->unsignedInteger('sort_order')->nullable();
             $table->string('code', 255)->nullable();
             $table->string('title', 255);
@@ -33,7 +33,7 @@ return new class extends Migration
             $table->foreign('created_by')->on('users')->references('id');
             $table->foreign('updated_by')->on('users')->references('id');
             $table->foreign('deleted_by')->on('users')->references('id');
-            $table->foreign('meeting_hall_id')->on('meeting_halls')->references('id');
+            $table->foreign('hall_id')->on('meeting_halls')->references('id');
         });
         DB::statement('ALTER TABLE meeting_hall_programs MODIFY logo MEDIUMBLOB NULL');
     }

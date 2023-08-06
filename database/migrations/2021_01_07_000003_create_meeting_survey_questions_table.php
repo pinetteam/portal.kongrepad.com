@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('meeting_survey_questions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('sort_order')->nullable();
             $table->unsignedBigInteger('survey_id')->index();
+            $table->unsignedInteger('sort_order')->nullable();
             $table->string('title', 255);
             $table->timestamps();
             $table->boolean('status')->default(0)->comment('0=passive;1=active');
