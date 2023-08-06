@@ -84,7 +84,7 @@ class DocumentController extends Controller
             $document->sharing_via_email = $request->input('sharing_via_email');
             $document->status = $request->input('status');
             if ($document->save()) {
-                $document->edited_by = Auth::user()->id;
+                $document->updated_by = Auth::user()->id;
                 $document->save();
                 return back()->with('success',__('common.edited-successfully'));
             } else {
@@ -101,6 +101,19 @@ class DocumentController extends Controller
             return back()->with('success', __('common.deleted-successfully'));
         } else {
             return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();
+        }
+    }
+    public function download(int $meeting, string $document)
+    {
+        $file = Document::where('meeting_id', $meeting)->where('file_name', $document)->first();
+        if($file) {
+            try {
+                return Storage::download('documents/' . $file->file_name . '.' . $file->file_extension);
+            } catch (\Exception $e) {
+                return back()->with('error', __('common.file-not-found'))->withInput();
+            }
+        } else {
+            return back()->with('error', __('common.there-is-no-such-file'))->withInput();
         }
     }
 }

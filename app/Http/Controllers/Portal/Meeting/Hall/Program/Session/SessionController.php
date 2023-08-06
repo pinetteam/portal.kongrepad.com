@@ -8,7 +8,7 @@ use App\Http\Resources\Portal\Meeting\Hall\Program\Session\SessionResource;
 use App\Models\Meeting\Hall\Program\Session\Session;
 use Illuminate\Support\Facades\Auth;
 
-class ProgramSessionController extends Controller
+class SessionController extends Controller
 {
     public function store(SessionRequest $request, string $program_id)
     {

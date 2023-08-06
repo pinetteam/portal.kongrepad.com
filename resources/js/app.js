@@ -2,13 +2,13 @@ import './bootstrap';
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
 
-import moment from'moment';
-//window.moment = Moment;
-import { TempusDominus } from '@eonasdan/tempus-dominus';
-
 window.onload = function() {
     document.getElementById("kp-loading").style.visibility = "hidden";
 }
+
+import moment from'moment';
+//window.moment = Moment;
+import { TempusDominus } from '@eonasdan/tempus-dominus';
 
 function initializeDatePicker(element) {
     const datePicker = new TempusDominus(element, {
