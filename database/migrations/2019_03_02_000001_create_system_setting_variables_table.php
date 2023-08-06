@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('system_setting_variables', function (Blueprint $table) {
             $table->id();
+            $table->enum('group', ['system', 'localisation'])->default('system');
             $table->unsignedInteger('sort_order')->nullable();
-            $table->enum('group', ['system', 'localisation']);
             $table->string('title', 255);
             $table->string('variable', 255);
-            $table->enum('type', ['checkbox','number', 'radio', 'select', 'text']);
+            $table->enum('type', ['checkbox', 'date', 'datetime', 'email', 'number', 'radio', 'select', 'text', 'time'])->default('text');
             $table->json('type_variables')->nullable();
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
             $table->timestamps();

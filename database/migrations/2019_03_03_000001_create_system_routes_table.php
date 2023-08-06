@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('system_routes', function (Blueprint $table) {
             $table->id();
+            $table->enum('group', ['boards', 'meeting', 'reporting', 'user-management', 'settings']);
             $table->unsignedInteger('sort_order')->nullable();
-            $table->string('group');
             $table->string('code', 63)->unique();
             $table->string('route', 255)->unique();
             $table->timestamps();

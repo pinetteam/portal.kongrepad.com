@@ -18,10 +18,10 @@ return new class extends Migration
             $table->binary('logo')->nullable();
             $table->string('title', 255);
             $table->text('description')->nullable();
-            $table->timestamps();
             $table->unsignedBigInteger('created_by')->index()->nullable();
             $table->unsignedBigInteger('updated_by')->index()->nullable();
             $table->unsignedBigInteger('deleted_by')->index()->nullable();
+            $table->timestamps();
             $table->softDeletes();
             $table->foreign('created_by')->on('users')->references('id');
             $table->foreign('updated_by')->on('users')->references('id');

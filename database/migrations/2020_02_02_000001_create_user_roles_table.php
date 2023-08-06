@@ -17,17 +17,17 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('customer_id')->index();
             $table->string('title', 255);
-            $table->longText('routes');
+            $table->json('routes');
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
             $table->unsignedBigInteger('created_by')->index()->nullable();
             $table->unsignedBigInteger('updated_by')->index()->nullable();
             $table->unsignedBigInteger('deleted_by')->index()->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('customer_id')->on('customers')->references('id');
             $table->foreign('created_by')->on('users')->references('id');
             $table->foreign('updated_by')->on('users')->references('id');
             $table->foreign('deleted_by')->on('users')->references('id');
+            $table->foreign('customer_id')->on('customers')->references('id');
         });
     }
 

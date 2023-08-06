@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('email', 255)->index();
             $table->string('token', 255);
             $table->timestamp('created_at')->nullable();
+            $table->foreign('email')->on('users')->references('email');
         });
     }
 

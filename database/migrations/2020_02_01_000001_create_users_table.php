@@ -8,29 +8,30 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('meeting_participants', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('meeting_id')->index();
-            $table->string('username', 127)->unique();
-            $table->string('title', 255)->nullable();
+            $table->unsignedBigInteger('customer_id')->index();
+            $table->unsignedBigInteger('user_role_id')->index();
+            $table->string('username', 255)->unique();
             $table->string('first_name', 255);
             $table->string('last_name', 255);
-            $table->text('qr_code');
-            $table->string('identification_number', 255)->nullable();
-            $table->string('organisation', 255)->nullable();
-            $table->string('email', 255)->nullable();
+            $table->string('email', 255);
+            $table->timestamp('email_verified_at')->nullable();
             $table->unsignedBigInteger('phone_country_id')->index()->nullable();
             $table->string('phone', 31)->nullable();
+            $table->timestamp('phone_verified_at')->nullable();
             $table->string('password', 255);
+            $table->rememberToken();
+            $table->ipAddress('register_ip')->nullable();
+            $table->string('register_user_agent', 511)->nullable();
             $table->ipAddress('last_login_ip')->nullable();
             $table->string('last_login_agent', 511)->nullable();
             $table->dateTime('last_login_datetime')->nullable();
-            $table->timestamp('last_activity')->nullable();
-            $table->enum('type', ['agent', 'attendee', 'team'])->default('attendee');
-            $table->boolean('gdpr_consent')->default(0)->comment('0=not-approved;1=approved');
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
             $table->unsignedBigInteger('created_by')->index()->nullable();
             $table->unsignedBigInteger('updated_by')->index()->nullable();
@@ -40,16 +41,25 @@ return new class extends Migration
             $table->foreign('created_by')->on('users')->references('id');
             $table->foreign('updated_by')->on('users')->references('id');
             $table->foreign('deleted_by')->on('users')->references('id');
-            $table->foreign('meeting_id')->on('meetings')->references('id');
+            $table->foreign('customer_id')->on('customers')->references('id');
+            $table->foreign('user_role_id')->on('user_roles')->references('id');
             $table->foreign('phone_country_id')->on('system_countries')->references('id');
+        });
+        Schema::table('user_roles', function (Blueprint $table) {
+            $table->foreign('deleted_by')->on('users')->references('id');
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('meeting_participants');
+        Schema::dropIfExists('users');
+        Schema::table('user_roles', function (Blueprint $table) {
+            $table->foreign('deleted_by')->on('users')->references('id');
+        });
     }
 };
