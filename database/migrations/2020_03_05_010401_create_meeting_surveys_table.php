@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('meeting_id')->index();
             $table->unsignedInteger('sort_order')->nullable();
-            $table->string('title', 255);
+            $table->string('title', 511);
             $table->text('description')->nullable();
             $table->dateTime('start_at')->nullable();
             $table->dateTime('finish_at')->nullable();
-            $table->boolean('on_air')->default(0)->comment('0=passive;1=active');
+            $table->boolean('on_vote')->default(0)->comment('0=no;1=yes');
             $table->boolean('status')->default(0)->comment('0=passive;1=active');
             $table->unsignedBigInteger('created_by')->index()->nullable();
             $table->unsignedBigInteger('updated_by')->index()->nullable();

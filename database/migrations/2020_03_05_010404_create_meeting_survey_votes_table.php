@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('meeting_hall_program_debate_votes', function (Blueprint $table) {
+        Schema::create('meeting_survey_votes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('team_id')->index();
+            $table->unsignedBigInteger('question_id')->index();
+            $table->unsignedBigInteger('option_id')->index();
             $table->unsignedBigInteger('participant_id')->index();
             $table->timestamps();
-            $table->foreign('created_by')->on('users')->references('id');
-            $table->foreign('updated_by')->on('users')->references('id');
-            $table->foreign('deleted_by')->on('users')->references('id');
-            $table->foreign('team_id')->on('meeting_hall_program_debate_teams')->references('id');
+            $table->foreign('question_id')->on('meeting_survey_questions')->references('id');
+            $table->foreign('option_id')->on('meeting_survey_question_options')->references('id');
             $table->foreign('participant_id')->on('meeting_participants')->references('id');
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('meeting_hall_program_debate_votes');
+        Schema::dropIfExists('meeting_survey_votes');
     }
 };

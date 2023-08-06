@@ -15,20 +15,13 @@ return new class extends Migration
             $table->id();
             $table->unsignedInteger('sort_order')->nullable();
             $table->unsignedBigInteger('session_id')->index();
-            $table->unsignedBigInteger('owner_id')->index();
-            $table->string('title', 255);
-            $table->boolean('on_screen')->default(0)->comment('0=passive;1=active');
-            $table->timestamps();
+            $table->unsignedBigInteger('questioner_id')->index();
+            $table->string('question', 511);
+            $table->boolean('selected_for_show')->default(0)->comment('0=no;1=yes');
             $table->boolean('status')->default(0)->comment('0=passive;1=active');
-            $table->unsignedBigInteger('created_by')->index()->nullable();
-            $table->unsignedBigInteger('updated_by')->index()->nullable();
-            $table->unsignedBigInteger('deleted_by')->index()->nullable();
-            $table->softDeletes();
-            $table->foreign('created_by')->on('users')->references('id');
-            $table->foreign('updated_by')->on('users')->references('id');
-            $table->foreign('deleted_by')->on('users')->references('id');
+            $table->timestamps();
             $table->foreign('session_id')->on('meeting_hall_program_sessions')->references('id');
-            $table->foreign('owner_id')->on('meeting_participants')->references('id');
+            $table->foreign('questioner_id')->on('meeting_participants')->references('id');
         });
     }
 

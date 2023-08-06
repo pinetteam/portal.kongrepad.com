@@ -3,7 +3,6 @@
 namespace App\Models\Customer;
 
 use App\Models\Customer\Setting\Setting;
-use App\Models\Customer\Setting\Variable\Variable;
 use App\Models\Meeting\Document\Document;
 use App\Models\Meeting\Hall\Hall;
 use App\Models\Meeting\Hall\Program\Chair\Chair;
@@ -22,28 +21,29 @@ use App\Models\Meeting\Survey\Question\Question;
 use App\Models\Meeting\Survey\Survey;
 use App\Models\User\Role\Role;
 use App\Models\User\User;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Customer extends Model
 {
-    use HasFactory, SoftDeletes;
+    use SoftDeletes;
     protected $table = 'customers';
     protected $fillable = [
+        'code',
         'title',
-        'description',
         'icon',
         'logo',
-        'policy_status',
         'language',
         'status',
-        'deleted_by',
     ];
     protected $dates = [
+        'created_at',
+        'updated_at',
         'deleted_at',
     ];
     protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
         'deleted_at' => 'datetime',
     ];
     public function documents()
@@ -104,7 +104,6 @@ class Customer extends Model
             ->where('customers.id', $this->getkey());
         return $program_sessions;
     }
-
     public function debates()
     {
         $debates = Debate::select('meeting_hall_program_debates.*')

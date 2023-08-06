@@ -3,7 +3,7 @@
 namespace App\Models\Meeting\Participant;
 
 use App\Models\Meeting\Meeting;
-use App\Models\System\Country\SystemCountry;
+use App\Models\System\Country\Country;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -68,7 +68,7 @@ class Participant extends Model
     }
     public function phoneCountry()
     {
-        return $this->belongsTo(SystemCountry::class, 'phone_country_id', 'id');
+        return $this->belongsTo(Country::class, 'phone_country_id', 'id');
     }
     public function getFullPhoneAttribute()
     {

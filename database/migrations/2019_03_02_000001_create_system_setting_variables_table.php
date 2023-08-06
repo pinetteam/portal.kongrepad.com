@@ -23,6 +23,7 @@ return new class extends Migration
             $table->json('type_variables')->nullable();
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
             $table->timestamps();
+            $table->softDeletes();
         });
 
     }

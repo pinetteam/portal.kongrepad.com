@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('code', 63)->unique();
             $table->string('route', 255)->unique();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

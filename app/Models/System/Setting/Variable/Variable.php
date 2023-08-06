@@ -1,23 +1,22 @@
 <?php
 
-namespace App\Models\User\Role;
+namespace App\Models\System\Setting\Variable;
 
-use App\Casts\JSON;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Role extends Model
+class Variable extends Model
 {
     use SoftDeletes;
-    protected $table = 'user_roles';
+    protected $table = 'system_setting_variables';
     protected $fillable = [
-        'customer_id',
+        'group',
+        'sort_order',
         'title',
-        'routes',
+        'variable',
+        'type',
+        'type_variables',
         'status',
-        'created_by',
-        'updated_by',
-        'deleted_by',
     ];
     protected $dates = [
         'created_at',
@@ -28,6 +27,5 @@ class Role extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
         'deleted_at' => 'datetime',
-        'routes' => JSON::class,
     ];
 }

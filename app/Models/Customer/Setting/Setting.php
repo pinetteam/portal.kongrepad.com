@@ -3,15 +3,25 @@
 namespace App\Models\Customer\Setting;
 
 use App\Models\Customer\Setting\Variable\Variable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Setting extends Model
 {
-    use HasFactory;
     protected $table = 'customer_settings';
     protected $fillable = [
+        'customer_id',
+        'variable_id',
         'value',
+        'created_by',
+        'updated_by',
+    ];
+    protected $dates = [
+        'created_at',
+        'updated_at',
+    ];
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
     public function variable()
     {

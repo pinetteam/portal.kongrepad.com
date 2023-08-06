@@ -16,13 +16,6 @@ return new class extends Migration
             $table->unsignedBigInteger('option_id')->index();
             $table->unsignedBigInteger('participant_id')->index();
             $table->timestamps();
-            $table->unsignedBigInteger('created_by')->index()->nullable();
-            $table->unsignedBigInteger('updated_by')->index()->nullable();
-            $table->unsignedBigInteger('deleted_by')->index()->nullable();
-            $table->softDeletes();
-            $table->foreign('created_by')->on('users')->references('id');
-            $table->foreign('updated_by')->on('users')->references('id');
-            $table->foreign('deleted_by')->on('users')->references('id');
             $table->foreign('option_id')->on('meeting_hall_program_session_keypad_options')->references('id');
             $table->foreign('participant_id')->on('meeting_participants')->references('id');
         });

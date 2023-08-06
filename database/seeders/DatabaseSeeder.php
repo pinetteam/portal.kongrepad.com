@@ -13,6 +13,10 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call(SystemCountrySeeder::class);
+        $this->call(SystemSettingVariablesSeeder::class);
+
+
+
         $this->call(CustomerSeeder::class);
         $this->call(VariableSeeder::class);
         $this->call(SettingSeeder::class);

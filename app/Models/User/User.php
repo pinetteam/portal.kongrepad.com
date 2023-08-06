@@ -3,22 +3,21 @@
 namespace App\Models\User;
 
 use App\Models\Customer\Customer;
-use App\Models\System\Country\SystemCountry;
+use App\Models\System\Country\Country;
 use App\Models\User\Role\Role;
 use App\Models\User\Session\Session;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, SoftDeletes;
+    use Notifiable, SoftDeletes;
     protected $table = 'users';
     protected $fillable = [
+        'customer_id',
         'user_role_id',
         'username',
         'first_name',
@@ -28,13 +27,14 @@ class User extends Authenticatable
         'phone_country_id',
         'phone',
         'phone_verified_at',
-        'password',
         'register_ip',
         'register_user_agent',
         'last_login_ip',
         'last_login_agent',
         'last_login_datetime',
         'status',
+        'created_by',
+        'updated_by',
         'deleted_by',
     ];
     protected $hidden = [
@@ -42,14 +42,20 @@ class User extends Authenticatable
         'remember_token',
     ];
     protected $dates = [
-        'email_verified_at',
-        'last_login_datetime',
+        'created_at',
+        'updated_at',
         'deleted_at',
+        'email_verified_at',
+        'phone_verified_at',
+        'last_login_datetime',
     ];
     protected $casts = [
-        'email_verified_at' => 'datetime',
-        'last_login_datetime' => 'datetime',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
         'deleted_at' => 'datetime',
+        'email_verified_at' => 'timestamp',
+        'phone_verified_at' => 'timestamp',
+        'last_login_datetime' => 'datetime',
     ];
     public function getActivityStatusAttribute()
     {
@@ -92,7 +98,7 @@ class User extends Authenticatable
     }
     public function phoneCountry()
     {
-        return $this->belongsTo(SystemCountry::class, 'phone_country_id', 'id');
+        return $this->belongsTo(Country::class, 'phone_country_id', 'id');
     }
     public function userRole()
     {

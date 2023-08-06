@@ -29,6 +29,9 @@ return new class extends Migration
             $table->foreign('deleted_by')->on('users')->references('id');
             $table->foreign('customer_id')->on('customers')->references('id');
         });
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreign('user_role_id')->on('user_roles')->references('id');
+        });
     }
 
     /**

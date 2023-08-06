@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Portal\Meeting\Participant\ParticipantRequest;
 use App\Http\Resources\Portal\Meeting\Participant\ParticipantResource;
 use App\Models\Meeting\Participant\Participant;
-use App\Models\System\Country\SystemCountry;
+use App\Models\System\Country\Country;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
@@ -16,7 +16,7 @@ class ParticipantController extends Controller
     {
         $participants = Auth::user()->customer->participants()->paginate(20);
         $meetings = Auth::user()->customer->meetings()->where('status', 1)->get();
-        $phone_countries = SystemCountry::get();
+        $phone_countries = Country::get();
         $types = [
             'agent' => ["value" => "agent", "title" => __('common.agent')],
             'attendee' => ["value" => "attendee", "title" => __('common.attendee')],

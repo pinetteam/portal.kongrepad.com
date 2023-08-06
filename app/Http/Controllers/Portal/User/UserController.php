@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Portal\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Portal\User\UserRequest;
 use App\Http\Resources\Portal\User\UserResource;
-use App\Models\System\Country\SystemCountry;
+use App\Models\System\Country\Country;
 use App\Models\User\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +15,7 @@ class UserController extends Controller
     {
         $users = Auth::user()->customer->users()->paginate(20);
         $user_roles = Auth::user()->customer->userRoles()->where('status', 1)->get();
-        $phone_countries = SystemCountry::get();
+        $phone_countries = Country::get();
         $statuses = [
             'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],

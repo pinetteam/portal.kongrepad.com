@@ -4,7 +4,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -19,22 +18,21 @@ return new class extends Migration
             $table->unsignedBigInteger('program_id')->index();
             $table->unsignedBigInteger('speaker_id')->index();
             $table->unsignedBigInteger('document_id')->index()->nullable();
-            $table->boolean('document_sharing_via_email')->default(0)->comment('0=passive;1=active');
             $table->string('code', 255)->nullable();
-            $table->string('title', 255);
+            $table->string('title', 511);
             $table->text('description')->nullable();
             $table->dateTime('start_at')->nullable();
             $table->dateTime('finish_at')->nullable();
             $table->boolean('is_started')->default(0)->comment('0=passive;1=active');
-            $table->boolean('is_questions_started')->default(0)->comment('0=passive;1=active');
-            $table->boolean('questions')->default(0)->comment('0=passive;1=active');
+            $table->unsignedInteger('questions_limit')->default(0);
+            $table->boolean('questions_allowed')->default(0)->comment('0=passive;1=active');
             $table->boolean('questions_auto_start')->default(0)->comment('0=passive;1=active');
-            $table->unsignedInteger('question_limit')->default(0);
+            $table->boolean('is_questions_started')->default(0)->comment('0=passive;1=active');
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
-            $table->timestamps();
             $table->unsignedBigInteger('created_by')->index()->nullable();
             $table->unsignedBigInteger('updated_by')->index()->nullable();
             $table->unsignedBigInteger('deleted_by')->index()->nullable();
+            $table->timestamps();
             $table->softDeletes();
             $table->foreign('created_by')->on('users')->references('id');
             $table->foreign('updated_by')->on('users')->references('id');
@@ -43,7 +41,6 @@ return new class extends Migration
             $table->foreign('speaker_id')->on('meeting_participants')->references('id');
             $table->foreign('document_id')->on('meeting_documents')->references('id');
         });
-        DB::statement('ALTER TABLE meeting_hall_programs MODIFY logo MEDIUMBLOB NULL');
     }
 
     /**

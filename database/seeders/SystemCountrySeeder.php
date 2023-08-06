@@ -2,8 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\System\Country\SystemCountry;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\System\Country\Country;
 use Illuminate\Database\Seeder;
 
 class SystemCountrySeeder extends Seeder
@@ -15,7 +14,7 @@ class SystemCountrySeeder extends Seeder
      */
     public function run()
     {
-        SystemCountry::insert(
+        Country::insert(
             [
                 ['code' => 'afghanistan',  'name' => 'Afghanistan', 'short_name_2d' => 'af','short_name_3d' => 'afg', 'phone_code' => '93',],
                 ['code' => 'albania',  'name' => 'Albania', 'short_name_2d' => 'al','short_name_3d' => 'alb', 'phone_code' => '355',],

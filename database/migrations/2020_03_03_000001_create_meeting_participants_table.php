@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('meeting_participants', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('meeting_id')->index();
-            $table->string('username', 127)->unique();
+            $table->string('username', 255)->unique();
             $table->string('title', 255)->nullable();
             $table->string('first_name', 255);
             $table->string('last_name', 255);

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('username', 255)->unique();
             $table->string('first_name', 255);
             $table->string('last_name', 255);
-            $table->string('email', 255);
+            $table->string('email', 255)->index();
             $table->timestamp('email_verified_at')->nullable();
             $table->unsignedBigInteger('phone_country_id')->index()->nullable();
             $table->string('phone', 31)->nullable();
@@ -42,11 +42,11 @@ return new class extends Migration
             $table->foreign('updated_by')->on('users')->references('id');
             $table->foreign('deleted_by')->on('users')->references('id');
             $table->foreign('customer_id')->on('customers')->references('id');
-            $table->foreign('user_role_id')->on('user_roles')->references('id');
             $table->foreign('phone_country_id')->on('system_countries')->references('id');
         });
-        Schema::table('user_roles', function (Blueprint $table) {
-            $table->foreign('deleted_by')->on('users')->references('id');
+        Schema::table('customer_settings', function (Blueprint $table) {
+            $table->foreign('created_by')->on('users')->references('id');
+            $table->foreign('updated_by')->on('users')->references('id');
         });
     }
 
@@ -58,8 +58,5 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('users');
-        Schema::table('user_roles', function (Blueprint $table) {
-            $table->foreign('deleted_by')->on('users')->references('id');
-        });
     }
 };

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedInteger('sort_order')->nullable();
             $table->unsignedBigInteger('program_id')->index();
             $table->string('code', 255)->nullable();
-            $table->string('title', 255);
+            $table->string('title', 511);
             $table->text('description')->nullable();
             $table->dateTime('voting_started_at')->nullable();
             $table->dateTime('voting_finished_at')->nullable();
