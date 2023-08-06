@@ -15,7 +15,7 @@ class CustomerSeeder extends Seeder
      */
     public function run()
     {
-        $icon = Image::make(storage_path('app/public/favicon.ico'))->encode('data-url');
+        $icon = Image::make(storage_path('app/public/favicon.png'))->encode('data-url');
         Customer::insert([
             [
                 'code' => 'devent',

@@ -26,7 +26,7 @@ class MeetingHallProgramSeeder extends Seeder
                 'status' => 1,
             ],
             [
-                'meeting_hall_id' => '5',
+                'hall_id' => '5',
                 'sort_order' => '20',
                 'code' => 'panel-1',
                 'title' => 'Panel 1',
@@ -38,7 +38,7 @@ class MeetingHallProgramSeeder extends Seeder
                 'status' => 1,
             ],
             [
-                'meeting_hall_id' => '5',
+                'hall_id' => '5',
                 'sort_order' => '30',
                 'code' => null,
                 'title' => 'Kahve Molası',
@@ -50,7 +50,7 @@ class MeetingHallProgramSeeder extends Seeder
                 'status' => 1,
             ],
             [
-                'meeting_hall_id' => '5',
+                'hall_id' => '5',
                 'sort_order' => '40',
                 'code' => 'sozel-bildiriler-1',
                 'title' => 'Sözel Bildiriler 1',
@@ -62,7 +62,7 @@ class MeetingHallProgramSeeder extends Seeder
                 'status' => 1,
             ],
             [
-                'meeting_hall_id' => '5',
+                'hall_id' => '5',
                 'sort_order' => '50',
                 'code' => 'takeda-uydu-sempozyumu',
                 'title' => 'Takeda Uydu Sempozyumu',
@@ -74,7 +74,7 @@ class MeetingHallProgramSeeder extends Seeder
                 'status' => 1,
             ],
             [
-                'meeting_hall_id' => '5',
+                'hall_id' => '5',
                 'sort_order' => '60',
                 'code' => null,
                 'title' => 'Öğle Yemeği',
@@ -86,7 +86,7 @@ class MeetingHallProgramSeeder extends Seeder
                 'status' => 1,
             ],
             [
-                'meeting_hall_id' => '5',
+                'hall_id' => '5',
                 'sort_order' => '70',
                 'code' => 'panel-2',
                 'title' => 'Panel 2',
@@ -98,7 +98,7 @@ class MeetingHallProgramSeeder extends Seeder
                 'status' => 1,
             ],
             [
-                'meeting_hall_id' => '5',
+                'hall_id' => '5',
                 'sort_order' => '80',
                 'code' => null,
                 'title' => 'Kahve Molası',
@@ -110,7 +110,7 @@ class MeetingHallProgramSeeder extends Seeder
                 'status' => 1,
             ],
             [
-                'meeting_hall_id' => '5',
+                'hall_id' => '5',
                 'sort_order' => '90',
                 'code' => 'novartis-uydu-sempozyumu',
                 'title' => 'Novartis Uydu Sempozyumu',
@@ -122,7 +122,7 @@ class MeetingHallProgramSeeder extends Seeder
                 'status' => 1,
             ],
             [
-                'meeting_hall_id' => '5',
+                'hall_id' => '5',
                 'sort_order' => '100',
                 'code' => 'sozel-bildiriler-2',
                 'title' => 'Sözel Bildiriler 2',
@@ -134,7 +134,7 @@ class MeetingHallProgramSeeder extends Seeder
                 'status' => 1,
             ],
             [
-                'meeting_hall_id' => '5',
+                'hall_id' => '5',
                 'sort_order' => '110',
                 'code' => 'debate',
                 'title' => 'Debate',
@@ -146,7 +146,7 @@ class MeetingHallProgramSeeder extends Seeder
                 'status' => 1,
             ],
             [
-                'meeting_hall_id' => '5',
+                'hall_id' => '5',
                 'sort_order' => '10',
                 'code' => null,
                 'title' => 'Açılış Töreni',
@@ -158,7 +158,7 @@ class MeetingHallProgramSeeder extends Seeder
                 'status' => 1,
             ],
             [
-                'meeting_hall_id' => '5',
+                'hall_id' => '5',
                 'sort_order' => '20',
                 'code' => 'panel-1',
                 'title' => 'Panel 1',
@@ -170,7 +170,7 @@ class MeetingHallProgramSeeder extends Seeder
                 'status' => 1,
             ],
             [
-                'meeting_hall_id' => '5',
+                'hall_id' => '5',
                 'sort_order' => '30',
                 'code' => null,
                 'title' => 'Kahve Molası',
@@ -182,7 +182,7 @@ class MeetingHallProgramSeeder extends Seeder
                 'status' => 1,
             ],
             [
-                'meeting_hall_id' => '5',
+                'hall_id' => '5',
                 'sort_order' => '40',
                 'code' => 'sozel-bildiriler-1',
                 'title' => 'Sözel Bildiriler 1',
@@ -194,7 +194,7 @@ class MeetingHallProgramSeeder extends Seeder
                 'status' => 1,
             ],
             [
-                'meeting_hall_id' => '5',
+                'hall_id' => '5',
                 'sort_order' => '50',
                 'code' => 'takeda-uydu-sempozyumu',
                 'title' => 'Takeda Uydu Sempozyumu',
@@ -206,7 +206,7 @@ class MeetingHallProgramSeeder extends Seeder
                 'status' => 1,
             ],
             [
-                'meeting_hall_id' => '5',
+                'hall_id' => '5',
                 'sort_order' => '60',
                 'code' => null,
                 'title' => 'Öğle Yemeği',
@@ -218,7 +218,7 @@ class MeetingHallProgramSeeder extends Seeder
                 'status' => 1,
             ],
             [
-                'meeting_hall_id' => '5',
+                'hall_id' => '5',
                 'sort_order' => '70',
                 'code' => 'panel-2',
                 'title' => 'Panel 2',
@@ -230,7 +230,7 @@ class MeetingHallProgramSeeder extends Seeder
                 'status' => 1,
             ],
             [
-                'meeting_hall_id' => '5',
+                'hall_id' => '5',
                 'sort_order' => '80',
                 'code' => null,
                 'title' => 'Kahve Molası',
@@ -242,7 +242,7 @@ class MeetingHallProgramSeeder extends Seeder
                 'status' => 1,
             ],
             [
-                'meeting_hall_id' => '5',
+                'hall_id' => '5',
                 'sort_order' => '90',
                 'code' => 'novartis-uydu-sempozyumu',
                 'title' => 'Novartis Uydu Sempozyumu',
@@ -254,7 +254,7 @@ class MeetingHallProgramSeeder extends Seeder
                 'status' => 1,
             ],
             [
-                'meeting_hall_id' => '5',
+                'hall_id' => '5',
                 'sort_order' => '100',
                 'code' => 'sozel-bildiriler-2',
                 'title' => 'Sözel Bildiriler 2',
@@ -266,7 +266,7 @@ class MeetingHallProgramSeeder extends Seeder
                 'status' => 1,
             ],
             [
-                'meeting_hall_id' => '5',
+                'hall_id' => '5',
                 'sort_order' => '110',
                 'code' => 'debate',
                 'title' => 'Debate',

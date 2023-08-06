@@ -90,6 +90,7 @@ class SystemSettingVariableSeeder extends Seeder
                 'title' => 'web',
                 'variable' => 'web',
                 'type' => 'text',
+                'type_variables' => null,
                 'status' => '1',
             ],
             [
@@ -98,6 +99,7 @@ class SystemSettingVariableSeeder extends Seeder
                 'title' => 'email',
                 'variable' => 'email',
                 'type' => 'text',
+                'type_variables' => null,
                 'status' => '1',
             ],
             [
@@ -106,6 +108,7 @@ class SystemSettingVariableSeeder extends Seeder
                 'title' => 'phone',
                 'variable' => 'phone',
                 'type' => 'text',
+                'type_variables' => null,
                 'status' => '1',
             ],
             [
@@ -114,6 +117,7 @@ class SystemSettingVariableSeeder extends Seeder
                 'title' => 'address',
                 'variable' => 'address',
                 'type' => 'text',
+                'type_variables' => null,
                 'status' => '1',
             ],
             [
@@ -158,6 +162,7 @@ class SystemSettingVariableSeeder extends Seeder
                 'title' => 'facebook-link',
                 'variable' => 'facebook_link',
                 'type' => 'text',
+                'type_variables' => null,
                 'status' => '1',
             ],
             [
@@ -166,6 +171,7 @@ class SystemSettingVariableSeeder extends Seeder
                 'title' => 'instagram-link',
                 'variable' => 'instagram_link',
                 'type' => 'text',
+                'type_variables' => null,
                 'status' => '1',
             ],
             [
@@ -174,6 +180,7 @@ class SystemSettingVariableSeeder extends Seeder
                 'title' => 'twitter-link',
                 'variable' => 'twitter_link',
                 'type' => 'text',
+                'type_variables' => null,
                 'status' => '1',
             ],
         ]);
