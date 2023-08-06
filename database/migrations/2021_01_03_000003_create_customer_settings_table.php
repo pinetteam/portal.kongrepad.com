@@ -18,7 +18,9 @@ return new class extends Migration
             $table->unsignedBigInteger('customer_id')->index();
             $table->unsignedBigInteger('variable_id')->index();
             $table->string('value', 255);
+            $table->unsignedBigInteger('updated_by')->index()->nullable();
             $table->timestamps();
+            $table->foreign('updated_by')->on('users')->references('id');
             $table->foreign('customer_id')->on('customers')->references('id');
             $table->foreign('variable_id')->on('system_setting_variables')->references('id');
         });

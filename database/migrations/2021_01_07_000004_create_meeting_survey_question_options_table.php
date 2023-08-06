@@ -19,11 +19,11 @@ return new class extends Migration
             $table->timestamps();
             $table->boolean('status')->default(0)->comment('0=passive;1=active');
             $table->unsignedBigInteger('created_by')->index()->nullable();
-            $table->unsignedBigInteger('edited_by')->index()->nullable();
+            $table->unsignedBigInteger('updated_by')->index()->nullable();
             $table->unsignedBigInteger('deleted_by')->index()->nullable();
             $table->softDeletes();
             $table->foreign('created_by')->on('users')->references('id');
-            $table->foreign('edited_by')->on('users')->references('id');
+            $table->foreign('updated_by')->on('users')->references('id');
             $table->foreign('deleted_by')->on('users')->references('id');
             $table->foreign('question_id')->on('meeting_survey_questions')->references('id');
         });

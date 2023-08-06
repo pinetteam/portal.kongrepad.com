@@ -15,15 +15,13 @@ use App\Models\Meeting\ScoreGame\ScoreGame;
 use App\Models\Meeting\Survey\Survey;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
 class Meeting extends Model
 {
-    use HasFactory, SoftDeletes;
-
+    use SoftDeletes;
     protected $table = 'meetings';
     protected $fillable = [
         'customer_id',
@@ -39,11 +37,15 @@ class Meeting extends Model
     protected $dates = [
         'start_at',
         'finish_at',
+        'created_at',
+        'edited_at',
         'deleted_at',
     ];
     protected $casts = [
         'start_at' => 'datetime:Y-m-d',
         'finish_at' => 'datetime:Y-m-d',
+        'created_at' => 'datetime',
+        'edited_at' => 'datetime',
         'deleted_at' => 'datetime',
     ];
 

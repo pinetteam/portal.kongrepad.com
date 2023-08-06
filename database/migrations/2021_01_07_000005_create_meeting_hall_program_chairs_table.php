@@ -20,11 +20,11 @@ return new class extends Migration
             $table->unsignedBigInteger('chair_id')->index();
             $table->timestamps();
             $table->unsignedBigInteger('created_by')->index()->nullable();
-            $table->unsignedBigInteger('edited_by')->index()->nullable();
+            $table->unsignedBigInteger('updated_by')->index()->nullable();
             $table->unsignedBigInteger('deleted_by')->index()->nullable();
             $table->softDeletes();
             $table->foreign('created_by')->on('users')->references('id');
-            $table->foreign('edited_by')->on('users')->references('id');
+            $table->foreign('updated_by')->on('users')->references('id');
             $table->foreign('deleted_by')->on('users')->references('id');
             $table->foreign('program_id')->on('meeting_hall_programs')->references('id');
             $table->foreign('chair_id')->on('meeting_participants')->references('id');
