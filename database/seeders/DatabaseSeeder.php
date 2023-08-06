@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserRoleSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(MeetingSeeder::class);
+        $this->call(MeetingParticipantSeeder::class);
         $this->call(MeetingHallSeeder::class);
         $this->call(MeetingHallProgramSeeder::class);
         $this->call(MeetingHallProgramSessionSeeder::class);

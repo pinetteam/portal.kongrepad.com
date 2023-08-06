@@ -2,6 +2,7 @@
 
 namespace App\Models\Meeting;
 
+use App\Models\Customer\Setting\Setting;
 use App\Models\Customer\Setting\Variable\Variable;
 use App\Models\Meeting\Document\Document;
 use App\Models\Meeting\Hall\Hall;
@@ -51,18 +52,19 @@ class Meeting extends Model
 
     protected function startAt(): Attribute
     {
+        $date_format = Setting::where('customer_id', 1)->where('variable_id', 7)->first()->value;
         return Attribute::make(
-            get: fn(string $startAt) => Carbon::createFromFormat('Y-m-d', $startAt)->format(Variable::where('variable', 'date_format')->first()->settings()->where('customer_id', Auth::user()->customer->id)->first()->value),
-            set: fn(string $startAt) => Carbon::createFromFormat('Y-m-d', $startAt)->format('Y-m-d'),
+            get: fn(string $startAt) => Carbon::createFromFormat('Y-m-d', $startAt)->format($date_format),
+            set: fn(string $startAt) => Carbon::createFromFormat($date_format, $startAt)->format('Y-m-d'),
         );
-
     }
 
     protected function finishAt(): Attribute
     {
+        $date_format = Setting::where('customer_id', 1)->where('variable_id', 7)->first()->value;
         return Attribute::make(
-            get: fn(string $finishAt) => Carbon::createFromFormat('Y-m-d', $finishAt)->format(Variable::where('variable', 'date_format')->first()->settings()->where('customer_id', Auth::user()->customer->id)->first()->value),
-            set: fn(string $finishAt) => Carbon::createFromFormat('Y-m-d', $finishAt)->format('Y-m-d'),
+            get: fn(string $finishAt) => Carbon::createFromFormat('Y-m-d', $finishAt)->format($date_format),
+            set: fn(string $finishAt) => Carbon::createFromFormat($date_format, $finishAt)->format('Y-m-d'),
         );
     }
 
