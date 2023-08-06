@@ -12,10 +12,10 @@ use App\Models\Meeting\Hall\Program\Debate\Vote\Vote;
 use App\Models\Meeting\Hall\Program\Program;
 use App\Models\Meeting\Hall\Program\Session\Keypad\Keypad;
 use App\Models\Meeting\Hall\Program\Session\Keypad\Option\Option;
-use App\Models\Meeting\Hall\Program\Session\ProgramSession;
+use App\Models\Meeting\Hall\Program\Session\Session;
 use App\Models\Meeting\Meeting;
 use App\Models\Meeting\Participant\Participant;
-use App\Models\Meeting\ScoreGame\QrCode\QrCode;
+use App\Models\Meeting\ScoreGame\QRCode\QRCode;
 use App\Models\Meeting\ScoreGame\ScoreGame;
 use App\Models\Meeting\Survey\Question\Question;
 use App\Models\Meeting\Survey\Survey;
@@ -96,7 +96,7 @@ class Customer extends Model
     }
     public function programSessions()
     {
-        $program_sessions = ProgramSession::select('meeting_hall_program_sessions.*')
+        $program_sessions = Session::select('meeting_hall_program_sessions.*')
             ->join('meeting_hall_programs', 'meeting_hall_program_sessions.program_id', '=', 'meeting_hall_programs.id')
             ->join('meeting_halls', 'meeting_hall_programs.meeting_hall_id', '=', 'meeting_halls.id')
             ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
@@ -209,7 +209,7 @@ class Customer extends Model
     }
     public function qrCodes()
     {
-        $qrcodes = QrCode::select('meeting_score_game_qr_codes.*')
+        $qrcodes = QRCode::select('meeting_score_game_qr_codes.*')
             ->join('meeting_score_games', 'meeting_score_game_qr_codes.score_game_id', '=', 'meeting_score_games.id')
             ->join('meetings', 'meeting_score_games.meeting_id', '=', 'meetings.id')
             ->join('customers', 'meetings.customer_id', '=', 'customers.id')

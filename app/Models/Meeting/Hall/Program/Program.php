@@ -6,20 +6,19 @@ use App\Models\Customer\Setting\Variable\Variable;
 use App\Models\Meeting\Hall\Hall;
 use App\Models\Meeting\Hall\Program\Chair\Chair;
 use App\Models\Meeting\Hall\Program\Debate\Debate;
-use App\Models\Meeting\Hall\Program\Session\ProgramSession;
+use App\Models\Meeting\Hall\Program\Session\Session;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
 class Program extends Model
 {
-    use HasFactory, SoftDeletes;
+    use SoftDeletes;
     protected $table = 'meeting_hall_programs';
     protected $fillable = [
-        'meeting_hall_id',
+        'hall_id',
         'sort_order',
         'code',
         'title',
@@ -28,21 +27,25 @@ class Program extends Model
         'start_at',
         'finish_at',
         'type',
-        'on_air',
+        'is_started',
         'status',
         'created_by',
-        'edited_by',
+        'updated_by',
         'deleted_by',
     ];
     protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
         'start_at',
         'finish_at',
-        'deleted_at',
     ];
     protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'deleted_at' => 'datetime',
         'start_at' => 'datetime',
         'finish_at' => 'datetime',
-        'deleted_at' => 'datetime',
     ];
     protected function startAt(): Attribute
     {
@@ -68,7 +71,7 @@ class Program extends Model
     }
     public function programSessions()
     {
-        return $this->hasMany(ProgramSession::class, 'program_id', 'id');
+        return $this->hasMany(Session::class, 'program_id', 'id');
     }
 
     public function debates()

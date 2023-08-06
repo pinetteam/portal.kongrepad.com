@@ -4,28 +4,31 @@ namespace App\Models\Meeting\Hall;
 
 use App\Models\Meeting\Hall\Program\Program;
 use App\Models\Meeting\Hall\Program\Session\Keypad\Keypad;
-use App\Models\Meeting\Hall\Program\Session\ProgramSession;
+use App\Models\Meeting\Hall\Program\Session\Session;
 use App\Models\Meeting\Meeting;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Hall extends Model
 {
-    use HasFactory, SoftDeletes;
+    use SoftDeletes;
     protected $table = 'meeting_halls';
     protected $fillable = [
         'meeting_id',
         'title',
         'status',
         'created_by',
-        'edited_by',
+        'updated_by',
         'deleted_by',
     ];
     protected $dates = [
+        'created_at',
+        'updated_at',
         'deleted_at',
     ];
     protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
         'deleted_at' => 'datetime',
     ];
     public function meeting()
@@ -47,6 +50,6 @@ class Hall extends Model
     }
     public function programSessions()
     {
-        return $this->hasManyThrough(ProgramSession::class, Program::class, 'meeting_hall_id', 'program_id', 'id');
+        return $this->hasManyThrough(Session::class, Program::class, 'meeting_hall_id', 'program_id', 'id');
     }
 }

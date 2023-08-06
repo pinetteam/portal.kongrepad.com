@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('meeting_id')->index();
             $table->string('title', 511);
-            $table->datetime('start_at');
-            $table->datetime('finish_at');
+            $table->dateTime('start_at');
+            $table->dateTime('finish_at');
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
             $table->unsignedBigInteger('created_by')->index()->nullable();
             $table->unsignedBigInteger('updated_by')->index()->nullable();

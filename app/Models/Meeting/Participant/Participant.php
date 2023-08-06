@@ -5,7 +5,6 @@ namespace App\Models\Meeting\Participant;
 use App\Models\Meeting\Meeting;
 use App\Models\System\Country\Country;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
@@ -21,8 +20,8 @@ class Participant extends Model
         'title',
         'first_name',
         'last_name',
-        'organisation',
         'identification_number',
+        'organisation',
         'email',
         'phone_country_id',
         'phone',
@@ -31,21 +30,26 @@ class Participant extends Model
         'last_login_agent',
         'last_login_datetime',
         'last_activity',
+        'type',
         'gdpr_consent',
         'status',
         'created_by',
-        'edited_by',
+        'updated_by',
         'deleted_by',
     ];
     protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
         'last_login_datetime',
         'last_activity',
-        'deleted_at',
     ];
     protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'deleted_at' => 'datetime',
         'last_login_datetime' => 'datetime',
         'last_activity' => 'timestamp',
-        'deleted_at' => 'datetime',
     ];
     public function meeting()
     {

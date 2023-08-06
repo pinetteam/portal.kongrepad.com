@@ -4,40 +4,41 @@ namespace App\Models\Meeting\ScoreGame;
 
 use App\Models\Customer\Setting\Variable\Variable;
 use App\Models\Meeting\Meeting;
-use App\Models\Meeting\ScoreGame\QrCode\Point\Point;
-use App\Models\Meeting\ScoreGame\QrCode\QrCode;
-use App\Models\Meeting\ScoreGame\QrCode\Point\Score;
+use App\Models\Meeting\ScoreGame\QRCode\Point\Point;
+use App\Models\Meeting\ScoreGame\QRCode\QRCode;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
 class ScoreGame extends Model
 {
-    use HasFactory, SoftDeletes;
+    use SoftDeletes;
     protected $table = 'meeting_score_games';
     protected $fillable = [
         'meeting_id',
         'title',
-        'status',
         'start_at',
         'finish_at',
+        'status',
         'created_by',
-        'edited_by',
+        'updated_by',
         'deleted_by',
     ];
     protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
         'start_at',
         'finish_at',
-        'deleted_at',
     ];
     protected $casts = [
-        'types' => 'array',
-        'start_at' => 'datetime:Y-m-d',
-        'finish_at' => 'datetime:Y-m-d',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
         'deleted_at' => 'datetime',
+        'start_at' => 'datetime',
+        'finish_at' => 'datetime',
     ];
     protected function startAt(): Attribute
     {
@@ -59,10 +60,10 @@ class ScoreGame extends Model
         return $this->belongsTo(Meeting::class, 'meeting_id', 'id');
     }
     public function qrCodes(){
-        return $this->hasMany(QrCode::class, 'score_game_id', 'id');
+        return $this->hasMany(QRCode::class, 'score_game_id', 'id');
     }
     public function points(){
-        return $this->hasManyThrough(Point::class, QrCode::class, 'score_game_id', 'qr_code_id', 'id', 'id');
+        return $this->hasManyThrough(Point::class, QRCode::class, 'score_game_id', 'qr_code_id', 'id', 'id');
     }
 
 }

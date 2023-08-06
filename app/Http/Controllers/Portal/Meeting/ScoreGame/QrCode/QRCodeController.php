@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Portal\Meeting\ScoreGame\QrCode;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Portal\Meeting\ScoreGame\QrCode\QrCodeRequest;
 use App\Http\Resources\Portal\Meeting\ScoreGame\QRCode\QRCodeResource;
-use App\Models\Meeting\ScoreGame\QrCode\QrCode;
+use App\Models\Meeting\ScoreGame\QRCode\QRCode;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 
@@ -24,7 +24,7 @@ class QRCodeController extends Controller
     public function store(QrCodeRequest $request)
     {
         if ($request->validated()) {
-            $qr_code = new QrCode();
+            $qr_code = new QRCode();
             $qr_code->score_game_id = $request->input('score_game_id');
             $qr_code->start_at = $request->input('start_at');
             $qr_code->finish_at = $request->input('finish_at');

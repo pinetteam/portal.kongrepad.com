@@ -13,12 +13,11 @@ return new class extends Migration
     {
         Schema::create('meeting_hall_program_debate_votes', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('debate_id')->index();
             $table->unsignedBigInteger('team_id')->index();
             $table->unsignedBigInteger('participant_id')->index();
             $table->timestamps();
-            $table->foreign('created_by')->on('users')->references('id');
-            $table->foreign('updated_by')->on('users')->references('id');
-            $table->foreign('deleted_by')->on('users')->references('id');
+            $table->foreign('debate_id')->on('meeting_hall_program_debates')->references('id');
             $table->foreign('team_id')->on('meeting_hall_program_debate_teams')->references('id');
             $table->foreign('participant_id')->on('meeting_participants')->references('id');
         });

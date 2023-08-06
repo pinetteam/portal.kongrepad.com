@@ -10,44 +10,47 @@ use App\Models\Meeting\Hall\Program\Session\Question\Question;
 use App\Models\Meeting\Participant\Participant;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
-class ProgramSession extends Model
+class Session extends Model
 {
-    use HasFactory, SoftDeletes;
+    use SoftDeletes;
     protected $table = 'meeting_hall_program_sessions';
     protected $fillable = [
+        'sort_order',
         'program_id',
         'speaker_id',
         'document_id',
-        'document_sharing_via_email',
-        'sort_order',
         'code',
         'title',
         'description',
         'start_at',
         'finish_at',
-        'is_started',
-        'questions',
+        'on_air',
+        'questions_limit',
+        'questions_allowed',
         'questions_auto_start',
-        'question_limit',
+        'is_questions_started',
         'status',
         'created_by',
-        'edited_by',
+        'updated_by',
         'deleted_by',
     ];
     protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
         'start_at',
         'finish_at',
-        'deleted_at',
     ];
     protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'deleted_at' => 'datetime',
         'start_at' => 'datetime',
         'finish_at' => 'datetime',
-        'deleted_at' => 'datetime',
     ];
     protected function startAt(): Attribute
     {

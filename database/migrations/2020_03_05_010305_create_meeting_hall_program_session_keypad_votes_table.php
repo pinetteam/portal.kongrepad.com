@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('meeting_hall_program_session_keypad_votes', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('keypad_id')->index();
             $table->unsignedBigInteger('option_id')->index();
             $table->unsignedBigInteger('participant_id')->index();
             $table->timestamps();
+            $table->foreign('keypad_id')->on('meeting_hall_program_session_keypads')->references('id');
             $table->foreign('option_id')->on('meeting_hall_program_session_keypad_options')->references('id');
             $table->foreign('participant_id')->on('meeting_participants')->references('id');
         });

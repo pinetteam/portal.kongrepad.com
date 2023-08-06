@@ -1,44 +1,48 @@
 <?php
 
-namespace App\Models\Meeting\ScoreGame\QrCode;
+namespace App\Models\Meeting\ScoreGame\QRCode;
 
 use App\Models\Customer\Setting\Variable\Variable;
 use App\Models\Meeting\ScoreGame\ScoreGame;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
-class QrCode extends Model
+class QRCode extends Model
 {
-    use HasFactory, SoftDeletes;
+    use SoftDeletes;
     protected $table = 'meeting_score_game_qr_codes';
     protected $fillable = [
-        'code',
         'score_game_id',
         'title',
+        'code',
+        'logo',
         'point',
+        'start_at',
+        'finish_at',
         'participation_for_agent',
         'participation_for_attendee',
         'participation_for_team',
-        'start_at',
-        'finish_at',
         'status',
         'created_by',
-        'edited_by',
+        'updated_by',
         'deleted_by',
     ];
     protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
         'start_at',
         'finish_at',
-        'deleted_at',
     ];
     protected $casts = [
-        'start_at' => 'datetime:Y-m-d',
-        'finish_at' => 'datetime:Y-m-d',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
         'deleted_at' => 'datetime',
+        'start_at' => 'datetime',
+        'finish_at' => 'datetime',
     ];
 
     protected function startAt(): Attribute

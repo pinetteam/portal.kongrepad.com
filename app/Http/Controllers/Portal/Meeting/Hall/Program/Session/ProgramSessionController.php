@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Portal\Meeting\Hall\Program\Session;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Portal\Meeting\Hall\Program\Session\SessionRequest;
 use App\Http\Resources\Portal\Meeting\Hall\Program\Session\SessionResource;
-use App\Models\Meeting\Hall\Program\Session\ProgramSession;
+use App\Models\Meeting\Hall\Program\Session\Session;
 use Illuminate\Support\Facades\Auth;
 
 class ProgramSessionController extends Controller
@@ -13,7 +13,7 @@ class ProgramSessionController extends Controller
     public function store(SessionRequest $request, string $program_id)
     {
         if ($request->validated()) {
-            $program_session = new ProgramSession();
+            $program_session = new Session();
             $program_session->program_id = $request->input('program_id');
             $program_session->speaker_id = $request->input('speaker_id');
             $program_session->document_id = $request->input('document_id');

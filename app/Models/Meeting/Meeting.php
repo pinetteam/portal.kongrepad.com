@@ -9,7 +9,7 @@ use App\Models\Meeting\Hall\Program\Chair\Chair;
 use App\Models\Meeting\Hall\Program\Debate\Debate;
 use App\Models\Meeting\Hall\Program\Program;
 use App\Models\Meeting\Hall\Program\Session\Keypad\Keypad;
-use App\Models\Meeting\Hall\Program\Session\ProgramSession;
+use App\Models\Meeting\Hall\Program\Session\Session;
 use App\Models\Meeting\Participant\Participant;
 use App\Models\Meeting\ScoreGame\ScoreGame;
 use App\Models\Meeting\Survey\Survey;
@@ -31,22 +31,22 @@ class Meeting extends Model
         'finish_at',
         'status',
         'created_by',
-        'edited_by',
+        'updated_by',
         'deleted_by',
     ];
     protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
         'start_at',
         'finish_at',
-        'created_at',
-        'edited_at',
-        'deleted_at',
     ];
     protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'deleted_at' => 'datetime',
         'start_at' => 'datetime:Y-m-d',
         'finish_at' => 'datetime:Y-m-d',
-        'created_at' => 'datetime',
-        'edited_at' => 'datetime',
-        'deleted_at' => 'datetime',
     ];
 
     protected function startAt(): Attribute
@@ -98,7 +98,7 @@ class Meeting extends Model
 
     public function programSessions()
     {
-        $program_sessions = ProgramSession::select('meeting_hall_program_sessions.*')
+        $program_sessions = Session::select('meeting_hall_program_sessions.*')
             ->join('meeting_hall_programs', 'meeting_hall_program_sessions.program_id', '=', 'meeting_hall_programs.id')
             ->join('meeting_halls', 'meeting_hall_programs.meeting_hall_id', '=', 'meeting_halls.id')
             ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')

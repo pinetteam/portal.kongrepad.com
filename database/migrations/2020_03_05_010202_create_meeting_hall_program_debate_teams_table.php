@@ -14,6 +14,7 @@ return new class extends Migration
     {
         Schema::create('meeting_hall_program_debate_teams', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('sort_order')->nullable();
             $table->unsignedBigInteger('debate_id')->index();
             $table->string('code', 255)->nullable();
             $table->binary('logo')->nullable();

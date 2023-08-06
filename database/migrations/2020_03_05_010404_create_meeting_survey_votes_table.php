@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('meeting_survey_votes', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('survey_id')->index();
             $table->unsignedBigInteger('question_id')->index();
             $table->unsignedBigInteger('option_id')->index();
             $table->unsignedBigInteger('participant_id')->index();
             $table->timestamps();
+            $table->foreign('survey_id')->on('meeting_surveys')->references('id');
             $table->foreign('question_id')->on('meeting_survey_questions')->references('id');
             $table->foreign('option_id')->on('meeting_survey_question_options')->references('id');
             $table->foreign('participant_id')->on('meeting_participants')->references('id');

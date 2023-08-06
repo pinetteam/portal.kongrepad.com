@@ -22,7 +22,7 @@ return new class extends Migration
             $table->datetime('start_at');
             $table->datetime('finish_at');
             $table->boolean('participation_for_agent')->default(0)->comment('0=passive;1=active');
-            $table->boolean('participation_for_-attendee')->default(1)->comment('0=passive;1=active');
+            $table->boolean('participation_for_attendee')->default(1)->comment('0=passive;1=active');
             $table->boolean('participation_for_team')->default(0)->comment('0=passive;1=active');
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
             $table->unsignedBigInteger('created_by')->index()->nullable();

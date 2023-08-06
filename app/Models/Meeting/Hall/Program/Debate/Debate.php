@@ -8,14 +8,13 @@ use App\Models\Meeting\Hall\Program\Program;
 use App\Models\Meeting\Hall\Program\Debate\Team\Team;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
 class Debate extends Model
 {
-    use HasFactory, SoftDeletes;
+    use SoftDeletes;
     protected $table = 'meeting_hall_program_debates';
     protected $fillable = [
         'sort_order',
@@ -32,14 +31,18 @@ class Debate extends Model
         'deleted_by',
     ];
     protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
         'voting_started_at',
         'voting_finished_at',
-        'deleted_at',
     ];
     protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'deleted_at' => 'datetime',
         'voting_started_at' => 'datetime',
         'voting_finished_at' => 'datetime',
-        'deleted_at' => 'datetime',
     ];
     protected function votingStartedAt(): Attribute
     {

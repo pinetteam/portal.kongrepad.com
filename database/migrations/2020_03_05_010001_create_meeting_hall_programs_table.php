@@ -17,13 +17,13 @@ return new class extends Migration
             $table->unsignedBigInteger('hall_id')->index();
             $table->unsignedInteger('sort_order')->nullable();
             $table->string('code', 255)->nullable();
-            $table->string('title', 255);
+            $table->string('title', 511);
             $table->text('description')->nullable();
             $table->binary('logo')->nullable();
             $table->dateTime('start_at')->nullable();
             $table->dateTime('finish_at')->nullable();
             $table->enum('type', ['debate', 'other', 'session'])->default('session');
-            $table->boolean('on_air')->default(0)->comment('0=passive;1=active');
+            $table->boolean('is_started')->default(0)->comment('0=no;1=yes');
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
             $table->unsignedBigInteger('created_by')->index()->nullable();
             $table->unsignedBigInteger('updated_by')->index()->nullable();

@@ -17,8 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('session_id')->index();
             $table->unsignedBigInteger('questioner_id')->index();
             $table->string('question', 511);
+            $table->boolean('is_hidden_name')->default(0)->comment('0=no;1=yes');
             $table->boolean('selected_for_show')->default(0)->comment('0=no;1=yes');
-            $table->boolean('status')->default(0)->comment('0=passive;1=active');
             $table->timestamps();
             $table->foreign('session_id')->on('meeting_hall_program_sessions')->references('id');
             $table->foreign('questioner_id')->on('meeting_participants')->references('id');

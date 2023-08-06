@@ -2,13 +2,13 @@
 
 namespace Database\Seeders;
 
-use App\Models\Meeting\Hall\Program\Session\ProgramSession;
+use App\Models\Meeting\Hall\Program\Session\Session;
 use Illuminate\Database\Seeder;
 
 class ProgramSessionSeeder extends Seeder
 {
     public function run(){
-        ProgramSession::insert([
+        Session::insert([
             [
                 'program_id' => '2',
                 'speaker_id' => '2',

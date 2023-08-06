@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('meeting_surveys', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('meeting_id')->index();
             $table->unsignedInteger('sort_order')->nullable();
+            $table->unsignedBigInteger('meeting_id')->index();
             $table->string('title', 511);
             $table->text('description')->nullable();
             $table->dateTime('start_at')->nullable();

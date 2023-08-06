@@ -7,38 +7,40 @@ use App\Models\Meeting\Meeting;
 use App\Models\Meeting\Survey\Question\Question;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
 class Survey extends Model
 {
-    use HasFactory, SoftDeletes;
+    use SoftDeletes;
     protected $table = 'meeting_surveys';
     protected $fillable = [
         'sort_order',
         'meeting_id',
-        'code',
         'title',
         'description',
-        'on_air',
-        'status',
         'start_at',
         'finish_at',
+        'on_vote',
+        'status',
         'created_by',
-        'edited_by',
+        'updated_by',
         'deleted_by',
     ];
     protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
         'start_at',
         'finish_at',
-        'deleted_at',
     ];
     protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'deleted_at' => 'datetime',
         'start_at' => 'datetime',
         'finish_at' => 'datetime',
-        'deleted_at' => 'datetime',
     ];
     protected function finishAt(): Attribute
     {
