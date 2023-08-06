@@ -132,8 +132,8 @@ class SystemSettingVariableSeeder extends Seeder
             [
                 'group' => 'localisation',
                 'sort_order' => '20',
-                'title' => 'datetime-format',
-                'variable' => 'datetime_format',
+                'title' => 'date-time-format',
+                'variable' => 'date_time_format',
                 'type' => 'select',
                 'type_variables' => json_encode($datetime_formats),
                 'status' => '1',

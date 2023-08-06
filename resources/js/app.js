@@ -14,7 +14,7 @@ function initializeDatePicker(element) {
     const datePicker = new TempusDominus(element, {
         localization: {
             locale: 'tr-TR',
-            format: 'YYYY-MM-DD'
+            format: 'DD/MM/YYYY'
         },
         display: {
             viewMode: 'calendar',
@@ -73,7 +73,7 @@ function initializeDateTimePicker(element) {
     const dateTimePicker = new TempusDominus(element, {
         localization: {
             locale: 'tr-TR',
-            format: 'YYYY-MM-DD HH:mm'
+            format: 'DD/MM/YYYY HH:mm'
         },
         display: {
             viewMode: 'calendar',
