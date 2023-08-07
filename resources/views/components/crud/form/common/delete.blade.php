@@ -10,7 +10,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>{{ __('common.are-you-sure-you-want-to-delete') }} <strong id="{{ $name }}-delete-record" class="text-danger"></strong>?</p>
+                    <p>{{ __('common.are-you-sure-you-want-to-delete') }} <strong id="{{ $name }}-delete-record" class="text-danger"></strong> ?</p>
+                    <p><em id="{{ $name }}-delete-record" class="text-danger">{{__('common.this-operation-will-delete-all-related-objects')}}</em></p>
                 </div>
                 <div class="modal-footer">
                     <div class="btn-group w-100" role="group" aria-label="{{ __('common.processes') }}">

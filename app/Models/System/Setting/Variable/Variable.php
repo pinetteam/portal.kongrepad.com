@@ -2,6 +2,7 @@
 
 namespace App\Models\System\Setting\Variable;
 
+use App\Models\Customer\Setting\Setting;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -29,4 +30,9 @@ class Variable extends Model
         'deleted_at' => 'datetime',
         'type_variables' => 'array',
     ];
+
+    public function settings()
+    {
+        return $this->hasMany(Setting::class, 'variable_id', 'id');
+    }
 }

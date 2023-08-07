@@ -38,9 +38,18 @@ Route::prefix('portal')->name('portal.')->group(function () {
             Route::name('hall.')->group(function () {
                 Route::resource('/{meeting}/hall/{hall}/program', \App\Http\Controllers\Portal\Meeting\Hall\Program\ProgramController::class)->except(['create']);
             });
+
             Route::resource('/{meeting}/survey', \App\Http\Controllers\Portal\Meeting\Survey\SurveyController::class)->except(['create']);
+
             Route::resource('/{meeting}/participant', \App\Http\Controllers\Portal\Meeting\Participant\ParticipantController::class)->except(['create']);
             Route::get('/{meeting}/participant/{participant}/qr-code', [\App\Http\Controllers\Portal\Meeting\Participant\ParticipantController::class, 'qr_code'])->name('participant.qr-code');
+            /* Score Game Routes */
+            Route::resource('/{meeting}/score-game', \App\Http\Controllers\Portal\Meeting\ScoreGame\ScoreGameController::class)->except(['create']);
+            Route::prefix('/{meeting}/score-game')->name('score-game.')->group(function () {
+                Route::get('/{score_game}/qr-code-download/{qr_code}', [\App\Http\Controllers\Portal\Meeting\ScoreGame\QrCode\QRCodeController::class,'download'])->name('qr-code-download');
+                Route::resource('/{score_game}/qr-code', \App\Http\Controllers\Portal\Meeting\ScoreGame\QrCode\QRCodeController::class)->except(['create']);
+            });
+
         });
 
 
@@ -66,16 +75,13 @@ Route::prefix('portal')->name('portal.')->group(function () {
 
         /* Survey routes */
         Route::resource('/chair', \App\Http\Controllers\Portal\Meeting\Hall\Program\Chair\ChairController::class)->only(['store', 'destroy']);
-        Route::resource('/score-game', \App\Http\Controllers\Portal\Meeting\ScoreGame\ScoreGameController::class)->except(['create']);
         Route::resource('/user', \App\Http\Controllers\Portal\User\UserController::class)->except(['create']);
         Route::resource('/user-role', \App\Http\Controllers\Portal\User\Role\UserRoleController::class)->except(['create']);
         Route::resource('/setting', \App\Http\Controllers\Portal\Setting\SettingController::class)->only(['index', 'update']);
         Route::resource('/team', \App\Http\Controllers\Portal\Meeting\Hall\Program\Debate\Team\TeamController::class)->except(['create']);
         Route::resource('/debate-vote', \App\Http\Controllers\Portal\Meeting\Hall\Program\Debate\Team\TeamController::class)->except(['create']);
-        Route::resource('/qr-code', \App\Http\Controllers\Portal\Meeting\ScoreGame\QrCode\QRCodeController::class)->except(['create']);
         Route::resource('/option', \App\Http\Controllers\Portal\Meeting\Hall\Program\Session\Keypad\Option\OptionController::class)->except(['create']);
         Route::resource('/session-question', \App\Http\Controllers\Portal\Meeting\Hall\Program\Session\Question\QuestionController::class)->except(['create']);
-        Route::get('/qr-code-download/{id}', [\App\Http\Controllers\Portal\Meeting\ScoreGame\QrCode\QRCodeController::class,'download'])->name('qr-code-download');
         Route::get('/session-question-on-screen/{id}', [\App\Http\Controllers\Portal\Meeting\Hall\Program\Session\Question\QuestionController::class,'on_screen'])->name('session-question.on-screen');
     });
 });

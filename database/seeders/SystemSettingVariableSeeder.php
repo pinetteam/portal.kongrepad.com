@@ -75,10 +75,16 @@ class SystemSettingVariableSeeder extends Seeder
         $datetime_formats = [
             'Y/m/d H:i:s' => ['value' => 'Y/m/d H:i:s', 'title' => 'Y/m/d H:i:s'],
             'd/m/Y H:i:s' => ['value' => 'd/m/Y H:i:s', 'title' => 'd/m/Y H:i:s'],
+            'Y-m-d H:i:s' => ['value' => 'Y-m-d H:i:s', 'title' => 'Y-m-d H:i:s'],
+            'Y-m-d H:i' => ['value' => 'Y-m-d H:i', 'title' => 'Y-m-d H:i'],
+            'd-m-Y H:i:s' => ['value' => 'd-m-Y H:i:s', 'title' => 'd-m-Y H:i:s'],
+            'd-m-Y H:i' => ['value' => 'd-m-Y H:i', 'title' => 'd-m-Y H:i'],
         ];
         $date_formats = [
             'Y/m/d' => ['value' => 'Y/m/d', 'title' => 'Y/m/d'],
             'd/m/Y' => ['value' => 'd/m/Y', 'title' => 'd/m/Y'],
+            'Y-m-d' => ['value' => 'Y-m-d', 'title' => 'Y-m-d'],
+            'd-m-Y' => ['value' => 'd-m-Y', 'title' => 'd-m-Y'],
         ];
         $time_formats = [
             'H:i:s' => ['value' => 'H:i:s', 'title' => 'H:i:s'],

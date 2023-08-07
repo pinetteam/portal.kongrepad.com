@@ -56,7 +56,7 @@ class DebateController extends Controller
             $debate->description = $request->input('description');
             $debate->status = $request->input('status');
             if ($debate->save()) {
-                $debate->edited_by = Auth::user()->id;
+                $debate->updated_by = Auth::user()->id;
                 $debate->save();
                 return back()->with('success',__('common.edited-successfully'));
             } else {

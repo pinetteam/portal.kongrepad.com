@@ -2,7 +2,6 @@
 
 namespace App\Models\Customer\Setting;
 
-use App\Models\Customer\Setting\Variable\Variable;
 use Illuminate\Database\Eloquent\Model;
 
 class Setting extends Model

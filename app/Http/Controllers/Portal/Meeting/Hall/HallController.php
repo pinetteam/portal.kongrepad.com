@@ -13,7 +13,7 @@ class HallController extends Controller
 {
     public function index(int $meeting)
     {
-        $halls = Auth::user()->customer->halls()->where('meeting_id', $meeting)->paginate(20);
+        $halls = Auth::user()->customer->meetingHalls()->where('meeting_id', $meeting)->paginate(20);
         $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
         $statuses = [
             'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
@@ -39,7 +39,7 @@ class HallController extends Controller
     }
     public function show(int $meeting, int $id)
     {
-        $hall = Auth::user()->customer->halls()->where('meeting_id', $meeting)->findOrFail($id);
+        $hall = Auth::user()->customer->meetingHalls()->where('meeting_id', $meeting)->findOrFail($id);
         $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
         $statuses = [
             'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
@@ -49,18 +49,18 @@ class HallController extends Controller
     }
     public function edit(int $meeting, int $id)
     {
-        $hall = Auth::user()->customer->halls()->where('meeting_id', $meeting)->findOrFail($id);
+        $hall = Auth::user()->customer->meetingHalls()->where('meeting_id', $meeting)->findOrFail($id);
         return new HallResource($hall);
     }
     public function update(HallRequest $request, int $meeting, int $id)
     {
         if ($request->validated()) {
-            $hall = Auth::user()->customer->halls()->where('meeting_id', $meeting)->findOrFail($id);
+            $hall = Auth::user()->customer->meetingHalls()->where('meeting_id', $meeting)->findOrFail($id);
             $hall->meeting_id = $meeting;
             $hall->title = $request->input('title');
             $hall->status = $request->input('status');
             if ($hall->save()) {
-                $hall->edited_by = Auth::user()->id;
+                $hall->updated_by = Auth::user()->id;
                 $hall->save();
                 return back()->with('success',__('common.edited-successfully'));
             } else {
@@ -70,7 +70,7 @@ class HallController extends Controller
     }
     public function destroy(int $meeting, int $id)
     {
-        $hall = Auth::user()->customer->halls()->where('meeting_id', $meeting)->findOrFail($id);
+        $hall = Auth::user()->customer->meetingHalls()->where('meeting_id', $meeting)->findOrFail($id);
         if ($hall->delete()) {
             $hall->deleted_by = Auth::user()->id;
             $hall->save();
@@ -82,7 +82,7 @@ class HallController extends Controller
 
     public function current_speaker(string $id)
     {
-        $hall = Auth::user()->customer->halls()->findOrFail($id);
+        $hall = Auth::user()->customer->meetingHalls()->findOrFail($id);
         $session = $hall->programSessions()->where('is_started',1)->first();
         $speaker = $session && $session->program->on_air && $session ? $session->speaker : null;
         event(new FormSubmitted("sdsdsd"));
@@ -91,7 +91,7 @@ class HallController extends Controller
 
     public function chair_board(string $id)
     {
-        $hall = Auth::user()->customer->halls()->findOrFail($id);
+        $hall = Auth::user()->customer->meetingHalls()->findOrFail($id);
         $session = $hall->programSessions()->where('is_started',1)->first();
         $questions = $session && $session->program->on_air ? $session->questions()->get() : null;
         return view('portal.chair-board.index', compact(['session', 'questions']));
@@ -99,7 +99,7 @@ class HallController extends Controller
 
     public function current_chair(string $id, string $chair_index)
     {
-        $hall = Auth::user()->customer->halls()->findOrFail($id);
+        $hall = Auth::user()->customer->meetingHalls()->findOrFail($id);
         $program = $hall->programs()->where('on_air',1)->first();
         if(isset($program))
             $chair = $program->programChairs->values()->get($chair_index-1);

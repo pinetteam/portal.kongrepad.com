@@ -51,7 +51,7 @@ class QuestionController extends Controller
             $question->title = $request->input('title');
             $question->status = $request->input('status');
             if ($question->save()) {
-                $question->edited_by = Auth::user()->id;
+                $question->updated_by = Auth::user()->id;
                 $question->save();
                 return back()->with('success',__('common.created-successfully'));
             } else {

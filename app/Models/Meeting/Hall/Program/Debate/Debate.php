@@ -27,7 +27,7 @@ class Debate extends Model
         'on_vote',
         'status',
         'created_by',
-        'edited_by',
+        'updated_by',
         'deleted_by',
     ];
     protected $dates = [

@@ -63,7 +63,7 @@ class MeetingController extends Controller
             $meeting->finish_at = $request->input('finish_at');
             $meeting->status = $request->input('status');
             if ($meeting->save()) {
-                $meeting->edited_by = Auth::user()->id;
+                $meeting->updated_by = Auth::user()->id;
                 $meeting->save();
                 return back()->with('success',__('common.edited-successfully'));
             } else {

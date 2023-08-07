@@ -2,9 +2,9 @@
 
 namespace App\Models\Meeting\Survey;
 
-use App\Models\Customer\Setting\Variable\Variable;
 use App\Models\Meeting\Meeting;
 use App\Models\Meeting\Survey\Question\Question;
+use App\Models\System\Setting\Variable\Variable;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;

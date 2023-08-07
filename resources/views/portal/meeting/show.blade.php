@@ -63,7 +63,7 @@
                                     <span class="fa-duotone fa-square-poll-horizontal"></span> {{ __('common.surveys') }}
                                 </a>
                                 <hr />
-                                <a class="btn btn-outline-light btn-lg w-100" href="{{ route("portal.score-game.index") }}" title="{{ __('common.show') }}">
+                                <a class="btn btn-outline-light btn-lg w-100" href="{{ route('portal.meeting.score-game.index', ['meeting' => $meeting->id]) }}" title="{{ __('common.show') }}">
                                     <span class="fa-duotone fa-hundred-points"></span>
                                     {{ __('common.score-game') }}
                                 </a>

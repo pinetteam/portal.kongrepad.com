@@ -60,7 +60,7 @@ class TeamController extends Controller
             $team->title = $request->input('title');
             $team->description = $request->input('description');
             if ($team->save()) {
-                $team->edited_by = Auth::user()->id;
+                $team->updated_by = Auth::user()->id;
                 $team->save();
                 return back()->with('success',__('common.edited-successfully'));
             } else {

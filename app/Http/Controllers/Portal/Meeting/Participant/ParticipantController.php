@@ -55,7 +55,7 @@ class ParticipantController extends Controller
             }
         }
     }
-    public function show(int $id, int $meeting)
+    public function show(int $meeting, int $id)
     {
         $participant = Auth::user()->customer->participants()->where('meeting_id', $meeting)->findOrFail($id);
         $statuses = [
@@ -64,12 +64,12 @@ class ParticipantController extends Controller
         ];
         return view('portal.meeting.participant.show', compact(['participant', 'statuses']));
     }
-    public function edit(int $id, int $meeting)
+    public function edit(int $meeting, int $id)
     {
         $participant = Auth::user()->customer->participants()->where('meeting_id', $meeting)->findOrFail($id);
         return new ParticipantResource($participant);
     }
-    public function update(ParticipantRequest $request, int $id, int $meeting)
+    public function update(ParticipantRequest $request, int $meeting, int $id)
     {
         if ($request->validated()) {
             $participant = Auth::user()->customer->participants()->where('meeting_id', $meeting)->findOrFail($id);
@@ -83,7 +83,7 @@ class ParticipantController extends Controller
             $participant->phone_country_id = $request->input('phone_country_id');
             $participant->phone = $request->input('phone');
             if ($request->has('password')) {
-                $participant->edited_by = Auth::user()->id;
+                $participant->updated_by = Auth::user()->id;
                 $participant->save();
                 $participant->password = $request->input('password');
             }
@@ -95,7 +95,7 @@ class ParticipantController extends Controller
             }
         }
     }
-    public function destroy(int $id, int $meeting)
+    public function destroy(int $meeting, int $id)
     {
         $participant = Auth::user()->customer->participants()->where('meeting_id', $meeting)->findOrFail($id);
         if ($participant->delete()) {

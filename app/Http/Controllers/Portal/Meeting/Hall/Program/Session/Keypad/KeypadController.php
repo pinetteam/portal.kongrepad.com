@@ -53,7 +53,7 @@ class KeypadController extends Controller
             $keypad->title = $request->input('title');
             $keypad->description = $request->input('description');
             if ($keypad->save()) {
-                $keypad->edited_by = Auth::user()->id;
+                $keypad->updated_by = Auth::user()->id;
                 $keypad->save();
                 return back()->with('success',__('common.created-successfully'));
             } else {

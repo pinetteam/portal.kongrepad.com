@@ -68,7 +68,7 @@ class SurveyController extends Controller
             $survey->finish_at = $request->input('finish_at');
             $survey->status = $request->input('status');
             if ($survey->save()) {
-                $survey->edited_by = Auth::user()->id;
+                $survey->updated_by = Auth::user()->id;
                 $survey->save();
                 return back()->with('success',__('common.created-successfully'));
             } else {

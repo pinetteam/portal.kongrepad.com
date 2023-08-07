@@ -15,7 +15,7 @@ class ProgramController extends Controller
     {
         $programs = Auth::user()->customer->programs()->where('meeting_hall_id', $hall)->paginate(10);
         $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
-        $hall = Auth::user()->customer->halls()->findOrFail($hall);
+        $hall = Auth::user()->customer->meetingHalls()->findOrFail($hall);
         $types = [
             'debate' => ["value" => "debate", "title" => __('common.debate')],
             'other' => ["value" => "other", "title" => __('common.other')],
@@ -107,7 +107,7 @@ class ProgramController extends Controller
             $program->type = $request->input('type');
             $program->status = $request->input('status');
             if ($program->save()) {
-                $program->edited_by = Auth::user()->id;
+                $program->updated_by = Auth::user()->id;
                 $program->save();
                 return back()->with('success',__('common.edited-successfully'));
             } else {

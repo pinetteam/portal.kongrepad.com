@@ -58,7 +58,7 @@ class Customer extends Model
     {
         return $this->hasMany(Meeting::class, 'customer_id', 'id');
     }
-    public function halls()
+    public function meetingHalls()
     {
         return $this->hasOneThrough(Hall::class, Meeting::class, 'customer_id', 'meeting_id', 'id', 'id');
     }

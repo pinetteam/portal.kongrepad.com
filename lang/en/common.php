@@ -206,6 +206,10 @@ return [
     'are-you-sure-you-want-to-stop' => 'Are you sure you want to stop:',
     'are-you-sure-you-want-to-stop-other-sessions-and-start' => 'Are you sure you want to stop other sessions and start:',
     'are-you-sure-you-want-to-stop-voting-other-debates-and-start-voting' => 'Are you sure you want to stop voting other debates and start voting:',
+    'created-by' => 'Created By',
+    'created-at' => 'Created At',
+    'search' => 'Search',
+    'this-operation-will-delete-all-related-objects' => 'This operation will delete all related objects',
     // todo Türkçe karşılıkları yazılacak
     'chair-board' => 'Chair Board',
     'on-screen' => 'On Screen',

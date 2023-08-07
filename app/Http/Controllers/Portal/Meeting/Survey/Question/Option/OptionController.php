@@ -43,7 +43,7 @@ class OptionController extends Controller
             $option->sort_order = $request->input('sort_order');
             $option->title = $request->input('title');
             if ($option->save()) {
-                $option->edited_by = Auth::user()->id;
+                $option->updated_by = Auth::user()->id;
                 $option->save();
                 return back()->with('success',__('common.created-successfully'));
             } else {

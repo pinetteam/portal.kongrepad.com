@@ -10,20 +10,16 @@ use Illuminate\Support\Facades\Auth;
 
 class ScoreGameController extends Controller
 {
-    public function index()
+    public function index(string $meeting_id)
     {
         $score_games = Auth::user()->customer->scoreGames()->paginate(20);
         $meetings = Auth::user()->customer->meetings()->where('status', 1)->get();
-        $types = [
-            'agent' => ["value" => "agent", "title" => __('common.agent')],
-            'attendee' => ["value" => "attendee", "title" => __('common.attendee')],
-            'team' => ["value" => "team", "title" => __('common.team')],
-        ];
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting_id);
         $statuses = [
             'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.score-game.index', compact(['score_games', 'meetings', 'statuses', 'types']));
+        return view('portal.meeting.score-game.index', compact(['score_games', 'meetings', 'meeting', 'statuses']));
     }
     public function store(ScoreGameRequest $request)
     {
@@ -43,34 +39,25 @@ class ScoreGameController extends Controller
             }
         }
     }
-    public function show(string $id)
+    public function show(string $meeting_id, string $id)
     {
         $score_game = Auth::user()->customer->scoreGames()->findOrFail($id);
         $score_games = Auth::user()->customer->scoreGames()->where('meeting_score_games.status', 1)->get();
         $points = $score_game->points()->paginate(10);
         $score_game_qr_codes = $score_game->qrCodes()->get();
-        $permissions = [
-            'allowed' => ["value" => 0, "title" => __('common.allowed'), 'color' => 'success'],
-            'not_allowed' => ["value" => 1, "title" => __('common.not-allowed'), 'color' => 'danger'],
-        ];
-        $types = [
-            'agent' => ["value" => "agent", "title" => __('common.agent')],
-            'attendee' => ["value" => "attendee", "title" => __('common.attendee')],
-            'team' => ["value" => "team", "title" => __('common.team')],
-        ];
         $statuses = [
             'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.score-game.show', compact(['permissions', 'points', 'score_game', 'score_games', 'score_game_qr_codes', 'statuses', 'types']));
+        return view('portal.meeting.score-game.show', compact(['points', 'score_game', 'score_games', 'score_game_qr_codes', 'statuses']));
 
     }
-    public function edit(string $id)
+    public function edit(string $meeting_id, string $id)
     {
         $score_game = Auth::user()->customer->scoreGames()->findOrFail($id);
         return new ScoreGameResource($score_game);
     }
-    public function update(ScoreGameRequest $request, string $id)
+    public function update(ScoreGameRequest $request, string $meeting_id, string $id)
     {
         if ($request->validated()) {
             $score_game = Auth::user()->customer->scoreGames()->findOrFail($id);
@@ -80,7 +67,7 @@ class ScoreGameController extends Controller
             $score_game->finish_at = $request->input('finish_at');
             $score_game->status = $request->input('status');
             if ($score_game->save()) {
-                $score_game->edited_by = Auth::user()->id;
+                $score_game->updated_by = Auth::user()->id;
                 $score_game->save();
                 return back()->with('success',__('common.edited-successfully'));
             } else {
@@ -88,7 +75,7 @@ class ScoreGameController extends Controller
             }
         }
     }
-    public function destroy(string $id)
+    public function destroy(string $meeting_id, string $id)
     {
         $score_game = Auth::user()->customer->scoreGames()->findOrFail($id);
         if ($score_game->delete()) {

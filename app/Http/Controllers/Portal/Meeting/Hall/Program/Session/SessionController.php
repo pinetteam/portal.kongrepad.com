@@ -70,7 +70,7 @@ class SessionController extends Controller
             $program_session->question_limit = $request->input('question_limit');
             $program_session->status = $request->input('status');
             if ($program_session->save()) {
-                $program_session->edited_by = Auth::user()->id;
+                $program_session->updated_by = Auth::user()->id;
                 $program_session->save();
                 return back()->with('success',__('common.edited-successfully'));
             } else {

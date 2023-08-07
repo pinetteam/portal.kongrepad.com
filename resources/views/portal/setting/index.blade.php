@@ -75,21 +75,21 @@
                                                                     @elseif($setting->type == 'select')
                                                                         <select name="value" class="form-select @error('value')is-invalid @enderror">
                                                                             @foreach(json_decode($setting->type_variables, true) as $option)
-                                                                                <option value="{{$option}}"{{ $setting->value == $option ? ' selected' : '' }}>{{ $option }}</option>
+                                                                                <option value="{{$option['value']}}"{{ $setting->value == $option['value']? ' selected' : '' }}>{{ $option['title'] }}</option>
                                                                             @endforeach
                                                                         </select>
                                                                     @elseif($setting->type == 'radio')
                                                                         <div class="btn-group w-100 @error('value')is-invalid @enderror" role="group" aria-label="{{ __('common.'.$setting->title) }}">
                                                                             @foreach(json_decode($setting->type_variables, true) as $option)
-                                                                                <input type="radio" name="value" class="btn-check" id="value-{{ $option }}" value="{{ $option }}"{{ (( $setting->value !== null) && $setting->value == $option) ? ' checked' : '' }} />
-                                                                                <label class="btn btn-outline-{{ $value['color'] }}" for="value-{{ $option }}">{{ $option }}</label>
+                                                                                <input type="radio" name="value" class="btn-check" id="value-{{ $option['value'] }}" value="{{ $option['value'] }}"{{ (( $setting->value !== null) && $setting->value == $option['value']) ? ' checked' : '' }} />
+                                                                                <label class="btn btn-outline-{{ $value['color'] }}" for="value-{{ $option['value'] }}">{{ $option['title'] }}</label>
                                                                             @endforeach
                                                                         </div>
                                                                     @elseif($setting->type == 'checkbox')
                                                                         <div class="btn-group w-100 @error('value')is-invalid @enderror" role="group" aria-label="{{ __('common.'.$setting->title) }}">
                                                                             @foreach(json_decode($setting->type_variables, true) as $option)
-                                                                                <input type="checkbox" name="value" class="form-check-input" id="value-{{ $option }}" value="{{ $option }}"{{ (( $setting->value !== null) && $setting->value == $option) ? ' checked' : '' }} />
-                                                                                <label class="btn btn-outline-{{ $value['color'] }}" for="value-{{ $option }}">{{ $option }}</label>
+                                                                                <input type="checkbox" name="value" class="form-check-input" id="value-{{ ['value'] }}" value="{{ $option['value'] }}"{{ (( $setting->value !== null) && $setting->value == $option['value']) ? ' checked' : '' }} />
+                                                                                <label class="btn btn-outline-{{ $value['color'] }}" for="value-{{ $option['value'] }}">{{ $option['title'] }}</label>
                                                                             @endforeach
                                                                         </div>
                                                                     @endif

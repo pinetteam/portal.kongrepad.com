@@ -41,7 +41,7 @@ class VoteController extends Controller
             $vote->team_id = $request->input('team_id');
             $vote->participant_id = $request->input('participant_id');
             if ($vote->save()) {
-                $vote->edited_by = Auth::user()->id;
+                $vote->updated_by = Auth::user()->id;
                 $vote->save();
                 return back()->with('success',__('common.edited-successfully'));
             } else {
