@@ -19,7 +19,7 @@ class ProgramRequest extends FormRequest
             case 'POST':
             {
                 return [
-                    'meeting_hall_id' => 'required|exists:meeting_halls,id',
+                    'hall_id' => 'required|exists:meeting_halls,id',
                     'sort_id' => 'nullable|integer',
                     'code' => 'nullable|max:255',
                     'title' => 'required|max:255',
@@ -33,7 +33,7 @@ class ProgramRequest extends FormRequest
             } case 'PATCH' || 'PUT':
             {
                 return [
-                    'meeting_hall_id' => 'required|exists:meeting_halls,id',
+                    'hall_id' => 'required|exists:meeting_halls,id',
                     'sort_id' => 'nullable|integer',
                     'code' => 'nullable|max:255',
                     'title' => 'required|max:255',
@@ -50,7 +50,7 @@ class ProgramRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'meeting_hall_id' => __('common.hall'),
+            'hall_id' => __('common.hall'),
             'sort_id' => __('common.sort'),
             'code' => __('common.code'),
             'title' => __('common.title'),

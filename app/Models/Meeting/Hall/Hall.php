@@ -37,19 +37,19 @@ class Hall extends Model
     }
     public function programs()
     {
-        return $this->hasMany(Program::class, 'meeting_hall_id', 'id');
+        return $this->hasMany(Program::class, 'hall_id', 'id');
     }
     public function keypads()
     {
         $keypads = Keypad::select('meeting_hall_program_session_keypads.*')
             ->join('meeting_hall_program_sessions', 'meeting_hall_program_session_keypads.session_id', '=', 'meeting_hall_program_sessions.id')
             ->join('meeting_hall_programs', 'meeting_hall_program_sessions.program_id', '=', 'meeting_hall_programs.id')
-            ->join('meeting_halls', 'meeting_hall_programs.meeting_hall_id', '=', 'meeting_halls.id')
+            ->join('meeting_halls', 'meeting_hall_programs.hall_id', '=', 'meeting_halls.id')
             ->where('meeting_halls.id', $this->getkey());
         return $keypads;
     }
     public function programSessions()
     {
-        return $this->hasManyThrough(Session::class, Program::class, 'meeting_hall_id', 'program_id', 'id');
+        return $this->hasManyThrough(Session::class, Program::class, 'hall_id', 'program_id', 'id');
     }
 }

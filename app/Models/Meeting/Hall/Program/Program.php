@@ -2,11 +2,11 @@
 
 namespace App\Models\Meeting\Hall\Program;
 
-use App\Models\Customer\Setting\Variable\Variable;
 use App\Models\Meeting\Hall\Hall;
 use App\Models\Meeting\Hall\Program\Chair\Chair;
 use App\Models\Meeting\Hall\Program\Debate\Debate;
 use App\Models\Meeting\Hall\Program\Session\Session;
+use App\Models\System\Setting\Variable\Variable;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
@@ -63,7 +63,7 @@ class Program extends Model
     }
     public function hall()
     {
-        return $this->belongsTo(Hall::class, 'meeting_hall_id', 'id');
+        return $this->belongsTo(Hall::class, 'hall_id', 'id');
     }
     public function programChairs()
     {

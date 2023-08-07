@@ -78,7 +78,7 @@ class Customer extends Model
     public function programs()
     {
         $programs = Program::select('meeting_hall_programs.*')
-            ->join('meeting_halls', 'meeting_hall_programs.meeting_hall_id', '=', 'meeting_halls.id')
+            ->join('meeting_halls', 'meeting_hall_programs.hall_id', '=', 'meeting_halls.id')
             ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
             ->join('customers', 'meetings.customer_id', '=', 'customers.id')
             ->where('customers.id', $this->getkey());
@@ -88,7 +88,7 @@ class Customer extends Model
     {
         $chairs = Chair::select('meeting_hall_program_chairs.*')
             ->join('meeting_hall_programs', 'meeting_hall_program_chairs.program_id', '=', 'meeting_hall_programs.id')
-            ->join('meeting_halls', 'meeting_hall_programs.meeting_hall_id', '=', 'meeting_halls.id')
+            ->join('meeting_halls', 'meeting_hall_programs.hall_id', '=', 'meeting_halls.id')
             ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
             ->join('customers', 'meetings.customer_id', '=', 'customers.id')
             ->where('customers.id', $this->getkey());
@@ -98,7 +98,7 @@ class Customer extends Model
     {
         $program_sessions = Session::select('meeting_hall_program_sessions.*')
             ->join('meeting_hall_programs', 'meeting_hall_program_sessions.program_id', '=', 'meeting_hall_programs.id')
-            ->join('meeting_halls', 'meeting_hall_programs.meeting_hall_id', '=', 'meeting_halls.id')
+            ->join('meeting_halls', 'meeting_hall_programs.hall_id', '=', 'meeting_halls.id')
             ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
             ->join('customers', 'meetings.customer_id', '=', 'customers.id')
             ->where('customers.id', $this->getkey());
@@ -108,7 +108,7 @@ class Customer extends Model
     {
         $debates = Debate::select('meeting_hall_program_debates.*')
             ->join('meeting_hall_programs', 'meeting_hall_program_debates.program_id', '=', 'meeting_hall_programs.id')
-            ->join('meeting_halls', 'meeting_hall_programs.meeting_hall_id', '=', 'meeting_halls.id')
+            ->join('meeting_halls', 'meeting_hall_programs.hall_id', '=', 'meeting_halls.id')
             ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
             ->join('customers', 'meetings.customer_id', '=', 'customers.id')
             ->where('customers.id', $this->getkey());
@@ -120,7 +120,7 @@ class Customer extends Model
         $teams = Team::select('meeting_hall_program_debate_teams.*')
             ->join('meeting_hall_program_debates', 'meeting_hall_program_debate_teams.debate_id', '=', 'meeting_hall_program_debates.id')
             ->join('meeting_hall_programs', 'meeting_hall_program_debates.program_id', '=', 'meeting_hall_programs.id')
-            ->join('meeting_halls', 'meeting_hall_programs.meeting_hall_id', '=', 'meeting_halls.id')
+            ->join('meeting_halls', 'meeting_hall_programs.hall_id', '=', 'meeting_halls.id')
             ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
             ->join('customers', 'meetings.customer_id', '=', 'customers.id')
             ->where('customers.id', $this->getkey());
@@ -132,7 +132,7 @@ class Customer extends Model
         $keypads = Keypad::select('meeting_hall_program_session_keypads.*')
             ->join('meeting_hall_program_sessions', 'meeting_hall_program_session_keypads.session_id', '=', 'meeting_hall_program_sessions.id')
             ->join('meeting_hall_programs', 'meeting_hall_program_sessions.program_id', '=', 'meeting_hall_programs.id')
-            ->join('meeting_halls', 'meeting_hall_programs.meeting_hall_id', '=', 'meeting_halls.id')
+            ->join('meeting_halls', 'meeting_hall_programs.hall_id', '=', 'meeting_halls.id')
             ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
             ->join('customers', 'meetings.customer_id', '=', 'customers.id')
             ->where('customers.id', $this->getkey());
@@ -144,7 +144,7 @@ class Customer extends Model
         $questions = \App\Models\Meeting\Hall\Program\Session\Question\Question::select('meeting_hall_program_session_questions.*')
             ->join('meeting_hall_program_sessions', 'meeting_hall_program_session_questions.session_id', '=', 'meeting_hall_program_sessions.id')
             ->join('meeting_hall_programs', 'meeting_hall_program_sessions.program_id', '=', 'meeting_hall_programs.id')
-            ->join('meeting_halls', 'meeting_hall_programs.meeting_hall_id', '=', 'meeting_halls.id')
+            ->join('meeting_halls', 'meeting_hall_programs.hall_id', '=', 'meeting_halls.id')
             ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
             ->join('customers', 'meetings.customer_id', '=', 'customers.id')
             ->where('customers.id', $this->getkey());
@@ -157,7 +157,7 @@ class Customer extends Model
             ->join('meeting_hall_program_session_keypads', 'meeting_hall_program_session_keypad_options.keypad_id', '=', 'meeting_hall_program_session_keypads.id')
             ->join('meeting_hall_program_sessions', 'meeting_hall_program_session_keypads.session_id', '=', 'meeting_hall_program_sessions.id')
             ->join('meeting_hall_programs', 'meeting_hall_program_sessions.program_id', '=', 'meeting_hall_programs.id')
-            ->join('meeting_halls', 'meeting_hall_programs.meeting_hall_id', '=', 'meeting_halls.id')
+            ->join('meeting_halls', 'meeting_hall_programs.hall_id', '=', 'meeting_halls.id')
             ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
             ->join('customers', 'meetings.customer_id', '=', 'customers.id')
             ->where('customers.id', $this->getkey());
@@ -188,7 +188,7 @@ class Customer extends Model
         $votes = Vote::select('meeting_hall_program_debate_votes.*')
             ->join('meeting_hall_program_debates', 'meeting_hall_program_debate_votes.debate_id', '=', 'meeting_hall_program_debates.id')
             ->join('meeting_hall_programs', 'meeting_hall_program_debates.program_id', '=', 'meeting_hall_programs.id')
-            ->join('meeting_halls', 'meeting_hall_programs.meeting_hall_id', '=', 'meeting_halls.id')
+            ->join('meeting_halls', 'meeting_hall_programs.hall_id', '=', 'meeting_halls.id')
             ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
             ->join('customers', 'meetings.customer_id', '=', 'customers.id')
             ->where('customers.id', $this->getkey());

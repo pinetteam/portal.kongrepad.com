@@ -4,11 +4,9 @@ namespace App\Models\Meeting\Hall\Program\Chair;
 
 use App\Models\Meeting\Participant\Participant;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Chair extends Model
 {
-    use SoftDeletes;
     protected $table = 'meeting_hall_program_chairs';
     protected $fillable = [
         'sort_order',

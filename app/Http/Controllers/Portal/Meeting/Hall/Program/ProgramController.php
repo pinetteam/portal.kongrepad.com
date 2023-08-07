@@ -13,7 +13,7 @@ class ProgramController extends Controller
 {
     public function index(int $meeting, int $hall)
     {
-        $programs = Auth::user()->customer->programs()->where('meeting_hall_id', $hall)->paginate(10);
+        $programs = Auth::user()->customer->programs()->where('hall_id', $hall)->paginate(10);
         $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
         $hall = Auth::user()->customer->meetingHalls()->findOrFail($hall);
         $types = [
@@ -31,7 +31,7 @@ class ProgramController extends Controller
     {
         if ($request->validated()) {
             $program = new Program();
-            $program->meeting_hall_id = $request->input('meeting_hall_id');
+            $program->hall_id = $hall;
             $program->sort_order = $request->input('sort_order');
             $program->code = $request->input('code');
             $program->title = $request->input('title');
@@ -67,8 +67,8 @@ class ProgramController extends Controller
             $program_chairs = $program->programChairs()->get();
             $program_sessions = $program->programSessions()->get();
             $questions = [
-                'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-                'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
+                'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
+                'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
             ];
             $questions_auto_start = [
                 'no' => ["value" => 0, "title" => __('common.no'), 'color' => 'danger'],
@@ -93,7 +93,7 @@ class ProgramController extends Controller
     {
         if ($request->validated()) {
             $program = Auth::user()->customer->programs()->findOrFail($id);
-            $program->meeting_hall_id = $request->input('meeting_hall_id');
+            $program->hall_id = $request->input('hall_id');
             $program->sort_order = $request->input('sort_order');
             $program->code = $request->input('code');
             $program->title = $request->input('title');

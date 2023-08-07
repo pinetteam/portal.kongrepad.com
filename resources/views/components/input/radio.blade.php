@@ -1,6 +1,7 @@
 @props(['method' => 'm', 'name', 'title', 'options', 'option_value', 'option_name', 'icon' => 'question', 'fade' => 'off'])
 <div class="col form-group mb-3">
-    <label for="{{ $method }}-{{ $name }}" class="form-label">
+    <input type="hidden" name="{{ $name }}" />
+    <label for="{{ $method }}-{{ $name }}-{{ reset($options)[$option_value] }}" class="form-label">
         <i class="fa-regular fa-{{ $icon }}{{ $fade=='on' ? ' fa-fade' : '' }}"></i> {{ __('common.'.$title) }}
     </label>
     <div class="btn-group w-100" role="group" aria-label="{{ __('common.'.$title) }}">
@@ -10,10 +11,10 @@
         @endforeach
     </div>
     @if($errors->any())
-    @error($name)
-    <div class="invalid-feedback d-block">
-        <i class="fa-regular fa-triangle-exclamation"></i> {{ $message }}
-    </div>
-    @enderror
+        @error($name)
+            <div class="invalid-feedback d-block">
+                <i class="fa-regular fa-triangle-exclamation"></i> {{ $message }}
+            </div>
+        @enderror
     @endif
 </div>

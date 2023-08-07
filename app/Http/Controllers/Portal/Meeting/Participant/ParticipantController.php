@@ -23,8 +23,8 @@ class ParticipantController extends Controller
             'team' => ["value" => "team", "title" => __('common.team')],
         ];
         $statuses = [
-            'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-            'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
+            'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
+            'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
         return view('portal.meeting.participant.index', compact(['participants', 'meeting', 'phone_countries', 'types', 'statuses']));
     }

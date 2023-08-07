@@ -86,7 +86,7 @@
     </div>
     <x-crud.form.common.create>
         @section('default-create-form')
-            <x-input.hidden method="c" name="meeting_hall_id" :value="$hall->id" />
+            <x-input.hidden method="c" name="hall_id" :value="$hall->id" />
             <x-input.number method="c" name="sort_order" title="sort" icon="circle-sort" />
             <x-input.text method="c" name="code" title="code" icon="code-simple" />
             <x-input.text method="c" name="title" title="title" icon="input-text" />
@@ -101,7 +101,7 @@
     <x-crud.form.common.delete />
     <x-crud.form.common.edit>
         @section('default-edit-form')
-            <x-input.hidden method="e" name="meeting_hall_id" :value="$hall->id" />
+            <x-input.hidden method="e" name="hall_id" :value="$hall->id" />
             <x-input.number method="e" name="sort_order" title="sort" icon="circle-sort" />
             <x-input.text method="e" name="code" title="code" icon="code-simple" />
             <x-input.text method="e" name="title" title="title" icon="input-text" />
