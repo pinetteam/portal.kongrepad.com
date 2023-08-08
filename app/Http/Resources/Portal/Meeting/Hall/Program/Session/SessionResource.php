@@ -20,14 +20,14 @@ class SessionResource extends JsonResource
             'code' => ['value'=>$this->code, 'type'=>'text'],
             'title' => ['value'=>$this->title, 'type'=>'text'],
             'description' => ['value'=>$this->description, 'type'=>'text'],
-            'start_at' => ['value'=>Carbon::createFromFormat(Variable::where('variable','date_format')->first()->settings()->where('customer_id',Auth::user()->customer->id)->first()->value.' '.Variable::where('variable','time_format')->first()->settings()->where('customer_id',Auth::user()->customer->id)->first()->value, $this->start_at)->format('Y-m-d H:i'), 'type'=>'datetime'],
-            'finish_at' => ['value'=>Carbon::createFromFormat(Variable::where('variable','date_format')->first()->settings()->where('customer_id',Auth::user()->customer->id)->first()->value.' '.Variable::where('variable','time_format')->first()->settings()->where('customer_id',Auth::user()->customer->id)->first()->value, $this->finish_at)->format('Y-m-d H:i'), 'type'=>'datetime'],
+            'start_at' => ['value'=>$this->start_at, 'type'=>'datetime'],
+            'finish_at' => ['value'=>$this->finish_at, 'type'=>'datetime'],
             'is_started' => ['value'=>$this->is_started, 'type'=>'radio'],
-            'questions' => ['value'=>$this->questions, 'type'=>'radio'],
-            'questions_auto_start' => ['value'=>$this->questions, 'type'=>'radio'],
-            'question_limit' => ['value'=>$this->question_limit, 'type'=>'number'],
+            'questions_allowed' => ['value'=>$this->questions_allowed, 'type'=>'radio'],
+            'questions_auto_start' => ['value'=>$this->questions_auto_start, 'type'=>'radio'],
+            'questions_limit' => ['value'=>$this->questions_limit, 'type'=>'number'],
             'status' => ['value'=>$this->status, 'type'=>'radio'],
-            'route' => route('portal.session.update', [$this->program_id, $this->id]),
+            'route' => route('portal.meeting.hall.program.session.update', ['meeting' => $this->program->hall->meeting->id, 'hall' => $this->program->hall->id, 'program' => $this->program->id, 'session' => $this->id]),
         ];
     }
 }

@@ -29,6 +29,7 @@ return new class extends Migration
             $table->dateTime('last_login_datetime')->nullable();
             $table->timestamp('last_activity')->nullable();
             $table->enum('type', ['agent', 'attendee', 'team'])->default('attendee');
+            $table->text('qr_code');
             $table->boolean('gdpr_consent')->default(0)->comment('0=not-approved;1=approved');
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
             $table->unsignedBigInteger('created_by')->index()->nullable();

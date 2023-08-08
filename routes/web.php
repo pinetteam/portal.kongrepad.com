@@ -37,6 +37,13 @@ Route::prefix('portal')->name('portal.')->group(function () {
 
             Route::name('hall.')->group(function () {
                 Route::resource('/{meeting}/hall/{hall}/program', \App\Http\Controllers\Portal\Meeting\Hall\Program\ProgramController::class)->except(['create']);
+                Route::name('program.')->group(function () {
+                    Route::resource('/{meeting}/hall/{hall}/program/{program}/session', \App\Http\Controllers\Portal\Meeting\Hall\Program\Session\SessionController::class)->except(['index', 'create']);
+                    Route::get('/program/{program_id}/start-stop-session/{session}', [\App\Http\Controllers\Portal\Meeting\Hall\Program\Session\SessionController::class,'start_stop'])->name('session.start-stop');
+                    Route::get('/program/{program_id}/start-stop-session-questions/{session}', [\App\Http\Controllers\Portal\Meeting\Hall\Program\Session\SessionController::class,'start_stop_questions'])->name('session.start-stop-questions');
+                    Route::get('/program/{program_id}/start-stop-session-questions/{session}/{increment}', [\App\Http\Controllers\Portal\Meeting\Hall\Program\Session\SessionController::class,'edit_question_limit'])->name('session.edit-question-limit');
+                    Route::resource('/{meeting}/hall/{hall}/program/{program}/chair', \App\Http\Controllers\Portal\Meeting\Hall\Program\Chair\ChairController::class)->except(['create']);
+                });
             });
 
             Route::resource('/{meeting}/survey', \App\Http\Controllers\Portal\Meeting\Survey\SurveyController::class)->except(['create']);
@@ -63,10 +70,6 @@ Route::prefix('portal')->name('portal.')->group(function () {
 */
 
         /* Program routes */
-        Route::resource('/program/{program_id}/session', \App\Http\Controllers\Portal\Meeting\Hall\Program\Session\SessionController::class)->except(['index', 'create']);
-        Route::get('/program/{program_id}/start-stop-session/{session}', [\App\Http\Controllers\Portal\Meeting\Hall\Program\Session\SessionController::class,'start_stop'])->name('session.start-stop');
-        Route::get('/program/{program_id}/start-stop-session-questions/{session}', [\App\Http\Controllers\Portal\Meeting\Hall\Program\Session\SessionController::class,'start_stop_questions'])->name('session.start-stop-questions');
-        Route::get('/program/{program_id}/start-stop-session-questions/{session}/{increment}', [\App\Http\Controllers\Portal\Meeting\Hall\Program\Session\SessionController::class,'edit_question_limit'])->name('session.edit-question-limit');
         Route::resource('/program/{program_id}/session/{session_id}/keypad', \App\Http\Controllers\Portal\Meeting\Hall\Program\Session\Keypad\KeypadController::class)->except(['index', 'create']);
         Route::get('/program/{program_id}/session/{session_id}/start-stop-keypad-voting/{keypad}', [\App\Http\Controllers\Portal\Meeting\Hall\Program\Session\Keypad\KeypadController::class,'start_stop_voting'])->name('keypad.start-stop-voting');
         Route::resource('/program/{program_id}/debate', \App\Http\Controllers\Portal\Meeting\Hall\Program\Debate\DebateController::class)->except(['index', 'create']);
@@ -74,7 +77,6 @@ Route::prefix('portal')->name('portal.')->group(function () {
 
 
         /* Survey routes */
-        Route::resource('/chair', \App\Http\Controllers\Portal\Meeting\Hall\Program\Chair\ChairController::class)->only(['store', 'destroy']);
         Route::resource('/user', \App\Http\Controllers\Portal\User\UserController::class)->except(['create']);
         Route::resource('/user-role', \App\Http\Controllers\Portal\User\Role\UserRoleController::class)->except(['create']);
         Route::resource('/setting', \App\Http\Controllers\Portal\Setting\SettingController::class)->only(['index', 'update']);

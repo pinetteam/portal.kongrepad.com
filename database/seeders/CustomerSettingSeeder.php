@@ -42,12 +42,12 @@ class CustomerSettingSeeder extends Seeder
             [
                 'customer_id' => '1',
                 'variable_id' => '6',
-                'value' => 'd/m/Y H:i:s',
+                'value' => 'Y-m-d H:i',
             ],
             [
                 'customer_id' => '1',
                 'variable_id' => '7',
-                'value' => 'd/m/Y',
+                'value' => 'Y-m-d',
             ],
             [
                 'customer_id' => '1',

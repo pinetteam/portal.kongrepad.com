@@ -23,10 +23,10 @@ class SessionController extends Controller
             $program_session->description = $request->input('description');
             $program_session->start_at = $request->input('start_at');
             $program_session->finish_at = $request->input('finish_at');
-            $program_session->questions = $request->input('questions');
+            $program_session->questions_allowed = $request->input('questions_allowed');
             $program_session->questions_auto_start = $request->input('questions_auto_start');
             $program_session->is_questions_started = $request->input('questions_auto_start');
-            $program_session->question_limit = $request->input('question_limit');
+            $program_session->questions_limit = $request->input('questions_limit');
             $program_session->status = $request->input('status');
             if ($program_session->save()) {
                 $program_session->created_by = Auth::user()->id;
@@ -37,7 +37,7 @@ class SessionController extends Controller
             }
         }
     }
-    public function show(string $program_id, string $id)
+    public function show(string $meeting, string $hall, string $program, string $id)
     {
         $session = Auth::user()->customer->programSessions()->findOrFail($id);
         $keypads = $session->keypads()->get();
@@ -47,12 +47,12 @@ class SessionController extends Controller
         ];
         return view('portal.program.session.show', compact(['keypads', 'session', 'statuses']));
     }
-    public function edit(string $program_id, string $id)
+    public function edit(string $meeting, string $hall, string $program, string $id)
     {
         $program_session = Auth::user()->customer->programSessions()->findOrFail($id);
         return new SessionResource($program_session);
     }
-    public function update(SessionRequest $request, string $program_id, string $id)
+    public function update(SessionRequest $request, string $meeting, string $hall, string $program, string $id)
     {
         if ($request->validated()) {
             $program_session = Auth::user()->customer->programSessions()->findOrFail($id);
@@ -64,10 +64,10 @@ class SessionController extends Controller
             $program_session->description = $request->input('description');
             $program_session->start_at = $request->input('start_at');
             $program_session->finish_at = $request->input('finish_at');
-            $program_session->questions = $request->input('questions');
+            $program_session->questions_allowed = $request->input('questions_allowed');
             $program_session->questions_auto_start = $request->input('questions_auto_start');
             $program_session->is_questions_started = $request->input('questions_auto_start');
-            $program_session->question_limit = $request->input('question_limit');
+            $program_session->questions_limit = $request->input('questions_limit');
             $program_session->status = $request->input('status');
             if ($program_session->save()) {
                 $program_session->updated_by = Auth::user()->id;
@@ -78,7 +78,7 @@ class SessionController extends Controller
             }
         }
     }
-    public function destroy(string $program_id, string $id)
+    public function destroy(string $meeting, string $hall, string $program, string $id)
     {
         $program_session = Auth::user()->customer->programSessions()->findOrFail($id);
         if ($program_session->delete()) {
@@ -90,10 +90,10 @@ class SessionController extends Controller
         }
     }
 
-    public function start_stop(string $program_id, string $id)
+    public function start_stop(string $meeting, string $hall, string $program, string $id)
     {
-        $program = Auth::user()->customer->programs()->findOrFail($program_id);
-        $meeting_hall = Auth::user()->customer->meetingHalls()->findOrFail($program_id);
+        $program = Auth::user()->customer->programs()->findOrFail($program);
+        $meeting_hall = Auth::user()->customer->meetingHalls()->findOrFail($program);
         foreach($meeting_hall->programSessions as $session){
             if($session->id == $id)
                 continue;
@@ -111,7 +111,7 @@ class SessionController extends Controller
             return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
         }
     }
-    public function start_stop_questions(string $program_id, string $id)
+    public function start_stop_questions(string $meeting, string $hall, string $program, string $id)
     {
         $program_session = Auth::user()->customer->programSessions()->findOrFail($id);
         $program_session->is_questions_started = !$program_session->is_questions_started;
@@ -125,7 +125,7 @@ class SessionController extends Controller
         }
     }
 
-    public function edit_question_limit(string $program_id, string $id, int $increment){
+    public function edit_question_limit(string $meeting, string $hall, string $program, string $id, int $increment){
         $program_session = Auth::user()->customer->programSessions()->findOrFail($id);
         $program_session->question_limit = $program_session->question_limit + $increment;
         if($program_session->question_limit > 0)
