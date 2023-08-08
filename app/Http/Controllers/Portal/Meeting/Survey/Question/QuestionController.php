@@ -16,7 +16,7 @@ class QuestionController extends Controller
             $question = new Question();
             $question->survey_id = $request->input('survey_id');
             $question->sort_order = $request->input('sort_order');
-            $question->title = $request->input('title');
+            $question->question = $request->input('question');
             $question->status = $request->input('status');
             if ($question->save()) {
                 $question->created_by = Auth::user()->id;
@@ -48,7 +48,7 @@ class QuestionController extends Controller
             $question = Auth::user()->customer->surveyQuestions()->findOrFail($id);
             $question->survey_id = $request->input('survey_id');
             $question->sort_order = $request->input('sort_order');
-            $question->title = $request->input('title');
+            $question->question = $request->input('question');
             $question->status = $request->input('status');
             if ($question->save()) {
                 $question->updated_by = Auth::user()->id;

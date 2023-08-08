@@ -13,7 +13,7 @@ class QuestionResource extends JsonResource
         return [
             'survey_id' => ['value'=>$this->survey_id, 'type'=>'hidden'],
             'sort_order' => ['value'=>$this->sort_order, 'type'=>'number'],
-            'title' => ['value'=>$this->title, 'type'=>'text'],
+            'question' => ['value'=>$this->question, 'type'=>'text'],
             'status' => ['value'=>$this->status, 'type'=>'radio'],
             'route' => route('portal.question.update', [Survey::where('id',$this->survey_id)->first()->meeting_id, $this->survey_id, $this->id]),
         ];

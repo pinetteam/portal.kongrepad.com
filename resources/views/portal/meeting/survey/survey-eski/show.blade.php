@@ -90,7 +90,7 @@
         </div>
         {{--create button--}}
         <div class="card-footer d-flex justify-content-center">
-            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#default-create-modal" data-route="{{ route('portal.question.store',['meeting_id'=> $survey->meeting_id,'survey_id'=> $survey->id]) }}">
+            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#default-create-modal" data-route="{{ route('portal.question.store',['meeting'=> $survey->meeting_id,'survey_id'=> $survey->id]) }}">
                 <i class="fa-solid fa-plus"></i> {{ __('common.create-new-question') }}
             </button>
         </div>

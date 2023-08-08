@@ -214,4 +214,7 @@ return [
     'chair-board' => 'Chair Board',
     'on-screen' => 'On Screen',
     'you-have-reached-the-question-limit' => 'You Have Reached The Question Limit',
+    'hall-programs'=> 'Hall Programs',
+    'question-count'=> 'Question Count',
+    'option-count'=> 'Option Count'
 ];

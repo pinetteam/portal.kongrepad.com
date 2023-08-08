@@ -12,11 +12,14 @@ class OptionController extends Controller
 {
     public function store(OptionRequest $request)
     {
+
         if ($request->validated()) {
+
             $option = new Option();
+            $option->survey_id = $request->input('survey_id');
             $option->question_id = $request->input('question_id');
             $option->sort_order = $request->input('sort_order');
-            $option->title = $request->input('title');
+            $option->option = $request->input('option');
             if ($option->save()) {
                 $option->created_by = Auth::user()->id;
                 $option->save();
@@ -41,7 +44,7 @@ class OptionController extends Controller
             $option = Auth::user()->customer->surveyOptions()->findOrFail($id);
             $option->question_id = $request->input('question_id');
             $option->sort_order = $request->input('sort_order');
-            $option->title = $request->input('title');
+            $option->option = $request->input('option');
             if ($option->save()) {
                 $option->updated_by = Auth::user()->id;
                 $option->save();

@@ -17,6 +17,7 @@
                             <th scope="col"><span class="fa-regular fa-pen-field mx-1"></span> {{ __('common.title') }}</th>
                             <th scope="col"><span class="fa-regular fa-calendar-arrow-up mx-1"></span> {{ __('common.start-at') }}</th>
                             <th scope="col"><span class="fa-regular fa-calendar-arrow-down mx-1"></span> {{ __('common.finish-at') }}</th>
+                            <th scope="col"><span class="fa-regular fa-calendar-arrow-down mx-1"></span> {{ __('common.question-count') }}</th>
                             <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}</th>
                             <th scope="col" class="text-end"></th>
                         </tr>
@@ -39,6 +40,9 @@
                                     @else
                                         <i class="text-info">{{__('common.unspecified')}}</i>
                                     @endif
+                                </td>
+                                <td>
+                                    {{$survey->questions->count()}}
                                 </td>
                                 <td>
                                     @if($survey->status)

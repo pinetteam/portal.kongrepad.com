@@ -13,6 +13,7 @@ class SurveyController extends Controller
 {
     public function index(int $meeting)
     {
+
         $surveys = Auth::user()->customer->surveys()->where('meeting_id', $meeting)->paginate(20);
         $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
         $statuses = [
@@ -45,11 +46,12 @@ class SurveyController extends Controller
     {
         $survey = Auth::user()->customer->surveys()->where('meeting_id', $meeting)->findOrFail($id);
         $questions = $survey->questions()->get();
+        $questionCount= $questions->count();
         $statuses = [
             'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.meeting.survey.show', compact(['questions', 'survey', 'statuses']));
+        return view('portal.meeting.survey.show', compact(['questions','survey','questionCount' , 'statuses']));
     }
     public function edit(string $meeting, string $id)
     {

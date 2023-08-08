@@ -20,7 +20,7 @@ class QuestionRequest extends FormRequest
                 return [
                     'survey_id' => 'required|exists:meeting_surveys,id',
                     'sort_order' => 'nullable|integer',
-                    'title' => 'required|max:255',
+                    'question' => 'required|max:255',
                     'status' => 'required|boolean',
                 ];
             }
@@ -32,7 +32,7 @@ class QuestionRequest extends FormRequest
         return [
             'survey_id' => __('common.survey'),
             'sort_order' => __('common.sort-order'),
-            'title' => __('common.title'),
+            'question' => __('common.question'),
             'status' => __('common.status'),
         ];
     }
