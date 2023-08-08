@@ -2,11 +2,15 @@
 
 namespace App\Models\Meeting\Hall\Program\Chair;
 
+use App\Models\Meeting\Hall\Program\Program;
 use App\Models\Meeting\Participant\Participant;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Chair extends Model
 {
+
+    use SoftDeletes;
     protected $table = 'meeting_hall_program_chairs';
     protected $fillable = [
         'sort_order',
@@ -26,5 +30,9 @@ class Chair extends Model
     public function chair()
     {
         return $this->belongsTo(Participant::class, 'chair_id', 'id');
+    }
+    public function program()
+    {
+        return $this->belongsTo(Program::class, 'program_id', 'id');
     }
 }

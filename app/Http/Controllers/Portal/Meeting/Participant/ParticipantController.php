@@ -75,6 +75,7 @@ class ParticipantController extends Controller
             $participant = Auth::user()->customer->participants()->where('meeting_id', $meeting)->findOrFail($id);
             $participant->meeting_id = $meeting;
             $participant->title = $request->input('title');
+            $participant->qr_code = \SimpleSoftwareIO\QrCode\Facades\QrCode::size(200)->generate($participant->username);
             $participant->first_name = $request->input('first_name');
             $participant->last_name = $request->input('last_name');
             $participant->organisation = $request->input('organisation');

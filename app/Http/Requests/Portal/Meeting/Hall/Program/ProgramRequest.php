@@ -14,38 +14,18 @@ class ProgramRequest extends FormRequest
     }
     public function rules(): array
     {
-        switch($this->method())
-        {
-            case 'POST':
-            {
-                return [
-                    'hall_id' => 'required|exists:meeting_halls,id',
-                    'sort_id' => 'nullable|integer',
-                    'code' => 'nullable|max:255',
-                    'title' => 'required|max:255',
-                    'description' => 'nullable|max:65535',
-                    'logo' => ['nullable', File::types(['png'])->max(12 * 1024),],
-                    'start_at' => 'nullable|date_format:Y-m-d H:i|before_or_equal:finish_at|required_with:finish_at',
-                    'finish_at' => 'nullable|date_format:Y-m-d H:i|after_or_equal:start_at|required_with:start_at',
-                    'type' => 'required|in:session,debate,other',
-                    'status' => 'required|boolean',
-                ];
-            } case 'PATCH' || 'PUT':
-            {
-                return [
-                    'hall_id' => 'required|exists:meeting_halls,id',
-                    'sort_id' => 'nullable|integer',
-                    'code' => 'nullable|max:255',
-                    'title' => 'required|max:255',
-                    'description' => 'nullable|max:65535',
-                    'logo' => ['nullable', File::types(['png'])->max(12 * 1024),],
-                    'start_at' => 'nullable|date_format:Y-m-d H:i|before_or_equal:finish_at|required_with:finish_at',
-                    'finish_at' => 'nullable|date_format:Y-m-d H:i|after_or_equal:start_at|required_with:start_at',
-                    'status' => 'required|boolean',
-                ];
-            }
-            default:break;
-        }
+        return [
+            'hall_id' => 'required|exists:meeting_halls,id',
+            'sort_id' => 'nullable|integer',
+            'code' => 'nullable|max:255',
+            'title' => 'required|max:255',
+            'description' => 'nullable|max:65535',
+            'logo' => ['nullable', File::types(['png'])->max(12 * 1024),],
+            'start_at' => 'nullable|date_format:Y-m-d H:i|before_or_equal:finish_at|required_with:finish_at',
+            'finish_at' => 'nullable|date_format:Y-m-d H:i|after_or_equal:start_at|required_with:start_at',
+            'type' => 'required|in:session,debate,other',
+            'status' => 'required|boolean',
+        ];
     }
     public function attributes(): array
     {

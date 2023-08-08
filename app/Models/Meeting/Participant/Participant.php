@@ -32,6 +32,7 @@ class Participant extends Model
         'last_activity',
         'type',
         'gdpr_consent',
+        'qr_code',
         'status',
         'created_by',
         'updated_by',
@@ -93,6 +94,5 @@ class Participant extends Model
     public function getFullNameAttribute()
     {
         return Str::of("$this->title $this->first_name $this->last_name")->trim();
-;
     }
 }
