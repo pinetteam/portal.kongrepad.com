@@ -12,9 +12,9 @@ class TestController extends Controller
     {
         return view('service.screen.index');
     }
-    public function start()
+    public function start($id)
     {
-        $participant = Participant::findOrFail(1);
+        $participant = Participant::findOrFail($id);
         event(new StartScreen($participant));
         return 'We just sent!';
     }

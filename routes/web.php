@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/screen/test', [\App\Http\Controllers\Service\Screen\TestController::class, 'index'])->name('screen.test.index');
-Route::get('/screen/start', [\App\Http\Controllers\Service\Screen\TestController::class, 'start'])->name('screen.test.start');
+Route::get('/screen/start/{id}', [\App\Http\Controllers\Service\Screen\TestController::class, 'start'])->name('screen.test.start');
 
 Route::group(["middleware" => ['guest']], function () {
     Route::get('/auth/login', [\App\Http\Controllers\Auth\LoginController::class, 'index'])->name('auth.login.index');

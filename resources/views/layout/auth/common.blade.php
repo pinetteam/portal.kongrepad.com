@@ -11,6 +11,11 @@
     @vite(['resources/js/app.js'])
 </head>
 <body class="d-flex bg-dark h-100 align-items-center">
+    <div id="kp-loading" class="d-flex align-items-center justify-content-center">
+        <div class="spinner-grow text-success" role="status">
+            <span class="visually-hidden">{{ __('common.loading') }}</span>
+        </div>
+    </div>
     <header class="navbar navbar-dark fixed-top bg-dark p-0 shadow" id="kp-header">
         <a class="navbar-brand ms-3 overflow-hidden ps-3" href="{{ route("auth.login.index") }}">
             {{ config('app.name') }}
