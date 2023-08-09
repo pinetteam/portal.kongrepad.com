@@ -18,6 +18,7 @@
                             <th scope="col"><span class="fa-regular fa-calendar-arrow-up mx-1"></span> {{ __('common.start-at') }}</th>
                             <th scope="col"><span class="fa-regular fa-calendar-arrow-down mx-1"></span> {{ __('common.finish-at') }}</th>
                             <th scope="col"><span class="fa-regular fa-calendar-arrow-down mx-1"></span> {{ __('common.question-count') }}</th>
+                            <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.on_vote') }}</th>
                             <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}</th>
                             <th scope="col" class="text-end"></th>
                         </tr>
@@ -43,6 +44,13 @@
                                 </td>
                                 <td>
                                     {{$survey->questions->count()}}
+                                </td>
+                                <td>
+                                    @if($survey->on_vote)
+                                        <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
+                                    @else
+                                        <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
+                                    @endif
                                 </td>
                                 <td>
                                     @if($survey->status)
@@ -89,6 +97,8 @@
                 <x-input.datetime method="c" name="start_at" title="start-at" icon="calendar-arrow-down" />
                 <x-input.datetime method="c" name="finish_at" title="finish-at" icon="calendar-arrow-down" />
                 <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
+                <x-input.radio method="c" name="on_vote" title="on_vote" :options="$on_vote" option_value="value" option_name="title" icon="toggle-large-on" />
+
             @endsection
         </x-crud.form.common.create>
         <x-crud.form.common.delete />
@@ -101,6 +111,7 @@
                 <x-input.datetime method="e" name="start_at" title="start-at" icon="calendar-arrow-down" />
                 <x-input.datetime method="e" name="finish_at" title="finish-at" icon="calendar-arrow-down" />
                 <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
+                <x-input.radio method="e" name="on_vote" title="on_vote" :options="$on_vote" option_value="value" option_name="title" icon="toggle-large-on" />
             @endsection
         </x-crud.form.common.edit>
     </div>

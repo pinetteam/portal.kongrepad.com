@@ -31,8 +31,14 @@
                     <tr>
                         <th scope="row" class="text-end w-25">{{ __('common.question-count') }}:</th>
                         <td class="text-start w-25">{{ $survey->questions->count() }}</td>
-                        <th scope="row" class="text-end w-25">{{ __('common.created-at') }}:</th>
-                        <td class="text-start w-25">{{ $survey->created_at }}</td>
+                        <th scope="row" class="text-end w-25">{{ __('common.on_vote') }}:</th>
+                        <td class="text-start w-25">
+                            @if($survey->on_vote)
+                                <i style="color:green" class="fa-regular fa-toggle-on"></i>
+                            @else
+                                <i style="color:red" class="fa-regular fa-toggle-off"></i>
+                            @endif
+                        </td>
                     </tr>
                 </table>
             </div>

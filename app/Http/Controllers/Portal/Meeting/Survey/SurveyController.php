@@ -20,7 +20,11 @@ class SurveyController extends Controller
             'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.meeting.survey.index', compact(['surveys', 'meeting', 'statuses']));
+        $on_vote = [
+            'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
+            'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
+        ];
+        return view('portal.meeting.survey.index', compact(['surveys', 'on_vote', 'meeting', 'statuses']));
     }
     public function store(SurveyRequest $request, int $meeting)
     {
@@ -30,6 +34,7 @@ class SurveyController extends Controller
             $survey->sort_order = $request->input('sort_order');
             $survey->title = $request->input('title');
             $survey->description = $request->input('description');
+            $survey->on_vote = $request->input('on_vote');
             $survey->start_at = $request->input('start_at');
             $survey->finish_at = $request->input('finish_at');
             $survey->status = $request->input('status');
@@ -51,7 +56,11 @@ class SurveyController extends Controller
             'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.meeting.survey.show', compact(['questions','survey','questionCount' , 'statuses']));
+        $on_vote = [
+            'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
+            'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
+        ];
+        return view('portal.meeting.survey.show', compact(['questions', 'survey', 'on_vote', 'questionCount', 'statuses']));
     }
     public function edit(string $meeting, string $id)
     {
@@ -66,6 +75,7 @@ class SurveyController extends Controller
             $survey->sort_order = $request->input('sort_order');
             $survey->title = $request->input('title');
             $survey->description = $request->input('description');
+            $survey->on_vote = $request->input('on_vote');
             $survey->start_at = $request->input('start_at');
             $survey->finish_at = $request->input('finish_at');
             $survey->status = $request->input('status');
@@ -93,9 +103,9 @@ class SurveyController extends Controller
     public function start_stop(string $meeting_id, string $id)
     {
         $survey = Auth::user()->customer->surveys()->findOrFail($id);
-        $survey->on_air = !$survey->on_air;
+        $survey->on_vote = !$survey->on_vote;
         if ($survey->save()) {
-            if($survey->on_air){
+            if($survey->on_vote){
                 return back()->with('success',__('common.voting-started'));
             }
             else{
