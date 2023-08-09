@@ -14,6 +14,7 @@ class OptionController extends Controller
     {
 
         if ($request->validated()) {
+            dd($request->all());
 
             $option = new Option();
             $option->survey_id = $request->input('survey_id');
@@ -35,15 +36,18 @@ class OptionController extends Controller
     }
     public function edit(string $meeting_id, string $survey_id, string $question_id,string $id)
     {
+
         $option = Auth::user()->customer->surveyOptions()->findOrFail($id);
         return new OptionResource($option);
     }
     public function update(OptionRequest $request, string $meeting_id, string $survey_id, string $question_id,string $id)
     {
+
         if ($request->validated()) {
             $option = Auth::user()->customer->surveyOptions()->findOrFail($id);
             $option->question_id = $request->input('question_id');
             $option->sort_order = $request->input('sort_order');
+            $option->status= $request->input('status');
             $option->option = $request->input('option');
             if ($option->save()) {
                 $option->updated_by = Auth::user()->id;

@@ -141,6 +141,7 @@
                                         </td>
                                     </tr>
                                 @endforeach
+
                                 </tbody>
                                 <tbody>
                                 <div class="card-footer d-flex justify-content-center">
@@ -153,6 +154,27 @@
                         </div>
                         </tfoot>
                     </table>
+                        <x-crud.form.common.create name="option">
+                            @section('option-create-form')
+                                <x-input.hidden method="c-o" name="survey_id" :value="$survey->id"/>
+                                <x-input.hidden method="c-o" name="question_id" :value="$question->id"/>
+                                <x-input.text method="c-o" name="option" title="option" icon="list-dropdown" />
+                                <x-input.number method="c-o" name="sort_order" title="sort" icon="circle-sort" />
+                                <x-input.radio method="c-o" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
+                            @endsection
+                        </x-crud.form.common.create>
+
+                        <x-crud.form.common.delete name="option" />
+
+                        <x-crud.form.common.edit name="option">
+                            @section('option-edit-form')
+                                <x-input.hidden method="e-o" name="survey_id" :value="$survey->id"/>
+                                <x-input.hidden method="e-o" name="question_id" :value="$question->id"/>
+                                <x-input.text method="e-o" name="option" title="option" icon="list-dropdown" />
+                                <x-input.number method="e-o" name="sort_order" title="sort" icon="circle-sort" />
+                                <x-input.radio method="e-o" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
+                            @endsection
+                        </x-crud.form.common.edit>
                     @endforeach
                         <div class="card-footer d-flex justify-content-center">
                             <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#question-create-modal" data-route="{{ route('portal.question.store',['meeting'=> $survey->meeting_id,'survey_id'=> $survey->id]) }}">
@@ -185,25 +207,5 @@
         @endsection
     </x-crud.form.common.edit>
 
-    <x-crud.form.common.create name="option">
-        @section('option-create-form')
-            <x-input.hidden method="c" name="survey_id" :value="$question->survey->id"/>
-            <x-input.hidden method="c" name="question_id" :value="$question->id"/>
-            <x-input.text method="c" name="option" title="option" icon="list-dropdown" />
-            <x-input.number method="c" name="sort_order" title="sort" icon="circle-sort" />
-            <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
-        @endsection
-    </x-crud.form.common.create>
 
-    <x-crud.form.common.delete name="option" />
-
-    <x-crud.form.common.edit name="option">
-        @section('option-edit-form')
-            <x-input.hidden method="e" name="survey_id" :value="$question->survey->id"/>
-            <x-input.hidden method="e" name="question_id" :value="$question->id"/>
-            <x-input.text method="e" name="option" title="option" icon="list-dropdown" />
-            <x-input.number method="e" name="sort_order" title="sort" icon="circle-sort" />
-            <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
-        @endsection
-    </x-crud.form.common.edit>
 @endsection
