@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Portal\Meeting\ScoreGame\QrCode;
+namespace App\Http\Controllers\Portal\Meeting\ScoreGame\QRCode;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Portal\Meeting\ScoreGame\QrCode\QrCodeRequest;
@@ -90,7 +90,7 @@ class QRCodeController extends Controller
     }
 
 
-    public function qr_code(int $meeting, string $score_game, int $id)
+    public function qrCode(int $meeting, string $score_game, int $id)
     {
         $qr_code = Auth::user()->customer->qrCodes()->where('score_game_id', $score_game)->findOrFail($id);
         return \SimpleSoftwareIO\QrCode\Facades\QrCode::size(200)->generate($qr_code->code);
