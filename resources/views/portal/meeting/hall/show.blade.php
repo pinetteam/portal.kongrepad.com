@@ -113,9 +113,6 @@
                             <tr>
                                 <td colspan="10">
                                     <div class="card text-bg-dark mt-2">
-                                        <div class="card-header">
-                                            <h6 class="m-0 text-start">{{ __('common.sessions')  }} | {{$program->title}}</h6>
-                                        </div>
                                         <div class="card-body">
                                             <div class="table-responsive">
                                                 <table class="table table-dark table-striped table-hover">
@@ -153,7 +150,7 @@
                                                             <td>{{ $program_session->start_at }}</td>
                                                             <td>{{ $program_session->finish_at }}</td>
                                                             <td>
-                                                                @if($program_session->questions)
+                                                                @if($program_session->questions_allowed)
                                                                     <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
                                                                 @else
                                                                     <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
@@ -172,6 +169,16 @@
                                                                     <a class="btn btn-info btn-sm" href="{{ route('portal.meeting.hall.program.session.show', ['meeting' => $program->hall->meeting->id, 'hall' => $program->hall->id, 'program' => $program->id, 'session' => $program_session->id]) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
                                                                         <span class="fa-regular fa-eye"></span>
                                                                     </a>
+                                                                    <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.edit') }}">
+                                                                        <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#session-edit-modal" data-route="{{ route('portal.meeting.hall.program.session.update', ['meeting' => $program->hall->meeting->id, 'hall' => $program->hall->id, 'program' => $program->id, 'session' => $program_session->id]) }}" data-resource="{{ route('portal.meeting.hall.program.session.edit', ['meeting' => $program->hall->meeting->id, 'hall' => $program->hall->id, 'program' => $program->id, 'session' => $program_session->id]) }}" data-id="{{ $program_session->id }}">
+                                                                            <span class="fa-regular fa-pen-to-square"></span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
+                                                                        <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#session-delete-modal" data-route="{{ route('portal.meeting.hall.program.session.destroy', ['meeting' => $program->hall->meeting->id, 'hall' => $program->hall->id, 'program' => $program->id, 'session' => $program_session->id]) }}" data-record="{{ $program_session->title }}">
+                                                                            <span class="fa-regular fa-trash"></span>
+                                                                        </button>
+                                                                    </div>
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -180,6 +187,41 @@
                                                 </table>
                                             </div>
                                         </div>
+                                        <x-crud.form.common.create name="session">
+                                            @section('session-create-form')
+                                                <x-input.hidden method="c" name="program_id" :value="$program->id" />
+                                                <x-input.select method="c" name="speaker_id" title="speaker" :options="$speakers" option_value="id" option_name="full_name" icon="person-chalkboard" />
+                                                <x-input.select method="c" name="document_id" title="document" :options="$documents" option_value="id" option_name="title" icon="speakation-screen" />
+                                                <x-input.number method="c" name="sort_order" title="sort" icon="circle-sort" />
+                                                <x-input.text method="c" name="code" title="code" icon="code-simple" />
+                                                <x-input.text method="c" name="title" title="title" icon="input-text" />
+                                                <x-input.text method="c" name="description" title="description" icon="comment-dots" />
+                                                <x-input.datetime method="c" name="start_at" title="start-at" icon="calendar-arrow-down" />
+                                                <x-input.datetime method="c" name="finish_at" title="finish-at" icon="calendar-arrow-down" />
+                                                <x-input.radio method="c" name="questions_allowed" title="questions" :options="$questions" option_value="value" option_name="title" icon="block-question" />
+                                                <x-input.radio method="c" name="questions_auto_start" title="questions-auto-start" :options="$questions_auto_start" option_value="value" option_name="title" icon="block-question" />
+                                                <x-input.number method="c" name="questions_limit" title="question-limit" icon="circle-1" />
+                                                <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
+                                            @endsection
+                                        </x-crud.form.common.create>
+                                        <x-crud.form.common.delete name="session" />
+                                        <x-crud.form.common.edit name="session" method="e-s">
+                                            @section('session-edit-form')
+                                                <x-input.hidden method="e-s" name="program_id" :value="$program->id" />
+                                                <x-input.select method="e-s" name="speaker_id" title="speaker" :options="$speakers" option_value="id" option_name="full_name" icon="person-chalkboard" />
+                                                <x-input.select method="e-s" name="document_id" title="document" :options="$documents" option_value="id" option_name="title" icon="speakation-screen" />
+                                                <x-input.number method="e-s" name="sort_order" title="sort" icon="circle-sort" />
+                                                <x-input.text method="e-s" name="code" title="code" icon="code-simple" />
+                                                <x-input.text method="e-s" name="title" title="title" icon="input-text" />
+                                                <x-input.text method="e-s" name="description" title="description" icon="comment-dots" />
+                                                <x-input.datetime method="e-s" name="start_at" title="start-at" icon="calendar-arrow-down" />
+                                                <x-input.datetime method="e-s" name="finish_at" title="finish-at" icon="calendar-arrow-down" />
+                                                <x-input.radio method="e-s" name="questions_allowed" title="questions" :options="$questions" option_value="value" option_name="title" icon="block-question" />
+                                                <x-input.radio method="e-s" name="questions_auto_start" title="questions-auto-start" :options="$questions_auto_start" option_value="value" option_name="title" icon="block-question" />
+                                                <x-input.number method="e-s" name="questions_limit" title="question-limit" icon="circle-1" />
+                                                <x-input.radio method="e-s" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
+                                            @endsection
+                                        </x-crud.form.common.edit>
                                     </div>
                                 </td>
                             </tr>
@@ -188,9 +230,6 @@
                             <tr>
                                 <td colspan="10">
                                     <div class="card text-bg-dark mt-2">
-                                        <div class="card-header">
-                                            <h6 class="m-0 text-center">{{ __('common.debates') }} | {{$program->title}}</h6>
-                                        </div>
                                         <div class="card-body">
                                             <div class="table-responsive">
                                                 <table class="table table-dark table-striped table-hover">

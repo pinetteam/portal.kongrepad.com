@@ -40,7 +40,17 @@ class HallController extends Controller
     public function show(int $meeting, int $id)
     {
         $hall = Auth::user()->customer->meetingHalls()->where('meeting_id', $meeting)->findOrFail($id);
+        $speakers = Auth::user()->customer->participants()->whereNot('meeting_participants.type', 'team')->get();
+        $documents = Auth::user()->customer->documents()->get();
         $programs = $hall->programs()->paginate(20);
+        $questions = [
+            'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
+            'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
+        ];
+        $questions_auto_start = [
+            'no' => ["value" => 0, "title" => __('common.no'), 'color' => 'danger'],
+            'yes' => ["value" => 1, "title" => __('common.yes'), 'color' => 'success'],
+        ];
         $types = [
         'debate' => ["value" => "debate", "title" => __('common.debate')],
         'other' => ["value" => "other", "title" => __('common.other')],
@@ -51,7 +61,7 @@ class HallController extends Controller
             'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.meeting.hall.show', compact(['hall', 'meeting', 'programs', 'statuses', 'types']));
+        return view('portal.meeting.hall.show', compact(['documents', 'hall', 'meeting', 'programs', 'questions', 'questions_auto_start', 'speakers', 'statuses', 'types']));
     }
     public function edit(int $meeting, int $id)
     {
