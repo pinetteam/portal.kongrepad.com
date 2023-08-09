@@ -18,6 +18,8 @@
                             @endif
                             {{ $hall->title }}
                         </td>
+                        <th scope="row" class="text-end w-25">{{ __('common.hall-program-count') }}:</th>
+                        <td class="text-start w-25">{{ $hall->programs->count() }}</td>
                     </tr>
                     <tr>
                         <th scope="row" class="text-end w-25">{{ __('common.start-at') }}:</th>

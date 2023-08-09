@@ -19,7 +19,7 @@ class SurveyResource extends JsonResource
             'description' => ['value'=>$this->description, 'type'=>'text'],
             'start_at' => ['value'=>$this->start_at, 'type'=>'datetime'],
             'finish_at' => ['value'=>$this->finish_at, 'type'=>'datetime'],
-            'on_air' => ['value'=>$this->on_vote, 'type'=>'radio'],
+            'on_vote' => ['value'=>$this->on_vote, 'type'=>'radio'],
             'status' => ['value'=>$this->status, 'type'=>'radio'],
             'route' => route('portal.meeting.survey.update', ['meeting' => $this->meeting_id, 'survey' => $this->id]),
         ];
