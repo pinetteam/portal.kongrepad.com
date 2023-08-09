@@ -14,6 +14,7 @@
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col"><span class="fa-regular fa-bee mx-1"></span> {{ __('common.meeting') }}</th>
+                            <th scope="col"><span class="fa-regular fa-image mx-1"></span> {{ __('common.logo') }}</th>
                             <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}</th>
                             <th scope="col"><span class="fa-regular fa-calendar-arrow-up mx-1"></span> {{ __('common.start-at') }}</th>
                             <th scope="col"><span class="fa-regular fa-calendar-arrow-down mx-1"></span> {{ __('common.finish-at') }}</th>
@@ -25,6 +26,13 @@
                         @foreach($score_games as $score_game)
                             <tr>
                                 <td>{{ $score_game->meeting->title }}</td>
+                                <td>
+                                    @if($score_game->logo)
+                                        <img src="{{ $score_game->logo }}" alt="{{ $score_game->title }}" class="img-thumbnail" style="height:36px;" />
+                                    @else
+                                        <i class="text-info">{{ __('common.unspecified') }}</i>
+                                    @endif
+                                </td>
                                 <td>{{ $score_game->title }}</td>
                                 <td>
                                     @if($score_game->start_at)

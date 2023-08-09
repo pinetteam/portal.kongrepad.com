@@ -14,8 +14,8 @@ class DocumentController extends Controller
 {
     public function index(int $meeting)
     {
-        $documents = Auth::user()->customer->documents()->paginate(20);
         $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $documents = $meeting->documents()->paginate(20);
         $sharing_via_emails = [
             'not-allowed' => ["value" => 0, "title" => __('common.not-allowed'), 'color' => 'danger'],
             'allowed' => ["value" => 1, "title" => __('common.allowed'), 'color' => 'success'],

@@ -21,7 +21,7 @@ class DocumentRequest extends FormRequest
                 return [
                     'meeting_id' => 'required|exists:meetings,id',
                     'file' => ['required', File::types(['pdf', 'pptx', 'ppt', 'ppsx'])->max(10240)],
-                    'title' => 'nullable|max:255',
+                    'title' => 'required|max:255',
                     'type' => 'required|in:presentation,publication,other',
                     'sharing_via_email' => 'required|boolean',
                     'status' => 'required|boolean',

@@ -27,7 +27,13 @@
                                 {{ __('common.passive') }}
                             @endif</td>
                         <th scope="row" class="text-end w-25">{{ __('common.logo') }}:</th>
-                        <td class="text-start w-25">{{ $score_game->logo }}</td>
+                        <td>
+                            @if($score_game->logo)
+                                <img src="{{ $score_game->logo }}" alt="{{ $score_game->title }}" class="img-thumbnail" style="height:36px;" />
+                            @else
+                                <i class="text-info">{{ __('common.unspecified') }}</i>
+                            @endif
+                        </td>
                     </tr>
                     <tr>
                         <th scope="row" class="text-end w-25">{{ __('common.created-by') }}:</th>
