@@ -43,36 +43,46 @@ class MeetingHallSeeder extends Seeder
                 'title' => 'IOK 2022 Side Hall',
                 'status' => 1,
             ],
+            [
+                'meeting_id' => '4',
+                'title' => 'IOK 2023 Main Hall',
+                'status' => 1,
+            ],
+            [
+                'meeting_id' => '4',
+                'title' => 'IOK 2023 Side Hall',
+                'status' => 1,
+            ],
         ]);
 
         Hall::insert([
             [
-                'meeting_id' => '4',
+                'meeting_id' => '5',
                 'title' => 'PNK 2020 Main Hall',
                 'status' => 1,
             ],
             [
-                'meeting_id' => '4',
+                'meeting_id' => '5',
                 'title' => 'PNK 2020 Side Hall',
                 'status' => 1,
             ],
             [
-                'meeting_id' => '5',
+                'meeting_id' => '6',
                 'title' => 'PNK 2021 Main Hall',
                 'status' => 1,
             ],
             [
-                'meeting_id' => '5',
+                'meeting_id' => '6',
                 'title' => 'PNK 2021 Side Hall',
                 'status' => 1,
             ],
             [
-                'meeting_id' => '6',
+                'meeting_id' => '7',
                 'title' => 'PNK 2022 Main Hall',
                 'status' => 1,
             ],
             [
-                'meeting_id' => '6',
+                'meeting_id' => '7',
                 'title' => 'PNK 2022 Side Hall',
                 'status' => 1,
             ],

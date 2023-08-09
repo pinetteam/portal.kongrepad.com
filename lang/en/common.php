@@ -216,5 +216,6 @@ return [
     'you-have-reached-the-question-limit' => 'You Have Reached The Question Limit',
     'hall-programs'=> 'Hall Programs',
     'question-count'=> 'Question Count',
-    'option-count'=> 'Option Count'
+    'option-count'=> 'Option Count',
+    'add-a-new-option'=> 'Add a New Option',
 ];

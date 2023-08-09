@@ -62,7 +62,7 @@
     </div>
     <x-crud.form.common.create>
         @section('default-create-form')
-            <x-input.hidden method="c" name="meeting_id" :value="$hall->meeting->id" />
+            <x-input.hidden method="c" name="meeting_id" :value="$meeting->id" />
             <x-input.text method="c" name="title" title="title" icon="input-text" />
             <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
@@ -70,7 +70,7 @@
     <x-crud.form.common.delete />
     <x-crud.form.common.edit>
         @section('default-edit-form')
-            <x-input.hidden method="e" name="meeting_id" :value="$hall->meeting->id" />
+            <x-input.hidden method="e" name="meeting_id" :value="$meeting->id" />
             <x-input.text method="e" name="title" title="title" icon="input-text" />
             <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection

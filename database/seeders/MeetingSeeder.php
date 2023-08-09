@@ -37,6 +37,14 @@ class MeetingSeeder extends Seeder
                 'finish_at' => '2022-12-31',
                 'status' => 1,
             ],
+            [
+                'customer_id' => '1',
+                'code' => 'iok-2023',
+                'title' => 'IOK 2023',
+                'start_at' => '2023-01-01',
+                'finish_at' => '2023-12-31',
+                'status' => 1,
+            ],
         ]);
 
         Meeting::insert([

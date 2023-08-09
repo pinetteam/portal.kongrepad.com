@@ -51,11 +51,6 @@
                 <div class="table-responsive">
                     @foreach($questions as $question)
                     <table class=" caption-top table table-dark table-striped-columns table-bordered m-2">
-                        <caption class="text-white">
-                       <h3 class="text-center mt-2">
-                            <span class="fa-regular fa-square-poll-vertical fa-fade"></span> <small>"{{$question->question }}"</small>{{ __('common.question') }}
-                        </h3>
-                        </caption>
                         <thead class="thead-dark">
                         <tr>
                             <th scope="col "><span class="fa-regular fa-messages-question mx-1 "></span> {{ __('common.question-title') }}</th>
@@ -82,7 +77,7 @@
                                 <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.create-new-option')}}">
                                         <button type="button" class="btn btn-outline-success btn-sm w-100  " data-bs-toggle="modal" data-bs-target="#option-create-modal" data-route="{{ route('portal.survey-option.store',['meeting'=>$question->survey->meeting_id, 'survey_id'=> $question->survey_id,'question_id'=> $question->id,]) }}">
-                                            <i class="fa-solid fa-plus"></i> {{ __('common.create-new-option') }}
+                                            <i class="fa-solid fa-plus"></i> {{ __('common.add-a-new-option') }}
                                         </button>
                                     </div>
                                     {{--show button--}}

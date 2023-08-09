@@ -14,7 +14,6 @@ class OptionController extends Controller
     {
 
         if ($request->validated()) {
-            dd($request->all());
             $option = new Option();
             $option->survey_id = $request->input('survey_id');
             $option->question_id = $request->input('question_id');

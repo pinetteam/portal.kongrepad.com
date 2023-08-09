@@ -32,8 +32,8 @@ class QuestionController extends Controller
         $question = Auth::user()->customer->surveyQuestions()->findOrFail($id);
         $options = $question->options()->get();
         $statuses = [
-            'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-            'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
+            'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
+            'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
         return view('portal.meeting.survey.question.show', compact(['question', 'options', 'statuses']));
     }

@@ -48,8 +48,8 @@ class HallController extends Controller
     ];
         $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
         $statuses = [
-            'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-            'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
+            'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
+            'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
         return view('portal.meeting.hall.show', compact(['hall', 'meeting', 'programs', 'statuses', 'types']));
     }
