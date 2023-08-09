@@ -38,6 +38,7 @@ class DocumentController extends Controller
                 if(Storage::putFileAs('documents', $request->file('file'), $file_name.'.'.$file_extension)) {
                     $document->file_name = $file_name;
                     $document->file_extension = $file_extension;
+                    $document->file_size = $request->file('file')->getSize();
                 } else {
                     return back()->with('create_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
                 }
@@ -76,6 +77,7 @@ class DocumentController extends Controller
                 if(Storage::putFileAs('documents', $request->file('file'), $file_name.'.'.$file_extension)) {
                     $document->file_name = $file_name;
                     $document->file_extension = $file_extension;
+                    $document->file_size = $request->file('file')->getSize();
                 } else {
                     return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
                 }

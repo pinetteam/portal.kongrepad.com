@@ -3,39 +3,52 @@
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">
-            <h1 class="m-0 text-center">{{ __('common.participant') }}</h1>
-        </div>
-        <div class="card-body">
-            <div class="row flex-shrink-0 g-2">
-                <div class="col card text-bg-dark p-0">
-                    <div class="card-header">
-                        <h2 class="m-0 text-center h3">{{ __('common.participant') }}</h2>
-                    </div>
-                    <div class="card-body p-0">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}:</b> {{ $participant->title }}</li>
-                            <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-bee mx-1"></span> {{ __('common.meeting') }}:</b> {{ $participant->meeting->title }}</li>
-                            <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-id-card mx-1"></span> {{ __('common.name') }}:</b> @if($participant->activity_status)
-                                    <div class="spinner-grow spinner-grow-sm text-success" role="status"></div>
-                                @else
-                                    <div class="spinner-border spinner-border-sm text-danger" role="status"></div>
-                                @endif
-                                {{ $participant->full_name }}
-                            </li>
-                            <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-building-columns mx-1"></span> {{ __('common.organisation') }}:</b> {{ $participant->organisation }}</li>
-                            <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-envelope mx-1"></span> {{ __('common.email') }}:</b> {{ $participant->email }}</li>
-                            <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-mobile-screen mx-1"></span> {{ __('common.phone') }}:</b> {{ $participant->full_phone }}</li>
-                            <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-fingerprint mx-1"></span> {{ __('common.identification-number') }}:</b> {{ $participant->identification_number }}</li>
-                            <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}:</b>
-                                @if($participant->status)
-                                    {{ __('common.active') }}
-                                @else
-                                    {{ __('common.passive') }}
-                                @endif
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+            <h1 class="text-center"><span class="fa-duotone fa-screen-users fa-fade"></span> <small>"{{ $participant->full_name }}"</small> {{ __('common.participant') }}</h1>
+            <div class="table-responsive">
+                <table class="table table-dark table-striped-columns table-bordered">
+                    <tr>
+                        <th scope="row" class="text-end w-25">{{ __('common.title') }}:</th>
+                        <td class="text-start w-25">{{ $participant->title }}</td>
+                        <th scope="row" class="text-end w-25">{{ __('common.name') }}:</th>
+                        <td class="text-start w-25">
+                            @if($participant->activity_status)
+                                <i style="color:green" class="fa-regular fa-toggle-on"></i>
+                            @else
+                                <i style="color:red" class="fa-regular fa-toggle-off"></i>
+                            @endif
+                            {{ $participant->full_name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="text-end w-25">{{ __('common.meeting') }}:</th>
+                        <td class="text-start w-25">{{ $participant->meeting->title }}</td>
+                        <th scope="row" class="text-end w-25">{{ __('common.identification-number') }}:</th>
+                        <td class="text-start w-25">{{ $participant->identification_number }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="text-end w-25">{{ __('common.organisation') }}:</th>
+                        <td class="text-start w-25">{{ $participant->organisation }}</td>
+                        <th scope="row" class="text-end w-25">{{ __('common.email') }}:</th>
+                        <td class="text-start w-25">{{ $participant->email }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="text-end w-25">{{ __('common.phone') }}:</th>
+                        <td class="text-start w-25">{{ $participant->full_phone }}</td>
+                        <th scope="row" class="text-end w-25">{{ __('common.status') }}:</th>
+                        <td class="text-start w-25">
+                            @if($participant->status)
+                                {{ __('common.active') }}
+                            @else
+                                {{ __('common.passive') }}
+                            @endif</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="text-end w-25">{{ __('common.created-by') }}:</th>
+                        <td class="text-start w-25">{{ $participant->created_by }}</td>
+                        <th scope="row" class="text-end w-25">{{ __('common.created-at') }}:</th>
+                        <td class="text-start w-25">{{ $participant->created_at }}</td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>

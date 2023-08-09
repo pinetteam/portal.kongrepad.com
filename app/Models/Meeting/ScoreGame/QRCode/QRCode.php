@@ -18,7 +18,6 @@ class QRCode extends Model
         'score_game_id',
         'title',
         'code',
-        'logo',
         'point',
         'start_at',
         'finish_at',

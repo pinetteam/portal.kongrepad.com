@@ -13,6 +13,7 @@ class ScoreGameResource extends JsonResource
             'meeting_id' => ['value'=>$this->meeting_id, 'type'=>'hidden'],
             'start_at' => ['value'=>$this->start_at, 'type'=>'datetime'],
             'finish_at' => ['value'=>$this->finish_at, 'type'=>'datetime'],
+            'logo' => ['value'=>$this->logo, 'type'=>'file'],
             'title' => ['value'=> $this->title, 'type'=>'text'],
             'status' => ['value'=> $this->status, 'type'=>'radio'],
             'route' => route('portal.meeting.score-game.update', ['meeting' => $this->meeting_id,'score_game' => $this->id]),

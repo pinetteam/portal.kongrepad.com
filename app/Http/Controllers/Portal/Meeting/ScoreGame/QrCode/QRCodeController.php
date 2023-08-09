@@ -7,6 +7,7 @@ use App\Http\Requests\Portal\Meeting\ScoreGame\QrCode\QrCodeRequest;
 use App\Http\Resources\Portal\Meeting\ScoreGame\QRCode\QRCodeResource;
 use App\Models\Meeting\ScoreGame\QRCode\QRCode;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
 class QRCodeController extends Controller
@@ -29,15 +30,10 @@ class QRCodeController extends Controller
             $qr_code->start_at = $request->input('start_at');
             $qr_code->finish_at = $request->input('finish_at');
             $qr_code->point = $request->input('point');
-            if ($request->has('logo')) {
-                $logo = Image::make($request->file('logo'))->encode('data-url');
-                $qr_code->logo = $logo;
-            }
-            $qr_code->code = \SimpleSoftwareIO\QrCode\Facades\QrCode::size(200)->generate('http://kongrepad.com/qr/'.$qr_code->id);
+            $qr_code->code = Str::uuid()->toString();
             $qr_code->title = $request->input('title');
             $qr_code->status = $request->input('status');
             if ($qr_code->save()) {
-                \SimpleSoftwareIO\QrCode\Facades\QrCode::size(200)->generate('http://kongrepad.com/qr/'.$qr_code->id, storage_path('app/qrcodes/qrcode-'.$qr_code->id.'.svg'));
                 $qr_code->created_by = Auth::user()->id;
                 $qr_code->save();
                 return back()->with('success', __('common.created-successfully'));
@@ -50,7 +46,7 @@ class QRCodeController extends Controller
     {
 
     }
-    public function edit(string $meeting_, string $score_game, string $id)
+    public function edit(string $meeting, string $score_game, string $id)
     {
         $qr_code = Auth::user()->customer->qrCodes()->findOrFail($id);
         return new QRCodeResource($qr_code);
@@ -74,7 +70,7 @@ class QRCodeController extends Controller
             }
         }
     }
-    public function destroy(string $meeting_, string $score_game, string $id)
+    public function destroy(string $meeting, string $score_game, string $id)
     {
 
         $qr_code = Auth::user()->customer->qrCodes()->findOrFail($id);;
@@ -88,6 +84,15 @@ class QRCodeController extends Controller
     }
 
     public function download(string $meeting, string $score_game, string $id){
-        return response()->download(storage_path('app/qrcodes/qrcode-'.$id.'.svg'));
+        $qr_code = Auth::user()->customer->qrCodes()->where('score_game_id', $score_game)->findOrFail($id);
+        \SimpleSoftwareIO\QrCode\Facades\QrCode::size(200)->generate($qr_code->code, storage_path('app/qrcodes/' . $qr_code->code . '.svg'));
+        return response()->download(storage_path('app/qrcodes/' . $qr_code->code . '.svg'));
+    }
+
+
+    public function qr_code(int $meeting, string $score_game, int $id)
+    {
+        $qr_code = Auth::user()->customer->qrCodes()->where('score_game_id', $score_game)->findOrFail($id);
+        return \SimpleSoftwareIO\QrCode\Facades\QrCode::size(200)->generate($qr_code->code);
     }
 }

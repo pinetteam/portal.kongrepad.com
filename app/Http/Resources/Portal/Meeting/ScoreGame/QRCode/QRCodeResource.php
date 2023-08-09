@@ -12,7 +12,6 @@ class QRCodeResource extends JsonResource
         return [
             'score_game_id' => ['value'=>$this->score_game_id, 'type'=>'select'],
             'title' => ['value'=>$this->title, 'type'=>'text'],
-            'logo' => ['value'=>$this->logo, 'type'=>'file'],
             'point' => ['value'=>$this->point, 'type'=>'number'],
             'start_at' => ['value'=> $this->start_at, 'type'=>'datetime'],
             'finish_at' => ['value'=> $this->finish_at, 'type'=>'datetime'],

@@ -9,6 +9,7 @@ use App\Models\Meeting\Participant\Participant;
 use App\Models\System\Country\Country;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class ParticipantController extends Controller
 {
@@ -34,7 +35,6 @@ class ParticipantController extends Controller
             $participant = new Participant();
             $participant->meeting_id = $meeting;
             $participant->username = Str::uuid()->toString();
-            $participant->qr_code = \SimpleSoftwareIO\QrCode\Facades\QrCode::size(200)->generate($participant->username);
             $participant->title = $request->input('title');
             $participant->first_name = $request->input('first_name');
             $participant->last_name = $request->input('last_name');
@@ -75,7 +75,6 @@ class ParticipantController extends Controller
             $participant = Auth::user()->customer->participants()->where('meeting_id', $meeting)->findOrFail($id);
             $participant->meeting_id = $meeting;
             $participant->title = $request->input('title');
-            $participant->qr_code = \SimpleSoftwareIO\QrCode\Facades\QrCode::size(200)->generate($participant->username);
             $participant->first_name = $request->input('first_name');
             $participant->last_name = $request->input('last_name');
             $participant->organisation = $request->input('organisation');
@@ -110,6 +109,6 @@ class ParticipantController extends Controller
     public function qr_code(int $meeting, int $id)
     {
         $participant = Auth::user()->customer->participants()->where('meeting_id', $meeting)->findOrFail($id);
-        return $participant->qr_code;
+        return QrCode::size(200)->generate($participant->username);
     }
 }

@@ -18,6 +18,7 @@ class ScoreGame extends Model
     protected $fillable = [
         'meeting_id',
         'title',
+        'logo',
         'start_at',
         'finish_at',
         'status',

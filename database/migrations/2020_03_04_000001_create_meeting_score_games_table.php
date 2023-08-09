@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('meeting_id')->index();
             $table->string('title', 511);
+            $table->binary('logo')->nullable();
             $table->dateTime('start_at');
             $table->dateTime('finish_at');
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
@@ -28,6 +29,7 @@ return new class extends Migration
             $table->foreign('deleted_by')->on('users')->references('id');
             $table->foreign('meeting_id')->on('meetings')->references('id');
         });
+        \Illuminate\Support\Facades\DB::statement('ALTER TABLE meeting_score_games MODIFY logo MEDIUMBLOB NULL');
     }
 
     /**

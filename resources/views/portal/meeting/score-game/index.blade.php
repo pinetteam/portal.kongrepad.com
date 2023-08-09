@@ -80,6 +80,7 @@
         @section('default-create-form')
             <x-input.hidden method="c" name="meeting_id" :value="$meeting->id" />
             <x-input.text method="c" name="title" title="title" icon="input-text" />
+            <x-input.file method="c" name="logo" title="logo" icon="image" />
             <x-input.datetime method="c" name="start_at" title="start-at" icon="calendar-arrow-down" />
             <x-input.datetime method="c" name="finish_at" title="finish-at" icon="calendar-arrow-down" />
             <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
@@ -90,6 +91,7 @@
         @section('default-edit-form')
             <x-input.hidden method="e" name="meeting_id" :value="$meeting->id" />
             <x-input.text method="e" name="title" title="title" icon="input-text" />
+            <x-input.file method="e" name="logo" title="logo" icon="image" />
             <x-input.datetime method="e" name="start_at" title="start-at" icon="calendar-arrow-down" />
             <x-input.datetime method="e" name="finish_at" title="finish-at" icon="calendar-arrow-down" />
             <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />

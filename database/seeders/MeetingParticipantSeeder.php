@@ -36,7 +36,6 @@ class MeetingParticipantSeeder extends Seeder
             [
                 'meeting_id' => '3',
                 'username' => $username1,
-                'qr_code' => \SimpleSoftwareIO\QrCode\Facades\QrCode::size(200)->generate($username1),
                 'title' => null,
                 'first_name' => $faker1->firstName,
                 'last_name' => $faker1->lastName,
@@ -57,7 +56,6 @@ class MeetingParticipantSeeder extends Seeder
             [
                 'meeting_id' => '3',
                 'username' => $username2,
-                'qr_code' => \SimpleSoftwareIO\QrCode\Facades\QrCode::size(200)->generate($username2),
                 'title' => null,
                 'first_name' => $faker2->firstName,
                 'last_name' => $faker2->lastName,
@@ -78,7 +76,6 @@ class MeetingParticipantSeeder extends Seeder
             [
                 'meeting_id' => '3',
                 'username' => $username3,
-                'qr_code' => \SimpleSoftwareIO\QrCode\Facades\QrCode::size(200)->generate($username3),
                 'title' => null,
                 'first_name' => $faker3->firstName,
                 'last_name' => $faker3->lastName,
@@ -99,7 +96,6 @@ class MeetingParticipantSeeder extends Seeder
             [
                 'meeting_id' => '3',
                 'username' => $username4,
-                'qr_code' => \SimpleSoftwareIO\QrCode\Facades\QrCode::size(200)->generate($username4),
                 'title' => null,
                 'first_name' => $faker4->firstName,
                 'last_name' => $faker4->lastName,
@@ -120,7 +116,6 @@ class MeetingParticipantSeeder extends Seeder
             [
                 'meeting_id' => '3',
                 'username' => $username5,
-                'qr_code' => \SimpleSoftwareIO\QrCode\Facades\QrCode::size(200)->generate($username5),
                 'title' => null,
                 'first_name' => $faker5->firstName,
                 'last_name' => $faker5->lastName,
@@ -141,7 +136,6 @@ class MeetingParticipantSeeder extends Seeder
             [
                 'meeting_id' => '3',
                 'username' => $username6,
-                'qr_code' => \SimpleSoftwareIO\QrCode\Facades\QrCode::size(200)->generate($username6),
                 'title' => null,
                 'first_name' => $faker6->firstName,
                 'last_name' => $faker6->lastName,
@@ -162,7 +156,6 @@ class MeetingParticipantSeeder extends Seeder
             [
                 'meeting_id' => '3',
                 'username' => $username7,
-                'qr_code' => \SimpleSoftwareIO\QrCode\Facades\QrCode::size(200)->generate($username7),
                 'title' => null,
                 'first_name' => $faker7->firstName,
                 'last_name' => $faker7->lastName,
@@ -183,7 +176,6 @@ class MeetingParticipantSeeder extends Seeder
             [
                 'meeting_id' => '3',
                 'username' => $username8,
-                'qr_code' => \SimpleSoftwareIO\QrCode\Facades\QrCode::size(200)->generate($username8),
                 'title' => null,
                 'first_name' => $faker8->firstName,
                 'last_name' => $faker8->lastName,
@@ -204,7 +196,6 @@ class MeetingParticipantSeeder extends Seeder
             [
                 'meeting_id' => '3',
                 'username' => $username9,
-                'qr_code' => \SimpleSoftwareIO\QrCode\Facades\QrCode::size(200)->generate($username9),
                 'title' => null,
                 'first_name' => $faker9->firstName,
                 'last_name' => $faker9->lastName,

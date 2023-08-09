@@ -7,6 +7,7 @@ use App\Http\Requests\Portal\Meeting\ScoreGame\ScoreGameRequest;
 use App\Http\Resources\Portal\Meeting\ScoreGame\ScoreGameResource;
 use App\Models\Meeting\ScoreGame\ScoreGame;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 
 class ScoreGameController extends Controller
 {
@@ -29,6 +30,10 @@ class ScoreGameController extends Controller
             $score_game->start_at = $request->input('start_at');
             $score_game->finish_at = $request->input('finish_at');
             $score_game->title = $request->input('title');
+            if ($request->has('logo')) {
+                $logo = Image::make($request->file('logo'))->encode('data-url');
+                $score_game->logo = $logo;
+            }
             $score_game->status = $request->input('status');
             if ($score_game->save()) {
                 $score_game->created_by = Auth::user()->id;
@@ -65,6 +70,10 @@ class ScoreGameController extends Controller
             $score_game->title = $request->input('title');
             $score_game->start_at = $request->input('start_at');
             $score_game->finish_at = $request->input('finish_at');
+            if ($request->has('logo')) {
+                $logo = Image::make($request->file('logo'))->encode('data-url');
+                $score_game->logo = $logo;
+            }
             $score_game->status = $request->input('status');
             if ($score_game->save()) {
                 $score_game->updated_by = Auth::user()->id;

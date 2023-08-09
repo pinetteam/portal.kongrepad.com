@@ -32,7 +32,6 @@ class Participant extends Model
         'last_activity',
         'type',
         'gdpr_consent',
-        'qr_code',
         'status',
         'created_by',
         'updated_by',

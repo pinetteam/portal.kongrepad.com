@@ -33,8 +33,11 @@ Route::prefix('portal')->name('portal.')->group(function () {
         /* Meeting routes */
         Route::resource('/meeting', \App\Http\Controllers\Portal\Meeting\MeetingController::class)->except(['create']);
         Route::prefix('meeting')->name('meeting.')->group(function () {
+            /* Document routes */
             Route::resource('/{meeting}/document', \App\Http\Controllers\Portal\Meeting\Document\DocumentController::class)->except(['create']);
             Route::get('/{meeting}/document/download/{document}', [\App\Http\Controllers\Portal\Meeting\Document\DocumentController::class, 'download'])->name('document.download');
+
+            /* Hall routes */
             Route::resource('/{meeting}/hall', \App\Http\Controllers\Portal\Meeting\Hall\HallController::class)->except(['create']);
 
             Route::name('hall.')->group(function () {
@@ -52,11 +55,13 @@ Route::prefix('portal')->name('portal.')->group(function () {
 
             Route::resource('/{meeting}/participant', \App\Http\Controllers\Portal\Meeting\Participant\ParticipantController::class)->except(['create']);
             Route::get('/{meeting}/participant/{participant}/qr-code', [\App\Http\Controllers\Portal\Meeting\Participant\ParticipantController::class, 'qr_code'])->name('participant.qr-code');
+
             /* Score Game Routes */
             Route::resource('/{meeting}/score-game', \App\Http\Controllers\Portal\Meeting\ScoreGame\ScoreGameController::class)->except(['create']);
-            Route::prefix('/{meeting}/score-game')->name('score-game.')->group(function () {
-                Route::get('/{score_game}/qr-code-download/{qr_code}', [\App\Http\Controllers\Portal\Meeting\ScoreGame\QrCode\QRCodeController::class,'download'])->name('qr-code-download');
-                Route::resource('/{score_game}/qr-code', \App\Http\Controllers\Portal\Meeting\ScoreGame\QrCode\QRCodeController::class)->except(['create']);
+            Route::prefix('/{meeting}/score-game/{score_game}')->name('score-game.')->group(function () {
+                Route::get('/qr-code/{qr_code}/download', [\App\Http\Controllers\Portal\Meeting\ScoreGame\QrCode\QRCodeController::class,'download'])->name('qr-code-download');
+                Route::get('/qr-code/{qr_code}/qr-code', [\App\Http\Controllers\Portal\Meeting\ScoreGame\QrCode\QRCodeController::class, 'qr_code'])->name('qr-code.qr-code');
+                Route::resource('/qr-code', \App\Http\Controllers\Portal\Meeting\ScoreGame\QrCode\QRCodeController::class)->except(['create', 'show']);
             });
 
         });
