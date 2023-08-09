@@ -106,7 +106,7 @@ class ParticipantController extends Controller
             return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();
         }
     }
-    public function qr_code(int $meeting, int $id)
+    public function qrCode(int $meeting, int $id)
     {
         $participant = Auth::user()->customer->participants()->where('meeting_id', $meeting)->findOrFail($id);
         return QrCode::size(200)->generate($participant->username);
