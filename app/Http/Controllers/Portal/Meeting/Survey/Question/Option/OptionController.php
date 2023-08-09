@@ -15,12 +15,12 @@ class OptionController extends Controller
 
         if ($request->validated()) {
             dd($request->all());
-
             $option = new Option();
             $option->survey_id = $request->input('survey_id');
             $option->question_id = $request->input('question_id');
-            $option->sort_order = $request->input('sort_order');
             $option->option = $request->input('option');
+            $option->sort_order = $request->input('sort_order');
+            $option->status= $request->input('status');
             if ($option->save()) {
                 $option->created_by = Auth::user()->id;
                 $option->save();

@@ -50,17 +50,18 @@
             <div class="card text-bg-dark mt-2">
                 <div class="table-responsive">
                     @foreach($questions as $question)
-                    <table class="table table-dark table-striped-columns table-bordered m-3">
-                        <thead class="thead-dark">
-                        <h3 class="text-center mt-2">
+                    <table class=" caption-top table table-dark table-striped-columns table-bordered m-2">
+                        <caption class="text-white">
+                       <h3 class="text-center mt-2">
                             <span class="fa-regular fa-square-poll-vertical fa-fade"></span> <small>"{{$question->question }}"</small>{{ __('common.question') }}
                         </h3>
-
+                        </caption>
+                        <thead class="thead-dark">
                         <tr>
-                            <th scope="col "><span class="fa-regular fa-messages-question mx-1 text-end w-25 "></span> {{ __('common.question-title') }}</th>
-                            <th scope="col"><span class="fa-regular fa-circle-sort mx-1 w-25"></span> {{ __('common.sort-order') }}</th>
-                            <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1  w-25"></span> {{ __('common.option-count') }}</th>
-                            <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1 w-25"> </span> {{ __('common.status') }}</th>
+                            <th scope="col "><span class="fa-regular fa-messages-question mx-1 "></span> {{ __('common.question-title') }}</th>
+                            <th scope="col"><span class="fa-regular fa-circle-sort mx-1 "></span> {{ __('common.sort-order') }}</th>
+                            <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1  "></span> {{ __('common.option-count') }}</th>
+                            <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1 "> </span> {{ __('common.status') }}</th>
                             <th scope="col" class="text-end "></th>
                         </tr>
                         </thead>
@@ -77,7 +78,13 @@
                                 @endif
                             </td>
                             <td class="text-end">
+
                                 <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
+                                    <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.create-new-option')}}">
+                                        <button type="button" class="btn btn-outline-success btn-sm w-100  " data-bs-toggle="modal" data-bs-target="#option-create-modal" data-route="{{ route('portal.survey-option.store',['meeting'=>$question->survey->meeting_id, 'survey_id'=> $question->survey_id,'question_id'=> $question->id,]) }}">
+                                            <i class="fa-solid fa-plus"></i> {{ __('common.create-new-option') }}
+                                        </button>
+                                    </div>
                                     {{--show button--}}
                                     <a class="btn btn-info btn-sm" href="{{ route('portal.question.show', ['meeting'=> $question->survey->meeting,'survey_id'=> $question->survey_id, 'question'=>$question->id,]) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
                                         <span class="fa-regular fa-eye"></span>
@@ -96,63 +103,56 @@
                                 </div>
                             </td>
                         </tr>
-                        </tbody>
-                        <tfoot>
-                        <div class="table-responsive">
-                            <table class=" caption-top table table-dark table-striped table-hover m-4 table-bordered">
-                                <caption class=" text-white text-center">
-                                   <h4> <span class="fa-regular fa-square-poll-vertical fa-fade"></span> {{ __('common.options') }} </h4>
-                                </caption>
-                                <thead class="thead-dark">
-                                <tr>
-                                    <th scope="col"><span class="fa-regular fa-messages-question mx-1"></span> {{ __('common.option-title') }}</th>
-                                    <th scope="col"><span class="fa-regular fa-circle-sort mx-1"></span> {{ __('common.sort-order') }}</th>
-                                    <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}</th>
-                                    <th scope="col" class=""></th>
-                                </tr>
-                                </thead>
+                        <tr>
+                            <td colspan="5">
+                                <div class="table-responsive">
+                                    <table class=" caption-top table table-dark table-striped table-hover m-2 table-bordered">
+                                        <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col"><span class="fa-regular fa-messages-question mx-1"></span> {{ __('common.option-title') }}</th>
+                                            <th scope="col"><span class="fa-regular fa-circle-sort mx-1"></span> {{ __('common.sort-order') }}</th>
+                                            <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}</th>
+                                            <th scope="col" class=""></th>
+                                        </tr>
+                                        </thead>
 
-                                <tbody>
-                                @foreach($question->options as $option)
-                                    <tr>
-                                        <td>{{$option->option}}</td>
-                                        <td>{{$option->sort_order}}</td>
-                                        <td>
-                                            @if($option->status)
-                                                <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
-                                            @else
-                                                <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
-                                            @endif
-                                        </td>
-                                        <td class="text-end">
-                                            <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
-                                                <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.edit')}}">
-                                                    {{--edit button--}}
-                                                    <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#option-edit-modal" data-route="{{ route('portal.survey-option.update',['meeting'=>$option->question->survey->meeting_id, 'survey_id'=> $option->question->survey_id,'question_id'=> $option->question_id, 'survey_option'=>$option->id,]) }}" data-resource="{{ route('portal.survey-option.edit',[ 'meeting'=>$question->survey->meeting_id, 'survey_id'=>$question->survey_id ,'question_id'=> $question->id, 'survey_option' => $option->id]) }}" data-id="{{ $option->id }}">
-                                                        <span class="fa-regular fa-pen-to-square"></span>
-                                                    </button>
-                                                </div>
-                                                <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
-                                                    <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#option-delete-modal" data-route="{{ route('portal.survey-option.show', ['meeting'=>$option->question->survey->meeting_id, 'survey_id'=> $option->question->survey_id,'question_id'=> $option->question_id, 'survey_option'=>$option->id,]) }}" data-record="{{ $option->option }}">
-                                                        <span class="fa-regular fa-trash"></span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                        <tbody>
+                                        @foreach($question->options as $option)
+                                            <tr>
+                                                <td>{{$option->option}}</td>
+                                                <td>{{$option->sort_order}}</td>
+                                                <td>
+                                                    @if($option->status)
+                                                        <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
+                                                    @else
+                                                        <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
+                                                    @endif
+                                                </td>
+                                                <td class="text-end">
+                                                    <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
+                                                        <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.edit')}}">
+                                                            {{--edit button--}}
+                                                            <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#option-edit-modal" data-route="{{ route('portal.survey-option.update',['meeting'=>$option->question->survey->meeting_id, 'survey_id'=> $option->question->survey_id,'question_id'=> $option->question_id, 'survey_option'=>$option->id,]) }}" data-resource="{{ route('portal.survey-option.edit',[ 'meeting'=>$question->survey->meeting_id, 'survey_id'=>$question->survey_id ,'question_id'=> $question->id, 'survey_option' => $option->id]) }}" data-id="{{ $option->id }}">
+                                                                <span class="fa-regular fa-pen-to-square"></span>
+                                                            </button>
+                                                        </div>
+                                                        <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
+                                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#option-delete-modal" data-route="{{ route('portal.survey-option.show', ['meeting'=>$option->question->survey->meeting_id, 'survey_id'=> $option->question->survey_id,'question_id'=> $option->question_id, 'survey_option'=>$option->id,]) }}" data-record="{{ $option->option }}">
+                                                                <span class="fa-regular fa-trash"></span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
 
-                                </tbody>
-                                <tbody>
-                                <div class="card-footer d-flex justify-content-center">
-                                    <button type="button" class="btn btn-outline-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#option-create-modal" data-route="{{ route('portal.survey-option.store',['meeting'=>$question->survey->meeting_id, 'survey_id'=> $question->survey_id,'question_id'=> $question->id,]) }}">
-                                        <i class="fa-solid fa-plus"></i> {{ __('common.create-new-option') }}
-                                    </button>
+                                        </tbody>
+                                    </table>
                                 </div>
-                                </tbody>
-                            </table>
-                        </div>
-                        </tfoot>
+
+                            </td>
+                        </tr>
+                        </tbody>
                     </table>
                         <x-crud.form.common.create name="option">
                             @section('option-create-form')

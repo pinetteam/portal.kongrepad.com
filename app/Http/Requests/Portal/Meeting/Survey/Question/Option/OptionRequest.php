@@ -31,6 +31,7 @@ class OptionRequest extends FormRequest
     public function attributes(): array
     {
         return [
+            'survey_id' => __('common.survey'),
             'question_id' => __('common.question'),
             'sort_order' => __('common.sort-order'),
             'option' => __('common.option'),
