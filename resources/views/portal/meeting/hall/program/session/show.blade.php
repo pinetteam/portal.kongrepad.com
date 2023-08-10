@@ -67,7 +67,7 @@
                                             class=" caption-top table table-dark table-striped-columns table-bordered ">
                                             <thead class="thead-dark">
                                             <tr>
-                                                <th scope="col "><span
+                                                <th scope="col"><span
                                                         class="fa-regular fa-messages-keypad mx-1 "></span> {{ __('common.keypad-title') }}
                                                 </th>
                                                 <th scope="col"><span
@@ -94,7 +94,7 @@
                                                             <button type="button"
                                                                     class="btn btn-outline-success btn-sm w-100  "
                                                                     data-bs-toggle="modal"
-                                                                    data-bs-target="#option-create-modal"
+                                                                    data-bs-target="#option-{{$keypad->id}}-create-modal"
                                                                     data-route="{{ route('portal.meeting.hall.program.session.keypad.option.store',['meeting'=>$session->program->hall->meeting_id, 'hall'=>$session->program->hall_id, 'program'=>$session->program_id, 'session'=> $session->id, 'keypad' => $keypad->id]) }}">
                                                                 <i class="fa-solid fa-plus"></i> {{ __('common.add-option') }}
                                                             </button>
@@ -200,7 +200,6 @@
                                                                     </td>
                                                                 </tr>
                                                             @endforeach
-
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -208,8 +207,8 @@
                                             </tr>
                                             </tbody>
                                         </table>
-                                        <x-crud.form.common.create name="option">
-                                            @section('option-create-form')
+                                        <x-crud.form.common.create name="option-{{$keypad->id}}" method="c-o">
+                                            @section('option-'.$keypad->id.'-create-form')
                                                 <x-input.hidden method="c-o" name="keypad_id"
                                                                 :value="$keypad->id"/>
                                                 <x-input.text method="c-o" name="option" title="option"
