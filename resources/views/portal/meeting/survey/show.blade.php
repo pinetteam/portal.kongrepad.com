@@ -31,14 +31,8 @@
                     <tr>
                         <th scope="row" class="text-end w-25">{{ __('common.question-count') }}:</th>
                         <td class="text-start w-25">{{ $survey->questions->count() }}</td>
-                        <th scope="row" class="text-end w-25">{{ __('common.on_vote') }}:</th>
-                        <td class="text-start w-25">
-                            @if($survey->on_vote)
-                                <i style="color:green" class="fa-regular fa-toggle-on"></i>
-                            @else
-                                <i style="color:red" class="fa-regular fa-toggle-off"></i>
-                            @endif
-                        </td>
+                        <th scope="row" class="text-end w-25">{{ __('common.created-at') }}:</th>
+                        <td class="text-start w-25">{{ $survey->created_at }}</td>
                     </tr>
                 </table>
             </div>
@@ -107,12 +101,12 @@
                                                             <button type="button"
                                                                     class="btn btn-outline-success btn-sm w-100  "
                                                                     data-bs-toggle="modal"
-                                                                    data-bs-target="#option-create-modal"
+                                                                    data-bs-target="#option-{{$question->id}}-create-modal"
                                                                     data-route="{{ route('portal.survey-option.store',['meeting'=>$question->survey->meeting_id, 'survey_id'=> $question->survey_id,'question_id'=> $question->id,]) }}">
                                                                 <i class="fa-solid fa-plus"></i> {{ __('common.add-option') }}
                                                             </button>
                                                         </div>
-                                                        {{--show button--}}
+
                                                         <a class="btn btn-info btn-sm"
                                                            href="{{ route('portal.question.show', ['meeting'=> $question->survey->meeting,'survey_id'=> $question->survey_id, 'question'=>$question->id,]) }}"
                                                            title="{{ __('common.show') }}"
@@ -225,7 +219,6 @@
                                                                     </td>
                                                                 </tr>
                                                             @endforeach
-
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -233,17 +226,17 @@
                                             </tr>
                                             </tbody>
                                         </table>
-                                        <x-crud.form.common.create name="option">
-                                            @section('option-create-form')
-                                                <x-input.hidden method="c-o" name="survey_id"
+                                        <x-crud.form.common.create method="c-o-{{$question->id}}" name="option-{{$question->id}}">
+                                            @section('option-'.$question->id.'-create-form')
+                                                <x-input.hidden method="c-o-{{$question->id}}" name="survey_id"
                                                                 :value="$survey->id"/>
-                                                <x-input.hidden method="c-o" name="question_id"
+                                                <x-input.hidden method="c-o-{{$question->id}}" name="question_id"
                                                                 :value="$question->id"/>
-                                                <x-input.text method="c-o" name="option" title="option"
+                                                <x-input.text method="c-o-{{$question->id}}" name="option" title="option"
                                                               icon="list-dropdown"/>
-                                                <x-input.number method="c-o" name="sort_order" title="sort"
+                                                <x-input.number method="c-o-{{$question->id}}" name="sort_order" title="sort"
                                                                 icon="circle-sort"/>
-                                                <x-input.radio method="c-o" name="status" title="status"
+                                                <x-input.radio method="c-o-{{$question->id}}" name="status" title="status"
                                                                :options="$statuses"
                                                                option_value="value" option_name="title"
                                                                icon="toggle-large-on"/>
@@ -252,7 +245,7 @@
 
                                         <x-crud.form.common.delete name="option"/>
 
-                                        <x-crud.form.common.edit name="option">
+                                        <x-crud.form.common.edit method="e-o" name="option">
                                             @section('option-edit-form')
                                                 <x-input.hidden method="e-o" name="survey_id"
                                                                 :value="$survey->id"/>

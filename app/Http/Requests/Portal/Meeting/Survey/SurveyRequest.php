@@ -38,7 +38,6 @@ class SurveyRequest extends FormRequest
             'sort_order' => __('common.sort-order'),
             'code' => __('common.code'),
             'title' => __('common.title'),
-            'on_air' => __('common.on-air'),
             'start_at' => __('common.start-at'),
             'finish_at' => __('common.finish-at'),
             'status' => __('common.status'),
