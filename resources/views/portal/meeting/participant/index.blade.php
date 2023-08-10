@@ -1,5 +1,5 @@
 @extends('layout.portal.common')
-@section('title', $meeting->title .' | ' . __('common.participants'))
+@section('title', $meeting->title . ' | ' . __('common.participants'))
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">
@@ -7,7 +7,7 @@
         </div>
         <div class="card-body p-0">
             <div class="table-responsive">
-                <table class="table table-dark table-striped table-hover ">
+                <table class="table table-dark table-striped table-hover">
                     <caption class="text-end me-3">
                         {{ $participants->links() }}
                     </caption>
@@ -104,7 +104,7 @@
     <x-crud.form.common.delete />
     <x-crud.form.common.edit>
         @section('default-edit-form')
-            <x-input.hidden method="c" name="meeting_id" :value="$meeting->id" />
+            <x-input.hidden method="e" name="meeting_id" :value="$meeting->id" />
             <x-input.text method="e" name="title" title="title" icon="input-text" />
             <x-input.text method="e" name="first_name" title="first-name" icon="id-card" />
             <x-input.text method="e" name="last_name" title="last-name" icon="id-card" />

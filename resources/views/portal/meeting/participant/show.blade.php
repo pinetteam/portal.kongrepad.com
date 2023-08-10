@@ -1,5 +1,5 @@
 @extends('layout.portal.common')
-@section('title', __('common.participant').' | '.$participant->title)
+@section('title', $participant->title . ' | ' . __('common.participant'))
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">
@@ -40,7 +40,8 @@
                                 {{ __('common.active') }}
                             @else
                                 {{ __('common.passive') }}
-                            @endif</td>
+                            @endif
+                        </td>
                     </tr>
                     <tr>
                         <th scope="row" class="text-end w-25">{{ __('common.created-by') }}:</th>
