@@ -217,7 +217,7 @@ return [
     'hall-programs'=> 'Hall Programs',
     'question-count'=> 'Question Count',
     'option-count'=> 'Option Count',
-    'add-a-new-option'=> 'Add a New Option',
+    'add-option'=> 'Add Option',
     'hall-program-count' => 'Hall Program Count',
     'on_vote' => 'On Vote',
 ];

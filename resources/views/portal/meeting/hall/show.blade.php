@@ -22,12 +22,6 @@
                         <td class="text-start w-25">{{ $hall->programs->count() }}</td>
                     </tr>
                     <tr>
-                        <th scope="row" class="text-end w-25">{{ __('common.start-at') }}:</th>
-                        <td class="text-start w-25">{{ $hall->start_at }}</td>
-                        <th scope="row" class="text-end w-25">{{ __('common.finish-at') }}:</th>
-                        <td class="text-start w-25">{{ $hall->finish_at }}</td>
-                    </tr>
-                    <tr>
                         <th scope="row" class="text-end w-25">{{ __('common.created-by') }}:</th>
                         <td class="text-start w-25">{{ $hall->created_by }}</td>
                         <th scope="row" class="text-end w-25">{{ __('common.created-at') }}:</th>
@@ -137,7 +131,7 @@
                                                             <td>{{ $program_session->speaker->full_name }}</td>
                                                             <td>
                                                                 @if($program_session->document_id)
-                                                                    <a href="{{ route('portal.document-download.index', $program_session->document->file_name) }}" class="btn btn-sm btn-info w-100" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.view') }}">
+                                                                    <a href="{{ route('portal.meeting.document.download', ['document'=>$program_session->document->file_name, 'meeting'=>$program_session->program->hall->meeting_id]) }}" class="btn btn-sm btn-info w-100" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.view') }}">
                                                                         <span class="fa-regular fa-file-arrow-down"></span> {{ $program_session->document->title }}
                                                                     </a>
                                                                 @else

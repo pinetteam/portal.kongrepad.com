@@ -55,7 +55,7 @@
         </div>
         <div class="card-body p-0">
             <div class="card text-bg-dark mt-2">
-                <table class=" caption-top table table-dark table-striped-columns table-bordered m-2">
+                <table class=" caption-top table table-dark table-striped-columns table-bordered ">
                     <tbody>
                     <tr>
                         <td>
@@ -65,7 +65,7 @@
                                 <tr>
                                     @foreach($questions as $question)
                                         <table
-                                            class=" caption-top table table-dark table-striped-columns table-bordered m-2">
+                                            class=" caption-top table table-dark table-striped-columns table-bordered ">
                                             <thead class="thead-dark">
                                             <tr>
                                                 <th scope="col "><span
@@ -103,13 +103,13 @@
                                                          aria-label="{{ __('common.processes') }}">
                                                         <div data-bs-toggle="tooltip" data-bs-placement="top"
                                                              data-bs-custom-class="kp-tooltip"
-                                                             data-bs-title="{{ __('common.create-new-option')}}">
+                                                             data-bs-title="{{ __('common.add-option')}}">
                                                             <button type="button"
                                                                     class="btn btn-outline-success btn-sm w-100  "
                                                                     data-bs-toggle="modal"
                                                                     data-bs-target="#option-create-modal"
                                                                     data-route="{{ route('portal.survey-option.store',['meeting'=>$question->survey->meeting_id, 'survey_id'=> $question->survey_id,'question_id'=> $question->id,]) }}">
-                                                                <i class="fa-solid fa-plus"></i> {{ __('common.add-a-new-option') }}
+                                                                <i class="fa-solid fa-plus"></i> {{ __('common.add-option') }}
                                                             </button>
                                                         </div>
                                                         {{--show button--}}
@@ -156,7 +156,7 @@
                                                 <td colspan="5">
                                                     <div class="table-responsive">
                                                         <table
-                                                            class=" caption-top table table-dark table-striped table-hover m-2 table-bordered">
+                                                            class=" caption-top table table-dark table-striped table-hover  table-bordered">
                                                             <thead class="thead-dark">
                                                             <tr>
                                                                 <th scope="col"><span
@@ -274,15 +274,17 @@
                             </table>
                         </td>
                     </tr>
+                    <tr>
+                        <div class="card-footer d-flex justify-content-center">
+                            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal"
+                                    data-bs-target="#question-create-modal"
+                                    data-route="{{ route('portal.question.store',['meeting'=> $survey->meeting_id,'survey_id'=> $survey->id]) }}">
+                                <i class="fa-solid fa-plus"></i> {{ __('common.create-new-question') }}
+                            </button>
+                        </div>
+                    </tr>
                     </tbody>
                 </table>
-                <div class="card-footer d-flex justify-content-center">
-                    <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal"
-                            data-bs-target="#question-create-modal"
-                            data-route="{{ route('portal.question.store',['meeting'=> $survey->meeting_id,'survey_id'=> $survey->id]) }}">
-                        <i class="fa-solid fa-plus"></i> {{ __('common.create-new-question') }}
-                    </button>
-                </div>
             </div>
         </div>
     </div>
