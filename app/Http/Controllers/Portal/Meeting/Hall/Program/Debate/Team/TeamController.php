@@ -36,8 +36,8 @@ class TeamController extends Controller
     {
         $team = Auth::user()->customer->teams()->findOrFail($id);
         $statuses = [
-            'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-            'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
+            'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
+            'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
         return view('portal.program.debate.team.show', compact(['team', 'statuses']));
     }

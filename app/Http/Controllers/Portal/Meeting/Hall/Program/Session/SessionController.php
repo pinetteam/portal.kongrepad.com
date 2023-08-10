@@ -42,8 +42,8 @@ class SessionController extends Controller
         $session = Auth::user()->customer->programSessions()->findOrFail($id);
         $keypads = $session->keypads()->get();
         $statuses = [
-            'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-            'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
+            'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
+            'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
         return view('portal.program.session.show', compact(['keypads', 'session', 'statuses']));
     }

@@ -22,8 +22,8 @@ class ProgramController extends Controller
             'session' => ["value" => "session", "title" => __('common.session')],
         ];
         $statuses = [
-            'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-            'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
+            'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
+            'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
         return view('portal.meeting.hall.program.index', compact(['programs', 'meeting', 'hall', 'types', 'statuses']));
     }
@@ -57,8 +57,8 @@ class ProgramController extends Controller
     {
         $program = Auth::user()->customer->programs()->findOrFail($id);
         $statuses = [
-            'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-            'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
+            'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
+            'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
         if($program->type=='session') {
             $documents = Auth::user()->customer->documents()->get();

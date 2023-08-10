@@ -17,8 +17,8 @@ class ScoreGameController extends Controller
         $meetings = Auth::user()->customer->meetings()->where('status', 1)->get();
         $meeting = Auth::user()->customer->meetings()->findOrFail($meeting_id);
         $statuses = [
-            'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-            'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
+            'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
+            'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
         return view('portal.meeting.score-game.index', compact(['score_games', 'meetings', 'meeting', 'statuses']));
     }
@@ -51,8 +51,8 @@ class ScoreGameController extends Controller
         $points = $score_game->points()->paginate(10);
         $score_game_qr_codes = $score_game->qrCodes()->get();
         $statuses = [
-            'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-            'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
+            'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
+            'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
         return view('portal.meeting.score-game.show', compact(['points', 'score_game', 'score_games', 'score_game_qr_codes', 'statuses']));
 
