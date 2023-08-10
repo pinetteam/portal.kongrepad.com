@@ -22,7 +22,7 @@ class DebateResource extends JsonResource
             'voting_finished_at' => ['value'=> $this->voting_finished_at ? Carbon::createFromFormat(Variable::where('variable','date_format')->first()->settings()->where('customer_id',Auth::user()->customer->id)->first()->value.' '.Variable::where('variable','time_format')->first()->settings()->where('customer_id',Auth::user()->customer->id)->first()->value, $this->voting_finished_at)->format('Y-m-d H:i')  : null, 'type'=>'datetime'],
             'on_vote' => ['value'=>$this->on_vote, 'type'=>'radio'],
             'status' => ['value'=>$this->status, 'type'=>'radio'],
-            'route' => route('portal.debate.update',  [$this->program->id, $this->id]),
+            'route' => route('portal.meeting.hall.program.debate.show', ['meeting' => $this->program->hall->meeting->id, 'hall' => $this->program->hall->id, 'program' => $this->program->id, 'debate' => $this->id]),
         ];
     }
 }

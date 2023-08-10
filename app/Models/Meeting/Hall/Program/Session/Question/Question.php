@@ -37,8 +37,8 @@ class Question extends Model
         return $this->belongsTo(Session::class, 'session_id', 'id');
     }
 
-    public function owner()
+    public function questioner()
     {
-        return $this->belongsTo(Participant::class, 'owner_id', 'id');
+        return $this->belongsTo(Participant::class, 'questioner_id', 'id');
     }
 }

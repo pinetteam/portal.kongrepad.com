@@ -39,7 +39,7 @@ class TeamController extends Controller
             'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.program.debate.team.show', compact(['team', 'statuses']));
+        return view('portal.meeting.hall.program.debate.team.show', compact(['team', 'statuses']));
     }
     public function edit(string $id)
     {

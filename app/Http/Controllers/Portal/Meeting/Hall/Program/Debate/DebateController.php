@@ -37,7 +37,7 @@ class DebateController extends Controller
             'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.program.debate.show', compact(['teams', 'debate', 'statuses']));
+        return view('portal.meeting.hall.program.debate.show', compact(['teams', 'debate', 'statuses']));
 
     }
     public function edit(string $program_id, string $id)
@@ -48,7 +48,7 @@ class DebateController extends Controller
     public function update(DebateRequest $request, string $program_id, string $id)
     {
         if ($request->validated()) {
-            $debate = Auth::user()->customer->programSessions()->findOrFail($id);
+            $debate = Auth::user()->customer->debates()->findOrFail($id);
             $debate->program_id = $request->input('program_id');
             $debate->sort_order = $request->input('sort_order');
             $debate->code = $request->input('code');

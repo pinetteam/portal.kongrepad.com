@@ -3,33 +3,41 @@
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">
-            <h1 class="m-0 text-center">{{ __('common.team') }}</h1>
+            <h1 class="m-0 text-center">{{ '"'.$team->title.'" '.__('common.team') }}</h1>
         </div>
         <div class="card-body">
             <div class="row flex-shrink-0 g-2">
-                <div class="col card text-bg-dark p-0">
-                    <div class="card-header">
-                        <h2 class="m-0 text-center h3">{{ __('common.team') }}</h2>
-                    </div>
-                    <div class="card-body p-0">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-code-simple mx-1"></span> {{ __('common.code') }}:</b> {{ $team->code }}</li>
-                            @if($team->logo)
-                            <li class="list-group-item bg-dark text-center"><img src="{{ $team->logo }}" alt="{{ $team->title }}" class="img-thumbnail img-fluid" /></li>
-                            @else
-                                <i class="text-info">{{ __('common.unspecified') }}</i>
-                            @endif
-                            <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}:</b> {{ $team->title }}</li>
-                            <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-face-party mx-1"></span> {{ __('common.debate') }}:</b> {{ $team->debate->title }}</li>
-                            <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}:</b>
-                                @if($team->status)
-                                    {{ __('common.active') }}
+                <div class="table-responsive">
+                    <table class="table table-dark table-striped-columns table-bordered">
+                        <tr>
+                            <th scope="row" class="text-end w-25">{{ __('common.logo') }}:</th>
+                            <td class="text-start w-25">
+                                @if($team->logo)
+                                    <img src="{{ $team->logo }}" alt="{{ $team->title }}" class="img-thumbnail img-fluid" />
                                 @else
-                                    {{ __('common.passive') }}
+                                    <i class="text-info">{{ __('common.unspecified') }}</i>
                                 @endif
-                            </li>
-                        </ul>
-                    </div>
+                            </td>
+                            <th scope="row" class="text-end w-25">{{ __('common.title') }}:</th>
+                            <td class="text-start w-25">{{ $team->title}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-end w-25">{{ __('common.code') }}:</th>
+                            <td class="text-start w-25">{{ $team->code }}</td>
+                            <th scope="row" class="text-end w-25">{{ __('common.debate') }}:</th>
+                            <td class="text-start w-25">{{ $team->debate->title}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-end w-25">{{ __('common.description') }}:</th>
+                            <td class="text-start w-25">{{ $team->description }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-end w-25">{{ __('common.created-by') }}:</th>
+                            <td class="text-start w-25">{{ $team->created_by }}</td>
+                            <th scope="row" class="text-end w-25">{{ __('common.created-at') }}:</th>
+                            <td class="text-start w-25">{{ $team->created_at }}</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>

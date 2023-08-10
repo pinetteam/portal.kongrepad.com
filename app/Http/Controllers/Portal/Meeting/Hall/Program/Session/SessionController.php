@@ -45,7 +45,7 @@ class SessionController extends Controller
             'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.program.session.show', compact(['keypads', 'session', 'statuses']));
+        return view('portal.meeting.hall.program.session.show', compact(['keypads', 'session', 'statuses']));
     }
     public function edit(string $meeting, string $hall, string $program, string $id)
     {

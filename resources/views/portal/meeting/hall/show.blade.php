@@ -87,6 +87,32 @@
                             </td>
                             <td class="text-end">
                                 <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
+                                    @if($program->type == "session")
+                                        <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                             data-bs-custom-class="kp-tooltip"
+                                             data-bs-title="{{ __('common.create-new-session')}}">
+                                            <button type="button"
+                                                    class="btn btn-outline-success btn-sm w-100"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#session-create-modal"
+                                                    data-route="{{ route('portal.meeting.hall.program.session.store', ['meeting' => $program->hall->meeting->id, 'hall' => $program->hall->id, 'program' => $program->id]) }}">
+                                                <i class="fa-solid fa-plus"></i> {{ __('common.add-session') }}
+                                            </button>
+                                        </div>
+                                    @elseif($program->type == "debate")
+
+                                        <div data-bs-toggle="tooltip" data-bs-placement="top"
+                                             data-bs-custom-class="kp-tooltip"
+                                             data-bs-title="{{ __('common.create-new-debate')}}">
+                                            <button type="button"
+                                                    class="btn btn-outline-success btn-sm w-100"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#debate-create-modal"
+                                                    data-route="{{ route('portal.meeting.hall.program.debate.store', ['meeting' => $program->hall->meeting->id, 'hall' => $program->hall->id, 'program' => $program->id]) }}">
+                                                <i class="fa-solid fa-plus"></i> {{ __('common.add-debate') }}
+                                            </button>
+                                        </div>
+                                    @endif
                                     <a class="btn btn-info btn-sm" href="{{ route('portal.meeting.hall.program.show', ['meeting' => $meeting->id, 'hall' => $hall->id, 'program' => $program->id]) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
                                         <span class="fa-regular fa-eye"></span>
                                     </a>
@@ -112,16 +138,16 @@
                                                 <table class="table table-dark table-striped table-hover">
                                                     <thead class="thead-dark">
                                                     <tr>
-                                                        <th scope="col"><span class="fa-regular fa-person-chalkboard mx-1"></span> {{ __('common.speaker') }}</th>
-                                                        <th scope="col"><span class="fa-regular fa-presentation-screen mx-1"></span> {{ __('common.document') }}</th>
-                                                        <th scope="col"><span class="fa-regular fa-circle-sort mx-1"></span> {{ __('common.sort') }}</th>
-                                                        <th scope="col"><span class="fa-regular fa-code-simple mx-1"></span> {{ __('common.code') }}</th>
-                                                        <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}</th>
-                                                        <th scope="col"><span class="fa-regular fa-calendar-arrow-up mx-1"></span> {{ __('common.start-at') }}</th>
-                                                        <th scope="col"><span class="fa-regular fa-calendar-arrow-down mx-1"></span> {{ __('common.finish-at') }}</th>
-                                                        <th scope="col"><span class="fa-regular fa-block-question mx-1"></span> {{ __('common.questions') }}</th>
-                                                        <th scope="col"><span class="fa-regular fa-circle-1 mx-1"></span> {{ __('common.question-limit') }}</th>
-                                                        <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}</th>
+                                                        <th scope="col">{{ __('common.speaker') }}</th>
+                                                        <th scope="col">{{ __('common.document') }}</th>
+                                                        <th scope="col">{{ __('common.sort') }}</th>
+                                                        <th scope="col">{{ __('common.code') }}</th>
+                                                        <th scope="col">{{ __('common.title') }}</th>
+                                                        <th scope="col">{{ __('common.start-at') }}</th>
+                                                        <th scope="col">{{ __('common.finish-at') }}</th>
+                                                        <th scope="col">{{ __('common.questions') }}</th>
+                                                        <th scope="col">{{ __('common.question-limit') }}</th>
+                                                        <th scope="col">{{ __('common.status') }}</th>
                                                         <th scope="col" class="text-end"></th>
                                                     </tr>
                                                     </thead>
@@ -131,7 +157,7 @@
                                                             <td>{{ $program_session->speaker->full_name }}</td>
                                                             <td>
                                                                 @if($program_session->document_id)
-                                                                    <a href="{{ route('portal.meeting.document.download', ['document'=>$program_session->document->file_name, 'meeting'=>$program_session->program->hall->meeting_id]) }}" class="btn btn-sm btn-info w-100" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.view') }}">
+                                                                    <a href="{{ route('portal.meeting.document.download', ['meeting' => $program->hall->meeting->id, 'document' => $program_session->document_id] ) }}" class="btn btn-sm btn-info w-100" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.view') }}">
                                                                         <span class="fa-regular fa-file-arrow-down"></span> {{ $program_session->document->title }}
                                                                     </a>
                                                                 @else
@@ -229,13 +255,13 @@
                                                 <table class="table table-dark table-striped table-hover">
                                                     <thead class="thead-dark">
                                                     <tr>
-                                                        <th scope="col"><span class="fa-regular fa-circle-sort mx-1"></span> {{ __('common.sort') }}</th>
-                                                        <th scope="col"><span class="fa-regular fa-code-simple mx-1"></span> {{ __('common.code') }}</th>
-                                                        <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}</th>
-                                                        <th scope="col"><span class="fa-regular fa-comment-dots mx-1"></span> {{ __('common.description') }}</th>
-                                                        <th scope="col"><span class="fa-regular fa-calendar-arrow-up mx-1"></span> {{ __('common.voting-started-at') }}</th>
-                                                        <th scope="col"><span class="fa-regular fa-calendar-arrow-down mx-1"></span> {{ __('common.voting-finished-at') }}</th>
-                                                        <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}</th>
+                                                        <th scope="col">{{ __('common.sort') }}</th>
+                                                        <th scope="col">{{ __('common.code') }}</th>
+                                                        <th scope="col">{{ __('common.title') }}</th>
+                                                        <th scope="col">{{ __('common.description') }}</th>
+                                                        <th scope="col">{{ __('common.voting-started-at') }}</th>
+                                                        <th scope="col">{{ __('common.voting-finished-at') }}</th>
+                                                        <th scope="col">{{ __('common.status') }}</th>
                                                         <th scope="col" class="text-end"></th>
                                                     </tr>
                                                     </thead>
@@ -257,16 +283,16 @@
                                                             </td>
                                                             <td class="text-end">
                                                                 <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
-                                                                    <a class="btn btn-info btn-sm" href="{{ route('portal.debate.show', [$program->id, $debate->id]) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
+                                                                    <a class="btn btn-info btn-sm" href="{{ route('portal.meeting.hall.program.debate.show', ['meeting' => $program->hall->meeting->id, 'hall' => $program->hall->id, 'program' => $program->id, 'debate' => $debate->id]) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
                                                                         <span class="fa-regular fa-eye"></span>
                                                                     </a>
                                                                     <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.edit') }}">
-                                                                        <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#debate-edit-modal" data-route="{{ route('portal.debate.update', [$program->id, $debate->id]) }}" data-resource="{{ route('portal.debate.edit', [$program->id, $debate->id]) }}" data-id="{{ $debate->id }}">
+                                                                        <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#debate-edit-modal" data-route="{{ route('portal.meeting.hall.program.debate.update', ['meeting' => $program->hall->meeting->id, 'hall' => $program->hall->id, 'program' => $program->id, 'debate' => $debate->id]) }}" data-resource="{{ route('portal.meeting.hall.program.debate.edit', ['meeting' => $program->hall->meeting->id, 'hall' => $program->hall->id, 'program' => $program->id, 'debate' => $debate->id]) }}" data-id="{{ $debate->id }}">
                                                                             <span class="fa-regular fa-pen-to-square"></span>
                                                                         </button>
                                                                     </div>
                                                                     <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
-                                                                        <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#debate-delete-modal" data-route="{{ route('portal.debate.destroy', [$program->id, $debate->id]) }}" data-record="{{ $debate->title }}">
+                                                                        <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#debate-delete-modal" data-route="{{ route('portal.meeting.hall.program.debate.destroy', ['meeting' => $program->hall->meeting->id, 'hall' => $program->hall->id, 'program' => $program->id, 'debate' => $debate->id]) }}" data-record="{{ $debate->title }}">
                                                                             <span class="fa-regular fa-trash"></span>
                                                                         </button>
                                                                     </div>
@@ -277,11 +303,6 @@
                                                     </tbody>
                                                 </table>
                                             </div>
-                                        </div>
-                                        <div class="card-footer d-flex justify-content-center">
-                                            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#debate-create-modal" data-route="{{ route('portal.debate.store', $program->id) }}">
-                                                <i class="fa-solid fa-plus"></i> {{ __('common.add-new-debate') }}
-                                            </button>
                                         </div>
                                         <x-crud.form.common.create name="debate">
                                             @section('debate-create-form')
@@ -294,14 +315,14 @@
                                             @endsection
                                         </x-crud.form.common.create>
                                         <x-crud.form.common.delete name="debate" />
-                                        <x-crud.form.common.edit name="debate">
+                                        <x-crud.form.common.edit name="debate" method="e-d">
                                             @section('debate-edit-form')
-                                                <x-input.hidden method="e" name="program_id" :value="$program->id" />
-                                                <x-input.number method="e" name="sort_order" title="sort" icon="circle-sort" />
-                                                <x-input.text method="e" name="code" title="code" icon="code-simple" />
-                                                <x-input.text method="e" name="title" title="title" icon="input-text" />
-                                                <x-input.text method="e" name="description" title="description" icon="comment-dots" />
-                                                <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
+                                                <x-input.hidden method="e-d" name="program_id" :value="$program->id" />
+                                                <x-input.number method="e-d" name="sort_order" title="sort" icon="circle-sort" />
+                                                <x-input.text method="e-d" name="code" title="code" icon="code-simple" />
+                                                <x-input.text method="e-d" name="title" title="title" icon="input-text" />
+                                                <x-input.text method="e-d" name="description" title="description" icon="comment-dots" />
+                                                <x-input.radio method="e-d" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
                                             @endsection
                                         </x-crud.form.common.edit>
                                     </div>

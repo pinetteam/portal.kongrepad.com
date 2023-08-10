@@ -12,24 +12,62 @@
                         <h2 class="m-0 text-center h3">{{ __('common.program') }}</h2>
                     </div>
                     <div class="card-body p-0">
-                        <ul class="list-group list-group-flush">
-                            @if($program->logo)
-                                <li class="list-group-item bg-dark text-center"><img src="{{ $program->logo }}" alt="{{ $program->title }}" class="img-thumbnail img-fluid" /></li>
-                            @endif
-                            <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-hotel mx-1"></span> {{ __('common.hall') }}:</b> {{ $program->hall->title }}</li>
-                            <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-code-simple mx-1"></span> {{ __('common.code') }}:</b> {{ $program->code }}</li>
-                            <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}:</b> {{ $program->title }}</li>
-                            <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-calendar-arrow-up mx-1"></span> {{ __('common.start-at') }}:</b> {{ $program->start_at }}</li>
-                            <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-calendar-arrow-down mx-1"></span> {{ __('common.finish-at') }}:</b> {{ $program->finish_at }}</li>
-                            <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-person-military-pointing mx-1"></span> {{ __('common.type') }}:</b> {{ __('common.'.$program->type) }}</li>
-                            <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}:</b>
-                                @if($program->status)
-                                    {{ __('common.active') }}
-                                @else
-                                    {{ __('common.passive') }}
-                                @endif
-                            </li>
-                        </ul>
+                        <div class="table-responsive">
+                            <table class="table table-dark table-striped-columns table-bordered">
+                                <tr>
+                                    <th scope="row" class="text-end w-50">{{ __('common.logo') }}:</th>
+                                    <td class="text-start w-50">
+                                        @if($program->logo)
+                                            <img src="{{ $program->logo }}" alt="{{ $program->title }}" class="img-thumbnail img-fluid" />
+                                        @else
+                                            <i class="text-info">{{ __('common.unspecified') }}</i>
+                                        @endif
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="text-end w-50">{{ __('common.title') }}:</th>
+                                    <td class="text-start w-50">{{ $program->title}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="text-end w-50">{{ __('common.code') }}:</th>
+                                    <td class="text-start w-50">{{ $program->code }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="text-end w-50">{{ __('common.hall') }}:</th>
+                                    <td class="text-start w-50">{{ $program->hall->title}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="text-end w-50">{{ __('common.start-at') }}:</th>
+                                    <td class="text-start w-50">{{ $program->start_at}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="text-end w-50">{{ __('common.finish-at') }}:</th>
+                                    <td class="text-start w-50">{{ $program->finish_at }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="text-end w-50">{{ __('common.type') }}:</th>
+                                    <td class="text-start w-50">{{ __('common.'.$program->type) }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="text-end w-50">{{ __('common.status') }}:</th>
+                                    <td class="text-start w-50">
+                                        @if($program->status)
+                                            {{ __('common.active') }}
+                                        @else
+                                            {{ __('common.passive') }}
+                                        @endif
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="text-end w-50">{{ __('common.created-by') }}:</th>
+                                    <td class="text-start w-50">{{ $program->created_by }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="text-end w-50">{{ __('common.created-at') }}:</th>
+                                    <td class="text-start w-50">{{ $program->created_at }}</td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 <div class="col card text-bg-dark p-0">
@@ -47,21 +85,21 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($program_chairs as $program_chair)
-                                        <tr>
-                                            <td>{{ $program_chair->chair->full_name }}</td>
-                                            <td>{{ __('common.'.$program_chair->chair->type) }}</td>
-                                            <td class="text-end">
-                                                <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
-                                                    <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
-                                                        <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#chair-delete-modal" data-route="{{ route('portal.meeting.hall.program.chair.destroy', ['meeting' => $program_chair->program->hall->meeting->id, 'hall' => $program_chair->program->hall->id, 'program' => $program_chair->program->id, 'chair' => $program_chair->id ]) }}" data-record="{{ $program_chair->chair->full_name }}">
-                                                            <span class="fa-regular fa-trash"></span>
-                                                        </button>
-                                                    </div>
+                                @foreach($program_chairs as $program_chair)
+                                    <tr>
+                                        <td>{{ $program_chair->chair->full_name }}</td>
+                                        <td>{{ __('common.'.$program_chair->chair->type) }}</td>
+                                        <td class="text-end">
+                                            <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
+                                                <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
+                                                    <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#chair-delete-modal" data-route="{{ route('portal.meeting.hall.program.chair.destroy', ['meeting' => $program_chair->program->hall->meeting->id, 'hall' => $program_chair->program->hall->id, 'program' => $program_chair->program->id, 'chair' => $program_chair->id ]) }}" data-record="{{ $program_chair->chair->full_name }}">
+                                                        <span class="fa-regular fa-trash"></span>
+                                                    </button>
                                                 </div>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -116,7 +154,7 @@
                                 <td>{{ $program_session->speaker->full_name }}</td>
                                 <td>
                                     @if($program_session->document_id)
-                                        <a href="{{ route('portal.document-download.index', $program_session->document->file_name) }}" class="btn btn-sm btn-info w-100" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.view') }}">
+                                        <a href="{{ route('portal.meeting.document.download', ['meeting' => $program->hall->meeting->id, 'document' => $program_session->document_id] ) }}" class="btn btn-sm btn-info w-100" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.view') }}">
                                             <span class="fa-regular fa-file-arrow-down"></span> {{ $program_session->document->title }}
                                         </a>
                                     @else

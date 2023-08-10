@@ -218,6 +218,8 @@ return [
     'question-count'=> 'Question Count',
     'option-count'=> 'Option Count',
     'add-option'=> 'Add Option',
+    'add-session'=> 'Add Session',
+    'add-debate'=> 'Add Debate',
     'hall-program-count' => 'Hall Program Count',
     'on_vote' => 'On Vote',
 ];

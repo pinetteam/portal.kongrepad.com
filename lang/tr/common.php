@@ -203,6 +203,8 @@ return [
     'created-by' => 'Oluşturan',
     'created-at' => 'Oluşturma Tarihi',
     'search' => 'Ara',
+    'add-session'=> 'Oturum Ekle',
+    'add-debate'=> 'Münazara Ekle',
     'this-operation-will-delete-all-related-objects' => 'Bu operasyon tüm ilişkili objeleri silecek',
     'are-you-sure-you-want-to-stop-voting-other-keypads-and-start-voting' => 'Are you sure you want to stop voting other keypads and start voting:',
     'are-you-sure-you-want-to-stop-voting' => 'Oylamayı durdurmak istediğinizden emin misiniz?',

@@ -18,7 +18,7 @@ class TeamResource extends JsonResource
             'logo' => ['value'=>$this->logo, 'type'=>'file'],
             'title' => ['value'=>$this->title, 'type'=>'text'],
             'description' => ['value'=>$this->description, 'type'=>'text'],
-            'route' => route('portal.team.update', $this->id),
+            'route' => route('portal.meeting.hall.program.debate.team.update', ['meeting' => $this->debate->program->hall->meeting->id, 'hall' => $this->debate->program->hall->id, 'program' => $this->debate->program->id, 'debate' => $this->debate_id, 'team' => $this->id]),
         ];
     }
 }
