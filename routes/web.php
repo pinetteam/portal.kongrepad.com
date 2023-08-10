@@ -51,7 +51,7 @@ Route::prefix('portal')->name('portal.')->group(function () {
                     Route::resource('/debate', \App\Http\Controllers\Portal\Meeting\Hall\Program\Debate\DebateController::class)->except(['index', 'create']);
                     Route::get('/start-stop-debate-voting/{debate}', [\App\Http\Controllers\Portal\Meeting\Hall\Program\Debate\DebateController::class,'start_stop_voting'])->name('debate.start-stop-voting');
                     Route::prefix('/debate/{debate}')->name('debate.')->group(function () {
-                        Route::resource('team', \App\Http\Controllers\Portal\Meeting\Hall\Program\Debate\Team\TeamController::class)->except(['create']);
+                        Route::resource('/team', \App\Http\Controllers\Portal\Meeting\Hall\Program\Debate\Team\TeamController::class)->except(['create']);
                     });
 
                     //Chair
@@ -67,8 +67,8 @@ Route::prefix('portal')->name('portal.')->group(function () {
                         //Keypad
                         Route::resource('/keypad', \App\Http\Controllers\Portal\Meeting\Hall\Program\Session\Keypad\KeypadController::class)->except(['index', 'create']);
                         Route::get('/start-stop-keypad-voting/{keypad}', [\App\Http\Controllers\Portal\Meeting\Hall\Program\Session\Keypad\KeypadController::class,'start_stop_voting'])->name('keypad.start-stop-voting');
-                        Route::name('keypad.')->group(function () {
-                            Route::resource('/keypad/{keypad}/option', \App\Http\Controllers\Portal\Meeting\Hall\Program\Session\Keypad\Option\OptionController::class)->except(['create']);
+                        Route::prefix('/keypad/{keypad}')->name('keypad.')->group(function () {
+                            Route::resource('/option', \App\Http\Controllers\Portal\Meeting\Hall\Program\Session\Keypad\Option\OptionController::class)->except(['create']);
                         });
                     });
 

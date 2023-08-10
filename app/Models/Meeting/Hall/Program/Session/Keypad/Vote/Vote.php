@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Vote extends Model
 {
-    use SoftDeletes;
     protected $table = 'meeting_hall_program_session_keypad_votes';
     protected $fillable = [
         'keypad_id',

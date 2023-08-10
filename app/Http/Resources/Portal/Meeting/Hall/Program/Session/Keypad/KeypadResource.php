@@ -24,7 +24,7 @@ class KeypadResource extends JsonResource
             'voting_finished_at' => ['value'=> $this->voting_finished_at, 'type'=>'datetime'],
             'on_vote' => ['value'=>$this->on_vote, 'type'=>'radio'],
             'status' => ['value'=>$this->status, 'type'=>'radio'],
-            'route' => route('portal.meeting.hall.program.session.keypad.update', ['meeting' => $this->session->program->hall->meeting->id, 'hall' => $this->session->program->hall->id, 'program' => $this->session->program->id, 'session' => $this->session_id, 'team' => $this->id]),
+            'route' => route('portal.meeting.hall.program.session.keypad.update', ['meeting'=>$this->session->program->hall->meeting_id, 'hall'=>$this->session->program->hall_id, 'program'=>$this->session->program_id, 'session'=> $this->session->id, 'keypad' => $this->id]),
         ];
     }
 }

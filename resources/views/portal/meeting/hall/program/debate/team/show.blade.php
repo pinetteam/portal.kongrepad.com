@@ -28,10 +28,6 @@
                             <td class="text-start w-25">{{ $team->debate->title}}</td>
                         </tr>
                         <tr>
-                            <th scope="row" class="text-end w-25">{{ __('common.description') }}:</th>
-                            <td class="text-start w-25">{{ $team->description }}</td>
-                        </tr>
-                        <tr>
                             <th scope="row" class="text-end w-25">{{ __('common.created-by') }}:</th>
                             <td class="text-start w-25">{{ $team->created_by }}</td>
                             <th scope="row" class="text-end w-25">{{ __('common.created-at') }}:</th>

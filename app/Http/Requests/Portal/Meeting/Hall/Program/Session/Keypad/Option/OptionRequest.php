@@ -20,7 +20,7 @@ class OptionRequest extends FormRequest
                 return [
                     'keypad_id' => 'required|exists:meeting_hall_program_session_keypads,id',
                     'sort_order' => 'nullable|integer',
-                    'title' => 'required|max:255',
+                    'option' => 'required|max:255',
                 ];
             }
             default:break;
@@ -31,7 +31,7 @@ class OptionRequest extends FormRequest
         return [
             'keypad_id' => __('common.keypad'),
             'sort_order' => __('common.sort-order'),
-            'title' => __('common.title'),
+            'option' => __('common.title'),
         ];
     }
     public function failedValidation(Validator $validator)

@@ -32,7 +32,7 @@ class TeamController extends Controller
             }
         }
     }
-    public function show(string $id)
+    public function show(string $meeting, string $hall, string $program, string $debate, string $id)
     {
         $team = Auth::user()->customer->teams()->findOrFail($id);
         $statuses = [
@@ -41,13 +41,13 @@ class TeamController extends Controller
         ];
         return view('portal.meeting.hall.program.debate.team.show', compact(['team', 'statuses']));
     }
-    public function edit(string $id)
+    public function edit(string $meeting, string $hall, string $program, string $debate, string $id)
     {
 
         $team = Auth::user()->customer->teams()->findOrFail($id);
         return new TeamResource($team);
     }
-    public function update(TeamRequest $request, string $id)
+    public function update(TeamRequest $request,string $meeting, string $hall, string $program, string $debate,  string $id)
     {
         if ($request->validated()) {
             $team = Auth::user()->customer->teams()->findOrFail($id);
@@ -68,7 +68,7 @@ class TeamController extends Controller
             }
         }
     }
-    public function destroy(string $id)
+    public function destroy(string $meeting, string $hall, string $program, string $debate, string $id)
     {
         $team = Auth::user()->customer->teams()->findOrFail($id);
         if ($team->delete()) {
