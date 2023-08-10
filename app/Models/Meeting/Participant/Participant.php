@@ -31,6 +31,7 @@ class Participant extends Model
         'last_login_datetime',
         'last_activity',
         'type',
+        'enrolled',
         'gdpr_consent',
         'status',
         'created_by',
