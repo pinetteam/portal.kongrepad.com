@@ -7,6 +7,8 @@
     <title>@yield('title') | {{ config('app.name') }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     @vite(['resources/sass/app.scss'])
     @vite(['resources/js/app.js'])
 </head>
@@ -89,7 +91,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{ route("portal.survey-report.index") }}">
                         <span class="nav-icon fa-duotone fa-option fa-fade"></span>
                         {{ __('common.survey-reports') }}
                     </a>

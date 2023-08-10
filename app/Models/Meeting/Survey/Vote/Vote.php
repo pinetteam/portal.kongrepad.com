@@ -2,6 +2,7 @@
 
 namespace App\Models\Meeting\Survey\Vote;
 
+use App\Models\Meeting\Survey\Question\Option\Option;
 use Illuminate\Database\Eloquent\Model;
 
 class Vote extends Model
@@ -21,4 +22,9 @@ class Vote extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+    public function option()
+    {
+        return $this->belongsTo(Option::class, 'option_id', 'id');
+    }
 }
+

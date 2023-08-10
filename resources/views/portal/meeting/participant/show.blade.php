@@ -44,7 +44,7 @@
                     </tr>
                     <tr>
                         <th scope="row" class="text-end w-25">{{ __('common.created-by') }}:</th>
-                        <td class="text-start w-25">{{ $participant->created_by }}</td>
+                        <td class="text-start w-25">{{ $created_by->getFullNameAttribute()}}</td>
                         <th scope="row" class="text-end w-25">{{ __('common.created-at') }}:</th>
                         <td class="text-start w-25">{{ $participant->created_at }}</td>
                     </tr>

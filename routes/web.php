@@ -30,6 +30,10 @@ Route::prefix('portal')->name('portal.')->group(function () {
         /* Main routes */
         Route::get('/', [\App\Http\Controllers\Portal\DashboardController::class, 'index'])->name('dashboard.index');
 
+        /* Report routes */
+        Route::resource('/survey-report', \App\Http\Controllers\Portal\Report\Survey\SurveyReportController::class)->except(['create']);
+        Route::resource('/survey-report/{survey_id}/question/{question_id}/chart',\App\Http\Controllers\Portal\Report\Survey\Chart\ChartController::class)->except(['create']);
+
         /* Meeting routes */
         Route::resource('/meeting', \App\Http\Controllers\Portal\Meeting\MeetingController::class)->except(['create']);
         Route::prefix('meeting')->name('meeting.')->group(function () {
@@ -106,4 +110,5 @@ Route::prefix('portal')->name('portal.')->group(function () {
         Route::resource('/session-question', \App\Http\Controllers\Portal\Meeting\Hall\Program\Session\Question\QuestionController::class)->except(['create']);
         Route::get('/session-question-on-screen/{id}', [\App\Http\Controllers\Portal\Meeting\Hall\Program\Session\Question\QuestionController::class,'on_screen'])->name('session-question.on-screen');
     });
+
 });

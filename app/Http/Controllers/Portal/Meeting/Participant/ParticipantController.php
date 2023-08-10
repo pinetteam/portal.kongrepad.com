@@ -58,11 +58,12 @@ class ParticipantController extends Controller
     public function show(int $meeting, int $id)
     {
         $participant = Auth::user()->customer->participants()->where('meeting_id', $meeting)->findOrFail($id);
+        $created_by= Auth::user()->customer->users()->findOrFail($participant->created_by);
         $statuses = [
             'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.meeting.participant.show', compact(['participant', 'statuses']));
+        return view('portal.meeting.participant.show', compact(['participant', 'created_by', 'statuses']));
     }
     public function edit(int $meeting, int $id)
     {
