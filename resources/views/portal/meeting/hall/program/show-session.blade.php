@@ -3,7 +3,7 @@
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">
-            <h1 class="m-0 text-center">{{ __('common.program').' | '.$program->title }}</h1>
+            <h1 class="m-0 text-center">{{'"'.$program->title.'" '. __('common.program') }}</h1>
         </div>
         <div class="card-body">
             <div class="row row-cols-1 row-cols-sm-2 flex-shrink-0 g-2">
@@ -205,7 +205,7 @@
             </div>
         </div>
         <div class="card-footer d-flex justify-content-center">
-            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#session-create-modal" data-route="{{ route('portal.meeting.hall.program.session.store', ['meeting' => $program->hall->meeting->id, 'hall' => $program->hall->id, 'program' => $program->id, 'session' => $program_session->id]) }}">
+            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#session-create-modal" data-route="{{ route('portal.meeting.hall.program.session.store', ['meeting' => $program->hall->meeting->id, 'hall' => $program->hall->id, 'program' => $program->id]) }}">
                 <i class="fa-solid fa-plus"></i> {{ __('common.add-new-session') }}
             </button>
         </div>

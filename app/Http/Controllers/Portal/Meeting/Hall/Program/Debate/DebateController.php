@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class DebateController extends Controller
 {
-    public function store(DebateRequest $request, string $program_id)
+    public function store(DebateRequest $request, string $meeting, string $hall, string $program)
     {
         if ($request->validated()) {
             $debate = new Debate();
@@ -29,7 +29,7 @@ class DebateController extends Controller
             }
         }
     }
-    public function show(string $program_id, string $id)
+    public function show(string $meeting, string $hall, string $program, string $id)
     {
         $debate = Auth::user()->customer->debates()->findOrFail($id);
         $teams = $debate->teams()->get();
@@ -40,12 +40,12 @@ class DebateController extends Controller
         return view('portal.meeting.hall.program.debate.show', compact(['teams', 'debate', 'statuses']));
 
     }
-    public function edit(string $program_id, string $id)
+    public function edit(string $meeting, string $hall, string $program, string $id)
     {
         $debate = Auth::user()->customer->debates()->findOrFail($id);
         return new DebateResource($debate);
     }
-    public function update(DebateRequest $request, string $program_id, string $id)
+    public function update(DebateRequest $request, string $meeting, string $hall, string $program, string $id)
     {
         if ($request->validated()) {
             $debate = Auth::user()->customer->debates()->findOrFail($id);
@@ -64,7 +64,7 @@ class DebateController extends Controller
             }
         }
     }
-    public function destroy(string $program_id, string $id)
+    public function destroy(string $meeting, string $hall, string $program, string $id)
     {
         $debate = Auth::user()->customer->debates()->findOrFail($id);
         if ($debate->delete()) {
@@ -75,9 +75,9 @@ class DebateController extends Controller
             return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();
         }
     }
-    public function start_stop_voting(string $program_id, string $id)
+    public function start_stop_voting(string $meeting, string $hall, string $program, string $id)
     {
-        $program = Auth::user()->customer->programs()->findOrFail($program_id);
+        $program = Auth::user()->customer->programs()->findOrFail($program);
         foreach($program->debates as $debate){
             if($debate->id == $id)
                 continue;

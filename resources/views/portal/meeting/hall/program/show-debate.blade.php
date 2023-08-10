@@ -3,7 +3,7 @@
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">
-            <h1 class="m-0 text-center">{{ __('common.program').' | '.$program->title }}</h1>
+            <h1 class="m-0 text-center">{{'"'.$program->title.'" '. __('common.program') }}</h1>
         </div>
         <div class="card-body">
             <div class="row row-cols-1 row-cols-sm-2 flex-shrink-0 g-2">
@@ -151,7 +151,7 @@
                                 <td>{{ $debate->sort_order }}</td>
                                 <td>{{ $debate->code }}</td>
                                 <td>{{ $debate->title }}</td>
-                                <td>{{ $debate->description }}</td>
+                                <td>{{ $debate->id }}</td>
                                 <td>{{ $debate->voting_started_at }}</td>
                                 <td>{{ $debate->voting_finished_at }}</td>
                                 <td>
