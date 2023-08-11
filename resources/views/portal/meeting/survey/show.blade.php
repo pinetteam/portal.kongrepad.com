@@ -52,8 +52,8 @@
                         <table class="table table-dark table-striped table-hover">
                             <thead>
                             <tr>
-                                <th scope="col "></th>
-                                <th scope="col "><span class="fa-regular fa-messages-question mx-1 "></span> {{ __('common.question-title') }}</th>
+                                <th scope="col"></th>
+                                <th scope="col"><span class="fa-regular fa-messages-question mx-1 "></span> {{ __('common.question-title') }}</th>
                                 <th scope="col"><span class="fa-regular fa-circle-sort mx-1 "></span> {{ __('common.sort-order') }}</th>
                                 <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1  "></span> {{ __('common.option-count') }}</th>
                                 <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1 "> </span> {{ __('common.status') }}</th>
@@ -125,7 +125,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td rowspan="1" colspan="3">
+                                <td rowspan="1" colspan="5">
                                     <div class="table-responsive ">
                                         <table class="table table-dark table-striped table-hover">
                                             <thead class="thead-dark">
