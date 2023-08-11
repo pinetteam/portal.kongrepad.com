@@ -42,6 +42,7 @@ return [
     'other' => 'Diğer',
     'create-new-document' => 'Yeni Belge Oluştur',
     'create-new-program' => 'Yeni Program Oluştur',
+    'create-new-screen' => 'Yeni Ekran Oluştur',
     'total-access-scopes' => 'Toplam Erişim Kapsamları',
     'password' => 'Parola',
     'program' => 'Program',

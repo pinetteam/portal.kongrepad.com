@@ -42,6 +42,7 @@ return [
     'other' => 'Other',
     'create-new-document' => 'Create New Document',
     'create-new-program' => 'Create New Program',
+    'create-new-screen' => 'Create New Screen',
     'total-access-scopes' => 'Total Access Scopes',
     'password' => 'Password',
     'program' => 'Program',

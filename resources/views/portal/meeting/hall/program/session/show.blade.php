@@ -60,7 +60,7 @@
                             <thead>
                             <tr>
                                 <th scope="col"></th>
-                                <th scope="col"><span class="fa-regular fa-messages-question mx-1 "></span> {{ __('common.question-title') }}</th>
+                                <th scope="col"><span class="fa-regular fa-messages-question mx-1 "></span> {{ __('common.keypad-title') }}</th>
                                 <th scope="col"><span class="fa-regular fa-circle-sort mx-1 "></span> {{ __('common.sort-order') }}</th>
                                 <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1  "></span> {{ __('common.option-count') }}</th>
                                 <th scope="col" class="text-end"></th>
@@ -232,7 +232,7 @@
     <x-crud.form.common.create name="keypad">
         @section('keypad-create-form')
             <x-input.hidden method="c" name="session_id" :value="$session->id"/>
-            <x-input.text method="c" name="title" title="keypad" icon="input-text"/>
+            <x-input.text method="c" name="keypad" title="keypad" icon="input-text"/>
             <x-input.number method="c" name="sort_order" title="sort" icon="circle-sort"/>
         @endsection
     </x-crud.form.common.create>
@@ -242,7 +242,7 @@
     <x-crud.form.common.edit name="keypad">
         @section('keypad-edit-form')
             <x-input.hidden method="e" name="session_id" :value="$session->id"/>
-            <x-input.text method="e" name="title" title="keypad" icon="input-text"/>
+            <x-input.text method="e" name="keypad" title="keypad" icon="input-text"/>
             <x-input.number method="e" name="sort_order" title="sort" icon="circle-sort"/>
         @endsection
     </x-crud.form.common.edit>
