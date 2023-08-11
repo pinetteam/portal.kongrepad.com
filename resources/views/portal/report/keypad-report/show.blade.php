@@ -1,11 +1,11 @@
 @extends('layout.portal.common')
-@section('title', __('common.question').' | '.$question->question)
+@section('title', __('common.question').' | '.$question->keypad)
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">
             <h1 class="text-center">
                 <span class="fa-regular fa-square-question fa-fade p-2 "></span>
-                <small>"{{$question->question }}"</small>
+                <small>"{{$question->keypad }}"</small>
             </h1>
         </div>
     </div>

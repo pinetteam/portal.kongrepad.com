@@ -96,6 +96,12 @@
                         {{ __('common.survey-reports') }}
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route("portal.keypad-report.index") }}">
+                        <span class="nav-icon fa-duotone fa-chart-pie fa-fade"></span>
+                        {{ __('common.keypad-reports') }}
+                    </a>
+                </li>
             </ul>
             <div class="sidebar-heading">
                 <span class="nav-icon fa-duotone fa-arrow-turn-down-right"></span> {{ __('common.system') }}

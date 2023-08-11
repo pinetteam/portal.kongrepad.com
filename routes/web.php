@@ -33,6 +33,7 @@ Route::prefix('portal')->name('portal.')->group(function () {
         /* Report routes */
         Route::resource('/survey-report', \App\Http\Controllers\Portal\Report\Survey\SurveyReportController::class)->except(['create']);
         Route::resource('/survey-report/{survey_id}/question/{question_id}/chart',\App\Http\Controllers\Portal\Report\Survey\Chart\ChartController::class)->except(['create']);
+        Route::resource('/keypad-report', \App\Http\Controllers\Portal\Report\Keypad\KeypadReportController::class)->except(['create']);
 
         /* Meeting routes */
         Route::resource('/meeting', \App\Http\Controllers\Portal\Meeting\MeetingController::class)->except(['create']);

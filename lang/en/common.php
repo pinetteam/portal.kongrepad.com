@@ -225,5 +225,6 @@ return [
     'add-debate' => 'Add Debate',
     'hall-program-count' => 'Hall Program Count',
     'on_vote' => 'On Vote',
-    'show-report' => 'Show Report'
+    'show-report' => 'Show Report',
+    'keypad-reports' => 'Keypad Reports'
 ];

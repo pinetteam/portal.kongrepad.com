@@ -21,7 +21,7 @@ class KeypadRequest extends FormRequest
                     'session_id' => 'required|exists:meeting_hall_program_sessions,id',
                     'sort_order' => 'nullable|integer',
                     'code' => 'nullable|max:255',
-                    'title' => 'required|max:255',
+                    'keypad' => 'required|max:255',
                     'status' => 'boolean|required',
                 ];
             }
@@ -34,7 +34,7 @@ class KeypadRequest extends FormRequest
             'session_id' => __('common.session'),
             'sort_order' => __('common.moderator'),
             'code' => __('common.code'),
-            'title' => __('common.title'),
+            'keypad' => __('common.keypad'),
             'on-vote' => __('common.on-vote'),
             'voting_started_at' => __('common.voting-started-at'),
             'voting_finished_at' => __('common.voting-finished-at'),

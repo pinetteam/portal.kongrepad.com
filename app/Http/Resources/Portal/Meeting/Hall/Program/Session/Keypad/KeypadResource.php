@@ -18,7 +18,7 @@ class KeypadResource extends JsonResource
             'session_id' => 'required|exists:meeting_hall_program_sessions,id',
             'sort_order' => ['value'=>$this->sort_order, 'type'=>'number'],
             'code' => ['value'=>$this->code, 'type'=>'text'],
-            'title' => ['value'=>$this->title, 'type'=>'text'],
+            'keypad' => ['value'=>$this->keypad, 'type'=>'text'],
             'description' => ['value'=>$this->description, 'type'=>'text'],
             'voting_started_at' => ['value'=> $this->voting_started_at, 'type'=>'datetime'],
             'voting_finished_at' => ['value'=> $this->voting_finished_at, 'type'=>'datetime'],

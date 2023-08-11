@@ -16,7 +16,7 @@ class KeypadController extends Controller
             $keypad = new Keypad();
             $keypad->session_id = $request->input('session_id');
             $keypad->sort_order = $request->input('sort_order');
-            $keypad->title = $request->input('title');
+            $keypad->keypad = $request->input('keypad');
             if ($keypad->save()) {
                 $keypad->created_by = Auth::user()->id;
                 $keypad->save();
@@ -47,7 +47,7 @@ class KeypadController extends Controller
             $keypad = Auth::user()->customer->keypads()->findOrFail($id);
             $keypad->session_id = $request->input('session_id');
             $keypad->sort_order = $request->input('sort_order');
-            $keypad->title = $request->input('title');
+            $keypad->keypad = $request->input('keypad');
             if ($keypad->save()) {
                 $keypad->updated_by = Auth::user()->id;
                 $keypad->save();
