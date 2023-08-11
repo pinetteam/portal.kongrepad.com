@@ -14,7 +14,7 @@ class OptionController extends Controller
     {
         if ($request->validated()) {
             $option = new Option();
-            $option->keypad_id = $request->input('keypad_id');
+            $option->keypad_id = $keypad;
             $option->sort_order = $request->input('sort_order');
             $option->option = $request->input('option');
             if ($option->save()) {

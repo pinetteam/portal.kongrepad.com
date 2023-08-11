@@ -13,6 +13,7 @@ use App\Models\Meeting\Hall\Program\Program;
 use App\Models\Meeting\Hall\Program\Session\Keypad\Keypad;
 use App\Models\Meeting\Hall\Program\Session\Keypad\Option\Option;
 use App\Models\Meeting\Hall\Program\Session\Session;
+use App\Models\Meeting\Hall\Screen\Screen;
 use App\Models\Meeting\Meeting;
 use App\Models\Meeting\Participant\Participant;
 use App\Models\Meeting\ScoreGame\QRCode\QRCode;
@@ -83,6 +84,15 @@ class Customer extends Model
             ->join('customers', 'meetings.customer_id', '=', 'customers.id')
             ->where('customers.id', $this->getkey());
         return $programs;
+    }
+    public function screens()
+    {
+        $screens = Screen::select('meeting_hall_screens.*')
+            ->join('meeting_halls', 'meeting_hall_screens.hall_id', '=', 'meeting_halls.id')
+            ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
+            ->join('customers', 'meetings.customer_id', '=', 'customers.id')
+            ->where('customers.id', $this->getkey());
+        return $screens;
     }
     public function programChairs()
     {

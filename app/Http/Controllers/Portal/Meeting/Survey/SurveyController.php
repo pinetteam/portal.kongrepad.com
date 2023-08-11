@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Portal\Meeting\Survey;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Portal\Meeting\Survey\SurveyRequest;
 use App\Http\Resources\Portal\Meeting\Survey\SurveyResource;
-use App\Models\Customer\Setting\Variable\Variable;
 use App\Models\Meeting\Survey\Survey;
 use Illuminate\Support\Facades\Auth;
 
@@ -73,7 +72,7 @@ class SurveyController extends Controller
             if ($survey->save()) {
                 $survey->updated_by = Auth::user()->id;
                 $survey->save();
-                return back()->with('success',__('common.created-successfully'));
+                return back()->with('success', __('common.edited-successfully'));
             } else {
                 return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
             }
@@ -97,10 +96,10 @@ class SurveyController extends Controller
         $survey->on_vote = !$survey->on_vote;
         if ($survey->save()) {
             if($survey->on_vote){
-                return back()->with('success',__('common.voting-started'));
+                return back()->with('success', __('common.voting-started'));
             }
             else{
-                return back()->with('success',__('common.voting-stopped'));
+                return back()->with('success', __('common.voting-stopped'));
             }
         } else {
             return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();

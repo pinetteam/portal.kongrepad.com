@@ -10,11 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 class SessionController extends Controller
 {
-    public function store(SessionRequest $request, string $program_id)
+    public function store(SessionRequest $request, string $meeting, string $hall, string $program)
     {
         if ($request->validated()) {
             $program_session = new Session();
-            $program_session->program_id = $request->input('program_id');
+            $program_session->program_id = $program;
             $program_session->speaker_id = $request->input('speaker_id');
             $program_session->document_id = $request->input('document_id');
             $program_session->sort_order = $request->input('sort_order');

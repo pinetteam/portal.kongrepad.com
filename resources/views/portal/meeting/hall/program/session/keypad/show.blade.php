@@ -1,11 +1,10 @@
 @extends('layout.portal.common')
-@section('title', __('common.keypad').' | '.$keypad->keypad)
+@section('title', $keypad->keypad . ' | ' . __('common.keypad'))
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">
-            <h1 class="text-center">
-                <small>"{{$keypad->keypad }}"</small>
-            </h1>
+            <h1 class="m-0 text-center"><span class="fa-duotone fa-tablet fa-fade"></span> <small>"{{ $keypad->keypad }}"</small></h1>
+        </div>
             <div class="table-responsive">
                 <table class="table table-dark table-striped-columns table-bordered">
                     <tr>
