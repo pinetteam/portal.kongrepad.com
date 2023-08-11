@@ -91,7 +91,7 @@ class SurveyController extends Controller
         }
     }
 
-    public function start_stop(string $meeting_id, string $id)
+    public function start_stop(string $meeting, string $id)
     {
         $survey = Auth::user()->customer->surveys()->findOrFail($id);
         $survey->on_vote = !$survey->on_vote;

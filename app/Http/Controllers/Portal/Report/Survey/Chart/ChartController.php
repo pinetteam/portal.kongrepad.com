@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ChartController extends Controller
 {
-    public function index(string $survey_id, string $question_id)
+    public function index(string $survey, string $question_id)
     {
         $question= Auth::user()->customer->surveyQuestions()->findOrFail($question_id);
         $options = Auth::user()->customer->surveyOptions()->where('question_id', $question_id)->paginate(20);

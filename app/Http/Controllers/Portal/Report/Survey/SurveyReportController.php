@@ -20,11 +20,22 @@ class SurveyReportController extends Controller
         ];
         return view('portal.report.survey-report.index', compact(['surveys', 'on_vote', 'statuses']));
     }
-
     public function show(string $survey)
     {
         $survey = Auth::user()->customer->surveys()->findOrFail($survey);
         $questions = $survey->questions;
         return view('portal.report.survey-report.show', compact(['survey','questions']));
+    }
+    public function chart(string $survey, string $question_id)
+    {
+        $question= Auth::user()->customer->surveyQuestions()->findOrFail($question_id);
+        $options = Auth::user()->customer->surveyOptions()->where('question_id', $question_id)->paginate(20);
+        $data = [];
+        foreach($options as $option) {
+            $data['label'][] = $option->option;
+            $data['data'][] = (int) $option->votes->count();
+        }
+        $data['chart_data'] = json_encode($data);
+        return view('portal.report.survey-report.chart.index', $data ,compact(['options','question']) );
     }
 }

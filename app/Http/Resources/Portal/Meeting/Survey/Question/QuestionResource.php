@@ -15,7 +15,7 @@ class QuestionResource extends JsonResource
             'sort_order' => ['value'=>$this->sort_order, 'type'=>'number'],
             'question' => ['value'=>$this->question, 'type'=>'text'],
             'status' => ['value'=>$this->status, 'type'=>'radio'],
-            'route' => route('portal.question.update', [Survey::where('id',$this->survey_id)->first()->meeting_id, $this->survey_id, $this->id]),
+            'route' => route('portal.meeting.survey.question.update', [Survey::where('id',$this->survey_id)->first()->meeting_id, $this->survey_id, $this->id]),
         ];
     }
 }

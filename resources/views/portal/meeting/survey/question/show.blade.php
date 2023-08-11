@@ -56,12 +56,12 @@
                                         <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
                                             <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.edit')}}">
                                                 {{--edit button--}}
-                                                <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#default-edit-modal" data-route="{{ route('portal.survey-option.update',['meeting'=>$option->question->survey->meeting_id, 'survey_id'=> $option->question->survey_id,'question_id'=> $option->question_id, 'survey_option'=>$option->id,]) }}" data-resource="{{ route('portal.survey-option.edit',[ 'meeting'=>$question->survey->meeting_id, 'survey_id'=>$question->survey_id ,'question_id'=> $question->id, 'survey_option' => $option->id]) }}" data-id="{{ $option->id }}">
+                                                <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#default-edit-modal" data-route="{{ route('portal.meeting.survey.option.update',['meeting'=>$option->question->survey->meeting_id, 'survey'=> $option->question->survey_id,'question'=> $option->question_id, 'option'=>$option->id,]) }}" data-resource="{{ route('portal.meeting.survey.option.edit',[ 'meeting'=>$question->survey->meeting_id, 'survey'=>$question->survey_id ,'question'=> $question->id, 'option' => $option->id]) }}" data-id="{{ $option->id }}">
                                                     <span class="fa-regular fa-pen-to-square"></span>
                                                 </button>
                                             </div>
                                             <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
-                                                <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#default-delete-modal" data-route="{{ route('portal.survey-option.show', ['meeting'=>$option->question->survey->meeting_id, 'survey_id'=> $option->question->survey_id,'question_id'=> $option->question_id, 'survey_option'=>$option->id,]) }}" data-record="{{ $option->option }}">
+                                                <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#default-delete-modal" data-route="{{ route('portal.meeting.survey.option.show', ['meeting'=>$option->question->survey->meeting_id, 'survey'=> $option->question->survey_id,'question'=> $option->question_id, 'option'=>$option->id,]) }}" data-record="{{ $option->option }}">
                                                     <span class="fa-regular fa-trash"></span>
                                                 </button>
                                             </div>
@@ -75,7 +75,7 @@
                 </div>
                 {{--create button--}}
                 <div class="card-footer d-flex justify-content-center">
-                    <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#default-create-modal" data-route="{{ route('portal.survey-option.store',['meeting'=>$question->survey->meeting_id, 'survey_id'=> $question->survey_id,'question_id'=> $question->id,]) }}">
+                    <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#default-create-modal" data-route="{{ route('portal.meeting.survey.option.store',['meeting'=>$question->survey->meeting_id, 'survey'=> $question->survey_id,'question'=> $question->id,]) }}">
                         <i class="fa-solid fa-plus"></i> {{ __('common.create-new-option') }}
                     </button>
                 </div>

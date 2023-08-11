@@ -16,7 +16,7 @@ class VoteResource extends JsonResource
             'question' => ['value'=>$this->question, 'type'=>'text'],
             'option' => ['value'=>$this->option, 'type'=>'text'],
             'status' => ['value'=>$this->status, 'type'=>'radio'],
-            'route' => route('portal.question.update', [Survey::where('id',$this->survey_id)->first()->meeting_id, $this->survey_id, $this->id]),
+            'route' => route('portal.meeting.survey.question.update', [Survey::where('id',$this->survey_id)->first()->meeting_id, $this->survey_id, $this->id]),
         ];
     }
 }

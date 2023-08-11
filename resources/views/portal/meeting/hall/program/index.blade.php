@@ -1,5 +1,5 @@
 @extends('layout.portal.common')
-@section('title', $hall->title . '|' .__('common.programs'))
+@section('title', $hall->title. ' | ' .__('common.programs'))
 @section('body')
     <div class="card text-bg-dark mt-2">
         <div class="card-header">

@@ -27,7 +27,7 @@ class QuestionController extends Controller
             }
         }
     }
-    public function show(string $meeting_id, string $survey_id, string $id)
+    public function show(string $meeting, string $survey, string $id)
     {
         $question = Auth::user()->customer->surveyQuestions()->findOrFail($id);
         $options = $question->options()->get();
@@ -37,12 +37,12 @@ class QuestionController extends Controller
         ];
         return view('portal.meeting.survey.question.show', compact(['question', 'options', 'statuses']));
     }
-    public function edit(string $meeting_id, string $survey_id, string $id)
+    public function edit(string $meeting, string $survey, string $id)
     {
         $question = Auth::user()->customer->surveyQuestions()->findOrFail($id);
         return new QuestionResource($question);
     }
-    public function update(QuestionRequest $request, string $meeting_id, string $survey_id, string $id)
+    public function update(QuestionRequest $request, string $meeting, string $survey, string $id)
     {
         if ($request->validated()) {
             $question = Auth::user()->customer->surveyQuestions()->findOrFail($id);
@@ -59,7 +59,7 @@ class QuestionController extends Controller
             }
         }
     }
-    public function destroy(string $meeting_id, string $survey_id, string $id)
+    public function destroy(string $meeting, string $survey, string $id)
     {
         $question = Auth::user()->customer->surveyQuestions()->findOrFail($id);
         if ($question->delete()) {
