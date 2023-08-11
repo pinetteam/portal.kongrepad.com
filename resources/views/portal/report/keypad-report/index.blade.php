@@ -1,11 +1,10 @@
 @extends('layout.portal.common')
-@section( __('common.keypads'))
+@section('title', __('common.keypad-reports'))
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">
-            <h1 class="m-0 text-center"><span class="fa-duotone fa-chart-pie fa-fade px-3 "></span>{{ __('common.keypads') }}</h1>
+            <h1 class="m-0 text-center"><span class="fa-duotone fa-chart-pie fa-fade"></span> {{ __('common.keypads') }}</h1>
         </div>
-
         <div class="card-body p-0">
             <div class="table-responsive">
                 <table class="table table-dark table-striped table-hover">
@@ -50,7 +49,11 @@
                             </td>
                             <td class="text-end">
                                 <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
-                                    <a class="btn btn-info btn-sm" href="{{ route("portal.keypad-report.show",['keypad_report'=>$keypad->id]) }}" title="{{ __('common.show-report') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
+                                    <a class="btn btn-info btn-sm" href="{{ route("portal.keypad-report.show",['keypad_report'=>$keypad->id]) }}" title="{{ __('common.show-report') }}"
+                                       data-bs-toggle="tooltip"
+                                       data-bs-placement="top"
+                                       data-bs-custom-class="kp-tooltip"
+                                       data-bs-title="{{ __('common.show') }}">
                                         <span class="fa-regular fa-eye"></span>
                                     </a>
                                 </div>

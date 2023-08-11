@@ -39,8 +39,7 @@
             </div>
         </div>
     </div>
-
-    <div class="card text-bg-dark mt-2">
+    <div class="card text-bg-dark">
         <div class="card-header">
             <h2 class="text-center">
                 <span class="fa-regular fa-circle-question fa-fade p-2"> </span>{{ __('common.questions') }}
@@ -127,7 +126,7 @@
                             </tr>
                             <tr>
                                 <td rowspan="1" colspan="3">
-                                    <div class="table-responsive w-100">
+                                    <div class="table-responsive ">
                                         <table class="table table-dark table-striped table-hover">
                                             <thead class="thead-dark">
                                             <tr>

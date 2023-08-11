@@ -52,21 +52,45 @@
                                 </td>
                                 <td class="text-end">
                                     <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
-                                        <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show-qr-code') }}">
-                                            <button class="btn btn-outline-success btn-sm" title="{{ __('common.show-qr-code') }}" data-bs-toggle="modal" data-bs-target="#show-qr-code-modal" data-resource="{{ route('portal.meeting.participant.qr-code', ['meeting' => $participant->meeting->id, 'participant' => $participant->id]) }}" data-id="{{ $participant->id }}">
+                                        <div data-bs-toggle="tooltip"
+                                             data-bs-placement="top"
+                                             data-bs-custom-class="kp-tooltip"
+                                             data-bs-title="{{ __('common.show-qr-code') }}">
+                                            <button class="btn btn-outline-success btn-sm" title="{{ __('common.show-qr-code') }}"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#show-qr-code-modal"
+                                                    data-resource="{{ route('portal.meeting.participant.qr-code', ['meeting' => $participant->meeting->id, 'participant' => $participant->id]) }}" data-id="{{ $participant->id }}">
                                                 <span class="fa-regular fa-qrcode"></span>
                                             </button>
                                         </div>
-                                        <a class="btn btn-info btn-sm" href="{{ route('portal.meeting.participant.show', ['meeting' => $participant->meeting->id, 'participant' => $participant->id]) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
+                                        <a class="btn btn-info btn-sm" href="{{ route('portal.meeting.participant.show', ['meeting' => $participant->meeting->id, 'participant' => $participant->id]) }}" title="{{ __('common.show') }}"
+                                           data-bs-toggle="tooltip"
+                                           data-bs-placement="top"
+                                           data-bs-custom-class="kp-tooltip"
+                                           data-bs-title="{{ __('common.show') }}">
                                             <span class="fa-regular fa-eye"></span>
                                         </a>
-                                        <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.edit') }}">
-                                            <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#default-edit-modal" data-route="{{ route('portal.meeting.participant.update', ['meeting' => $participant->meeting->id, 'participant' => $participant->id]) }}" data-resource="{{ route('portal.meeting.participant.edit', ['meeting' => $participant->meeting->id, 'participant' => $participant->id]) }}" data-id="{{ $participant->id }}">
+                                        <div data-bs-toggle="tooltip"
+                                             data-bs-placement="top"
+                                             data-bs-custom-class="kp-tooltip"
+                                             data-bs-title="{{ __('common.edit') }}">
+                                            <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#default-edit-modal"
+                                                    data-route="{{ route('portal.meeting.participant.update', ['meeting' => $participant->meeting->id, 'participant' => $participant->id]) }}"
+                                                    data-resource="{{ route('portal.meeting.participant.edit', ['meeting' => $participant->meeting->id, 'participant' => $participant->id]) }}"
+                                                    data-id="{{ $participant->id }}">
                                                 <span class="fa-regular fa-pen-to-square"></span>
                                             </button>
                                         </div>
-                                        <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
-                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#default-delete-modal" data-route="{{ route('portal.meeting.participant.destroy', ['meeting' => $participant->meeting->id, 'participant' => $participant->id]) }}" data-record="{{ $participant->full_name }}">
+                                        <div data-bs-toggle="tooltip"
+                                             data-bs-placement="top"
+                                             data-bs-custom-class="kp-tooltip"
+                                             data-bs-title="{{ __('common.delete') }}">
+                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal"
+                                                    data-bs-target="#default-delete-modal"
+                                                    data-route="{{ route('portal.meeting.participant.destroy', ['meeting' => $participant->meeting->id, 'participant' => $participant->id]) }}"
+                                                    data-record="{{ $participant->full_name }}">
                                                 <span class="fa-regular fa-trash"></span>
                                             </button>
                                         </div>
@@ -79,7 +103,9 @@
             </div>
         </div>
         <div class="card-footer d-flex justify-content-center">
-            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#default-create-modal" data-route="{{ route('portal.meeting.participant.store', ['meeting' => $meeting->id]) }}">
+            <button type="button" class="btn btn-success btn-lg w-100"
+                    data-bs-toggle="modal" data-bs-target="#default-create-modal"
+                    data-route="{{ route('portal.meeting.participant.store', ['meeting' => $meeting->id]) }}">
                 <i class="fa-solid fa-plus"></i> {{ __('common.create-new-participant') }}
             </button>
         </div>

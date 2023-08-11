@@ -29,10 +29,6 @@ class OptionController extends Controller
             }
         }
     }
-    public function show(string $id)
-    {
-        //
-    }
     public function edit(string $meeting_id, string $survey_id, string $question_id, string $id)
     {
         $option = Auth::user()->customer->surveyOptions()->findOrFail($id);
@@ -40,7 +36,6 @@ class OptionController extends Controller
     }
     public function update(OptionRequest $request, string $meeting_id, string $survey_id, string $question_id, string $id)
     {
-
         if ($request->validated()) {
             $option = Auth::user()->customer->surveyOptions()->findOrFail($id);
             $option->question_id = $request->input('question_id');

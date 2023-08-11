@@ -96,10 +96,10 @@ class SurveyController extends Controller
         $survey = Auth::user()->customer->surveys()->findOrFail($id);
         $survey->on_vote = !$survey->on_vote;
         if ($survey->save()) {
-            if($survey->on_vote){
+            if($survey->on_vote) {
                 return back()->with('success',__('common.voting-started'));
             }
-            else{
+            else {
                 return back()->with('success',__('common.voting-stopped'));
             }
         } else {

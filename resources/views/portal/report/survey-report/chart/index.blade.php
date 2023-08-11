@@ -20,14 +20,10 @@
                                 <canvas id="pie-chart"></canvas>
                             </div>
                         </div>
-
                         <script>
-
                             $(function(){
                                 var cData = JSON.parse(`<?php echo $chart_data; ?>`);
                                 var ctx = $("#pie-chart");
-
-                                //pie chart data
                                 var data = {
                                     labels: cData.label,
                                     datasets: [
@@ -56,8 +52,6 @@
                                         }
                                     ]
                                 };
-
-                                //options
                                 var options = {
                                     responsive: true,
                                     title: {
@@ -88,13 +82,11 @@
                                         },
                                     },
                                 };
-
                                 var chart1 = new Chart(ctx, {
                                     type: "pie",
                                     data: data,
                                     options: options
                                 });
-
                             });
                         </script>
                     </tr>

@@ -25,7 +25,11 @@
                             <tr>
                                 <td>{{ $document->meeting->title }}</td>
                                 <td>
-                                    <a href="{{ route('portal.meeting.document.download', ['meeting' => $meeting->id, 'document' => $document->file_name]) }}" class="btn btn-sm btn-info w-100" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.download') }}">
+                                    <a href="{{ route('portal.meeting.document.download', ['meeting' => $meeting->id, 'document' => $document->file_name]) }}" class="btn btn-sm btn-info w-100"
+                                       data-bs-toggle="tooltip"
+                                       data-bs-placement="top"
+                                       data-bs-custom-class="kp-tooltip"
+                                       data-bs-title="{{ __('common.download') }}">
                                         <span class="fa-regular fa-file-arrow-down"></span> {{ $document->title }}
                                     </a>
                                 </td>
@@ -45,16 +49,31 @@
                                 </td>
                                 <td class="text-end">
                                     <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
-                                        <a class="btn btn-info btn-sm" href="{{ route('portal.meeting.document.show', ['meeting' => $meeting->id, 'document' => $document->id]) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
+                                        <a class="btn btn-info btn-sm" href="{{ route('portal.meeting.document.show', ['meeting' => $meeting->id, 'document' => $document->id]) }}" title="{{ __('common.show') }}"
+                                           data-bs-toggle="tooltip"
+                                           data-bs-placement="top"
+                                           data-bs-custom-class="kp-tooltip"
+                                           data-bs-title="{{ __('common.show') }}">
                                             <span class="fa-regular fa-eye"></span>
                                         </a>
-                                        <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.edit') }}">
-                                            <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#default-edit-modal" data-route="{{ route('portal.meeting.document.update', ['meeting' => $meeting->id, 'document' => $document->id]) }}" data-resource="{{ route('portal.meeting.document.edit', ['meeting' => $meeting->id, 'document' => $document->id]) }}" data-id="{{ $document->id }}">
+                                        <div data-bs-toggle="tooltip"
+                                             data-bs-placement="top"
+                                             data-bs-custom-class="kp-tooltip"
+                                             data-bs-title="{{ __('common.edit') }}">
+                                            <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#default-edit-modal"
+                                                    data-route="{{ route('portal.meeting.document.update', ['meeting' => $meeting->id, 'document' => $document->id]) }}" data-resource="{{ route('portal.meeting.document.edit', ['meeting' => $meeting->id, 'document' => $document->id]) }}" data-id="{{ $document->id }}">
                                                 <span class="fa-regular fa-pen-to-square"></span>
                                             </button>
                                         </div>
-                                        <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
-                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#default-delete-modal" data-route="{{ route('portal.meeting.document.destroy', ['meeting' => $meeting->id, 'document' => $document->id]) }}" data-record="{{ $document->title }}">
+                                        <div data-bs-toggle="tooltip"
+                                             data-bs-placement="top"
+                                             data-bs-custom-class="kp-tooltip"
+                                             data-bs-title="{{ __('common.delete') }}">
+                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}"
+                                                    data-bs-toggle="modal" data-bs-target="#default-delete-modal"
+                                                    data-route="{{ route('portal.meeting.document.destroy', ['meeting' => $meeting->id, 'document' => $document->id]) }}" data-record="{{ $document->title }}">
                                                 <span class="fa-regular fa-trash"></span>
                                             </button>
                                         </div>
@@ -67,7 +86,9 @@
             </div>
         </div>
         <div class="card-footer d-flex justify-content-center">
-            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#default-create-modal" data-route="{{ route('portal.meeting.document.store', ['meeting' => $meeting->id]) }}">
+            <button type="button" class="btn btn-success btn-lg w-100"
+                    data-bs-toggle="modal" data-bs-target="#default-create-modal"
+                    data-route="{{ route('portal.meeting.document.store', ['meeting' => $meeting->id]) }}">
                 <i class="fa-solid fa-plus"></i> {{ __('common.create-new-document') }}
             </button>
         </div>

@@ -1,5 +1,5 @@
 @extends('layout.portal.common')
-@section('title', __('common.question').' | '.$question->keypad)
+@section('title', __('common.keypad').' | '.$question->keypad)
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">
@@ -20,14 +20,10 @@
                                 <canvas id="pie-chart"></canvas>
                             </div>
                         </div>
-
                         <script>
-
                             $(function(){
                                 var cData = JSON.parse(`<?php echo $chart_data; ?>`);
                                 var ctx = $("#pie-chart");
-
-                                //pie chart data
                                 var data = {
                                     labels: cData.label,
                                     datasets: [
@@ -56,8 +52,6 @@
                                         }
                                     ]
                                 };
-
-                                //options
                                 var options = {
                                     responsive: true,
                                     title: {
@@ -88,13 +82,11 @@
                                         },
                                     },
                                 };
-
                                 var chart1 = new Chart(ctx, {
                                     type: "pie",
                                     data: data,
                                     options: options
                                 });
-
                             });
                         </script>
                     </tr>

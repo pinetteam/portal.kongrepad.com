@@ -4,8 +4,7 @@
     <div class="card text-bg-dark">
         <div class="card-header">
             <h1 class="text-center">
-                <span class="fa-regular fa-square-poll-vertical fa-fade"></span> <small class="p-2">"{{$survey->title }}
-                    "</small>{{ __('common.survey') }}
+                <span class="fa-regular fa-square-poll-vertical fa-fade"></span> <small>" {{$survey->title }}"</small>{{ __('common.survey') }}
             </h1>
             <div class="table-responsive">
                 <table class="table table-dark table-striped-columns table-bordered">
@@ -57,27 +56,16 @@
                     <tbody>
                     <tr>
                         <td>
-                            <table
-                                class=" caption-top table table-dark table-striped-columns table-bordered m-2">
+                            <table class=" caption-top table table-dark table-striped-columns table-bordered m-2">
                                 <tbody>
                                 <tr>
-
-                                        <table
-                                            class=" caption-top table table-dark table-striped-columns table-bordered ">
-                                            <thead class="thead-dark">
+                                    <table class=" caption-top table table-dark table-striped-columns table-bordered ">
+                                        <thead class="thead-dark">
                                             <tr>
-                                                <th scope="col "><span
-                                                        class="fa-regular fa-messages-question mx-1 "></span> {{ __('common.question-title') }}
-                                                </th>
-                                                <th scope="col"><span
-                                                        class="fa-regular fa-circle-sort mx-1 "></span> {{ __('common.sort-order') }}
-                                                </th>
-                                                <th scope="col"><span
-                                                        class="fa-regular fa-toggle-large-on mx-1  "></span> {{ __('common.option-count') }}
-                                                </th>
-                                                <th scope="col"><span
-                                                        class="fa-regular fa-toggle-large-on mx-1 "> </span> {{ __('common.status') }}
-                                                </th>
+                                                <th scope="col "><span class="fa-regular fa-messages-question mx-1 "></span> {{ __('common.question-title') }}</th>
+                                                <th scope="col"><span class="fa-regular fa-circle-sort mx-1 "></span> {{ __('common.sort-order') }}</th>
+                                                <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1  "></span> {{ __('common.option-count') }}</th>
+                                                <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1 "> </span> {{ __('common.status') }}</th>
                                                 <th scope="col" class="text-end "></th>
                                             </tr>
                                             </thead>
@@ -97,19 +85,21 @@
                                                         @endif
                                                     </td>
                                                     <td class="text-end">
-                                                        <div class="btn-group" role="group"
-                                                             aria-label="{{ __('common.processes') }}">
-                                                                <a class="btn btn-info btn-sm" href="{{ route("portal.chart.index",['survey_id'=>$survey->id, 'question_id'=>$question->id ]) }}" title="{{ __('common.show-report') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
+                                                        <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
+                                                            <a class="btn btn-info btn-sm" href="{{ route("portal.chart.index",['survey_id'=>$survey->id, 'question_id'=>$question->id ]) }}" title="{{ __('common.show-report') }}"
+                                                                   data-bs-toggle="tooltip"
+                                                                   data-bs-placement="top"
+                                                                   data-bs-custom-class="kp-tooltip"
+                                                                   data-bs-title="{{ __('common.show') }}">
                                                                     <span class="fa-regular fa-eye"></span>
-                                                                </a>
+                                                            </a>
                                                         </div>
                                                     </td>
                                                 </tr>
                                             @endforeach
                                             </tbody>
-                                        </table>
+                                    </table>
                                 </tr>
-                                </tbody>
                             </table>
                         </td>
                     </tr>
@@ -117,7 +107,6 @@
                 </table>
             </div>
         </div>
-    </div>
     </div>
 @endsection
 
