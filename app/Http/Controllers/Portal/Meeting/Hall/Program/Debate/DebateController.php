@@ -14,7 +14,7 @@ class DebateController extends Controller
     {
         if ($request->validated()) {
             $debate = new Debate();
-            $debate->program_id = $request->input('program_id');
+            $debate->program_id = $program;
             $debate->sort_order = $request->input('sort_order');
             $debate->code = $request->input('code');
             $debate->title = $request->input('title');

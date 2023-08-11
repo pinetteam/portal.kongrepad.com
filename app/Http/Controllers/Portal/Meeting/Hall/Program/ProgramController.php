@@ -13,9 +13,19 @@ class ProgramController extends Controller
 {
     public function index(int $meeting, int $hall)
     {
-        $programs = Auth::user()->customer->programs()->where('hall_id', $hall)->paginate(10);
+        $programs = Auth::user()->customer->programs()->where('hall_id', $hall)->paginate(20);
         $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $speakers = Auth::user()->customer->participants()->whereNot('meeting_participants.type', 'team')->get();
+        $documents = Auth::user()->customer->documents()->get();
         $hall = Auth::user()->customer->meetingHalls()->findOrFail($hall);
+        $questions = [
+            'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
+            'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
+        ];
+        $questions_auto_start = [
+            'no' => ["value" => 0, "title" => __('common.no'), 'color' => 'danger'],
+            'yes' => ["value" => 1, "title" => __('common.yes'), 'color' => 'success'],
+        ];
         $types = [
             'debate' => ["value" => "debate", "title" => __('common.debate')],
             'other' => ["value" => "other", "title" => __('common.other')],
@@ -25,7 +35,7 @@ class ProgramController extends Controller
             'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.meeting.hall.program.index', compact(['programs', 'meeting', 'hall', 'types', 'statuses']));
+        return view('portal.meeting.hall.program.index', compact(['programs', 'meeting', 'hall', 'types', 'statuses', 'speakers', 'documents', 'questions', 'questions_auto_start']));
     }
     public function store(ProgramRequest $request, int $meeting, int $hall)
     {

@@ -46,6 +46,7 @@ Route::prefix('portal')->name('portal.')->group(function () {
             Route::resource('/{meeting}/hall', \App\Http\Controllers\Portal\Meeting\Hall\HallController::class)->except(['create']);
 
             Route::prefix('/{meeting}/hall/{hall}')->name('hall.')->group(function () {
+                Route::resource('/screen', \App\Http\Controllers\Portal\Meeting\Hall\Screen\ScreenController::class)->except(['create']);
                 Route::resource('/program', \App\Http\Controllers\Portal\Meeting\Hall\Program\ProgramController::class)->except(['create']);
                 Route::prefix('/program/{program}')->name('program.')->group(function () {
                     //Debate

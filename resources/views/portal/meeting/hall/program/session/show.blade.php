@@ -1,9 +1,9 @@
 @extends('layout.portal.common')
-@section('title', __('common.session').' | '.$session->title)
+@section('title', $session->title . ' | ' . __('common.session'))
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">
-            <h1 class="m-0 text-center">{{'"'.$session->title.'" '. __('common.session') }}</h1>
+            <h1 class="m-0 text-center">{{'"' .$session->title. '"'}}</h1>
         </div>
         <div class="card-body">
             <div class="row">
@@ -49,23 +49,24 @@
     <div class="card text-bg-dark mt-2">
         <div class="card-header">
             <h2 class="text-center">
-                <span class="fa-regular fa-circle-question fa-fade p-2"> </span>{{ __('common.keypads') }}
+                <span class="fa-regular fa-tablet fa-fade p-2"> </span>{{ __('common.keypads') }}
             </h2>
         </div>
         <div class="card-body p-0">
             <div class="card text-bg-dark mt-2">
-                @foreach($keypads as $keypad)
+
                     <div class="table-responsive">
                         <table class="table table-dark table-striped table-hover">
                             <thead>
                             <tr>
                                 <th scope="col"></th>
-                                <th scope="col"><span class="fa-regular fa-messages-question mx-1 "></span> {{ __('common.keypad') }}</th>
+                                <th scope="col"><span class="fa-regular fa-messages-question mx-1 "></span> {{ __('common.question-title') }}</th>
                                 <th scope="col"><span class="fa-regular fa-circle-sort mx-1 "></span> {{ __('common.sort-order') }}</th>
                                 <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1  "></span> {{ __('common.option-count') }}</th>
                                 <th scope="col" class="text-end"></th>
                             </tr>
                             </thead>
+                            @foreach($keypads as $keypad)
                             <tbody>
                             <tr>
                                 <td rowspan="2" style="width: 2%"></td>
@@ -81,7 +82,7 @@
                                             <button type="button"
                                                     class="btn btn-outline-success btn-sm w-100  "
                                                     data-bs-toggle="modal"
-                                                    data-bs-target="#option-{{$keypad->id}}-create-modal"
+                                                    data-bs-target="#option-create-modal"
                                                     data-route="{{ route('portal.meeting.hall.program.session.keypad.option.store',['meeting'=>$session->program->hall->meeting_id, 'keypad'=> $keypad->id,'session'=> $session->id,'program'=>$session->program_id, 'hall'=>$session->program->hall_id]) }}">
                                                 <i class="fa-solid fa-plus"></i> {{ __('common.add-option') }}
                                             </button>
@@ -124,7 +125,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td rowspan="1" colspan="3">
+                                <td rowspan="1" colspan="4">
                                     <div class="table-responsive w-100">
                                         <table class="table table-dark table-striped table-hover">
                                             <thead class="thead-dark">
@@ -140,6 +141,13 @@
                                                 <tr>
                                                     <td>{{$option->option}}</td>
                                                     <td>{{$option->sort_order}}</td>
+                                                    <td>
+                                                        @if($option->status)
+                                                            <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
+                                                        @else
+                                                            <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
+                                                        @endif
+                                                    </td>
                                                     <td class="text-end">
                                                         <div class="btn-group" role="group"
                                                              aria-label="{{ __('common.processes') }}">
@@ -176,35 +184,17 @@
                                             @endforeach
                                             </tbody>
                                         </table>
-                                        <x-crud.form.common.create method="c-o-{{$keypad->id}}" name="option-{{$keypad->id}}">
-                                            @section('option-'.$keypad->id.'-create-form')
-                                                <x-input.hidden method="c-o-{{$keypad->id}}" name="session_id" :value="$session->id"/>
-                                                <x-input.hidden method="c-o-{{$keypad->id}}" name="keypad_id" :value="$keypad->id"/>
-                                                <x-input.text method="c-o-{{$keypad->id}}" name="option" title="option" icon="list-dropdown"/>
-                                                <x-input.number method="c-o-{{$keypad->id}}" name="sort_order" title="sort" icon="circle-sort"/>
-                                                <x-input.radio method="c-o-{{$keypad->id}}" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on"/>
-                                            @endsection
-                                        </x-crud.form.common.create>
-                                        <x-crud.form.common.delete name="option"/>
-                                        <x-crud.form.common.edit method="e-o" name="option">
-                                            @section('option-edit-form')
-                                                <x-input.hidden method="e-o" name="session_id" :value="$session->id"/>
-                                                <x-input.hidden method="e-o" name="keypad_id" :value="$keypad->id"/>
-                                                <x-input.text method="e-o" name="option" title="option" icon="list-dropdown"/>
-                                                <x-input.number method="e-o" name="sort_order" title="sort" icon="circle-sort"/>
-                                                <x-input.radio method="e-o" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on"/>
-                                            @endsection
-                                        </x-crud.form.common.edit>
                                     </div>
                                 </td>
                             </tr>
                             </tbody>
+                            @endforeach
                         </table>
-                        @endforeach
                         <tr>
                             <div class="card-footer d-flex justify-content-center">
-                                <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#keypad-create-modal"
-                                        data-route="{{ route('portal.meeting.hall.program.session.keypad.store',['meeting'=>$session->program->hall->meeting_id, 'keypad'=> $keypad->id,'session'=> $session->id,'program'=>$session->program_id, 'hall'=>$session->program->hall_id]) }}">
+                                <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal"
+                                        data-bs-target="#keypad-create-modal"
+                                        data-route="{{ route('portal.meeting.hall.program.session.keypad.store', ['meeting'=>$session->program->hall->meeting_id, 'hall'=>$session->program->hall_id, 'program'=>$session->program_id, 'session'=> $session->id]) }}">
                                     <i class="fa-solid fa-plus"></i> {{ __('common.create-new-keypad') }}
                                 </button>
                             </div>
@@ -215,7 +205,30 @@
             </div>
         </div>
     </div>
+    </div>
+    <x-crud.form.common.create name="option" method="c-o">
+        @section('option-create-form')
+            <x-input.hidden method="c-o" name="keypad_id"
+                            :value="$keypad->id"/>
+            <x-input.text method="c-o" name="option" title="option"
+                          icon="list-dropdown"/>
+            <x-input.number method="c-o" name="sort_order" title="sort"
+                            icon="circle-sort"/>
+        @endsection
+    </x-crud.form.common.create>
 
+    <x-crud.form.common.delete name="option"/>
+
+    <x-crud.form.common.edit name="option" method="e-o">
+        @section('option-edit-form')
+            <x-input.hidden method="e-o" name="keypad_id"
+                            :value="$keypad->id"/>
+            <x-input.text method="e-o" name="option" title="option"
+                          icon="list-dropdown"/>
+            <x-input.number method="e-o" name="sort_order" title="sort"
+                            icon="circle-sort"/>
+        @endsection
+    </x-crud.form.common.edit>
     <x-crud.form.common.create name="keypad">
         @section('keypad-create-form')
             <x-input.hidden method="c" name="session_id" :value="$session->id"/>

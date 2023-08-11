@@ -1,9 +1,9 @@
 @extends('layout.portal.common')
-@section('title', __('common.team').' | '.$team->title)
+@section('title',$team->title . ' | ' . __('common.team'))
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">
-            <h1 class="m-0 text-center">{{ '"'.$team->title.'" '.__('common.team') }}</h1>
+            <h1 class="m-0 text-center">{{ $team->title }}</h1>
         </div>
         <div class="card-body">
             <div class="row flex-shrink-0 g-2">
@@ -19,7 +19,7 @@
                                 @endif
                             </td>
                             <th scope="row" class="text-end w-25">{{ __('common.title') }}:</th>
-                            <td class="text-start w-25">{{ $team->title}}</td>
+                            <td class="text-start w-25">{{ $team->title }}</td>
                         </tr>
                         <tr>
                             <th scope="row" class="text-end w-25">{{ __('common.code') }}:</th>

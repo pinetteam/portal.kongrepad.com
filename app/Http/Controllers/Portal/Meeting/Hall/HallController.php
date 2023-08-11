@@ -78,7 +78,7 @@ class HallController extends Controller
             if ($hall->save()) {
                 $hall->updated_by = Auth::user()->id;
                 $hall->save();
-                return back()->with('success',__('common.edited-successfully'));
+                return back()->with('success', __('common.edited-successfully'));
             } else {
                 return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
             }
@@ -99,7 +99,7 @@ class HallController extends Controller
     public function current_speaker(string $id)
     {
         $hall = Auth::user()->customer->meetingHalls()->findOrFail($id);
-        $session = $hall->programSessions()->where('is_started',1)->first();
+        $session = $hall->programSessions()->where('is_started', 1)->first();
         $speaker = $session && $session->program->on_air && $session ? $session->speaker : null;
         event(new FormSubmitted("sdsdsd"));
         return view('portal.current-speaker.show', compact(['speaker']));

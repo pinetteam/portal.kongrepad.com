@@ -1,9 +1,9 @@
 @extends('layout.portal.common')
-@section('title', __('common.debate').' | '.$debate->title)
+@section('title', $debate->title . ' | ' . __('common.debate'))
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">
-            <h1 class="m-0 text-center">{{'"'.$debate->title.'" '. __('common.debate') }}</h1>
+            <h1 class="m-0 text-center"><span class="fa-duotone fa-face-party fa-fade"></span> {{'"' .$debate->title. '"'}}</h1>
         </div>
         <div class="card-body">
             <div class="row">
