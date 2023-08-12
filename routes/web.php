@@ -32,7 +32,7 @@ Route::prefix('portal')->name('portal.')->group(function () {
 
         /* Report routes */
         Route::resource('/survey-report', \App\Http\Controllers\Portal\Report\Survey\SurveyReportController::class)->except(['create']);
-        Route::resource('/survey-report/{survey_id}/question/{question_id}/chart',\App\Http\Controllers\Portal\Report\Survey\Chart\ChartController::class)->except(['create']);
+        Route::get('/survey-report/{survey_id}/question/{question_id}/chart',[\App\Http\Controllers\Portal\Report\Survey\SurveyReportController::class, 'showChart'])->name('survey-report.question.chart');
         Route::resource('/keypad-report', \App\Http\Controllers\Portal\Report\Keypad\KeypadReportController::class)->except(['create']);
         Route::resource('/debate-report', \App\Http\Controllers\Portal\Report\Debate\DebateReportController::class)->except(['create']);
 

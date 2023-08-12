@@ -14,7 +14,16 @@ class DebateReportController extends Controller
             'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.report.debate-report.index', compact(['debates', 'on_vote']));
+        $data = [];
+        foreach ($debates as $debate) {
+            $data_temp = [];
+            foreach ($debate->teams as $team) {
+                $data_temp['label'][] = $team->title;
+                $data_temp['data'][] = (int)$team->votes->count();
+            }
+            $data['chart_data'][$debate->id] = json_encode($data_temp);
+        }
+        return view('portal.report.debate-report.index', $data, compact(['debates', 'on_vote']));
     }
 
     public function show(string $debate){

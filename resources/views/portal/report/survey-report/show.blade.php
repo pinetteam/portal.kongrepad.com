@@ -44,69 +44,134 @@
         </div>
     </div>
 
-    <div class="card text-bg-dark mt-2">
+    <div class="card text-bg-dark">
         <div class="card-header">
-            <h2 class="text-center">
-                <span class="fa-regular fa-circle-question fa-fade p-2"> </span>{{ __('common.questions') }}
-            </h2>
+            <h1 class="m-0 text-center"><span class="fa-duotone fa-option fa-fade"></span> {{ __('common.survey-reports') }}</h1>
         </div>
         <div class="card-body p-0">
-            <div class="card text-bg-dark mt-2">
-                <table class=" caption-top table table-dark table-striped-columns table-bordered ">
-                    <tbody>
+            <div class="table-responsive">
+                <table class="table table-dark table-striped table-hover">
+                    <thead class="thead-dark">
                     <tr>
-                        <td>
-                            <table class=" caption-top table table-dark table-striped-columns table-bordered m-2">
-                                <tbody>
-                                <tr>
-                                    <table class=" caption-top table table-dark table-striped-columns table-bordered ">
-                                        <thead class="thead-dark">
-                                            <tr>
-                                                <th scope="col "><span class="fa-regular fa-messages-question mx-1 "></span> {{ __('common.question-title') }}</th>
-                                                <th scope="col"><span class="fa-regular fa-circle-sort mx-1 "></span> {{ __('common.sort-order') }}</th>
-                                                <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1  "></span> {{ __('common.option-count') }}</th>
-                                                <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1 "> </span> {{ __('common.status') }}</th>
-                                                <th scope="col" class="text-end "></th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            @foreach($questions as $question)
-                                                <tr>
-                                                    <td>{{$question->question}}</td>
-                                                    <td>{{$question->sort_order}}</td>
-                                                    <td>{{$question->options->count()}}</td>
-                                                    <td>
-                                                        @if($question->status)
-                                                            <i style="color:green"
-                                                               class="fa-regular fa-toggle-on fa-xg"></i>
-                                                        @else
-                                                            <i style="color:red"
-                                                               class="fa-regular fa-toggle-off fa-xg"></i>
-                                                        @endif
-                                                    </td>
-                                                    <td class="text-end">
-                                                        <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
-                                                            <a class="btn btn-info btn-sm" href="{{ route("portal.chart.index",['survey_id'=>$survey->id, 'question_id'=>$question->id ]) }}" title="{{ __('common.show-report') }}"
-                                                                   data-bs-toggle="tooltip"
-                                                                   data-bs-placement="top"
-                                                                   data-bs-custom-class="kp-tooltip"
-                                                                   data-bs-title="{{ __('common.show') }}">
-                                                                    <span class="fa-regular fa-eye"></span>
-                                                            </a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                            </tbody>
-                                    </table>
-                                </tr>
-                            </table>
-                        </td>
+                        <th scope="col"></th>
+                        <th scope="col" class="w-50"><span class="fa-regular fa-circle-question fa-fade mx1"></span> {{ __('common.question') }}</th>
+                        <th scope="col"><span class="fa-regular fa-chart-pie fa-fade mx1"></span> {{ __('common.report') }}</th>
                     </tr>
-                    </tbody>
+                    </thead>
+                    @foreach($questions as $question)
+                        <tbody>
+                        <tr>
+                            <th scope="col"></th>
+                            <td>
+                                <div class="table-responsive mt-5">
+                                    <table class="table table-dark table-striped table-hover">
+                                        <tbody>
+                                        <tr>
+                                            <th scope="col"><span class="fa-regular fa-messages-question mx-1"></span> {{ __('common.question-title') }}</th>
+                                            <td>{{$question->question}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col"><span class="fa-regular fa-circle-sort mx-1"></span> {{ __('common.sort-order') }}</th>
+                                            <td>{{$question->sort_order}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}</th>
+                                            <td>
+                                                @if($question->status)
+                                                    <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
+                                                @else
+                                                    <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="chart-container">
+                                    <div class="pie-chart-container">
+                                        <canvas id="pie-chart-{{$question->id}}"></canvas>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    @endforeach
                 </table>
             </div>
         </div>
     </div>
+    <script>
+        $(function(){
+            @foreach($questions as $question)
+            var cData = JSON.parse(`<?php echo $chart_data[$question->id]; ?>`);
+            var ctx = $("#pie-chart-<?php echo $question->id; ?>");
+            var data = {
+                labels: cData.label,
+                datasets: [
+                    {
+                        label: "Votes",
+                        data: cData.data,
+                        backgroundColor: [
+                            "#3179ab",
+                            "#4a1d96",
+                            "#2f14dc",
+                            "#124d7a",
+                            "#2E8B57",
+                            "#1D7A46",
+                            "#48b08d",
+                        ],
+                        borderColor: [
+                            "#ffffff",
+                            "#ffffff",
+                            "#ffffff",
+                            "#ffffff",
+                            "#ffffff",
+                            "#ffffff",
+                            "#ffffff",
+                        ],
+                        borderWidth: [1, 1, 1, 1, 1, 1, 1]
+                    }
+                ]
+            };
+            var options = {
+                responsive: true,
+                title: {
+                    display: true,
+                    position: "top",
+                    text: "",
+                    fontSize: 18,
+                    fontColor: "#ffffff"
+                },
+                legend: {
+                    display: true,
+                    position: "bottom",
+                    labels: {
+                        fontColor: "#ffffff",
+                        fontSize: 16
+                    }
+                },
+                animation: {
+                    onComplete: () => {
+                        delayed = true;
+                    },
+                    delay: (context) => {
+                        let delay = 0;
+                        if (context.type === 'data' && context.mode === 'default' && !delayed) {
+                            delay = context.dataIndex * 300 + context.datasetIndex * 100;
+                        }
+                        return delay;
+                    },
+                },
+            };
+            var chart1 = new Chart(ctx, {
+                type: "pie",
+                data: data,
+                options: options
+            });
+            @endforeach
+        });
+    </script>
 @endsection
 

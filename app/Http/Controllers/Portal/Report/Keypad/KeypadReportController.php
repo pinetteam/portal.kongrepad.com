@@ -10,15 +10,20 @@ class KeypadReportController extends Controller
     public function index()
     {
         $keypads = Auth::user()->customer->keypads()->paginate(20);
-        $statuses = [
-            'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-            'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
-        ];
         $on_vote = [
             'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.report.keypad-report.index', compact(['keypads', 'on_vote', 'statuses']));
+        $data = [];
+        foreach ($keypads as $keypad) {
+            $data_temp = [];
+            foreach ($keypad->options as $option) {
+                $data_temp['label'][] = $option->option;
+                $data_temp['data'][] = (int)$option->votes->count();
+            }
+            $data['chart_data'][$keypad->id] = json_encode($data_temp);
+        }
+        return view('portal.report.keypad-report.index', $data, compact(['keypads', 'on_vote']));
     }
 
     public function show(string $keypad){

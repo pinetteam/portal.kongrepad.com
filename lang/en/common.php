@@ -229,5 +229,6 @@ return [
     'on_vote' => 'On Vote',
     'show-report' => 'Show Report',
     'keypad-reports' => 'Keypad Reports',
-    'debate-reports' => 'Debate Reports'
+    'debate-reports' => 'Debate Reports',
+    'report' => 'Report'
 ];
