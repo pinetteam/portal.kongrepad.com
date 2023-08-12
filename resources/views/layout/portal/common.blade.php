@@ -102,6 +102,12 @@
                         {{ __('common.keypad-reports') }}
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route("portal.debate-report.index") }}">
+                        <span class="nav-icon fa-duotone fa-podium-star fa-fade"></span>
+                        {{ __('common.debate-reports') }}
+                    </a>
+                </li>
             </ul>
             <div class="sidebar-heading">
                 <span class="nav-icon fa-duotone fa-arrow-turn-down-right"></span> {{ __('common.system') }}

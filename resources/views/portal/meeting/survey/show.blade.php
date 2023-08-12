@@ -217,12 +217,9 @@
                                     </button>
                                 </div>
                             </tr>
-                            </thead>
-                        </table>
                     </div>
             </div>
         </div>
-    </div>
     </div>
 
     <x-crud.form.common.create name="question">

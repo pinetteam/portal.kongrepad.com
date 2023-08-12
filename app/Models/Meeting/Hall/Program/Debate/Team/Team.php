@@ -3,6 +3,7 @@
 namespace App\Models\Meeting\Hall\Program\Debate\Team;
 
 use App\Models\Meeting\Hall\Program\Debate\Debate;
+use App\Models\Meeting\Hall\Program\Debate\Vote\Vote;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 class Team extends Model
@@ -33,5 +34,8 @@ class Team extends Model
     public function debate()
     {
         return $this->belongsTo(Debate::class, 'debate_id', 'id');
+    }
+    public function votes(){
+        return $this->hasMany(Vote::class, 'team_id', 'id');
     }
 }
