@@ -230,5 +230,7 @@ return [
     'show-report' => 'Show Report',
     'keypad-reports' => 'Keypad Reports',
     'debate-reports' => 'Debate Reports',
-    'report' => 'Report'
+    'report' => 'Report',
+    'reports' => 'Reports',
+
 ];

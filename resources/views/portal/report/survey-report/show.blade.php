@@ -1,10 +1,10 @@
 @extends('layout.portal.common')
-@section('title', $survey->title .' | ' . __('common.survey'))
+@section('title', $survey->title .' | ' . __('common.reports'))
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">
             <h1 class="text-center">
-                <span class="fa-regular fa-square-poll-vertical fa-fade"></span> <small>" {{$survey->title }}"</small>{{ __('common.survey') }}
+                <span class="fa-regular fa-square-poll-vertical fa-fade"></span> <small>"{{$survey->title }}"</small>{{ __('common.survey') }}
             </h1>
             <div class="table-responsive">
                 <table class="table table-dark table-striped-columns table-bordered">
