@@ -89,7 +89,7 @@ class ParticipantController extends Controller
             }
             $participant->status = $request->input('status');
             if ($participant->save()) {
-                return back()->with('success',__('common.edited-successfully'));
+                return back()->with('success', __('common.edited-successfully'));
             } else {
                 return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
             }

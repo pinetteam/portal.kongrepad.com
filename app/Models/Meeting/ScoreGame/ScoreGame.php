@@ -41,18 +41,20 @@ class ScoreGame extends Model
         'start_at' => 'datetime',
         'finish_at' => 'datetime',
     ];
-    protected function finishAt(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($startAt) => $startAt ? Carbon::createFromFormat('Y-m-d H:i:s', $startAt)->format(Variable::where('variable','date_format')->first()->settings()->where('customer_id',Auth::user()->customer->id ?? 1)->first()->value.' '.Variable::where('variable','time_format')->first()->settings()->where('customer_id',Auth::user()->customer->id ?? 1)->first()->value) : null,
-            set: fn ($startAt) => $startAt ? Carbon::createFromFormat('Y-m-d H:i', $startAt)->format('Y-m-d H:i:s') : null,
-        );
-    }
     protected function startAt(): Attribute
     {
+        $date_time_format = \App\Models\System\Setting\Variable\Variable::where('variable','date_time_format')->first()->settings()->where('customer_id', Auth::user()->customer->id)->first()->value;
         return Attribute::make(
-            get: fn ($finishAt) => $finishAt ? Carbon::createFromFormat('Y-m-d H:i:s', $finishAt)->format(Variable::where('variable','date_format')->first()->settings()->where('customer_id',Auth::user()->customer->id ?? 1)->first()->value.' '.Variable::where('variable','time_format')->first()->settings()->where('customer_id',Auth::user()->customer->id ?? 1)->first()->value) : null,
-            set: fn ($finishAt) => $finishAt ? Carbon::createFromFormat('Y-m-d H:i', $finishAt)->format('Y-m-d H:i:s') : null,
+            get: fn (string $startAt) => Carbon::createFromFormat('Y-m-d H:i:s', $startAt)->format($date_time_format),
+            set: fn (string $startAt) => Carbon::createFromFormat($date_time_format, $startAt)->format('Y-m-d H:i:s'),
+        );
+    }
+    protected function finishAt(): Attribute
+    {
+        $date_time_format = \App\Models\System\Setting\Variable\Variable::where('variable','date_time_format')->first()->settings()->where('customer_id', Auth::user()->customer->id)->first()->value;
+        return Attribute::make(
+            get: fn (string $finishAt) => Carbon::createFromFormat('Y-m-d H:i:s', $finishAt)->format($date_time_format),
+            set: fn (string $finishAt) => Carbon::createFromFormat($date_time_format, $finishAt)->format('Y-m-d H:i:s'),
         );
     }
 

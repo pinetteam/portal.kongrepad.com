@@ -8,7 +8,6 @@ use App\Http\Resources\Portal\Meeting\ScoreGame\QRCode\QRCodeResource;
 use App\Models\Meeting\ScoreGame\QRCode\QRCode;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use Intervention\Image\Facades\Image;
 
 class QRCodeController extends Controller
 {
@@ -64,7 +63,7 @@ class QRCodeController extends Controller
             if ($qr_code->save()) {
                 $qr_code->updated_by = Auth::user()->id;
                 $qr_code->save();
-                return back()->with('success',__('common.edited-successfully'));
+                return back()->with('success', __('common.edited-successfully'));
             } else {
                 return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
             }
@@ -92,7 +91,8 @@ class QRCodeController extends Controller
 
     public function qrCode(int $meeting, string $score_game, int $id)
     {
-        $qr_code = Auth::user()->customer->qrCodes()->where('score_game_id', $score_game)->findOrFail($id);
+        $score_game_object = Auth::user()->customer->scoreGames()->findOrFail($score_game);
+        $qr_code = $score_game_object->qrCodes()->findOrFail($id);
         return \SimpleSoftwareIO\QrCode\Facades\QrCode::size(200)->generate($qr_code->code);
     }
 }

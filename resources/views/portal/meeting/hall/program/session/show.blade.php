@@ -190,7 +190,6 @@
                             </tbody>
                             @endforeach
                         </table>
-                        <tr>
                             <div class="card-footer d-flex justify-content-center">
                                 <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal"
                                         data-bs-target="#keypad-create-modal"
@@ -198,9 +197,6 @@
                                     <i class="fa-solid fa-plus"></i> {{ __('common.create-new-keypad') }}
                                 </button>
                             </div>
-                        </tr>
-                        </thead>
-                        </table>
                     </div>
             </div>
         </div>
@@ -209,7 +205,7 @@
     <x-crud.form.common.create name="option" method="c-o">
         @section('option-create-form')
             <x-input.hidden method="c-o" name="keypad_id"
-                            :value="$keypad->id"/>
+                            :value="1"/>
             <x-input.text method="c-o" name="option" title="option"
                           icon="list-dropdown"/>
             <x-input.number method="c-o" name="sort_order" title="sort"
@@ -221,8 +217,7 @@
 
     <x-crud.form.common.edit name="option" method="e-o">
         @section('option-edit-form')
-            <x-input.hidden method="e-o" name="keypad_id"
-                            :value="$keypad->id"/>
+            <x-input.hidden method="e-o" name="keypad_id" :value="1"/>
             <x-input.text method="e-o" name="option" title="option"
                           icon="list-dropdown"/>
             <x-input.number method="e-o" name="sort_order" title="sort"

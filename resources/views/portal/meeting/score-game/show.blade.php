@@ -133,25 +133,4 @@
             @endsection
         </x-crud.form.common.edit>
     </div>
-    @foreach($score_game_qr_codes as $qr_code)
-    <div class="modal fade" id="showQr-{{$qr_code->id}}" tabindex="-1" aria-labelledby="showQr-{{$qr_code->id}}" aria-hidden="true">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content bg-dark">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalLabel">{{__('common.show-qr-code')}}</h5>
-                </div>
-                <div class="modal-body">
-                    <div class="container-fluid">
-                        <div id="qr-code" class="mb-3">
-                            {!! $qr_code->code  !!}
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-@endforeach
 @endsection

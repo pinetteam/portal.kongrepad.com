@@ -31,9 +31,9 @@ class SessionController extends Controller
             if ($program_session->save()) {
                 $program_session->created_by = Auth::user()->id;
                 $program_session->save();
-                return back()->with('success',__('common.created-successfully'));
+                return back()->with('success', __('common.created-successfully'));
             } else {
-                return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
+                return back()->with('create_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
             }
         }
     }
@@ -72,7 +72,7 @@ class SessionController extends Controller
             if ($program_session->save()) {
                 $program_session->updated_by = Auth::user()->id;
                 $program_session->save();
-                return back()->with('success',__('common.edited-successfully'));
+                return back()->with('success', __('common.edited-successfully'));
             } else {
                 return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
             }
@@ -104,9 +104,9 @@ class SessionController extends Controller
         $program_session->is_started = !$program_session->is_started;
         if ($program_session->save()) {
             if($program_session->is_started)
-                return back()->with('success',__('common.session-started'));
+                return back()->with('success', __('common.session-started'));
             else
-                return back()->with('success',__('common.session-stopped'));
+                return back()->with('success', __('common.session-stopped'));
         } else {
             return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
         }
@@ -117,9 +117,9 @@ class SessionController extends Controller
         $program_session->is_questions_started = !$program_session->is_questions_started;
         if ($program_session->save()) {
             if($program_session->is_questions_started)
-                return back()->with('success',__('common.session-questions-started'));
+                return back()->with('success', __('common.session-questions-started'));
             else
-                return back()->with('success',__('common.session-questions-stopped'));
+                return back()->with('success', __('common.session-questions-stopped'));
         } else {
             return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
         }

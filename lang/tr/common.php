@@ -74,6 +74,7 @@ return [
     'meeting-halls' => 'Toplantı Salonları',
     'hall' => 'Toplantı Salonu',
     'create-new-hall' => 'Yeni Toplantı Salonu Oluştur',
+    'create-new-session' => 'Yeni Oturum Oluştur',
     'create-new-participant' => 'Yeni Katılımcı Oluştur',
     'debates' => 'Debates',
     'surveys' => 'Anketler',

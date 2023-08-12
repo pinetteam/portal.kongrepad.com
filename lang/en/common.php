@@ -74,6 +74,7 @@ return [
     'halls' => 'Halls',
     'hall' => 'Hall',
     'create-new-hall' => 'Create New Hall',
+    'create-new-session' => 'Create New Session',
     'create-new-participant' => 'Create New Participant',
     'debates' => 'Debates',
     'surveys' => 'Surveys',

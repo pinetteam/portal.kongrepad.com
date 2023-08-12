@@ -10,11 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 class QuestionController extends Controller
 {
-    public function store(QuestionRequest $request)
+    public function store(QuestionRequest $request, string $meeting, string $survey)
     {
         if ($request->validated()) {
             $question = new Question();
-            $question->survey_id = $request->input('survey_id');
+            $question->survey_id = $survey;
             $question->sort_order = $request->input('sort_order');
             $question->question = $request->input('question');
             $question->status = $request->input('status');
@@ -23,7 +23,7 @@ class QuestionController extends Controller
                 $question->save();
                 return back()->with('success',__('common.created-successfully'));
             } else {
-                return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
+                return back()->with('create_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
             }
         }
     }

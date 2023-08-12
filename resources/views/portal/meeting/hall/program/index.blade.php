@@ -325,7 +325,6 @@
                             </tbody>
                             @endforeach
                         </table>
-                        <tr>
                             <div class="card-footer d-flex justify-content-center">
                                 <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal"
                                         data-bs-target="#default-create-modal"
@@ -333,9 +332,6 @@
                                     <i class="fa-solid fa-plus"></i> {{ __('common.create-new-program') }}
                                 </button>
                             </div>
-                        </tr>
-                        </thead>
-                        </table>
                     </div>
             </div>
         </div>
@@ -344,7 +340,7 @@
                                method="c-s">
         @section('session-create-form')
             <x-input.hidden method="c-s" name="program_id"
-                            :value="$program->id"/>
+                            :value="1"/>
             <x-input.select method="c-s" name="speaker_id"
                             title="speaker" :options="$speakers"
                             option_value="id" option_name="full_name"
@@ -385,8 +381,7 @@
     <x-crud.form.common.delete name="session"/>
     <x-crud.form.common.edit name="session" method="e-s">
         @section('session-edit-form')
-            <x-input.hidden method="e-s" name="program_id"
-                            :value="$program->id"/>
+            <x-input.hidden method="e-s" name="program_id" :value="1"/>
             <x-input.select method="e-s" name="speaker_id" title="speaker"
                             :options="$speakers" option_value="id"
                             option_name="full_name" icon="person-chalkboard"/>
@@ -424,7 +419,7 @@
                                method="c-d">
         @section('debate-create-form')
             <x-input.hidden method="c-d" name="program_id"
-                            :value="$program->id"/>
+                            :value="1"/>
             <x-input.number method="c-d" name="sort_order"
                             title="sort" icon="circle-sort"/>
             <x-input.text method="c-d" name="code" title="code"
@@ -442,8 +437,7 @@
     <x-crud.form.common.delete name="debate"/>
     <x-crud.form.common.edit name="debate" method="e-d">
         @section('debate-edit-form')
-            <x-input.hidden method="e-d" name="program_id"
-                            :value="$program->id"/>
+            <x-input.hidden method="e-d" name="program_id" :value="1"/>
             <x-input.number method="e-d" name="sort_order" title="sort"
                             icon="circle-sort"/>
             <x-input.text method="e-d" name="code" title="code"
