@@ -20,9 +20,9 @@ class KeypadController extends Controller
             if ($keypad->save()) {
                 $keypad->created_by = Auth::user()->id;
                 $keypad->save();
-                return back()->with('success',__('common.created-successfully'));
+                return back()->with('success', __('common.created-successfully'));
             } else {
-                return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
+                return back()->with('create_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
             }
         }
     }
@@ -51,7 +51,7 @@ class KeypadController extends Controller
             if ($keypad->save()) {
                 $keypad->updated_by = Auth::user()->id;
                 $keypad->save();
-                return back()->with('success',__('common.created-successfully'));
+                return back()->with('success', __('common.edited-successfully'));
             } else {
                 return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
             }
@@ -86,12 +86,12 @@ class KeypadController extends Controller
                 $keypad->voting_started_at = now()->format('Y-m-d H:i');;
                 $keypad->voting_finished_at = null;
                 $keypad->save();
-                return back()->with('success',__('common.voting-started'));
+                return back()->with('success', __('common.voting-started'));
             }
             else{
                 $keypad->voting_finished_at = now()->format('Y-m-d H:i');;
                 $keypad->save();
-                return back()->with('success',__('common.voting-stopped'));
+                return back()->with('success', __('common.voting-stopped'));
             }
         } else {
             return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();

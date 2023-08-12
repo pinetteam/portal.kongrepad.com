@@ -78,7 +78,7 @@ class ScoreGameController extends Controller
             if ($score_game->save()) {
                 $score_game->updated_by = Auth::user()->id;
                 $score_game->save();
-                return back()->with('success',__('common.edited-successfully'));
+                return back()->with('success', __('common.edited-successfully'));
             } else {
                 return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
             }

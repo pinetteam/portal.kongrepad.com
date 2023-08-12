@@ -24,7 +24,7 @@ return new class extends Migration
             $table->dateTime('start_at')->nullable();
             $table->dateTime('finish_at')->nullable();
             $table->boolean('on_air')->default(0)->comment('0=no;1=yes');
-            $table->unsignedInteger('questions_limit')->default(0);
+            $table->unsignedInteger('questions_limit')->nullable()->default(0);
             $table->boolean('questions_allowed')->default(0)->comment('0=passive;1=active');
             $table->boolean('questions_auto_start')->default(0)->comment('0=passive;1=active');
             $table->boolean('is_questions_started')->default(0)->comment('0=passive;1=active');

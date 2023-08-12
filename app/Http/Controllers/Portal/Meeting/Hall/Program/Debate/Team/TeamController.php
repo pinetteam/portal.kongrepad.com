@@ -28,7 +28,7 @@ class TeamController extends Controller
                 $team->save();
                 return back()->with('success',__('common.created-successfully'));
             } else {
-                return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
+                return back()->with('create_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
             }
         }
     }

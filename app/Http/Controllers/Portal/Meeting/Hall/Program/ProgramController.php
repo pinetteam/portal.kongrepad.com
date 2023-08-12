@@ -13,11 +13,11 @@ class ProgramController extends Controller
 {
     public function index(int $meeting, int $hall)
     {
-        $programs = Auth::user()->customer->programs()->where('hall_id', $hall)->paginate(20);
-        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
-        $speakers = Auth::user()->customer->participants()->whereNot('meeting_participants.type', 'team')->get();
-        $documents = Auth::user()->customer->documents()->get();
         $hall = Auth::user()->customer->meetingHalls()->findOrFail($hall);
+        $programs = $hall->programs()->paginate(20);
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $speakers = $meeting->participants()->whereNot('meeting_participants.type', 'team')->get();
+        $documents = $meeting->documents()->get();
         $questions = [
             'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
