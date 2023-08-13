@@ -46,7 +46,7 @@ return [
     'total-access-scopes' => 'Total Access Scopes',
     'password' => 'Password',
     'program' => 'Program',
-    'remember-me' => 'Remember me',
+    'remember' => 'Remember',
     'forgot-password' => 'Forgot password?',
     'dashboard' => 'Dashboard',
     'operator-board' => 'Operator Board',

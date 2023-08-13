@@ -11,14 +11,19 @@ class LoginController extends Controller
     public function index()
     {
         $remember = [
-            'remember' => ['value' => true, 'title' => 'always-login-on-this-device'],
+            'remember' => ['value' => 1, 'title' => 'always-login-on-this-device'],
         ];
         return view('auth.login.index', compact('remember'));
     }
     public function store(Request $request)
     {
         $credentials = $request->only('username', 'password');
-        if(Auth::attempt($credentials)) {
+        if ($request->has('remember.0')) {
+            $remember = true;
+        } else {
+            $remember = false;
+        }
+        if(Auth::attempt($credentials, $remember)) {
             $user = Auth::user();
             $user->last_login_ip = $_SERVER['REMOTE_ADDR'];
             $user->last_login_agent = $_SERVER['HTTP_USER_AGENT'];

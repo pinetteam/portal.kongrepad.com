@@ -10,7 +10,7 @@
             <div class="card-body">
                 <x-input.text name="username" title="username" icon="user" />
                 <x-input.password name="password" title="password" icon="lock" />
-                <x-input.checkbox name="remember_me" title="remember-me" :options="$remember" option_value="value" option_name="title" icon="cloud-check" />
+                <x-input.checkbox name="remember" title="remember" :options="$remember" option_value="value" option_name="title" icon="cloud-check" />
                 <button type="submit" class="btn btn-success float-end mb-3 shadow">{{__('common.login')}}</button>
             </div>
         </form>
