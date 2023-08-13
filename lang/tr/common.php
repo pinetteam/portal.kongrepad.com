@@ -216,4 +216,10 @@ return [
     'are-you-sure-you-want-to-stop' => 'Durdurmak istediğinizden emin misiniz?',
     'are-you-sure-you-want-to-stop-other-sessions-and-start' => 'Diğer oturumları durdurmak ve bu oturumu başlatmak istediğinize emin misiniz: ',
     'are-you-sure-you-want-to-stop-voting-other-debates-and-start-voting' => 'Diğer münazaralara oy vermeyi bırakıp bu münazarayı oylamaya başlamak istediğinizden emin misiniz: ',
+    'user' => 'Kullanıcı',
+    'web' => 'Web',
+    'date-time-format' => 'Tarih Saat Formatı',
+    'facebook-link' => 'Facebook Bağlantısı',
+    'instagram-link' => 'Instagram Bağlantısı',
+    'twitter-link' => 'Twitter Bağlantısı',
 ];

@@ -39,7 +39,7 @@ class UserRequest extends FormRequest
                     'last_name' => 'required|max:255',
                     'email' => ['required', 'email', Rule::unique('users','email')->ignore($this->email, 'email'), 'max:255'],
                     'phone_country_id' => 'nullable|exists:system_countries,id|required_with:phone',
-                    'phone' => 'nullable|number|max:31|required_with:phone_country_id',
+                    'phone' => 'nullable|max:31|required_with:phone_country_id',
                     'password' => 'nullable|max:255',
                     'status' => 'required|boolean',
                 ];
@@ -63,6 +63,6 @@ class UserRequest extends FormRequest
     }
     public function failedValidation(Validator $validator)
     {
-        return back()->with('method', $this->method())->with('route', url()->current())->withErrors($this->validator)->withInput();
+        return back()->with('method', $this->method())->with('name', 'user')->with('route', url()->current())->withErrors($this->validator)->withInput();
     }
 }

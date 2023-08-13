@@ -37,12 +37,12 @@
                                             <span class="fa-regular fa-eye"></span>
                                         </a>
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.edit') }}">
-                                            <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#default-edit-modal" data-route="{{ route('portal.meeting.hall.update', ['meeting' => $hall->meeting->id, 'hall' => $hall->id]) }}" data-resource="{{ route('portal.meeting.hall.edit', ['meeting' => $hall->meeting->id, 'hall' => $hall->id]) }}" data-id="{{ $hall->id }}">
+                                            <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#hall-edit-modal" data-route="{{ route('portal.meeting.hall.update', ['meeting' => $hall->meeting->id, 'hall' => $hall->id]) }}" data-resource="{{ route('portal.meeting.hall.edit', ['meeting' => $hall->meeting->id, 'hall' => $hall->id]) }}" data-id="{{ $hall->id }}">
                                                 <span class="fa-regular fa-pen-to-square"></span>
                                             </button>
                                         </div>
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
-                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#default-delete-modal" data-route="{{ route('portal.meeting.hall.destroy', ['meeting' => $hall->meeting->id, 'hall' => $hall->id]) }}" data-record="{{ $hall->title }}">
+                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#hall-delete-modal" data-route="{{ route('portal.meeting.hall.destroy', ['meeting' => $hall->meeting->id, 'hall' => $hall->id]) }}" data-record="{{ $hall->title }}">
                                                 <span class="fa-regular fa-trash"></span>
                                             </button>
                                         </div>
@@ -55,21 +55,21 @@
             </div>
         </div>
         <div class="card-footer d-flex justify-content-center">
-            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#default-create-modal" data-route="{{ route('portal.meeting.hall.store', ['meeting' => $meeting->id]) }}">
+            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#hall-create-modal" data-route="{{ route('portal.meeting.hall.store', ['meeting' => $meeting->id]) }}">
                 <i class="fa-solid fa-plus"></i> {{ __('common.create-new-hall') }}
             </button>
         </div>
     </div>
-    <x-crud.form.common.create>
-        @section('default-create-form')
+    <x-crud.form.common.create name="hall" >
+        @section('hall-create-form')
             <x-input.hidden method="c" name="meeting_id" :value="$meeting->id" />
             <x-input.text method="c" name="title" title="title" icon="input-text" />
             <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.create>
-    <x-crud.form.common.delete />
-    <x-crud.form.common.edit>
-        @section('default-edit-form')
+    <x-crud.form.common.delete name="hall" />
+    <x-crud.form.common.edit name="hall" >
+        @section('hall-edit-form')
             <x-input.hidden method="e" name="meeting_id" :value="$meeting->id" />
             <x-input.text method="e" name="title" title="title" icon="input-text" />
             <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />

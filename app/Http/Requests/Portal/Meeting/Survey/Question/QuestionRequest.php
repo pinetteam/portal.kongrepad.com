@@ -38,6 +38,6 @@ class QuestionRequest extends FormRequest
     }
     public function failedValidation(Validator $validator)
     {
-        return back()->with('method', $this->method())->with('route', url()->current())->withErrors($this->validator)->withInput();
+        return back()->with('method', $this->method())->with('name', 'question')->with('route', url()->current())->withErrors($this->validator)->withInput();
     }
 }

@@ -215,6 +215,12 @@ return [
     'created-at' => 'Created At',
     'search' => 'Search',
     'this-operation-will-delete-all-related-objects' => 'This operation will delete all related objects',
+    'user' => 'User',
+    'web' => 'Web',
+    'date-time-format' => 'Date Time Format',
+    'facebook-link' => 'Facebook Link',
+    'instagram-link' => 'Instagram Link',
+    'twitter-link' => 'Twitter Link',
     // todo Türkçe karşılıkları yazılacak
     'chair-board' => 'Chair Board',
     'on-screen' => 'On Screen',

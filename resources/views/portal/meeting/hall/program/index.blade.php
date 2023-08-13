@@ -96,7 +96,7 @@
                                             <button class="btn btn-warning btn-sm"
                                                     title="{{ __('common.edit') }}"
                                                     data-bs-toggle="modal"
-                                                    data-bs-target="#default-edit-modal"
+                                                    data-bs-target="#program-edit-modal"
                                                     data-route="{{ route('portal.meeting.hall.program.update', ['meeting' => $meeting->id, 'hall' => $hall->id, 'program' => $program->id]) }}"
                                                     data-resource="{{ route('portal.meeting.hall.program.edit', ['meeting' => $meeting->id, 'hall' => $hall->id, 'program' => $program->id]) }}"
                                                     data-id="{{ $program->id }}">
@@ -109,7 +109,7 @@
                                             <button class="btn btn-danger btn-sm"
                                                     title="{{ __('common.delete') }}"
                                                     data-bs-toggle="modal"
-                                                    data-bs-target="#default-delete-modal"
+                                                    data-bs-target="#program-delete-modal"
                                                     data-route="{{ route('portal.meeting.hall.program.destroy', ['meeting' => $meeting->id, 'hall' => $hall->id, 'program' => $program->id]) }}"
                                                     data-record="{{ $program->title }}">
                                                 <span class="fa-regular fa-trash"></span>
@@ -327,7 +327,7 @@
                         </table>
                             <div class="card-footer d-flex justify-content-center">
                                 <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal"
-                                        data-bs-target="#default-create-modal"
+                                        data-bs-target="#program-create-modal"
                                         data-route="{{ route('portal.meeting.hall.program.store', ['meeting' => $meeting->id, 'hall' => $hall->id]) }}">
                                     <i class="fa-solid fa-plus"></i> {{ __('common.create-new-program') }}
                                 </button>
@@ -451,8 +451,8 @@
                            option_name="title" icon="toggle-large-on"/>
         @endsection
     </x-crud.form.common.edit>
-    <x-crud.form.common.create>
-        @section('default-create-form')
+    <x-crud.form.common.create name="program">
+        @section('program-create-form')
             <x-input.hidden method="c" name="hall_id" :value="$hall->id"/>
             <x-input.number method="c" name="sort_order" title="sort" icon="circle-sort"/>
             <x-input.text method="c" name="code" title="code" icon="code-simple"/>
@@ -467,9 +467,9 @@
                            option_name="title" icon="toggle-large-on"/>
         @endsection
     </x-crud.form.common.create>
-    <x-crud.form.common.delete/>
-    <x-crud.form.common.edit>
-        @section('default-edit-form')
+    <x-crud.form.common.delete name="program" />
+    <x-crud.form.common.edit name="program" >
+        @section('program-edit-form')
             <x-input.hidden method="e" name="hall_id" :value="$hall->id"/>
             <x-input.number method="e" name="sort_order" title="sort" icon="circle-sort"/>
             <x-input.text method="e" name="code" title="code" icon="code-simple"/>

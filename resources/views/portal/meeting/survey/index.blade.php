@@ -58,12 +58,12 @@
                                         </a>
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.edit')}}">
                                             {{--edit button--}}
-                                            <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#default-edit-modal" data-route="{{ route('portal.meeting.survey.update', ['meeting' => $survey->meeting_id, 'survey' => $survey->id]) }}" data-resource="{{ route('portal.meeting.survey.edit', ['meeting' => $survey->meeting_id, 'survey' => $survey->id]) }}" data-id="{{ $survey->id }}">
+                                            <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#survey-edit-modal" data-route="{{ route('portal.meeting.survey.update', ['meeting' => $survey->meeting_id, 'survey' => $survey->id]) }}" data-resource="{{ route('portal.meeting.survey.edit', ['meeting' => $survey->meeting_id, 'survey' => $survey->id]) }}" data-id="{{ $survey->id }}">
                                                 <span class="fa-regular fa-pen-to-square"></span>
                                             </button>
                                         </div>
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
-                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#default-delete-modal" data-route="{{ route('portal.meeting.survey.destroy', ['meeting' => $survey->meeting_id, 'survey' => $survey->id]) }}" data-record="{{ $survey->title }}">
+                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#survey-delete-modal" data-route="{{ route('portal.meeting.survey.destroy', ['meeting' => $survey->meeting_id, 'survey' => $survey->id]) }}" data-record="{{ $survey->title }}">
                                                 <span class="fa-regular fa-trash"></span>
                                             </button>
                                         </div>
@@ -92,9 +92,9 @@
 
             @endsection
         </x-crud.form.common.create>
-        <x-crud.form.common.delete />
-        <x-crud.form.common.edit>
-            @section('default-edit-form')
+        <x-crud.form.common.delete name="survey" />
+        <x-crud.form.common.edit name="survey" >
+            @section('survey-edit-form')
                 <x-input.hidden method="e" name="meeting_id" :value="$meeting->id" />
                 <x-input.number method="e" name="sort_order" title="sort" icon="circle-sort" />
                 <x-input.text method="e" name="title" title="title" icon="pen-field" />

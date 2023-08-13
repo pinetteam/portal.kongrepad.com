@@ -14,7 +14,7 @@ class UserRoleController extends Controller
     public function index()
     {
         $user_roles = Auth()->user()->customer->userRoles()->paginate(20);
-        $routes = Route::get();
+        $routes = json_decode(Route::get(), true);
         $statuses = [
             'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],

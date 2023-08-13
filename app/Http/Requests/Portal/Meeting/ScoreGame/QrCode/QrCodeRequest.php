@@ -45,6 +45,6 @@ class QrCodeRequest extends FormRequest
     }
     public function failedValidation(Validator $validator)
     {
-        return back()->with('method', $this->method())->with('route', url()->current())->withErrors($this->validator)->withInput();
+        return back()->with('method', $this->method())->with('name', 'qr-code')->with('route', url()->current())->withErrors($this->validator)->withInput();
     }
 }

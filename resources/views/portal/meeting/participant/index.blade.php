@@ -76,7 +76,7 @@
                                              data-bs-title="{{ __('common.edit') }}">
                                             <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}"
                                                     data-bs-toggle="modal"
-                                                    data-bs-target="#default-edit-modal"
+                                                    data-bs-target="#participant-edit-modal"
                                                     data-route="{{ route('portal.meeting.participant.update', ['meeting' => $participant->meeting->id, 'participant' => $participant->id]) }}"
                                                     data-resource="{{ route('portal.meeting.participant.edit', ['meeting' => $participant->meeting->id, 'participant' => $participant->id]) }}"
                                                     data-id="{{ $participant->id }}">
@@ -88,7 +88,7 @@
                                              data-bs-custom-class="kp-tooltip"
                                              data-bs-title="{{ __('common.delete') }}">
                                             <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal"
-                                                    data-bs-target="#default-delete-modal"
+                                                    data-bs-target="#participant-delete-modal"
                                                     data-route="{{ route('portal.meeting.participant.destroy', ['meeting' => $participant->meeting->id, 'participant' => $participant->id]) }}"
                                                     data-record="{{ $participant->full_name }}">
                                                 <span class="fa-regular fa-trash"></span>
@@ -104,15 +104,15 @@
         </div>
         <div class="card-footer d-flex justify-content-center">
             <button type="button" class="btn btn-success btn-lg w-100"
-                    data-bs-toggle="modal" data-bs-target="#default-create-modal"
+                    data-bs-toggle="modal" data-bs-target="#participant-create-modal"
                     data-route="{{ route('portal.meeting.participant.store', ['meeting' => $meeting->id]) }}">
                 <i class="fa-solid fa-plus"></i> {{ __('common.create-new-participant') }}
             </button>
         </div>
     </div>
     <x-common.popup.show name="show-qr-code" title="{{ __('common.show-qr-code') }}" />
-    <x-crud.form.common.create>
-        @section('default-create-form')
+    <x-crud.form.common.create name="participant" >
+        @section('participant-create-form')
             <x-input.hidden method="c" name="meeting_id" :value="$meeting->id" />
             <x-input.text method="c" name="title" title="title" icon="input-text" />
             <x-input.text method="c" name="first_name" title="first-name" icon="id-card" />
@@ -127,9 +127,9 @@
             <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.create>
-    <x-crud.form.common.delete />
-    <x-crud.form.common.edit>
-        @section('default-edit-form')
+    <x-crud.form.common.delete name="participant" />
+    <x-crud.form.common.edit name="participant" >
+        @section('participant-edit-form')
             <x-input.hidden method="e" name="meeting_id" :value="$meeting->id" />
             <x-input.text method="e" name="title" title="title" icon="input-text" />
             <x-input.text method="e" name="first_name" title="first-name" icon="id-card" />

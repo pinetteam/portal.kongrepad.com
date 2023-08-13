@@ -1,44 +1,51 @@
 @extends('layout.portal.common')
-@section('title', __('common.user').' | '.$user->title)
+@section('title', $user->full_name . ' | ' . __('common.user'))
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">
-            <h1 class="m-0 text-center">{{ __('common.user').' | '.$user->title }}</h1>
-        </div>
-        <div class="card-body">
-            <div class="row row-cols-1 row-cols-sm-2 flex-shrink-0 g-2">
-                <div class="col card text-bg-dark p-0">
-                    <div class="card-header">
-                        <h2 class="m-0 text-center h3">{{ __('common.user') }}</h2>
-                    </div>
-                    <div class="card-body p-0">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-id-card mx-1"></span> {{ __('common.name') }}:</b> @if($user->activity_status)
-                                    <div class="spinner-grow spinner-grow-sm text-success" role="status"></div>
-                                @else
-                                    <div class="spinner-border spinner-border-sm text-danger" role="status"></div>
-                                @endif
-                                {{ $user->full_name }}
-                            </li>
-                            <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-envelope mx-1"></span> {{ __('common.email') }}:</b> {{ $user->email }}</li>
-                            <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-mobile-screen mx-1"></span> {{ __('common.phone') }}:</b> {{ $user->full_phone }}</li>
-                            <li class="list-group-item bg-dark text-white"><b><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}:</b>
-                                @if($user->status)
-                                    {{ __('common.active') }}
-                                @else
-                                    {{ __('common.passive') }}
-                                @endif
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col card text-bg-dark p-0">
-                    <div class="card-header">
-                        <h2 class="m-0 text-center h3">{{ __('common.scores') }}</h2>
-                    </div>
-                    <div class="card-body p-0">
-                    </div>
-                </div>
+            <h1 class="text-center"><span class="fa-duotone fa-screen-users fa-fade"></span> <small>"{{ $user->full_name }}"</small></h1>
+            <div class="table-responsive">
+                <table class="table table-dark table-striped-columns table-bordered">
+                    <tr>
+                        <th scope="row" class="text-end w-25">{{ __('common.title') }}:</th>
+                        <td class="text-start w-25">{{ $user->title }}</td>
+                        <th scope="row" class="text-end w-25">{{ __('common.name') }}:</th>
+                        <td class="text-start w-25">
+                            @if($user->activity_status)
+                                <i style="color:green" class="fa-regular fa-toggle-on"></i>
+                            @else
+                                <i style="color:red" class="fa-regular fa-toggle-off"></i>
+                            @endif
+                            {{ $user->full_name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="text-end w-25">{{ __('common.email') }}:</th>
+                        <td class="text-start w-25">{{ $user->email }}</td>
+                        <th scope="row" class="text-end w-25">{{ __('common.identification-number') }}:</th>
+                        <td class="text-start w-25">{{ $user->identification_number }}</td>
+                    </tr>
+                    <tr>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="text-end w-25">{{ __('common.phone') }}:</th>
+                        <td class="text-start w-25">{{ $user->full_phone }}</td>
+                        <th scope="row" class="text-end w-25">{{ __('common.status') }}:</th>
+                        <td class="text-start w-25">
+                            @if($user->status)
+                                {{ __('common.active') }}
+                            @else
+                                {{ __('common.passive') }}
+                            @endif
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="text-end w-25">{{ __('common.created-by') }}:</th>
+                        <td class="text-start w-25"></td>
+                        <th scope="row" class="text-end w-25">{{ __('common.created-at') }}:</th>
+                        <td class="text-start w-25">{{ $user->created_at }}</td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>

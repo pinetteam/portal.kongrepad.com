@@ -54,6 +54,6 @@ class DocumentRequest extends FormRequest
     }
     public function failedValidation(Validator $validator)
     {
-        return back()->with('method', $this->method())->with('route', url()->current())->withErrors($this->validator)->withInput();
+        return back()->with('method', $this->method())->with('name', 'document')->with('route', url()->current())->withErrors($this->validator)->withInput();
     }
 }

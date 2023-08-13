@@ -52,7 +52,7 @@
         document.getElementById("kp-loading").style.visibility = "visible";
     });
 </script>
-@if($errors->any() && session('method'))
+@if($errors->any() && session('method') && session('name') == $name)
     @if(session('method')=='POST')
         <script type="module">
             new bootstrap.Modal('#{{ $name }}-create-modal', {}).show();

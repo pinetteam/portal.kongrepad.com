@@ -23,7 +23,11 @@
                         @foreach($user_roles as $user_role)
                             <tr>
                                 <td>{{ $user_role->title }}</td>
-                                <td>{{ $user_role->routes }}</td>
+                                <td>
+                                    @foreach($user_role->routes as $route)
+                                    {{$route}}
+                                    @endforeach
+                                </td>
                                 <td>
                                     @if($user_role->status)
                                         <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
@@ -37,12 +41,12 @@
                                             <span class="fa-regular fa-eye"></span>
                                         </a>
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.edit') }}">
-                                            <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#default-edit-modal" data-route="{{ route('portal.user-role.update', $user_role->id) }}" data-resource="{{ route('portal.user-role.edit', $user_role->id) }}" data-id="{{ $user_role->id }}">
+                                            <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#user-role-edit-modal" data-route="{{ route('portal.user-role.update', $user_role->id) }}" data-resource="{{ route('portal.user-role.edit', $user_role->id) }}" data-id="{{ $user_role->id }}">
                                                 <span class="fa-regular fa-pen-to-square"></span>
                                             </button>
                                         </div>
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
-                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#default-delete-modal" data-route="{{ route('portal.user-role.destroy', $user_role->id) }}" data-record="{{ $user_role->title}}">
+                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#user-role-delete-modal" data-route="{{ route('portal.user-role.destroy', $user_role->id) }}" data-record="{{ $user_role->title}}">
                                                 <span class="fa-regular fa-trash"></span>
                                             </button>
                                         </div>
@@ -55,21 +59,21 @@
             </div>
         </div>
         <div class="card-footer d-flex justify-content-center">
-            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#default-create-modal" data-route="{{ route('portal.user-role.store') }}">
+            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#user-role-create-modal" data-route="{{ route('portal.user-role.store') }}">
                 <i class="fa-solid fa-plus"></i> {{ __('common.create-new-user-role') }}
             </button>
         </div>
     </div>
-    <x-crud.form.common.create>
-        @section('default-create-form')
+    <x-crud.form.common.create name="user-role" >
+        @section('user-role-create-form')
             <x-input.text method="c" name="title" title="title" icon="input-text" />
             <x-input.checkbox method="c" name="routes" title="access-scopes" :options="$routes" option_value="route" option_name="code" icon="ballot-check" />
             <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.create>
-    <x-crud.form.common.delete />
-    <x-crud.form.common.edit>
-        @section('default-edit-form')
+    <x-crud.form.common.delete name="user-role" />
+    <x-crud.form.common.edit name="user-role" >
+        @section('user-role-edit-form')
             <x-input.text method="e" name="title" title="title" icon="input-text" />
             <x-input.checkbox method="e" name="routes" title="access-scopes" :options="$routes" option_value="route" option_name="code" icon="ballot-check" />
             <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />

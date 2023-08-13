@@ -44,6 +44,6 @@ class DebateRequest extends FormRequest
     }
     public function failedValidation(Validator $validator)
     {
-        return back()->with('method', $this->method())->with('route', url()->current())->withErrors($this->validator)->withInput();
+        return back()->with('method', $this->method())->with('name', 'debate')->with('route', url()->current())->withErrors($this->validator)->withInput();
     }
 }

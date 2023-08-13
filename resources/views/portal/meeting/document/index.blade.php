@@ -62,7 +62,7 @@
                                              data-bs-title="{{ __('common.edit') }}">
                                             <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}"
                                                     data-bs-toggle="modal"
-                                                    data-bs-target="#default-edit-modal"
+                                                    data-bs-target="#document-edit-modal"
                                                     data-route="{{ route('portal.meeting.document.update', ['meeting' => $meeting->id, 'document' => $document->id]) }}" data-resource="{{ route('portal.meeting.document.edit', ['meeting' => $meeting->id, 'document' => $document->id]) }}" data-id="{{ $document->id }}">
                                                 <span class="fa-regular fa-pen-to-square"></span>
                                             </button>
@@ -72,7 +72,7 @@
                                              data-bs-custom-class="kp-tooltip"
                                              data-bs-title="{{ __('common.delete') }}">
                                             <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}"
-                                                    data-bs-toggle="modal" data-bs-target="#default-delete-modal"
+                                                    data-bs-toggle="modal" data-bs-target="#document-delete-modal"
                                                     data-route="{{ route('portal.meeting.document.destroy', ['meeting' => $meeting->id, 'document' => $document->id]) }}" data-record="{{ $document->title }}">
                                                 <span class="fa-regular fa-trash"></span>
                                             </button>
@@ -87,14 +87,14 @@
         </div>
         <div class="card-footer d-flex justify-content-center">
             <button type="button" class="btn btn-success btn-lg w-100"
-                    data-bs-toggle="modal" data-bs-target="#default-create-modal"
+                    data-bs-toggle="modal" data-bs-target="#document-create-modal"
                     data-route="{{ route('portal.meeting.document.store', ['meeting' => $meeting->id]) }}">
                 <i class="fa-solid fa-plus"></i> {{ __('common.create-new-document') }}
             </button>
         </div>
     </div>
-    <x-crud.form.common.create>
-        @section('default-create-form')
+    <x-crud.form.common.create name="document">
+        @section('document-create-form')
             <x-input.hidden method="c" name="meeting_id" :value="$meeting->id" />
             <x-input.file method="c" name="file" title="file" icon="file-import" />
             <x-input.text method="c" name="title" title="title" icon="input-text" />
@@ -102,9 +102,9 @@
             <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.create>
-    <x-crud.form.common.delete />
-    <x-crud.form.common.edit>
-        @section('default-edit-form')
+    <x-crud.form.common.delete name="document"/>
+    <x-crud.form.common.edit name="document">
+        @section('document-edit-form')
             <x-input.hidden method="c" name="meeting_id" :value="$meeting->id" />
             <x-input.file method="e" name="file" title="file" icon="file-import" />
             <x-input.text method="e" name="title" title="title" icon="input-text" />

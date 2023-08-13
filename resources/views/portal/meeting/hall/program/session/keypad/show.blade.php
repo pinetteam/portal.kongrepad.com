@@ -48,7 +48,7 @@
                                                     class="btn btn-warning btn-sm"
                                                     title="{{ __('common.edit') }}"
                                                     data-bs-toggle="modal"
-                                                    data-bs-target="#default-edit-modal"
+                                                    data-bs-target="#option-edit-modal"
                                                     data-route="{{ route('portal.meeting.hall.program.session.keypad.option.update', ['meeting'=>$keypad->session->program->hall->meeting_id, 'hall'=>$keypad->session->program->hall_id, 'program'=>$keypad->session->program_id, 'session'=> $keypad->session->id, 'keypad' => $keypad->id, 'option' => $option->id]) }}"
                                                     data-resource="{{ route('portal.meeting.hall.program.session.keypad.option.edit', ['meeting'=>$keypad->session->program->hall->meeting_id, 'hall'=>$keypad->session->program->hall_id, 'program'=>$keypad->session->program_id, 'session'=> $keypad->session->id, 'keypad' => $keypad->id, 'option' => $option->id]) }}"
                                                     data-id="{{ $option->id }}">
@@ -81,14 +81,14 @@
                 </div>
                 {{--create button--}}
                 <div class="card-footer d-flex justify-content-center">
-                    <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#default-create-modal" data-route="{{ route('portal.meeting.hall.program.session.keypad.option.store',['meeting'=>$keypad->session->program->hall->meeting_id, 'hall'=>$keypad->session->program->hall_id, 'program'=>$keypad->session->program_id, 'session'=> $keypad->session->id, 'keypad' => $keypad->id]) }}">
+                    <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#option-create-modal" data-route="{{ route('portal.meeting.hall.program.session.keypad.option.store',['meeting'=>$keypad->session->program->hall->meeting_id, 'hall'=>$keypad->session->program->hall_id, 'program'=>$keypad->session->program_id, 'session'=> $keypad->session->id, 'keypad' => $keypad->id]) }}">
                         <i class="fa-solid fa-plus"></i> {{ __('common.create-new-option') }}
                     </button>
                 </div>
 
                 {{--create form--}}
-                <x-crud.form.common.create >
-                    @section('default-create-form')
+                <x-crud.form.common.create name="option">
+                    @section('option-create-form')
                         <x-input.hidden method="c" name="keypad_id" :value="$keypad->id"/>
                         <x-input.text method="c" name="option" title="option" icon="list-dropdown" />
                         <x-input.number method="c" name="sort_order" title="sort" icon="circle-sort" />
@@ -98,8 +98,8 @@
                 <x-crud.form.common.delete name="option" />
 
                 {{--edit form--}}
-                <x-crud.form.common.edit>
-                    @section('default-edit-form')
+                <x-crud.form.common.edit name="option">
+                    @section('option-edit-form')
                         <x-input.hidden method="e" name="keypad_id" :value="$keypad->id"/>
                         <x-input.text method="e" name="option" title="option" icon="list-dropdown" />
                         <x-input.number method="e" name="sort_order" title="sort" icon="circle-sort" />

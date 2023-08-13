@@ -52,12 +52,12 @@
                                             <span class="fa-regular fa-eye"></span>
                                         </a>
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.edit') }}">
-                                            <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#default-edit-modal" data-route="{{ route('portal.user.update', $user->id) }}" data-resource="{{ route('portal.user.edit', $user->id) }}" data-id="{{ $user->id }}">
+                                            <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#user-edit-modal" data-route="{{ route('portal.user.update', $user->id) }}" data-resource="{{ route('portal.user.edit', $user->id) }}" data-id="{{ $user->id }}">
                                                 <span class="fa-regular fa-pen-to-square"></span>
                                             </button>
                                         </div>
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
-                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#default-delete-modal" data-route="{{ route('portal.user.destroy', $user->id) }}" data-record="{{ $user->full_name }}">
+                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#user-delete-modal" data-route="{{ route('portal.user.destroy', $user->id) }}" data-record="{{ $user->full_name }}">
                                                 <span class="fa-regular fa-trash"></span>
                                             </button>
                                         </div>
@@ -70,13 +70,13 @@
             </div>
         </div>
         <div class="card-footer d-flex justify-content-center">
-            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#default-create-modal" data-route="{{ route('portal.user.store') }}">
+            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#user-create-modal" data-route="{{ route('portal.user.store') }}">
                 <i class="fa-solid fa-plus"></i> {{ __('common.create-new-user') }}
             </button>
         </div>
     </div>
-    <x-crud.form.common.create>
-        @section('default-create-form')
+    <x-crud.form.common.create name="user">
+        @section('user-create-form')
             <x-input.select method="c" name="user_role_id" title="user-role" :options="$user_roles" option_value="id" option_name="title" icon="person-military-pointing" />
             <x-input.text method="c" name="username" title="username" icon="id-card-clip" />
             <x-input.text method="c" name="first_name" title="first-name" icon="id-card" />
@@ -88,9 +88,9 @@
             <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.create>
-    <x-crud.form.common.delete />
-    <x-crud.form.common.edit>
-        @section('default-edit-form')
+    <x-crud.form.common.delete name="user"/>
+    <x-crud.form.common.edit name="user">
+        @section('user-edit-form')
             <x-input.select method="e" name="user_role_id" title="user-role" :options="$user_roles" option_value="id" option_name="title" icon="person-military-pointing" />
             <x-input.text method="e" name="username" title="username" icon="id-card-clip" />
             <x-input.text method="e" name="first_name" title="first-name" icon="id-card" />

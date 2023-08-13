@@ -25,7 +25,7 @@ class OptionController extends Controller
                 $option->save();
                 return back()->with('success',__('common.created-successfully'));
             } else {
-                return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
+                return back()->with('create_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
             }
         }
     }
@@ -45,7 +45,7 @@ class OptionController extends Controller
             if ($option->save()) {
                 $option->updated_by = Auth::user()->id;
                 $option->save();
-                return back()->with('success',__('common.created-successfully'));
+                return back()->with('success',__('common.edited-successfully'));
             } else {
                 return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
             }

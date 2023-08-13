@@ -132,7 +132,6 @@
                                             <tr>
                                                 <th scope="col"><span class="fa-regular fa-messages-question mx-1"></span> {{ __('common.option-title') }}</th>
                                                 <th scope="col"><span class="fa-regular fa-circle-sort mx-1"></span> {{ __('common.sort-order') }}</th>
-                                                <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}</th>
                                                 <th scope="col" class=""></th>
                                             </tr>
                                             </thead>
@@ -141,13 +140,6 @@
                                                 <tr>
                                                     <td>{{$option->option}}</td>
                                                     <td>{{$option->sort_order}}</td>
-                                                    <td>
-                                                        @if($option->status)
-                                                            <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
-                                                        @else
-                                                            <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
-                                                        @endif
-                                                    </td>
                                                     <td class="text-end">
                                                         <div class="btn-group" role="group"
                                                              aria-label="{{ __('common.processes') }}">

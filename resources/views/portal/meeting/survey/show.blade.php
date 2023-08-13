@@ -203,25 +203,27 @@
         </div>
     </div>
 
-    <x-crud.form.common.create method="c-0" name="option">
+    <x-crud.form.common.create method="c-o" name="option">
         @section('option-create-form')
-            <x-input.hidden method="c-0" name="survey_id" :value="1"/>
-            <x-input.hidden method="c-0" name="question_id" :value="$question->id"/>
-            <x-input.text method="c-0" name="option" title="option" icon="list-dropdown"/>
-            <x-input.number method="c-0" name="sort_order" title="sort" icon="circle-sort"/>
-            <x-input.radio method="c-0" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on"/>
+            <x-input.hidden method="c-o" name="survey_id" :value="$survey->id"/>
+            <x-input.hidden method="c-o" name="question_id" value="1"/>
+            <x-input.text method="c-o" name="option" title="option" icon="list-dropdown"/>
+            <x-input.number method="c-o" name="sort_order" title="sort" icon="circle-sort"/>
+            <x-input.radio method="c-o" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on"/>
         @endsection
     </x-crud.form.common.create>
     <x-crud.form.common.delete name="option"/>
     <x-crud.form.common.edit method="e-o" name="option">
         @section('option-edit-form')
-            <x-input.hidden method="e-o" name="survey_id" :value="1"/>
-            <x-input.hidden method="e-o" name="question_id" :value="$question->id"/>
+            <x-input.hidden method="e-o" name="survey_id" :value="$survey->id"/>
+            <x-input.hidden method="e-o" name="question_id" value="1"/>
             <x-input.text method="e-o" name="option" title="option" icon="list-dropdown"/>
             <x-input.number method="e-o" name="sort_order" title="sort" icon="circle-sort"/>
             <x-input.radio method="e-o" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on"/>
         @endsection
     </x-crud.form.common.edit>
+
+
     <x-crud.form.common.create name="question">
         @section('question-create-form')
             <x-input.hidden method="c" name="survey_id" :value="$survey->id"/>

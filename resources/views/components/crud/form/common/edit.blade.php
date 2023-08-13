@@ -123,7 +123,7 @@
         document.getElementById("kp-loading").style.visibility = "visible";
     });
 </script>
-@if($errors->any() && session('method') && session('route'))
+@if($errors->any() && session('method') && session('route') && session('route') && session('name') == $name)
     @if(session('method')=='PATCH' || session('method')=='PUT')
         <script type="module">
             new bootstrap.Modal('#{{ $name }}-edit-modal', {}).show();
