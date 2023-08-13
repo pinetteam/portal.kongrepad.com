@@ -24,7 +24,7 @@
                                     <table class="table table-dark table-striped table-hover">
                                         <tbody>
                                         <tr>
-                                            <th scope="col"><span class="fa-regular fa-pen-field mx-1"></span> {{ __('common.keypad') }}</th>
+                                            <th scope="col"><span class="fa-regular fa-messages fa-fade mx-1"></span> {{ __('common.debate') }}</th>
                                             <td>{{$debate->title}}</td>
                                         </tr>
                                         <tr>
