@@ -24,10 +24,6 @@
                                 <table class="table table-dark table-striped table-hover">
                                     <tbody>
                                     <tr>
-                                        <th scope="col"><span class="fa-regular fa-bee mx-1"></span> {{ __('common.session') }}</th>
-                                        <td>{{$keypad->session->title}}</td>
-                                    </tr>
-                                    <tr>
                                         <th scope="col"><span class="fa-regular fa-pen-field mx-1"></span> {{ __('common.keypad') }}</th>
                                         <td>{{$keypad->keypad}}</td>
                                     </tr>

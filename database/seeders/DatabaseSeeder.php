@@ -36,6 +36,8 @@ class DatabaseSeeder extends Seeder
         $this->call(OptionSeeder::class);
         $this->call(SurveyVoteSeeder::class);
         $this->call(KeypadVoteSeeder::class);
+        $this->call(DebateVoteSeeder::class);
+        $this->call(DebateTeamSeeder::class);
 
 
     }
