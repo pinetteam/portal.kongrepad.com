@@ -25,13 +25,13 @@
                                         <tbody>
                                         <tr>
                                             <th scope="col"><span class="fa-regular fa-messages fa-fade mx-1"></span> {{ __('common.debate') }}</th>
-                                            <td>{{$debate->title}}</td>
+                                            <td>{{ $debate->title }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="col"><span class="fa-regular fa-calendar-arrow-up mx-1"></span> {{ __('common.voting-started-at') }}</th>
                                             <td>
                                                 @if($debate->voting_started_at)
-                                                    {{$debate->voting_started_at}}
+                                                    {{ $debate->voting_started_at }}
                                                 @else
                                                     <i class="text-info">{{__('common.unspecified')}}</i>
                                                 @endif

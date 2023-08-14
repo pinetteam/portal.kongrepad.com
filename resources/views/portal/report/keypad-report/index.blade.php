@@ -25,17 +25,17 @@
                                     <tbody>
                                     <tr>
                                         <th scope="col"><span class="fa-regular fa-bee mx-1"></span> {{ __('common.session') }}</th>
-                                        <td>{{$keypad->session->title}}</td>
+                                        <td>{{ $keypad->session->title }}</td>
                                     </tr>
                                     <tr>
                                         <th scope="col"><span class="fa-regular fa-pen-field mx-1"></span> {{ __('common.keypad') }}</th>
-                                        <td>{{$keypad->keypad}}</td>
+                                        <td>{{ $keypad->keypad }}</td>
                                     </tr>
                                     <tr>
                                         <th scope="col"><span class="fa-regular fa-calendar-arrow-up mx-1"></span> {{ __('common.voting-started-at') }}</th>
                                         <td>
                                             @if($keypad->voting_started_at)
-                                                {{$keypad->voting_started_at}}
+                                                {{ $keypad->voting_started_at }}
                                             @else
                                                 <i class="text-info">{{__('common.unspecified')}}</i>
                                             @endif
@@ -45,7 +45,7 @@
                                         <th scope="col"><span class="fa-regular fa-calendar-arrow-down mx-1"></span> {{ __('common.voting-finished-at') }}</th>
                                         <td>
                                             @if($keypad->voting_finished_at)
-                                                {{$keypad->voting_finished_at}}
+                                                {{ $keypad->voting_finished_at }}
                                             @else
                                                 <i class="text-info">{{__('common.unspecified')}}</i>
                                             @endif
@@ -68,7 +68,7 @@
                         <td>
                             <div class="chart-container">
                                 <div class="pie-chart-container">
-                                    <canvas id="pie-chart-{{$keypad->id}}"></canvas>
+                                    <canvas id="pie-chart-{{ $keypad->id }}"></canvas>
                                 </div>
                             </div>
                         </td>

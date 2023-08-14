@@ -68,11 +68,11 @@
                                         <tbody>
                                         <tr>
                                             <th scope="col"><span class="fa-regular fa-messages-question mx-1"></span> {{ __('common.question-title') }}</th>
-                                            <td>{{$question->question}}</td>
+                                            <td>{{ $question->question }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="col"><span class="fa-regular fa-circle-sort mx-1"></span> {{ __('common.sort-order') }}</th>
-                                            <td>{{$question->sort_order}}</td>
+                                            <td>{{ $question->sort_order }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}</th>
@@ -91,7 +91,7 @@
                             <td>
                                 <div class="chart-container">
                                     <div class="pie-chart-container">
-                                        <canvas id="pie-chart-{{$question->id}}"></canvas>
+                                        <canvas id="pie-chart-{{ $question->id }}"></canvas>
                                     </div>
                                 </div>
                             </td>

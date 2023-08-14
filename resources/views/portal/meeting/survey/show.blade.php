@@ -1,7 +1,6 @@
 @extends('layout.portal.common')
-@section('title', __('common.survey').' | '.$survey->title)
+@section('title', $survey->title . ' | ' . __('common.survey'))
 @section('body')
-
     <div class="card text-bg-dark">
         <div class="card-header">
             <h1 class="text-center">
@@ -63,9 +62,9 @@
                             <tbody>
                             <tr>
                                 <td rowspan="2" style="width: 2%"></td>
-                                <td rowspan="1">{{$question->question}}</td>
-                                <td rowspan="1">{{$question->sort_order}}</td>
-                                <td rowspan="1">{{$question->options->count()}}</td>
+                                <td rowspan="1">{{ $question->question }}</td>
+                                <td rowspan="1">{{ $question->sort_order }}</td>
+                                <td rowspan="1">{{ $question->options->count() }}</td>
                                 <td rowspan="1">
                                     @if($question->status)
                                         <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
@@ -139,8 +138,8 @@
                                             <tbody>
                                             @foreach($question->options as $option)
                                                 <tr>
-                                                    <td>{{$option->option}}</td>
-                                                    <td>{{$option->sort_order}}</td>
+                                                    <td>{{ $option->option }}</td>
+                                                    <td>{{ $option->sort_order }}</td>
                                                     <td>
                                                         @if($option->status)
                                                             <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
@@ -216,7 +215,7 @@
     <x-crud.form.common.edit method="e-o" name="option">
         @section('option-edit-form')
             <x-input.hidden method="e-o" name="survey_id" :value="$survey->id"/>
-            <x-input.hidden method="e-o" name="question_id" value="1"/>
+            <x-input.hidden method="e-o" name="question_id" :value="$question->id"/>
             <x-input.text method="e-o" name="option" title="option" icon="list-dropdown"/>
             <x-input.number method="e-o" name="sort_order" title="sort" icon="circle-sort"/>
             <x-input.radio method="e-o" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on"/>

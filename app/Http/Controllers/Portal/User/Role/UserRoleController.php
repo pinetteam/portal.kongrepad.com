@@ -27,10 +27,10 @@ class UserRoleController extends Controller
             $user_role = new Role();
             $user_role->customer_id = Auth::user()->customer->id;
             $user_role->title = $request->input('title');
-            if ($request->has('access_scopes')) {
-                $user_role->access_scopes = $request->input('access_scopes');
+            if ($request->has('routes')) {
+                $user_role->routes = $request->input('routes');
             } else {
-                $user_role->access_scopes = [];
+                $user_role->routes = [];
             }
             $user_role->status = $request->input('status');
             if ($user_role->save()) {
@@ -54,10 +54,10 @@ class UserRoleController extends Controller
         if ($request->validated()) {
             $user_role = Auth::user()->customer->userRoles()->findOrFail($id);
             $user_role->title = $request->input('title');
-            if ($request->has('access_scopes')) {
-                $user_role->access_scopes = $request->input('access_scopes');
+            if ($request->has('routes')) {
+                $user_role->routes = $request->input('routes');
             } else {
-                $user_role->access_scopes = [];
+                $user_role->routes = [];
             }
             $user_role->status = $request->input('status');
             if ($user_role->save()) {
