@@ -10,13 +10,13 @@ use Illuminate\Support\Facades\Auth;
 
 class OptionController extends Controller
 {
-    public function store(OptionRequest $request)
+    public function store(OptionRequest $request, string $meeting, string $survey, string $question)
     {
 
         if ($request->validated()) {
             $option = new Option();
             $option->survey_id = $request->input('survey_id');
-            $option->question_id = $request->input('question_id');
+            $option->question_id = $question;
             $option->option = $request->input('option');
             $option->sort_order = $request->input('sort_order');
             $option->status= $request->input('status');
