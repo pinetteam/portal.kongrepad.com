@@ -206,7 +206,7 @@
     <x-crud.form.common.create method="c-o" name="option">
         @section('option-create-form')
             <x-input.hidden method="c-o" name="survey_id" :value="$survey->id"/>
-            <x-input.hidden method="c-o" name="question_id" :value="$question->id"/>
+            <x-input.hidden method="c-o" name="question_id" value="1"/>
             <x-input.text method="c-o" name="option" title="option" icon="list-dropdown"/>
             <x-input.number method="c-o" name="sort_order" title="sort" icon="circle-sort"/>
             <x-input.radio method="c-o" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on"/>

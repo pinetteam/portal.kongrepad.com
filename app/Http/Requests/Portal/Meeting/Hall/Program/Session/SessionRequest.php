@@ -25,11 +25,11 @@ class SessionRequest extends FormRequest
                     'code' => 'nullable|max:255',
                     'title' => 'required|max:255',
                     'description' => 'nullable|max:65535',
-                    'start_at' => 'nullable|date_format:Y-m-d H:i|before_or_equal:finish_at|required_with:finish_at',
-                    'finish_at' => 'nullable|date_format:Y-m-d H:i|after_or_equal:start_at|required_with:start_at',
+                    'start_at' => 'required|date_format:Y-m-d H:i|before_or_equal:finish_at|required_with:finish_at',
+                    'finish_at' => 'required|date_format:Y-m-d H:i|after_or_equal:start_at|required_with:start_at',
                     'questions' => 'boolean|required',
                     'questions_auto_start' => 'boolean|required_if:questions,1',
-                    'question_limit' => 'required_if:questions,1|integer',
+                    'questions_limit' => 'required_if:questions,1|integer',
                     'status' => 'boolean|required',
                 ];
             }
@@ -49,7 +49,7 @@ class SessionRequest extends FormRequest
             'start_at' => __('common.start-at'),
             'finish_at' => __('common.finish-at'),
             'questions' => __('common.questions'),
-            'question_limit' => __('common.question-limit'),
+            'questions_limit' => __('common.question-limit'),
             'status' => __('common.status'),
         ];
     }
