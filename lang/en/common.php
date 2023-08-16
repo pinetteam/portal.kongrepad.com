@@ -239,5 +239,7 @@ return [
     'debate-reports' => 'Debate Reports',
     'report' => 'Report',
     'reports' => 'Reports',
-    'meeting-halls'=> 'Meeting Halls'
+    'meeting-halls' => 'Meeting Halls',
+    'enrollment' => 'Enrollment',
+    'gdpr-consent' => 'GDPR Consent'
 ];

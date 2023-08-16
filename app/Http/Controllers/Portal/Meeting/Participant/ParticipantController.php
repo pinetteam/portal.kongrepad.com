@@ -20,13 +20,13 @@ class ParticipantController extends Controller
         $participants = Auth::user()->customer->participants()->where('meeting_id', $meeting->id)->paginate(20);
         $phone_countries = Country::get(['id', 'name']);
         $types = [
-            'agent' => ["value" => "agent", "title" => __('common.agent')],
-            'attendee' => ["value" => "attendee", "title" => __('common.attendee')],
-            'team' => ["value" => "team", "title" => __('common.team')],
+            'agent' => ['value' => 'agent', 'title' => __('common.agent')],
+            'attendee' => ['value' => 'attendee', 'title' => __('common.attendee')],
+            'team' => ['value' => 'team', 'title' => __('common.team')],
         ];
         $statuses = [
-            'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-            'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
+            'passive' => ['value' => 0, 'title' => __('common.passive'), 'color' => 'danger'],
+            'active' => ['value' => 1, 'title' => __('common.active'), 'color' => 'success'],
         ];
         return view('portal.meeting.participant.index', compact(['meeting', 'participants', 'phone_countries', 'types', 'statuses']));
     }
@@ -58,22 +58,21 @@ class ParticipantController extends Controller
     }
     public function show(int $meeting, int $id)
     {
-        $participant = Auth::user()->customer->participants()->where('meeting_id', $meeting)->findOrFail($id);
-        $statuses = [
-            'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-            'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
-        ];
-        return view('portal.meeting.participant.show', compact(['participant', 'statuses']));
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $participant = $meeting->participants()->findOrFail($id);
+        return view('portal.meeting.participant.show', compact(['meeting', 'participant']));
     }
     public function edit(int $meeting, int $id)
     {
-        $participant = Auth::user()->customer->participants()->where('meeting_id', $meeting)->findOrFail($id);
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $participant = $meeting->participants()->findOrFail($id);
         return new ParticipantResource($participant);
     }
     public function update(ParticipantRequest $request, int $meeting, int $id)
     {
         if ($request->validated()) {
-            $participant = Auth::user()->customer->participants()->where('meeting_id', $meeting)->findOrFail($id);
+            $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+            $participant = $meeting->participants()->findOrFail($id);
             $participant->title = $request->input('title');
             $participant->first_name = $request->input('first_name');
             $participant->last_name = $request->input('last_name');
@@ -97,7 +96,8 @@ class ParticipantController extends Controller
     }
     public function destroy(int $meeting, int $id)
     {
-        $participant = Auth::user()->customer->participants()->where('meeting_id', $meeting)->findOrFail($id);
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $participant = $meeting->participants()->findOrFail($id);
         if ($participant->delete()) {
             $participant->deleted_by = Auth::user()->id;
             $participant->save();
@@ -108,7 +108,8 @@ class ParticipantController extends Controller
     }
     public function qrCode(int $meeting, int $id)
     {
-        $participant = Auth::user()->customer->participants()->where('meeting_id', $meeting)->findOrFail($id);
-        return QrCode::size(200)->generate($participant->username);
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $participant = $meeting->participants()->findOrFail($id);
+        return QrCode::size(256)->generate($participant->username);
     }
 }

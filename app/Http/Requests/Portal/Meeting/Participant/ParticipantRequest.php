@@ -55,7 +55,6 @@ class ParticipantRequest extends FormRequest
     {
         return [
             'meeting_id' => __('common.meeting'),
-            'username' => __('common.username'),
             'title' => __('common.title'),
             'first_name' => __('common.first-name'),
             'last_name' => __('common.last-name'),

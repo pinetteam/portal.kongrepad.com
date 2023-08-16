@@ -54,10 +54,12 @@ class Participant extends Model
         'last_login_datetime' => 'datetime',
         'last_activity' => 'timestamp',
     ];
+    protected $perPage = 30;
+    /*
     public function meeting()
     {
         return $this->belongsTo(Meeting::class, 'meeting_id', 'id');
-    }
+    }*/
     public function getActivityStatusAttribute()
     {
         if($this->last_activity !== null) {

@@ -15,12 +15,14 @@
                         <tr>
                             <th scope="col"><span class="fa-regular fa-bee mx-1"></span> {{ __('common.meeting') }}</th>
                             <th scope="col"><span class="fa-regular fa-id-card mx-1"></span> {{ __('common.name') }}</th>
-                            <th scope="col"><span class="fa-regular fa-building-columns mx-1"></span> {{ __('common.organisation') }}</th>
                             <th scope="col"><span class="fa-regular fa-fingerprint mx-1"></span> {{ __('common.identification-number') }}</th>
+                            <th scope="col"><span class="fa-regular fa-building-columns mx-1"></span> {{ __('common.organisation') }}</th>
                             <th scope="col"><span class="fa-regular fa-envelope mx-1"></span> {{ __('common.email') }}</th>
                             <th scope="col"><span class="fa-regular fa-mobile-screen mx-1"></span> {{ __('common.phone') }}</th>
-                            <th scope="col"><span class="fa-regular fa-person-military-pointing mx-1"></span> {{ __('common.type') }}</th>
                             <th scope="col"><span class="fa-regular fa-right-to-bracket mx-1"></span> {{ __('common.last-login') }}</th>
+                            <th scope="col"><span class="fa-regular fa-person-military-pointing mx-1"></span> {{ __('common.type') }}</th>
+                            <th scope="col"><span class="fa-regular fa-square-check mx-1"></span> {{ __('common.enrollment') }}</th>
+                            <th scope="col"><span class="fa-regular fa-handshake mx-1"></span> {{ __('common.gdpr-consent') }}</th>
                             <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}</th>
                             <th scope="col" class="text-end"></th>
                         </tr>
@@ -37,12 +39,26 @@
                                     @endif
                                     {{ $participant->full_name }}
                                 </td>
-                                <td>{{ $participant->organisation }}</td>
-                                <td>{{ $participant->identification_number }}</td>
+                                <td>{{ $participant->identification_number_show }}</td>
+                                <td>{{ $participant->organisation_show }}</td>
                                 <td>{{ $participant->email }}</td>
                                 <td>{{ $participant->full_phone }}</td>
-                                <td>{{ __('common.'.$participant->type) }}</td>
                                 <td>{{ $participant->last_login }}</td>
+                                <td>{{ __('common.'.$participant->type) }}</td>
+                                <td>
+                                    @if($participant->enrolled)
+                                        <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
+                                    @else
+                                        <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($participant->gdpr_consent)
+                                        <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
+                                    @else
+                                        <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
+                                    @endif
+                                </td>
                                 <td>
                                     @if($participant->status)
                                         <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
