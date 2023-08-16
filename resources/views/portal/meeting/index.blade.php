@@ -26,20 +26,8 @@
                             <tr>
                                 <td>{{ $meeting->code }}</td>
                                 <td>{{ $meeting->title }}</td>
-                                <td>
-                                    @if($meeting->start_at)
-                                        {{ $meeting->start_at }}
-                                    @else
-                                        <i class="text-info">{{ __('common.unspecified') }}</i>
-                                    @endif
-                                </td>
-                                <td>
-                                    @if($meeting->finish_at)
-                                        {{ $meeting->finish_at }}
-                                    @else
-                                        <i class="text-info">{{ __('common.unspecified') }}</i>
-                                    @endif
-                                </td>
+                                <td>{{ $meeting->start_at }}</td>
+                                <td>{{ $meeting->finish_at }}</td>
                                 <td>
                                     @if($meeting->status)
                                         <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>

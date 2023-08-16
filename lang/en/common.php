@@ -37,6 +37,7 @@ return [
     'moderators' => 'Moderators',
     'participant' => 'Participant',
     'file' => 'File',
+    'announcements' => 'Announcements',
     'presentation' => 'Presentation',
     'publication' => 'Publication',
     'other' => 'Other',

@@ -59,13 +59,17 @@
                                 <h1 class="m-0 text-center"><span class="badge text-bg-dark">2.</span> {{ __('common.event-and-activity') }}</h1>
                             </div>
                             <div class="card-body">
-                                <a class="btn btn-outline-light btn-lg w-100" href="{{ route('portal.meeting.survey.index', ['meeting' => $meeting->id]) }}" title="{{ __('common.show') }}">
-                                    <span class="fa-duotone fa-square-poll-horizontal"></span> {{ __('common.surveys') }}
+                                <a class="btn btn-outline-light btn-lg w-100" href="{{ route('portal.meeting.announcement.index', ['meeting' => $meeting->id]) }}" title="{{ __('common.show') }}">
+                                    <span class="fa-duotone fa-megaphone"></span> {{ __('common.announcements') }}
                                 </a>
                                 <hr />
                                 <a class="btn btn-outline-light btn-lg w-100" href="{{ route('portal.meeting.score-game.index', ['meeting' => $meeting->id]) }}" title="{{ __('common.show') }}">
                                     <span class="fa-duotone fa-hundred-points"></span>
-                                    {{ __('common.score-game') }}
+                                    {{ __('common.score-games') }}
+                                </a>
+                                <hr />
+                                <a class="btn btn-outline-light btn-lg w-100" href="{{ route('portal.meeting.survey.index', ['meeting' => $meeting->id]) }}" title="{{ __('common.show') }}">
+                                    <span class="fa-duotone fa-square-poll-horizontal"></span> {{ __('common.surveys') }}
                                 </a>
                             </div>
                         </div>
@@ -78,6 +82,10 @@
                             <div class="card-body">
                                 <a class="btn btn-outline-light btn-lg w-100" href="{{ route('portal.meeting.hall.index', ['meeting' => $meeting->id]) }}" title="{{ __('common.show') }}">
                                     <span class="fa-duotone fa-hotel"></span> {{ __('common.halls') }}
+                                </a>
+                                <hr />
+                                <a class="btn btn-outline-light btn-lg w-100" href="{{ route('portal.meeting.virtual-stand.index', ['meeting' => $meeting->id]) }}" title="{{ __('common.show') }}">
+                                    <span class="fa-duotone fa-browser"></span> {{ __('common.virtual-stands') }}
                                 </a>
                             </div>
                         </div>

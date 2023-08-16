@@ -2,7 +2,6 @@
 
 namespace App\Models\Meeting\Participant;
 
-use App\Models\Meeting\Meeting;
 use App\Models\System\Country\Country;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -85,6 +84,10 @@ class Participant extends Model
         } else {
             return __('common.unspecified');
         }
+    }
+    public function getOrganisationShowAttribute()
+    {
+        return isset($this->organisation) ? $this->organisation : __('common.unspecified');
     }
     public function getLastLoginAttribute()
     {

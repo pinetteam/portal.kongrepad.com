@@ -4,11 +4,6 @@ namespace App\Models\Meeting;
 
 use App\Models\Meeting\Document\Document;
 use App\Models\Meeting\Hall\Hall;
-use App\Models\Meeting\Hall\Program\Chair\Chair;
-use App\Models\Meeting\Hall\Program\Debate\Debate;
-use App\Models\Meeting\Hall\Program\Program;
-use App\Models\Meeting\Hall\Program\Session\Keypad\Keypad;
-use App\Models\Meeting\Hall\Program\Session\Session;
 use App\Models\Meeting\Participant\Participant;
 use App\Models\Meeting\ScoreGame\ScoreGame;
 use App\Models\Meeting\Survey\Survey;
@@ -51,51 +46,45 @@ class Meeting extends Model
         'start_at' => 'datetime:Y-m-d',
         'finish_at' => 'datetime:Y-m-d',
     ];
-
+    protected $perPage = 30;
     protected function startAt(): Attribute
     {
-        $date_format = Variable::where('variable','date_format')->first()->settings()->where('customer_id', Auth::user()->customer->id)->first()->value;
+        $date_format = Variable::where('variable', 'date_format')->first()->settings()->where('customer_id', Auth::user()->customer->id)->first()->value;
         return Attribute::make(
-            get: fn(string $startAt) => Carbon::createFromFormat('Y-m-d', $startAt)->format($date_format),
-            set: fn(string $startAt) => Carbon::createFromFormat($date_format, $startAt)->format('Y-m-d'),
+            get: fn($startAt) => $startAt ? Carbon::createFromFormat('Y-m-d', $startAt)->format($date_format) : __('common.unspecified'),
+            set: fn($startAt) => $startAt ? Carbon::createFromFormat($date_format, $startAt)->format('Y-m-d') : null,
         );
     }
-
     protected function finishAt(): Attribute
     {
-        $date_format = Variable::where('variable','date_format')->first()->settings()->where('customer_id', Auth::user()->customer->id)->first()->value;
+        $date_format = Variable::where('variable', 'date_format')->first()->settings()->where('customer_id', Auth::user()->customer->id)->first()->value;
         return Attribute::make(
-            get: fn(string $finishAt) => Carbon::createFromFormat('Y-m-d', $finishAt)->format($date_format),
-            set: fn(string $finishAt) => Carbon::createFromFormat($date_format, $finishAt)->format('Y-m-d'),
+            get: fn($finishAt) => $finishAt ? Carbon::createFromFormat('Y-m-d', $finishAt)->format($date_format) : __('common.unspecified'),
+            set: fn($finishAt) => $finishAt ? Carbon::createFromFormat($date_format, $finishAt)->format('Y-m-d') : null,
         );
     }
-
-    public function halls()
-    {
-        return $this->hasMany(Hall::class, 'meeting_id', 'id');
-    }
-
     public function documents()
     {
         return $this->hasMany(Document::class, 'meeting_id', 'id');
     }
-
+    public function halls()
+    {
+        return $this->hasMany(Hall::class, 'meeting_id', 'id');
+    }
+    public function participants()
+    {
+        return $this->hasMany(Participant::class, 'meeting_id', 'id');
+    }
+    public function scoreGames()
+    {
+        return $this->hasMany(ScoreGame::class, 'meeting_id', 'id');
+    }
     public function surveys()
     {
         return $this->hasMany(Survey::class, 'meeting_id', 'id');
     }
 
-    public function scoreGames()
-    {
-        return $this->hasMany(ScoreGame::class, 'meeting_id', 'id');
-    }
-
-    public function participants()
-    {
-        return $this->hasMany(Participant::class, 'meeting_id', 'id');
-    }
-
-    public function programs()
+    /*public function programs()
     {
         return $this->hasManyThrough(Program::class, Hall::class, 'meeting_id', 'hall_id', 'id');
     }
@@ -139,5 +128,5 @@ class Meeting extends Model
             ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
             ->where('meetings.id', $this->getkey());
         return $chairs;
-    }
+    }*/
 }

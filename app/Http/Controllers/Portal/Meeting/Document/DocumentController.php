@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Portal\Meeting\Document\DocumentRequest;
 use App\Http\Resources\Portal\Meeting\Document\DocumentResource;
 use App\Models\Meeting\Document\Document;
+use App\Models\Meeting\Meeting;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -14,14 +15,15 @@ class DocumentController extends Controller
 {
     public function index(int $meeting)
     {
-        $documents = Auth::user()->customer->documents()->where('meeting_id', $meeting)->paginate(20);
+        $meeting = Meeting::findOrFail($meeting);
+        $documents = Auth::user()->customer->documents()->where('meeting_id', $meeting->id)->paginate(20);
         $sharing_via_emails = [
-            'not-allowed' => ["value" => 0, "title" => __('common.not-allowed'), 'color' => 'danger'],
-            'allowed' => ["value" => 1, "title" => __('common.allowed'), 'color' => 'success'],
+            'not-allowed' => ['value' => 0, 'title' => __('common.not-allowed'), 'color' => 'danger'],
+            'allowed' => ['value' => 1, 'title' => __('common.allowed'), 'color' => 'success'],
         ];
         $statuses = [
-            'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-            'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
+            'passive' => ['value' => 0, 'title' => __('common.passive'), 'color' => 'danger'],
+            'active' => ['value' => 1, 'title' => __('common.active'), 'color' => 'success'],
         ];
         return view('portal.meeting.document.index', compact(['documents', 'meeting', 'sharing_via_emails', 'statuses']));
     }
@@ -72,7 +74,7 @@ class DocumentController extends Controller
                 $file = $request->file('file');
                 $file_name = $document->file_name;
                 $file_extension = $file->getClientOriginalExtension();
-                if(Storage::putFileAs('documents', $request->file('file'), $file_name.'.'.$file_extension)) {
+                if (Storage::putFileAs('documents', $request->file('file'), $file_name.'.'.$file_extension)) {
                     $document->file_name = $file_name;
                     $document->file_extension = $file_extension;
                     $document->file_size = $request->file('file')->getSize();
