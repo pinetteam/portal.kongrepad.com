@@ -12,11 +12,11 @@ class SurveyController extends Controller
 {
     public function index(int $meeting)
     {
-        $surveys = Auth::user()->customer->surveys()->where('meeting_id', $meeting)->paginate(20);
         $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $surveys = $meeting->surveys()->paginate(20);
         $statuses = [
-            'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-            'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
+            'passive' => ['value' => 0, 'title' => __('common.passive'), 'color' => 'danger'],
+            'active' => ['value' => 1, 'title' => __('common.active'), 'color' => 'success'],
         ];
 
         return view('portal.meeting.survey.index', compact(['surveys', 'meeting', 'statuses']));
@@ -47,8 +47,8 @@ class SurveyController extends Controller
         $questions = $survey->questions()->get();
         $questionCount= $questions->count();
         $statuses = [
-            'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-            'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
+            'passive' => ['value' => 0, 'title' => __('common.passive'), 'color' => 'danger'],
+            'active' => ['value' => 1, 'title' => __('common.active'), 'color' => 'success'],
         ];
         return view('portal.meeting.survey.show', compact(['questions', 'survey', 'questionCount', 'statuses']));
     }

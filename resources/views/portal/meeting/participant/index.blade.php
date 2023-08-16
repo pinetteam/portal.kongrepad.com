@@ -13,7 +13,6 @@
                     </caption>
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col"><span class="fa-regular fa-bee mx-1"></span> {{ __('common.meeting') }}</th>
                             <th scope="col"><span class="fa-regular fa-id-card mx-1"></span> {{ __('common.name') }}</th>
                             <th scope="col"><span class="fa-regular fa-fingerprint mx-1"></span> {{ __('common.identification-number') }}</th>
                             <th scope="col"><span class="fa-regular fa-building-columns mx-1"></span> {{ __('common.organisation') }}</th>
@@ -30,7 +29,6 @@
                     <tbody>
                         @foreach($participants as $participant)
                             <tr>
-                                <td>{{ $participant->meeting->title }}</td>
                                 <td>
                                     @if($participant->activity_status)
                                         <div class="spinner-grow spinner-grow-sm text-success" role="status"></div>

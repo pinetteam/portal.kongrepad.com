@@ -81,11 +81,11 @@ class Participant extends Model
     }
     public function getFullPhoneAttribute()
     {
-        if(isset($this->phone_country_id) && isset($this->phone)) {
-            return Str::of('+'.$this->phoneCountry->phone_code.$this->phone)->trim();
-        } else {
-            return __('common.unspecified');
-        }
+        return (isset($this->phone_country_id) && isset($this->phone)) ? Str::of('+'.$this->phoneCountry->phone_code.$this->phone)->trim() : __('common.unspecified');
+    }
+    public function getIdentificationNumberShowAttribute()
+    {
+        return isset($this->identification_number) ? $this->identification_number : __('common.unspecified');
     }
     public function getOrganisationShowAttribute()
     {
@@ -93,11 +93,7 @@ class Participant extends Model
     }
     public function getLastLoginAttribute()
     {
-        if(isset($this->last_login_datetime)) {
-            return Carbon::parse($this->last_login_datetime)->diffForHumans();
-        } else {
-            return __('common.not-logged-in-yet');
-        }
+        return isset($this->last_login_datetime) ? Carbon::parse($this->last_login_datetime)->diffForHumans() : __('common.not-logged-in-yet');
     }
     public function getFullNameAttribute()
     {
