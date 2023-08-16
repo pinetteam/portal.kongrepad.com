@@ -238,5 +238,5 @@ return [
     'debate-reports' => 'Debate Reports',
     'report' => 'Report',
     'reports' => 'Reports',
-
+    'meeting-halls'=> 'Meeting Halls'
 ];

@@ -13,13 +13,27 @@ class DebateTeamSeeder extends Seeder
         Team::insert([
             [
                 'debate_id' => '1',
-                'code' => 'panel-1-1',
                 'title' => 'Team 1'
             ],
             [
                 'debate_id' => '1',
-                'code' => 'panel-1-1',
                 'title' => 'Team 2'
+            ],
+            [
+                'debate_id' => '2',
+                'title' => 'Team A'
+            ],
+            [
+                'debate_id' => '2',
+                'title' => 'Team B'
+            ],
+            [
+                'debate_id' => '3',
+                'title' => 'Team Red'
+            ],
+            [
+                'debate_id' => '3',
+                'title' => 'Team Blue'
             ],
         ]);
     }
