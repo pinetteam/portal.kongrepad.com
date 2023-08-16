@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Portal\Meeting\Survey;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Portal\Meeting\Survey\SurveyRequest;
 use App\Http\Resources\Portal\Meeting\Survey\SurveyResource;
-use App\Models\Customer\Setting\Variable\Variable;
 use App\Models\Meeting\Survey\Survey;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,7 +12,6 @@ class SurveyController extends Controller
 {
     public function index(int $meeting)
     {
-
         $surveys = Auth::user()->customer->surveys()->where('meeting_id', $meeting)->paginate(20);
         $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
         $statuses = [

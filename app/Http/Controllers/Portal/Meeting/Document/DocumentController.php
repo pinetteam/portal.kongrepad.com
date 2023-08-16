@@ -14,8 +14,7 @@ class DocumentController extends Controller
 {
     public function index(int $meeting)
     {
-        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
-        $documents = $meeting->documents()->paginate(20);
+        $documents = Auth::user()->customer->documents()->where('meeting_id', $meeting)->paginate(20);
         $sharing_via_emails = [
             'not-allowed' => ["value" => 0, "title" => __('common.not-allowed'), 'color' => 'danger'],
             'allowed' => ["value" => 1, "title" => __('common.allowed'), 'color' => 'success'],
@@ -58,7 +57,7 @@ class DocumentController extends Controller
     public function show(int $meeting, int $id)
     {
         $document = Auth::user()->customer->documents()->where('meeting_id', $meeting)->findOrFail($id);
-        return response()->file(storage_path('app/documents/'.$document->file_name.'.'.$document->file_extension));
+        return view('portal.meeting.document.show', compact(['document']));
     }
     public function edit(int $meeting, int $id)
     {
@@ -69,7 +68,6 @@ class DocumentController extends Controller
     {
         if ($request->validated()) {
             $document = Auth::user()->customer->documents()->where('meeting_id', $meeting)->findOrFail($id);
-            $document->meeting_id = $meeting;
             if ($request->hasFile('file')) {
                 $file = $request->file('file');
                 $file_name = $document->file_name;
@@ -108,7 +106,7 @@ class DocumentController extends Controller
     public function download(int $meeting, string $document)
     {
         $file = Document::where('meeting_id', $meeting)->where('file_name', $document)->first();
-        if($file) {
+        if ($file) {
             try {
                 return Storage::download('documents/' . $file->file_name . '.' . $file->file_extension);
             } catch (\Exception $e) {

@@ -19,7 +19,7 @@ class HallRequest extends FormRequest
             {
                 return [
                     'meeting_id' => 'required|exists:meetings,id',
-                    'title' => 'required|max:255',
+                    'title' => 'required|max:511',
                     'status' => 'required|boolean',
                 ];
             }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Portal\Meeting\Participant;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Portal\Meeting\Participant\ParticipantRequest;
 use App\Http\Resources\Portal\Meeting\Participant\ParticipantResource;
+use App\Models\Meeting\Meeting;
 use App\Models\Meeting\Participant\Participant;
 use App\Models\System\Country\Country;
 use Illuminate\Support\Facades\Auth;
@@ -15,9 +16,9 @@ class ParticipantController extends Controller
 {
     public function index(int $meeting)
     {
-        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
-        $participants = $meeting->participants()->paginate(20);
-        $phone_countries = Country::get();
+        $meeting = Meeting::findOrFail($meeting);
+        $participants = Auth::user()->customer->participants()->where('meeting_id', $meeting->id)->paginate(20);
+        $phone_countries = Country::get(['id', 'name']);
         $types = [
             'agent' => ["value" => "agent", "title" => __('common.agent')],
             'attendee' => ["value" => "attendee", "title" => __('common.attendee')],
@@ -27,7 +28,7 @@ class ParticipantController extends Controller
             'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.meeting.participant.index', compact(['participants', 'meeting', 'phone_countries', 'types', 'statuses']));
+        return view('portal.meeting.participant.index', compact(['meeting', 'participants', 'phone_countries', 'types', 'statuses']));
     }
     public function store(ParticipantRequest $request, int $meeting)
     {
@@ -38,8 +39,8 @@ class ParticipantController extends Controller
             $participant->title = $request->input('title');
             $participant->first_name = $request->input('first_name');
             $participant->last_name = $request->input('last_name');
-            $participant->organisation = $request->input('organisation');
             $participant->identification_number = $request->input('identification_number');
+            $participant->organisation = $request->input('organisation');
             $participant->email = $request->input('email');
             $participant->phone_country_id = $request->input('phone_country_id');
             $participant->phone = $request->input('phone');
@@ -73,22 +74,21 @@ class ParticipantController extends Controller
     {
         if ($request->validated()) {
             $participant = Auth::user()->customer->participants()->where('meeting_id', $meeting)->findOrFail($id);
-            $participant->meeting_id = $meeting;
             $participant->title = $request->input('title');
             $participant->first_name = $request->input('first_name');
             $participant->last_name = $request->input('last_name');
-            $participant->organisation = $request->input('organisation');
             $participant->identification_number = $request->input('identification_number');
+            $participant->organisation = $request->input('organisation');
             $participant->email = $request->input('email');
             $participant->phone_country_id = $request->input('phone_country_id');
             $participant->phone = $request->input('phone');
             if ($request->has('password')) {
-                $participant->updated_by = Auth::user()->id;
-                $participant->save();
                 $participant->password = $request->input('password');
             }
             $participant->status = $request->input('status');
             if ($participant->save()) {
+                $participant->updated_by = Auth::user()->id;
+                $participant->save();
                 return back()->with('success', __('common.edited-successfully'));
             } else {
                 return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();

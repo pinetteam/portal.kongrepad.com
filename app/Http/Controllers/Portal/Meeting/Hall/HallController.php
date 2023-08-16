@@ -14,12 +14,11 @@ class HallController extends Controller
     public function index(int $meeting)
     {
         $halls = Auth::user()->customer->meetingHalls()->where('meeting_id', $meeting)->paginate(20);
-        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
         $statuses = [
             'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.meeting.hall.index', compact(['halls', 'meeting', 'statuses']));
+        return view('portal.meeting.hall.index', compact(['halls', 'statuses']));
     }
     public function store(HallRequest $request, int $meeting)
     {

@@ -1,18 +1,15 @@
 <?php
 
-namespace App\Models\Meeting\Hall;
+namespace App\Models\Meeting\Announcement;
 
-use App\Models\Meeting\Hall\Program\Program;
-use App\Models\Meeting\Hall\Program\Session\Session;
-use App\Models\Meeting\Hall\Screen\Screen;
 use App\Models\Meeting\Meeting;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Hall extends Model
+class Announcement extends Model
 {
     use SoftDeletes;
-    protected $table = 'meeting_halls';
+    protected $table = 'meeting_announcements';
     protected $fillable = [
         'meeting_id',
         'title',
@@ -37,17 +34,5 @@ class Hall extends Model
     public function meeting()
     {
         return $this->belongsTo(Meeting::class, 'meeting_id', 'id');
-    }
-    public function programs()
-    {
-        return $this->hasMany(Program::class, 'hall_id', 'id');
-    }
-    public function screens()
-    {
-        return $this->hasMany(Screen::class, 'hall_id', 'id');
-    }
-    public function programSessions()
-    {
-        return $this->hasManyThrough(Session::class, Program::class, 'hall_id', 'program_id', 'id');
     }
 }
