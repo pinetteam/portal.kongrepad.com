@@ -2,6 +2,7 @@
 
 namespace App\Models\Meeting\Survey;
 
+use App\Models\Meeting\Meeting;
 use App\Models\Meeting\Survey\Question\Question;
 use App\Models\System\Setting\Variable\Variable;
 use Carbon\Carbon;
@@ -60,5 +61,9 @@ class Survey extends Model
     public function questions()
     {
         return $this->hasMany(Question::class, 'survey_id', 'id');
+    }
+    public function meeting()
+    {
+        return $this->belongsTo(Meeting::class, 'meeting_id', 'id');
     }
 }

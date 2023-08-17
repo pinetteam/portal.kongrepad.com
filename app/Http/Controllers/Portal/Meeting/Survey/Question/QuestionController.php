@@ -31,12 +31,11 @@ class QuestionController extends Controller
     {
         $survey = Auth::user()->customer->surveys()->findOrFail($survey);
         $question = $survey->questions()->findOrFail($id);
-        $options = $question->options()->get();
         $statuses = [
             'passive' => ['value' => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'active' => ['value' => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.meeting.survey.question.show', compact(['survey', 'question', 'options', 'statuses']));
+        return view('portal.meeting.survey.question.show', compact(['survey', 'question', 'statuses']));
     }
     public function edit(string $meeting, string $survey, string $id)
     {

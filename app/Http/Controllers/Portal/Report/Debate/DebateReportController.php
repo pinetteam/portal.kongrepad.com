@@ -11,8 +11,8 @@ class DebateReportController extends Controller
     {
         $debates = Auth::user()->customer->debates()->paginate(20);
         $on_vote = [
-            'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-            'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
+            'passive' => ['value' => 0, 'title' => __('common.passive'), 'color' => 'danger'],
+            'active' => ['value' => 1, 'title' => __('common.active'), 'color' => 'success'],
         ];
         $data = [];
         foreach ($debates as $debate) {
@@ -25,10 +25,9 @@ class DebateReportController extends Controller
         }
         return view('portal.report.debate-report.index', $data, compact(['debates', 'on_vote']));
     }
-
     public function show(string $debate){
         $title = Auth::user()->customer->debates()->findOrFail($debate);
-        $teams = Auth::user()->customer->teams()->where('debate_id', $debate)->paginate(20);
+        $teams = $debate->teams()->where('debate_id', $debate)->paginate(20);
         $data = [];
         foreach($teams as $team) {
             $data['label'][] = $team->title;

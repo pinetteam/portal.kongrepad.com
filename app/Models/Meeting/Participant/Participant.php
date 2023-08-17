@@ -2,6 +2,7 @@
 
 namespace App\Models\Meeting\Participant;
 
+use App\Models\Meeting\Meeting;
 use App\Models\System\Country\Country;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -98,5 +99,9 @@ class Participant extends Model
     public function getFullNameAttribute()
     {
         return Str::of("$this->title $this->first_name $this->last_name")->trim();
+    }
+    public function meeting()
+    {
+        return $this->belongsTo(Meeting::class, 'meeting_id', 'id');
     }
 }

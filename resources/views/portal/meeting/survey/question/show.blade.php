@@ -10,13 +10,13 @@
                 @else
                     <i style="color:red" class="fa-regular fa-toggle-off"></i>
                 @endif
-                <small>"{{$question->question }}"</small>
+                <small>"{{ $question->question }}"</small>
             </h1>
             <div class="table-responsive">
                 <table class="table table-dark table-striped-columns table-bordered">
                     <tr>
                         <th scope="row" class="text-end w-25">{{ __('common.created-by') }}:</th>
-                        <td class="text-start w-25">{{ $question->created_by }}</td>
+                        <td class="text-start w-25">{{ $question->created_by_name }}</td>
                         <th scope="row" class="text-end w-25">{{ __('common.created-at') }}:</th>
                         <td class="text-start w-25">{{ $question->created_at }}</td>
                     </tr>
@@ -45,7 +45,7 @@
                             </thead>
 
                             <tbody>
-                            @foreach($options as $option)
+                            @foreach($question->options as $option)
                                 <tr>
                                     <td>{{ $option->option }}</td>
                                     <td>{{ $option->sort_order }}</td>
@@ -61,11 +61,10 @@
                                             <div data-bs-toggle="tooltip" data-bs-placement="top"
                                                  data-bs-custom-class="kp-tooltip"
                                                  data-bs-title="{{ __('common.edit')}}">
-                                                {{--edit button--}}
                                                 <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}"
                                                         data-bs-toggle="modal" data-bs-target="#option-edit-modal"
-                                                        data-route="{{ route('portal.meeting.survey.option.update',['meeting'=>$option->question->survey->meeting_id, 'survey'=> $option->question->survey_id,'question'=> $option->question_id, 'option'=>$option->id,]) }}"
-                                                        data-resource="{{ route('portal.meeting.survey.option.edit',[ 'meeting'=>$question->survey->meeting_id, 'survey'=>$question->survey_id ,'question'=> $question->id, 'option' => $option->id]) }}"
+                                                        data-route="{{ route('portal.meeting.survey.option.update',['meeting' => $question->survey->meeting_id, 'survey' => $question->survey_id, 'question' => $question->id, 'option' => $option->id]) }}"
+                                                        data-resource="{{ route('portal.meeting.survey.option.edit',['meeting' => $question->survey->meeting_id, 'survey' => $question->survey_id, 'question' => $question->id, 'option' => $option->id]) }}"
                                                         data-id="{{ $option->id }}">
                                                     <span class="fa-regular fa-pen-to-square"></span>
                                                 </button>
@@ -75,7 +74,7 @@
                                                  data-bs-title="{{ __('common.delete') }}">
                                                 <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}"
                                                         data-bs-toggle="modal" data-bs-target="#option-delete-modal"
-                                                        data-route="{{ route('portal.meeting.survey.option.show', ['meeting'=>$option->question->survey->meeting_id, 'survey'=> $option->question->survey_id,'question'=> $option->question_id, 'option'=>$option->id,]) }}"
+                                                        data-route="{{ route('portal.meeting.survey.option.show', ['meeting' => $question->survey->meeting_id, 'survey' => $question->survey_id, 'question' => $question->id, 'option' => $option->id]) }}"
                                                         data-record="{{ $option->option }}">
                                                     <span class="fa-regular fa-trash"></span>
                                                 </button>
@@ -91,7 +90,7 @@
                 <div class="card-footer d-flex justify-content-center">
                     <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal"
                             data-bs-target="#option-create-modal"
-                            data-route="{{ route('portal.meeting.survey.option.store',['meeting'=>$question->survey->meeting_id, 'survey'=> $question->survey_id,'question'=> $question->id,]) }}">
+                            data-route="{{ route('portal.meeting.survey.option.store',['meeting' => $question->survey->meeting_id, 'survey' => $question->survey_id, 'question' => $question->id]) }}">
                         <i class="fa-solid fa-plus"></i> {{ __('common.create-new-option') }}
                     </button>
                 </div>
@@ -101,8 +100,7 @@
                         <x-input.hidden method="c" name="question_id" :value="$question->id"/>
                         <x-input.text method="c" name="option" title="option" icon="list-dropdown"/>
                         <x-input.number method="c" name="sort_order" title="sort" icon="circle-sort"/>
-                        <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value"
-                                       option_name="title" icon="toggle-large-on"/>
+                        <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value"  option_name="title" icon="toggle-large-on"/>
                     @endsection
                 </x-crud.form.common.create>
                 <x-crud.form.common.delete name="option"/>
@@ -112,8 +110,7 @@
                         <x-input.hidden method="e" name="question_id" :value="$question->id"/>
                         <x-input.text method="e" name="option" title="option" icon="list-dropdown"/>
                         <x-input.number method="e" name="sort_order" title="sort" icon="circle-sort"/>
-                        <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value"
-                                       option_name="title" icon="toggle-large-on"/>
+                        <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on"/>
                     @endsection
                 </x-crud.form.common.edit>
             </div>

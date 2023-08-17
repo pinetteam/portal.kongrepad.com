@@ -15,6 +15,7 @@ class OptionController extends Controller
         if ($request->validated()) {
             $option = new Option();
             $option->sort_order = $request->input('sort_order');
+            $option->survey_id = $survey;
             $option->question_id = $question;
             $option->option = $request->input('option');
             $option->status= $request->input('status');

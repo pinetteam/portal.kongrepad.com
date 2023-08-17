@@ -58,7 +58,7 @@
                         <th scope="col"><span class="fa-regular fa-chart-pie fa-fade mx1"></span> {{ __('common.report') }}</th>
                     </tr>
                     </thead>
-                    @foreach($questions as $question)
+                    @foreach($survey->questions as $question)
                         <tbody>
                         <tr>
                             <th scope="col"></th>
@@ -104,7 +104,7 @@
     </div>
     <script>
         $(function(){
-            @foreach($questions as $question)
+            @foreach($survey->questions as $question)
             var cData = JSON.parse(`<?php echo $chart_data[$question->id]; ?>`);
             var ctx = $("#pie-chart-<?php echo $question->id; ?>");
             var data = {

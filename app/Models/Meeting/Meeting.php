@@ -6,6 +6,10 @@ use App\Models\Meeting\Announcement\Announcement;
 use App\Models\Meeting\Document\Document;
 use App\Models\Meeting\Hall\Hall;
 use App\Models\Meeting\Hall\Program\Chair\Chair;
+use App\Models\Meeting\Hall\Program\Debate\Debate;
+use App\Models\Meeting\Hall\Program\Program;
+use App\Models\Meeting\Hall\Program\Session\Keypad\Keypad;
+use App\Models\Meeting\Hall\Program\Session\Session;
 use App\Models\Meeting\Participant\Participant;
 use App\Models\Meeting\ScoreGame\ScoreGame;
 use App\Models\Meeting\Survey\Survey;
@@ -107,7 +111,7 @@ class Meeting extends Model
         return $this->hasMany(VirtualStand::class, 'meeting_id', 'id');
     }
 
-    /*public function programs()
+    public function programs()
     {
         return $this->hasManyThrough(Program::class, Hall::class, 'meeting_id', 'hall_id', 'id');
     }
@@ -151,5 +155,5 @@ class Meeting extends Model
             ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
             ->where('meetings.id', $this->getkey());
         return $chairs;
-    }*/
+    }
 }
