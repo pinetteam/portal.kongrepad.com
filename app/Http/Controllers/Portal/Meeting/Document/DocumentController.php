@@ -36,7 +36,7 @@ class DocumentController extends Controller
                 $file = $request->file('file');
                 $file_name = Str::uuid()->toString();
                 $file_extension = $file->getClientOriginalExtension();
-                if(Storage::putFileAs('documents', $request->file('file'), $file_name.'.'.$file_extension)) {
+                if(Storage::putFileAs('public/documents', $request->file('file'), $file_name.'.'.$file_extension)) {
                     $document->file_name = $file_name;
                     $document->file_extension = $file_extension;
                     $document->file_size = $request->file('file')->getSize();
@@ -77,7 +77,7 @@ class DocumentController extends Controller
                 $file = $request->file('file');
                 $file_name = $document->file_name;
                 $file_extension = $file->getClientOriginalExtension();
-                if (Storage::putFileAs('documents', $request->file('file'), $file_name.'.'.$file_extension)) {
+                if (Storage::putFileAs('public/documents', $request->file('file'), $file_name.'.'.$file_extension)) {
                     $document->file_name = $file_name;
                     $document->file_extension = $file_extension;
                     $document->file_size = $request->file('file')->getSize();
