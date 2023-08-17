@@ -3,6 +3,7 @@
 namespace App\Models\Meeting\Announcement;
 
 use App\Models\Meeting\Meeting;
+use App\Models\User\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -31,6 +32,10 @@ class Announcement extends Model
         'updated_at' => 'datetime',
         'deleted_at' => 'datetime',
     ];
+    public function getCreatedByNameAttribute()
+    {
+        return isset($this->created_by) ? User::findOrFail($this->created_by)->full_name : __('common.unspecified');
+    }
     public function meeting()
     {
         return $this->belongsTo(Meeting::class, 'meeting_id', 'id');

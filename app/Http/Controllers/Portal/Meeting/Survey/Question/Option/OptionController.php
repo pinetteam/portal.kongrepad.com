@@ -10,9 +10,8 @@ use Illuminate\Support\Facades\Auth;
 
 class OptionController extends Controller
 {
-    public function store(OptionRequest $request, string $meeting, string $survey, string $question)
+    public function store(OptionRequest $request, int $meeting, int $survey, int $question)
     {
-
         if ($request->validated()) {
             $option = new Option();
             $option->survey_id = $request->input('survey_id');
@@ -29,12 +28,12 @@ class OptionController extends Controller
             }
         }
     }
-    public function edit(string $meeting, string $survey, string $question, string $id)
+    public function edit(int $meeting, int $survey, int $question, int $id)
     {
         $option = Auth::user()->customer->surveyOptions()->findOrFail($id);
         return new OptionResource($option);
     }
-    public function update(OptionRequest $request, string $meeting, string $survey, string $question, string $id)
+    public function update(OptionRequest $request, int $meeting, int $survey, int $question, int $id)
     {
         if ($request->validated()) {
             $option = Auth::user()->customer->surveyOptions()->findOrFail($id);
@@ -51,7 +50,7 @@ class OptionController extends Controller
             }
         }
     }
-    public function destroy(string $meeting, string $survey, string $question, string $id)
+    public function destroy(int $meeting, int $survey, int $question, int $id)
     {
         $option = Auth::user()->customer->surveyOptions()->findOrFail($id);
         if ($option->delete()) {

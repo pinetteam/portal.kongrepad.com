@@ -31,10 +31,6 @@ return new class extends Migration
         });
         \Illuminate\Support\Facades\DB::statement('ALTER TABLE meeting_score_games MODIFY logo MEDIUMBLOB NULL');
     }
-
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('meeting_score_games');

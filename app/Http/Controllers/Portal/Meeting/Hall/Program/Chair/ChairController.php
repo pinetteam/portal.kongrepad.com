@@ -24,9 +24,10 @@ class ChairController extends Controller
             }
         }
     }
-    public function destroy(string $meeting, string $hall, string $program, string $id)
+    public function destroy(int $meeting, int $hall, int $program, int $id)
     {
-        $chair = Auth::user()->customer->programChairs()->findOrFail($id);
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $chair = $meeting->chairs()->findOrFail($id);
         if ($chair->delete()) {
             $chair->deleted_by = Auth::user()->id;
             $chair->save();

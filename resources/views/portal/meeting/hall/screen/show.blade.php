@@ -32,7 +32,7 @@
                     </tr>
                     <tr>
                         <th scope="row" class="text-end w-25">{{ __('common.created-by') }}:</th>
-                        <td class="text-start w-25">#</td>
+                        <td class="text-start w-25">{{ $screen->created_by_name }}</td>
                         <th scope="row" class="text-end w-25">{{ __('common.created-at') }}:</th>
                         <td class="text-start w-25">{{ $screen->created_at }}</td>
                     </tr>

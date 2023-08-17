@@ -13,29 +13,29 @@ class ProgramController extends Controller
 {
     public function index(int $meeting, int $hall)
     {
-        $hall = Auth::user()->customer->meetingHalls()->findOrFail($hall);
+        $hall = Auth::user()->customer->halls()->findOrFail($hall);
         $programs = $hall->programs()->paginate(20);
         $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
         $speakers = $meeting->participants()->whereNot('meeting_participants.type', 'team')->get();
         $documents = $meeting->documents()->get();
         $questions = [
-            'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-            'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
+            'passive' => ['value' => 0, 'title' => __('common.passive'), 'color' => 'danger'],
+            'active' => ['value' => 1, 'title' => __('common.active'), 'color' => 'success'],
         ];
         $questions_auto_start = [
-            'no' => ["value" => 0, "title" => __('common.no'), 'color' => 'danger'],
-            'yes' => ["value" => 1, "title" => __('common.yes'), 'color' => 'success'],
+            'no' => ['value' => 0, 'title' => __('common.no'), 'color' => 'danger'],
+            'yes' => ['value' => 1, 'title' => __('common.yes'), 'color' => 'success'],
         ];
         $types = [
-            'debate' => ["value" => "debate", "title" => __('common.debate')],
-            'other' => ["value" => "other", "title" => __('common.other')],
-            'session' => ["value" => "session", "title" => __('common.session')],
+            'debate' => ['value' => 'debate', 'title' => __('common.debate')],
+            'other' => ['value' => 'other', 'title' => __('common.other')],
+            'session' => ['value' => 'session', 'title' => __('common.session')],
         ];
         $statuses = [
-            'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-            'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
+            'passive' => ['value' => 0, 'title' => __('common.passive'), 'color' => 'danger'],
+            'active' => ['value' => 1, 'title' => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.meeting.hall.program.index', compact(['programs', 'meeting', 'hall', 'types', 'statuses', 'speakers', 'documents', 'questions', 'questions_auto_start']));
+        return view('portal.meeting.hall.program.index', compact(['programs', 'hall', 'types', 'statuses', 'speakers', 'documents', 'questions', 'questions_auto_start']));
     }
     public function store(ProgramRequest $request, int $meeting, int $hall)
     {
@@ -65,10 +65,11 @@ class ProgramController extends Controller
     }
     public function show(int $meeting, int $hall, int $id)
     {
-        $program = Auth::user()->customer->programs()->findOrFail($id);
+        $hall = Auth::user()->customer->halls()->findOrFail($hall);
+        $program = $hall->programs()->findOrFail($id);
         $statuses = [
-            'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-            'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
+            'passive' => ['value' => 0, 'title' => __('common.passive'), 'color' => 'danger'],
+            'active' => ['value' => 1, 'title' => __('common.active'), 'color' => 'success'],
         ];
         if($program->type=='session') {
             $documents = Auth::user()->customer->documents()->get();
@@ -77,12 +78,12 @@ class ProgramController extends Controller
             $program_chairs = $program->programChairs()->get();
             $program_sessions = $program->sessions()->get();
             $questions = [
-                'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-                'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
+                'passive' => ['value' => 0, 'title' => __('common.passive'), 'color' => 'danger'],
+                'active' => ['value' => 1, 'title' => __('common.active'), 'color' => 'success'],
             ];
             $questions_auto_start = [
-                'no' => ["value" => 0, "title" => __('common.no'), 'color' => 'danger'],
-                'yes' => ["value" => 1, "title" => __('common.yes'), 'color' => 'success'],
+                'no' => ['value' => 0, 'title' => __('common.no'), 'color' => 'danger'],
+                'yes' => ['value' => 1, 'title' => __('common.yes'), 'color' => 'success'],
             ];
             return view('portal.meeting.hall.program.show-session', compact(['documents', 'chairs', 'speakers', 'program', 'program_chairs', 'program_sessions', 'questions', 'questions_auto_start', 'statuses']));
         } else if($program->type == 'debate') {
@@ -96,13 +97,15 @@ class ProgramController extends Controller
     }
     public function edit(int $meeting, int $hall, int $id)
     {
-        $program = Auth::user()->customer->programs()->findOrFail($id);
+        $hall = Auth::user()->customer->halls()->findOrFail($hall);
+        $program = $hall->programs()->findOrFail($id);
         return new ProgramResource($program);
     }
     public function update(ProgramRequest $request, int $meeting, int $hall, int $id)
     {
         if ($request->validated()) {
-            $program = Auth::user()->customer->programs()->findOrFail($id);
+            $hall = Auth::user()->customer->halls()->findOrFail($hall);
+            $program = $hall->programs()->findOrFail($id);
             $program->hall_id = $request->input('hall_id');
             $program->sort_order = $request->input('sort_order');
             $program->code = $request->input('code');
@@ -127,7 +130,8 @@ class ProgramController extends Controller
     }
     public function destroy(int $meeting, int $hall, int $id)
     {
-        $program = Auth::user()->customer->programs()->findOrFail($id);
+        $hall = Auth::user()->customer->halls()->findOrFail($hall);
+        $program = $hall->programs()->findOrFail($id);
         if ($program->delete()) {
             $program->deleted_by = Auth::user()->id;
             $program->save();

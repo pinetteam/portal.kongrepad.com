@@ -1,5 +1,5 @@
 @extends('layout.portal.common')
-@section('title', $program->title . ' | ' . __('common.program'))
+@section('title', $program->title))
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">
@@ -44,7 +44,7 @@
                     </tr>
                     <tr>
                         <th scope="row" class="text-end w-25">{{ __('common.created-by') }}:</th>
-                        <td class="text-start w-25">{{ $program->created_by }}</td>
+                        <td class="text-start w-25">{{ $program->created_by_name }}</td>
                         <th scope="row" class="text-end w-25">{{ __('common.created-at') }}:</th>
                         <td class="text-start w-25">{{ $program->created_at }}</td>
                     </tr>

@@ -1,9 +1,9 @@
 @extends('layout.portal.common')
-@section('title', __('common.score-games'))
+@section('title', $meeting->title . ' | ' . __('common.score-games'))
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">
-            <h1 class="m-0 text-center">{{ __('common.score-games') }}</h1>
+            <h1 class="m-0 text-center"><span class="fa-duotone fa-hundred-points fa-fade"></span> <small>"{{ $meeting->title }}"</small> {{ __('common.score-games') }}</h1>
         </div>
         <div class="card-body p-0">
             <div class="table-responsive">
@@ -13,7 +13,6 @@
                     </caption>
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col"><span class="fa-regular fa-bee mx-1"></span> {{ __('common.meeting') }}</th>
                             <th scope="col"><span class="fa-regular fa-image mx-1"></span> {{ __('common.logo') }}</th>
                             <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}</th>
                             <th scope="col"><span class="fa-regular fa-calendar-arrow-up mx-1"></span> {{ __('common.start-at') }}</th>
@@ -25,7 +24,6 @@
                     <tbody>
                         @foreach($score_games as $score_game)
                             <tr>
-                                <td>{{ $score_game->meeting->title }}</td>
                                 <td>
                                     @if($score_game->logo)
                                         <img src="{{ $score_game->logo }}" alt="{{ $score_game->title }}" class="img-thumbnail" style="height:36px;" />

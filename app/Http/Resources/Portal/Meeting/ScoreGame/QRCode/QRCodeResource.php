@@ -16,7 +16,7 @@ class QRCodeResource extends JsonResource
             'start_at' => ['value' => $this->start_at, 'type' => 'datetime'],
             'finish_at' => ['value' => $this->finish_at, 'type' => 'datetime'],
             'status' => ['value' => $this->status, 'type' => 'radio'],
-            'route' => route('portal.meeting.score-game.qr-code.update', ['meeting' => $this->scoreGame->meeting->id, 'score_game' => $this->score_game_id, 'qr_code' => $this->id]),
+            'route' => route('portal.meeting.score-game.qr-code.update', ['meeting' => $this->scoreGame->meeting_id, 'score_game' => $this->score_game_id, 'qr_code' => $this->id]),
         ];
     }
 }

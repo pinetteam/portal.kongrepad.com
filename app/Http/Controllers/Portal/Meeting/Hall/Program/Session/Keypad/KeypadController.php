@@ -10,12 +10,13 @@ use Illuminate\Support\Facades\Auth;
 
 class KeypadController extends Controller
 {
-    public function store(KeypadRequest $request, string $meeting, string $hall, string $program, string $session)
+    public function store(KeypadRequest $request, int $meeting, int $hall, int $program, int $session)
     {
         if ($request->validated()) {
             $keypad = new Keypad();
-            $keypad->session_id = $request->input('session_id');
             $keypad->sort_order = $request->input('sort_order');
+            $keypad->session_id = $request->input('session_id');
+            $keypad->title = $request->input('title');
             $keypad->keypad = $request->input('keypad');
             if ($keypad->save()) {
                 $keypad->created_by = Auth::user()->id;
@@ -26,27 +27,23 @@ class KeypadController extends Controller
             }
         }
     }
-    public function show(string $meeting, string $hall, string $program, string $session, string $id)
+    public function show(int $meeting, int $hall, int $program, int $session, int $id)
     {
         $keypad = Auth::user()->customer->keypads()->findOrFail($id);
-        $options = $keypad->options()->get();
-        $statuses = [
-            'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-            'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
-        ];
-        return view('portal.meeting.hall.program.session.keypad.show', compact(['options', 'keypad', 'statuses']));
+        return view('portal.meeting.hall.program.session.keypad.show', compact(['keypad']));
     }
-    public function edit(string $meeting, string $hall, string $program, string $session, string $id)
+    public function edit(int $meeting, int $hall, int $program, int $session, int $id)
     {
         $keypad = Auth::user()->customer->keypads()->findOrFail($id);
         return new KeypadResource($keypad);
     }
-    public function update(KeypadRequest $request, string $meeting, string $hall, string $program, string $session, string $id)
+    public function update(KeypadRequest $request, int $meeting, int $hall, int $program, int $session, int $id)
     {
         if ($request->validated()) {
             $keypad = Auth::user()->customer->keypads()->findOrFail($id);
             $keypad->session_id = $request->input('session_id');
             $keypad->sort_order = $request->input('sort_order');
+            $keypad->title = $request->input('title');
             $keypad->keypad = $request->input('keypad');
             if ($keypad->save()) {
                 $keypad->updated_by = Auth::user()->id;
@@ -57,7 +54,7 @@ class KeypadController extends Controller
             }
         }
     }
-    public function destroy(string $meeting, string $hall, string $program, string $session, string $id)
+    public function destroy(int $meeting, int $hall, int $program, int $session, int $id)
     {
         $keypad = Auth::user()->customer->keypads()->findOrFail($id);
         if ($keypad->delete()) {
@@ -68,8 +65,7 @@ class KeypadController extends Controller
             return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();
         }
     }
-
-    public function start_stop_voting(string $meeting, string $hall, string $program, string $session, string $id)
+    /*public function start_stop_voting(int $meeting, int $hall, int $program, int $session, int $id)
     {
         $session = Auth::user()->customer->programSessions()->findOrFail($session);
         foreach($session->keypads as $keypad){
@@ -96,5 +92,5 @@ class KeypadController extends Controller
         } else {
             return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
         }
-    }
+    }*/
 }

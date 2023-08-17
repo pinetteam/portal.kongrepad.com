@@ -11,13 +11,13 @@ use Illuminate\Support\Str;
 
 class QRCodeController extends Controller
 {
-    public function index(string $meeting, string $score_game)
+    public function index(int $meeting, int $score_game)
     {
         $score_game = Auth::user()->customer->scoreGames()->findOrFail($score_game);
         $qr_codes = $score_game->qrCodes()->paginate(20);
         $statuses = [
-            'active' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-            'passive' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
+            'passive' => ['value' => 0, 'title' => __('common.passive'), 'color' => 'danger'],
+            'active' => ['value' => 1, 'title' => __('common.active'), 'color' => 'success'],
         ];
         return view('portal.meeting.score-game.qr-code.index', compact(['qr_codes', 'score_game', 'statuses']));
     }
@@ -26,11 +26,11 @@ class QRCodeController extends Controller
         if ($request->validated()) {
             $qr_code = new QRCode();
             $qr_code->score_game_id = $request->input('score_game_id');
+            $qr_code->title = $request->input('title');
+            $qr_code->code = Str::uuid()->toString();
+            $qr_code->point = $request->input('point');
             $qr_code->start_at = $request->input('start_at');
             $qr_code->finish_at = $request->input('finish_at');
-            $qr_code->point = $request->input('point');
-            $qr_code->code = Str::uuid()->toString();
-            $qr_code->title = $request->input('title');
             $qr_code->status = $request->input('status');
             if ($qr_code->save()) {
                 $qr_code->created_by = Auth::user()->id;
@@ -41,24 +41,21 @@ class QRCodeController extends Controller
             }
         }
     }
-    public function show(string $meeting, string $score_game, string $id)
+    public function edit(int $meeting, int $score_game, int $id)
     {
-
-    }
-    public function edit(string $meeting, string $score_game, string $id)
-    {
-        $qr_code = Auth::user()->customer->qrCodes()->findOrFail($id);
+        $score_game = Auth::user()->customer->scoreGames()->findOrFail($score_game);
+        $qr_code = $score_game->qrCodes()->findOrFail($id);
         return new QRCodeResource($qr_code);
     }
-    public function update(QrCodeRequest $request, string $meeting, string $score_game, string $id)
+    public function update(QrCodeRequest $request, int $meeting, int $score_game, int $id)
     {
         if ($request->validated()) {
-            $qr_code = Auth::user()->customer->qrCodes()->findOrFail($id);
-            $qr_code->score_game_id = $request->input('score_game_id');
+            $score_game = Auth::user()->customer->scoreGames()->findOrFail($score_game);
+            $qr_code = $score_game->qrCodes()->findOrFail($id);
             $qr_code->title = $request->input('title');
+            $qr_code->point = $request->input('point');
             $qr_code->start_at = $request->input('start_at');
             $qr_code->finish_at = $request->input('finish_at');
-            $qr_code->point = $request->input('point');
             $qr_code->status = $request->input('status');
             if ($qr_code->save()) {
                 $qr_code->updated_by = Auth::user()->id;
@@ -69,10 +66,10 @@ class QRCodeController extends Controller
             }
         }
     }
-    public function destroy(string $meeting, string $score_game, string $id)
+    public function destroy(int $meeting, int $score_game, int $id)
     {
-
-        $qr_code = Auth::user()->customer->qrCodes()->findOrFail($id);;
+        $score_game = Auth::user()->customer->scoreGames()->findOrFail($score_game);
+        $qr_code = $score_game->qrCodes()->findOrFail($id);
         if ($qr_code->delete()) {
             $qr_code->deleted_by = Auth::user()->id;
             $qr_code->save();
@@ -81,18 +78,18 @@ class QRCodeController extends Controller
             return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();
         }
     }
-
-    public function download(string $meeting, string $score_game, string $id){
-        $qr_code = Auth::user()->customer->qrCodes()->where('score_game_id', $score_game)->findOrFail($id);
-        \SimpleSoftwareIO\QrCode\Facades\QrCode::size(200)->generate($qr_code->code, storage_path('app/qrcodes/' . $qr_code->code . '.svg'));
-        return response()->download(storage_path('app/qrcodes/' . $qr_code->code . '.svg'));
+    public function download(int $meeting, int $score_game, int $id){
+        $score_game = Auth::user()->customer->scoreGames()->findOrFail($score_game);
+        $qr_code = $score_game->qrCodes()->findOrFail($id);
+        $path = storage_path('app/qrcodes/' . $qr_code->code . '.svg');
+        $contents = \SimpleSoftwareIO\QrCode\Facades\QrCode::size(200)->generate($qr_code->code);
+        file_put_contents($path, $contents);
+        return response()->download($path)->deleteFileAfterSend();
     }
-
-
-    public function qrCode(int $meeting, string $score_game, int $id)
+    public function qrCode(int $meeting, int $score_game, int $id)
     {
-        $score_game_object = Auth::user()->customer->scoreGames()->findOrFail($score_game);
-        $qr_code = $score_game_object->qrCodes()->findOrFail($id);
-        return \SimpleSoftwareIO\QrCode\Facades\QrCode::size(200)->generate($qr_code->code);
+        $score_game = Auth::user()->customer->scoreGames()->findOrFail($score_game);
+        $qr_code = $score_game->qrCodes()->findOrFail($id);
+        return \SimpleSoftwareIO\QrCode\Facades\QrCode::size(256)->generate($qr_code->code);
     }
 }

@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Chair extends Model
 {
-
     use SoftDeletes;
     protected $table = 'meeting_hall_program_chairs';
     protected $fillable = [
@@ -18,14 +17,20 @@ class Chair extends Model
         'chair_id',
         'created_by',
         'updated_by',
+        'deleted_by',
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
     protected $dates = [
         'created_at',
         'updated_at',
+        'deleted_at',
     ];
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
+        'deleted_at' => 'datetime',
     ];
     public function chair()
     {

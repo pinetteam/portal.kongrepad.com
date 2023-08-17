@@ -11,8 +11,8 @@ class ChairResource extends JsonResource
     {
         return [
             'program_id' => ['value'=>$this->program_id, 'type'=>'hidden'],
-            'moderator_id' => ['value'=>$this->moderator_id, 'type'=>'hidden'],
-            'route' => route('portal.meeting.hall.program.chair.update', $this->id),
+            'chair_id' => ['value'=>$this->chair_id, 'type'=>'hidden'],
+            'route' => route('portal.meeting.hall.program.chair.update', ['meeting' => $this->program->hall->meeting_id, 'hall' => $this->program->hall->id, 'program' => $this->program->id, 'chair' => $this->id]),
         ];
     }
 }

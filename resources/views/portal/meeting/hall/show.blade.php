@@ -38,7 +38,7 @@
                             <h1 class="m-0 text-center"><span class="badge text-bg-dark">1.</span> {{ __('common.programs') }}</h1>
                         </div>
                         <div class="card-body">
-                            <a class="btn btn-outline-light btn-lg w-100" href="{{ route('portal.meeting.hall.program.index', ['meeting' => $hall->meeting->id, 'hall' => $hall->id]) }}" title="{{ __('common.show') }}">
+                            <a class="btn btn-outline-light btn-lg w-100" href="{{ route('portal.meeting.hall.program.index', ['meeting' => $meeting->id, 'hall' => $hall->id]) }}" title="{{ __('common.show') }}">
                                 <span class="fa-duotone fa-presentation-screen"></span> {{ __('common.programs') }}
                             </a>
                         </div>
@@ -50,7 +50,7 @@
                             <h1 class="m-0 text-center"><span class="badge text-bg-dark">2.</span> {{ __('common.screens') }}</h1>
                         </div>
                         <div class="card-body">
-                            <a class="btn btn-outline-light btn-lg w-100" href="{{ route('portal.meeting.hall.screen.index', ['meeting' => $hall->meeting->id, 'hall' => $hall->id]) }}" title="{{ __('common.show') }}">
+                            <a class="btn btn-outline-light btn-lg w-100" href="{{ route('portal.meeting.hall.screen.index', ['meeting' => $meeting->id, 'hall' => $hall->id]) }}" title="{{ __('common.show') }}">
                                 <span class="fa-duotone fa-presentation-screen"></span> {{ __('common.screens') }}
                             </a>
                         </div>

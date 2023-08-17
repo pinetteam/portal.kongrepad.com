@@ -10,11 +10,11 @@ class KeypadResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'session_id' => ['value'=>$this->session_id, 'type'=>'hidden'],
             'sort_order' => ['value'=>$this->sort_order, 'type'=>'number'],
+            'session_id' => ['value'=>$this->session_id, 'type'=>'hidden'],
             'code' => ['value'=>$this->code, 'type'=>'text'],
+            'title' => ['value'=>$this->title, 'type'=>'text'],
             'keypad' => ['value'=>$this->keypad, 'type'=>'text'],
-            'description' => ['value'=>$this->description, 'type'=>'text'],
             'voting_started_at' => ['value'=> $this->voting_started_at, 'type'=>'datetime'],
             'voting_finished_at' => ['value'=> $this->voting_finished_at, 'type'=>'datetime'],
             'on_vote' => ['value'=>$this->on_vote, 'type'=>'radio'],

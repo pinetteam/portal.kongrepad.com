@@ -7,6 +7,7 @@ use App\Models\Meeting\Hall\Program\Chair\Chair;
 use App\Models\Meeting\Hall\Program\Debate\Debate;
 use App\Models\Meeting\Hall\Program\Session\Session;
 use App\Models\System\Setting\Variable\Variable;
+use App\Models\User\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
@@ -49,7 +50,7 @@ class Program extends Model
     ];
     protected function startAt(): Attribute
     {
-        $date_time_format = \App\Models\System\Setting\Variable\Variable::where('variable','date_time_format')->first()->settings()->where('customer_id', Auth::user()->customer->id)->first()->value;
+        $date_time_format = Variable::where('variable','date_time_format')->first()->settings()->where('customer_id', Auth::user()->customer->id)->first()->value;
         return Attribute::make(
             get: fn (string $startAt) => Carbon::createFromFormat('Y-m-d H:i:s', $startAt)->format($date_time_format),
             set: fn (string $startAt) => Carbon::createFromFormat($date_time_format, $startAt)->format('Y-m-d H:i:s'),
@@ -57,11 +58,15 @@ class Program extends Model
     }
     protected function finishAt(): Attribute
     {
-        $date_time_format = \App\Models\System\Setting\Variable\Variable::where('variable','date_time_format')->first()->settings()->where('customer_id', Auth::user()->customer->id)->first()->value;
+        $date_time_format = Variable::where('variable','date_time_format')->first()->settings()->where('customer_id', Auth::user()->customer->id)->first()->value;
         return Attribute::make(
             get: fn (string $finishAt) => Carbon::createFromFormat('Y-m-d H:i:s', $finishAt)->format($date_time_format),
             set: fn (string $finishAt) => Carbon::createFromFormat($date_time_format, $finishAt)->format('Y-m-d H:i:s'),
         );
+    }
+    public function getCreatedByNameAttribute()
+    {
+        return isset($this->created_by) ? User::findOrFail($this->created_by)->full_name : __('common.unspecified');
     }
     public function hall()
     {
@@ -75,7 +80,6 @@ class Program extends Model
     {
         return $this->hasMany(Session::class, 'program_id', 'id');
     }
-
     public function debates()
     {
         return $this->hasMany(Debate::class, 'program_id', 'id');

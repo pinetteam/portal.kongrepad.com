@@ -18,11 +18,11 @@ class KeypadRequest extends FormRequest
             case 'POST' || 'PATCH' || 'PUT':
             {
                 return [
-                    'session_id' => 'required|exists:meeting_hall_program_sessions,id',
                     'sort_order' => 'nullable|integer',
+                    'session_id' => 'required|exists:meeting_hall_program_sessions,id',
                     'code' => 'nullable|max:255',
+                    'title' => 'required|max:255',
                     'keypad' => 'required|max:255',
-                    'status' => 'boolean|required',
                 ];
             }
             default:break;
@@ -32,13 +32,10 @@ class KeypadRequest extends FormRequest
     {
         return [
             'session_id' => __('common.session'),
-            'sort_order' => __('common.moderator'),
+            'sort_order' => __('common.sort-order'),
             'code' => __('common.code'),
+            'title' => __('common.title'),
             'keypad' => __('common.keypad'),
-            'on-vote' => __('common.on-vote'),
-            'voting_started_at' => __('common.voting-started-at'),
-            'voting_finished_at' => __('common.voting-finished-at'),
-            'status' => __('common.status'),
         ];
     }
     public function failedValidation(Validator $validator)

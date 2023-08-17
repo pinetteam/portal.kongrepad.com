@@ -1,5 +1,5 @@
 @extends('layout.portal.common')
-@section('title', $program->title . ' | ' . __('common.program'))
+@section('title', $program->title)
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">
@@ -60,7 +60,7 @@
                                 </tr>
                                 <tr>
                                     <th scope="row" class="text-end w-50">{{ __('common.created-by') }}:</th>
-                                    <td class="text-start w-50">{{ $program->created_by }}</td>
+                                    <td class="text-start w-50">{{ $program->created_by_name }}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" class="text-end w-50">{{ __('common.created-at') }}:</th>
@@ -92,7 +92,7 @@
                                         <td class="text-end">
                                             <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
                                                 <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
-                                                    <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#chair-delete-modal" data-route="{{ route('portal.meeting.hall.program.chair.destroy', ['meeting' => $program_chair->program->hall->meeting->id, 'hall' => $program_chair->program->hall->id, 'program' => $program_chair->program->id, 'chair' => $program_chair->id ]) }}" data-record="{{ $program_chair->chair->full_name }}">
+                                                    <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#chair-delete-modal" data-route="{{ route('portal.meeting.hall.program.chair.destroy', ['meeting' => $program_chair->program->hall->meeting_id, 'hall' => $program_chair->program->hall->id, 'program' => $program_chair->program->id, 'chair' => $program_chair->id ]) }}" data-record="{{ $program_chair->chair->full_name }}">
                                                         <span class="fa-regular fa-trash"></span>
                                                     </button>
                                                 </div>
@@ -105,7 +105,7 @@
                         </div>
                     </div>
                     <div class="card-footer d-flex justify-content-center">
-                        <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#chair-create-modal" data-route="{{ route('portal.meeting.hall.program.chair.store' , ['meeting' => $program->hall->meeting->id, 'hall' => $program->hall->id, 'program' => $program->id]) }}">
+                        <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#chair-create-modal" data-route="{{ route('portal.meeting.hall.program.chair.store' , ['meeting' => $program->hall->meeting_id, 'hall' => $program->hall->id, 'program' => $program->id]) }}">
                             <i class="fa-solid fa-plus"></i> {{ __('common.add-new-chair') }}
                         </button>
                     </div>
@@ -154,7 +154,7 @@
                                 <td>{{ $program_session->speaker->full_name }}</td>
                                 <td>
                                     @if($program_session->document_id)
-                                        <a href="{{ route('portal.meeting.document.download', ['meeting' => $program->hall->meeting->id, 'document' => $program_session->document_id] ) }}" class="btn btn-sm btn-info w-100" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.view') }}">
+                                        <a href="{{ route('portal.meeting.document.download', ['meeting' => $program->hall->meeting_id, 'document' => $program_session->document->file_name]) }}" class="btn btn-sm btn-info w-100" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.view') }}">
                                             <span class="fa-regular fa-file-arrow-down"></span> {{ $program_session->document->title }}
                                         </a>
                                     @else
@@ -167,7 +167,7 @@
                                 <td>{{ $program_session->start_at }}</td>
                                 <td>{{ $program_session->finish_at }}</td>
                                 <td>
-                                    @if($program_session->questions)
+                                    @if($program_session->questions_allowed)
                                         <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
                                     @else
                                         <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
@@ -183,16 +183,16 @@
                                 </td>
                                 <td class="text-end">
                                     <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
-                                        <a class="btn btn-info btn-sm" href="{{ route('portal.meeting.hall.program.session.show', ['meeting' => $program->hall->meeting->id, 'hall' => $program->hall->id, 'program' => $program->id, 'session' => $program_session->id]) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
+                                        <a class="btn btn-info btn-sm" href="{{ route('portal.meeting.hall.program.session.show', ['meeting' => $program->hall->meeting_id, 'hall' => $program->hall->id, 'program' => $program->id, 'session' => $program_session->id]) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
                                             <span class="fa-regular fa-eye"></span>
                                         </a>
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.edit') }}">
-                                            <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#session-edit-modal" data-route="{{ route('portal.meeting.hall.program.session.update', ['meeting' => $program->hall->meeting->id, 'hall' => $program->hall->id, 'program' => $program->id, 'session' => $program_session->id]) }}" data-resource="{{ route('portal.meeting.hall.program.session.edit', ['meeting' => $program->hall->meeting->id, 'hall' => $program->hall->id, 'program' => $program->id, 'session' => $program_session->id]) }}" data-id="{{ $program_session->id }}">
+                                            <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#session-edit-modal" data-route="{{ route('portal.meeting.hall.program.session.update', ['meeting' => $program->hall->meeting_id, 'hall' => $program->hall->id, 'program' => $program->id, 'session' => $program_session->id]) }}" data-resource="{{ route('portal.meeting.hall.program.session.edit', ['meeting' => $program->hall->meeting_id, 'hall' => $program->hall->id, 'program' => $program->id, 'session' => $program_session->id]) }}" data-id="{{ $program_session->id }}">
                                                 <span class="fa-regular fa-pen-to-square"></span>
                                             </button>
                                         </div>
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
-                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#session-delete-modal" data-route="{{ route('portal.meeting.hall.program.session.destroy', ['meeting' => $program->hall->meeting->id, 'hall' => $program->hall->id, 'program' => $program->id, 'session' => $program_session->id]) }}" data-record="{{ $program_session->title }}">
+                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#session-delete-modal" data-route="{{ route('portal.meeting.hall.program.session.destroy', ['meeting' => $program->hall->meeting_id, 'hall' => $program->hall->id, 'program' => $program->id, 'session' => $program_session->id]) }}" data-record="{{ $program_session->title }}">
                                                 <span class="fa-regular fa-trash"></span>
                                             </button>
                                         </div>
@@ -205,42 +205,42 @@
             </div>
         </div>
         <div class="card-footer d-flex justify-content-center">
-            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#session-create-modal" data-route="{{ route('portal.meeting.hall.program.session.store', ['meeting' => $program->hall->meeting->id, 'hall' => $program->hall->id, 'program' => $program->id]) }}">
+            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#session-create-modal" data-route="{{ route('portal.meeting.hall.program.session.store', ['meeting' => $program->hall->meeting_id, 'hall' => $program->hall->id, 'program' => $program->id]) }}">
                 <i class="fa-solid fa-plus"></i> {{ __('common.add-new-session') }}
             </button>
         </div>
         <x-crud.form.common.create name="session">
             @section('session-create-form')
+                <x-input.number method="c" name="sort_order" title="sort" icon="circle-sort" />
                 <x-input.hidden method="c" name="program_id" :value="$program->id" />
                 <x-input.select method="c" name="speaker_id" title="speaker" :options="$speakers" option_value="id" option_name="full_name" icon="person-chalkboard" />
                 <x-input.select method="c" name="document_id" title="document" :options="$documents" option_value="id" option_name="title" icon="speakation-screen" />
-                <x-input.number method="c" name="sort_order" title="sort" icon="circle-sort" />
                 <x-input.text method="c" name="code" title="code" icon="code-simple" />
                 <x-input.text method="c" name="title" title="title" icon="input-text" />
                 <x-input.text method="c" name="description" title="description" icon="comment-dots" />
                 <x-input.datetime method="c" name="start_at" title="start-at" icon="calendar-arrow-down" />
                 <x-input.datetime method="c" name="finish_at" title="finish-at" icon="calendar-arrow-down" />
                 <x-input.radio method="c" name="questions_allowed" title="questions" :options="$questions" option_value="value" option_name="title" icon="block-question" />
-                <x-input.radio method="c" name="questions_auto_start" title="questions-auto-start" :options="$questions_auto_start" option_value="value" option_name="title" icon="block-question" />
                 <x-input.number method="c" name="questions_limit" title="question-limit" icon="circle-1" />
+                <x-input.radio method="c" name="questions_auto_start" title="questions-auto-start" :options="$questions_auto_start" option_value="value" option_name="title" icon="block-question" />
                 <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
             @endsection
         </x-crud.form.common.create>
         <x-crud.form.common.delete name="session" />
         <x-crud.form.common.edit name="session">
             @section('session-edit-form')
+                <x-input.number method="e" name="sort_order" title="sort" icon="circle-sort" />
                 <x-input.hidden method="e" name="program_id" :value="$program->id" />
                 <x-input.select method="e" name="speaker_id" title="speaker" :options="$speakers" option_value="id" option_name="full_name" icon="person-chalkboard" />
                 <x-input.select method="e" name="document_id" title="document" :options="$documents" option_value="id" option_name="title" icon="speakation-screen" />
-                <x-input.number method="e" name="sort_order" title="sort" icon="circle-sort" />
                 <x-input.text method="e" name="code" title="code" icon="code-simple" />
                 <x-input.text method="e" name="title" title="title" icon="input-text" />
                 <x-input.text method="e" name="description" title="description" icon="comment-dots" />
                 <x-input.datetime method="e" name="start_at" title="start-at" icon="calendar-arrow-down" />
                 <x-input.datetime method="e" name="finish_at" title="finish-at" icon="calendar-arrow-down" />
                 <x-input.radio method="e" name="questions_allowed" title="questions" :options="$questions" option_value="value" option_name="title" icon="block-question" />
-                <x-input.radio method="e" name="questions_auto_start" title="questions-auto-start" :options="$questions_auto_start" option_value="value" option_name="title" icon="block-question" />
                 <x-input.number method="e" name="questions_limit" title="question-limit" icon="circle-1" />
+                <x-input.radio method="e" name="questions_auto_start" title="questions-auto-start" :options="$questions_auto_start" option_value="value" option_name="title" icon="block-question" />
                 <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
             @endsection
         </x-crud.form.common.edit>

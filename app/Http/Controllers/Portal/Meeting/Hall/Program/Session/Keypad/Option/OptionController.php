@@ -10,12 +10,12 @@ use Illuminate\Support\Facades\Auth;
 
 class OptionController extends Controller
 {
-    public function store(OptionRequest $request, string $meeting, string $hall, string $program, string $session, string $keypad)
+    public function store(OptionRequest $request, int $meeting, int $hall, int $program, int $session, int $keypad)
     {
         if ($request->validated()) {
             $option = new Option();
-            $option->keypad_id = $keypad;
             $option->sort_order = $request->input('sort_order');
+            $option->keypad_id = $keypad;
             $option->option = $request->input('option');
             if ($option->save()) {
                 $option->created_by = Auth::user()->id;
@@ -26,23 +26,17 @@ class OptionController extends Controller
             }
         }
     }
-    public function show(string $meeting, string $hall, string $program, string $session, string $keypad, string $id)
-    {
-        $option = Auth::user()->customer->options()->findOrFail($id);
-        $votes = $option->votes()->get();
-        return view('portal.program.session.keypad.option.show', compact(['option', 'votes']));
-    }
-    public function edit(string $meeting, string $hall, string $program, string $session, string $keypad, string $id)
+    public function edit(int $meeting, int $hall, int $program, int $session, int $keypad, int $id)
     {
         $option = Auth::user()->customer->options()->findOrFail($id);
         return new OptionResource($option);
     }
-    public function update(OptionRequest $request, string $meeting, string $hall, string $program, string $session, string $keypad, string $id)
+    public function update(OptionRequest $request, int $meeting, int $hall, int $program, int $session, int $keypad, int $id)
     {
         if ($request->validated()) {
             $option = Auth::user()->customer->options()->findOrFail($id);
-            $option->keypad_id = $request->input('keypad_id');
             $option->sort_order = $request->input('sort_order');
+            $option->keypad_id = $request->input('keypad_id');
             $option->option = $request->input('option');
             if ($option->save()) {
                 $option->updated_by = Auth::user()->id;
@@ -53,7 +47,7 @@ class OptionController extends Controller
             }
         }
     }
-    public function destroy(string $meeting, string $hall, string $program, string $session, string $keypad, string $id)
+    public function destroy(int $meeting, int $hall, int $program, int $session, int $keypad, int $id)
     {
         $option = Auth::user()->customer->options()->findOrFail($id);
         if ($option->delete()) {

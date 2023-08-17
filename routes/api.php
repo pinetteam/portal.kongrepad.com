@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('v1')->name('api.v1.')->group(function () {
     Route::post('/auth/login/participant', [\App\Http\Controllers\API\Auth\LoginController::class, 'participant'])->name('auth.login.participant');
     Route::group(["middleware" => ['auth:sanctum']], function () {
-        Route::resource('/meeting/{meeting_id}/hall', \App\Http\Controllers\API\Meeting\Hall\MeetingHallController::class)->except(['create']);
+        Route::resource('/hall', \App\Http\Controllers\API\Meeting\Hall\MeetingHallController::class)->except(['create']);
         Route::resource('/meeting/{meeting_id}/program', \App\Http\Controllers\API\Meeting\Hall\Program\ProgramController::class)->except(['create']);
         Route::resource('/meeting/{meeting_id}/survey', \App\Http\Controllers\API\Meeting\Survey\SurveyController::class)->except(['create']);
         Route::resource('/meeting/{meeting_id}/survey/{survey_id}/question', \App\Http\Controllers\API\Meeting\Survey\Question\QuestionController::class)->except(['create']);

@@ -7,9 +7,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('meeting_hall_program_sessions', function (Blueprint $table) {
@@ -24,8 +21,8 @@ return new class extends Migration
             $table->dateTime('start_at')->nullable();
             $table->dateTime('finish_at')->nullable();
             $table->boolean('on_air')->default(0)->comment('0=no;1=yes');
-            $table->unsignedInteger('questions_limit')->nullable()->default(0);
             $table->boolean('questions_allowed')->default(0)->comment('0=passive;1=active');
+            $table->unsignedInteger('questions_limit')->nullable()->default(0);
             $table->boolean('questions_auto_start')->default(0)->comment('0=passive;1=active');
             $table->boolean('is_questions_started')->default(0)->comment('0=passive;1=active');
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
@@ -42,10 +39,6 @@ return new class extends Migration
             $table->foreign('document_id')->on('meeting_documents')->references('id');
         });
     }
-
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('meeting_hall_program_sessions');

@@ -2,8 +2,10 @@
 
 namespace App\Models\Meeting;
 
+use App\Models\Meeting\Announcement\Announcement;
 use App\Models\Meeting\Document\Document;
 use App\Models\Meeting\Hall\Hall;
+use App\Models\Meeting\Hall\Program\Chair\Chair;
 use App\Models\Meeting\Participant\Participant;
 use App\Models\Meeting\ScoreGame\ScoreGame;
 use App\Models\Meeting\Survey\Survey;
@@ -62,6 +64,19 @@ class Meeting extends Model
             get: fn($finishAt) => $finishAt ? Carbon::createFromFormat('Y-m-d', $finishAt)->format($date_format) : __('common.unspecified'),
             set: fn($finishAt) => $finishAt ? Carbon::createFromFormat($date_format, $finishAt)->format('Y-m-d') : null,
         );
+    }
+    public function chairs()
+    {
+        $chairs = Chair::select('meeting_hall_program_chairs.*')
+            ->join('meeting_hall_programs', 'meeting_hall_program_chairs.program_id', '=', 'meeting_hall_programs.id')
+            ->join('meeting_halls', 'meeting_hall_programs.hall_id', '=', 'meeting_halls.id')
+            ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
+            ->where('meetings.id', $this->getkey());
+        return $chairs;
+    }
+    public function announcements()
+    {
+        return $this->hasMany(Announcement::class, 'meeting_id', 'id');
     }
     public function documents()
     {

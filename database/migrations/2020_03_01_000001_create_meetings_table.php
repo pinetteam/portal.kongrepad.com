@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('meetings', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('customer_id')->index();
-            $table->uuid('banner_name')->unique();
+            $table->uuid('banner_name')->nullable();
             $table->string('banner_extension', 31)->nullable();
             $table->unsignedInteger('banner_size')->comment('(kb)')->nullable();
             $table->string('code', 511);

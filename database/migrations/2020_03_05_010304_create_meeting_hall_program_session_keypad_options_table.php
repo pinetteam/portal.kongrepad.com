@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('meeting_hall_program_session_keypad_options', function (Blueprint $table) {
@@ -27,10 +24,6 @@ return new class extends Migration
             $table->foreign('keypad_id')->on('meeting_hall_program_session_keypads')->references('id');
         });
     }
-
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('meeting_hall_program_session_keypad_options');

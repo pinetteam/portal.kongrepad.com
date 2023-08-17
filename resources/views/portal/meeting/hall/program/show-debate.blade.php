@@ -60,7 +60,7 @@
                                 </tr>
                                 <tr>
                                     <th scope="row" class="text-end w-50">{{ __('common.created-by') }}:</th>
-                                    <td class="text-start w-50">{{ $program->created_by }}</td>
+                                    <td class="text-start w-50">{{ $program->created_by_name }}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" class="text-end w-50">{{ __('common.created-at') }}:</th>

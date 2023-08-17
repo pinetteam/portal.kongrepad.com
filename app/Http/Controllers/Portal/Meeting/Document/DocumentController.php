@@ -15,8 +15,8 @@ class DocumentController extends Controller
 {
     public function index(int $meeting)
     {
-        $meeting = Meeting::findOrFail($meeting);
-        $documents = Auth::user()->customer->documents()->where('meeting_id', $meeting->id)->paginate(20);
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $documents = $meeting->documents()->paginate(20);
         $sharing_via_emails = [
             'not-allowed' => ['value' => 0, 'title' => __('common.not-allowed'), 'color' => 'danger'],
             'allowed' => ['value' => 1, 'title' => __('common.allowed'), 'color' => 'success'],
@@ -107,7 +107,8 @@ class DocumentController extends Controller
     }
     public function download(int $meeting, string $document)
     {
-        $file = Document::where('meeting_id', $meeting)->where('file_name', $document)->first();
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $file = $meeting->documents()->where('file_name', $document)->first();
         if ($file) {
             try {
                 return Storage::download('documents/' . $file->file_name . '.' . $file->file_extension);

@@ -4,6 +4,7 @@ namespace App\Http\Requests\Portal\Meeting\ScoreGame;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\File;
 
 class ScoreGameRequest extends FormRequest
 {
@@ -19,9 +20,10 @@ class ScoreGameRequest extends FormRequest
             {
                 return [
                     'meeting_id' => 'required|exists:meetings,id',
+                    'title' => 'required|max:255',
+                    'logo' => ['nullable', File::types(['png'])->max(12 * 1024),],
                     'start_at' => 'required|date_format:Y-m-d H:i|before_or_equal:finish_at|required_with:finish_at',
                     'finish_at' => 'required|date_format:Y-m-d H:i|after_or_equal:start_at|required_with:start_at',
-                    'title' => 'required|max:255',
                     'status' => 'required|boolean',
                 ];
             }

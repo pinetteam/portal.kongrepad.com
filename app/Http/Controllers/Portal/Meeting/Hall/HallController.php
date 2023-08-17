@@ -97,7 +97,7 @@ class HallController extends Controller
 
     public function current_speaker(string $id)
     {
-        $hall = Auth::user()->customer->meetingHalls()->findOrFail($id);
+        $hall = Auth::user()->customer->halls()->findOrFail($id);
         $session = $hall->programSessions()->where('is_started', 1)->first();
         $speaker = $session && $session->program->on_air && $session ? $session->speaker : null;
         event(new FormSubmitted("sdsdsd"));
@@ -106,7 +106,7 @@ class HallController extends Controller
 
     public function chair_board(string $id)
     {
-        $hall = Auth::user()->customer->meetingHalls()->findOrFail($id);
+        $hall = Auth::user()->customer->halls()->findOrFail($id);
         $session = $hall->programSessions()->where('is_started',1)->first();
         $questions = $session && $session->program->on_air ? $session->questions()->get() : null;
         return view('portal.chair-board.index', compact(['session', 'questions']));
@@ -114,7 +114,7 @@ class HallController extends Controller
 
     public function current_chair(string $id, string $chair_index)
     {
-        $hall = Auth::user()->customer->meetingHalls()->findOrFail($id);
+        $hall = Auth::user()->customer->halls()->findOrFail($id);
         $program = $hall->programs()->where('on_air',1)->first();
         if(isset($program))
             $chair = $program->programChairs->values()->get($chair_index-1);

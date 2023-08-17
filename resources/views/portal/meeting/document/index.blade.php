@@ -1,5 +1,5 @@
 @extends('layout.portal.common')
-@section('title', $meeting->title .' | ' . __('common.documents'))
+@section('title', $meeting->title . ' | ' . __('common.documents'))
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">
@@ -23,13 +23,9 @@
                     <tbody>
                         @foreach($documents as $document)
                             <tr>
-                                <td>{{ $document->meeting->title }}</td>
+                                <td>{{ $meeting->title }}</td>
                                 <td>
-                                    <a href="{{ route('portal.meeting.document.download', ['meeting' => $meeting->id, 'document' => $document->file_name]) }}" class="btn btn-sm btn-info w-100"
-                                       data-bs-toggle="tooltip"
-                                       data-bs-placement="top"
-                                       data-bs-custom-class="kp-tooltip"
-                                       data-bs-title="{{ __('common.download') }}">
+                                    <a href="{{ route('portal.meeting.document.download', ['meeting' => $meeting->id, 'document' => $document->file_name]) }}" class="btn btn-sm btn-info w-100" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.download') }}">
                                         <span class="fa-regular fa-file-arrow-down"></span> {{ $document->title }}
                                     </a>
                                 </td>
@@ -67,13 +63,8 @@
                                                 <span class="fa-regular fa-pen-to-square"></span>
                                             </button>
                                         </div>
-                                        <div data-bs-toggle="tooltip"
-                                             data-bs-placement="top"
-                                             data-bs-custom-class="kp-tooltip"
-                                             data-bs-title="{{ __('common.delete') }}">
-                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}"
-                                                    data-bs-toggle="modal" data-bs-target="#document-delete-modal"
-                                                    data-route="{{ route('portal.meeting.document.destroy', ['meeting' => $meeting->id, 'document' => $document->id]) }}" data-record="{{ $document->title }}">
+                                        <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
+                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#document-delete-modal" data-route="{{ route('portal.meeting.document.destroy', ['meeting' => $meeting->id, 'document' => $document->id]) }}" data-record="{{ $document->title }}">
                                                 <span class="fa-regular fa-trash"></span>
                                             </button>
                                         </div>
@@ -86,9 +77,7 @@
             </div>
         </div>
         <div class="card-footer d-flex justify-content-center">
-            <button type="button" class="btn btn-success btn-lg w-100"
-                    data-bs-toggle="modal" data-bs-target="#document-create-modal"
-                    data-route="{{ route('portal.meeting.document.store', ['meeting' => $meeting->id]) }}">
+            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#document-create-modal" data-route="{{ route('portal.meeting.document.store', ['meeting' => $meeting->id]) }}">
                 <i class="fa-solid fa-plus"></i> {{ __('common.create-new-document') }}
             </button>
         </div>

@@ -12,10 +12,11 @@ class AnnouncementController extends Controller
 {
     public function index(int $meeting)
     {
-        $announcements = Auth::user()->customer->announcements()->where('meeting_id', $meeting)->paginate(20);
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $announcements = $meeting->announcements()->paginate(20);
         $statuses = [
-            'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-            'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
+            'passive' => ['value' => 0, 'title' => __('common.passive'), 'color' => 'danger'],
+            'active' => ['value' => 1, 'title' => __('common.active'), 'color' => 'success'],
         ];
         return view('portal.meeting.announcement.index', compact(['announcements', 'meeting', 'statuses']));
     }
@@ -37,18 +38,21 @@ class AnnouncementController extends Controller
     }
     public function show(int $meeting, int $id)
     {
-        $announcement = Auth::user()->customer->announcements()->where('meeting_id', $meeting)->findOrFail($id);
-        return view('portal.meeting.announcement.show', compact(['announcement']));
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $announcement = $meeting->announcements()->findOrFail($id);
+        return view('portal.meeting.announcement.show', compact(['announcement', 'meeting']));
     }
     public function edit(int $meeting, int $id)
     {
-        $announcement = Auth::user()->customer->announcements()->where('meeting_id', $meeting)->findOrFail($id);
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $announcement = $meeting->announcements()->findOrFail($id);
         return new AnnouncementResource($announcement);
     }
     public function update(AnnouncementRequest $request, int $meeting, int $id)
     {
         if ($request->validated()) {
-            $announcement = Auth::user()->customer->announcements()->where('meeting_id', $meeting)->findOrFail($id);
+            $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+            $announcement = $meeting->announcements()->findOrFail($id);
             $announcement->title = $request->input('title');
             $announcement->status = $request->input('status');
             if ($announcement->save()) {
@@ -62,7 +66,8 @@ class AnnouncementController extends Controller
     }
     public function destroy(string $meeting, string $id)
     {
-        $announcement = Auth::user()->customer->announcements()->where('meeting_id', $meeting)->findOrFail($id);
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $announcement = $meeting->announcements()->findOrFail($id);
         if ($announcement->delete()) {
             $announcement->deleted_by = Auth::user()->id;
             $announcement->save();

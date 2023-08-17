@@ -18,8 +18,8 @@ class OptionRequest extends FormRequest
             case 'POST' || 'PATCH' || 'PUT':
             {
                 return [
-                    'keypad_id' => 'required|exists:meeting_hall_program_session_keypads,id',
                     'sort_order' => 'nullable|integer',
+                    'keypad_id' => 'required|exists:meeting_hall_program_session_keypads,id',
                     'option' => 'required|max:255',
                 ];
             }
@@ -29,9 +29,9 @@ class OptionRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'keypad_id' => __('common.keypad'),
             'sort_order' => __('common.sort-order'),
-            'option' => __('common.title'),
+            'keypad_id' => __('common.keypad'),
+            'option' => __('common.option'),
         ];
     }
     public function failedValidation(Validator $validator)

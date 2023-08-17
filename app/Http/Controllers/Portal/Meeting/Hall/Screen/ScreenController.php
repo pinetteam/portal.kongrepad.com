@@ -22,8 +22,8 @@ class ScreenController extends Controller
             'document' => ["value" => "document", "title" => __('common.document')],
         ];
         $statuses = [
-            'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-            'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
+            'passive' => ['value' => 0, 'title' => __('common.passive'), 'color' => 'danger'],
+            'active' => ['value' => 1, 'title' => __('common.active'), 'color' => 'success'],
         ];
         return view('portal.meeting.hall.screen.index', compact(['screens', 'meeting', 'hall', 'types', 'statuses']));
     }

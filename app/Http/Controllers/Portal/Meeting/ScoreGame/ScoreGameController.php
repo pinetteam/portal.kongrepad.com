@@ -11,29 +11,28 @@ use Intervention\Image\Facades\Image;
 
 class ScoreGameController extends Controller
 {
-    public function index(string $meeting_id)
+    public function index(int $meeting)
     {
-        $score_games = Auth::user()->customer->scoreGames()->paginate(20);
-        $meetings = Auth::user()->customer->meetings()->where('status', 1)->get();
-        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting_id);
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $score_games = $meeting->scoreGames()->paginate(20);
         $statuses = [
-            'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-            'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
+            'passive' => ['value' => 0, 'title' => __('common.passive'), 'color' => 'danger'],
+            'active' => ['value' => 1, 'title' => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.meeting.score-game.index', compact(['score_games', 'meetings', 'meeting', 'statuses']));
+        return view('portal.meeting.score-game.index', compact(['meeting', 'score_games', 'statuses']));
     }
     public function store(ScoreGameRequest $request)
     {
         if ($request->validated()) {
             $score_game = new ScoreGame();
             $score_game->meeting_id = $request->input('meeting_id');
-            $score_game->start_at = $request->input('start_at');
-            $score_game->finish_at = $request->input('finish_at');
             $score_game->title = $request->input('title');
             if ($request->has('logo')) {
                 $logo = Image::make($request->file('logo'))->encode('data-url');
                 $score_game->logo = $logo;
             }
+            $score_game->start_at = $request->input('start_at');
+            $score_game->finish_at = $request->input('finish_at');
             $score_game->status = $request->input('status');
             if ($score_game->save()) {
                 $score_game->created_by = Auth::user()->id;
@@ -44,36 +43,36 @@ class ScoreGameController extends Controller
             }
         }
     }
-    public function show(string $meeting_id, string $id)
+    public function show(int $meeting, string $id)
     {
-        $score_game = Auth::user()->customer->scoreGames()->findOrFail($id);
-        $score_games = Auth::user()->customer->scoreGames()->where('meeting_score_games.status', 1)->get();
-        $points = $score_game->points()->paginate(10);
-        $score_game_qr_codes = $score_game->qrCodes()->get();
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $score_game = $meeting->scoreGames()->findOrFail($id);
         $statuses = [
-            'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-            'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
+            'passive' => ['value' => 0, 'title' => __('common.passive'), 'color' => 'danger'],
+            'active' => ['value' => 1, 'title' => __('common.active'), 'color' => 'success'],
         ];
         return view('portal.meeting.score-game.show', compact(['points', 'score_game', 'score_games', 'score_game_qr_codes', 'statuses']));
 
     }
-    public function edit(string $meeting_id, string $id)
+    public function edit(int $meeting, string $id)
     {
-        $score_game = Auth::user()->customer->scoreGames()->findOrFail($id);
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $score_game = $meeting->scoreGames()->findOrFail($id);
         return new ScoreGameResource($score_game);
     }
     public function update(ScoreGameRequest $request, string $meeting_id, string $id)
     {
         if ($request->validated()) {
-            $score_game = Auth::user()->customer->scoreGames()->findOrFail($id);
+            $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+            $score_game = $meeting->scoreGames()->findOrFail($id);
             $score_game->meeting_id = $request->input('meeting_id');
             $score_game->title = $request->input('title');
-            $score_game->start_at = $request->input('start_at');
-            $score_game->finish_at = $request->input('finish_at');
             if ($request->has('logo')) {
                 $logo = Image::make($request->file('logo'))->encode('data-url');
                 $score_game->logo = $logo;
             }
+            $score_game->start_at = $request->input('start_at');
+            $score_game->finish_at = $request->input('finish_at');
             $score_game->status = $request->input('status');
             if ($score_game->save()) {
                 $score_game->updated_by = Auth::user()->id;
@@ -86,7 +85,8 @@ class ScoreGameController extends Controller
     }
     public function destroy(string $meeting_id, string $id)
     {
-        $score_game = Auth::user()->customer->scoreGames()->findOrFail($id);
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $score_game = $meeting->scoreGames()->findOrFail($id);
         if ($score_game->delete()) {
             $score_game->deleted_by = Auth::user()->id;
             $score_game->save();
