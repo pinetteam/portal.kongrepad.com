@@ -1,5 +1,5 @@
 @extends('layout.portal.common')
-@section('title', $hall->title .' | ' . __('common.screens'))
+@section('title', $hall->title . ' | ' . __('common.screens'))
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">

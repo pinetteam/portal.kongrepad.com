@@ -51,7 +51,7 @@ class ScoreGameController extends Controller
             'passive' => ['value' => 0, 'title' => __('common.passive'), 'color' => 'danger'],
             'active' => ['value' => 1, 'title' => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.meeting.score-game.show', compact(['points', 'score_game', 'score_games', 'score_game_qr_codes', 'statuses']));
+        return view('portal.meeting.score-game.show', compact(['meeting', 'score_game', 'statuses']));
 
     }
     public function edit(int $meeting, string $id)
@@ -60,7 +60,7 @@ class ScoreGameController extends Controller
         $score_game = $meeting->scoreGames()->findOrFail($id);
         return new ScoreGameResource($score_game);
     }
-    public function update(ScoreGameRequest $request, string $meeting_id, string $id)
+    public function update(ScoreGameRequest $request, string $meeting, string $id)
     {
         if ($request->validated()) {
             $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);

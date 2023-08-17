@@ -18,7 +18,7 @@ class AnnouncementController extends Controller
             'passive' => ['value' => 0, 'title' => __('common.passive'), 'color' => 'danger'],
             'active' => ['value' => 1, 'title' => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.meeting.announcement.index', compact(['announcements', 'meeting', 'statuses']));
+        return view('portal.meeting.announcement.index', compact(['meeting', 'announcements', 'statuses']));
     }
     public function store(AnnouncementRequest $request, int $meeting)
     {

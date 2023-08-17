@@ -34,9 +34,10 @@ class ScoreGameRequest extends FormRequest
     {
         return [
             'meeting_id' => __('common.meeting'),
+            'title' => __('common.title'),
+            'logo' => __('common.logo'),
             'start_at' => __('common.start-at'),
             'finish_at' => __('common.finish-at'),
-            'title' => __('common.title'),
             'status' => __('common.status'),
         ];
     }

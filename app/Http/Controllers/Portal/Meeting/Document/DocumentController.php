@@ -25,7 +25,7 @@ class DocumentController extends Controller
             'passive' => ['value' => 0, 'title' => __('common.passive'), 'color' => 'danger'],
             'active' => ['value' => 1, 'title' => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.meeting.document.index', compact(['documents', 'meeting', 'sharing_via_emails', 'statuses']));
+        return view('portal.meeting.document.index', compact(['meeting', 'documents', 'sharing_via_emails', 'statuses']));
     }
     public function store(DocumentRequest $request, int $meeting)
     {
@@ -58,18 +58,21 @@ class DocumentController extends Controller
     }
     public function show(int $meeting, int $id)
     {
-        $document = Auth::user()->customer->documents()->where('meeting_id', $meeting)->findOrFail($id);
-        return view('portal.meeting.document.show', compact(['document']));
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $document = $meeting->documents()->findOrFail($id);
+        return view('portal.meeting.document.show', compact(['meeting', 'document']));
     }
     public function edit(int $meeting, int $id)
     {
-        $document = Auth::user()->customer->documents()->where('meeting_id', $meeting)->findOrFail($id);
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $document = $meeting->documents()->findOrFail($id);
         return new DocumentResource($document);
     }
     public function update(DocumentRequest $request, int $meeting, int $id)
     {
         if ($request->validated()) {
-            $document = Auth::user()->customer->documents()->where('meeting_id', $meeting)->findOrFail($id);
+            $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+            $document = $meeting->documents()->findOrFail($id);
             if ($request->hasFile('file')) {
                 $file = $request->file('file');
                 $file_name = $document->file_name;
@@ -96,7 +99,8 @@ class DocumentController extends Controller
     }
     public function destroy(int $meeting, int $id)
     {
-        $document = Auth::user()->customer->documents()->where('meeting_id', $meeting)->findOrFail($id);
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $document = $meeting->documents()->findOrFail($id);
         if ($document->delete()) {
             $document->deleted_by = Auth::user()->id;
             $document->save();

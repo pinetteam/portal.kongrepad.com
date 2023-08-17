@@ -1,5 +1,5 @@
 @extends('layout.portal.common')
-@section('title', $meeting->title .' | ' . __('common.surveys'))
+@section('title', $meeting->title . ' | ' . __('common.surveys'))
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">
@@ -25,25 +25,11 @@
                     <tbody>
                         @foreach($surveys as $survey)
                             <tr>
-                                <td>{{ $survey->meeting->title }}</td>
+                                <td>{{ $meeting->title }}</td>
                                 <td>{{ $survey->title }}</td>
-                                <td>
-                                    @if($survey->start_at)
-                                    {{ $survey->start_at }}
-                                    @else
-                                        <i class="text-info">{{__('common.unspecified')}}</i>
-                                    @endif
-                                </td>
-                                <td>
-                                    @if($survey->finish_at)
-                                        {{ $survey->finish_at }}
-                                    @else
-                                        <i class="text-info">{{__('common.unspecified')}}</i>
-                                    @endif
-                                </td>
-                                <td>
-                                    {{ $survey->questions->count() }}
-                                </td>
+                                <td>{{ $survey->start_at }}</td>
+                                <td>{{ $survey->finish_at }}</td>
+                                <td>{{ $survey->questions->count() }}</td>
                                 <td>
                                     @if($survey->status)
                                         <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
@@ -57,13 +43,12 @@
                                             <span class="fa-regular fa-eye"></span>
                                         </a>
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.edit')}}">
-                                            {{--edit button--}}
-                                            <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#survey-edit-modal" data-route="{{ route('portal.meeting.survey.update', ['meeting' => $survey->meeting_id, 'survey' => $survey->id]) }}" data-resource="{{ route('portal.meeting.survey.edit', ['meeting' => $survey->meeting_id, 'survey' => $survey->id]) }}" data-id="{{ $survey->id }}">
+                                            <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#survey-edit-modal" data-route="{{ route('portal.meeting.survey.update', ['meeting' => $meeting->id, 'survey' => $survey->id]) }}" data-resource="{{ route('portal.meeting.survey.edit', ['meeting' => $meeting->id, 'survey' => $survey->id]) }}" data-id="{{ $survey->id }}">
                                                 <span class="fa-regular fa-pen-to-square"></span>
                                             </button>
                                         </div>
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
-                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#survey-delete-modal" data-route="{{ route('portal.meeting.survey.destroy', ['meeting' => $survey->meeting_id, 'survey' => $survey->id]) }}" data-record="{{ $survey->title }}">
+                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#survey-delete-modal" data-route="{{ route('portal.meeting.survey.destroy', ['meeting' => $meeting->id, 'survey' => $survey->id]) }}" data-record="{{ $survey->title }}">
                                                 <span class="fa-regular fa-trash"></span>
                                             </button>
                                         </div>

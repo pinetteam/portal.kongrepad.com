@@ -1,5 +1,5 @@
 @extends('layout.portal.common')
-@section('title', __('common.hall').' | '.$hall->title)
+@section('title', __('common.hall') . ' | ' . $hall->title)
 @section('body')
 <div class="card text-bg-dark">
     <div class="card-header">
@@ -21,7 +21,7 @@
                 </tr>
                 <tr>
                     <th scope="row" class="text-end w-25">{{ __('common.created-by') }}:</th>
-                    <td class="text-start w-25">{{ $hall->created_by }}</td>
+                    <td class="text-start w-25">{{ $hall->created_by_name }}</td>
                     <th scope="row" class="text-end w-25">{{ __('common.created-at') }}:</th>
                     <td class="text-start w-25">{{ $hall->created_at }}</td>
                 </tr>

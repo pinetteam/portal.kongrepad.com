@@ -241,5 +241,7 @@ return [
     'reports' => 'Reports',
     'meeting-halls' => 'Meeting Halls',
     'enrollment' => 'Enrollment',
-    'gdpr-consent' => 'GDPR Consent'
+    'gdpr-consent' => 'GDPR Consent',
+    'create-new-announcement' => 'Create New Announcement',
+    'announcement' => 'Announcement'
 ];

@@ -18,9 +18,8 @@ class SurveyRequest extends FormRequest
             case 'POST' || 'PATCH' || 'PUT':
             {
                 return [
-                    'meeting_id' => 'required|exists:meetings,id',
                     'sort_order' => 'nullable|integer',
-                    'code' => 'nullable|max:255',
+                    'meeting_id' => 'required|exists:meetings,id',
                     'title' => 'required|max:255',
                     'description' => 'required|max:255',
                     'start_at' => 'required|date_format:Y-m-d H:i|before_or_equal:finish_at|required_with:finish_at',
@@ -34,9 +33,8 @@ class SurveyRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'meeting_id' => __('common.meeting'),
             'sort_order' => __('common.sort-order'),
-            'code' => __('common.code'),
+            'meeting_id' => __('common.meeting'),
             'title' => __('common.title'),
             'description' => __('common.description'),
             'start_at' => __('common.start-at'),

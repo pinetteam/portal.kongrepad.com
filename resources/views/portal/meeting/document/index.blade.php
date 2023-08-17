@@ -45,21 +45,11 @@
                                 </td>
                                 <td class="text-end">
                                     <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
-                                        <a class="btn btn-info btn-sm" href="{{ route('portal.meeting.document.show', ['meeting' => $meeting->id, 'document' => $document->id]) }}" title="{{ __('common.show') }}"
-                                           data-bs-toggle="tooltip"
-                                           data-bs-placement="top"
-                                           data-bs-custom-class="kp-tooltip"
-                                           data-bs-title="{{ __('common.show') }}">
+                                        <a class="btn btn-info btn-sm" href="{{ route('portal.meeting.document.show', ['meeting' => $meeting->id, 'document' => $document->id]) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
                                             <span class="fa-regular fa-eye"></span>
                                         </a>
-                                        <div data-bs-toggle="tooltip"
-                                             data-bs-placement="top"
-                                             data-bs-custom-class="kp-tooltip"
-                                             data-bs-title="{{ __('common.edit') }}">
-                                            <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#document-edit-modal"
-                                                    data-route="{{ route('portal.meeting.document.update', ['meeting' => $meeting->id, 'document' => $document->id]) }}" data-resource="{{ route('portal.meeting.document.edit', ['meeting' => $meeting->id, 'document' => $document->id]) }}" data-id="{{ $document->id }}">
+                                        <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.edit') }}">
+                                            <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#document-edit-modal" data-route="{{ route('portal.meeting.document.update', ['meeting' => $meeting->id, 'document' => $document->id]) }}" data-resource="{{ route('portal.meeting.document.edit', ['meeting' => $meeting->id, 'document' => $document->id]) }}" data-id="{{ $document->id }}">
                                                 <span class="fa-regular fa-pen-to-square"></span>
                                             </button>
                                         </div>

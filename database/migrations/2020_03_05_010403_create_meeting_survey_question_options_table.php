@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('meeting_survey_question_options', function (Blueprint $table) {
@@ -30,10 +27,6 @@ return new class extends Migration
             $table->foreign('question_id')->on('meeting_survey_questions')->references('id');
         });
     }
-
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('meeting_survey_question_options');

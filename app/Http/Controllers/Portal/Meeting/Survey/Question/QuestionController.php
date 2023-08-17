@@ -14,8 +14,8 @@ class QuestionController extends Controller
     {
         if ($request->validated()) {
             $question = new Question();
-            $question->survey_id = $survey;
             $question->sort_order = $request->input('sort_order');
+            $question->survey_id = $survey;
             $question->question = $request->input('question');
             $question->status = $request->input('status');
             if ($question->save()) {
@@ -29,25 +29,28 @@ class QuestionController extends Controller
     }
     public function show(string $meeting, string $survey, string $id)
     {
-        $question = Auth::user()->customer->surveyQuestions()->findOrFail($id);
+        $survey = Auth::user()->customer->surveys()->findOrFail($survey);
+        $question = $survey->questions()->findOrFail($id);
         $options = $question->options()->get();
         $statuses = [
-            'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-            'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
+            'passive' => ['value' => 0, "title" => __('common.passive'), 'color' => 'danger'],
+            'active' => ['value' => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.meeting.survey.question.show', compact(['question', 'options', 'statuses']));
+        return view('portal.meeting.survey.question.show', compact(['survey', 'question', 'options', 'statuses']));
     }
     public function edit(string $meeting, string $survey, string $id)
     {
-        $question = Auth::user()->customer->surveyQuestions()->findOrFail($id);
+        $survey = Auth::user()->customer->surveys()->findOrFail($survey);
+        $question = $survey->questions()->findOrFail($id);
         return new QuestionResource($question);
     }
     public function update(QuestionRequest $request, string $meeting, string $survey, string $id)
     {
         if ($request->validated()) {
-            $question = Auth::user()->customer->surveyQuestions()->findOrFail($id);
-            $question->survey_id = $request->input('survey_id');
+            $survey = Auth::user()->customer->surveys()->findOrFail($survey);
+            $question = $survey->questions()->findOrFail($id);
             $question->sort_order = $request->input('sort_order');
+            $question->survey_id = $request->input('survey_id');
             $question->question = $request->input('question');
             $question->status = $request->input('status');
             if ($question->save()) {
@@ -61,7 +64,8 @@ class QuestionController extends Controller
     }
     public function destroy(string $meeting, string $survey, string $id)
     {
-        $question = Auth::user()->customer->surveyQuestions()->findOrFail($id);
+        $survey = Auth::user()->customer->surveys()->findOrFail($survey);
+        $question = $survey->questions()->findOrFail($id);
         if ($question->delete()) {
             $question->deleted_by = Auth::user()->id;
             $question->save();

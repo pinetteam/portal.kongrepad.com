@@ -3,9 +3,8 @@
 namespace App\Models\Meeting\Hall;
 
 use App\Models\Meeting\Hall\Program\Program;
-use App\Models\Meeting\Hall\Program\Session\Session;
 use App\Models\Meeting\Hall\Screen\Screen;
-use App\Models\Meeting\Meeting;
+use App\Models\User\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -34,9 +33,9 @@ class Hall extends Model
         'updated_at' => 'datetime',
         'deleted_at' => 'datetime',
     ];
-    public function meeting()
+    public function getCreatedByNameAttribute()
     {
-        return $this->belongsTo(Meeting::class, 'meeting_id', 'id');
+        return isset($this->created_by) ? User::findOrFail($this->created_by)->full_name : __('common.unspecified');
     }
     public function programs()
     {
@@ -46,8 +45,10 @@ class Hall extends Model
     {
         return $this->hasMany(Screen::class, 'hall_id', 'id');
     }
+    /*
     public function programSessions()
     {
         return $this->hasManyThrough(Session::class, Program::class, 'hall_id', 'program_id', 'id');
     }
+    */
 }

@@ -18,8 +18,8 @@ class QuestionRequest extends FormRequest
             case 'POST' || 'PATCH' || 'PUT':
             {
                 return [
-                    'survey_id' => 'required|exists:meeting_surveys,id',
                     'sort_order' => 'nullable|integer',
+                    'survey_id' => 'required|exists:meeting_surveys,id',
                     'question' => 'required|max:255',
                     'status' => 'required|boolean',
                 ];
@@ -30,8 +30,8 @@ class QuestionRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'survey_id' => __('common.survey'),
             'sort_order' => __('common.sort-order'),
+            'survey_id' => __('common.survey'),
             'question' => __('common.question'),
             'status' => __('common.status'),
         ];

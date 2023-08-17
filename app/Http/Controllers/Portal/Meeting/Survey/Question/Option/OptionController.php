@@ -14,10 +14,9 @@ class OptionController extends Controller
     {
         if ($request->validated()) {
             $option = new Option();
-            $option->survey_id = $request->input('survey_id');
+            $option->sort_order = $request->input('sort_order');
             $option->question_id = $question;
             $option->option = $request->input('option');
-            $option->sort_order = $request->input('sort_order');
             $option->status= $request->input('status');
             if ($option->save()) {
                 $option->created_by = Auth::user()->id;
@@ -30,15 +29,16 @@ class OptionController extends Controller
     }
     public function edit(int $meeting, int $survey, int $question, int $id)
     {
-        $option = Auth::user()->customer->surveyOptions()->findOrFail($id);
+        $question = Auth::user()->customer->surveyQuestions()->findOrFail($question);
+        $option = $question->options()->findOrFail($id);
         return new OptionResource($option);
     }
     public function update(OptionRequest $request, int $meeting, int $survey, int $question, int $id)
     {
         if ($request->validated()) {
             $option = Auth::user()->customer->surveyOptions()->findOrFail($id);
-            $option->question_id = $request->input('question_id');
             $option->sort_order = $request->input('sort_order');
+            $option->question_id = $request->input('question_id');
             $option->status= $request->input('status');
             $option->option = $request->input('option');
             if ($option->save()) {
@@ -52,7 +52,8 @@ class OptionController extends Controller
     }
     public function destroy(int $meeting, int $survey, int $question, int $id)
     {
-        $option = Auth::user()->customer->surveyOptions()->findOrFail($id);
+        $question = Auth::user()->customer->surveyQuestions()->findOrFail($question);
+        $option = $question->options()->findOrFail($id);
         if ($option->delete()) {
             $option->deleted_by = Auth::user()->id;
             $option->save();

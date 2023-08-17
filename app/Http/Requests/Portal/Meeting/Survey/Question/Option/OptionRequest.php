@@ -18,9 +18,9 @@ class OptionRequest extends FormRequest
             case 'POST' || 'PATCH' || 'PUT':
             {
                 return [
+                    'sort_order' => 'nullable|integer',
                     'survey_id' => 'required|exists:meeting_surveys,id',
                     'question_id' => 'required|exists:meeting_survey_questions,id',
-                    'sort_order' => 'nullable|integer',
                     'option' => 'required|max:255',
                     'status' => 'required|boolean',
                 ];
@@ -31,9 +31,9 @@ class OptionRequest extends FormRequest
     public function attributes(): array
     {
         return [
+            'sort_order' => __('common.sort-order'),
             'survey_id' => __('common.survey'),
             'question_id' => __('common.question'),
-            'sort_order' => __('common.sort-order'),
             'option' => __('common.option'),
             'status' => __('common.status'),
         ];

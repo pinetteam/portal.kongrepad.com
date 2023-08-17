@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Portal\Meeting\Hall;
 
-use App\Events\FormSubmitted;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Portal\Meeting\Hall\HallRequest;
 use App\Http\Resources\Portal\Meeting\Hall\HallResource;
@@ -13,12 +12,13 @@ class HallController extends Controller
 {
     public function index(int $meeting)
     {
-        $halls = Auth::user()->customer->meetingHalls()->where('meeting_id', $meeting)->paginate(20);
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $halls = $meeting->halls()->paginate(20);
         $statuses = [
-            'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-            'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
+            'passive' => ['value' => 0, 'title' => __('common.passive'), 'color' => 'danger'],
+            'active' => ['value' => 1, 'title' => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.meeting.hall.index', compact(['halls', 'statuses']));
+        return view('portal.meeting.hall.index', compact(['meeting', 'halls', 'statuses']));
     }
     public function store(HallRequest $request, int $meeting)
     {
@@ -38,40 +38,25 @@ class HallController extends Controller
     }
     public function show(int $meeting, int $id)
     {
-        $hall = Auth::user()->customer->meetingHalls()->where('meeting_id', $meeting)->findOrFail($id);
-        $speakers = Auth::user()->customer->participants()->whereNot('meeting_participants.type', 'team')->get();
-        $documents = Auth::user()->customer->documents()->get();
-        $programs = $hall->programs()->paginate(20);
-        $questions = [
-            'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-            'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
-        ];
-        $questions_auto_start = [
-            'no' => ["value" => 0, "title" => __('common.no'), 'color' => 'danger'],
-            'yes' => ["value" => 1, "title" => __('common.yes'), 'color' => 'success'],
-        ];
-        $types = [
-        'debate' => ["value" => "debate", "title" => __('common.debate')],
-        'other' => ["value" => "other", "title" => __('common.other')],
-        'session' => ["value" => "session", "title" => __('common.session')],
-    ];
         $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $hall = $meeting->halls()->findOrFail($id);
         $statuses = [
             'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.meeting.hall.show', compact(['documents', 'hall', 'meeting', 'programs', 'questions', 'questions_auto_start', 'speakers', 'statuses', 'types']));
+        return view('portal.meeting.hall.show', compact(['meeting', 'hall', 'statuses']));
     }
     public function edit(int $meeting, int $id)
     {
-        $hall = Auth::user()->customer->meetingHalls()->where('meeting_id', $meeting)->findOrFail($id);
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $hall = $meeting->halls()->findOrFail($id);
         return new HallResource($hall);
     }
     public function update(HallRequest $request, int $meeting, int $id)
     {
         if ($request->validated()) {
-            $hall = Auth::user()->customer->meetingHalls()->where('meeting_id', $meeting)->findOrFail($id);
-            $hall->meeting_id = $meeting;
+            $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+            $hall = $meeting->halls()->findOrFail($id);
             $hall->title = $request->input('title');
             $hall->status = $request->input('status');
             if ($hall->save()) {
@@ -85,7 +70,8 @@ class HallController extends Controller
     }
     public function destroy(int $meeting, int $id)
     {
-        $hall = Auth::user()->customer->meetingHalls()->where('meeting_id', $meeting)->findOrFail($id);
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $hall = $meeting->halls()->findOrFail($id);
         if ($hall->delete()) {
             $hall->deleted_by = Auth::user()->id;
             $hall->save();
@@ -94,7 +80,7 @@ class HallController extends Controller
             return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();
         }
     }
-
+/*
     public function current_speaker(string $id)
     {
         $hall = Auth::user()->customer->halls()->findOrFail($id);
@@ -121,5 +107,5 @@ class HallController extends Controller
         else
             $chair = null;
         return view('portal.program.chair.show', compact(['chair', 'chair_index']));
-    }
+    }*/
 }
