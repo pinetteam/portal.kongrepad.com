@@ -63,7 +63,7 @@ class SurveyController extends Controller
             $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
             $survey = $meeting->surveys()->findOrFail($id);
             $survey->sort_order = $request->input('sort_order');
-            $survey->meeting_id = $meeting;
+            $survey->meeting_id = $meeting->id;
             $survey->title = $request->input('title');
             $survey->description = $request->input('description');
             $survey->start_at = $request->input('start_at');

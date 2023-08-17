@@ -16,10 +16,10 @@ class UserRoleController extends Controller
         $user_roles = Auth()->user()->customer->userRoles()->paginate(20);
         $routes = json_decode(Route::get(), true);
         $statuses = [
-            'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-            'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
+            'passive' => ['value' => 0, 'title' => __('common.passive'), 'color' => 'danger'],
+            'active' => ['value' => 1, 'title' => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.user-role.index', compact(['user_roles', 'routes','statuses']));
+        return view('portal.user-role.index', compact(['user_roles', 'routes', 'statuses']));
     }
     public function store(UserRoleRequest $request)
     {
@@ -40,16 +40,12 @@ class UserRoleController extends Controller
             }
         }
     }
-    public function show($id)
-    {
-
-    }
     public function edit($id)
     {
         $user_role = Auth::user()->customer->userRoles()->findOrFail($id);
         return new RoleResource($user_role);
     }
-    public function update(UserRoleRequest $request, $id)
+    public function update(UserRoleRequest $request, int $id)
     {
         if ($request->validated()) {
             $user_role = Auth::user()->customer->userRoles()->findOrFail($id);
@@ -67,7 +63,7 @@ class UserRoleController extends Controller
             }
         }
     }
-    public function destroy($id)
+    public function destroy(int $id)
     {
         $user_role = Auth::user()->customer->userRoles()->findOrFail($id);
         if ($user_role->delete()) {

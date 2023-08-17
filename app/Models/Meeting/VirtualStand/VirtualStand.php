@@ -2,7 +2,7 @@
 
 namespace App\Models\Meeting\VirtualStand;
 
-use App\Models\Meeting\Meeting;
+use App\Models\User\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -34,8 +34,8 @@ class VirtualStand extends Model
         'updated_at' => 'datetime',
         'deleted_at' => 'datetime',
     ];
-    public function meeting()
+    public function getCreatedByNameAttribute()
     {
-        return $this->belongsTo(Meeting::class, 'meeting_id', 'id');
+        return isset($this->created_by) ? User::findOrFail($this->created_by)->full_name : __('common.unspecified');
     }
 }

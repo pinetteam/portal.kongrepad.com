@@ -15,6 +15,7 @@ class TeamController extends Controller
     {
         if ($request->validated()) {
             $team = new Team();
+            $team->sort_order = $request->input('sort_order');
             $team->debate_id = $request->input('debate_id');
             $team->code = $request->input('code');
             if ($request->has('logo')) {
@@ -26,31 +27,27 @@ class TeamController extends Controller
             if ($team->save()) {
                 $team->created_by = Auth::user()->id;
                 $team->save();
-                return back()->with('success',__('common.created-successfully'));
+                return back()->with('success', __('common.created-successfully'));
             } else {
                 return back()->with('create_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
             }
         }
     }
-    public function show(string $meeting, string $hall, string $program, string $debate, string $id)
+    public function show(int $meeting, int $hall, int $program, int $debate, int $id)
     {
         $team = Auth::user()->customer->teams()->findOrFail($id);
-        $statuses = [
-            'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-            'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
-        ];
-        return view('portal.meeting.hall.program.debate.team.show', compact(['team', 'statuses']));
+        return view('portal.meeting.hall.program.debate.team.show', compact(['team']));
     }
-    public function edit(string $meeting, string $hall, string $program, string $debate, string $id)
+    public function edit(int $meeting, int $hall, int $program, int $debate, int $id)
     {
-
         $team = Auth::user()->customer->teams()->findOrFail($id);
         return new TeamResource($team);
     }
-    public function update(TeamRequest $request,string $meeting, string $hall, string $program, string $debate,  string $id)
+    public function update(TeamRequest $request,int $meeting, int $hall, int $program, int $debate,  int $id)
     {
         if ($request->validated()) {
             $team = Auth::user()->customer->teams()->findOrFail($id);
+            $team->sort_order = $request->input('sort_order');
             $team->debate_id = $request->input('debate_id');
             $team->code = $request->input('code');
             if ($request->has('logo')) {
@@ -62,13 +59,13 @@ class TeamController extends Controller
             if ($team->save()) {
                 $team->updated_by = Auth::user()->id;
                 $team->save();
-                return back()->with('success',__('common.edited-successfully'));
+                return back()->with('success', __('common.edited-successfully'));
             } else {
                 return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
             }
         }
     }
-    public function destroy(string $meeting, string $hall, string $program, string $debate, string $id)
+    public function destroy(int $meeting, int $hall, int $program, int $debate, int $id)
     {
         $team = Auth::user()->customer->teams()->findOrFail($id);
         if ($team->delete()) {

@@ -19,6 +19,7 @@ class TeamRequest extends FormRequest
             case 'POST' || 'PATCH' || 'PUT':
             {
                 return [
+                    'sort_order' => 'nullable|integer',
                     'debate_id' => 'required|exists:meeting_hall_program_debates,id',
                     'code' => 'nullable|max:255',
                     'logo' => ['nullable', File::types(['png'])->max(12 * 1024),],
@@ -32,9 +33,11 @@ class TeamRequest extends FormRequest
     public function attributes(): array
     {
         return [
+            'sort_order' => __('common.moderator'),
             'debate_id' => __('common.debate'),
             'code' => __('common.code'),
             'title' => __('common.title'),
+            'logo' => __('common.logo'),
             'description' => __('common.description'),
             ];
     }

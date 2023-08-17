@@ -27,6 +27,7 @@ class User extends Authenticatable
         'phone_country_id',
         'phone',
         'phone_verified_at',
+        'password',
         'register_ip',
         'register_user_agent',
         'last_login_ip',
@@ -36,6 +37,9 @@ class User extends Authenticatable
         'created_by',
         'updated_by',
         'deleted_by',
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
     protected $hidden = [
         'password',
@@ -91,6 +95,10 @@ class User extends Authenticatable
         } else {
             return __('common.not-logged-in-yet');
         }
+    }
+    public function getCreatedByNameAttribute()
+    {
+        return isset($this->created_by) ? User::findOrFail($this->created_by)->full_name : __('common.unspecified');
     }
     public function customer()
     {

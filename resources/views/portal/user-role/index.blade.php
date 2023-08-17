@@ -25,7 +25,7 @@
                                 <td>{{ $user_role->title }}</td>
                                 <td>
                                     @foreach($user_role->routes as $route)
-                                    {{$route}}
+                                    {{ $route }}
                                     @endforeach
                                 </td>
                                 <td>

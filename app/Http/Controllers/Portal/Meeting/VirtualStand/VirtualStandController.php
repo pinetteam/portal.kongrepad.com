@@ -17,8 +17,8 @@ class VirtualStandController extends Controller
         $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
         $virtual_stands = $meeting->virtualStands()->paginate(20);
         $statuses = [
-            'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-            'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
+            'passive' => ['value' => 0, 'title' => __('common.passive'), 'color' => 'danger'],
+            'active' => ['value' => 1, 'title' => __('common.active'), 'color' => 'success'],
         ];
         return view('portal.meeting.virtual-stand.index', compact(['virtual_stands', 'meeting', 'statuses']));
     }
@@ -52,19 +52,22 @@ class VirtualStandController extends Controller
     }
     public function show(int $meeting, int $id)
     {
-        $virtual_stand = Auth::user()->customer->virtualStands()->where('meeting_id', $meeting)->findOrFail($id);
-        return response()->file(storage_path('app/virtual-stands/'.$virtual_stand->file_name.'.'.$virtual_stand->file_extension));
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $virtual_stand = $meeting->virtualStands()->findOrFail($id);
+        return view('portal.meeting.virtual-stand.show', compact(['meeting', 'virtual_stand']));
     }
     public function edit(int $meeting, int $id)
     {
-        $virtual_stand = Auth::user()->customer->virtualStands()->where('meeting_id', $meeting)->findOrFail($id);
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $virtual_stand = $meeting->virtualStands()->findOrFail($id);
         return new VirtualStandResource($virtual_stand);
     }
     public function update(VirtualStandRequest $request, int $meeting, int $id)
     {
         if ($request->validated()) {
-            $virtual_stand = Auth::user()->customer->virtualStands()->where('meeting_id', $meeting)->findOrFail($id);
-            $virtual_stand->meeting_id = $meeting;
+            $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+            $virtual_stand = $meeting->virtualStands()->findOrFail($id);
+            $virtual_stand->meeting_id = $meeting->id;
             if ($request->hasFile('file')) {
                 $file = $request->file('file');
                 $file_name = $virtual_stand->file_name;
@@ -90,26 +93,14 @@ class VirtualStandController extends Controller
     }
     public function destroy(int $meeting, int $id)
     {
-        $virtual_stand = Auth::user()->customer->virtualStands()->where('meeting_id', $meeting)->findOrFail($id);
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $virtual_stand = $meeting->virtualStands()->findOrFail($id);
         if ($virtual_stand->delete()) {
             $virtual_stand->deleted_by = Auth::user()->id;
             $virtual_stand->save();
             return back()->with('success', __('common.deleted-successfully'));
         } else {
             return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();
-        }
-    }
-    public function download(int $meeting, string $virtual_stand)
-    {
-        $file = VirtualStand::where('meeting_id', $meeting)->where('file_name', $virtual_stand)->first();
-        if ($file) {
-            try {
-                return Storage::download('virtual-stands/' . $file->file_name . '.' . $file->file_extension);
-            } catch (\Exception $e) {
-                return back()->with('error', __('common.file-not-found'))->withInput();
-            }
-        } else {
-            return back()->with('error', __('common.there-is-no-such-file'))->withInput();
         }
     }
 }

@@ -9,6 +9,7 @@ use App\Models\Meeting\Hall\Program\Chair\Chair;
 use App\Models\Meeting\Participant\Participant;
 use App\Models\Meeting\ScoreGame\ScoreGame;
 use App\Models\Meeting\Survey\Survey;
+use App\Models\Meeting\VirtualStand\VirtualStand;
 use App\Models\System\Setting\Variable\Variable;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -22,6 +23,9 @@ class Meeting extends Model
     protected $table = 'meetings';
     protected $fillable = [
         'customer_id',
+        'banner-extension',
+        'banner-size',
+        'banner-name',
         'code',
         'title',
         'start_at',
@@ -97,6 +101,10 @@ class Meeting extends Model
     public function surveys()
     {
         return $this->hasMany(Survey::class, 'meeting_id', 'id');
+    }
+    public function virtualStands()
+    {
+        return $this->hasMany(VirtualStand::class, 'meeting_id', 'id');
     }
 
     /*public function programs()

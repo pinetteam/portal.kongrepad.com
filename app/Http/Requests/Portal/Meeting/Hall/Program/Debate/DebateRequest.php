@@ -18,8 +18,8 @@ class DebateRequest extends FormRequest
             case 'POST' || 'PATCH' || 'PUT':
             {
                 return [
-                    'program_id' => 'required|exists:meeting_hall_programs,id',
                     'sort_order' => 'nullable|integer',
+                    'program_id' => 'required|exists:meeting_hall_programs,id',
                     'code' => 'nullable|max:255',
                     'title' => 'required|max:255',
                     'description' => 'nullable|max:65535',
@@ -32,13 +32,11 @@ class DebateRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'program_id' => __('common.program'),
             'sort_order' => __('common.moderator'),
+            'program_id' => __('common.program'),
             'code' => __('common.code'),
             'title' => __('common.title'),
             'description' => __('common.description'),
-            'voting_started_at' => __('common.voting-started-at'),
-            'voting_finished_at' => __('common.voting-finished-at'),
             'status' => __('common.status'),
         ];
     }

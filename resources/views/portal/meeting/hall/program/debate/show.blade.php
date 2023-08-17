@@ -37,7 +37,7 @@
                                 </tr>
                                 <tr>
                                     <th scope="row" class="text-end w-25">{{ __('common.created-by') }}:</th>
-                                    <td class="text-start w-25">{{ $debate->created_by }}</td>
+                                    <td class="text-start w-25">{{ $debate->created_by_name }}</td>
                                     <th scope="row" class="text-end w-25">{{ __('common.created-at') }}:</th>
                                     <td class="text-start w-25">{{ $debate->created_at }}</td>
                                 </tr>
@@ -65,7 +65,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($teams as $team)
+                    @foreach($debate->teams as $team)
                         <tr>
                             <td>
                                 @if($team->logo)
@@ -78,16 +78,16 @@
                             <td>{{ $team->title }}</td>
                             <td class="text-end">
                                 <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
-                                    <a class="btn btn-info btn-sm" href="{{ route('portal.meeting.hall.program.debate.team.show', ['meeting' => $debate->program->hall->meeting->id, 'hall' => $debate->program->hall->id, 'program' => $debate->program->id, 'debate' => $debate->id, 'team' => $team->id]) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
+                                    <a class="btn btn-info btn-sm" href="{{ route('portal.meeting.hall.program.debate.team.show', ['meeting' => $debate->program->hall->meeting_id, 'hall' => $debate->program->hall->id, 'program' => $debate->program_id, 'debate' => $debate->id, 'team' => $team->id]) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
                                         <span class="fa-regular fa-eye"></span>
                                     </a>
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.edit') }}">
-                                        <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#team-edit-modal" data-route="{{ route('portal.meeting.hall.program.debate.team.update', ['meeting' => $debate->program->hall->meeting->id, 'hall' => $debate->program->hall->id, 'program' => $debate->program->id, 'debate' => $debate->id, 'team' => $team->id]) }}" data-resource="{{ route('portal.meeting.hall.program.debate.team.edit', ['meeting' => $debate->program->hall->meeting->id, 'hall' => $debate->program->hall->id, 'program' => $debate->program->id, 'debate' => $debate->id, 'team' => $team->id]) }}" data-id="{{ $team->id }}">
+                                        <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#team-edit-modal" data-route="{{ route('portal.meeting.hall.program.debate.team.update', ['meeting' => $debate->program->hall->meeting_id, 'hall' => $debate->program->hall->id, 'program' => $debate->program_id, 'debate' => $debate->id, 'team' => $team->id]) }}" data-resource="{{ route('portal.meeting.hall.program.debate.team.edit', ['meeting' => $debate->program->hall->meeting_id, 'hall' => $debate->program->hall->id, 'program' => $debate->program_id, 'debate' => $debate->id, 'team' => $team->id]) }}" data-id="{{ $team->id }}">
                                             <span class="fa-regular fa-pen-to-square"></span>
                                         </button>
                                     </div>
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
-                                        <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#team-delete-modal" data-route="{{ route('portal.meeting.hall.program.debate.team.destroy', ['meeting' => $debate->program->hall->meeting->id, 'hall' => $debate->program->hall->id, 'program' => $debate->program->id, 'debate' => $debate->id, 'team' => $team->id]) }}" data-record="{{ $team->title }}">
+                                        <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#team-delete-modal" data-route="{{ route('portal.meeting.hall.program.debate.team.destroy', ['meeting' => $debate->program->hall->meeting_id, 'hall' => $debate->program->hall->id, 'program' => $debate->program_id, 'debate' => $debate->id, 'team' => $team->id]) }}" data-record="{{ $team->title }}">
                                             <span class="fa-regular fa-trash"></span>
                                         </button>
                                     </div>
@@ -100,7 +100,7 @@
             </div>
         </div>
         <div class="card-footer d-flex justify-content-center">
-            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#team-create-modal" data-route="{{ route('portal.meeting.hall.program.debate.team.store', ['meeting' => $debate->program->hall->meeting->id, 'hall' => $debate->program->hall->id, 'program' => $debate->program->id, 'debate' => $debate->id]) }}">
+            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#team-create-modal" data-route="{{ route('portal.meeting.hall.program.debate.team.store', ['meeting' => $debate->program->hall->meeting_id, 'hall' => $debate->program->hall_id, 'program' => $debate->program_id, 'debate' => $debate->id]) }}">
                 <i class="fa-solid fa-plus"></i> {{ __('common.add-new-team') }}
             </button>
         </div>

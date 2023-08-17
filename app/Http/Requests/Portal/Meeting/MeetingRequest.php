@@ -4,6 +4,7 @@ namespace App\Http\Requests\Portal\Meeting;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\File;
 
 class MeetingRequest extends FormRequest
 {
@@ -19,6 +20,7 @@ class MeetingRequest extends FormRequest
             {
                 return [
                     'code' => 'required|max:511',
+                    'banner' => ['nullable', File::types(['jpeg', 'jpg'])],
                     'title' => 'required|max:511',
                     'start_at' => 'required|date_format:Y-m-d|before_or_equal:finish_at|required_with:finish_at',
                     'finish_at' => 'required|date_format:Y-m-d|after_or_equal:start_at|required_with:start_at',

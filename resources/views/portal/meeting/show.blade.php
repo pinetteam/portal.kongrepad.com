@@ -7,6 +7,16 @@
             <div class="table-responsive">
                 <table class="table table-dark table-striped-columns table-bordered">
                     <tr>
+                        <th scope="row" class="text-end w-50">{{ __('common.banner') }}:</th>
+                        <td class="text-start w-50">
+                            @if(asset('storage/meeting_banners/' . $meeting->banner_name . '.' . $meeting->banner_extension))
+                                <img src="{{ storage_path('app/meeting_banners/' . $meeting->banner_name . '.' . $meeting->banner_extension)}}" alt="{{ $meeting->title }}" class="img-thumbnail img-fluid" />
+                            @else
+                                <i class="text-info">{{ __('common.unspecified') }}</i>
+                            @endif
+                        </td>
+                    </tr>
+                    <tr>
                         <th scope="row" class="text-end w-25">{{ __('common.code') }}:</th>
                         <td class="text-start w-25">{{ $meeting->code }}</td>
                         <th scope="row" class="text-end w-25">{{ __('common.meeting-title') }}:</th>

@@ -4,7 +4,6 @@ namespace App\Http\Requests\Portal\User\Role;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class UserRoleRequest extends FormRequest
 {
@@ -31,7 +30,7 @@ class UserRoleRequest extends FormRequest
     {
         return [
             'title' => __('common.title'),
-            'access_scopes' => __('common.access-scopes'),
+            'routes' => __('common.routes'),
             'status' => __('common.status'),
         ];
     }

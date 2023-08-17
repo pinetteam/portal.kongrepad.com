@@ -10,12 +10,12 @@ use Illuminate\Support\Facades\Auth;
 
 class DebateController extends Controller
 {
-    public function store(DebateRequest $request, string $meeting, string $hall, string $program)
+    public function store(DebateRequest $request, int $meeting, int $hall, int $program)
     {
         if ($request->validated()) {
             $debate = new Debate();
-            $debate->program_id = $program;
             $debate->sort_order = $request->input('sort_order');
+            $debate->program_id = $program;
             $debate->code = $request->input('code');
             $debate->title = $request->input('title');
             $debate->description = $request->input('description');
@@ -29,28 +29,23 @@ class DebateController extends Controller
             }
         }
     }
-    public function show(string $meeting, string $hall, string $program, string $id)
+    public function show(int $meeting, int $hall, int $program, int $id)
     {
         $debate = Auth::user()->customer->debates()->findOrFail($id);
-        $teams = $debate->teams()->get();
-        $statuses = [
-            'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-            'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
-        ];
-        return view('portal.meeting.hall.program.debate.show', compact(['teams', 'debate', 'statuses']));
+        return view('portal.meeting.hall.program.debate.show', compact(['debate']));
 
     }
-    public function edit(string $meeting, string $hall, string $program, string $id)
+    public function edit(int $meeting, int $hall, int $program, int $id)
     {
         $debate = Auth::user()->customer->debates()->findOrFail($id);
         return new DebateResource($debate);
     }
-    public function update(DebateRequest $request, string $meeting, string $hall, string $program, string $id)
+    public function update(DebateRequest $request, int $meeting, int $hall, int $program, int $id)
     {
         if ($request->validated()) {
             $debate = Auth::user()->customer->debates()->findOrFail($id);
-            $debate->program_id = $request->input('program_id');
             $debate->sort_order = $request->input('sort_order');
+            $debate->program_id = $request->input('program_id');
             $debate->code = $request->input('code');
             $debate->title = $request->input('title');
             $debate->description = $request->input('description');
@@ -58,13 +53,13 @@ class DebateController extends Controller
             if ($debate->save()) {
                 $debate->updated_by = Auth::user()->id;
                 $debate->save();
-                return back()->with('success',__('common.edited-successfully'));
+                return back()->with('success', __('common.edited-successfully'));
             } else {
                 return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
             }
         }
     }
-    public function destroy(string $meeting, string $hall, string $program, string $id)
+    public function destroy(int $meeting, int $hall, int $program, int $id)
     {
         $debate = Auth::user()->customer->debates()->findOrFail($id);
         if ($debate->delete()) {
@@ -75,7 +70,7 @@ class DebateController extends Controller
             return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();
         }
     }
-    public function start_stop_voting(string $meeting, string $hall, string $program, string $id)
+    /*public function start_stop_voting(int $meeting, int $hall, int $program, int $id)
     {
         $program = Auth::user()->customer->programs()->findOrFail($program);
         foreach($program->debates as $debate){
@@ -102,5 +97,5 @@ class DebateController extends Controller
         } else {
             return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
         }
-    }
+    }*/
 }

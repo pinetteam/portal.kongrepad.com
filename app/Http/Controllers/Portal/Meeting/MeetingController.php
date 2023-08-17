@@ -7,6 +7,8 @@ use App\Http\Requests\Portal\Meeting\MeetingRequest;
 use App\Http\Resources\Portal\Meeting\MeetingResource;
 use App\Models\Meeting\Meeting;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class MeetingController extends Controller
 {
@@ -23,6 +25,18 @@ class MeetingController extends Controller
     {
         if ($request->validated()) {
             $meeting = new Meeting();
+            if ($request->hasFile('banner')) {
+                $file = $request->file('banner');
+                $banner_name = Str::uuid()->toString();
+                $file_extension = $file->getClientOriginalExtension();
+                if(Storage::putFileAs('meeting_banners', $request->file('banner'), $banner_name.'.'.$file_extension)) {
+                    $meeting->banner_name = $banner_name;
+                    $meeting->banner_extension = $file_extension;
+                    $meeting->banner_size = $request->file('banner')->getSize();
+                } else {
+                    return back()->with('create_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
+                }
+            }
             $meeting->customer_id = Auth::user()->customer->id;
             $meeting->code = $request->input('code');
             $meeting->title = $request->input('title');
@@ -52,6 +66,18 @@ class MeetingController extends Controller
     {
         if ($request->validated()) {
             $meeting = Auth::user()->customer->meetings()->findOrFail($id);
+            if ($request->hasFile('banner')) {
+                $file = $request->file('banner');
+                $banner_name = Str::uuid()->toString();
+                $file_extension = $file->getClientOriginalExtension();
+                if(Storage::putFileAs('meeting_banners', $request->file('banner'), $banner_name.'.'.$file_extension)) {
+                    $meeting->banner_name = $banner_name;
+                    $meeting->banner_extension = $file_extension;
+                    $meeting->banner_size = $request->file('banner')->getSize();
+                } else {
+                    return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
+                }
+            }
             $meeting->code = $request->input('code');
             $meeting->title = $request->input('title');
             $meeting->start_at = $request->input('start_at');

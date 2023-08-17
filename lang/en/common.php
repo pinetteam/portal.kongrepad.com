@@ -101,6 +101,7 @@ return [
     'application' => 'Application',
     'template-and-design' => 'Template & Design',
     'virtual-stands' => 'Virtual Stands',
+    'virtual-stand' => 'Virtual Stand',
     'statistic-and-report' => 'Statistic & Report',
     'live-stats' => 'Live Stats',
     'registration-reports' => 'Registration Reports',
@@ -243,5 +244,7 @@ return [
     'enrollment' => 'Enrollment',
     'gdpr-consent' => 'GDPR Consent',
     'create-new-announcement' => 'Create New Announcement',
-    'announcement' => 'Announcement'
+    'announcement' => 'Announcement',
+    'create-new-virtual-stand' => 'Create New Virtual Stand',
+    'banner' => 'Banner',
 ];
