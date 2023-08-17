@@ -43,7 +43,7 @@ class ScoreGameController extends Controller
             }
         }
     }
-    public function show(int $meeting, string $id)
+    public function show(int $meeting, int $id)
     {
         $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
         $score_game = $meeting->scoreGames()->findOrFail($id);
@@ -54,13 +54,13 @@ class ScoreGameController extends Controller
         return view('portal.meeting.score-game.show', compact(['meeting', 'score_game', 'statuses']));
 
     }
-    public function edit(int $meeting, string $id)
+    public function edit(int $meeting, int $id)
     {
         $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
         $score_game = $meeting->scoreGames()->findOrFail($id);
         return new ScoreGameResource($score_game);
     }
-    public function update(ScoreGameRequest $request, string $meeting, string $id)
+    public function update(ScoreGameRequest $request, int $meeting, int $id)
     {
         if ($request->validated()) {
             $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
@@ -83,7 +83,7 @@ class ScoreGameController extends Controller
             }
         }
     }
-    public function destroy(string $meeting_id, string $id)
+    public function destroy(int $meeting, int $id)
     {
         $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
         $score_game = $meeting->scoreGames()->findOrFail($id);

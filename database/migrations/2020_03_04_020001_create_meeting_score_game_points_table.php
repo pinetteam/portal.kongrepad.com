@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('meeting_score_game_points', function (Blueprint $table) {
@@ -21,10 +18,6 @@ return new class extends Migration
             $table->foreign('participant_id')->on('meeting_participants')->references('id');
         });
     }
-
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('meeting_score_game_points');

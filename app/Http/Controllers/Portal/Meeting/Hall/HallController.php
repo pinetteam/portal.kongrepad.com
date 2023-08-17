@@ -40,10 +40,6 @@ class HallController extends Controller
     {
         $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
         $hall = $meeting->halls()->findOrFail($id);
-        $statuses = [
-            'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-            'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
-        ];
         return view('portal.meeting.hall.show', compact(['meeting', 'hall', 'statuses']));
     }
     public function edit(int $meeting, int $id)
@@ -86,7 +82,7 @@ class HallController extends Controller
         $hall = Auth::user()->customer->halls()->findOrFail($id);
         $session = $hall->programSessions()->where('is_started', 1)->first();
         $speaker = $session && $session->program->on_air && $session ? $session->speaker : null;
-        event(new FormSubmitted("sdsdsd"));
+        event(new FormSubmitted('sdsdsd'));
         return view('portal.current-speaker.show', compact(['speaker']));
     }
 

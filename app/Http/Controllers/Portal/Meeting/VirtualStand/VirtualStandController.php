@@ -31,7 +31,7 @@ class VirtualStandController extends Controller
                 $file = $request->file('file');
                 $file_name = Str::uuid()->toString();
                 $file_extension = $file->getClientOriginalExtension();
-                if(Storage::putFileAs('virtual-stands', $request->file('file'), $file_name.'.'.$file_extension)) {
+                if(Storage::putFileAs('public/virtual-stands', $request->file('file'), $file_name.'.'.$file_extension)) {
                     $virtual_stand->file_name = $file_name;
                     $virtual_stand->file_extension = $file_extension;
                     $virtual_stand->file_size = $request->file('file')->getSize();
@@ -72,7 +72,7 @@ class VirtualStandController extends Controller
                 $file = $request->file('file');
                 $file_name = $virtual_stand->file_name;
                 $file_extension = $file->getClientOriginalExtension();
-                if(Storage::putFileAs('virtual-stands', $request->file('file'), $file_name.'.'.$file_extension)) {
+                if(Storage::putFileAs('public/virtual-stands', $request->file('file'), $file_name . '.' . $file_extension)) {
                     $virtual_stand->file_name = $file_name;
                     $virtual_stand->file_extension = $file_extension;
                     $virtual_stand->file_size = $request->file('file')->getSize();

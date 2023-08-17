@@ -27,9 +27,9 @@ class Meeting extends Model
     protected $table = 'meetings';
     protected $fillable = [
         'customer_id',
-        'banner-extension',
-        'banner-size',
-        'banner-name',
+        'banner_name',
+        'banner_extension',
+        'banner_size',
         'code',
         'title',
         'start_at',
@@ -116,7 +116,7 @@ class Meeting extends Model
         return $this->hasManyThrough(Program::class, Hall::class, 'meeting_id', 'hall_id', 'id');
     }
 
-    public function programSessions()
+    /*public function programSessions()
     {
         $program_sessions = Session::select('meeting_hall_program_sessions.*')
             ->join('meeting_hall_programs', 'meeting_hall_program_sessions.program_id', '=', 'meeting_hall_programs.id')
@@ -155,5 +155,5 @@ class Meeting extends Model
             ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
             ->where('meetings.id', $this->getkey());
         return $chairs;
-    }
+    }*/
 }

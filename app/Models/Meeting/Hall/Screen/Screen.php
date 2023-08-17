@@ -17,7 +17,6 @@ class Screen extends Model
         'title',
         'description',
         'type',
-        'is_started',
         'status',
         'created_by',
         'updated_by',

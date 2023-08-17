@@ -23,8 +23,8 @@
                     @foreach($virtual_stands as $virtual_stand)
                         <tr>
                             <td>
-                                @if($virtual_stand->file_name)
-                                    <img src="{{ storage_path('app/virtual-stands/' . $meeting->banner_name . '.' . $meeting->banner_extension) }}" alt="{{ $virtual_stand->title }}"
+                                @if(isset($virtual_stand->file_name))
+                                    <img src="{{ asset('storage/virtual-stands/' . $virtual_stand->file_name . '.' . $virtual_stand->file_extension) }}" alt="{{ $virtual_stand->title }}"
                                          class="img-thumbnail" style="height:36px;"/>
                                 @else
                                     <i class="text-info">{{ __('common.unspecified') }}</i>
@@ -78,7 +78,7 @@
     <x-crud.form.common.delete name="virtual-stand"/>
     <x-crud.form.common.edit name="virtual-stand">
         @section('virtual-stand-edit-form')
-            <x-input.hidden method="c" name="meeting_id" :value="$meeting->id" />
+            <x-input.hidden method="e" name="meeting_id" :value="$meeting->id" />
             <x-input.file method="e" name="file" title="file" icon="file-import" />
             <x-input.text method="e" name="title" title="title" icon="input-text" />
             <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />

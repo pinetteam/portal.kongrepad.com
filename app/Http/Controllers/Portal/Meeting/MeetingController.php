@@ -25,11 +25,12 @@ class MeetingController extends Controller
     {
         if ($request->validated()) {
             $meeting = new Meeting();
+            $meeting->customer_id = Auth::user()->customer->id;
             if ($request->hasFile('banner')) {
                 $file = $request->file('banner');
                 $banner_name = Str::uuid()->toString();
                 $file_extension = $file->getClientOriginalExtension();
-                if(Storage::putFileAs('meeting_banners', $request->file('banner'), $banner_name.'.'.$file_extension)) {
+                if(Storage::putFileAs('public/meeting-banners', $request->file('banner'), $banner_name.'.'.$file_extension)) {
                     $meeting->banner_name = $banner_name;
                     $meeting->banner_extension = $file_extension;
                     $meeting->banner_size = $request->file('banner')->getSize();
@@ -37,7 +38,6 @@ class MeetingController extends Controller
                     return back()->with('create_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
                 }
             }
-            $meeting->customer_id = Auth::user()->customer->id;
             $meeting->code = $request->input('code');
             $meeting->title = $request->input('title');
             $meeting->start_at = $request->input('start_at');
@@ -70,7 +70,7 @@ class MeetingController extends Controller
                 $file = $request->file('banner');
                 $banner_name = Str::uuid()->toString();
                 $file_extension = $file->getClientOriginalExtension();
-                if(Storage::putFileAs('meeting_banners', $request->file('banner'), $banner_name.'.'.$file_extension)) {
+                if(Storage::putFileAs('public/meeting-banners', $request->file('banner'), $banner_name . '.' . $file_extension)) {
                     $meeting->banner_name = $banner_name;
                     $meeting->banner_extension = $file_extension;
                     $meeting->banner_size = $request->file('banner')->getSize();
@@ -94,10 +94,10 @@ class MeetingController extends Controller
     }
     public function destroy($id)
     {
-        $user = Auth::user()->customer->meetings()->findOrFail($id);
-        if ($user->delete()) {
-            $user->deleted_by = Auth::user()->id;
-            $user->save();
+        $meeting = Auth::user()->customer->meetings()->findOrFail($id);
+        if ($meeting->delete()) {
+            $meeting->deleted_by = Auth::user()->id;
+            $meeting->save();
             return back()->with('success', __('common.deleted-successfully'));
         } else {
             return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();

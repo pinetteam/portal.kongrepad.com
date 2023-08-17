@@ -12,8 +12,8 @@
                         <tr>
                             <th scope="row" class="text-end w-25">{{ __('common.logo') }}:</th>
                             <td class="text-start w-25">
-                                @if($virtual_stand->file_name)
-                                    <img src="{{ storage_path('app/virtual-stands/' . $meeting->banner_name . '.' . $meeting->banner_extension) }}" alt="{{ $virtual_stand->title }}"
+                                @if(isset($virtual_stand->file_name))
+                                    <img src="{{ asset('storage/virtual-stands/' . $virtual_stand->file_name . '.' . $virtual_stand->file_extension) }}" alt="{{ $virtual_stand->title }}"
                                          class="img-thumbnail" style="height:36px;"/>
                                 @else
                                     <i class="text-info">{{ __('common.unspecified') }}</i>
@@ -32,7 +32,7 @@
                                 @endif
                             </td>
                             <th scope="row" class="text-end w-25">{{ __('common.meeting') }}:</th>
-                            <td class="text-start w-25">{{ $meeting->title}}</td>
+                            <td class="text-start w-25">{{ $meeting->title }}</td>
                         </tr>
                         <tr>
                             <th scope="row" class="text-end w-25">{{ __('common.created-by') }}:</th>

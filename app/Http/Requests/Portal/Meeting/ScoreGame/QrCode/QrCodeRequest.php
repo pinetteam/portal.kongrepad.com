@@ -34,7 +34,7 @@ class QrCodeRequest extends FormRequest
         return [
             'score_game_id' => __('common.score-game'),
             'title' => __('common.title'),
-            'score' => __('common.score'),
+            'point' => __('common.point'),
             'start_at' => __('common.start-at'),
             'finish_at' => __('common.finish-at'),
             'status' => __('common.status'),

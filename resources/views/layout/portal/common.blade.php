@@ -63,12 +63,6 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">
-                        <span class="nav-icon fa-duotone fa-browser fa-fade"></span>
-                        {{ __('common.virtual-stands') }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
                         <span class="nav-icon fa-duotone fa-rectangle-ad fa-fade"></span>
                         {{ __('common.advertisements') }}
                     </a>

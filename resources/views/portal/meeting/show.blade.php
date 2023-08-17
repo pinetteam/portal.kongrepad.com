@@ -7,14 +7,11 @@
             <div class="table-responsive">
                 <table class="table table-dark table-striped-columns table-bordered">
                     <tr>
-                        <th scope="row" class="text-end w-50">{{ __('common.banner') }}:</th>
-                        <td class="text-start w-50">
-                            @if(asset('storage/meeting_banners/' . $meeting->banner_name . '.' . $meeting->banner_extension))
-                                <img src="{{ storage_path('app/meeting_banners/' . $meeting->banner_name . '.' . $meeting->banner_extension)}}" alt="{{ $meeting->title }}" class="img-thumbnail img-fluid" />
-                            @else
-                                <i class="text-info">{{ __('common.unspecified') }}</i>
-                            @endif
-                        </td>
+                        @if(isset($meeting->banner_name) && isset($meeting->banner_extension))
+                            <img src="{{ asset('storage/meeting-banners/' . $meeting->banner_name . '.' . $meeting->banner_extension) }}" alt="{{ $meeting->title }}" width="720" height="180">
+                        @else
+                            <i class="text-info">{{ __('common.unspecified') }}</i>
+                        @endif
                     </tr>
                     <tr>
                         <th scope="row" class="text-end w-25">{{ __('common.code') }}:</th>

@@ -21,7 +21,7 @@ class ProgramResource extends JsonResource
             'on_air' => ['value' => $this->on_air, 'type' => 'radio'],
             'type' => ['value' => $this->type, 'type' => 'select'],
             'status' => ['value' => $this->status, 'type' => 'radio'],
-            'route' => route('portal.meeting.hall.program.update', ['meeting' => $this->hall->meeting->id, 'hall' => $this->hall->id, 'program' => $this->id]),
+            'route' => route('portal.meeting.hall.program.update', ['meeting' => $this->hall->meeting_id, 'hall' => $this->hall_id, 'program' => $this->id]),
         ];
     }
 }
