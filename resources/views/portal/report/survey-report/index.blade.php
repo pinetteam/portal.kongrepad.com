@@ -29,8 +29,20 @@
                         <tr>
                             <td>{{ $survey->meeting->title }}</td>
                             <td>{{ $survey->title }}</td>
-                            <td>{{ $survey->start_at }}</td>
-                            <td>{{ $survey->finish_at }}</td>
+                            <td>
+                                @if($survey->start_at)
+                                    {{ $survey->start_at }}
+                                @else
+                                    <i class="text-info">{{ __('common.unspecified') }}</i>
+                                @endif
+                            </td>
+                            <td>
+                                @if($survey->finish_at)
+                                    {{ $survey->finish_at }}
+                                @else
+                                    <i class="text-info">{{ __('common.unspecified') }}</i>
+                                @endif
+                            </td>
                             <td>{{ $survey->questions->count() }}</td>
                             <td>
                                 @if($survey->on_vote)

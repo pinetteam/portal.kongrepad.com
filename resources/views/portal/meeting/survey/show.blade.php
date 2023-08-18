@@ -24,9 +24,21 @@
                     </tr>
                     <tr>
                         <th scope="row" class="text-end w-25">{{ __('common.start-at') }}:</th>
-                        <td class="text-start w-25">{{ $survey->start_at }}</td>
+                        <td>
+                            @if($survey->start_at)
+                                {{ $survey->start_at }}
+                            @else
+                                <i class="text-info">{{ __('common.unspecified') }}</i>
+                            @endif
+                        </td>
                         <th scope="row" class="text-end w-25">{{ __('common.finish-at') }}:</th>
-                        <td class="text-start w-25">{{ $survey->finish_at }}</td>
+                        <td>
+                            @if($survey->finish_at)
+                                {{ $survey->finish_at }}
+                            @else
+                                <i class="text-info">{{ __('common.unspecified') }}</i>
+                            @endif
+                        </td>
                     </tr>
                     <tr>
                         <th scope="row" class="text-end w-25">{{ __('common.question-count') }}:</th>
