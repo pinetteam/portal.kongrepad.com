@@ -40,7 +40,7 @@ class HallController extends Controller
     {
         $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
         $hall = $meeting->halls()->findOrFail($id);
-        return view('portal.meeting.hall.show', compact(['meeting', 'hall', 'statuses']));
+        return view('portal.meeting.hall.show', compact(['meeting', 'hall']));
     }
     public function edit(int $meeting, int $id)
     {

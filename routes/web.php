@@ -29,6 +29,7 @@ Route::prefix('portal')->name('portal.')->group(function () {
     Route::group(["middleware" => ['auth']], function () {
         /* Main routes */
         Route::get('/', [\App\Http\Controllers\Portal\DashboardController::class, 'index'])->name('dashboard.index');
+        Route::get('/meeting/{meeting}/program', [\App\Http\Controllers\Portal\DashboardController::class, 'programIndex'])->name('dashboard.meeting.program.index');
 
         /* Report routes */
         Route::resource('/survey-report', \App\Http\Controllers\Portal\Report\Survey\SurveyReportController::class)->except(['create']);
