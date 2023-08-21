@@ -18,4 +18,10 @@ class DashboardController extends Controller
         $programs = $meeting->programs()->get();
         return view('portal.dashboard.show-program', compact(['meeting', 'programs']));
     }
+    public function chairIndex(int $meeting)
+    {
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $chairs = $meeting->programChairs()->get();
+        return view('portal.dashboard.show-chair', compact(['meeting', 'chairs']));
+    }
 }

@@ -159,22 +159,26 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <div class="card-body p-0">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-dark table-borderless">
-                                                            <tbody>
-                                                            <tr>
-                                                                <td class="text-center">{{ __('common.chairs') }}</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="text-center">
-                                                                    <h4>{{$meeting->programChairs()->count()}}</h4>
-                                                                </td>
-                                                            </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
+                                                <a class="text-white link-underline-dark" href="{{ route('portal.dashboard.meeting.chair.index', $meeting->id) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
+                                                    <span>
+                                                        <div class="card-body p-0">
+                                                            <div class="table-responsive">
+                                                                <table class="table table-dark table-borderless">
+                                                                    <tbody>
+                                                                    <tr>
+                                                                        <td class="text-center">{{ __('common.chairs') }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-center">
+                                                                            <h4>{{$meeting->programChairs()->count()}}</h4>
+                                                                        </td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </span>
+                                                </a>
                                             </td>
                                             <td>
                                                 <a class="text-white link-underline-dark" href="{{ route('portal.meeting.survey.index', $meeting->id) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
