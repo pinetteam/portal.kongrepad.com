@@ -14,6 +14,6 @@ class MeetingController extends Controller
 {
     public function index(Request $request)
     {
-        return $request->user()->meetings()->get();
+        return $request->user()->meeting;
     }
 }

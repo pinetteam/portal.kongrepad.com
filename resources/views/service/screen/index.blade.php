@@ -9,12 +9,20 @@
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
     @vite(['resources/sass/app.scss'])
     @vite(['resources/js/app.js'])
-    <script type="module">
-        console.log('test');
-        Echo.channel('screen-channel')
-            .listen('.my-event', data => {
-                document.getElementById("speaker").innerHTML = data.participant.first_name + ' ' + data.participant.last_name;
-            });
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+    <script>
+
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher('1cf2459678ef9563476b', {
+            cluster: 'eu'
+        });
+
+        var channel = pusher.subscribe('screen-channel');
+        channel.bind('my-event', function(data) {
+            document.getElementById("speaker").innerHTML = data.participant.first_name + ' ' + data.participant.last_name;
+        });
     </script>
 </head>
 <body class="d-flex bg-dark h-100 align-items-center">

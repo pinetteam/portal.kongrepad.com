@@ -70,7 +70,7 @@ class VirtualStandController extends Controller
             $virtual_stand->meeting_id = $meeting->id;
             if ($request->hasFile('file')) {
                 $file = $request->file('file');
-                $file_name = $virtual_stand->file_name;
+                $file_name = Str::uuid()->toString();
                 $file_extension = $file->getClientOriginalExtension();
                 if(Storage::putFileAs('public/virtual-stands', $request->file('file'), $file_name . '.' . $file_extension)) {
                     $virtual_stand->file_name = $file_name;

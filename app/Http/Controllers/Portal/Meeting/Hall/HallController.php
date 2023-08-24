@@ -87,15 +87,6 @@ class HallController extends Controller
         event(new FormSubmitted('sdsdsd'));
         return view('portal.current-speaker.show', compact(['speaker']));
     }
-
-    public function chair_board(string $id)
-    {
-        $hall = Auth::user()->customer->halls()->findOrFail($id);
-        $session = $hall->programSessions()->where('is_started',1)->first();
-        $questions = $session && $session->program->on_air ? $session->questions()->get() : null;
-        return view('portal.chair-board.index', compact(['session', 'questions']));
-    }
-
     public function current_chair(string $id, string $chair_index)
     {
         $hall = Auth::user()->customer->halls()->findOrFail($id);

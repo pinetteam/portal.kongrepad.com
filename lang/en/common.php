@@ -119,6 +119,8 @@ return [
     'presenter' => 'Presenter',
     'document' => 'Document',
     'questions' => 'Questions',
+    'questions-on-screen' => 'Questions On Screen',
+    'question-board' => 'Question Board',
     'question-limit' => 'Question Limit',
     'user-role' => 'User Role',
     'last-login' => 'Last login',
