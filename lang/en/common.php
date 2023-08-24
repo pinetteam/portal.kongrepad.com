@@ -252,4 +252,7 @@ return [
     'last-5-users' => 'Last 5 Users',
     'screen' => 'Screen',
     'speaker-screen' => 'Speaker Screen',
+    'screen-event' => 'Screen Event',
+    'questions-event' => 'Questions Event',
+    'questions-screen' => 'Questions Screen',
 ];

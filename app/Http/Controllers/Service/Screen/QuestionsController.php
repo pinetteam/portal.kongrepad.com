@@ -24,7 +24,7 @@ class QuestionsController extends Controller
     {
         $meeting_hall_screen = Screen::where('code', $meeting_hall_screen_code)->first();
         event(new QuestionsEvent($meeting_hall_screen));
-        return 'Ok!';
+        return back();
     }
 
 }
