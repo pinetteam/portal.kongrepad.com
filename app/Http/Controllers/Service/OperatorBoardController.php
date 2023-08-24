@@ -11,12 +11,20 @@ class OperatorBoardController extends Controller
     {
         $meeting_hall = Auth::user()->customer->halls()->where('meeting_halls.code', $code)->first();
         $programs = $meeting_hall->programs;
+        foreach($programs as $program){
+            $program->is_started = 0;
+            $program->save();
+        }
         $programs = $programs->values();
         if($program_order == -1)
             return back()->with('error', __('common.there-is-not-any-program-before'));
         elseif ($program_order == count($programs))
             return back()->with('error', __('common.this-is-the-last-program'));
-        $program = $programs->get($program_order);
+        else {
+            $program = $programs->get($program_order);
+            $program->is_started = 1;
+            $program->save();
+        }
         if($program->type == 'session'){
             $chairs = Auth::user()->customer->participants()->whereNotIn('meeting_participants.id', $program->programChairs()->pluck('meeting_hall_program_chairs.chair_id'))->whereNot('meeting_participants.type', 'team')->get();
             $program_chairs = $program->programChairs()->get();
