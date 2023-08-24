@@ -19,6 +19,9 @@
                     } else {
                         document.getElementById("speaker").innerHTML = data.speaker.first_name + ' ' + data.speaker.last_name;
                     }
+                } else {
+                    document.getElementById("speaker").innerHTML = '...';
+
                 }
             });
     </script>
