@@ -133,7 +133,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '40',
                 'program_id' => 4,
-                'speaker_id' => 1,
+                'speaker_id' => 11,
                 'code' => 'S-04',
                 'title' => 'Lokal İleri Veya Metastatik KHDAK Olan Hastalarda Nivolumabın Etkinlik Ve Güvenliliğini Değerlendiren Retrospektif Bir Çalışma',
                 'start_at' => '2022-10-20 11:20',
@@ -148,7 +148,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '50',
                 'program_id' => 4,
-                'speaker_id' => 6,
+                'speaker_id' => 12,
                 'code' => 'S-05',
                 'title' => 'KRAS-G12C Mutant Metastatik Küçük Hücreli Dışı Akciğer Kanseri Hastalarında İmmünoterapi İle Sağkalım Sonuçlarının Değerlendirilmesi',
                 'start_at' => '2022-10-20 11:20',
@@ -163,7 +163,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '60',
                 'program_id' => 4,
-                'speaker_id' => 6,
+                'speaker_id' => 13,
                 'code' => 'S-06',
                 'title' => 'Nivolumab Tedavisi Alan Metastatik Küçük Hücreli Dışı Akciğer Kanserli Hastaların Klinik Özellikleri Ve Sağkalım Sonuçları; Tek Merkez Deneyimi',
                 'start_at' => '2022-10-20 11:20',
@@ -178,7 +178,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '70',
                 'program_id' => 4,
-                'speaker_id' => 6,
+                'speaker_id' => 14,
                 'code' => 'S-07',
                 'title' => 'Küçük Hücreli Akciğer Kanserinde Kemoterapinin Etkinliği: İkinci Basamak Ve Ötesi',
                 'start_at' => '2022-10-20 11:20',
@@ -193,7 +193,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '80',
                 'program_id' => 4,
-                'speaker_id' => 6,
+                'speaker_id' => 15,
                 'code' => 'S-08',
                 'title' => 'Toraks BT Çekimlerinde Akciğerde Rastlantısal Nodül Sıklığı',
                 'start_at' => '2022-10-20 11:20',
@@ -208,7 +208,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 7,
-                'speaker_id' => 6,
+                'speaker_id' => 16,
                 'code' => null,
                 'title' => 'Baş Boyun Kanserinde İmmünoterapi',
                 'start_at' => '2022-10-20 14:00',
@@ -223,7 +223,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '20',
                 'program_id' => 7,
-                'speaker_id' => 6,
+                'speaker_id' => 17,
                 'code' => null,
                 'title' => 'Metastatik Melanomda Yeni Tedavi Seçenekleri',
                 'start_at' => '2022-10-20 14:20',
@@ -238,7 +238,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '30',
                 'program_id' => 7,
-                'speaker_id' => 6,
+                'speaker_id' => 18,
                 'code' => null,
                 'title' => 'İmatinibe Resistant Gastrointestinal Stromal Tümörlerde Tedavi Seçenekleri',
                 'start_at' => '2022-10-20 14:40',
@@ -253,7 +253,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '40',
                 'program_id' => 7,
-                'speaker_id' => 6,
+                'speaker_id' => 19,
                 'code' => null,
                 'title' => 'Sarkomlarda Alt Tiplere Göre Sistemik Tedaviler',
                 'start_at' => '2022-10-20 15:00',
@@ -268,7 +268,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '50',
                 'program_id' => 7,
-                'speaker_id' => 6,
+                'speaker_id' => 20,
                 'code' => null,
                 'title' => 'Soru & Cevap & Tartışma',
                 'start_at' => '2022-10-20 15:20',
@@ -283,7 +283,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 10,
-                'speaker_id' => 6,
+                'speaker_id' => 21,
                 'code' => 'S-09',
                 'title' => 'Erişkin Medulloblastomda Tedavi Yaklaşımlarının Rolü Ve Uzun Dönem Sonuçları: Tek Merkez Deneyimi',
                 'start_at' => '2022-10-20 16:30',
@@ -298,7 +298,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '20',
                 'program_id' => 10,
-                'speaker_id' => 6,
+                'speaker_id' => 22,
                 'code' => 'S-10',
                 'title' => 'Relaps Veya Refrakter Medulloblastomlu Erişkin Hastalarda Yüksek Doz Kemoterapinin Etkinliği',
                 'start_at' => '2022-10-20 16:30',
@@ -313,7 +313,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '30',
                 'program_id' => 10,
-                'speaker_id' => 6,
+                'speaker_id' => 23,
                 'code' => 'S-11',
                 'title' => 'Lokal İleri Nazofarenks Kanserli Hastalarda İndüksiyon Kemoterapisinin Konsolidasyon Kemoterapisi İle Karşılaştırılması: Hangi Hastaya; Kaç Kür ?',
                 'start_at' => '2022-10-20 16:30',
@@ -328,7 +328,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '40',
                 'program_id' => 10,
-                'speaker_id' => 6,
+                'speaker_id' => 24,
                 'code' => 'S-12',
                 'title' => 'Nivolumab Tedavisi Alan Malign Melanom Hastalarında Pan-İmmun-İnflammation Value (PIV) İle Genel Sağ Kalım İlişkisi; Tek Merkez Deneyimi',
                 'start_at' => '2022-10-20 16:30',
@@ -343,7 +343,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '50',
                 'program_id' => 10,
-                'speaker_id' => 6,
+                'speaker_id' => 25,
                 'code' => 'S-13',
                 'title' => 'Nivolumab Tedavisi Alan Malign Melanom Hastalarında Prognostik Nutrisyonel İndex(PNI) İle Genel Sağkalım İlişkisi-Tek Merkez Deneyimi',
                 'start_at' => '2022-10-20 16:30',
@@ -358,7 +358,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '60',
                 'program_id' => 10,
-                'speaker_id' => 6,
+                'speaker_id' => 26,
                 'code' => 'S-14',
                 'title' => 'Osteosarkom Sa-Os Hücre Hattında CDK 4/6 İnhibitörü Ribosiklibin Kemoduyarlılaştırma Etkinliğinin Değerlendirilmesi',
                 'start_at' => '2022-10-20 16:30',
@@ -373,7 +373,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '70',
                 'program_id' => 10,
-                'speaker_id' => 6,
+                'speaker_id' => 27,
                 'code' => 'S-15',
                 'title' => 'Nivolumab Kullanan Hastalarda Nütrisyonel Durum Değerlendirmesi',
                 'start_at' => '2022-10-20 16:30',
@@ -388,7 +388,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '80',
                 'program_id' => 10,
-                'speaker_id' => 6,
+                'speaker_id' => 28,
                 'code' => 'S-16',
                 'title' => 'Anti PD-1 Monoklonal Antikorlara Bağlı Hipofizit: Tek Merkez Deneyimi',
                 'start_at' => '2022-10-20 16:30',
@@ -403,7 +403,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '90',
                 'program_id' => 10,
-                'speaker_id' => 6,
+                'speaker_id' => 29,
                 'code' => 'S-17',
                 'title' => 'Küçük Hücreli Dışı Akciğer Kanserinde Tedavi Öncesi Bakılan Prognostik Nutrisyonel İndeks İle Nivolumab Tedavisi Arasında Olabilecek İlişkinin Retrospektif Araştırılması',
                 'start_at' => '2022-10-20 16:30',
@@ -418,7 +418,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 12,
-                'speaker_id' => 6,
+                'speaker_id' => 30,
                 'code' => null,
                 'title' => 'Metastatik Kastrasyona Duyarlı Prostat Kanseri Tedavisi',
                 'start_at' => '2022-10-21 09:00',
@@ -433,7 +433,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '20',
                 'program_id' => 12,
-                'speaker_id' => 6,
+                'speaker_id' => 31,
                 'code' => null,
                 'title' => 'Non-Metastatik Kasa İnvaze Mesane Kanserinde Optimal Tedavi',
                 'start_at' => '2022-10-21 09:20',
@@ -448,7 +448,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '30',
                 'program_id' => 12,
-                'speaker_id' => 6,
+                'speaker_id' => 32,
                 'code' => null,
                 'title' => 'Metastatik Renal Hücreli Kanserin Tedavisinde Yenilikler Ve Sağkalımın Belirleyicileri',
                 'start_at' => '2022-10-21 09:40',
@@ -463,7 +463,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '40',
                 'program_id' => 12,
-                'speaker_id' => 6,
+                'speaker_id' => 33,
                 'code' => null,
                 'title' => 'Soru & Cevap & Tartışma',
                 'start_at' => '2022-10-21 10:00',
@@ -478,7 +478,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 15,
-                'speaker_id' => 6,
+                'speaker_id' => 34,
                 'code' => 'S-18',
                 'title' => 'Yüksek Doz Kemoterapi Ve Otolog Kök Hücre Nakli Uygulanan Relaps Veya Refrakter Erkek Germ Hücreli Tümör Olgularının Retrospektif İncelemesi',
                 'start_at' => '2022-10-21 11:10',
@@ -493,7 +493,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '20',
                 'program_id' => 15,
-                'speaker_id' => 6,
+                'speaker_id' => 35,
                 'code' => 'S-19',
                 'title' => 'Metastatik Renal Hücreli Karsinomda Birinci Basamak Tedavi Öncesi HALP (Hemoglobin-Albümin-Lenfosit-Platelet) Skoru İle Metastatik Genel Sağ Kalım Arasındaki İlişkinin Değerlendirilmesi',
                 'start_at' => '2022-10-21 11:10',
@@ -508,7 +508,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '30',
                 'program_id' => 15,
-                'speaker_id' => 6,
+                'speaker_id' => 36,
                 'code' => 'S-20',
                 'title' => 'Metastatik Hormon Duyarlı Prostat Karsinomu’nda Prognozu Öngörmede CHAARTED Ve LATITUDE Kriterlerinin Karşılaştırılması',
                 'start_at' => '2022-10-21 11:10',
@@ -523,7 +523,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '40',
                 'program_id' => 15,
-                'speaker_id' => 6,
+                'speaker_id' => 37,
                 'code' => 'S-21',
                 'title' => 'Böbrek Şeffaf Hücreli Kanser Tanılı Nivolumab İle Tedavi Edilen Hastalarda Tedavi Yanıtını Ön Gördürücü Bir Model; Modifiye Glasgow Prognostik Skoru',
                 'start_at' => '2022-10-21 11:10',
@@ -538,7 +538,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '50',
                 'program_id' => 15,
-                'speaker_id' => 6,
+                'speaker_id' => 38,
                 'code' => 'S-22',
                 'title' => 'Geriatrik Onkoloji Hastalarında Depresyon Ve İlişkili Faktörler: Tek Merkez Deneyimi',
                 'start_at' => '2022-10-21 11:10',
@@ -553,7 +553,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '60',
                 'program_id' => 15,
-                'speaker_id' => 6,
+                'speaker_id' => 39,
                 'code' => 'S-23',
                 'title' => 'Koronavirüs-19 Pandemi Sürecinin Kanser Hastaları Üzerindeki Psikolojik Etkilerinin Değerlendirilmesi',
                 'start_at' => '2022-10-21 11:10',
@@ -568,7 +568,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '70',
                 'program_id' => 15,
-                'speaker_id' => 6,
+                'speaker_id' => 40,
                 'code' => 'S-24',
                 'title' => 'Solid Organ Maligniteli Hastalarda Pet Suvmax Değerleri Ve Ebus Biyopsi Sonuçlarının Karşılaştırmalı Değerlendirilmesi',
                 'start_at' => '2022-10-21 11:10',
@@ -583,7 +583,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '80',
                 'program_id' => 15,
-                'speaker_id' => 6,
+                'speaker_id' => 41,
                 'code' => 'S-25',
                 'title' => 'Gastrointestinal Tümöre Yönelik Kemoterapi Alan Hastalarda Sarkopeni Düzeyinin Uzaktan Malnutrisyon-Sarkopeni Uygulaması İle Korelasyonu',
                 'start_at' => '2022-10-21 11:10',
@@ -598,7 +598,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '90',
                 'program_id' => 15,
-                'speaker_id' => 6,
+                'speaker_id' => 42,
                 'code' => 'S-26',
                 'title' => 'Solid Kanser Tanısı Olan Hastalarda B12/CRP Oranının (BCO) Prognostik Değeri',
                 'start_at' => '2022-10-21 11:10',
@@ -613,7 +613,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 18,
-                'speaker_id' => 6,
+                'speaker_id' => 43,
                 'code' => null,
                 'title' => 'Hormon Pozitif Metastatik Meme Kanserinde Birinci Basamak Tedavi ve Ötesi',
                 'start_at' => '2022-10-21 13:30',
@@ -628,7 +628,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '20',
                 'program_id' => 18,
-                'speaker_id' => 6,
+                'speaker_id' => 44,
                 'code' => null,
                 'title' => 'Meme Kanseri Tedavisinde İmmünoterapi',
                 'start_at' => '2022-10-21 13:50',
@@ -643,7 +643,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '30',
                 'program_id' => 18,
-                'speaker_id' => 6,
+                'speaker_id' => 45,
                 'code' => null,
                 'title' => 'HER2(+) Metastatik Meme Kanserinde Yeni Tedavi Seçenekleri',
                 'start_at' => '2022-10-21 14:10',
@@ -658,7 +658,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '40',
                 'program_id' => 18,
-                'speaker_id' => 6,
+                'speaker_id' => 46,
                 'code' => null,
                 'title' => 'Memenin Nadir Tümörlerinde Tedavi',
                 'start_at' => '2022-10-21 14:30',
@@ -673,7 +673,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '50',
                 'program_id' => 18,
-                'speaker_id' => 6,
+                'speaker_id' => 47,
                 'code' => null,
                 'title' => 'Soru & Cevap & Tartışma',
                 'start_at' => '2022-10-21 14:50',
@@ -688,7 +688,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 21,
-                'speaker_id' => 6,
+                'speaker_id' => 48,
                 'code' => 'S-27',
                 'title' => 'Üçlü Negatif Meme Kanseri (Ünmk) Hücre Hatlarındaki CD44/CD24 Belirtecini Farklı Düzeylerde Taşıyan Alt-Grupların Monosit/Makrofaj Aracılı T Hücre Yanıtlarına Etkisi',
                 'start_at' => '2022-10-21 16:00',
@@ -703,7 +703,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '20',
                 'program_id' => 21,
-                'speaker_id' => 6,
+                'speaker_id' => 49,
                 'code' => 'S-28',
                 'title' => 'Metastatik Luminal A Tip Meme Kanserinde CDK4/6 İnhibitör Tedavi Etkinliğine Wip1 Fosfotaz Ve İnhibitörlerinin Etkisinin Araştırılması',
                 'start_at' => '2022-10-21 16:00',
@@ -718,7 +718,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '30',
                 'program_id' => 21,
-                'speaker_id' => 6,
+                'speaker_id' => 50,
                 'code' => 'S-29',
                 'title' => 'Kemoterapi Alan Meme Kanseri Hastalarında Depresyon Durumu Ve Uyku Kalitesinin Değerlendirilmesi',
                 'start_at' => '2022-10-21 16:00',
@@ -733,7 +733,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '40',
                 'program_id' => 21,
-                'speaker_id' => 6,
+                'speaker_id' => 51,
                 'code' => 'S-30',
                 'title' => 'Her2-Pozitif Meme Kanserinde Biyobenzer Trastuzumab MYL-1401Onun Etkinlik Ve Güvenlik Değerlendirmesi',
                 'start_at' => '2022-10-21 16:00',
@@ -748,7 +748,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '50',
                 'program_id' => 21,
-                'speaker_id' => 6,
+                'speaker_id' => 52,
                 'code' => 'S-31',
                 'title' => 'Akut Faz Parametreleri, Hormon Pozitif Metastatik Meme Kanserinde CDK 4/6 İnhibitörlerine Yanıtı Predikte Eder Mi?',
                 'start_at' => '2022-10-21 16:00',
@@ -763,7 +763,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '60',
                 'program_id' => 21,
-                'speaker_id' => 6,
+                'speaker_id' => 53,
                 'code' => 'S-32',
                 'title' => 'TDM-1 İle Tedavi Edilen Her2/Neu Pozitif Metastatik Meme Kanseri Tanılı Hastalarda Tedavi Zamanlaması Ve Klinik Özelliklerle Sağkalım Parametrelerinin Arasındaki İlişkinin İncelenmesi',
                 'start_at' => '2022-10-21 16:00',
@@ -778,7 +778,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '70',
                 'program_id' => 21,
-                'speaker_id' => 6,
+                'speaker_id' => 54,
                 'code' => 'S-33',
                 'title' => 'Meme Kanserinde Her-2 Diskordansı: Tek Merkez Deneyimi',
                 'start_at' => '2022-10-21 16:00',
@@ -793,7 +793,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '80',
                 'program_id' => 21,
-                'speaker_id' => 6,
+                'speaker_id' => 55,
                 'code' => 'S-34',
                 'title' => 'Premenapozal Endokrin Duyarlı Metastatik Meme Kanserli Hastalarda Ribosiklib Ve Palbosiklibin Karşılaştırılması',
                 'start_at' => '2022-10-21 16:00',
@@ -808,7 +808,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 24,
-                'speaker_id' => 6,
+                'speaker_id' => 56,
                 'code' => null,
                 'title' => 'Onkolojide HİPEC’in Rasyonel Kullanımı',
                 'start_at' => '2022-10-22 09:00',
@@ -823,7 +823,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '20',
                 'program_id' => 24,
-                'speaker_id' => 6,
+                'speaker_id' => 57,
                 'code' => null,
                 'title' => 'İleri Evre Endometrium Kanseri Tedavisinde Yeni Tedavi Seçenekleri',
                 'start_at' => '2022-10-22 09:20',
@@ -838,7 +838,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '30',
                 'program_id' => 24,
-                'speaker_id' => 6,
+                'speaker_id' => 58,
                 'code' => null,
                 'title' => 'Over Kanserinde İdame Tedavi ve Platin Dirençli Hastalıkta Güncel Gelişmeler',
                 'start_at' => '2022-10-22 09:40',
@@ -853,7 +853,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '40',
                 'program_id' => 24,
-                'speaker_id' => 6,
+                'speaker_id' => 59,
                 'code' => null,
                 'title' => 'Soru & Cevap & Tartışma',
                 'start_at' => '2022-10-22 10:00',
@@ -868,7 +868,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 27,
-                'speaker_id' => 6,
+                'speaker_id' => 60,
                 'code' => 'S-35',
                 'title' => 'Opere 70 Yaş Üstündeki Kolanjiosellüler Kanser Hastalarında Adjuvan Kapesitabin Kullanımı: Tek Merkez Deneyimi',
                 'start_at' => '2022-10-22 10:50',
@@ -883,7 +883,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '20',
                 'program_id' => 27,
-                'speaker_id' => 6,
+                'speaker_id' => 61,
                 'code' => 'S-36',
                 'title' => 'Metastatik Mide Kanserli Hastalarda Tedavi Öncesi Bakılan Sistemik İmmün İnflamasyon İndeksi Ve Panimmun İnflamasyon İndeksi’nin Klinik Önemi',
                 'start_at' => '2022-10-22 10:50',
@@ -898,7 +898,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '30',
                 'program_id' => 27,
-                'speaker_id' => 6,
+                'speaker_id' => 62,
                 'code' => 'S-37',
                 'title' => 'Metastatik Pankreas Kanseri Tanılı Hastalarda Yaş Tedavi Tercihimizi Etkilemeli Mi?',
                 'start_at' => '2022-10-22 10:50',
@@ -913,7 +913,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '40',
                 'program_id' => 27,
-                'speaker_id' => 6,
+                'speaker_id' => 63,
                 'code' => 'S-38',
                 'title' => 'İleri Akciğer Kanseri İnflamasyon İndeksi (ALI), Nivolumab Tedavisi Uygulanan Metastatik Küçük Hücreli Dışı Akciğer Kanserli Hastalarda Prognozu Belirlemede Yol Gösterici Midir?',
                 'start_at' => '2022-10-22 10:50',
@@ -928,7 +928,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '50',
                 'program_id' => 27,
-                'speaker_id' => 6,
+                'speaker_id' => 64,
                 'code' => 'S-39',
                 'title' => 'Metastatik Pankreas Kanserli Hastalarda İkinci Basamak Tedavi Sonuçları',
                 'start_at' => '2022-10-22 10:50',
@@ -943,7 +943,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '60',
                 'program_id' => 27,
-                'speaker_id' => 6,
+                'speaker_id' => 65,
                 'code' => 'S-40',
                 'title' => 'Metastatik Ve Nonmetastatik Kolon Kanserinde Peritümöral Ve İntratümöral Tümör İnfiltre Lenfosit Farklılıkları',
                 'start_at' => '2022-10-22 10:50',
@@ -958,7 +958,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '70',
                 'program_id' => 27,
-                'speaker_id' => 6,
+                'speaker_id' => 66,
                 'code' => 'S-41',
                 'title' => 'Grade 3 Gastroenteropankreatik Nöroendokrin Neoplazmlarda Farklı Özellikler Ve Yaşam Süreleri',
                 'start_at' => '2022-10-22 10:50',
@@ -973,7 +973,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '80',
                 'program_id' => 27,
-                'speaker_id' => 6,
+                'speaker_id' => 67,
                 'code' => 'S-42',
                 'title' => 'Gastrik Ve Gastroözefageal Kanserlerde CD74 Overekspresyonunun Klinik Parametreler Ve Prognozla İlişkisi Var Mıdır?',
                 'start_at' => '2022-10-22 10:50',
@@ -988,7 +988,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '90',
                 'program_id' => 27,
-                'speaker_id' => 6,
+                'speaker_id' => 68,
                 'code' => 'S-43',
                 'title' => 'Metastatik Pankreas Kanserli Hastalarda Albi Skoru İle Sağkalım Arasındaki İlişki',
                 'start_at' => '2022-10-22 10:50',
@@ -1003,7 +1003,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '100',
                 'program_id' => 27,
-                'speaker_id' => 6,
+                'speaker_id' => 69,
                 'code' => 'S-44',
                 'title' => '75 Yaş Üstü Kolorektal Kanserli Hastalarda Tedavi Sonuçları',
                 'start_at' => '2022-10-22 10:50',
@@ -1018,7 +1018,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 30,
-                'speaker_id' => 6,
+                'speaker_id' => 70,
                 'code' => null,
                 'title' => 'Kolorektal Kanserlerde Yeni Hedefler ve Tedaviler',
                 'start_at' => '2022-10-22 13:30',
@@ -1033,7 +1033,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '20',
                 'program_id' => 30,
-                'speaker_id' => 6,
+                'speaker_id' => 71,
                 'code' => null,
                 'title' => 'Metastatik Mide Kanserinde Güncel Tedavi Yaklaşımı',
                 'start_at' => '2022-10-22 13:50',
@@ -1048,7 +1048,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '30',
                 'program_id' => 30,
-                'speaker_id' => 6,
+                'speaker_id' => 72,
                 'code' => null,
                 'title' => 'İleri Evre Hepatoselüler Kanser Tedavisinde İmmünoterapide ve Hedefe Yönelik Tedavilerde Gelişmeler',
                 'start_at' => '2022-10-22 14:10',
@@ -1063,7 +1063,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '40',
                 'program_id' => 30,
-                'speaker_id' => 6,
+                'speaker_id' => 73,
                 'code' => null,
                 'title' => 'Soru & Cevap & Tartışma',
                 'start_at' => '2022-10-22 14:30',
@@ -1078,7 +1078,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '50',
                 'program_id' => 33,
-                'speaker_id' => 6,
+                'speaker_id' => 74,
                 'code' => null,
                 'title' => 'NGS – Hangi Hastaya ve Ne Zaman ?',
                 'start_at' => '2022-10-22 15:40',
@@ -1093,7 +1093,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '60',
                 'program_id' => 33,
-                'speaker_id' => 6,
+                'speaker_id' => 75,
                 'code' => null,
                 'title' => 'MSI, PDL-1, TMB: Hangi Hastada, Ne Zaman ve Hangi Tedavi ?',
                 'start_at' => '2022-10-22 16:00',
@@ -1108,7 +1108,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '70',
                 'program_id' => 33,
-                'speaker_id' => 6,
+                'speaker_id' => 76,
                 'code' => null,
                 'title' => 'BRCA, HRD Hangi Hastada, Ne Zaman ve Hangi Tedavi?',
                 'start_at' => '2022-10-22 16:20',
@@ -1123,7 +1123,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '80',
                 'program_id' => 33,
-                'speaker_id' => 6,
+                'speaker_id' => 77,
                 'code' => null,
                 'title' => 'Yenilikçi İlaçlara Erişim ve Bütçe Etkisi',
                 'start_at' => '2022-10-22 16:40',
@@ -1138,7 +1138,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '90',
                 'program_id' => 33,
-                'speaker_id' => 6,
+                'speaker_id' => 78,
                 'code' => null,
                 'title' => 'Soru & Cevap & Tartışma',
                 'start_at' => '2022-10-22 17:00',
@@ -1153,7 +1153,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 35,
-                'speaker_id' => 6,
+                'speaker_id' => 79,
                 'code' => null,
                 'title' => 'Kanser ve Kaşeksi',
                 'start_at' => '2022-10-23 09:00',
@@ -1168,7 +1168,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '20',
                 'program_id' => 35,
-                'speaker_id' => 6,
+                'speaker_id' => 80,
                 'code' => null,
                 'title' => 'Kanser ve Tromboz',
                 'start_at' => '2022-10-23 09:20',
@@ -1183,7 +1183,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '30',
                 'program_id' => 35,
-                'speaker_id' => 6,
+                'speaker_id' => 81,
                 'code' => null,
                 'title' => 'Kanserde Ağrı Tedavisi',
                 'start_at' => '2022-10-23 09:40',
@@ -1198,7 +1198,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '40',
                 'program_id' => 35,
-                'speaker_id' => 6,
+                'speaker_id' => 82,
                 'code' => null,
                 'title' => 'Kanserli Hastalarda Psikolojik Destek',
                 'start_at' => '2022-10-23 10:00',
@@ -1213,7 +1213,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '50',
                 'program_id' => 35,
-                'speaker_id' => 6,
+                'speaker_id' => 83,
                 'code' => null,
                 'title' => 'Soru & Cevap & Tartışma',
                 'start_at' => '2022-10-23 10:20',

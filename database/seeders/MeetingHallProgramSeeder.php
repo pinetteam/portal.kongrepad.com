@@ -147,7 +147,7 @@ class MeetingHallProgramSeeder extends Seeder
             ],
             [
                 'hall_id' => '5',
-                'sort_order' => '10',
+                'sort_order' => '120',
                 'code' => 'panel-3',
                 'title' => 'PANEL 3',
                 'description' => 'Oturum Başkanları: Mehmet Bilici, Güzin Demirağ, Aziz Karaoğlu',
@@ -159,7 +159,7 @@ class MeetingHallProgramSeeder extends Seeder
             ],
             [
                 'hall_id' => '5',
-                'sort_order' => '20',
+                'sort_order' => '130',
                 'code' => 'gen-uydu-sempozyumu',
                 'title' => 'Gen Uydu Sempozyumu',
                 'description' => 'Metastatik RCC Tedavisinde Güncel Gelişmeler ve Kabozantinibin Yeri',
@@ -171,7 +171,7 @@ class MeetingHallProgramSeeder extends Seeder
             ],
             [
                 'hall_id' => '5',
-                'sort_order' => '30',
+                'sort_order' => '140',
                 'code' => null,
                 'title' => 'Kahve Molası',
                 'description' => null,
@@ -183,7 +183,7 @@ class MeetingHallProgramSeeder extends Seeder
             ],
             [
                 'hall_id' => '5',
-                'sort_order' => '40',
+                'sort_order' => '150',
                 'code' => 'sozel-bildiriler-3',
                 'title' => 'Sözel Bildiriler 3',
                 'description' => null,
@@ -195,7 +195,7 @@ class MeetingHallProgramSeeder extends Seeder
             ],
             [
                 'hall_id' => '5',
-                'sort_order' => '50',
+                'sort_order' => '160',
                 'code' => 'astellas-uydu-sempozyumu',
                 'title' => 'Astellas Uydu Sempozyumu',
                 'description' => 'Xtandi’yle Prostat Kanserinde Zamanın Ötesinde',
@@ -207,7 +207,7 @@ class MeetingHallProgramSeeder extends Seeder
             ],
             [
                 'hall_id' => '5',
-                'sort_order' => '60',
+                'sort_order' => '170',
                 'code' => null,
                 'title' => 'Öğle Yemeği',
                 'description' => null,
@@ -219,7 +219,7 @@ class MeetingHallProgramSeeder extends Seeder
             ],
             [
                 'hall_id' => '5',
-                'sort_order' => '70',
+                'sort_order' => '180',
                 'code' => 'panel-4',
                 'title' => 'Panel 4',
                 'description' => null,
@@ -231,7 +231,7 @@ class MeetingHallProgramSeeder extends Seeder
             ],
             [
                 'hall_id' => '5',
-                'sort_order' => '80',
+                'sort_order' => '190',
                 'code' => null,
                 'title' => 'Kahve Molası',
                 'description' => null,
@@ -243,7 +243,7 @@ class MeetingHallProgramSeeder extends Seeder
             ],
             [
                 'hall_id' => '5',
-                'sort_order' => '90',
+                'sort_order' => '200',
                 'code' => 'farmanova-uydu-sempozyumu',
                 'title' => 'Farmanova Uydu Sempozyumu',
                 'description' => 'HR+ HER2- İleri Evre Meme Kanserine Klinik ve Moleküler Bakış: Sorularla Valamor ve Pimreva',
@@ -255,7 +255,7 @@ class MeetingHallProgramSeeder extends Seeder
             ],
             [
                 'hall_id' => '5',
-                'sort_order' => '100',
+                'sort_order' => '210',
                 'code' => 'sozel-bildiriler-4',
                 'title' => 'Sözel Bildiriler 4',
                 'description' => null,
@@ -267,7 +267,7 @@ class MeetingHallProgramSeeder extends Seeder
             ],
             [
                 'hall_id' => '5',
-                'sort_order' => '110',
+                'sort_order' => '220',
                 'code' => 'debate',
                 'title' => 'Debate',
                 'description' => 'ÖZEFAGOGASTRİK BİLEŞKE TÜMÖRLERİNDE NEOADJUVAN KT VS. KRT?',
@@ -279,7 +279,7 @@ class MeetingHallProgramSeeder extends Seeder
             ],
             [
                 'hall_id' => '5',
-                'sort_order' => '10',
+                'sort_order' => '230',
                 'code' => null,
                 'title' => 'Akılcı İlaç Kullanımı',
                 'description' => 'Oturum Başkanı: Gökhan Çelenkoğlu',
@@ -291,7 +291,7 @@ class MeetingHallProgramSeeder extends Seeder
             ],
             [
                 'hall_id' => '5',
-                'sort_order' => '20',
+                'sort_order' => '240',
                 'code' => 'panel-5',
                 'title' => 'PANEL 5',
                 'description' => 'Oturum Başkanları: Pınar Saip, Salim Başol Tekin',
@@ -303,7 +303,7 @@ class MeetingHallProgramSeeder extends Seeder
             ],
             [
                 'hall_id' => '5',
-                'sort_order' => '30',
+                'sort_order' => '250',
                 'code' => 'gsk-uydu-sempozyumu',
                 'title' => 'GSK Uydu Sempozyumu',
                 'description' => 'Over Kanseri İdame Tedavisinde Zejula ile Yeni Bir Dönem',
@@ -315,7 +315,7 @@ class MeetingHallProgramSeeder extends Seeder
             ],
             [
                 'hall_id' => '5',
-                'sort_order' => '40',
+                'sort_order' => '260',
                 'code' => null,
                 'title' => 'Kahve Molası',
                 'description' => null,
@@ -327,7 +327,7 @@ class MeetingHallProgramSeeder extends Seeder
             ],
             [
                 'hall_id' => '5',
-                'sort_order' => '50',
+                'sort_order' => '270',
                 'code' => 'sozel-bildiriler-5',
                 'title' => 'Sözel Bildiriler 5',
                 'description' => 'Oturum Başkanları: Murat Araz, Didem Şener, Ali Murat Sedef',
@@ -339,7 +339,7 @@ class MeetingHallProgramSeeder extends Seeder
             ],
             [
                 'hall_id' => '5',
-                'sort_order' => '60',
+                'sort_order' => '280',
                 'code' => 'bristol-uydu-sempozyumu',
                 'title' => 'Bristol Uydu Sempozyumu',
                 'description' => '1. Basamak Renal Hücreli Karsinom Tedavisinde İmmünoterapi Deneyimi : Nivolumab + İpilimumab',
@@ -351,7 +351,7 @@ class MeetingHallProgramSeeder extends Seeder
             ],
             [
                 'hall_id' => '5',
-                'sort_order' => '70',
+                'sort_order' => '290',
                 'code' => null,
                 'title' => 'Öğle Yemeği',
                 'description' => null,
@@ -363,7 +363,7 @@ class MeetingHallProgramSeeder extends Seeder
             ],
             [
                 'hall_id' => '5',
-                'sort_order' => '80',
+                'sort_order' => '300',
                 'code' => 'panel-6',
                 'title' => 'Panel 6',
                 'description' => null,
@@ -375,7 +375,7 @@ class MeetingHallProgramSeeder extends Seeder
             ],
             [
                 'hall_id' => '5',
-                'sort_order' => '90',
+                'sort_order' => '310',
                 'code' => null,
                 'title' => 'Kahve Molası',
                 'description' => null,
@@ -387,7 +387,7 @@ class MeetingHallProgramSeeder extends Seeder
             ],
             [
                 'hall_id' => '5',
-                'sort_order' => '100',
+                'sort_order' => '320',
                 'code' => 'msd-uydu-sempozyumu',
                 'title' => 'MSD Uydu Sempozyumu',
                 'description' => 'Metastatik Küçük Hücreli Dışı Akciğer Kanserinin 1.Basamak Tedavisinde Güncel Gelişmeler',
@@ -399,7 +399,7 @@ class MeetingHallProgramSeeder extends Seeder
             ],
             [
                 'hall_id' => '5',
-                'sort_order' => '110',
+                'sort_order' => '330',
                 'code' => 'panel-7',
                 'title' => 'PANEL 7',
                 'description' => null,
@@ -411,7 +411,7 @@ class MeetingHallProgramSeeder extends Seeder
             ],
             [
                 'hall_id' => '5',
-                'sort_order' => '120',
+                'sort_order' => '340',
                 'code' => 'kapanis',
                 'title' => 'KAPANIŞ',
                 'description' => null,
@@ -423,7 +423,7 @@ class MeetingHallProgramSeeder extends Seeder
             ],
             [
                 'hall_id' => '5',
-                'sort_order' => '10',
+                'sort_order' => '350',
                 'code' => null,
                 'title' => 'PALYATİF TEDAVİLER KURSU',
                 'description' => null,
