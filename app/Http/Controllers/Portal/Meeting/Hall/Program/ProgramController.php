@@ -14,7 +14,7 @@ class ProgramController extends Controller
     public function index(int $meeting, int $hall)
     {
         $hall = Auth::user()->customer->halls()->findOrFail($hall);
-        $programs = $hall->programs()->paginate(20);
+        $programs = $hall->programs()->orderBy('sort_order', 'ASC')->orderBy('start_at', 'ASC')->get();
         $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
         $speakers = $meeting->participants()->whereNot('meeting_participants.type', 'team')->get();
         $documents = $meeting->documents()->get();
