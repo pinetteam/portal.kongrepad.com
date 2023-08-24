@@ -34,7 +34,17 @@
                                 <td class="text-end">
                                     <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
                                         @if($screen->type == 'speaker')
+                                            <a class="btn btn-outline-success btn-sm" href="{{ route('service.screen.speaker.start', ['meeting_hall_screen_code' => $screen->code]) }}" title="{{ __('common.screen-event') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.screen-event') }}" target="_blank">
+                                                <span class="fa-regular fa-gamepad"></span>
+                                            </a>
                                             <a class="btn btn-outline-success btn-sm" href="{{ route('service.screen.speaker.index', ['meeting_hall_screen_code' => $screen->code]) }}" title="{{ __('common.screen') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.screen') }}" target="_blank">
+                                                <span class="fa-regular fa-tv"></span>
+                                            </a>
+                                        @elseif($screen->type == 'questions')
+                                            <a class="btn btn-outline-success btn-sm" href="{{ route('service.screen.questions.start', ['meeting_hall_screen_code' => $screen->code]) }}" title="{{ __('common.questions-event') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.questions-event') }}" target="_blank">
+                                                <span class="fa-regular fa-gamepad"></span>
+                                            </a>
+                                            <a class="btn btn-outline-success btn-sm" href="{{ route('service.screen.questions.index', ['meeting_hall_screen_code' => $screen->code]) }}" title="{{ __('common.questions') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.questions') }}" target="_blank">
                                                 <span class="fa-regular fa-tv"></span>
                                             </a>
                                         @endif
