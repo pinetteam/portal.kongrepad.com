@@ -18,6 +18,7 @@ class ScreenController extends Controller
             'participant' => ['value' => 'participant', 'title' => __('common.participant')],
             'chair' => ['value' => 'chair', 'title' => __('common.chair')],
             'document' => ['value' => 'document', 'title' => __('common.document')],
+            'questions' => ['value' => 'questions', 'title' => __('common.questions')],
         ];
         $statuses = [
             'passive' => ['value' => 0, 'title' => __('common.passive'), 'color' => 'danger'],

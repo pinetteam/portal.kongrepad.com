@@ -46,7 +46,6 @@ class MeetingSeeder extends Seeder
                 'status' => 1,
             ],
         ]);
-
         Meeting::insert([
             [
                 'customer_id' => '2',

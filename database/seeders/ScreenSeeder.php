@@ -55,6 +55,14 @@ class ScreenSeeder extends Seeder
                 'type' => 'participant',
                 'status' => 1,
             ],
+            [
+                'hall_id' => '5',
+                'code' => null,
+                'title' => 'Questions',
+                'description' => '',
+                'type' => 'questions',
+                'status' => 1,
+            ],
         ]);
     }
 }

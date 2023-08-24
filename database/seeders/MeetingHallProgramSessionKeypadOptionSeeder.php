@@ -42,8 +42,6 @@ class MeetingHallProgramSessionKeypadOptionSeeder extends Seeder
                 'keypad_id' => '2',
                 'option' => 'Uygulanacak ilaca göre yaklaşımım değişir.',
             ],
-
-
         ]);
     }
 }

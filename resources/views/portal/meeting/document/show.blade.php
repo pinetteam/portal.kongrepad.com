@@ -44,7 +44,6 @@
                 <div class="ratio ratio-16x9">
                     <iframe src="{{ asset('storage/documents/' . $document->file_name . '.' . $document->file_extension) }}"></iframe>
                 </div>
-
             @else
                 <i class="text-info">{{ __('common.unspecified') }}</i>
             @endif

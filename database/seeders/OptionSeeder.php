@@ -9,7 +9,6 @@ class OptionSeeder extends Seeder
     public function run(): void
     {
         Option::insert([
-
             [
                 'survey_id' => '1',
                 'question_id' => '1',

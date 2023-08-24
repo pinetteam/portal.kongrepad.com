@@ -86,6 +86,16 @@ class MeetingHallSeeder extends Seeder
                 'title' => 'PNK 2022 Side Hall',
                 'status' => 1,
             ],
+            [
+                'meeting_id' => '8',
+                'title' => 'PNK 2023 Main Hall',
+                'status' => 1,
+            ],
+            [
+                'meeting_id' => '8',
+                'title' => 'PNK 2023 Side Hall',
+                'status' => 1,
+            ],
         ]);
     }
 }

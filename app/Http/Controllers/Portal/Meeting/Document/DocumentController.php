@@ -115,7 +115,7 @@ class DocumentController extends Controller
         $file = $meeting->documents()->where('file_name', $document)->first();
         if ($file) {
             try {
-                return Storage::download('documents/' . $file->file_name . '.' . $file->file_extension);
+                return Storage::download('public/documents/' . $file->file_name . '.' . $file->file_extension);
             } catch (\Exception $e) {
                 return back()->with('error', __('common.file-not-found'))->withInput();
             }

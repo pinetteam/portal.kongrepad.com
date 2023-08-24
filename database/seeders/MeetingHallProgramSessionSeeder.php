@@ -7,7 +7,8 @@ use Illuminate\Database\Seeder;
 
 class MeetingHallProgramSessionSeeder extends Seeder
 {
-    public function run(){
+    public function run(): void
+    {
         Session::insert([
             [
                 'sort_order' => '10',

@@ -19,7 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UserRoleSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(MeetingSeeder::class);
-        $this->call(DocumentSeeder::class);
         $this->call(ScoreGameSeeder::class);
         $this->call(ScoreGameQrCodeSeeder::class);
         $this->call(MeetingParticipantSeeder::class);

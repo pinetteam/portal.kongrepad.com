@@ -18,7 +18,7 @@ class ScreenRequest extends FormRequest
             'code' => 'nullable|max:255',
             'title' => 'required|max:255',
             'description' => 'nullable|max:65535',
-            'type' => 'required|in:document,participant,chair',
+            'type' => 'required|in:document,participant,chair,questions',
             'status' => 'required|boolean',
         ];
     }

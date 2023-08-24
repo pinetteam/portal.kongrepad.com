@@ -71,8 +71,6 @@ class CustomerSettingSeeder extends Seeder
                 'value' => 'https://twitter.com/deventsocial/',
             ],
         ]);
-
-
         Setting::insert([
             [
                 'customer_id' => '2',

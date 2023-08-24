@@ -16,11 +16,21 @@ class DocumentRequest extends FormRequest
     {
         switch($this->method())
         {
-            case 'POST' || 'PATCH' || 'PUT':
+            case 'POST':
             {
                 return [
                     'meeting_id' => 'required|exists:meetings,id',
                     'file' => ['required', File::types(['pdf', 'pptx', 'ppt', 'ppsx'])->max(10240)],
+                    'title' => 'required|max:511',
+                    'sharing_via_email' => 'required|boolean',
+                    'status' => 'required|boolean',
+                ];
+            }
+            case 'PATCH' || 'PUT':
+            {
+                return [
+                    'meeting_id' => 'required|exists:meetings,id',
+                    'file' => ['nullable', File::types(['pdf', 'pptx', 'ppt', 'ppsx'])->max(10240)],
                     'title' => 'required|max:511',
                     'sharing_via_email' => 'required|boolean',
                     'status' => 'required|boolean',
