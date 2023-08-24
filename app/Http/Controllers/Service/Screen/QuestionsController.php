@@ -14,7 +14,9 @@ class QuestionsController extends Controller
         $meeting_hall_screen = Screen::where('code', $meeting_hall_screen_code)->first();
         try {
             $session = $meeting_hall_screen->hall->programs()->where('is_started', true)->first()->sessions->where('on_air', true)->first();
-            $questions = $session->questions()->where('selected_for_show', true)->with('questioner')->get();
+            if($session->questions) {
+                $questions = $session->questions()->where('selected_for_show', true)->with('questioner')->get();
+            }
         } catch (\Exception $e) {
             $questions = null;
         }
