@@ -48,4 +48,5 @@ class QuestionsEvent implements ShouldBroadcast
                 'questions' => null,
             ];
         }
-    }}
+    }
+}
