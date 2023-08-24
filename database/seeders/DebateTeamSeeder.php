@@ -27,14 +27,6 @@ class DebateTeamSeeder extends Seeder
                 'debate_id' => '2',
                 'title' => 'Team B'
             ],
-            [
-                'debate_id' => '3',
-                'title' => 'Team Red'
-            ],
-            [
-                'debate_id' => '3',
-                'title' => 'Team Blue'
-            ],
         ]);
     }
 }
