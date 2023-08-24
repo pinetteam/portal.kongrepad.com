@@ -15,8 +15,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/service/screen/speaker/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\SpeakerController::class, 'index'])->name('service.screen.speaker.index');
 Route::get('/service/screen/speaker/event/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\SpeakerController::class, 'start'])->name('service.screen.speaker.start');
 
+Route::get('/service/screen/questions/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\QuestionsController::class, 'index'])->name('service.screen.questions.index');
+Route::get('/service/screen/questions/event/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\QuestionsController::class, 'start'])->name('service.screen.questions.start');
+
 
 Route::get('/service/question-board/{code}', [\App\Http\Controllers\Service\QuestionBoardController::class, 'index'])->name('service.question-board.start');
+Route::get('/service/operator-board/{code}/{program_order}', [\App\Http\Controllers\Service\OperatorBoardController::class, 'index'])->name('service.operator-board.start');
 
 Route::group(["middleware" => ['guest']], function () {
     Route::get('/auth/login', [\App\Http\Controllers\Auth\LoginController::class, 'index'])->name('auth.login.index');
@@ -106,8 +110,7 @@ Route::prefix('portal')->name('portal.')->group(function () {
 
         });
 
-        /*Route::get('/hall/{meeting_hall_id}/operator-board/{program_order}', [\App\Http\Controllers\Portal\OperatorBoardController::class, 'index'])->name('operator-board.index');
-        Route::resource('/hall', \App\Http\Controllers\Portal\Meeting\Hall\MeetingHallController::class)->except(['create']);
+        /*Route::resource('/hall', \App\Http\Controllers\Portal\Meeting\Hall\MeetingHallController::class)->except(['create']);
         Route::get('/hall/{meeting_hall_id}/current_speaker', [\App\Http\Controllers\Portal\Meeting\Hall\MeetingHallController::class, 'current_speaker'])->name('current-speaker.show');
         Route::get('/hall/{meeting_hall_id}/chair_board', [\App\Http\Controllers\Portal\Meeting\Hall\MeetingHallController::class, 'chair_board'])->name('chair-board.index');
         Route::get('/hall/{meeting_hall_id}/current_chair/{chair_index}', [\App\Http\Controllers\Portal\Meeting\Hall\MeetingHallController::class, 'current_chair'])->name('current-chair.show');
