@@ -31,10 +31,17 @@ class QuestionsEvent implements ShouldBroadcast
     public function broadcastWith () {
         try {
             $session = $this->meeting_hall_screen->hall->programs()->where('is_started', true)->first()->sessions->where('on_air', true)->first();
-            return [
-                'meeting_hall_screen' => $this->meeting_hall_screen,
-                'questions' => $session->questions()->where('selected_for_show', true)->with('questioner')->get(),
-            ];
+            if($session->questions) {
+                return [
+                    'meeting_hall_screen' => $this->meeting_hall_screen,
+                    'questions' => $session->questions()->where('selected_for_show', true)->with('questioner')->get(),
+                ];
+            } else {
+                return [
+                    'meeting_hall_screen' => $this->meeting_hall_screen,
+                    'questions' => null,
+                ];
+            }
         } catch (\Exception $e) {
             return [
                 'meeting_hall_screen' => $this->meeting_hall_screen,
