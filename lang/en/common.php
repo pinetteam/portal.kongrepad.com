@@ -119,6 +119,8 @@ return [
     'presenter' => 'Presenter',
     'document' => 'Document',
     'questions' => 'Questions',
+    'questions-on-screen' => 'Questions On Screen',
+    'question-board' => 'Question Board',
     'question-limit' => 'Question Limit',
     'user-role' => 'User Role',
     'last-login' => 'Last login',
@@ -247,5 +249,7 @@ return [
     'announcement' => 'Announcement',
     'create-new-virtual-stand' => 'Create New Virtual Stand',
     'banner' => 'Banner',
-    'last-5-users' => 'Last 5 Users'
+    'last-5-users' => 'Last 5 Users',
+    'screen' => 'Screen',
+    'speaker-screen' => 'Speaker Screen',
 ];

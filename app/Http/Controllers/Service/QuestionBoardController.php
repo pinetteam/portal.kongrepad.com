@@ -3,21 +3,19 @@
 namespace App\Http\Controllers\Service;
 
 use App\Http\Controllers\Controller;
+use App\Models\Meeting\Hall\Hall;
 use Illuminate\Http\Request;
 
 class QuestionBoardController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(string $code)
     {
-        //
+        $hall = Hall::where('code', $code)->first();
+        $session = $hall->programSessions()->where('meeting_hall_program_sessions.id',1)->first();
+        $questions = $session ? $session->questions()->where('meeting_hall_program_session_questions.selected_for_show', 0)->get() : null;
+        $selected_questions = $session ? $session->questions()->where('meeting_hall_program_session_questions.selected_for_show', 1)->get() : null;
+        return view('service.question-board.index', compact(['session', 'questions', 'selected_questions']));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //

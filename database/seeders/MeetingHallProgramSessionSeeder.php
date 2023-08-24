@@ -20,7 +20,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
                 'finish_at' => '2022-10-22 09:35',
                 'on_air' => 0,
                 'questions_limit' => 3,
-                'questions_allowed' => 0,
+                'questions_allowed' => 1,
                 'questions_auto_start' => 0,
                 'is_questions_started' => 0,
                 'status' => 1,
