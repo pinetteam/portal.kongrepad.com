@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Meeting\Hall\Screen\Screen;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class ScreenSeeder extends Seeder
 {
@@ -17,7 +18,7 @@ class ScreenSeeder extends Seeder
         Screen::insert([
             [
                 'hall_id' => '5',
-                'code' => null,
+                'code' => Str::uuid()->toString(),
                 'title' => 'Chair 1',
                 'description' => 'Chair 1 Masa',
                 'type' => 'chair',
@@ -25,7 +26,7 @@ class ScreenSeeder extends Seeder
             ],
             [
                 'hall_id' => '5',
-                'code' => null,
+                'code' => Str::uuid()->toString(),
                 'title' => 'Chair 2',
                 'description' => 'Chair 2 Masa',
                 'type' => 'chair',
@@ -33,7 +34,7 @@ class ScreenSeeder extends Seeder
             ],
             [
                 'hall_id' => '5',
-                'code' => null,
+                'code' => Str::uuid()->toString(),
                 'title' => 'Chair 3',
                 'description' => 'Chair 3 Masa',
                 'type' => 'chair',
@@ -41,7 +42,7 @@ class ScreenSeeder extends Seeder
             ],
             [
                 'hall_id' => '5',
-                'code' => null,
+                'code' => Str::uuid()->toString(),
                 'title' => 'Presentation Screen',
                 'description' => 'Presentation Screen',
                 'type' => 'document',
@@ -49,7 +50,7 @@ class ScreenSeeder extends Seeder
             ],
             [
                 'hall_id' => '5',
-                'code' => null,
+                'code' => Str::uuid()->toString(),
                 'title' => 'Participant 1',
                 'description' => '',
                 'type' => 'participant',
@@ -57,7 +58,7 @@ class ScreenSeeder extends Seeder
             ],
             [
                 'hall_id' => '5',
-                'code' => null,
+                'code' => Str::uuid()->toString(),
                 'title' => 'Questions',
                 'description' => '',
                 'type' => 'questions',
