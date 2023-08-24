@@ -11,6 +11,7 @@ return new class extends Migration
         Schema::create('meeting_halls', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('meeting_id')->index();
+            $table->string('code', 255)->unique();
             $table->string('title', 511);
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
             $table->unsignedBigInteger('created_by')->index()->nullable();

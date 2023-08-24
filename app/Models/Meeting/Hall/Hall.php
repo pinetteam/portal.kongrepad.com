@@ -14,6 +14,7 @@ class Hall extends Model
     protected $table = 'meeting_halls';
     protected $fillable = [
         'meeting_id',
+        'code',
         'title',
         'status',
         'created_by',

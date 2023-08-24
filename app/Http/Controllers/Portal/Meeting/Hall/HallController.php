@@ -7,6 +7,7 @@ use App\Http\Requests\Portal\Meeting\Hall\HallRequest;
 use App\Http\Resources\Portal\Meeting\Hall\HallResource;
 use App\Models\Meeting\Hall\Hall;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class HallController extends Controller
 {
@@ -25,6 +26,7 @@ class HallController extends Controller
         if ($request->validated()) {
             $hall = new Hall();
             $hall->meeting_id = $meeting;
+            $hall->code = Str::uuid()->toString();
             $hall->title = $request->input('title');
             $hall->status = $request->input('status');
             if ($hall->save()) {
