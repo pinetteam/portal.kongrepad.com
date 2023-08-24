@@ -7,6 +7,7 @@ use App\Http\Requests\Portal\Meeting\Hall\Screen\ScreenRequest;
 use App\Http\Resources\Portal\Meeting\Hall\Screen\ScreenResource;
 use App\Models\Meeting\Hall\Screen\Screen;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class ScreenController extends Controller
 {
@@ -31,7 +32,7 @@ class ScreenController extends Controller
         if ($request->validated()) {
             $screen = new Screen();
             $screen->hall_id = $hall;
-            $screen->code = $request->input('code');
+            $screen->code = Str::uuid()->toString();
             $screen->title = $request->input('title');
             $screen->description = $request->input('description');
             $screen->type = $request->input('type');
@@ -63,7 +64,6 @@ class ScreenController extends Controller
             $hall = Auth::user()->customer->halls()->findOrFail($hall);
             $screen = $hall->screens()->findOrFail($id);
             $screen->hall_id = $request->input('hall_id');
-            $screen->code = $request->input('code');
             $screen->title = $request->input('title');
             $screen->description = $request->input('description');
             $screen->type = $request->input('type');

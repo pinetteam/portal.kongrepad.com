@@ -13,7 +13,6 @@
                     </caption>
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col"><span class="fa-regular fa-code-simple mx-1"></span> {{ __('common.code') }}</th>
                             <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}</th>
                             <th scope="col"><span class="fa-regular fa-person-military-pointing mx-1"></span> {{ __('common.type') }}</th>
                             <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}</th>
@@ -23,7 +22,6 @@
                     <tbody>
                         @foreach($screens as $screen)
                             <tr>
-                                <td>{{ $screen->code }}</td>
                                 <td>{{ $screen->title }}</td>
                                 <td>{{ __('common.'.$screen->type) }}</td>
                                 <td >
@@ -64,23 +62,21 @@
     </div>
     <x-crud.form.common.create name="screen" >
         @section('screen-create-form')
-            <x-input.hidden method="c" name="hall_id" :value="$hall->id"/>
-            <x-input.text method="c" name="code" title="code" icon="code-simple"/>
-            <x-input.text method="c" name="title" title="title" icon="input-text"/>
-            <x-input.text method="c" name="description" title="description" icon="comment-dots"/>
-            <x-input.select method="c" name="type" title="type" :options="$types" option_value="value" option_name="title" icon="person-military-pointing"/>
-            <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on"/>
+            <x-input.hidden method="c" name="hall_id" :value="$hall->id" />
+            <x-input.text method="c" name="title" title="title" icon="input-text" />
+            <x-input.text method="c" name="description" title="description" icon="comment-dots" />
+            <x-input.select method="c" name="type" title="type" :options="$types" option_value="value" option_name="title" icon="person-military-pointing" />
+            <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.create>
     <x-crud.form.common.delete name="screen" />
     <x-crud.form.common.edit name="screen" >
         @section('screen-edit-form')
-            <x-input.hidden method="e" name="hall_id" :value="$hall->id"/>
-            <x-input.text method="e" name="code" title="code" icon="code-simple"/>
-            <x-input.text method="e" name="title" title="title" icon="input-text"/>
-            <x-input.text method="e" name="description" title="description" icon="comment-dots"/>
-            <x-input.select method="e" name="type" title="type" :options="$types" option_value="value" option_name="title" icon="person-military-pointing"/>
-            <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on"/>
+            <x-input.hidden method="e" name="hall_id" :value="$hall->id" />
+            <x-input.text method="e" name="title" title="title" icon="input-text" />
+            <x-input.text method="e" name="description" title="description" icon="comment-dots" />
+            <x-input.select method="e" name="type" title="type" :options="$types" option_value="value" option_name="title" icon="person-military-pointing" />
+            <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.edit>
 @endsection

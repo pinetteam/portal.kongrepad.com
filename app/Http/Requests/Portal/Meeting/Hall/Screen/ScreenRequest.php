@@ -15,7 +15,6 @@ class ScreenRequest extends FormRequest
     {
         return [
             'hall_id' => 'required|exists:meeting_halls,id',
-            'code' => 'nullable|max:255',
             'title' => 'required|max:255',
             'description' => 'nullable|max:65535',
             'type' => 'required|in:document,participant,chair,questions',
