@@ -14,7 +14,7 @@ return new class extends Migration
             $table->string('code', 255)->nullable();
             $table->string('title', 511);
             $table->text('description')->nullable();
-            $table->enum('type', ['document', 'participant', 'chair', 'questions']);
+            $table->enum('type', ['chair', 'document', 'questions', 'speaker']);
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
             $table->unsignedBigInteger('created_by')->index()->nullable();
             $table->unsignedBigInteger('updated_by')->index()->nullable();

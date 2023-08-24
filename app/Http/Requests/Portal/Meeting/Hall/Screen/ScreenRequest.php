@@ -17,7 +17,7 @@ class ScreenRequest extends FormRequest
             'hall_id' => 'required|exists:meeting_halls,id',
             'title' => 'required|max:255',
             'description' => 'nullable|max:65535',
-            'type' => 'required|in:document,participant,chair,questions',
+            'type' => 'required|in:chair,document,questions,speaker',
             'status' => 'required|boolean',
         ];
     }

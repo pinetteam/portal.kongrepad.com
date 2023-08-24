@@ -16,10 +16,10 @@ class ScreenController extends Controller
         $hall = Auth::user()->customer->halls()->findOrFail($hall);
         $screens = $hall->screens()->paginate(10);
         $types = [
-            'participant' => ['value' => 'participant', 'title' => __('common.participant')],
             'chair' => ['value' => 'chair', 'title' => __('common.chair')],
             'document' => ['value' => 'document', 'title' => __('common.document')],
             'questions' => ['value' => 'questions', 'title' => __('common.questions')],
+            'speaker' => ['value' => 'speaker', 'title' => __('common.speaker')],
         ];
         $statuses = [
             'passive' => ['value' => 0, 'title' => __('common.passive'), 'color' => 'danger'],
