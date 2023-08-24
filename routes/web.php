@@ -12,8 +12,10 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/screen/test', [\App\Http\Controllers\Service\Screen\TestController::class, 'index'])->name('screen.test.index');
-Route::get('/screen/start/{id}', [\App\Http\Controllers\Service\Screen\TestController::class, 'start'])->name('screen.test.start');
+Route::get('/service/screen/speaker/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\SpeakerController::class, 'index'])->name('service.screen.speaker.index');
+Route::get('/service/screen/speaker/event/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\SpeakerController::class, 'start'])->name('service.screen.speaker.start');
+
+
 Route::get('/service/question-board/{code}', [\App\Http\Controllers\Service\QuestionBoardController::class, 'index'])->name('service.question-board.start');
 
 Route::group(["middleware" => ['guest']], function () {

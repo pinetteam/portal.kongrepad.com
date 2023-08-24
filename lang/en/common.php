@@ -249,5 +249,7 @@ return [
     'announcement' => 'Announcement',
     'create-new-virtual-stand' => 'Create New Virtual Stand',
     'banner' => 'Banner',
-    'last-5-users' => 'Last 5 Users'
+    'last-5-users' => 'Last 5 Users',
+    'screen' => 'Screen',
+    'speaker-screen' => 'Speaker Screen',
 ];
