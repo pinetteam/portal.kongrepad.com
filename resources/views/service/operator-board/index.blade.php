@@ -4,7 +4,7 @@
     <div class="container-fluid h-100">
         <div class="row h-100">
             <div class="col-12 col-lg-1 p-0 mb-4" id="operator-board-left">
-                <a href="{{ route('portal.operator-board.index',[ $meeting_hall->id, (int)\Route::current()->parameter('program_order') - 1]) }}" >
+                <a href="{{ route('service.operator-board.start',['code' => $meeting_hall->code, 'program_order' => (int)\Route::current()->parameter('program_order') - 1]) }}" >
                 <button type="button" class="btn btn-dark w-100 h-100 text-center text-white"><i class="fa-solid fa-chevron-left display-1"></i></button>
                 </a>
             </div>
@@ -63,7 +63,7 @@
                                                 <td class="text-end">
                                                     <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
                                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
-                                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#chair-delete-modal" data-route="{{ route('portal.chair.destroy', $program_chair->id) }}" data-record="{{ $program_chair->chair->full_name }}">
+                                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#chair-delete-modal" data-route="{{ route('portal.meeting.hall.program.chair.destroy', ['meeting' => $program_chair->program->hall->meeting_id, 'hall' => $program_chair->program->hall_id, 'program' => $program_chair->program->id, 'chair' => $program_chair->id ]) }}" data-record="{{ $program_chair->chair->full_name }}">
                                                                 <span class="fa-regular fa-trash"></span>
                                                             </button>
                                                         </div>
@@ -76,7 +76,7 @@
                                 </div>
                             </div>
                             <div class="card-footer d-flex justify-content-center">
-                                <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#chair-create-modal" data-route="{{ route('portal.chair.store') }}">
+                                <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#chair-create-modal" data-route="{{ route('portal.meeting.hall.program.chair.store' , ['meeting' => $program->hall->meeting_id, 'hall' => $program->hall_id, 'program' => $program->id]) }}">
                                     <i class="fa-solid fa-plus"></i> {{ __('common.add-new-chair') }}
                                 </button>
                             </div>
@@ -118,8 +118,8 @@
                                             @foreach($sessions as $session)
                                                 <tr>
                                                     <td>
-                                                        <a href =""  title="{{ __('common.start-stop') }}" data-bs-toggle="modal" data-bs-target="#start-session-confirmation-modal" data-route="{{ route('portal.session.start-stop', ['program_id' => $program->id, 'session' => $session->id]) }}" data-record="{{ $session->title }}" data-start-stop="{{ $session->is_started }} " data-bs-title="{{ __('common.start-stop') }}">
-                                                                @if($session->is_started)
+                                                        <a href =""  title="{{ __('common.start-stop') }}" data-bs-toggle="modal" data-bs-target="#start-session-confirmation-modal" data-route="{{ route('portal.meeting.hall.program.session.start-stop', ['meeting' => $program->hall->meeting_id, 'hall' => $program->hall->id, 'program' => $program->id, 'session' => $session->id]) }}" data-record="{{ $session->title }}" data-start-stop="{{ $session->on_air }} " data-bs-title="{{ __('common.start-stop') }}">
+                                                                @if($session->on_air)
                                                                     <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
                                                                 @else
                                                                     <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
@@ -129,7 +129,7 @@
                                                     <td>{{ $session->speaker->full_name }}</td>
                                                     <td>
                                                         @if($session->document_id)
-                                                            <a href="{{ route('portal.document-download.index', $session->document->file_name) }}" class="btn btn-sm btn-info w-100" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.view') }}">
+                                                            <a href="{{ route('portal.meeting.document.download', ['meeting' => $program->hall->meeting_id, 'document' => $program_session->document->file_name]) }}" class="btn btn-sm btn-info w-100" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.view') }}">
                                                                 <span class="fa-regular fa-file-arrow-down"></span> {{ $session->document->title }}
                                                             </a>
                                                         @else
@@ -140,15 +140,15 @@
                                                     <td>{{ $session->start_at }}</td>
                                                     <td>{{ $session->finish_at }}</td>
                                                     <td>
-                                                        @if($session->questions)
+                                                        @if($session->questions_allowed)
                                                             <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
                                                         @else
                                                             <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
                                                         @endif
                                                     </td>
                                                     <td>
-                                                        @if($session->questions)
-                                                            <a href="{{ route('portal.session.start-stop-questions', ['program_id' => $program->id, 'session' => $session->id]) }}" title="{{ __('common.start-stop-questions') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.start-stop-questions') }}">
+                                                        @if($session->questions_allowed)
+                                                            <a href="{{ route('portal.meeting.hall.program.session.start-stop-questions', ['meeting' => $program->hall->meeting_id, 'hall' => $program->hall->id, 'program' => $program->id, 'session' => $session->id]) }}" title="{{ __('common.start-stop-questions') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.start-stop-questions') }}">
                                                             @if($session->is_questions_started)
                                                                 <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
                                                             @else
@@ -158,12 +158,12 @@
                                                         @endif
                                                     </td>
                                                     <td>
-                                                        @if($session->questions)
-                                                            <a href ="{{ route('portal.session.edit-question-limit', ['program_id' => $program->id, 'session' => $session->id, 'increment' => -1]) }}"  title="{{ __('common.decrement') }}" >
+                                                        @if($session->questions_allowed)
+                                                            <a href ="{{ route('portal.meeting.hall.program.session.edit-question-limit', ['meeting' => $program->hall->meeting_id, 'hall' => $program->hall->id, 'program' => $program->id, 'session' => $session->id, 'increment' => -1]) }}"  title="{{ __('common.decrement') }}" >
                                                                 <i style="color:red" class="fa-regular fa-square-minus fa-lg"></i>
                                                             </a>
-                                                            {{ $session->question_limit }}
-                                                            <a href ="{{ route('portal.session.edit-question-limit', ['program_id' => $program->id, 'session' => $session->id, 'increment' => 1]) }}"  title="{{ __('common.increment') }}">
+                                                            {{ $session->questions_limit }}
+                                                            <a href ="{{ route('portal.meeting.hall.program.session.edit-question-limit', ['meeting' => $program->hall->meeting_id, 'hall' => $program->hall->id, 'program' => $program->id, 'session' => $session->id, 'increment' => 1]) }}"  title="{{ __('common.increment') }}">
                                                                 <i style="color:green" class="fa-regular fa-square-plus fa-lg"></i>
                                                             </a>
                                                         @endif
@@ -207,9 +207,9 @@
                                                     @foreach($session->keypads as $keypad)
                                                         <tr>
                                                             <td>{{ $keypad->sort_order }}</td>
-                                                            <td>{{ $keypad->title }}</td>
+                                                            <td>{{ $keypad->keypad }}</td>
                                                             <td>
-                                                                <a href =""  title="{{ __('common.start-stop-voting') }}" data-bs-toggle="modal" data-bs-target="#start-keypad-confirmation-modal" data-route="{{ route('portal.keypad.start-stop-voting', ['program_id' => $program->id, 'session_id' => $session->id, 'keypad' => $keypad->id]) }}" data-record="{{ $keypad->title }}" data-start-stop="{{ $keypad->on_vote }}">
+                                                                <a href =""  title="{{ __('common.start-stop-voting') }}" data-bs-toggle="modal" data-bs-target="#start-keypad-confirmation-modal" data-route="{{ route('portal.meeting.hall.program.session.keypad.start-stop-voting',['meeting'=>$session->program->hall->meeting_id, 'keypad'=> $keypad->id,'session'=> $session->id,'program'=>$session->program_id, 'hall'=>$session->program->hall_id]) }}" data-record="{{ $keypad->keypad }}" data-start-stop="{{ $keypad->on_vote }}">
                                                                     @if($keypad->on_vote)
                                                                         <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
                                                                     @else
@@ -438,7 +438,7 @@
             </div>
 
             <div class="col-12 col-lg-1 p-0 mb-4" id="operator-board-right">
-                <a href="{{ route('portal.operator-board.index',[ $meeting_hall->id, (int)\Route::current()->parameter('program_order') + 1]) }}" >
+                <a href="{{ route('service.operator-board.start',['code' => $meeting_hall->code, 'program_order' => (int)\Route::current()->parameter('program_order') + 1]) }}" >
                 <button title="{{ __('common.operator-board') }}" type="button" class="btn btn-dark w-100 h-100 text-center text-white"><i class="fa-solid fa-chevron-right display-1"></i></button>
                 </a>
             </div>

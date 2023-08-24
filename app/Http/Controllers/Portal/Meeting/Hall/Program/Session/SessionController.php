@@ -84,20 +84,20 @@ class SessionController extends Controller
             return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();
         }
     }
-    /*public function start_stop(int $meeting, int $hall, int $program, int $id)
+    public function start_stop(int $meeting, int $hall, int $program, int $id)
     {
         $program = Auth::user()->customer->programs()->findOrFail($program);
-        $meeting_hall = Auth::user()->customer->meetingHalls()->findOrFail($program);
+        $meeting_hall = Auth::user()->customer->halls()->findOrFail($hall);
         foreach($meeting_hall->programSessions as $session){
             if($session->id == $id)
                 continue;
-            $session->is_started = 0;
+            $session->on_air = 0;
             $session->save();
         }
         $program_session = Auth::user()->customer->programSessions()->findOrFail($id);
-        $program_session->is_started = !$program_session->is_started;
+        $program_session->on_air = !$program_session->on_air;
         if ($program_session->save()) {
-            if($program_session->is_started)
+            if($program_session->on_air)
                 return back()->with('success', __('common.session-started'));
             else
                 return back()->with('success', __('common.session-stopped'));
@@ -121,9 +121,9 @@ class SessionController extends Controller
 
     public function edit_question_limit(int $meeting, int $hall, int $program, int $id, int $increment){
         $program_session = Auth::user()->customer->programSessions()->findOrFail($id);
-        $program_session->question_limit = $program_session->question_limit + $increment;
-        if($program_session->question_limit > 0)
+        $program_session->questions_limit = $program_session->questions_limit + $increment;
+        if($program_session->questions_limit > 0)
             $program_session->save();
         return back();
-    }*/
+    }
 }
