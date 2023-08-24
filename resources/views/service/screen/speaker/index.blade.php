@@ -21,7 +21,6 @@
                     }
                 } else {
                     document.getElementById("speaker").innerHTML = '...';
-
                 }
             });
     </script>
