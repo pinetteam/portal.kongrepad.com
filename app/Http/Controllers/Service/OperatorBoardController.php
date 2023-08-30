@@ -28,8 +28,8 @@ class OperatorBoardController extends Controller
         if($program->type == 'session'){
             $chairs = Auth::user()->customer->participants()->whereNotIn('meeting_participants.id', $program->programChairs()->pluck('meeting_hall_program_chairs.chair_id'))->whereNot('meeting_participants.type', 'team')->get();
             $program_chairs = $program->programChairs()->get();
-            $sessions = $program->sessions()->get();;
-            return view('service.operator-board.index',compact(['meeting_hall', 'program', 'program_chairs', 'chairs', 'sessions']));
+            $sessions = $program->sessions()->get();
+            return view('service.operator-board.index', compact(['meeting_hall', 'program', 'program_chairs', 'chairs', 'sessions']));
         } elseif($program->type == 'debate'){
             $chairs = Auth::user()->customer->participants()->whereNotIn('meeting_participants.id', $program->programChairs()->pluck('meeting_hall_program_chairs.chair_id'))->whereNot('meeting_participants.type', 'team')->get();
             $program_chairs = $program->programChairs()->get();

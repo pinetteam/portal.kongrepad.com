@@ -24,6 +24,7 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
         Route::resource('/survey', \App\Http\Controllers\API\Meeting\Survey\SurveyController::class)->except(['create']);
         Route::resource('/virtual-stand', \App\Http\Controllers\API\Meeting\VirtualStand\VirtualStandController::class)->except(['create']);
         Route::resource('/announcement', \App\Http\Controllers\API\Meeting\Announcement\AnnouncementController::class)->except(['create']);
+        Route::resource('/document', \App\Http\Controllers\API\Meeting\Document\DocumentController::class)->except(['create']);
         Route::resource('/survey/{survey_id}/question', \App\Http\Controllers\API\Meeting\Survey\Question\QuestionController::class)->except(['create']);
         Route::resource('/survey/{survey_id}/question/{question_id}/survey-option', \App\Http\Controllers\API\Meeting\Survey\Question\Option\OptionController::class)->except(['create']);
         Route::get('/meeting/{meeting_id}/hall/{meeting_hall_id}/active-document', [\App\Http\Controllers\API\Meeting\Hall\MeetingHallController::class, 'active_document'])->name('active-document.show');

@@ -125,6 +125,15 @@ class Meeting extends Model
             ->where('meetings.id', $this->getkey());
         return $program_sessions;
     }
+    public function debates()
+    {
+        $debates = Debate::select('meeting_hall_program_debates.*')
+            ->join('meeting_hall_programs', 'meeting_hall_program_debates.program_id', '=', 'meeting_hall_programs.id')
+            ->join('meeting_halls', 'meeting_hall_programs.hall_id', '=', 'meeting_halls.id')
+            ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
+            ->where('meetings.id', $this->getkey());
+        return $debates;
+    }
 
     public function keypads()
     {
@@ -135,16 +144,6 @@ class Meeting extends Model
             ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
             ->where('meetings.id', $this->getkey());
         return $keypads;
-    }
-
-    public function debates()
-    {
-        $debates = Debate::select('meeting_hall_program_debates.*')
-            ->join('meeting_hall_programs', 'meeting_hall_program_debates.program_id', '=', 'meeting_hall_programs.id')
-            ->join('meeting_halls', 'meeting_hall_programs.hall_id', '=', 'meeting_halls.id')
-            ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
-            ->where('meetings.id', $this->getkey());
-        return $debates;
     }
 
     public function programChairs()

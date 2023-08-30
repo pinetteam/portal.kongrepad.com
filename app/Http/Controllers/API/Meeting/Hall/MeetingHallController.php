@@ -16,15 +16,6 @@ class MeetingHallController extends Controller
 
         return $request->user()->meeting->halls()->findOrFail($meeting_hall_id) ;
     }
-    public function active_document(Request $request, string $meeting_id, string $id)
-    {
-        $meeting_hall =  $request->user()->meeting->halls()->where('meeting_id',$meeting_id)->where("meeting_halls.id",$id)->first();
-        $document = $meeting_hall->programSessions()->where('is_started', 1)->first()->document;
-        if($document)
-            return storage_path('app/documents/'.$document->file_name.'.'.$document->file_extension);
-        else
-            return "";
-    }
     public function active_keypad(Request $request, string $id)
     {
         $meeting_hall =  $request->user()->meeting->halls()->where("meeting_halls.id",$id)->first();
