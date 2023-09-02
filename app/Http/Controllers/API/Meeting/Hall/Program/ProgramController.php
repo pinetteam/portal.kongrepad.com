@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\Meeting\Hall\Program;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\API\Meeting\Hall\Program\ProgramResource;
+use App\Http\Resources\API\Meeting\Hall\Program\Session\SessionResource;
 use Illuminate\Http\Request;
 
 class ProgramController extends Controller
@@ -16,7 +17,7 @@ class ProgramController extends Controller
             'errors' => null
         ];
     }
-    public function show(Request $request,string $id)
+    public function show(Request $request, int $id)
     {
         return [
         'data' => new ProgramResource($request->user()->meeting->programs()->findOrFail($id)),

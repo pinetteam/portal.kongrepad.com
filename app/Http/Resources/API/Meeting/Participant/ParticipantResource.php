@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\Portal\Meeting\Participant;
+namespace App\Http\Resources\API\Meeting\Participant;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -10,20 +10,21 @@ class ParticipantResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'meeting_id' => ['value' => $this->meeting_id, 'type' => 'hidden'],
-            'username' => ['value' => $this->username, 'type' => 'text'],
-            'title' => ['value' => $this->title, 'type' => 'text'],
-            'first_name' => ['value' => $this->first_name, 'type' => 'text'],
-            'last_name' => ['value' => $this->last_name, 'type' => 'text'],
-            'identification_number' => ['value' => $this->identification_number, 'type' => 'text'],
-            'organisation' => ['value' => $this->organisation, 'type' => 'text'],
-            'email' => ['value' => $this->email, 'type' => 'email'],
-            'phone_country_id' => ['value' => $this->phone_country_id, 'type' => 'select'],
-            'phone' => ['value' => $this->phone, 'type' => 'text'],
-            'password' => ['value' => $this->password, 'type' => 'text'],
-            'type' => ['value' => $this->type, 'type' => 'select'],
-            'status' => ['value' => $this->status, 'type' => 'radio'],
-            'route' => route('portal.meeting.participant.update', ['meeting' => $this->meeting_id, 'participant' => $this->id]),
-        ];
+            'id' => $this->id,
+            'meeting_id' => $this->meeting_id,
+            'username' => $this->username,
+            'title' => $this->title,
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
+            'full_name' => $this->full_name,
+            'identification_number' => $this->identification_number,
+            'organisation' => $this->organisation,
+            'email' => $this->email,
+            'phone_country_id' => $this->phone_country_id,
+            'phone' => $this->phone,
+            'password' => $this->password,
+            'type' => $this->type,
+            'status' => $this->status,
+            ];
     }
 }

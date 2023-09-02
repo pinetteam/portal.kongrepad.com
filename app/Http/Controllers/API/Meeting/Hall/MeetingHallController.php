@@ -3,18 +3,27 @@
 namespace App\Http\Controllers\API\Meeting\Hall;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\API\Meeting\Hall\HallResource;
 use Illuminate\Http\Request;
 
 class MeetingHallController extends Controller
 {
     public function index(Request $request)
     {
-        return $request->user()->meeting->halls()->get();
+        return [
+            'data' => HallResource::collection($request->user()->meeting->halls()->get()),
+            'status' => true,
+            'errors' => null
+        ];
     }
-    public function show(Request $request, string $meeting_id, string $meeting_hall_id)
+    public function show(Request $request, int $id)
     {
 
-        return $request->user()->meeting->halls()->findOrFail($meeting_hall_id) ;
+        return [
+            'data' => new HallResource($request->user()->meeting->halls()->findOrFail($id)),
+            'status' => true,
+            'errors' => null
+        ];
     }
     public function active_keypad(Request $request, string $id)
     {

@@ -18,9 +18,11 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('v1')->name('api.v1.')->group(function () {
     Route::post('/auth/login/participant', [\App\Http\Controllers\API\Auth\LoginController::class, 'participant'])->name('auth.login.participant');
     Route::group(["middleware" => ['auth:sanctum']], function () {
+        Route::resource('/participant', \App\Http\Controllers\API\Meeting\Participant\ParticipantController::class)->only(['index']);
         Route::resource('/meeting', \App\Http\Controllers\API\Meeting\MeetingController::class)->except(['create']);
         Route::resource('/hall', \App\Http\Controllers\API\Meeting\Hall\MeetingHallController::class)->except(['create']);
         Route::resource('/program', \App\Http\Controllers\API\Meeting\Hall\Program\ProgramController::class)->except(['create']);
+        Route::resource('/program/{program}/session', \App\Http\Controllers\API\Meeting\Hall\Program\Session\ProgramSessionController::class)->except(['create']);
         Route::resource('/survey', \App\Http\Controllers\API\Meeting\Survey\SurveyController::class)->except(['create']);
         Route::resource('/virtual-stand', \App\Http\Controllers\API\Meeting\VirtualStand\VirtualStandController::class)->except(['create']);
         Route::resource('/announcement', \App\Http\Controllers\API\Meeting\Announcement\AnnouncementController::class)->except(['create']);
@@ -35,6 +37,5 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
         Route::resource('/program/{program_id}/session', \App\Http\Controllers\API\Meeting\Hall\Program\Session\ProgramSessionController::class)->except(['create']);
         Route::resource('/program/{program_id}/debate', \App\Http\Controllers\API\Meeting\Hall\Program\Debate\DebateController::class)->except(['create']);
         Route::resource('/hall/{meeting_hall_id}/session-question', \App\Http\Controllers\API\Meeting\Hall\Program\Session\Question\QuestionController::class)->except(['create']);*/
-        Route::get('participant', [\App\Http\Controllers\API\Participant\ParticipantController::class, 'index'])->name('participant.index');
-    });
+        });
 });
