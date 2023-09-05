@@ -10,6 +10,7 @@ class HallResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this->id,
             'meeting_id' => $this->meeting_id,
             'code' => $this->code,
             'title' => $this->title,

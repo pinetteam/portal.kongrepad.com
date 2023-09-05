@@ -11,6 +11,7 @@ use App\Models\Meeting\Hall\Program\Program;
 use App\Models\Meeting\Hall\Program\Session\Keypad\Keypad;
 use App\Models\Meeting\Hall\Program\Session\Session;
 use App\Models\Meeting\Participant\Participant;
+use App\Models\Meeting\ScoreGame\QRCode\QRCode;
 use App\Models\Meeting\ScoreGame\ScoreGame;
 use App\Models\Meeting\Survey\Survey;
 use App\Models\Meeting\VirtualStand\VirtualStand;
@@ -124,6 +125,15 @@ class Meeting extends Model
             ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
             ->where('meetings.id', $this->getkey());
         return $program_sessions;
+    }
+
+    public function qrCodes()
+    {
+        $qr_codes = QRCode::select('meeting_score_game_qr_codes.*')
+            ->join('meeting_score_games', 'meeting_score_game_qr_codes.score_game_id', '=', 'meeting_score_games.id')
+            ->join('meetings', 'meeting_score_games.meeting_id', '=', 'meetings.id')
+            ->where('meetings.id', $this->getkey());
+        return $qr_codes;
     }
     public function debates()
     {

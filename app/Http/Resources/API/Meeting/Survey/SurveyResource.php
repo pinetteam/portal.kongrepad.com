@@ -11,6 +11,7 @@ class SurveyResource extends JsonResource
     {
         return [
             'sort_order' => $this->sort_order,
+            'id' => $this->id,
             'meeting_id' => $this->meeting_id,
             'title' => $this->title,
             'description' => $this->description,

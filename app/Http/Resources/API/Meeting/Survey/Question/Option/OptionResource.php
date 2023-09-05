@@ -12,6 +12,7 @@ class OptionResource extends JsonResource
         return [
             'sort_order' => $this->sort_order,
             'survey_id' => $this->survey_id,
+            'id' => $this->id,
             'question_id' => $this->question_id,
             'option' => $this->option,
             'status' => $this->status,

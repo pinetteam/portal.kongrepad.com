@@ -14,6 +14,7 @@ class AnnouncementResource extends JsonResource
             'meeting_id' => $this->meeting_id,
             'title' => $this->title,
             'status' => $this->status,
+            'created_at' => $this->created_at,
             ];
     }
 }
