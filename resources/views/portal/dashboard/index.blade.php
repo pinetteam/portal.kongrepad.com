@@ -251,68 +251,68 @@
                                          <div class="row row-cols-1 row-cols-sm-1 row-cols-md-3 row-cols-xs-1 g-2">
                                              <div class="col border-2">
                                                  <a class="text-white link-underline-dark" href="{{ route('portal.survey-report.index') }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
-                                                                <span>
-                                                                    <div class="card-body p-0 shadow">
-                                                                        <div class="table-responsive">
-                                                                            <table class="table table-dark table-borderless">
-                                                                                <tbody>
-                                                                                <tr>
-                                                                                    <td class="text-center">{{ __('common.survey') }}</td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td class="text-center">
-                                                                                        <h3>{{ $meeting->surveys()->where('meeting_surveys.on_vote','1')->count() }}</h3>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                </tbody>
-                                                                            </table>
-                                                                        </div>
-                                                                    </div>
-                                                                </span>
+                                                     <span>
+                                                         <div class="card-body p-0 shadow">
+                                                             <div class="table-responsive">
+                                                                 <table class="table table-dark table-borderless">
+                                                                     <tbody>
+                                                                        <tr>
+                                                                            <td class="text-center">{{ __('common.survey') }}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td class="text-center">
+                                                                                <h3>{{ $meeting->surveys()->where('meeting_surveys.on_vote','1')->count() }}</h3>
+                                                                            </td>
+                                                                        </tr>
+                                                                     </tbody>
+                                                                 </table>
+                                                             </div>
+                                                         </div>
+                                                     </span>
                                                  </a>
                                              </div>
                                              <div class="col border-2">
                                                  <a class="text-white link-underline-dark" href="{{ route('portal.debate-report.index') }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
-                                                                <span>
-                                                                    <div class="card-body p-0 shadow">
-                                                                        <div class="table-responsive">
-                                                                            <table class="table table-dark table-borderless">
-                                                                                <tbody>
-                                                                                <tr>
-                                                                                    <td class="text-center">{{ __('common.debate') }}</td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td class="text-center">
+                                                     <span>
+                                                         <div class="card-body p-0 shadow">
+                                                             <div class="table-responsive">
+                                                                 <table class="table table-dark table-borderless">
+                                                                     <tbody>
+                                                                        <tr>
+                                                                            <td class="text-center">{{ __('common.debate') }}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td class="text-center">
                                                                                         <h3>{{$meeting->debates()->where('meeting_hall_program_debates.on_vote','1')->count()}}</h3>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                </tbody>
-                                                                            </table>
-                                                                        </div>
-                                                                    </div>
-                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                     </tbody>
+                                                                 </table>
+                                                             </div>
+                                                         </div>
+                                                     </span>
                                                  </a>
                                              </div>
                                              <div class="col border-2">
                                                  <a class="text-white link-underline-dark" href="{{ route('portal.keypad-report.index') }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
-                                                                <span>
-                                                                    <div class="card-body p-0 shadow">
-                                                                        <div class="table-responsive">
-                                                                            <table class="table table-dark table-borderless">
-                                                                                <tbody>
-                                                                                <tr>
-                                                                                    <td class="text-center">{{ __('common.keypad') }}</td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td class="text-center">
+                                                     <span>
+                                                         <div class="card-body p-0 shadow">
+                                                             <div class="table-responsive">
+                                                                 <table class="table table-dark table-borderless">
+                                                                     <tbody>
+                                                                        <tr>
+                                                                         <td class="text-center">{{ __('common.keypad') }}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td class="text-center">
                                                                                         <h3>{{$meeting->keypads()->where('meeting_hall_program_session_keypads.on_vote','1')->count()}}</h3>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                </tbody>
-                                                                            </table>
-                                                                        </div>
-                                                                    </div>
-                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                     </tbody>
+                                                                 </table>
+                                                             </div>
+                                                         </div>
+                                                     </span>
                                                  </a>
                                              </div>
                                          </div>
