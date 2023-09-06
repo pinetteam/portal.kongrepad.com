@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Resources\Portal\Meeting\Survey\Question;
+namespace App\Http\Resources\API\Meeting\Survey\Question;
 
+use App\Http\Resources\API\Meeting\Survey\Question\Option\OptionResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -10,11 +11,12 @@ class QuestionResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'survey_id' => ['value' => $this->survey_id, 'type' => 'hidden'],
-            'sort_order' => ['value'=>$this->sort_order, 'type' => 'number'],
-            'question' => ['value'=>$this->question, 'type' => 'text'],
-            'status' => ['value' => $this->status, 'type' => 'radio'],
-            'route' => route('portal.meeting.survey.question.update', [$this->survey->meeting_id, $this->survey_id, $this->id]),
-        ];
+            'id' => $this->id,
+            'survey_id' => $this->survey_id,
+            'sort_order' => $this->sort_order,
+            'question' => $this->question,
+            'options' => OptionResource::collection($this->options),
+            'status' => $this->status,
+            ];
     }
 }

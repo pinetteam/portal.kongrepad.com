@@ -3,16 +3,25 @@
 namespace App\Http\Controllers\API\Meeting\Hall\Program\Session;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\API\Meeting\Hall\Program\Session\SessionResource;
 use Illuminate\Http\Request;
 
 class ProgramSessionController extends Controller
 {
-    public function index(Request $request, $program_id){
-        return $request->user()->meeting->programs()->where('meeting_hall_programs.id', $program_id)->first()->programSessions()->get();
+    public function index(Request $request, int $program){
+        return [
+            'data' => SessionResource::collection($request->user()->meeting->programs()->findOrFail($program)->sessions),
+            'status' => true,
+            'errors' => null
+        ];
     }
-    public function show(Request $request, string $program_id, string $id)
+    public function show(Request $request, int $program, int $id)
     {
-        $request->user()->customer->programSessions()->where('meeting_hall_program_sessions.id', $id)->first();
+        return [
+            'data' => new SessionResource($request->user()->meeting->programs()->findOrFail($program)->sessions->findOrFail($id)),
+            'status' => true,
+            'errors' => null
+        ];
 
     }
 }

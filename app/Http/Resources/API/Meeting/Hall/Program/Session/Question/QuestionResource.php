@@ -10,13 +10,12 @@ class QuestionResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'survey_id' => ['value'=>$this->survey_id, 'type'=>'hidden'],
-            'owner_id' => ['value'=>$this->survey_id, 'type'=>'hidden'],
-            'sort_order' => ['value'=>$this->sort_order, 'type'=>'number'],
-            'title' => ['value'=>$this->title, 'type'=>'text'],
-            'on_screen' => ['value'=>$this->status, 'type'=>'radio'],
-            'status' => ['value'=>$this->status, 'type'=>'radio'],
-            'route' => route('portal.session-question.update', $this->id),
+            'survey_id' => $this->survey_id,
+            'owner_id' => $this->survey_id,
+            'sort_order' => $this->sort_order,
+            'title' => $this->title,
+            'on_screen' => $this->on_screen,
+            'status' => $this->status,
         ];
     }
 }

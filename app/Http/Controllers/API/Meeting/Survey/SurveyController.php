@@ -3,16 +3,25 @@
 namespace App\Http\Controllers\API\Meeting\Survey;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\API\Meeting\Survey\SurveyResource;
 use Illuminate\Http\Request;
 
 class SurveyController extends Controller
 {
     public function index(Request $request)
     {
-        return $request->user()->meeting->surveys()->get();
+        return [
+            'data' => SurveyResource::collection( $request->user()->meeting->surveys()->get()),
+            'status' => true,
+            'errors' => null
+        ];
     }
     public function show(Request $request, string $id)
     {
-        return $request->user()->meeting->surveys()->where('meeting_surveys.id',$id)->first();
+        return [
+            'data' => new SurveyResource( $request->user()->meeting->surveys()->findOrFail($id)),
+            'status' => true,
+            'errors' => null
+        ];
     }
 }
