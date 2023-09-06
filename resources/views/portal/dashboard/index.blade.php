@@ -248,7 +248,7 @@
                                  <div class="card-body mb-3">
                                      <h4 class="pb-3 text-white text-center">{{ __('common.on-vote') }}</h4>
                                      <div class="container text-center">
-                                         <div class="row row-cols-3">
+                                         <div class="row row-cols-1 row-cols-sm-1 row-cols-md-3 row-cols-xs-1 g-2">
                                              <div class="col border-2">
                                                  <a class="text-white link-underline-dark" href="{{ route('portal.survey-report.index') }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
                                                                 <span>
