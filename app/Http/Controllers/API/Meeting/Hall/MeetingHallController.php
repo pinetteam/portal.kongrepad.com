@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API\Meeting\Hall;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\API\Meeting\Document\DocumentResource;
 use App\Http\Resources\API\Meeting\Hall\HallResource;
+use App\Http\Resources\API\Meeting\Hall\Program\Debate\DebateResource;
+use App\Http\Resources\API\Meeting\Hall\Program\Session\Keypad\KeypadResource;
 use Illuminate\Http\Request;
 
 class MeetingHallController extends Controller
@@ -30,10 +32,35 @@ class MeetingHallController extends Controller
     {
         $meeting_hall =  $request->user()->meeting->halls()->where("meeting_halls.id",$id)->first();
         $keypad = $meeting_hall->programSessions()->where('is_started', 1)->first()->keypads()->where('on_vote', 1)->first();
-        if($keypad)
-            return $keypad;
-        else
-            return "";
+        $result = [];
+        if(isset($keypad)) {
+            $result['data'] = new KeypadResource($keypad);
+            $result['status'] = true;
+            $result['errors'] = null;
+        }
+        else{
+            $result['data'] = null;
+            $result['status'] = false;
+            $result['errors'] = [__('common.there-is-not-active-keypad')];
+        }
+        return $result;
+    }
+    public function active_debate(Request $request, int $id)
+    {
+        $meeting_hall =  $request->user()->meeting->halls()->where("meeting_halls.id",$id)->first();
+        $debate = $meeting_hall->debates()->where('on_vote', 1)->first();
+        $result = [];
+        if(isset($debate)) {
+            $result['data'] = new DebateResource($debate);
+            $result['status'] = true;
+            $result['errors'] = null;
+        }
+        else{
+            $result['data'] = null;
+            $result['status'] = false;
+            $result['errors'] = [__('common.there-is-not-active-keypad')];
+        }
+        return $result;
     }
     public function active_document(Request $request, int $id)
     {

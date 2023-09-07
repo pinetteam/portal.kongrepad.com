@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\API\Meeting\Hall\Program\Debate;
 
+use App\Http\Resources\API\Meeting\Hall\Program\Debate\Team\TeamResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -16,6 +17,7 @@ class DebateResource extends JsonResource
             'code' => $this->code,
             'title' => $this->title,
             'description' => $this->description,
+            'teams' => TeamResource::collection($this->teams),
             'voting_started_at' => $this->voting_started_at,
             'voting_finished_at' => $this->voting_finished_at,
             'on_vote' => $this->on_vote,

@@ -16,6 +16,7 @@ use App\Models\Meeting\ScoreGame\ScoreGame;
 use App\Models\Meeting\Survey\Survey;
 use App\Models\Meeting\VirtualStand\VirtualStand;
 use App\Models\System\Setting\Variable\Variable;
+use App\Models\User\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
@@ -60,7 +61,7 @@ class Meeting extends Model
     protected $perPage = 30;
     protected function startAt(): Attribute
     {
-        $date_format = Variable::where('variable', 'date_format')->first()->settings()->where('customer_id', Auth::user()->customer->id ?? 1)->first()->value;
+        $date_format = Variable::where('variable', 'date_format')->first()->settings()->where('customer_id', Auth::user()->customer->id ?? User::first()->id)->first()->value;
         return Attribute::make(
             get: fn($startAt) => $startAt ? Carbon::createFromFormat('Y-m-d', $startAt)->format($date_format) : __('common.unspecified'),
             set: fn($startAt) => $startAt ? Carbon::createFromFormat($date_format, $startAt)->format('Y-m-d') : null,
@@ -68,7 +69,7 @@ class Meeting extends Model
     }
     protected function finishAt(): Attribute
     {
-        $date_format = Variable::where('variable', 'date_format')->first()->settings()->where('customer_id', Auth::user()->customer->id ?? 1)->first()->value;
+        $date_format = Variable::where('variable', 'date_format')->first()->settings()->where('customer_id', Auth::user()->customer->id ?? User::first()->id)->first()->value;
         return Attribute::make(
             get: fn($finishAt) => $finishAt ? Carbon::createFromFormat('Y-m-d', $finishAt)->format($date_format) : __('common.unspecified'),
             set: fn($finishAt) => $finishAt ? Carbon::createFromFormat($date_format, $finishAt)->format('Y-m-d') : null,

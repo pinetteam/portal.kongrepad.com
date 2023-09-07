@@ -70,7 +70,7 @@ class DebateController extends Controller
             return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();
         }
     }
-    /*public function start_stop_voting(int $meeting, int $hall, int $program, int $id)
+    public function start_stop_voting(int $meeting, int $hall, int $program, int $id)
     {
         $program = Auth::user()->customer->programs()->findOrFail($program);
         foreach($program->debates as $debate){
@@ -97,5 +97,5 @@ class DebateController extends Controller
         } else {
             return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
         }
-    }*/
+    }
 }

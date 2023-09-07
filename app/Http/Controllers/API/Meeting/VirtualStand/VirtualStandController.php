@@ -11,7 +11,7 @@ class VirtualStandController extends Controller
     public function index(Request $request)
     {
         return [
-            'data' => VirtualStandResource::collection($request->user()->meeting->virtualStands()->get()),
+            'data' => VirtualStandResource::collection($request->user()->meeting->virtualStands()->get())->shuffle(),
             'status' => true,
             'errors' => null
         ];

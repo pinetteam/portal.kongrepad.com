@@ -17,6 +17,7 @@ class SurveyResource extends JsonResource
             'description' => $this->description,
             'start_at' => $this->start_at,
             'finish_at' => $this->finish_at,
+            'is_completed' => $this->votes->where('participant_id', $request->user()->id)->count() > 0 ? true : false,
             'status' => $this->status,
         ];
     }

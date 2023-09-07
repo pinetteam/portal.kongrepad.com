@@ -11,7 +11,7 @@ class SurveyController extends Controller
     public function index(Request $request)
     {
         return [
-            'data' => SurveyResource::collection( $request->user()->meeting->surveys()->get()),
+            'data' => SurveyResource::collection( $request->user()->meeting->surveys()->get())->additional(['some_id => 1']),
             'status' => true,
             'errors' => null
         ];

@@ -3,7 +3,12 @@
 namespace App\Models\Meeting\ScoreGame\Point;
 
 use App\Models\Meeting\ScoreGame\QRCode\QRCode;
+use App\Models\System\Setting\Variable\Variable;
+use App\Models\User\User;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Point extends Model
 {
@@ -21,6 +26,15 @@ class Point extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+    protected function createdAt(): Attribute
+    {
+        $date_time_format = Variable::where('variable', 'date_time_format')->first()->settings()->where('customer_id', Auth::user()->customer->id ?? User::first()->id)->first()->value;
+
+        return Attribute::make(
+            get: fn (string $createdAt) => Carbon::createFromFormat('Y-m-d H:i:s', $createdAt)->format($date_time_format),
+            set: fn (string $createdAt) => Carbon::createFromFormat($date_time_format, $createdAt)->format('Y-m-d H:i:s'),
+        );
+    }
 
     public function qrCode()
     {

@@ -360,7 +360,7 @@
                                                     <td>{{ $debate->title }}</td>
                                                     <td>{{ $debate->description }}</td>
                                                     <td>
-                                                        <a href =""  title="{{ __('common.start-stop') }}" data-bs-toggle="modal" data-bs-target="#start-debate-confirmation-modal" data-route="{{ route('portal.debate.start-stop-voting', ['program_id' => $program->id, 'debate' => $debate->id]) }}" data-record="{{ $debate->title }}" data-start-stop="{{ $debate->on_vote }}">
+                                                        <a href =""  title="{{ __('common.start-stop') }}" data-bs-toggle="modal" data-bs-target="#start-debate-confirmation-modal" data-route="{{ route('portal.meeting.hall.program.debate.start-stop-voting', ['meeting' => $meeting_hall->meeting_id, 'hall' => $meeting_hall->id, 'program' => $program->id, 'debate' => $debate->id]) }}" data-record="{{ $debate->title }}" data-start-stop="{{ $debate->on_vote }}">
                                                             @if($debate->on_vote)
                                                             <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
                                                             @else

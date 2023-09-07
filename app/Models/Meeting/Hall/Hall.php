@@ -2,6 +2,7 @@
 
 namespace App\Models\Meeting\Hall;
 
+use App\Models\Meeting\Hall\Program\Debate\Debate;
 use App\Models\Meeting\Hall\Program\Program;
 use App\Models\Meeting\Hall\Program\Session\Session;
 use App\Models\Meeting\Hall\Screen\Screen;
@@ -50,5 +51,9 @@ class Hall extends Model
     public function programSessions()
     {
         return $this->hasManyThrough(Session::class, Program::class, 'hall_id', 'program_id', 'id');
+    }
+    public function debates()
+    {
+        return $this->hasManyThrough(Debate::class, Program::class, 'hall_id', 'program_id', 'id');
     }
 }
