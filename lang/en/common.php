@@ -255,4 +255,6 @@ return [
     'screen-event' => 'Screen Event',
     'questions-event' => 'Questions Event',
     'questions-screen' => 'Questions Screen',
+    'date' => 'Date',
+    'requested-documents' => 'Requested Documents',
 ];

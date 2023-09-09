@@ -31,6 +31,7 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
         Route::resource('/document', \App\Http\Controllers\API\Meeting\Document\DocumentController::class)->except(['create']);
         Route::resource('/survey/{survey}/question', \App\Http\Controllers\API\Meeting\Survey\Question\QuestionController::class)->except(['create']);
         Route::resource('/survey/{survey}/vote', \App\Http\Controllers\API\Meeting\Survey\Vote\VoteController::class)->only(['store']);
+        Route::resource('/mail', \App\Http\Controllers\API\Meeting\Document\Mail\MailController::class)->only(['store']);
         Route::resource('/keypad/{keypad}/keypad-vote', \App\Http\Controllers\API\Meeting\Hall\Program\Session\Keypad\Vote\VoteController::class)->only(['store']);
         Route::resource('/debate/{debate}/debate-vote', \App\Http\Controllers\API\Meeting\Hall\Program\Debate\Vote\VoteController::class)->only(['store']);
         Route::get('/hall/{meeting_hall_id}/active-keypad', [\App\Http\Controllers\API\Meeting\Hall\MeetingHallController::class, 'active_keypad']);

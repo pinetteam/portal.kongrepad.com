@@ -30,7 +30,6 @@
                                     <th scope="col"><span class="fa-regular fa-messages-question mx-1"></span> {{ __('common.question-title') }}</th>
                                     <th scope="col"><span class="fa-regular fa-presentation-screen mx-1"></span> {{ __('common.on-screen') }}</th>
                                     <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}</th>
-                                    <th scope="col" class="text-end"></th>
                                 </tr>
                                 </thead>
 
@@ -46,15 +45,6 @@
                                                     <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
                                                 @endif
                                             </a>
-                                        </td>
-                                        <td class="text-end">
-                                            <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
-                                                <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
-                                                    <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#question-delete-modal" data-route="{{ route('portal.meeting.hall.program.session.question.destroy',['meeting'=>$session->program->hall->meeting_id, 'hall'=>$session->program->hall_id, 'program'=>$session->program_id, 'session'=> $session->id, 'question'=> $question->id,]) }}" data-record="{{ $question->question }}">
-                                                        <span class="fa-regular fa-trash"></span>
-                                                    </button>
-                                                </div>
-                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach

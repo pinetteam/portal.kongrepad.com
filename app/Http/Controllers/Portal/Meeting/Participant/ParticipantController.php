@@ -60,7 +60,11 @@ class ParticipantController extends Controller
     {
         $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
         $participant = $meeting->participants()->findOrFail($id);
-        return view('portal.meeting.participant.show', compact(['meeting', 'participant']));
+        $survey_votes = \App\Models\Meeting\Survey\Vote\Vote::where('participant_id', $participant->id)->groupBy('survey_id')->get();
+        $debate_votes = \App\Models\Meeting\Hall\Program\Debate\Vote\Vote::where('participant_id', $participant->id)->groupBy('debate_id')->get();
+        $keypad_votes = \App\Models\Meeting\Hall\Program\Session\Keypad\Vote\Vote::where('participant_id', $participant->id)->groupBy('keypad_id')->get();
+        $requested_documents = \App\Models\Meeting\Document\Mail\Mail::where('participant_id', $participant->id)->groupBy('document_id')->get();
+        return view('portal.meeting.participant.show', compact(['debate_votes', 'keypad_votes', 'meeting', 'participant', 'requested_documents', 'survey_votes']));
     }
     public function edit(int $meeting, int $id)
     {

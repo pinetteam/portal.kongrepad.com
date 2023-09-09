@@ -1,23 +1,22 @@
 <?php
 
-namespace App\Models\Meeting\ScoreGame\Point;
+namespace App\Models\Meeting\Document\Mail;
 
 use App\Models\Customer\Customer;
-use App\Models\Meeting\ScoreGame\QRCode\QRCode;
+use App\Models\Meeting\Document\Document;
+use App\Models\Meeting\Participant\Participant;
 use App\Models\System\Setting\Variable\Variable;
-use App\Models\User\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
-class Point extends Model
+class Mail extends Model
 {
-    protected $table = 'meeting_score_game_points';
+    protected $table = 'meeting_document_mails';
     protected $fillable = [
-        'qr_code_id',
+        'document_id',
         'participant_id',
-        'point',
     ];
     protected $dates = [
         'created_at',
@@ -32,13 +31,16 @@ class Point extends Model
         $date_time_format = Variable::where('variable', 'date_time_format')->first()->settings()->where('customer_id', Auth::user()->customer->id ?? Customer::first()->id)->first()->value;
 
         return Attribute::make(
-            get: fn (string $createdAt) => Carbon::createFromFormat('Y-m-d H:i:s', $createdAt)->format($date_time_format),
-            set: fn (string $createdAt) => Carbon::createFromFormat($date_time_format, $createdAt)->format('Y-m-d H:i:s'),
-        );
+            get: fn ($createdAt) => $createdAt ? Carbon::createFromFormat('Y-m-d H:i:s', $createdAt)->format($date_time_format) : null,
+            );
     }
-
-    public function qrCode()
+    public function document()
     {
-        return $this->belongsTo(QRCode::class, 'qr_code_id', 'id');
+        return $this->belongsTo(Document::class, 'document_id', 'id');
+    }
+    public function participant()
+    {
+        return $this->belongsTo(Participant::class, 'participant_id', 'id');
     }
 }
+

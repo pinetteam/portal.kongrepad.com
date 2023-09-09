@@ -2,6 +2,7 @@
 
 namespace App\Models\Meeting\Announcement;
 
+use App\Models\Customer\Customer;
 use App\Models\Meeting\Meeting;
 use App\Models\System\Setting\Variable\Variable;
 use App\Models\User\User;
@@ -38,7 +39,7 @@ class Announcement extends Model
     ];
     protected function createdAt(): Attribute
     {
-        $date_time_format = Variable::where('variable', 'date_time_format')->first()->settings()->where('customer_id', Auth::user()->customer->id ?? User::first()->id)->first()->value;
+        $date_time_format = Variable::where('variable', 'date_time_format')->first()->settings()->where('customer_id', Auth::user()->customer->id ?? Customer::first()->id)->first()->value;
 
         return Attribute::make(
             get: fn (string $createdAt) => Carbon::createFromFormat('Y-m-d H:i:s', $createdAt)->format($date_time_format),
