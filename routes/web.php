@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/', function () {
+    return view('home.index');
+});
 Route::get('/service/screen/speaker/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\SpeakerController::class, 'index'])->name('service.screen.speaker.index');
 Route::get('/service/screen/speaker/event/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\SpeakerController::class, 'start'])->name('service.screen.speaker.start');
 
