@@ -16,6 +16,8 @@ class MeetingResource extends JsonResource
             'banner_extension' => $this->banner_extension,
             'start_at' => $this->start_at,
             'finish_at' => $this->finish_at,
+            'hall_count' => $this->halls->count(),
+            'first_hall_id' => $this->halls->first()->id,
             'status' => $this->status,
         ];
     }

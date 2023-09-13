@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\API\Meeting\Hall\Program\Session;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -18,8 +19,8 @@ class SessionResource extends JsonResource
             'code' => $this->code,
             'title' => $this->title,
             'description' => $this->description,
-            'start_at' => $this->start_at,
-            'finish_at' => $this->finish_at,
+            'start_at' => Carbon::parse($this->start_at)->format('H:i'),
+            'finish_at' => Carbon::parse($this->finish_at)->format('H:i'),
             'on_air' => $this->on_air,
             'questions_allowed' => $this->questions_allowed,
             'questions_limit' => $this->questions_limit,

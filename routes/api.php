@@ -37,6 +37,7 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
         Route::get('/hall/{meeting_hall_id}/active-keypad', [\App\Http\Controllers\API\Meeting\Hall\MeetingHallController::class, 'active_keypad']);
         Route::get('/hall/{meeting_hall_id}/active-debate', [\App\Http\Controllers\API\Meeting\Hall\MeetingHallController::class, 'active_debate']);
         Route::get('/hall/{meeting_hall_id}/active-document', [\App\Http\Controllers\API\Meeting\Hall\MeetingHallController::class, 'active_document']);
+        Route::get('/hall/{meeting_hall_id}/active-session', [\App\Http\Controllers\API\Meeting\Hall\MeetingHallController::class, 'active_session']);
         Route::resource('/keypad', \App\Http\Controllers\API\Meeting\Hall\Program\Session\Keypad\KeypadController::class)->except(['create']);
         Route::resource('/hall/{hall}/session-question', \App\Http\Controllers\API\Meeting\Hall\Program\Session\Question\QuestionController::class)->except(['create']);
         });

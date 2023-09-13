@@ -33,8 +33,7 @@ class Point extends Model
 
         return Attribute::make(
             get: fn (string $createdAt) => Carbon::createFromFormat('Y-m-d H:i:s', $createdAt)->format($date_time_format),
-            set: fn (string $createdAt) => Carbon::createFromFormat($date_time_format, $createdAt)->format('Y-m-d H:i:s'),
-        );
+            );
     }
 
     public function qrCode()
