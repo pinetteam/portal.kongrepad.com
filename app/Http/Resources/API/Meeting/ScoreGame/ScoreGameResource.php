@@ -14,6 +14,7 @@ class ScoreGameResource extends JsonResource
             'meeting_id' => $this->meeting_id,
             'title' => $this->title,
             'logo' => $this->logo,
+            'total_point' => intval($this->qrCodes()->sum('point')),
             'start_at' => $this->start_at,
             'finish_at' => $this->finish_at,
             'status' => $this->status,

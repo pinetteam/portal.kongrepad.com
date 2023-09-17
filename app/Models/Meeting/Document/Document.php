@@ -2,6 +2,7 @@
 
 namespace App\Models\Meeting\Document;
 
+use App\Models\Meeting\Hall\Program\Session\Session;
 use App\Models\User\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -38,5 +39,10 @@ class Document extends Model
     public function getCreatedByNameAttribute()
     {
         return isset($this->created_by) ? User::findOrFail($this->created_by)->full_name : __('common.unspecified');
+    }
+
+    public function sessions()
+    {
+        return $this->hasMany(Session::class, 'document_id', 'id');
     }
 }

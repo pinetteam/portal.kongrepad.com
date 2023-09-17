@@ -18,6 +18,7 @@ class SessionResource extends JsonResource
             'document_id' => $this->document_id,
             'code' => $this->code,
             'title' => $this->title,
+            'speaker_name' => $this->speaker->full_name,
             'description' => $this->description,
             'start_at' => Carbon::parse($this->start_at)->format('H:i'),
             'finish_at' => Carbon::parse($this->finish_at)->format('H:i'),

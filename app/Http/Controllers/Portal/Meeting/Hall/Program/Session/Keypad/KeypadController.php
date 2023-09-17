@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Portal\Meeting\Hall\Program\Session\Keypad;
 
+use App\Events\KeypadEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Portal\Meeting\Hall\Program\Session\Keypad\KeypadRequest;
 use App\Http\Resources\Portal\Meeting\Hall\Program\Session\Keypad\KeypadResource;
@@ -68,6 +69,7 @@ class KeypadController extends Controller
     public function start_stop_voting(int $meeting, int $hall, int $program, int $session, int $id)
     {
         $session = Auth::user()->customer->programSessions()->findOrFail($session);
+        $hall = Auth::user()->customer->halls()->findOrFail($hall);
         foreach($session->keypads as $keypad){
             if($keypad->id == $id)
                 continue;
@@ -78,6 +80,7 @@ class KeypadController extends Controller
         $keypad = Auth::user()->customer->keypads()->findOrFail($id);
         $keypad->on_vote = !$keypad->on_vote;
         if ($keypad->save()) {
+            event(new KeypadEvent($hall));
             if($keypad->on_vote){
                 $keypad->voting_started_at = now()->format('Y-m-d H:i');;
                 $keypad->voting_finished_at = null;

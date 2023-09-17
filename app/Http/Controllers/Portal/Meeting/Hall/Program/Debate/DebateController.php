@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Portal\Meeting\Hall\Program\Debate;
 
+use App\Events\DebateEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Portal\Meeting\Hall\Program\Debate\DebateRequest;
 use App\Http\Resources\Portal\Meeting\Hall\Program\Debate\DebateResource;
@@ -83,6 +84,7 @@ class DebateController extends Controller
         $debate = Auth::user()->customer->debates()->findOrFail($id);
         $debate->on_vote = !$debate->on_vote;
         if ($debate->save()) {
+            event(new DebateEvent($hall));
             if($debate->on_vote){
                 $debate->voting_started_at = now()->format('Y-m-d H:i');;
                 $debate->voting_finished_at = null;

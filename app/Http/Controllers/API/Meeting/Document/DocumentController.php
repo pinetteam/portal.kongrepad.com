@@ -18,6 +18,6 @@ class DocumentController extends Controller
     }
     public function show(Request $request, string $id)
     {
-        return $request->user()->meeting->virtualStands()->where('meeting_virtual_stands.id',$id)->first();
+        return $request->user()->meeting->documents()->where('meeting_documents.id',$id)->first()->mails()->count();
     }
 }
