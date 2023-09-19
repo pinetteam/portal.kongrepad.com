@@ -33,13 +33,12 @@ class MeetingHallController extends Controller
     {
         $meeting_hall =  $request->user()->meeting->halls()->where("meeting_halls.id", $id)->first();
         $session = $meeting_hall->programSessions()->where('on_air', 1)->first();
-        if(isset($session))
-            $keypad = $session->keypads()->where('on_vote', 1)->first();
-        else {
+        if(!isset($session)){
             $result['data'] = null;
             $result['status'] = false;
             $result['errors'] = [__('common.there-is-not-active-session')];
         }
+        $keypad = $session->keypads()->where('on_vote', 1)->first();
         $result = [];
         if(isset($keypad)) {
             $result['data'] = new KeypadResource($keypad);

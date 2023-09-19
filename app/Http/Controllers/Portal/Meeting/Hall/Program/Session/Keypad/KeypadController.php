@@ -80,7 +80,7 @@ class KeypadController extends Controller
         $keypad = Auth::user()->customer->keypads()->findOrFail($id);
         $keypad->on_vote = !$keypad->on_vote;
         if ($keypad->save()) {
-            event(new KeypadEvent($hall));
+            event(new KeypadEvent(hall: $hall, on_vote: $keypad->on_vote));
             if($keypad->on_vote){
                 $keypad->voting_started_at = now()->format('Y-m-d H:i');;
                 $keypad->voting_finished_at = null;

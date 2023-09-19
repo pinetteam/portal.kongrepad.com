@@ -84,7 +84,7 @@ class DebateController extends Controller
         $debate = Auth::user()->customer->debates()->findOrFail($id);
         $debate->on_vote = !$debate->on_vote;
         if ($debate->save()) {
-            event(new DebateEvent($hall));
+            event(new DebateEvent($hall, $debate->on_vote));
             if($debate->on_vote){
                 $debate->voting_started_at = now()->format('Y-m-d H:i');;
                 $debate->voting_finished_at = null;

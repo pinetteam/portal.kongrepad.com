@@ -12,10 +12,12 @@ class KeypadEvent implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $hall;
+    public $on_vote;
 
-    public function __construct($hall)
+    public function __construct($hall, $on_vote)
     {
         $this->hall = $hall;
+        $this->on_vote = $on_vote;
     }
 
     public function broadcastOn()
@@ -33,6 +35,7 @@ class KeypadEvent implements ShouldBroadcast
     public function broadcastWith () {
         return [
             'hall_id' => $this->hall->id,
+            'on_vote' => $this->on_vote,
         ];
     }
 }
