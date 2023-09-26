@@ -72,6 +72,15 @@
                                 </div>
                             </div>
                         </td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
+                                    <a class="btn btn-info btn-sm" href="{{ route("portal.keypad-report.question.chart",['keypad_id'=>$keypad->id]) }}" title="{{ __('common.show-report') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
+                                        <span class="fa-regular fa-eye">
+                                            <h7>Show Chart</h7>
+                                        </span>
+                                    </a>
+                                </div>
+                            </td>
                         </tr>
                         </tbody>
                     @endforeach

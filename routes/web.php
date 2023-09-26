@@ -46,7 +46,9 @@ Route::prefix('portal')->name('portal.')->group(function () {
         Route::resource('/survey-report', \App\Http\Controllers\Portal\Report\Survey\SurveyReportController::class)->except(['create']);
         Route::get('/survey-report/{survey_id}/question/{question_id}/chart',[\App\Http\Controllers\Portal\Report\Survey\SurveyReportController::class, 'showChart'])->name('survey-report.question.chart');
         Route::resource('/keypad-report', \App\Http\Controllers\Portal\Report\Keypad\KeypadReportController::class)->except(['create']);
+        Route::get('/keypad-report/{keypad_id}/chart',[\App\Http\Controllers\Portal\Report\Keypad\KeypadReportController::class, 'showChart'])->name('keypad-report.question.chart');
         Route::resource('/debate-report', \App\Http\Controllers\Portal\Report\Debate\DebateReportController::class)->except(['create']);
+        Route::get('/debate-report/{debate_id}/chart',[\App\Http\Controllers\Portal\Report\Debate\DebateReportController::class, 'showChart'])->name('debate-report.debate.chart');
 
         /* Meeting routes */
         Route::resource('/meeting', \App\Http\Controllers\Portal\Meeting\MeetingController::class)->except(['create']);

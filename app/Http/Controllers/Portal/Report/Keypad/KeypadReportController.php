@@ -36,4 +36,16 @@ class KeypadReportController extends Controller
         $data['chart_data'] = json_encode($data);
         return view('portal.report.keypad-report.show', $data ,compact(['options','question']) );
     }
+    public function showChart(string $keypad)
+    {
+        $question = Auth::user()->customer->keypads()->findOrFail($keypad);
+        $options = $question->options()->where('keypad_id', $keypad)->paginate(20);
+        $data = [];
+        foreach($options as $option) {
+            $data['label'][] = $option->option;
+            $data['data'][] = (int) $option->votes->count();
+        }
+        $data['chart_data'] = json_encode($data);
+        return view('portal.report.keypad-report.chart.index', $data ,compact(['options','question']) );
+    }
 }

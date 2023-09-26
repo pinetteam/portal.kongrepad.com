@@ -53,18 +53,12 @@
             </div>
         </div>
     </div>
-
-    <div class="card text-bg-dark">
-        <div class="card-header">
-            <h1 class="m-0 text-center"></h1>
-        </div>
+    <div class="card text-bg-dark mt-2">
         <div class="card-body">
-            <div class="row row-cols-1 row-cols-sm-4 flex-shrink-0 g-4">
-                <div class="col card text-bg-dark p-0">
-                    <div class="card-header">
-                        <h2 class="m-0 text-center h3">{{ __('common.surveys') }}</h2>
-                    </div>
-                    <div class="card-body p-0">
+            <div class="row row-cols-1 row-cols-sm-2 g-4 row-gap-2">
+                <div class="col border-5 border-dark card text-bg-dark p-2 shadow">
+                    <h2 class="m-0 text-center h3">{{ __('common.surveys') }}</h2>
+                    <div class="card-body p-0 ">
                         <table class="table table-dark table-striped table-hover">
                             <thead class="thead-dark">
                             <tr>
@@ -83,10 +77,8 @@
                         </table>
                     </div>
                 </div>
-                <div class="col card text-bg-dark p-0">
-                    <div class="card-header">
-                        <h2 class="m-0 text-center h3">{{ __('common.debates') }}</h2>
-                    </div>
+                <div class="col border-5 border-dark card text-bg-dark p-2 shadow">
+                    <h2 class="m-0 text-center h3">{{ __('common.debates') }}</h2>
                     <div class="card-body p-0">
                         <div class="table-responsive">
                             <table class="table table-dark table-striped table-hover">
@@ -111,10 +103,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col card text-bg-dark p-0">
-                    <div class="card-header">
-                        <h2 class="m-0 text-center h3">{{ __('common.keypads') }}</h2>
-                    </div>
+                <div class="col border-5 border-dark card text-bg-dark p-2 shadow">
+                    <h2 class="m-0 text-center h3">{{ __('common.keypads') }}</h2>
                     <div class="card-body p-0">
                         <table class="table table-dark table-striped table-hover">
                             <thead class="thead-dark">
@@ -136,10 +126,8 @@
                         </table>
                     </div>
                 </div>
-                <div class="col card text-bg-dark p-0">
-                    <div class="card-header">
-                        <h2 class="m-0 text-center h3">{{ __('common.requested-documents') }}</h2>
-                    </div>
+                <div class="col border-5 border-dark card text-bg-dark p-2 shadow">
+                    <h2 class="m-0 text-center h3">{{ __('common.requested-documents') }}</h2>
                     <div class="card-body p-0">
                         <div class="table-responsive">
                             <table class="table table-dark table-striped table-hover">
