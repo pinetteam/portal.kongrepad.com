@@ -251,4 +251,7 @@ return [
     'welcome' => 'Hoşgeldiniz',
     'date' => 'Tarih',
     'requested-documents' => 'İstenen Dökümanlar',
+    'anonymous' => 'Anonim',
+    'selected_questions' => 'Seçili Sorular',
+    'questioner' => 'Soruyu Soran',
 ];

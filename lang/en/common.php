@@ -258,4 +258,7 @@ return [
     'welcome' => 'Welcome',
     'date' => 'Date',
     'requested-documents' => 'Requested Documents',
+    'anonymous' => 'Anonymous',
+    'selected_questions' => 'Selected Questions',
+    'questioner' => 'Questioner',
 ];

@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Portal\Meeting\Hall\Program\Session\Question;
 
+use App\Events\Service\Screen\QuestionsEvent;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Portal\Meeting\Hall\Program\Session\Question\QuestionRequest;
-use App\Models\Meeting\Hall\Program\Session\Question\Question;
 use Illuminate\Support\Facades\Auth;
 
 class QuestionController extends Controller
@@ -25,13 +24,16 @@ class QuestionController extends Controller
     {
         $question = Auth::user()->customer->sessionQuestions()->findOrFail($id);
         $session = Auth::user()->customer->programSessions()->findOrFail($question->session_id);
-        if(!$question->selected_for_show && $session->questions()->where('selected_for_show',1)->count() >= $session->questions_limit){
+        $hall = $session->program->hall;
+        if(!$question->selected_for_show && $session->questions()->where('selected_for_show', true)->count() >= $session->questions_limit){
             return back()->with('error', __('common.you-have-reached-the-question-limit'));
         }
         $question->selected_for_show = !$question->selected_for_show;
         if (!$question->save()) {
-            return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
+            return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();
         } else {
+            $meeting_hall_screen = $hall->screens()->where('type', 'questions')->first();
+            event(new QuestionsEvent($meeting_hall_screen));
             return back();
         }
     }

@@ -73,14 +73,12 @@ class Debate extends Model
     {
         return $this->belongsTo(Program::class, 'program_id', 'id');
     }
-
-    public function votes()
-    {
-        return $this->hasManyThrough(Vote::class, Team::class, 'debate_id', 'team_id', 'id', 'id');
-
-    }
     public function teams()
     {
         return $this->hasMany(Team::class, 'debate_id', 'id');
+    }
+    public function votes()
+    {
+        return $this->hasMany(Vote::class, 'debate_id', 'id');
     }
 }

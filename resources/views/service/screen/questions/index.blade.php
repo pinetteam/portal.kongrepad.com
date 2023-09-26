@@ -17,7 +17,7 @@
                     var questionsHTML = '<hr />';
                     questions.forEach(function(question) {
                         questionsHTML += question.question;
-                        if(question.is_hidden_name === false) {
+                        if(question.is_hidden_name) {
                             questionsHTML += ' | <small>' + question.questioner.first_name + ' ' + question.questioner.last_name + '</small>';
                         }
                         questionsHTML += '<hr />';
@@ -37,12 +37,12 @@
 </div>
 @if($questions)
     <h1 class="text-white text-center w-100" id="questions" style="font-size: 72px">
-        <hr />
+        <hr/>
         @foreach($questions as $question)
             {{ $question->question }}
-                @if(!$question->is_hidden_name)
-                    | <small>{{ $question->questioner->last_name }} {{ $question->questioner->last_name }}</small>
-                @endif
+            @if($question->is_hidden_name)
+                | <small>{{ $question->questioner->full_name }}</small>
+            @endif
             <hr />
         @endforeach
     </h1>
