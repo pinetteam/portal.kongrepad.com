@@ -17,8 +17,10 @@
                     var questionsHTML = '<hr />';
                     questions.forEach(function(question) {
                         questionsHTML += question.question;
-                        if(question.is_hidden_name) {
+                        if(!question.is_hidden_name) {
                             questionsHTML += ' | <small>' + question.questioner.first_name + ' ' + question.questioner.last_name + '</small>';
+                        } else {
+                            questionsHTML += '| <small>Anonim</small>'
                         }
                         questionsHTML += '<hr />';
                     });
@@ -40,8 +42,10 @@
         <hr/>
         @foreach($questions as $question)
             {{ $question->question }}
-            @if($question->is_hidden_name)
+            @if(!$question->is_hidden_name)
                 | <small>{{ $question->questioner->full_name }}</small>
+            @else
+                | <small>Anonim</small>
             @endif
             <hr />
         @endforeach

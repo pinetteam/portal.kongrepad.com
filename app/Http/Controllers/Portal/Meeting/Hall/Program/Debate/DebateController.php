@@ -74,6 +74,7 @@ class DebateController extends Controller
     public function start_stop_voting(int $meeting, int $hall, int $program, int $id)
     {
         $program = Auth::user()->customer->programs()->findOrFail($program);
+        $hall = Auth::user()->customer->halls()->findOrFail($hall);
         foreach($program->debates as $debate){
             if($debate->id == $id)
                 continue;

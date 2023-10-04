@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Service;
 
+use App\Events\Service\Screen\ChairEvent;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,6 +25,10 @@ class OperatorBoardController extends Controller
             $program = $programs->get($program_order);
             $program->is_started = 1;
             $program->save();
+        }
+        $meeting_hall_screens = $meeting_hall->screens()->where('type', 'chair')->get();
+        foreach ($meeting_hall_screens as $screen){
+            event(new ChairEvent($screen));
         }
         if($program->type == 'session'){
             $chairs = Auth::user()->customer->participants()->whereNotIn('meeting_participants.id', $program->programChairs()->pluck('meeting_hall_program_chairs.chair_id'))->whereNot('meeting_participants.type', 'team')->get();

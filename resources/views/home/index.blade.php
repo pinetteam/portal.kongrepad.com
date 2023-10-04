@@ -32,14 +32,14 @@
                                             <div class="col">
                                                 <div class="card bg-dark border-dark">
                                                     <div class="card-body">
-                                                        <img class="img-responsive" style= "height: 490px; width: 260px" src="{{ asset('storage/images/homepage.png') }}">
+                                                        <img class="img-responsive" style= "height: 490px; width: 260px" src="{{ asset('storage/homepage/homepage.png') }}">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="card bg-dark border-dark">
                                                     <div class="card-body">
-                                                        <img class="img-responsive" style= "height: 500px; width: 280px" src="{{ asset('storage/images/dashboard.png') }}">
+                                                        <img class="img-responsive" style= "height: 500px; width: 280px" src="{{ asset('storage/homepage/dashboard.png') }}">
                                                     </div>
                                                 </div>
                                             </div>

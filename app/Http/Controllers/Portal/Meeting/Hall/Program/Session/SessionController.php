@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Portal\Meeting\Hall\Program\Session;
 
+use App\Events\Service\Screen\SpeakerEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Portal\Meeting\Hall\Program\Session\SessionRequest;
 use App\Http\Resources\Portal\Meeting\Hall\Program\Session\SessionResource;
@@ -97,6 +98,8 @@ class SessionController extends Controller
         $program_session = Auth::user()->customer->programSessions()->findOrFail($id);
         $program_session->on_air = !$program_session->on_air;
         if ($program_session->save()) {
+            $meeting_hall_screen = $meeting_hall->screens()->where('type', 'speaker')->first();
+            event(new SpeakerEvent($meeting_hall_screen));
             if($program_session->on_air)
                 return back()->with('success', __('common.session-started'));
             else
