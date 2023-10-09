@@ -41,26 +41,5 @@ class UserRoleSeeder extends Seeder
                 'status' => 1,
             ],
         ]);
-
-        Role::insert([
-            [
-                'customer_id' => 2,
-                'title' => 'Manager',
-                'routes' => json_encode($routes),
-                'status' => 1,
-            ],
-            [
-                'customer_id' => 2,
-                'title' => 'Operator',
-                'routes' => json_encode($routes),
-                'status' => 1,
-            ],
-            [
-                'customer_id' => 2,
-                'title' => 'User',
-                'routes' => json_encode($routes),
-                'status' => 1,
-            ],
-        ]);
     }
 }

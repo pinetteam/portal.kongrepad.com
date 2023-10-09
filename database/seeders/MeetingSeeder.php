@@ -14,69 +14,12 @@ class MeetingSeeder extends Seeder
     {
         Meeting::insert([
             [
-                'customer_id' => '1',
-                'code' => 'iok-2020',
-                'title' => 'IOK 2020',
-                'start_at' => '2020-01-01',
-                'finish_at' => '2020-12-31',
-                'status' => 1,
-            ],
-            [
-                'customer_id' => '1',
-                'code' => 'iok-2021',
-                'title' => 'IOK 2021',
-                'start_at' => '2021-01-01',
-                'finish_at' => '2021-12-31',
-                'status' => 1,
-            ],
-            [
-                'customer_id' => '1',
-                'code' => 'iok-2022',
-                'title' => 'IOK 2022',
-                'start_at' => '2022-01-01',
-                'finish_at' => '2022-12-31',
-                'status' => 1,
-            ],
-            [
+                'id' => '4',
                 'customer_id' => '1',
                 'code' => 'iok-2023',
                 'title' => 'IOK 2023',
-                'start_at' => '2023-01-01',
-                'finish_at' => '2023-12-31',
-                'status' => 1,
-            ],
-        ]);
-        Meeting::insert([
-            [
-                'customer_id' => '2',
-                'code' => 'pnk-2020',
-                'title' => 'PNK 2020',
-                'start_at' => '2020-01-01',
-                'finish_at' => '2020-12-31',
-                'status' => 1,
-            ],
-            [
-                'customer_id' => '2',
-                'code' => 'pnk-2021',
-                'title' => 'PNK 2021',
-                'start_at' => '2021-01-01',
-                'finish_at' => '2021-12-31',
-                'status' => 1,
-            ],
-            [
-                'customer_id' => '2',
-                'code' => 'pnk-2022',
-                'title' => 'PNK 2022',
-                'start_at' => '2022-01-01',
-                'finish_at' => '2022-12-31',
-                'status' => 1,
-            ],
-            [
-                'customer_id' => '2',
-                'code' => 'pnk-2023',
-                'title' => 'PNK 2023',
-                'start_at' => '2023-01-01',
-                'finish_at' => '2023-12-31',
+                'start_at' => '2023-11-01',
+                'finish_at' => '2023-11-05',
                 'status' => 1,
             ],
         ]);

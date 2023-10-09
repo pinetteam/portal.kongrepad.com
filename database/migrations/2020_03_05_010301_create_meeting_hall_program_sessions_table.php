@@ -13,7 +13,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedInteger('sort_order')->nullable();
             $table->unsignedBigInteger('program_id')->index();
-            $table->unsignedBigInteger('speaker_id')->index();
+            $table->unsignedBigInteger('speaker_id')->index()->nullable();
             $table->unsignedBigInteger('document_id')->index()->nullable();
             $table->string('code', 255)->nullable();
             $table->string('title', 511);

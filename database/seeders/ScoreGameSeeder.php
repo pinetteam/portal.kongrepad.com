@@ -16,7 +16,7 @@ class ScoreGameSeeder extends Seeder
     {
         ScoreGame::insert([
             [
-                'meeting_id' => '3',
+                'meeting_id' => '4',
                 'start_at' => '2022-10-22 09:00',
                 'finish_at' => '2022-10-22 09:15',
                 'title' => 'Pfizer',

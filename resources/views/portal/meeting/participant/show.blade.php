@@ -53,7 +53,7 @@
             </div>
         </div>
     </div>
-    <div class="card text-bg-dark mt-2">
+    <div class="card text-bg-dark mt-1">
         <div class="card-body">
             <div class="row row-cols-1 row-cols-sm-2 g-4 row-gap-2">
                 <div class="col border-5 border-dark card text-bg-dark p-2 shadow">

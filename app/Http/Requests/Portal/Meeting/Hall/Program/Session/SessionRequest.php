@@ -20,7 +20,7 @@ class SessionRequest extends FormRequest
                 return [
                     'sort_order' => 'nullable|integer',
                     'program_id' => 'required|exists:meeting_hall_programs,id',
-                    'speaker_id' => 'required|exists:meeting_participants,id',
+                    'speaker_id' => 'nullable|exists:meeting_participants,id',
                     'document_id' => 'nullable|exists:meeting_documents,id',
                     'code' => 'nullable|max:255',
                     'title' => 'required|max:255',

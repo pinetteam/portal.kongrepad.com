@@ -111,7 +111,13 @@
                                             <tbody>
                                             @foreach($program->sessions()->get() as $program_session)
                                                 <tr>
-                                                    <td>{{ $program_session->speaker->full_name }}</td>
+                                                    <td>
+                                                        @if($program_session->speaker)
+                                                            {{ $program_session->speaker->full_name }}
+                                                        @else
+                                                            <i class="text-info">{{ __('common.unspecified') }}</i>
+                                                        @endif
+                                                    </td>
                                                     <td>
                                                         @if($program_session->document_id)
                                                             <a href="{{ route('portal.meeting.document.download', ['meeting' => $program->hall->meeting_id, 'document' => $program_session->document_id] ) }}" class="btn btn-sm btn-info w-100" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.view') }}">

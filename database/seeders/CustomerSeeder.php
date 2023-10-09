@@ -21,12 +21,6 @@ class CustomerSeeder extends Seeder
                 'language' => 'en',
                 'status' => '1',
             ],
-            [
-                'code' => 'pievent',
-                'title' => 'Pi-Event',
-                'language' => 'tr',
-                'status' => '1',
-            ],
         ]);
     }
 }

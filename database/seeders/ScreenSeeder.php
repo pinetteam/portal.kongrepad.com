@@ -17,7 +17,7 @@ class ScreenSeeder extends Seeder
     {
         Screen::insert([
             [
-                'hall_id' => '5',
+                'hall_id' => '3',
                 'code' => Str::uuid()->toString(),
                 'title' => 'Chair 1 Screen',
                 'description' => 'Chair 1 Screen',
@@ -25,7 +25,7 @@ class ScreenSeeder extends Seeder
                 'status' => 1,
             ],
             [
-                'hall_id' => '5',
+                'hall_id' => '3',
                 'code' => Str::uuid()->toString(),
                 'title' => 'Chair 2 Screen',
                 'description' => 'Chair 2 Screen',
@@ -33,7 +33,7 @@ class ScreenSeeder extends Seeder
                 'status' => 1,
             ],
             [
-                'hall_id' => '5',
+                'hall_id' => '3',
                 'code' => Str::uuid()->toString(),
                 'title' => 'Chair 3 Screen',
                 'description' => 'Chair 3 Screen',
@@ -41,7 +41,7 @@ class ScreenSeeder extends Seeder
                 'status' => 1,
             ],
             [
-                'hall_id' => '5',
+                'hall_id' => '3',
                 'code' => Str::uuid()->toString(),
                 'title' => 'Document Screen',
                 'description' => 'Document Screen',
@@ -49,7 +49,7 @@ class ScreenSeeder extends Seeder
                 'status' => 1,
             ],
             [
-                'hall_id' => '5',
+                'hall_id' => '3',
                 'code' => Str::uuid()->toString(),
                 'title' => 'Questions Screen',
                 'description' => 'Questions Screen',
@@ -57,7 +57,7 @@ class ScreenSeeder extends Seeder
                 'status' => 1,
             ],
             [
-                'hall_id' => '5',
+                'hall_id' => '3',
                 'code' => Str::uuid()->toString(),
                 'title' => 'Speaker Screen',
                 'description' => 'Speaker Screen',
