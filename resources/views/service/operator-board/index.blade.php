@@ -126,7 +126,12 @@
                                                                 @endif
                                                         </a>
                                                     </td>
-                                                    <td>{{ $session->speaker->full_name }}</td>
+                                                    <td>
+                                                        @if($session->speaker_id)
+                                                        {{ $session->speaker->full_name }}</td>
+                                                        @else
+                                                        <i class="text-info">{{ __('common.unspecified') }}</i>
+                                                        @endif
                                                     <td>
                                                         @if($session->document_id)
                                                             <a href="{{ route('portal.meeting.document.download', ['meeting' => $program->hall->meeting_id, 'document' => $session->document->file_name]) }}" class="btn btn-sm btn-info w-100" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.view') }}">

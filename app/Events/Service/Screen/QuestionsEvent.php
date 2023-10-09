@@ -30,7 +30,7 @@ class QuestionsEvent implements ShouldBroadcast
     }
     public function broadcastWith () {
         try {
-            $session = $this->meeting_hall_screen->hall->programs()->where('is_started', true)->first()->sessions->where('on_air', true)->first();
+            $session = $this->meeting_hall_screen->hall->programSessions()->where('on_air', true)->first();
             if($session->questions) {
                 return [
                     'meeting_hall_screen' => $this->meeting_hall_screen,
