@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('meeting_id')->index();
             $table->uuid('file_name')->unique();
             $table->string('file_extension', 31)->nullable();
+            $table->uuid('pdf_name')->unique()->nullable();
             $table->unsignedInteger('file_size')->comment('(kb)')->nullable();
             $table->string('title', 255)->nullable();
             $table->boolean('status')->default(1)->comment('0=passive;1=active');

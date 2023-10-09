@@ -234,7 +234,7 @@ class MeetingParticipantSeeder extends Seeder
         Participant::insert([
             [
                 'meeting_id' => '4',
-                'username' => $username1,
+                'username' => '344c1051-b28a-4934-8159-b12983258f86',
                 'title' => null,
                 'first_name' => "Banu",
                 'last_name' => "Öztürk",

@@ -13,6 +13,10 @@ return new class extends Migration
             $table->unsignedBigInteger('meeting_id')->index();
             $table->string('code', 255)->unique();
             $table->string('title', 511);
+            $table->boolean('show_on_session')->default(1)->comment('0=passive;1=active');
+            $table->boolean('show_on_view_program')->default(1)->comment('0=passive;1=active');
+            $table->boolean('show_on_ask_question')->default(1)->comment('0=passive;1=active');
+            $table->boolean('show_on_send_mail')->default(1)->comment('0=passive;1=active');
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
             $table->unsignedBigInteger('created_by')->index()->nullable();
             $table->unsignedBigInteger('updated_by')->index()->nullable();

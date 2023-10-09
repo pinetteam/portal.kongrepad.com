@@ -44,5 +44,14 @@
                 </div>
             </div>
         </div>
+        <div class="card-body p-0">
+            @if(isset($virtual_stand->pdf_name))
+                <div class="ratio ratio-16x9">
+                    <iframe src="{{ asset('storage/virtual-stand-pdfs/' . $virtual_stand->pdf_name . '.pdf') }}"></iframe>
+                </div>
+            @else
+                <i class="text-info">{{ __('common.unspecified') }}</i>
+            @endif
+        </div>
     </div>
 @endsection

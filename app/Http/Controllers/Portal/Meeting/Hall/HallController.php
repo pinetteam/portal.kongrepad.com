@@ -28,6 +28,10 @@ class HallController extends Controller
             $hall->meeting_id = $meeting;
             $hall->code = Str::uuid()->toString();
             $hall->title = $request->input('title');
+            $hall->show_on_session = $request->input('show_on_session');
+            $hall->show_on_view_program = $request->input('show_on_view_program');
+            $hall->show_on_ask_question = $request->input('show_on_ask_question');
+            $hall->show_on_send_mail = $request->input('show_on_send_mail');
             $hall->status = $request->input('status');
             if ($hall->save()) {
                 $hall->created_by = Auth::user()->id;
@@ -56,6 +60,10 @@ class HallController extends Controller
             $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
             $hall = $meeting->halls()->findOrFail($id);
             $hall->title = $request->input('title');
+            $hall->show_on_session = $request->input('show_on_session');
+            $hall->show_on_view_program = $request->input('show_on_view_program');
+            $hall->show_on_ask_question = $request->input('show_on_ask_question');
+            $hall->show_on_send_mail = $request->input('show_on_send_mail');
             $hall->status = $request->input('status');
             if ($hall->save()) {
                 $hall->updated_by = Auth::user()->id;
@@ -78,23 +86,4 @@ class HallController extends Controller
             return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();
         }
     }
-/*
-    public function current_speaker(string $id)
-    {
-        $hall = Auth::user()->customer->halls()->findOrFail($id);
-        $session = $hall->programSessions()->where('is_started', 1)->first();
-        $speaker = $session && $session->program->on_air && $session ? $session->speaker : null;
-        event(new FormSubmitted('sdsdsd'));
-        return view('portal.current-speaker.show', compact(['speaker']));
-    }
-    public function current_chair(string $id, string $chair_index)
-    {
-        $hall = Auth::user()->customer->halls()->findOrFail($id);
-        $program = $hall->programs()->where('on_air',1)->first();
-        if(isset($program))
-            $chair = $program->programChairs->values()->get($chair_index-1);
-        else
-            $chair = null;
-        return view('portal.program.chair.show', compact(['chair', 'chair_index']));
-    }*/
 }

@@ -22,7 +22,7 @@ class SessionResource extends JsonResource
             'document_sharing_via_email' => $this->document_id ? $this->document->sharing_via_email == 1 : false,
             'code' => $this->code,
             'title' => $this->title,
-            'speaker_name' => $this->speaker->full_name,
+            'speaker_name' => $this->speaker ? $this->speaker->full_name : null,
             'description' => $this->description,
             'start_at' => Carbon::parse($this->start_at)->format('H:i'),
             'finish_at' => Carbon::parse($this->finish_at)->format('H:i'),

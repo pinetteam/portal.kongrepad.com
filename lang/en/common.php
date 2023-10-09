@@ -262,4 +262,9 @@ return [
     'selected_questions' => 'Selected Questions',
     'questioner' => 'Questioner',
     'chair-screen' => 'Chair Screen',
+    'pdf' => 'Pdf',
+    'show-on-session' => 'Show On Session',
+    'show-on-ask-question' => 'Show On Ask Question',
+    'show-on-view-program' => 'Show On View Program',
+    'show-on-send-mail' => 'Show On Send Mail',
 ];

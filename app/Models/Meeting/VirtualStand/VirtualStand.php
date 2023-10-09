@@ -14,6 +14,7 @@ class VirtualStand extends Model
         'meeting_id',
         'file_name',
         'file_extension',
+        'pdf_name',
         'file_size',
         'title',
         'status',

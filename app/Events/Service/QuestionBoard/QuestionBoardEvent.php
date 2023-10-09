@@ -31,8 +31,8 @@ class QuestionBoardEvent implements ShouldBroadcast
             $session = $this->hall->programSessions()->where('on_air', true)->first();
             if($session && $session->questions) {
                 return [
-                    'questions' => $session->questions()->where('selected_for_show', false)->with('questioner')->get(),
-                    'selected_questions' => $session->questions()->where('selected_for_show', true)->with('questioner')->get(),
+                    'questions' => "",
+                    'selected_questions' => "",
                 ];
             } else {
                 return [

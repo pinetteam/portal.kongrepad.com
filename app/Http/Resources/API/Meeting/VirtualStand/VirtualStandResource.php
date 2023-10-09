@@ -15,7 +15,8 @@ class VirtualStandResource extends JsonResource
             'title' => $this->title,
             'file_name' => $this->file_name,
             'file_extension' => $this->file_extension,
+            'pdf_name' => $this->pdf_name,
             'status' => $this->status,
-            ];
+        ];
     }
 }

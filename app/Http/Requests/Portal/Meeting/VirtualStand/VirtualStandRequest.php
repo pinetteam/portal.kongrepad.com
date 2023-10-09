@@ -21,6 +21,7 @@ class VirtualStandRequest extends FormRequest
                 return [
                     'meeting_id' => 'required|exists:meetings,id',
                     'file' => ['required', File::types(['png', 'jpg', 'jpeg'])],
+                    'pdf' => ['nullable', File::types(['pdf'])],
                     'title' => 'required|max:255',
                     'status' => 'required|boolean',
                 ];
@@ -30,6 +31,7 @@ class VirtualStandRequest extends FormRequest
                 return [
                     'meeting_id' => 'required|exists:meetings,id',
                     'file' => ['nullable', File::types(['png', 'jpg', 'jpeg'])],
+                    'pdf' => ['nullable', File::types(['pdf'])],
                     'title' => 'required|max:255',
                     'status' => 'required|boolean',
                 ];

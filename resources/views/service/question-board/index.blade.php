@@ -12,6 +12,7 @@
     <script type="module">
         Echo.channel('service.screen.question-board.{{ $hall->code }}')
             .listen('.question-board-event', data => {
+                location.reload();
                 if(data.questions !== null) {
                     var questions = data.questions;
                     var questionsHTML = '';
@@ -55,7 +56,7 @@
                         <h2 class=" text-center h3">Gelen Sorular</h2>
                     </div>
                     <div class="card-body p-0">
-                        <div class="overflow-scroll h-50">
+                        <div class="overflow-scroll h-100">
                             <table class="table table-dark table-striped table-hover w-100">
                                 <thead class="thead-dark">
                                 <tr>

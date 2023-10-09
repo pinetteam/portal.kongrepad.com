@@ -30,5 +30,31 @@ class MailController extends Controller
             'errors' => null
         ];
     }
+    public function send_all(Request $request){
+        $documents = $request->user()->meeting->documents()->get();
+        foreach ($documents as $document){
+            if(!$document->sharing_via_email)
+                continue;
+            elseif (Mail::where([['participant_id', $request->user()->id], ['document_id', $document->id]])->count() > 0)
+                continue;
+            $mail = new Mail();
+            $mail->document_id = $document->id;
+            $mail->participant_id = $request->user()->id;
+            try{
+                $mail->save();
+            } catch (\Throwable $e){
+                return [
+                    'data' => null,
+                    'status' => false,
+                    'errors' => $e
+                ];
+            }
+        }
+        return [
+            'data' => null,
+            'status' => true,
+            'errors' => null
+        ];
+    }
 }
 

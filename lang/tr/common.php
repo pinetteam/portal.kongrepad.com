@@ -255,4 +255,9 @@ return [
     'selected_questions' => 'Seçili Sorular',
     'questioner' => 'Soruyu Soran',
     'chair-screen' => 'Hakem Ekranı',
+    'pdf' => 'Pdf',
+    'show-on-session' => 'Sunum İzlemede Göster',
+    'show-on-ask-question' => 'Soru Sormada Göster',
+    'show-on-view-program' => 'Bilimsel Programda Göster',
+    'show-on-send-mail' => 'Mail Göndermede Göster',
 ];

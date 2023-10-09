@@ -39,6 +39,14 @@ class VirtualStandController extends Controller
                     return back()->with('create_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
                 }
             }
+            if ($request->hasFile('pdf')) {
+                $pdf_name= Str::uuid()->toString();
+                if(Storage::putFileAs('public/virtual-stand-pdfs', $request->file('pdf'), $pdf_name.'.pdf')) {
+                    $virtual_stand->pdf_name = $pdf_name;
+                } else {
+                    return back()->with('create_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
+                }
+            }
             $virtual_stand->title = $request->input('title');
             $virtual_stand->status = $request->input('status');
             if ($virtual_stand->save()) {
@@ -78,6 +86,14 @@ class VirtualStandController extends Controller
                     $virtual_stand->file_size = $request->file('file')->getSize();
                 } else {
                     return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
+                }
+            }
+            if ($request->hasFile('pdf')) {
+                $pdf_name = Str::uuid()->toString();
+                if(Storage::putFileAs('public/virtual-stand-pdfs', $request->file('pdf'), $pdf_name.'.pdf')) {
+                    $virtual_stand->pdf_name = $pdf_name;
+                } else {
+                    return back()->with('create_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
                 }
             }
             $virtual_stand->title = $request->input('title');

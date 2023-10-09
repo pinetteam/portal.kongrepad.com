@@ -14,6 +14,10 @@
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}</th>
+                            <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.show-on-session') }}</th>
+                            <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.show-on-ask-question') }}</th>
+                            <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.show-on-view-program') }}</th>
+                            <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.show-on-send-mail') }}</th>
                             <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}</th>
                             <th scope="col" class="text-end"></th>
                         </tr>
@@ -22,6 +26,34 @@
                         @foreach($halls as $hall)
                             <tr>
                                 <td>{{ $hall->title }}</td>
+                                <td >
+                                    @if($hall->show_on_session)
+                                        <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
+                                    @else
+                                        <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
+                                    @endif
+                                </td>
+                                <td >
+                                    @if($hall->show_on_ask_question)
+                                        <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
+                                    @else
+                                        <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
+                                    @endif
+                                </td>
+                                <td >
+                                    @if($hall->show_on_view_program)
+                                        <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
+                                    @else
+                                        <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
+                                    @endif
+                                </td>
+                                <td >
+                                    @if($hall->show_on_send_mail)
+                                        <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
+                                    @else
+                                        <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
+                                    @endif
+                                </td>
                                 <td >
                                     @if($hall->status)
                                         <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
@@ -68,6 +100,10 @@
         @section('hall-create-form')
             <x-input.hidden method="c" name="meeting_id" :value="$meeting->id" />
             <x-input.text method="c" name="title" title="title" icon="input-text" />
+            <x-input.radio method="c" name="show_on_session" title="show-on-session" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
+            <x-input.radio method="c" name="show_on_ask_question" title="show-on-ask-question" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
+            <x-input.radio method="c" name="show_on_view_program" title="show-on-view-program" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
+            <x-input.radio method="c" name="show_on_send_mail" title="show-on-send-mail" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
             <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.create>
@@ -76,6 +112,10 @@
         @section('hall-edit-form')
             <x-input.hidden method="e" name="meeting_id" :value="$meeting->id" />
             <x-input.text method="e" name="title" title="title" icon="input-text" />
+            <x-input.radio method="e" name="show_on_session" title="show-on-session" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
+            <x-input.radio method="e" name="show_on_ask_question" title="show-on-ask-question" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
+            <x-input.radio method="e" name="show_on_view_program" title="show-on-view-program" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
+            <x-input.radio method="e" name="show_on_send_mail" title="show-on-send-mail" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
             <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.edit>
