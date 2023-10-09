@@ -54,7 +54,7 @@ class MeetingHallController extends Controller
     }
     public function active_debate(Request $request, int $id)
     {
-        $meeting_hall =  $request->user()->meeting->halls()->where("meeting_halls.id",$id)->first();
+        $meeting_hall =  $request->user()->meeting->halls()->where("meeting_halls.id", $id)->first();
         $debate = $meeting_hall->debates()->where('on_vote', 1)->first();
         $result = [];
         if(isset($debate)) {
@@ -65,7 +65,7 @@ class MeetingHallController extends Controller
         else{
             $result['data'] = null;
             $result['status'] = false;
-            $result['errors'] = [__('common.there-is-not-active-keypad')];
+            $result['errors'] = [__('common.there-is-not-active-debate')];
         }
         return $result;
     }

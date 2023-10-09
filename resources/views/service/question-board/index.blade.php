@@ -22,7 +22,7 @@
                         if(question.is_hidden_name === 0)
                             questionsHTML += '<td>' + question.questioner.first_name + ' ' + question.questioner.last_name + '</td>';
                         else
-                            questionsHTML += '<td></td>';
+                            questionsHTML += '<td>Anonim</td>';
                         questionsHTML += '</tr>';
                     });
                     var selected_questions = data.selected_questions;
@@ -34,7 +34,7 @@
                         if(question.is_hidden_name === 0)
                             selectedQuestionsHTML += '<td>' + question.questioner.first_name + ' ' + question.questioner.last_name + '</td>';
                         else
-                            selectedQuestionsHTML += '<td></td>';
+                            selectedQuestionsHTML += '<td>Anonim</td>';
                         selectedQuestionsHTML += '</tr>';
                     });
                     document.getElementById("questions").innerHTML = questionsHTML;
@@ -45,28 +45,25 @@
             });
     </script>
 </head>
-<body class="d-flex bg-dark h-100 align-items-center">
-    <div class="card text-center text-bg-dark w-100">
-        <div class="card-body">
-            @isset($session)
+<body class="d-flex bg-dark align-items-center">
+<div class="card text-center text-bg-dark w-100">
+    <div class="card-body">
+        @isset($session)
             <div class="row row-cols-1 row-cols-sm-2 flex-shrink-0 g-2">
                 <div class="col card text-bg-dark p-0">
                     <div class="card-header">
-                        <h2 class="m-0 text-center h3">{{ __('common.questions') }}</h2>
+                        <h2 class=" text-center h3">Gelen Sorular</h2>
                     </div>
-
                     <div class="card-body p-0">
-                        <div class="table-responsive">
-                            <table class="table table-dark table-striped table-hover">
-
+                        <div class="overflow-scroll h-50">
+                            <table class="table table-dark table-striped table-hover w-100">
                                 <thead class="thead-dark">
                                 <tr>
-                                    <th scope="col"><span class="fa-regular fa-messages-question mx-1"></span> {{ __('common.question-title') }}</th>
-                                    <th scope="col"><span class="fa-regular fa-presentation-screen mx-1"></span> {{ __('common.on-screen') }}</th>
-                                    <th scope="col"><span class="fa-regular fa-user mx-1"></span> {{ __('common.questioner') }}</th>
+                                    <th scope="col"><span class="fa-regular fa-messages-question mx-1"></span> Soru</th>
+                                    <th scope="col"><span class="fa-regular fa-presentation-screen mx-1"></span> Seç</th>
+                                    <th scope="col"><span class="fa-regular fa-user mx-1"></span> İsim</th>
                                 </tr>
                                 </thead>
-
                                 <tbody id="questions">
                                 @foreach($questions as $question)
                                     <tr>
@@ -83,7 +80,7 @@
                                         @if(!$question->is_hidden_name)
                                             <td>{{$question->questioner->full_name}}</td>
                                         @else
-                                            <td></td>
+                                            <td>Anonim</td>
                                         @endif
                                     </tr>
                                 @endforeach
@@ -94,18 +91,18 @@
                 </div>
                 <div class="col card text-bg-dark p-0">
                     <div class="card-header">
-                        <h2 class="m-0 text-center h3">{{ __('common.selected_questions') }}</h2>
+                        <h2 class="m-0 text-center h3">Seçilen Sorular</h2>
                     </div>
 
                     <div class="card-body p-0">
-                        <div class="table-responsive">
-                            <table class="table table-dark table-striped table-hover">
+                        <div class="overflow-y-visible">
+                            <table class="table table-dark table-striped table-hover w-100">
 
                                 <thead class="thead-dark">
                                 <tr>
-                                    <th scope="col"><span class="fa-regular fa-messages-question mx-1"></span> {{ __('common.question-title') }}</th>
-                                    <th scope="col"><span class="fa-regular fa-presentation-screen mx-1"></span> {{ __('common.on-screen') }}</th>
-                                    <th scope="col"><span class="fa-regular fa-user mx-1"></span> {{ __('common.questioner') }}</th>
+                                    <th scope="col"><span class="fa-regular fa-messages-question mx-1"></span> Soru</th>
+                                    <th scope="col"><span class="fa-regular fa-presentation-screen mx-1"></span> Kaldır</th>
+                                    <th scope="col"><span class="fa-regular fa-user mx-1"></span> İsim</th>
                                 </tr>
                                 </thead>
 
@@ -125,7 +122,7 @@
                                         @if(!$question->is_hidden_name)
                                             <td>{{$question->questioner->full_name}}</td>
                                         @else
-                                            <td></td>
+                                            <td>Anonim</td>
                                         @endif
                                     </tr>
                                 @endforeach
@@ -135,9 +132,9 @@
                     </div>
                 </div>
             </div>
-            @endisset
+        @endisset
     </div>
-    </div>
-    <x-crud.form.common.delete name="question"/>
-    <x-common.popup.default />
+</div>
+<x-crud.form.common.delete name="question"/>
+<x-common.popup.default />
 </body>

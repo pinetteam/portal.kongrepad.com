@@ -75,6 +75,7 @@ class DebateController extends Controller
     {
         $program = Auth::user()->customer->programs()->findOrFail($program);
         $hall = Auth::user()->customer->halls()->findOrFail($hall);
+        event(new DebateEvent($hall, false));
         foreach($program->debates as $debate){
             if($debate->id == $id)
                 continue;

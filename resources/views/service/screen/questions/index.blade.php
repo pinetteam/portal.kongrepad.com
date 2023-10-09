@@ -38,7 +38,7 @@
     </div>
 </div>
 @if($questions)
-    <h1 class="text-white text-center w-100" id="questions" style="font-size: 72px">
+    <h1 class="text-white text-center w-100" id="questions" style="font-size: 36px">
         <hr/>
         @foreach($questions as $question)
             {{ $question->question }}

@@ -70,6 +70,7 @@ class KeypadController extends Controller
     {
         $session = Auth::user()->customer->programSessions()->findOrFail($session);
         $hall = Auth::user()->customer->halls()->findOrFail($hall);
+        event(new KeypadEvent(hall: $hall, on_vote: false));
         foreach($session->keypads as $keypad){
             if($keypad->id == $id)
                 continue;

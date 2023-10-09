@@ -254,4 +254,5 @@ return [
     'anonymous' => 'Anonim',
     'selected_questions' => 'Seçili Sorular',
     'questioner' => 'Soruyu Soran',
+    'chair-screen' => 'Hakem Ekranı',
 ];

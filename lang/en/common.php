@@ -261,4 +261,5 @@ return [
     'anonymous' => 'Anonymous',
     'selected_questions' => 'Selected Questions',
     'questioner' => 'Questioner',
+    'chair-screen' => 'Chair Screen',
 ];

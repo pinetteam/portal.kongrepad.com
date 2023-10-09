@@ -15,7 +15,7 @@ class ProgramController extends Controller
         try{
             $programs = $request->user()->meeting->halls()->findOrFail($hall)->programs()->get();
             $programs = ProgramResource::collection($programs)->groupBy(function($date) {
-                return Carbon::parse($date->start_at)->format('Y-m-d');
+                return Carbon::parse($date->start_at)->translatedFormat('d F l');
             });
             $result = [];
             foreach(json_decode($programs, true) as $key => $val) {

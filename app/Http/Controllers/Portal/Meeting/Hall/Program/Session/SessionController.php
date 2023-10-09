@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Portal\Meeting\Hall\Program\Session;
 
+use App\Events\Service\QuestionBoard\QuestionBoardEvent;
+use App\Events\Service\Screen\QuestionsEvent;
 use App\Events\Service\Screen\SpeakerEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Portal\Meeting\Hall\Program\Session\SessionRequest;
@@ -87,7 +89,6 @@ class SessionController extends Controller
     }
     public function start_stop(int $meeting, int $hall, int $program, int $id)
     {
-        $program = Auth::user()->customer->programs()->findOrFail($program);
         $meeting_hall = Auth::user()->customer->halls()->findOrFail($hall);
         foreach($meeting_hall->programSessions as $session){
             if($session->id == $id)
@@ -100,6 +101,9 @@ class SessionController extends Controller
         if ($program_session->save()) {
             $meeting_hall_screen = $meeting_hall->screens()->where('type', 'speaker')->first();
             event(new SpeakerEvent($meeting_hall_screen));
+            event(new QuestionBoardEvent($meeting_hall));
+            $meeting_hall_screen = $hall->screens()->where('type', 'questions')->first();
+            event(new QuestionsEvent($meeting_hall_screen));
             if($program_session->on_air)
                 return back()->with('success', __('common.session-started'));
             else

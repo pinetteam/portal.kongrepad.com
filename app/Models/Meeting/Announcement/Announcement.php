@@ -42,7 +42,7 @@ class Announcement extends Model
         $date_time_format = Variable::where('variable', 'date_time_format')->first()->settings()->where('customer_id', Auth::user()->customer->id ?? Customer::first()->id)->first()->value;
 
         return Attribute::make(
-            get: fn (string $createdAt) => Carbon::createFromFormat('Y-m-d H:i:s', $createdAt)->format($date_time_format),
+            get: fn ($createdAt) => $createdAt ? Carbon::createFromFormat('Y-m-d H:i:s', $createdAt)->format($date_time_format): null,
         );
     }
     public function getCreatedByNameAttribute()
