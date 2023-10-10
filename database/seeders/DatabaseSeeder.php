@@ -31,5 +31,6 @@ class DatabaseSeeder extends Seeder
         //$this->call(MeetingHallProgramSessionKeypadOptionSeeder::class);
         //$this->call(MeetingHallProgramDebateSeeder::class);
         //$this->call(DebateTeamSeeder::class);
+        $this->call(MeetingHallProgramChairSeeder::class);
     }
 }
