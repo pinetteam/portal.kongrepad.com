@@ -11,8 +11,8 @@ class QuestionBoardController extends Controller
     {
         $hall = Hall::where('code', $code)->first();
         $session = $hall->programSessions()->where('meeting_hall_program_sessions.on_air', 1)->first();
-        $questions = $session ? $session->questions()->where('selected_for_show', false)->get() : null;
-        $selected_questions = $session ? $session->questions()->where('selected_for_show', true)->get() : null;
+        $questions = $session ? $session->questions()->where('selected_for_show', false)->orderBy('created_at', 'desc')->get() : null;
+        $selected_questions = $session ? $session->questions()->where('selected_for_show', true)->orderBy('created_at', 'desc')->get() : null;
         return view('service.question-board.index', compact(['hall', 'session', 'questions', 'selected_questions']));
     }
 }
