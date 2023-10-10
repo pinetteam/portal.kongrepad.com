@@ -45,97 +45,106 @@
                 }
             });
     </script>
+    <style type="text/css">
+        .table-scroll tbody {
+            overflow-y: scroll;
+        }
+        .table-scroll tr {
+            width: 100%;
+            table-layout: fixed;
+            display: inline-table;
+        }
+
+        .table-scroll thead > tr > th {
+            border: none;
+        }
+    </style>
+
 </head>
-<body class="d-flex bg-dark align-items-center">
-<div class="card text-center text-bg-dark w-100">
-    <div class="card-body">
-        @isset($session)
-            <div class="row row-cols-1 row-cols-sm-2 flex-shrink-0 g-2">
-                <div class="col card text-bg-dark p-0">
-                    <div class="card-header">
-                        <h2 class=" text-center h3">Gelen Sorular</h2>
-                    </div>
-                    <div class="card-body p-0">
-                        <div class="overflow-scroll h-100">
-                            <table class="table table-dark table-striped table-hover w-100">
-                                <thead class="thead-dark">
-                                <tr>
-                                    <th scope="col"><span class="fa-regular fa-messages-question mx-1"></span> Soru</th>
-                                    <th scope="col"><span class="fa-regular fa-presentation-screen mx-1"></span> Seç</th>
-                                    <th scope="col"><span class="fa-regular fa-user mx-1"></span> İsim</th>
-                                </tr>
-                                </thead>
-                                <tbody id="questions">
-                                @foreach($questions as $question)
-                                    <tr>
-                                        <td>{{$question->question}}</td>
-                                        <td>
-                                            <a href="{{ route('portal.session-question.on-screen', [$question->id]) }}" title="{{ __('common.on-screen') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.on-screen') }}">
-                                                @if($question->selected_for_show)
-                                                    <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
-                                                @else
-                                                    <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
-                                                @endif
-                                            </a>
-                                        </td>
-                                        @if(!$question->is_hidden_name)
-                                            <td>{{$question->questioner->full_name}}</td>
-                                        @else
-                                            <td>Anonim</td>
-                                        @endif
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="col card text-bg-dark p-0">
-                    <div class="card-header">
-                        <h2 class="m-0 text-center h3">Seçilen Sorular</h2>
-                    </div>
-
-                    <div class="card-body p-0">
-                        <div class="overflow-y-visible">
-                            <table class="table table-dark table-striped table-hover w-100">
-
-                                <thead class="thead-dark">
-                                <tr>
-                                    <th scope="col"><span class="fa-regular fa-messages-question mx-1"></span> Soru</th>
-                                    <th scope="col"><span class="fa-regular fa-presentation-screen mx-1"></span> Kaldır</th>
-                                    <th scope="col"><span class="fa-regular fa-user mx-1"></span> İsim</th>
-                                </tr>
-                                </thead>
-
-                                <tbody id="selected-questions">
-                                @foreach($selected_questions as $question)
-                                    <tr>
-                                        <td>{{$question->question}}</td>
-                                        <td>
-                                            <a href="{{ route('portal.session-question.on-screen', [$question->id]) }}" title="{{ __('common.on-screen') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.on-screen') }}">
-                                                @if($question->selected_for_show)
-                                                    <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
-                                                @else
-                                                    <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
-                                                @endif
-                                            </a>
-                                        </td>
-                                        @if(!$question->is_hidden_name)
-                                            <td>{{$question->questioner->full_name}}</td>
-                                        @else
-                                            <td>Anonim</td>
-                                        @endif
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endisset
+<body class="d-flex bg-dark flex-column h-100">
+<div id="kp-loading" class="d-flex align-items-center justify-content-center">
+    <div class="spinner-grow text-success" role="status">
+        <span class="visually-hidden">{{ __('common.loading') }}</span>
     </div>
 </div>
-<x-crud.form.common.delete name="question"/>
-<x-common.popup.default />
+<div class="container-fluid h-100">
+    @isset($session)
+        <div class="row row-cols-1 row-cols-sm-2 h-100">
+            <div class="col card text-bg-dark p-0 h-100">
+                <div class="card-header">
+                    <h2 class="text-center h3">Gelen Sorular</h2>
+                </div>
+                <div class="card-body d-block p-0 overflow-y-auto h-100">
+                    <table class="table table-dark table-striped table-hover w-100 table-scroll">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col" class="w-75"><span class="fa-regular fa-messages-question mx-1"></span> Soru</th>
+                                <th scope="col"><span class="fa-regular fa-presentation-screen mx-1"></span> Seç</th>
+                                <th scope="col"><span class="fa-regular fa-user mx-1"></span> İsim</th>
+                            </tr>
+                        </thead>
+                        <tbody id="questions" class="h-100">
+                        @foreach($questions as $question)
+                            <tr>
+                                <td class="w-75">{{$question->question}}</td>
+                                <td>
+                                    <a href="{{ route('portal.session-question.on-screen', [$question->id]) }}" title="{{ __('common.on-screen') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.on-screen') }}">
+                                        @if($question->selected_for_show)
+                                            <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
+                                        @else
+                                            <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
+                                        @endif
+                                    </a>
+                                </td>
+                                @if(!$question->is_hidden_name)
+                                    <td>{{$question->questioner->full_name}}</td>
+                                @else
+                                    <td>Anonim</td>
+                                @endif
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col card text-bg-dark p-0 h-100">
+                <div class="card-header">
+                    <h2 class="text-center h3">Seçilen Sorular</h2>
+                </div>
+                <div class="card-body d-block p-0 overflow-y-auto h-100">
+                    <table class="table table-dark table-striped table-hover w-100 table-scroll">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col"><span class="fa-regular fa-messages-question mx-1"></span> Soru</th>
+                            <th scope="col"><span class="fa-regular fa-presentation-screen mx-1"></span> Kaldır</th>
+                            <th scope="col"><span class="fa-regular fa-user mx-1"></span> İsim</th>
+                        </tr>
+                        </thead>
+                        <tbody id="selected-questions" class="h-100">
+                        @foreach($selected_questions as $question)
+                            <tr>
+                                <td class="w-75">{{$question->question}}</td>
+                                <td>
+                                    <a href="{{ route('portal.session-question.on-screen', [$question->id]) }}" title="{{ __('common.on-screen') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.on-screen') }}">
+                                        @if($question->selected_for_show)
+                                            <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
+                                        @else
+                                            <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
+                                        @endif
+                                    </a>
+                                </td>
+                                @if(!$question->is_hidden_name)
+                                    <td>{{$question->questioner->full_name}}</td>
+                                @else
+                                    <td>Anonim</td>
+                                @endif
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    @endisset
+</div>
 </body>

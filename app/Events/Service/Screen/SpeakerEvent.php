@@ -21,7 +21,7 @@ class SpeakerEvent implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new Channel('service.screen.speaker.'. $this->meeting_hall_screen!=null ? $this->meeting_hall_screen->code : ""),
+            new Channel('service.screen.speaker.'.$this->meeting_hall_screen->code),
         ];
     }
     public function broadcastAs(): string
