@@ -84,6 +84,7 @@ class ParticipantController extends Controller
             $participant->organisation = $request->input('organisation');
             $participant->email = $request->input('email');
             $participant->phone_country_id = $request->input('phone_country_id');
+            $participant->type = $request->input('type');
             $participant->phone = $request->input('phone');
             if ($request->has('password')) {
                 $participant->password = $request->input('password');

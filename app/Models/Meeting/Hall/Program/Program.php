@@ -7,6 +7,7 @@ use App\Models\Meeting\Hall\Hall;
 use App\Models\Meeting\Hall\Program\Chair\Chair;
 use App\Models\Meeting\Hall\Program\Debate\Debate;
 use App\Models\Meeting\Hall\Program\Session\Session;
+use App\Models\Meeting\Participant\Participant;
 use App\Models\System\Setting\Variable\Variable;
 use App\Models\User\User;
 use Carbon\Carbon;
@@ -76,6 +77,10 @@ class Program extends Model
     public function programChairs()
     {
         return $this->hasMany(Chair::class, 'program_id', 'id');
+    }
+    public function chairs()
+    {
+        return $this->belongsToMany(Participant::class, 'meeting_hall_program_chairs', 'program_id', 'chair_id');
     }
     public function sessions()
     {

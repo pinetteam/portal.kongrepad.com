@@ -128,6 +128,7 @@
             <x-input.select method="e" name="phone_country_id" title="phone-country" :options="$phone_countries" option_value="id" option_name="name" icon="flag" />
             <x-input.text method="e" name="phone" title="phone" icon="mobile-screen" />
             <x-input.text method="e" name="password" title="password" icon="lock" />
+            <x-input.select method="e" name="type" title="type" :options="$types" option_value="value" option_name="title" icon="person-military-pointing" />
             <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.edit>
