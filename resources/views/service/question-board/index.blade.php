@@ -18,24 +18,24 @@
                     var questionsHTML = '';
                     questions.forEach(function(question) {
                         questionsHTML += '<tr>';
-                        questionsHTML += '<td>' + question.question + '</td>';
-                        questionsHTML += '<td><a href="https://app.kongrepad.com/portal/session-question-on-screen/'+question.id+'"><i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i></a></td>';
+                        questionsHTML += '<td class="w-75">' + question.question + '</td>';
                         if(question.is_hidden_name === 0)
                             questionsHTML += '<td>' + question.questioner.first_name + ' ' + question.questioner.last_name + '</td>';
                         else
                             questionsHTML += '<td>Anonim</td>';
+                        questionsHTML += '<td><a href="https://app.kongrepad.com/portal/session-question-on-screen/'+question.id+'"><i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i></a></td>';
                         questionsHTML += '</tr>';
                     });
                     var selected_questions = data.selected_questions;
                     var selectedQuestionsHTML = '';
                     selected_questions.forEach(function(question) {
                         selectedQuestionsHTML += '<tr>';
-                        selectedQuestionsHTML += '<td>' + question.question + '</td>';
-                        selectedQuestionsHTML += '<td><a href="https://app.kongrepad.com/portal/session-question-on-screen/'+question.id+'"><i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i></a></td>';
+                        selectedQuestionsHTML += '<td class="w-75">' + question.question + '</td>';
                         if(question.is_hidden_name === 0)
                             selectedQuestionsHTML += '<td>' + question.questioner.first_name + ' ' + question.questioner.last_name + '</td>';
                         else
                             selectedQuestionsHTML += '<td>Anonim</td>';
+                        selectedQuestionsHTML += '<td><a href="https://app.kongrepad.com/portal/session-question-on-screen/'+question.id+'"><i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i></a></td>';
                         selectedQuestionsHTML += '</tr>';
                     });
                     document.getElementById("questions").innerHTML = questionsHTML;
@@ -79,14 +79,19 @@
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col" class="w-75"><span class="fa-regular fa-messages-question mx-1"></span> Soru</th>
-                                <th scope="col"><span class="fa-regular fa-presentation-screen mx-1"></span> Seç</th>
                                 <th scope="col"><span class="fa-regular fa-user mx-1"></span> İsim</th>
+                                <th scope="col"><span class="fa-regular fa-presentation-screen mx-1"></span> Seç</th>
                             </tr>
                         </thead>
                         <tbody id="questions" class="h-100">
                         @foreach($questions as $question)
                             <tr>
                                 <td class="w-75">{{$question->question}}</td>
+                                @if(!$question->is_hidden_name)
+                                    <td>{{$question->questioner->full_name}}</td>
+                                @else
+                                    <td>Anonim</td>
+                                @endif
                                 <td>
                                     <a href="{{ route('portal.session-question.on-screen', [$question->id]) }}" title="{{ __('common.on-screen') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.on-screen') }}">
                                         @if($question->selected_for_show)
@@ -96,11 +101,6 @@
                                         @endif
                                     </a>
                                 </td>
-                                @if(!$question->is_hidden_name)
-                                    <td>{{$question->questioner->full_name}}</td>
-                                @else
-                                    <td>Anonim</td>
-                                @endif
                             </tr>
                         @endforeach
                         </tbody>
@@ -115,15 +115,20 @@
                     <table class="table table-dark table-striped table-hover w-100 table-scroll">
                         <thead class="thead-dark">
                         <tr>
-                            <th scope="col"><span class="fa-regular fa-messages-question mx-1"></span> Soru</th>
-                            <th scope="col"><span class="fa-regular fa-presentation-screen mx-1"></span> Kaldır</th>
+                            <th scope="col" class="w-75"><span class="fa-regular fa-messages-question mx-1"></span> Soru</th>
                             <th scope="col"><span class="fa-regular fa-user mx-1"></span> İsim</th>
+                            <th scope="col"><span class="fa-regular fa-presentation-screen mx-1"></span> Kaldır</th>
                         </tr>
                         </thead>
                         <tbody id="selected-questions" class="h-100">
                         @foreach($selected_questions as $question)
                             <tr>
                                 <td class="w-75">{{$question->question}}</td>
+                                @if(!$question->is_hidden_name)
+                                    <td>{{$question->questioner->full_name}}</td>
+                                @else
+                                    <td>Anonim</td>
+                                @endif
                                 <td>
                                     <a href="{{ route('portal.session-question.on-screen', [$question->id]) }}" title="{{ __('common.on-screen') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.on-screen') }}">
                                         @if($question->selected_for_show)
@@ -133,11 +138,6 @@
                                         @endif
                                     </a>
                                 </td>
-                                @if(!$question->is_hidden_name)
-                                    <td>{{$question->questioner->full_name}}</td>
-                                @else
-                                    <td>Anonim</td>
-                                @endif
                             </tr>
                         @endforeach
                         </tbody>
@@ -147,4 +147,5 @@
         </div>
     @endisset
 </div>
+<x-common.popup.default />
 </body>

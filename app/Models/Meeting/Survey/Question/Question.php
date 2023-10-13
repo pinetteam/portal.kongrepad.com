@@ -4,6 +4,7 @@ namespace App\Models\Meeting\Survey\Question;
 
 use App\Models\Meeting\Survey\Question\Option\Option;
 use App\Models\Meeting\Survey\Survey;
+use App\Models\Meeting\Survey\Vote\Vote;
 use App\Models\User\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -42,5 +43,9 @@ class Question extends Model
     public function options()
     {
         return $this->hasMany(Option::class, 'question_id', 'id');
+    }
+    public function votes()
+    {
+        return $this->hasMany(Vote::class, 'question_id', 'id');
     }
 }

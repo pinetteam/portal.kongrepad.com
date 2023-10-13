@@ -38,7 +38,7 @@
     </div>
 </div>
 @if($questions)
-    <h1 class="text-white text-center w-100" id="questions" style="font-size: 36px">
+    <h1 class="text-white text-start w-100 p-5" id="questions" style="font-size: 36px">
         <hr/>
         @foreach($questions as $question)
             {{ $question->question }}
@@ -51,7 +51,7 @@
         @endforeach
     </h1>
 @else
-    <h1 class="text-white text-center w-100" id="questions" style="font-size: 72px">
+    <h1 class="text-white text-start w-100 p-5" id="questions" style="font-size: 72px">
         <div class="spinner-grow text-success text-center" role="status">
             <span class="visually-hidden">{{ __('common.loading') }}</span>
         </div>
