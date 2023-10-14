@@ -267,4 +267,5 @@ return [
     'show-on-ask-question' => 'Show On Ask Question',
     'show-on-view-program' => 'Show On View Program',
     'show-on-send-mail' => 'Show On Send Mail',
+    'allowed-to-review' => 'Allowed To Review',
 ];

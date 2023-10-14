@@ -19,6 +19,7 @@ class DocumentResource extends JsonResource
             'is_requested' => Mail::where([['participant_id', $request->user()->id], ['document_id', $this->id]])->count() > 0,
             'file_name' => $this->file_name,
             'file_extension' => $this->file_extension,
+            'allowed_to_review' => $this->allowed_to_review,
             'sharing_via_email' => $this->sharing_via_email,
             'status' => $this->status,
         ];

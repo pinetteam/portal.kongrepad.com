@@ -10,10 +10,18 @@ class MeetingController extends Controller
 {
     public function index(Request $request)
     {
-        return [
-            'data' => new MeetingResource($request->user()->meeting),
-            'status' => true,
-            'errors' => null
-         ];
+        try {
+            return [
+                'data' => new MeetingResource($request->user()->meeting),
+                'status' => true,
+                'errors' => null
+            ];
+        } catch (\Throwable $e) {
+            return [
+                'data' => new MeetingResource($request->user()->meeting),
+                'status' => false,
+                'errors' => [$e->getMessage()]
+            ];
+        }
     }
 }

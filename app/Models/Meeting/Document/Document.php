@@ -18,6 +18,7 @@ class Document extends Model
         'file_size',
         'title',
         'sharing_via_email',
+        'allowed_to_review',
         'status',
         'created_by',
         'updated_by',

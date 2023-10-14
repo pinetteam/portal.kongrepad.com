@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedInteger('file_size')->comment('(kb)')->nullable();
             $table->string('title', 511)->nullable();
             $table->boolean('sharing_via_email')->default(0)->comment('0=not-allowed;1=allowed');
+            $table->boolean('allowed_to_review')->default(0)->comment('0=not-allowed;1=allowed');
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
             $table->unsignedBigInteger('created_by')->index()->nullable();
             $table->unsignedBigInteger('updated_by')->index()->nullable();

@@ -260,4 +260,5 @@ return [
     'show-on-ask-question' => 'Soru Sormada Göster',
     'show-on-view-program' => 'Bilimsel Programda Göster',
     'show-on-send-mail' => 'Mail Göndermede Göster',
+    'allowed-to-review' => 'Önizlemeye Açık',
 ];

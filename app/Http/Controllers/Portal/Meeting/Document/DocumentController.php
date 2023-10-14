@@ -45,6 +45,7 @@ class DocumentController extends Controller
                 }
             }
             $document->title = $request->input('title');
+            $document->allowed_to_review = $request->input('allowed_to_review');
             $document->sharing_via_email = $request->input('sharing_via_email');
             $document->status = $request->input('status');
             if ($document->save()) {
@@ -86,6 +87,7 @@ class DocumentController extends Controller
                 }
             }
             $document->title = $request->input('title');
+            $document->allowed_to_review = $request->input('allowed_to_review');
             $document->sharing_via_email = $request->input('sharing_via_email');
             $document->status = $request->input('status');
             if ($document->save()) {

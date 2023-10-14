@@ -22,6 +22,7 @@ class DocumentRequest extends FormRequest
                     'meeting_id' => 'required|exists:meetings,id',
                     'file' => ['required', File::types(['pdf', 'pptx', 'ppt', 'ppsx'])->max(10240)],
                     'title' => 'required|max:511',
+                    'allowed_to_review' => 'required|boolean',
                     'sharing_via_email' => 'required|boolean',
                     'status' => 'required|boolean',
                 ];
@@ -32,6 +33,7 @@ class DocumentRequest extends FormRequest
                     'meeting_id' => 'required|exists:meetings,id',
                     'file' => ['nullable', File::types(['pdf', 'pptx', 'ppt', 'ppsx'])->max(10240)],
                     'title' => 'required|max:511',
+                    'allowed_to_review' => 'required|boolean',
                     'sharing_via_email' => 'required|boolean',
                     'status' => 'required|boolean',
                 ];
@@ -45,6 +47,7 @@ class DocumentRequest extends FormRequest
             'meeting_id' => __('common.meeting'),
             'file' => __('common.file'),
             'title' => __('common.title'),
+            'allowed_to_review' => __('common.allowed-to-review'),
             'sharing_via_email' => __('common.sharing-via-email'),
             'status' => __('common.status'),
         ];

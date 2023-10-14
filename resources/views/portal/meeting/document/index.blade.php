@@ -15,6 +15,7 @@
                         <tr>
                             <th scope="col"><span class="fa-regular fa-bee mx-1"></span> {{ __('common.meeting') }}</th>
                             <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}</th>
+                            <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.allowed-to-review') }}</th>
                             <th scope="col"><span class="fa-regular fa-envelope mx-1"></span> {{ __('common.sharing-via-email') }}</th>
                             <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}</th>
                             <th scope="col" class="text-end"></th>
@@ -28,6 +29,13 @@
                                     <a href="{{ route('portal.meeting.document.download', ['meeting' => $meeting->id, 'document' => $document->file_name]) }}" class="btn btn-sm btn-info w-100" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.download') }}">
                                         <span class="fa-regular fa-file-arrow-down"></span> {{ $document->title }}
                                     </a>
+                                </td>
+                                <td>
+                                    @if($document->allowed_to_review)
+                                        <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
+                                    @else
+                                        <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
+                                    @endif
                                 </td>
                                 <td>
                                     @if($document->sharing_via_email)
@@ -77,6 +85,7 @@
             <x-input.hidden method="c" name="meeting_id" :value="$meeting->id" />
             <x-input.file method="c" name="file" title="file" icon="file-import" />
             <x-input.text method="c" name="title" title="title" icon="input-text" />
+            <x-input.radio method="c" name="allowed_to_review" title="allowed-to-review" :options="$sharing_via_emails" option_value="value" option_name="title" icon="envelope" />
             <x-input.radio method="c" name="sharing_via_email" title="sharing-via-email" :options="$sharing_via_emails" option_value="value" option_name="title" icon="envelope" />
             <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
@@ -87,6 +96,7 @@
             <x-input.hidden method="c" name="meeting_id" :value="$meeting->id" />
             <x-input.file method="e" name="file" title="file" icon="file-import" />
             <x-input.text method="e" name="title" title="title" icon="input-text" />
+            <x-input.radio method="e" name="allowed_to_review" title="allowed-to-review" :options="$sharing_via_emails" option_value="value" option_name="title" icon="envelope" />
             <x-input.radio method="e" name="sharing_via_email" title="sharing-via-email" :options="$sharing_via_emails" option_value="value" option_name="title" icon="envelope" />
             <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
