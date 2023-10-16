@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Portal\Meeting\Hall\Program\Session\Keypad\KeypadRequest;
 use App\Http\Resources\Portal\Meeting\Hall\Program\Session\Keypad\KeypadResource;
 use App\Models\Meeting\Hall\Program\Session\Keypad\Keypad;
+use App\Notifications\KeypadNotification;
 use Illuminate\Support\Facades\Auth;
 
 class KeypadController extends Controller
@@ -70,6 +71,7 @@ class KeypadController extends Controller
     {
         $session = Auth::user()->customer->programSessions()->findOrFail($session);
         $hall = Auth::user()->customer->halls()->findOrFail($hall);
+        $meeting = Auth::user()->customer->meetings()->findOrFail($hall);
         event(new KeypadEvent(hall: $hall, on_vote: false));
         foreach($session->keypads as $keypad){
             if($keypad->id == $id)
@@ -86,6 +88,7 @@ class KeypadController extends Controller
                 $keypad->voting_started_at = now()->format('Y-m-d H:i');;
                 $keypad->voting_finished_at = null;
                 $keypad->save();
+                $meeting->participants->first()->notify(new KeypadNotification());
                 return back()->with('success', __('common.voting-started'));
             }
             else{

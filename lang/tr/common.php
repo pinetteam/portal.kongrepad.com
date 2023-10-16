@@ -261,4 +261,9 @@ return [
     'show-on-view-program' => 'Bilimsel Programda Göster',
     'show-on-send-mail' => 'Mail Göndermede Göster',
     'allowed-to-review' => 'Önizlemeye Açık',
+    'answer' => 'Yanıt',
+    'vote-count' => 'Oy Sayısı',
+    'vote' => 'Oy',
+    'keypad-voting-started' => 'Keypad Oylaması Başladı',
+    'debate-voting-started' => 'Münazara Oylaması Başladı',
 ];

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Portal\Meeting\Hall\Program\Debate\DebateRequest;
 use App\Http\Resources\Portal\Meeting\Hall\Program\Debate\DebateResource;
 use App\Models\Meeting\Hall\Program\Debate\Debate;
+use App\Notifications\DebateNotification;
 use Illuminate\Support\Facades\Auth;
 
 class DebateController extends Controller
@@ -75,6 +76,7 @@ class DebateController extends Controller
     {
         $program = Auth::user()->customer->programs()->findOrFail($program);
         $hall = Auth::user()->customer->halls()->findOrFail($hall);
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
         event(new DebateEvent($hall, false));
         foreach($program->debates as $debate){
             if($debate->id == $id)
@@ -91,6 +93,7 @@ class DebateController extends Controller
                 $debate->voting_started_at = now()->format('Y-m-d H:i');;
                 $debate->voting_finished_at = null;
                 $debate->save();
+                $meeting->participants->first()->notify(new DebateNotification());
                 return back()->with('success',__('common.voting-started'));
             }
             else{

@@ -7,12 +7,13 @@ use App\Models\System\Country\Country;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 
 class Participant extends Model
 {
-    use HasApiTokens, SoftDeletes;
+    use HasApiTokens, SoftDeletes, Notifiable;
     protected $table = 'meeting_participants';
     protected $fillable = [
         'meeting_id',
@@ -70,6 +71,16 @@ class Participant extends Model
         } else {
             return false;
         }
+    }
+    public function routeNotificationFor($channel)
+    {
+        if($channel === 'PusherPushNotifications'){
+            return 'meeting-'.$this->meeting_id;
+        }
+
+        $class = str_replace('\\', '.', get_class($this));
+
+        return $class.'.'.$this->getKey();
     }
     public function phoneCountry()
     {
