@@ -34,7 +34,7 @@ class DebateReportController extends Controller
             $data['data'][] = (int) $team->votes->count();
         }
         $data['chart_data'] = json_encode($data);
-        return view('portal.report.debate-report.show', $data ,compact(['teams','title']) );
+        return view('portal.report.debate-report.show', $data ,compact(['teams','title']));
     }
     public function showChart(string $debate)
     {
@@ -46,12 +46,12 @@ class DebateReportController extends Controller
             $data['data'][] = (int) $team->votes->count();
         }
         $data['chart_data'] = json_encode($data);
-        return view('portal.report.debate-report.chart.index', $data ,compact(['teams','title']) );
+        return view('portal.report.debate-report.chart.index', $data ,compact(['teams','title']));
     }
     public function showParticipants(string $debate)
     {
         $title = Auth::user()->customer->debates()->findOrFail($debate);
         $votes = Auth::user()->customer->debateVotes()->where('debate_id', $debate)->paginate(20);
-        return view('portal.report.debate-report.participant.index', compact(['votes','title']) );
+        return view('portal.report.debate-report.participant.index', compact(['votes','title']));
     }
 }

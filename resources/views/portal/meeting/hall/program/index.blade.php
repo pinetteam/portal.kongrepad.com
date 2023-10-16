@@ -7,7 +7,7 @@
         </div>
         <div class="card-body p-0">
             <div class="card text-bg-dark mt-2">
-                <div class="table-responsive">
+                <div class="table-responsive overflow-x-auto">
                     <table class="table table-dark table-striped table-hover">
                         <thead>
                         <tr>
@@ -26,17 +26,17 @@
                         @foreach($programs as $program)
                             <tbody>
                             <tr>
-                                <td rowspan="2" style="width: 2%"></td>
-                                <td rowspan="1" width="9%">
+                                <td rowspan="2"></td>
+                                <td rowspan="1">
                                     @if($program->sort_order)
                                         {{ $program->sort_order }}
                                     @else
                                         <i class="text-info">{{ __('common.unspecified') }}</i>
                                     @endif
                                 </td>
-                                <td rowspan="1" width="9%">{{ $program->code }}</td>
-                                <td rowspan="1" width="18%">{{ $program->title }}</td>
-                                <td rowspan="1" width="9%">
+                                <td rowspan="1">{{ $program->code }}</td>
+                                <td rowspan="1">{{ $program->title }}</td>
+                                <td rowspan="1">
                                     @if($program->logo)
                                         <img src="{{ $program->logo }}" alt="{{ $program->title }}"
                                              class="img-thumbnail" style="height:36px;"/>
@@ -44,10 +44,10 @@
                                         <i class="text-info">{{ __('common.unspecified') }}</i>
                                     @endif
                                 </td>
-                                <td rowspan="1" width="9%">{{ $program->start_at }}</td>
-                                <td rowspan="1" width="9%">{{ $program->finish_at }}</td>
-                                <td rowspan="1" width="9%">{{ __('common.'.$program->type) }}</td>
-                                <td rowspan="1" width="9%">
+                                <td rowspan="1">{{ $program->start_at }}</td>
+                                <td rowspan="1">{{ $program->finish_at }}</td>
+                                <td rowspan="1">{{ __('common.'.$program->type) }}</td>
+                                <td rowspan="1">
                                     @if($program->status)
                                         <i style="color:green"
                                            class="fa-regular fa-toggle-on fa-xg"></i>
@@ -55,19 +55,19 @@
                                         <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
                                     @endif
                                 </td>
-                                <td rowspan="1"  class="text-end" width="18%">
+                                <td rowspan="1"  class="text-end">
                                     <div class="btn-group" role="group"
                                          aria-label="{{ __('common.processes') }}">
                                         @if($program->type == "session")
                                             <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.create-new-session')}}">
                                                 <button type="button" class="btn btn-outline-success btn-sm w-100" data-bs-toggle="modal" data-bs-target="#session-create-modal" data-route="{{ route('portal.meeting.hall.program.session.store', ['meeting' => $program->hall->meeting_id, 'hall' => $program->hall->id, 'program' => $program->id]) }}">
-                                                    <i class="fa-solid fa-plus"></i> {{ __('common.add-session') }}
+                                                    <span class="fa-plus" style="white-space: nowrap"> {{ __('common.add-session') }}</span>
                                                 </button>
                                             </div>
                                         @elseif($program->type == "debate")
                                             <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.create-new-debate')}}">
                                                 <button type="button" class="btn btn-outline-success btn-sm w-100" data-bs-toggle="modal" data-bs-target="#debate-create-modal" data-route="{{ route('portal.meeting.hall.program.debate.store', ['meeting' => $program->hall->meeting_id, 'hall' => $program->hall->id, 'program' => $program->id]) }}">
-                                                    <i class="fa-solid fa-plus"></i> {{ __('common.add-debate') }}
+                                                    <span class="fa-plus" style="white-space: nowrap"> {{ __('common.add-debate') }}</span>
                                                 </button>
                                             </div>
                                         @endif
@@ -91,7 +91,7 @@
                                 <tr>
                                     <td rowspan="1" colspan="10">
                                         @if($program->sessions()->count() > 0)
-                                            <div class="table-responsive w-100">
+                                            <div class="table-responsive w-100 overflow-x-auto">
                                                 <table class="table table-dark table-striped table-hover">
                                                     <thead class="thead-dark">
                                                     <tr>

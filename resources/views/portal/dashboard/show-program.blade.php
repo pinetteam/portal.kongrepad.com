@@ -7,8 +7,8 @@
         </div>
         <div class="card-body p-0">
             <div class="card text-bg-dark mt-2">
-                <div class="table-responsive overflow-scroll">
-                    <table class="table table-dark table-striped table-hover">
+                <div class="relative overflow-x-auto">
+                    <table class="w-full table table-dark table-striped table-hover">
                         <thead>
                         <tr>
                             <th scope="col"></th>
@@ -68,7 +68,7 @@
                                 <tr>
                                     <td rowspan="1" colspan="10">
                                         @if($program->sessions()->count() > 0)
-                                            <div class="table-responsive w-100 overflow-scroll">
+                                            <div class="relative overflow-x-auto">
                                                 <table class="table table-dark table-striped table-hover">
                                                     <thead class="thead-dark">
                                                     <tr>
