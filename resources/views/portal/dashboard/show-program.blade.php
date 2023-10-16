@@ -7,7 +7,7 @@
         </div>
         <div class="card-body p-0">
             <div class="card text-bg-dark mt-2">
-                <div class="table-responsive">
+                <div class="table-responsive overflow-scroll">
                     <table class="table table-dark table-striped table-hover">
                         <thead>
                         <tr>
@@ -27,16 +27,16 @@
                             <tbody>
                             <tr>
                                 <td rowspan="2" style="width: 2%"></td>
-                                <td rowspan="1" width="9%">
+                                <td rowspan="1">
                                     @if($program->sort_order)
                                         {{ $program->sort_order }}
                                     @else
                                         <i class="text-info">{{ __('common.unspecified') }}</i>
                                     @endif
                                 </td>
-                                <td rowspan="1" width="9%">{{ $program->code }}</td>
-                                <td rowspan="1" width="18%">{{ $program->title }}</td>
-                                <td rowspan="1" width="9%">
+                                <td rowspan="1">{{ $program->code }}</td>
+                                <td rowspan="1">{{ $program->title }}</td>
+                                <td rowspan="1">
                                     @if($program->logo)
                                         <img src="{{ $program->logo }}" alt="{{ $program->title }}"
                                              class="img-thumbnail" style="height:36px;"/>
@@ -44,10 +44,10 @@
                                         <i class="text-info">{{ __('common.unspecified') }}</i>
                                     @endif
                                 </td>
-                                <td rowspan="1" width="9%">{{ $program->start_at }}</td>
-                                <td rowspan="1" width="9%">{{ $program->finish_at }}</td>
-                                <td rowspan="1" width="9%">{{ __('common.'.$program->type) }}</td>
-                                <td rowspan="1" width="9%">
+                                <td rowspan="1">{{ $program->start_at }}</td>
+                                <td rowspan="1">{{ $program->finish_at }}</td>
+                                <td rowspan="1">{{ __('common.'.$program->type) }}</td>
+                                <td rowspan="1">
                                     @if($program->status)
                                         <i style="color:green"
                                            class="fa-regular fa-toggle-on fa-xg"></i>
@@ -55,7 +55,7 @@
                                         <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
                                     @endif
                                 </td>
-                                <td rowspan="1"  class="text-end" width="18%">
+                                <td rowspan="1" class="text-end">
                                     <div class="btn-group" role="group"
                                          aria-label="{{ __('common.processes') }}">
                                         <a class="btn btn-info btn-sm" href="{{ route('portal.meeting.hall.program.show', ['meeting' => $meeting->id, 'hall' => $program->hall->id, 'program' => $program->id]) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
@@ -68,7 +68,7 @@
                                 <tr>
                                     <td rowspan="1" colspan="10">
                                         @if($program->sessions()->count() > 0)
-                                            <div class="table-responsive w-100">
+                                            <div class="table-responsive w-100 overflow-scroll">
                                                 <table class="table table-dark table-striped table-hover">
                                                     <thead class="thead-dark">
                                                     <tr>

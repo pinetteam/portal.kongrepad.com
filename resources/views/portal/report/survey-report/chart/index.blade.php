@@ -16,14 +16,14 @@
                 <table class="table table-dark table-striped-columns table-bordered">
                     <tr>
                         <div class="chart-container">
-                            <div class="pie-chart-container">
-                                <canvas id="pie-chart"></canvas>
+                            <div class="polarArea-chart-container">
+                                <canvas id="polarArea-chart"></canvas>
                             </div>
                         </div>
                         <script>
                             $(function(){
                                 var cData = JSON.parse(`<?php echo $chart_data; ?>`);
-                                var ctx = $("#pie-chart");
+                                var ctx = $("#polarArea-chart");
                                 var data = {
                                     labels: cData.label,
                                     datasets: [
@@ -31,61 +31,21 @@
                                             label: "Votes",
                                             data: cData.data,
                                             backgroundColor: [
-                                                "#3179ab",
-                                                "#4a1d96",
-                                                "#2f14dc",
-                                                "#124d7a",
-                                                "#2E8B57",
-                                                "#1D7A46",
-                                                "#48b08d",
-                                            ],
-                                            borderColor: [
-                                                "#ffffff",
-                                                "#ffffff",
-                                                "#ffffff",
-                                                "#ffffff",
-                                                "#ffffff",
-                                                "#ffffff",
-                                                "#ffffff",
-                                            ],
-                                            borderWidth: [1, 1, 1, 1, 1, 1, 1]
+                                                'rgb(255, 99, 132)',
+                                                'rgb(75, 192, 192)',
+                                                'rgb(255, 205, 86)',
+                                                'rgb(201, 203, 207)',
+                                                'rgb(54, 162, 235)'
+                                            ]
                                         }
                                     ]
                                 };
-                                var options = {
-                                    responsive: true,
-                                    title: {
-                                        display: true,
-                                        position: "top",
-                                        text: "",
-                                        fontSize: 18,
-                                        fontColor: "#ffffff"
-                                    },
-                                    legend: {
-                                        display: true,
-                                        position: "bottom",
-                                        labels: {
-                                            fontColor: "#ffffff",
-                                            fontSize: 16
-                                        }
-                                    },
-                                    animation: {
-                                        onComplete: () => {
-                                            delayed = true;
-                                        },
-                                        delay: (context) => {
-                                            let delay = 0;
-                                            if (context.type === 'data' && context.mode === 'default' && !delayed) {
-                                                delay = context.dataIndex * 300 + context.datasetIndex * 100;
-                                            }
-                                            return delay;
-                                        },
-                                    },
-                                };
                                 var chart1 = new Chart(ctx, {
-                                    type: "pie",
+                                    type: "polarArea",
                                     data: data,
-                                    options: options
+                                    options: {
+                                        indexAxis: 'y',
+                                    }
                                 });
                             });
                         </script>

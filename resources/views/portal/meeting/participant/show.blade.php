@@ -53,9 +53,9 @@
             </div>
         </div>
     </div>
-    <div class="card text-bg-dark mt-1">
+    <div class="card text-bg-dark">
         <div class="card-body">
-            <div class="row row-cols-1 row-cols-sm-2 g-4 row-gap-2">
+            <div class="row row-cols-1 row-cols-sm-2 g-4 row-gap-2 gy-3 py-3">
                 <div class="col border-5 border-dark card text-bg-dark p-2 shadow">
                     <h2 class="m-0 text-center h3">{{ __('common.surveys') }}</h2>
                     <div class="card-body p-0 ">
@@ -64,6 +64,7 @@
                             <tr>
                                 <th scope="col"><span class="fa-regular fa-calendar mx-1"></span> {{ __('common.date') }}</th>
                                 <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}</th>
+                                <th scope="col" class="text-end"></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -71,6 +72,13 @@
                                 <tr>
                                     <td>{{ $vote->created_at }}</td>
                                     <td>{{ $vote->survey->title }}</td>
+                                    <td class="text-end">
+                                        <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
+                                            <a class="btn btn-info btn-sm" href="{{ route("portal.meeting.participant.survey",['meeting'=> $participant->meeting->id, 'participant' => $participant->id, 'survey' => $vote->survey->id]) }}" title="{{ __('common.show-report') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
+                                                <span class="fa-regular fa-eye"></span>
+                                            </a>
+                                        </div>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>

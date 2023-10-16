@@ -3,7 +3,9 @@
 namespace App\Models\Meeting\Survey\Vote;
 
 use App\Models\Customer\Customer;
+use App\Models\Meeting\Participant\Participant;
 use App\Models\Meeting\Survey\Question\Option\Option;
+use App\Models\Meeting\Survey\Question\Question;
 use App\Models\Meeting\Survey\Survey;
 use App\Models\System\Setting\Variable\Variable;
 use Carbon\Carbon;
@@ -40,9 +42,17 @@ class Vote extends Model
     {
         return $this->belongsTo(Option::class, 'option_id', 'id');
     }
+    public function question()
+    {
+        return $this->belongsTo(Question::class, 'question_id', 'id');
+    }
     public function survey()
     {
         return $this->belongsTo(Survey::class, 'survey_id', 'id');
+    }
+    public function participant()
+    {
+        return $this->belongsTo(Participant::class, 'participant_id', 'id');
     }
 }
 

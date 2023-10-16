@@ -46,6 +46,12 @@ class KeypadReportController extends Controller
             $data['data'][] = (int) $option->votes->count();
         }
         $data['chart_data'] = json_encode($data);
-        return view('portal.report.keypad-report.chart.index', $data ,compact(['options','question']) );
+        return view('portal.report.keypad-report.chart.index', $data ,compact(['options', 'question']) );
+    }
+    public function showParticipants(string $keypad)
+    {
+        $question = Auth::user()->customer->keypads()->findOrFail($keypad);
+        $votes = Auth::user()->customer->keypadVotes()->where('keypad_id', $keypad)->paginate(20);
+        return view('portal.report.keypad-report.participant.index', compact(['question', 'votes']) );
     }
 }

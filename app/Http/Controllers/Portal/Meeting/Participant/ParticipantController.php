@@ -117,4 +117,12 @@ class ParticipantController extends Controller
         $participant = $meeting->participants()->findOrFail($id);
         return QrCode::size(256)->generate($participant->username);
     }
+    public function showSurvey(int $meeting, int $id, int $survey)
+    {
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $participant = $meeting->participants()->findOrFail($id);
+        $survey = Auth::user()->customer->surveys()->findOrFail($survey);
+        $survey_votes = $survey->votes()->where('participant_id', $id)->paginate(20);;
+        return view('portal.meeting.participant.show-survey.index', compact(['participant', 'survey', 'survey_votes']) );
+    }
 }

@@ -6,7 +6,7 @@ namespace Database\Seeders;
 use App\Models\Meeting\Hall\Program\Debate\Team\Team;
 use Illuminate\Database\Seeder;
 
-class DebateTeamSeeder extends Seeder
+class MeetingHallProgramDebateTeamSeeder extends Seeder
 {
     public function run(): void
     {

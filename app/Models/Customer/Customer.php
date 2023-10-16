@@ -205,6 +205,41 @@ class Customer extends Model
         return $votes;
     }
 
+    public function keypadVotes()
+    {
+        $votes = \App\Models\Meeting\Hall\Program\Session\Keypad\Vote\Vote::select('meeting_hall_program_session_keypad_votes.*')
+            ->join('meeting_hall_program_session_keypads', 'meeting_hall_program_session_keypad_votes.keypad_id', '=', 'meeting_hall_program_session_keypads.id')
+            ->join('meeting_hall_program_sessions', 'meeting_hall_program_session_keypads.session_id', '=', 'meeting_hall_program_sessions.id')
+            ->join('meeting_hall_programs', 'meeting_hall_program_sessions.program_id', '=', 'meeting_hall_programs.id')
+            ->join('meeting_halls', 'meeting_hall_programs.hall_id', '=', 'meeting_halls.id')
+            ->join('meetings', 'meeting_halls.meeting_id', '=', 'meetings.id')
+            ->join('customers', 'meetings.customer_id', '=', 'customers.id')
+            ->where('customers.id', $this->getkey());
+        return $votes;
+    }
+
+    public function surveyVotes()
+    {
+        $surveyVotes = \App\Models\Meeting\Survey\Vote\Vote::select('meeting_survey_votes.*')
+            ->join('meeting_surveys', 'meeting_survey_votes.survey_id', '=', 'meeting_surveys.id')
+            ->join('meetings', 'meeting_surveys.meeting_id', '=', 'meetings.id')
+            ->join('customers', 'meetings.customer_id', '=', 'customers.id')
+            ->where('customers.id', $this->getkey());
+        return $surveyVotes;
+    }
+
+
+
+    public function surveyParticipants()
+    {
+        $surveyParticipants = \App\Models\Meeting\Survey\Vote\Vote::select('meeting_survey_votes.*')
+            ->join('meeting_participants', 'meeting_survey_votes.participant_id', '=', 'meeting_participants.id')
+            ->join('meetings', 'meeting_participants.meeting_id', '=', 'meetings.id')
+            ->join('customers', 'meetings.customer_id', '=', 'customers.id')
+            ->where('customers.id', $this->getkey());
+        return $surveyParticipants;
+    }
+
     public function settings()
     {
      $settings = Setting::select('customer_settings.*','system_setting_variables.*')

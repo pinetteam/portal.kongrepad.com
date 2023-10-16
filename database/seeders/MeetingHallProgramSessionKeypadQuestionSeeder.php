@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\Meeting\Hall\Program\Session\Question\Question;
 use Illuminate\Database\Seeder;
 
-class MeetingHallProgramSessionQuestionSeeder extends Seeder
+class MeetingHallProgramSessionKeypadQuestionSeeder extends Seeder
 {
     public function run(): void
     {

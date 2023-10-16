@@ -268,4 +268,7 @@ return [
     'show-on-view-program' => 'Show On View Program',
     'show-on-send-mail' => 'Show On Send Mail',
     'allowed-to-review' => 'Allowed To Review',
+    'answer' => 'Answer',
+    'vote-count' => 'Vote Count',
+    'vote' => 'Vote'
 ];
