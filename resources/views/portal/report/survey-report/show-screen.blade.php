@@ -44,31 +44,25 @@
         </div>
     </div>
     <div class="card text-bg-dark">
-        <div class="card-body p-0">
-            <div class="table-responsive mx-5">
-                <table class="table table-dark table-striped table-bordered">
-                    <tr>
-                        <ol type="1">
+        <div class="card-body">
+                        <ol class="list-group list-group-numbered">
                             @foreach($survey->questions as $question)
-                                <span style="font-size: 30px;" class="m-2">
-                                    <li>
-                                        {{ $question->question }}
-                                    </li>
-                                </span>
-                                <span style="font-size: 30px;" class="m-1">
-                                        @foreach($question->options as $option)
-                                            <div class="progress rounded-4 m-3 h-25" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success text-black overflow-scroll p-2" style="width: {{ $option->votes->count() }}%">
-                                                   {{ $option->option }}
+                                <li class="list-group-item d-flex justify-content-between align-items-start bg-dark border-dark-subtle text-white">
+                                    <div class="ms-2 w-100">
+                                        <div class="fw-bold">{{ $question->question }}</div>
+                                        <hr />
+                                            @foreach($question->options as $option)
+                                                <div class="progress mt-2 h-25" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success text-black text-center p-2 " style="width: {{ $option->votes->count() / $question->votes->count()*100 }}%">
+                                                        {{ $option->option }} ({{$option->votes->count() / $question->votes->count()*100}}%)
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        @endforeach
-                                </span>
+                                            @endforeach
+
+                                    </div>
+                                </li>
                             @endforeach
                         </ol>
-                    </tr>
-                </table>
-            </div>
         </div>
     </div>
 @endsection

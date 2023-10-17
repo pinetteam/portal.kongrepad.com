@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
     <html class="h-100">
         <head>
             <meta charset="utf-8" />
@@ -10,43 +10,31 @@
             @vite(['resources/sass/app.scss'])
             @vite(['resources/js/app.js'])
         </head>
-        <body class="d-flex bg-dark h-100 align-items-center">
-        <div id="kp-loading" class="d-flex align-items-center justify-content-center">
-            <div class="spinner-grow text-success" role="status">
-                <span class="visually-hidden">{{ __('common.loading') }}</span>
-            </div>
-        </div>
-        <header class="navbar navbar-dark fixed-top bg-dark p-0 shadow" id="kp-header">
-            <a class="navbar-brand ms-3 overflow-hidden ps-3" href="{{ route("auth.login.index") }}">
+        <header class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow" id="kp-header">
+            <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 overflow-hidden text-center" href="{{ route("auth.login.index") }}">
                 {{ config('app.name') }}
             </a>
         </header>
-        <div class="container">
-            <div class="row h-100 vertical-offset-100 d-flex justify-content-center">
-                    <div class="card bg-dark w-100 border-dark mt-sm-5">
-                        <div class="card-body mt-2 mt-sm-5">
+        <body class="d-flex bg-dark h-100 align-items-center overflow-scroll">
+            <div id="kp-loading" class="d-flex align-items-center justify-content-center">
+                <div class="spinner-grow text-success" role="status">
+                    <span class="visually-hidden">{{ __('common.loading') }}</span>
+                </div>
+            </div>
+            <div class="container overflow-scroll mt-5 py-5">
+                <div class="row h-100 vertical-offset-100 d-flex justify-content-center">
+                    <div class="card bg-dark w-100 border-dark ">
+                        <div class="card-body">
                             <div class="container text-center">
-                                <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-xs-1 row-cols-lg-2 column-gap-0 mt-md-5 mt-sm-5">
+                                <div class="row row-cols-1 row-cols-xs-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 column-gap-0 row-gap-5">
                                     <div class="col">
-                                        <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-xs-1 row-cols-lg-2 row-gap-5 mt-md-5 mt-sm-5">
-                                            <div class="col">
-                                                <div class="card bg-dark border-dark">
-                                                    <div class="card-body">
-                                                        <img class="img-responsive" style= "height: 490px; width: 260px" src="{{ asset('storage/homepage/homepage.png') }}">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="card bg-dark border-dark">
-                                                    <div class="card-body">
-                                                        <img class="img-responsive" style= "height: 500px; width: 280px" src="{{ asset('storage/homepage/dashboard.png') }}">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <img class="img-fluid" src="{{ asset('images/homepage.png') }}">
                                     </div>
-                                    <div class="col mt-5">
-                                        <div class="card bg-dark border-dark shadow-lg rounded-4 mt-5">
+                                    <div class="col">
+                                        <img class="img-fluid" src="{{ asset('images/dashboard.png') }}">
+                                    </div>
+                                    <div class="col">
+                                        <div class="card bg-dark border-dark shadow-lg rounded-4 mt-5 p-4 overflow-hidden">
                                             <div class="card-body">
                                                 <h1 class="mt-5 text-center text-white">Welcome to KongrePad</h1>
                                                 <a type="button" class="btn btn-secondary btn-lg rounded shadow-lg m-5" href="{{ route("auth.login.index") }}">Continue with Web</a>
@@ -57,11 +45,10 @@
                             </div>
                         </div>
                     </div>
-                <footer class="bg-dark text-light col-12 shadow" id="kp-footer">
-                    Copyright © 2017-{{ date('Y') }} {{ config('app.name') }}
-                </footer>
+                </div>
             </div>
-        </div>
         </body>
+        <footer class="bg-dark text-light col-12 shadow" id="kp-footer">
+            Copyright © 2017-{{ date('Y') }} {{ config('app.name') }}
+        </footer>
     </html>
-
