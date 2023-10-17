@@ -126,7 +126,7 @@
             </div>
         </div>
     </div>
-    <div class="card text-bg-dark mt-2">
+    <div class="card text-bg-dark">
         <div class="card-header">
             <h1 class="m-0 text-center">{{ __('common.sessions') }}</h1>
         </div>

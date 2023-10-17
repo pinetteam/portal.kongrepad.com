@@ -375,7 +375,7 @@ class MeetingHallProgramSeeder extends Seeder
                 'status' => 1,
             ],
             [
-                'hall_id' => '1',
+                'hall_id' => '5',
                 'sort_order' => '340',
                 'code' => 'merck-uydu-sempozyumu',
                 'title' => 'Merck Uydu Sempozyumu',
@@ -387,7 +387,7 @@ class MeetingHallProgramSeeder extends Seeder
                 'status' => 1,
             ],
             [
-                'hall_id' => '1',
+                'hall_id' => '5',
                 'sort_order' => '350',
                 'code' => 'merck-uydu-sempozyumu',
                 'title' => 'Merck Uydu Sempozyumu',
@@ -399,7 +399,7 @@ class MeetingHallProgramSeeder extends Seeder
                 'status' => 1,
             ],
             [
-                'hall_id' => '1',
+                'hall_id' => '5',
                 'sort_order' => '360',
                 'code' => 'merck-uydu-sempozyumu',
                 'title' => 'Merck Uydu Sempozyumu',

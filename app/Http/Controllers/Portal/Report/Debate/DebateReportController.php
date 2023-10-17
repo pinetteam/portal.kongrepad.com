@@ -27,7 +27,7 @@ class DebateReportController extends Controller
     }
     public function show(string $debate){
         $title = Auth::user()->customer->debates()->findOrFail($debate);
-        $teams = $debate->teams()->where('debate_id', $debate)->paginate(20);
+        $teams = Auth::user()->customer->teams()->where('debate_id', $debate)->paginate(20);
         $data = [];
         foreach($teams as $team) {
             $data['label'][] = $team->title;
@@ -39,7 +39,7 @@ class DebateReportController extends Controller
     public function showChart(string $debate)
     {
         $title = Auth::user()->customer->debates()->findOrFail($debate);
-        $teams = $debate->teams()->paginate(20);
+        $teams = Auth::user()->customer->teams()->where('debate_id', $debate)->paginate(20);
         $data = [];
         foreach($teams as $team) {
             $data['label'][] = $team->title;

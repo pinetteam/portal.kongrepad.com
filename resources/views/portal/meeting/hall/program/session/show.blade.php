@@ -46,7 +46,7 @@
             </div>
         </div>
     </div>
-    <div class="card text-bg-dark mt-2">
+    <div class="card text-bg-dark">
         <div class="card-header">
             <h2 class="text-center">
                 <span class="fa-regular fa-tablet fa-fade p-2"> </span>{{ __('common.keypads') }}
@@ -79,7 +79,7 @@
                                     <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.add-option')}}">
                                             <button type="button" class="btn btn-outline-success btn-sm w-100  " data-bs-toggle="modal" data-bs-target="#option-create-modal" data-route="{{ route('portal.meeting.hall.program.session.keypad.option.store',['meeting'=>$session->program->hall->meeting_id, 'keypad'=> $keypad->id,'session'=> $session->id,'program'=>$session->program_id, 'hall'=>$session->program->hall_id]) }}">
-                                                <i class="fa-solid fa-plus"></i> {{ __('common.add-option') }}
+                                                <span class="fa-plus" style="white-space: nowrap"> {{ __('common.add-option') }}</span>
                                             </button>
                                         </div>
                                         <a class="btn btn-info btn-sm" href="{{ route('portal.meeting.hall.program.session.keypad.show',['meeting'=>$session->program->hall->meeting_id, 'keypad'=> $keypad->id,'session'=> $session->id,'program'=>$session->program_id, 'hall'=>$session->program->hall_id]) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">

@@ -1,10 +1,10 @@
 @extends('layout.portal.common')
-@section('title', $participant->fullname . ' | '. $survey->title . ' | ' . __('common.votes'))
+@section('title', $survey->title .' | ' . __('common.screen'))
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">
             <h1 class="text-center">
-                <span class="fa-regular fa-square-poll-vertical fa-fade"></span> <small>"{{ $survey->title }}"</small> {{ __('common.survey') }}
+                <span class="fa-regular fa-square-poll-vertical fa-fade"></span> <small>"{{ $survey->title }}"</small> {{ __('common.screen') }}
             </h1>
             <div class="table-responsive">
                 <table class="table table-dark table-striped-columns table-bordered">
@@ -44,31 +44,31 @@
         </div>
     </div>
     <div class="card text-bg-dark">
-        <div class="card-header">
-            <h1 class="m-0 text-center"><span class="fa-duotone fa-option fa-fade"></span> <small>"{{ $participant->fullname }}"</small> {{ __('common.votes') }}</h1>
-        </div>
         <div class="card-body p-0">
-            <div class="table-responsive">
-                <table class="table table-dark table-striped table-hover">
-                    <thead>
+            <div class="table-responsive mx-5">
+                <table class="table table-dark table-striped table-bordered">
                     <tr>
-                        <th scope="col"><span class="fa-regular fa-messages-question mx-1"></span> {{ __('common.question') }}</th>
-                        <th scope="col"><span class="fa-regular fa-vote-yea mx-1"></span>{{ __('common.vote') }}</th>
-                        <th scope="col"><span class="fa-regular fa-clock mx-1"></span>{{ __('common.vote-at') }}</th>
+                        <ol type="1">
+                            @foreach($survey->questions as $question)
+                                <span style="font-size: 30px;" class="m-2">
+                                    <li>
+                                        {{ $question->question }}
+                                    </li>
+                                </span>
+                                <span style="font-size: 30px;" class="m-1">
+                                        @foreach($question->options as $option)
+                                            <div class="progress rounded-4 m-3 h-25" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success text-black overflow-scroll p-2" style="width: {{ $option->votes->count() }}%">
+                                                   {{ $option->option }}
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                </span>
+                            @endforeach
+                        </ol>
                     </tr>
-                    </thead>
-                    @foreach($survey_votes as $vote)
-                        <tbody>
-                        <tr>
-                            <td>{{ $vote->question->question }}</td>
-                            <td>{{ $vote->option->option }}</td>
-                            <td>{{ $vote->created_at }}</td>
-                        </tr>
-                        </tbody>
-                    @endforeach
                 </table>
             </div>
         </div>
     </div>
 @endsection
-

@@ -15,6 +15,7 @@
                     <tr>
                         <th scope="col"><span class="fa-regular fa-id-card mx-1"></span> {{ __('common.name') }}</th>
                         <th scope="col"><span class="fa-regular fa-pen mx-1"></span> {{ __('common.answer') }}</th>
+                        <th scope="col"class="text-end px-4"><span class="fa-regular fa-clock mx-1"></span> {{ __('common.vote-at') }}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -29,6 +30,7 @@
                                 {{ $vote->owner->full_name }}
                             </td>
                             <td>{{ $vote->option->option }}</td>
+                            <td class="text-end px-4">{{ $vote->created_at }}</td>
                         </tr>
                     @endforeach
                     </tbody>

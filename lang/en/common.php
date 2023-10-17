@@ -270,7 +270,8 @@ return [
     'allowed-to-review' => 'Allowed To Review',
     'answer' => 'Answer',
     'vote-count' => 'Vote Count',
+    'vote-at' => 'Vote at',
     'vote' => 'Vote',
     'keypad-voting-started' => 'Keypad Voting Started',
-    'debate-voting-started' => 'Debate Voting Started',
+    'debate-voting-started' => 'Debate Voting Started'
 ];

@@ -63,6 +63,9 @@
                                     <a class="btn btn-info btn-sm" href="{{ route("portal.survey-report.show",['survey_report'=>$survey->id]) }}" title="{{ __('common.show-report') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
                                         <span class="fa-regular fa-eye"></span>
                                     </a>
+                                    <a class="btn btn-success btn-sm" href="{{ route("portal.survey-report.screen",['survey_id'=>$survey->id]) }}" title="{{ __('common.screen') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.screen') }} ">
+                                        <span class="fa-regular fa-presentation-screen"></span>
+                                    </a>
                                 </div>
                             </td>
                         </tr>

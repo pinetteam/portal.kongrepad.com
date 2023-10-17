@@ -15,7 +15,7 @@
                     </tr>
                 </table>
             </div>
-            <div class="card text-bg-dark mt-2">
+            <div class="card text-bg-dark">
                 <div class="card-header">
                     <h2 class="m-0 text-center">{{ __('common.options') }}</h2>
                 </div>

@@ -126,7 +126,7 @@
             </div>
         </div>
     </div>
-    <div class="card text-bg-dark mt-2">
+    <div class="card text-bg-dark">
         <div class="card-header">
             <h1 class="m-0 text-center"><span class="fa-duotone fa-face-party fa-fade"></span> {{ __('common.debates') }}</h1>
         </div>

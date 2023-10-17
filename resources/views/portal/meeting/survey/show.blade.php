@@ -95,7 +95,7 @@
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#option-create-modal"
                                                     data-route="{{ route('portal.meeting.survey.option.store',['meeting' => $survey->meeting_id, 'survey' =>  $question->survey_id, 'question' => $question->id,]) }}">
-                                                <i class="fa-solid fa-plus"></i> {{ __('common.add-option') }}
+                                                <span class="fa-plus" style="white-space: nowrap"> {{ __('common.add-option') }}</span>
                                             </button>
                                         </div>
                                         <a class="btn btn-info btn-sm"
