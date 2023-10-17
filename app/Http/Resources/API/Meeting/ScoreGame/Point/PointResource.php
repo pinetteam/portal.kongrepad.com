@@ -18,7 +18,7 @@ class PointResource extends JsonResource
             'participant_id' => $this->participant_id,
             'point' => $this->point,
             'title' => $this->qrCode->title,
-            'created_at' => Carbon::parse($this->created_at)->translatedFormat('H:i d F'),
+            'created_at' => Carbon::parse($this->created_at)->translatedFormat('H:i, d F'),
         ];
     }
 }

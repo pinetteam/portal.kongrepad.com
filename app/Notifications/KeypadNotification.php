@@ -8,6 +8,12 @@ use Illuminate\Notifications\Notification;
 
 class KeypadNotification extends Notification
 {
+    public $hall;
+
+    public function __construct($hall)
+    {
+        $this->hall = $hall;
+    }
     public function via($notifiable)
     {
         return [PusherChannel::class];
@@ -19,6 +25,9 @@ class KeypadNotification extends Notification
             ->iOS()
             ->badge(1)
             ->sound('success')
-            ->body(__('common.keypad-voting-started'));
+            ->body(__('common.debate-voting-started'))
+            ->setOption('apns.data.hall_id', $this->hall->id)
+            ->setOption('apns.data.event', 'keypad');
+        ;
     }
 }

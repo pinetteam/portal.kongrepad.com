@@ -71,7 +71,7 @@ class KeypadController extends Controller
     {
         $session = Auth::user()->customer->programSessions()->findOrFail($session);
         $hall = Auth::user()->customer->halls()->findOrFail($hall);
-        $meeting = Auth::user()->customer->meetings()->findOrFail($hall);
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
         event(new KeypadEvent(hall: $hall, on_vote: false));
         foreach($session->keypads as $keypad){
             if($keypad->id == $id)
@@ -88,7 +88,7 @@ class KeypadController extends Controller
                 $keypad->voting_started_at = now()->format('Y-m-d H:i');;
                 $keypad->voting_finished_at = null;
                 $keypad->save();
-                $meeting->participants->first()->notify(new KeypadNotification());
+                $meeting->participants->first()->notify(new KeypadNotification($hall));
                 return back()->with('success', __('common.voting-started'));
             }
             else{
