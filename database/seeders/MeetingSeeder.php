@@ -17,7 +17,7 @@ class MeetingSeeder extends Seeder
                 'id' => '4',
                 'customer_id' => '1',
                 'code' => 'iok-2023',
-                'title' => 'IOK 2023',
+                'title' => '7. Ulusal İmmunoterapi ve Onkoloji Kongresi',
                 'start_at' => '2023-11-01',
                 'finish_at' => '2023-11-05',
                 'status' => 1,

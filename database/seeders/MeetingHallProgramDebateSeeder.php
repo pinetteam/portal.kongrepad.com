@@ -11,16 +11,16 @@ class MeetingHallProgramDebateSeeder extends Seeder
         Debate::insert([
             [
                 'sort_order' => '10',
-                'program_id' => 11,
+                'program_id' => 17,
                 'code' => 'debate',
-                'title' => 'KHDAK’NDE İMMÜNOTERAPİ NEOADJUVANDA MI ADJUVANDA MI?',
+                'title' => 'Rezektable Küçük Hücreli Dışı Akciğer Kanserinde Neoadjuvan vs. Adjuvan Tedavi',
                 'on_vote' => 0,
                 'status' => 1,
             ],[
                 'sort_order' => '10',
-                'program_id' => 22,
+                'program_id' => 30,
                 'code' => 'debate',
-                'title' => ' ÖZEFAGOGASTRİK BİLEŞKE TÜMÖRLERİNDE NEOADJUVAN KT VS. KRT?',
+                'title' => 'Yapay Zeka Gelecektir vs. Tehdittir',
                 'on_vote' => 0,
                 'status' => 1,
             ],

@@ -13,19 +13,19 @@ class MeetingHallProgramDebateTeamSeeder extends Seeder
         Team::insert([
             [
                 'debate_id' => '1',
-                'title' => 'Team 1'
+                'title' => 'Neoadjuvan KT'
             ],
             [
                 'debate_id' => '1',
-                'title' => 'Team 2'
+                'title' => 'Adjuvan KT'
             ],
             [
                 'debate_id' => '2',
-                'title' => 'Team A'
+                'title' => 'Gelecektir'
             ],
             [
                 'debate_id' => '2',
-                'title' => 'Team B'
+                'title' => 'Tehdittir'
             ],
         ]);
     }
