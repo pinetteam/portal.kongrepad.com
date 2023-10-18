@@ -13,7 +13,7 @@ class MeetingSurveySeeder extends Seeder
             [
                 'meeting_id' => '4',
                 'title' => 'Anket 1',
-                'description' => 'Onkoloji Pratiğinde Prostat Kanserine Bağlı Androjen Deprivasyon Tedavisi(ADT) Alan Hastalarda Erkek Osteporozunun(OP) Önemi/ Farkındalık Anketi',
+                'description' => '2023 Medikal Onkoloji İş İlişkili Rölatif Değerler Anketi',
                 'start_at' => '2023-11-01 10:30',
                 'finish_at' => '2023-11-05 17:30',
                 'status' => 1
@@ -21,7 +21,15 @@ class MeetingSurveySeeder extends Seeder
             [
                 'meeting_id' => '4',
                 'title' => 'Anket 2',
-                'description' => 'Onkologların Klinik Uygulamalarında Farklılıklar',
+                'description' => 'Tıbbi Onkologların Duktal Karsinoma İn Situ Yönetimini Etkileyen Faktörler',
+                'start_at' => '2023-11-01 10:30',
+                'finish_at' => '2023-11-05 17:30',
+                'status' => 1
+            ],
+            [
+                'meeting_id' => '4',
+                'title' => 'Anket 3',
+                'description' => 'Tümör Board Katılım Anketi',
                 'start_at' => '2023-11-01 10:30',
                 'finish_at' => '2023-11-05 17:30',
                 'status' => 1
