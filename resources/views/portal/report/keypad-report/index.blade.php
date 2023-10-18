@@ -51,11 +51,8 @@
                                     <a class="btn btn-success btn-sm" href="{{ route("portal.keypad-report.question.participants",['keypad_id'=>$keypad->id]) }}" title="{{ __('common.participants') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.participants') }}">
                                         <span class="fa-regular fa-user"></span>
                                     </a>
-                                    <a class="btn btn-info btn-sm" href="{{ route("portal.keypad-report.question.chart",['keypad_id'=>$keypad->id]) }}" title="{{ __('common.results') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.results') }} ">
-                                        <span class="fa-regular fa-presentation-screen"></span>
-                                    </a>
-                                    <a class="btn btn-success btn-sm" href="" title="{{ __('common.documents') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.documents') }}">
-                                        <span class="fa-regular fa-file-arrow-down"></span>
+                                    <a class="btn btn-info btn-sm" href="{{ route("portal.keypad-report.question.report",['keypad_id'=>$keypad->id]) }}" title="{{ __('common.report') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.report') }} ">
+                                        <span class="fa-regular fa-page"></span>
                                     </a>
                                 </div>
                             </td>

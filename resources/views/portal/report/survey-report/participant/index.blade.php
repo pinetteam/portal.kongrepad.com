@@ -16,6 +16,7 @@
                         <th scope="col"><span class="fa-regular fa-id-card mx-1"></span> {{ __('common.name') }}</th>
                         <th scope="col"><span class="fa-regular fa-pen mx-1"></span> {{ __('common.answer') }}</th>
                         <th scope="col"><span class="fa-regular fa-clock mx-1"></span> {{ __('common.vote-at') }}</th>
+                        <th scope="col" class="text-end"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -31,6 +32,13 @@
                             </td>
                             <td>{{ $vote->option->option }}</td>
                             <td>{{ $vote->created_at }}</td>
+                            <td class="text-end">
+                                <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
+                                    <a class="btn btn-info btn-sm" href="{{ route("portal.meeting.participant.survey",['meeting'=> $vote->participant->meeting->id, 'participant' => $vote->participant->id, 'survey' => $vote->survey->id]) }}" title="{{ __('common.show-report') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
+                                        <span class="fa-regular fa-eye"></span>
+                                    </a>
+                                </div>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>

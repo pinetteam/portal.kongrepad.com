@@ -25,17 +25,6 @@ class KeypadReportController extends Controller
         }
         return view('portal.report.keypad-report.index', $data, compact(['keypads', 'on_vote']));
     }
-    public function show(string $keypad){
-        $question = Auth::user()->customer->keypads()->findOrFail($keypad);
-        $options = $question->options()->where('keypad_id', $keypad)->paginate(20);
-        $data = [];
-        foreach($options as $option) {
-            $data['label'][] = $option->option;
-            $data['data'][] = (int) $option->votes->count();
-        }
-        $data['chart_data'] = json_encode($data);
-        return view('portal.report.keypad-report.show', $data ,compact(['options','question']));
-    }
     public function showChart(string $keypad)
     {
         $question = Auth::user()->customer->keypads()->findOrFail($keypad);
@@ -53,5 +42,10 @@ class KeypadReportController extends Controller
         $question = Auth::user()->customer->keypads()->findOrFail($keypad);
         $votes = Auth::user()->customer->keypadVotes()->where('keypad_id', $keypad)->paginate(20);
         return view('portal.report.keypad-report.participant.index', compact(['question', 'votes']));
+    }
+    public function showReport(string $keypad)
+    {
+        $keypad = Auth::user()->customer->keypads()->findOrFail($keypad);
+        return view('portal.report.keypad-report.show-report', compact(['keypad']));
     }
 }

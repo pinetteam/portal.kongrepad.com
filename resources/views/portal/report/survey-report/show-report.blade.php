@@ -1,10 +1,10 @@
 @extends('layout.portal.common')
-@section('title', $participant->fullname . ' | '. $survey->title . ' | ' . __('common.votes'))
+@section('title', $survey->title .' | ' . __('common.report'))
 @section('body')
-    <div class="card text-bg-dark">
+    <div class="card text-bg-dark" xmlns="http://www.w3.org/1999/html">
         <div class="card-header">
             <h1 class="text-center">
-                <span class="fa-regular fa-square-poll-vertical fa-fade"></span> <small>"{{ $survey->title }}"</small> {{ __('common.survey') }}
+                <span class="fa-regular fa-square-poll-vertical fa-fade"></span> <small>"{{ $survey->title }}"</small> {{ __('common.report') }}
             </h1>
             <div class="table-responsive">
                 <table class="table table-dark table-striped-columns table-bordered">
@@ -32,22 +32,26 @@
         </div>
     </div>
     <div class="card text-bg-dark">
-        <div class="card-header">
-            <h1 class="m-0 text-center"><span class="fa-duotone fa-option fa-fade"></span> <small>"{{ $participant->fullname }}"</small> {{ __('common.votes') }}</h1>
-        </div>
-        <div class="card-body p-0">
+        <div class="card-body">
             <ol class="list-group list-group-numbered">
-                @foreach($survey_votes as $vote)
+                @foreach($survey->questions as $question)
                     <li class="list-group-item d-flex justify-content-between align-items-start bg-dark border-dark-subtle text-white">
                         <div class="ms-2 w-100 overflow-hidden">
-                            <div class="fw-bold">{{ $vote->question->question }}</div>
+                            <div class="fw-bold">{{ $question->question }}</div>
                             <hr />
-                            <ul class="list-group">
-                            @foreach($vote->question->options as $option)
-                                @if($vote->option == $option)
-                                        <li class="list-group-item list-group-item-success d-flex justify-content-between align-items-start border-dark-subtle text-dark text-body-emphasis overflow-scroll">{{$option->option}}</li>
-                                @elseif($vote->option != $option)
-                                        <li class="list-group-item d-flex justify-content-between align-items-start bg-dark border-dark text-white border-dark-subtle overflow-scroll">{{$option->option}}</li>
+                            @foreach($question->options as $option)
+                                @if($question->votes->count() != 0)
+                                    <div class="progress mt-2 h-25" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success text-black text-center p-2 overflow-visible" style="width: {{ $option->votes->count() / $question->votes->count()*100 }}%">
+                                            {{ $option->option }} ({{$option->votes->count() / $question->votes->count()*100}}%)
+                                        </div>
+                                    </div>
+                                @elseif($question->votes->count() == 0)
+                                    <div class="progress mt-2 h-25" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success text-black text-center p-2 overflow-visible" style="width: {{ $option->votes->count()}}%">
+                                            {{ $option->option }} ({{ $option->votes->count() }}%)
+                                        </div>
+                                    </div>
                                 @endif
                             @endforeach
                         </div>

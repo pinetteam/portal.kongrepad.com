@@ -80,9 +80,6 @@
                                         <a class="btn btn-info btn-sm" href="{{ route("portal.survey-report.question.chart",['question_id'=>$question->id, 'survey_id'=>$survey->id]) }}" title="{{ __('common.results') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.results') }} ">
                                             <span class="fa-regular fa-presentation-screen"></span>
                                         </a>
-                                        <a class="btn btn-success btn-sm" href="" title="{{ __('common.documents') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.documents') }}">
-                                            <span class="fa-regular fa-file-arrow-down"></span>
-                                        </a>
                                     </div>
                                 </td>
                             </tr>

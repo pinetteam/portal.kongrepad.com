@@ -56,12 +56,12 @@ class SurveyReportController extends Controller
         $votes = Auth::user()->customer->surveyVotes()->where('question_id', $question_id)->paginate(20);
         return view('portal.report.survey-report.participant.index', compact(['votes','question']));
     }
+    public function showReport(string $survey){
+        $survey = Auth::user()->customer->surveys()->findOrFail($survey);
+        return view('portal.report.survey-report.show-report', compact(['survey']));
+    }
     public function showScreen(string $survey){
         $survey = Auth::user()->customer->surveys()->findOrFail($survey);
-        $on_vote = [
-            'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
-            'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
-        ];
-        return view('portal.report.survey-report.show-screen', compact(['survey', 'on_vote']));
+        return view('service.survey-board.index', compact(['survey']));
     }
 }

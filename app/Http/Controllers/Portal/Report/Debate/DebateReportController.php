@@ -25,17 +25,6 @@ class DebateReportController extends Controller
         }
         return view('portal.report.debate-report.index', $data, compact(['debates', 'on_vote']));
     }
-    public function show(string $debate){
-        $title = Auth::user()->customer->debates()->findOrFail($debate);
-        $teams = Auth::user()->customer->teams()->where('debate_id', $debate)->paginate(20);
-        $data = [];
-        foreach($teams as $team) {
-            $data['label'][] = $team->title;
-            $data['data'][] = (int) $team->votes->count();
-        }
-        $data['chart_data'] = json_encode($data);
-        return view('portal.report.debate-report.show', $data ,compact(['teams','title']));
-    }
     public function showChart(string $debate)
     {
         $title = Auth::user()->customer->debates()->findOrFail($debate);
@@ -53,5 +42,11 @@ class DebateReportController extends Controller
         $title = Auth::user()->customer->debates()->findOrFail($debate);
         $votes = Auth::user()->customer->debateVotes()->where('debate_id', $debate)->paginate(20);
         return view('portal.report.debate-report.participant.index', compact(['votes','title']));
+    }
+    public function showReport(string $debate_id)
+    {
+        $debate = Auth::user()->customer->debates()->findOrFail($debate_id);
+        $teams = Auth::user()->customer->teams()->where('debate_id', $debate_id)->paginate(20);
+        return view('portal.report.debate-report.show-report', compact(['debate', 'teams']));
     }
 }
