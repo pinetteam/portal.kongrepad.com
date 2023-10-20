@@ -403,7 +403,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '30',
                 'program_id' => 11,
-                'speaker_id' => 18,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => 'Soru & Cevap & Tartışma',
                 'start_at' => '2023-11-02 12:00',
