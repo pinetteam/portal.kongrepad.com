@@ -273,5 +273,6 @@ return [
     'vote-at' => 'Vote at',
     'vote' => 'Vote',
     'keypad-voting-started' => 'Keypad Voting Started',
-    'debate-voting-started' => 'Debate Voting Started'
+    'debate-voting-started' => 'Debate Voting Started',
+    'debate-program' => 'Debate Program'
 ];

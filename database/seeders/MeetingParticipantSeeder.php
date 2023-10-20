@@ -178,6 +178,8 @@ class MeetingParticipantSeeder extends Seeder
         $faker162 = Factory::create();
         $faker163 = Factory::create();
         $faker164 = Factory::create();
+        $faker165 = Factory::create();
+        $faker166 = Factory::create();
 
         $username1 = Str::uuid()->toString();
         $username2 = Str::uuid()->toString();
@@ -343,6 +345,8 @@ class MeetingParticipantSeeder extends Seeder
         $username162 = Str::uuid()->toString();
         $username163 = Str::uuid()->toString();
         $username164 = Str::uuid()->toString();
+        $username165 = Str::uuid()->toString();
+        $username166 = Str::uuid()->toString();
 
         Participant::insert([
             [
@@ -601,8 +605,8 @@ class MeetingParticipantSeeder extends Seeder
                 'meeting_id' => '4',
                 'username' => $username13,
                 'title' => null,
-                'first_name' => 'Deniz Can',
-                'last_name' => 'Güven',
+                'first_name' => 'Asude',
+                'last_name' => 'Aksoy',
                 'identification_number' => null,
                 'organisation' => $faker13->company,
                 'email' => $faker13->companyEmail,
@@ -958,8 +962,8 @@ class MeetingParticipantSeeder extends Seeder
                 'meeting_id' => '4',
                 'username' => $username30,
                 'title' => null,
-                'first_name' => 'Nalan Akyürek',
-                'last_name' => $faker30->lastName,
+                'first_name' => 'Nalan',
+                'last_name' => 'Akyürek',
                 'identification_number' => null,
                 'organisation' => $faker30->company,
                 'email' => $faker30->companyEmail,
@@ -1756,8 +1760,8 @@ class MeetingParticipantSeeder extends Seeder
                 'meeting_id' => '4',
                 'username' => $username68,
                 'title' => null,
-                'first_name' => 'Fahri',
-                'last_name' => 'Akgül',
+                'first_name' => 'İsmail',
+                'last_name' => 'Bayrakçı',
                 'identification_number' => null,
                 'organisation' => $faker68->company,
                 'email' => $faker68->companyEmail,
@@ -3226,8 +3230,8 @@ class MeetingParticipantSeeder extends Seeder
                 'meeting_id' => '4',
                 'username' => $username138,
                 'title' => null,
-                'first_name' => 'Devrim',
-                'last_name' => 'Çabuk',
+                'first_name' => 'Mehmet',
+                'last_name' => 'Artaç',
                 'identification_number' => null,
                 'organisation' => $faker138->company,
                 'email' => $faker138->companyEmail,
@@ -3782,6 +3786,48 @@ class MeetingParticipantSeeder extends Seeder
                 'password' => $faker164->password,
                 'last_login_ip' => $faker164->ipv4,
                 'last_login_agent' => $faker164->userAgent,
+                'last_login_datetime' => date('Y-m-d H:i:s'),
+                'last_activity' => now(),
+                'type' => 'attendee',
+                'enrolled' => 0,
+                'gdpr_consent' => 0,
+                'status' => 1,
+            ],
+            [
+                'meeting_id' => '4',
+                'username' => $username165,
+                'title' => null,
+                'first_name' => 'Özlem',
+                'last_name' => 'Er',
+                'identification_number' => null,
+                'organisation' => $faker165->company,
+                'email' => $faker165->companyEmail,
+                'phone_country_id' => '223',
+                'phone' => $faker165->phoneNumber,
+                'password' => $faker165->password,
+                'last_login_ip' => $faker165->ipv4,
+                'last_login_agent' => $faker165->userAgent,
+                'last_login_datetime' => date('Y-m-d H:i:s'),
+                'last_activity' => now(),
+                'type' => 'attendee',
+                'enrolled' => 0,
+                'gdpr_consent' => 0,
+                'status' => 1,
+            ],
+            [
+                'meeting_id' => '4',
+                'username' => $username166,
+                'title' => null,
+                'first_name' => 'Nuri',
+                'last_name' => 'Karadurmuş',
+                'identification_number' => null,
+                'organisation' => $faker166->company,
+                'email' => $faker166->companyEmail,
+                'phone_country_id' => '223',
+                'phone' => $faker166->phoneNumber,
+                'password' => $faker166->password,
+                'last_login_ip' => $faker166->ipv4,
+                'last_login_agent' => $faker166->userAgent,
                 'last_login_datetime' => date('Y-m-d H:i:s'),
                 'last_activity' => now(),
                 'type' => 'attendee',

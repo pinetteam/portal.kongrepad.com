@@ -568,7 +568,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 19,
-                'speaker_id' => 33,
+                'speaker_id' => 165,
                 'code' => null,
                 'title' => '1.Basamak mKHDAK Tedavisinde Pembrolizumab’ın Olgularla 5 Yıllık Güncel Sonuçları',
                 'start_at' => '2023-11-03 10:30',
@@ -583,7 +583,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 19,
-                'speaker_id' => 34,
+                'speaker_id' => 166,
                 'code' => null,
                 'title' => '1.Basamak mKHDAK Tedavisinde Pembrolizumab’ın Olgularla 5 Yıllık Güncel Sonuçları',
                 'start_at' => '2023-11-03 10:30',
@@ -1377,7 +1377,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             ],
             [
                 'sort_order' => '190',
-                'program_id' => 49,
+                'program_id' => 50,
                 'speaker_id' => 81,
                 'code' => 'S-19',
                 'title' => 'Akciğer Kanserinde Moleküler Testlerin Gerçek Yaşam Verileri: Tek Merkez Deneyimi',
