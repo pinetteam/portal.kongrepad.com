@@ -68,8 +68,9 @@
                     @foreach($debate->teams as $team)
                         <tr>
                             <td>
-                                @if($team->logo)
-                                    <img src="{{ $team->logo }}" alt="{{ $team->title }}" class="img-thumbnail" style="height:36px;" />
+                                @if(isset($team->logo_name))
+                                    <img src="{{ asset('storage/team-logos/' . $team->logo_name . '.' . $team->logo_extension) }}" alt="{{ $team->title }}"
+                                         class="img-thumbnail" style="height:36px;"/>
                                 @else
                                     <i class="text-info">{{ __('common.unspecified') }}</i>
                                 @endif

@@ -7,6 +7,8 @@ use App\Http\Requests\Portal\Meeting\Hall\Program\ProgramRequest;
 use App\Http\Resources\Portal\Meeting\Hall\Program\ProgramResource;
 use App\Models\Meeting\Hall\Program\Program;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
 class ProgramController extends Controller
@@ -46,9 +48,16 @@ class ProgramController extends Controller
             $program->code = $request->input('code');
             $program->title = $request->input('title');
             $program->description = $request->input('description');
-            if ($request->has('logo')) {
-                $logo = Image::make($request->file('logo'))->encode('data-url');
-                $program->logo = $logo;
+            if ($request->hasFile('logo')) {
+                $file = $request->file('logo');
+                $file_name = Str::uuid()->toString();
+                $file_extension = $file->getClientOriginalExtension();
+                if(Storage::putFileAs('public/program-logos', $request->file('logo'), $file_name . '.' . $file_extension)) {
+                    $program->logo_name = $file_name;
+                    $program->logo_extension = $file_extension;
+                } else {
+                    return back()->with('create_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
+                }
             }
             $program->start_at = $request->input('start_at');
             $program->finish_at = $request->input('finish_at');
@@ -111,9 +120,16 @@ class ProgramController extends Controller
             $program->code = $request->input('code');
             $program->title = $request->input('title');
             $program->description = $request->input('description');
-            if ($request->has('logo')) {
-                $logo = Image::make($request->file('logo'))->encode('data-url');
-                $program->logo = $logo;
+            if ($request->hasFile('logo')) {
+                $file = $request->file('logo');
+                $file_name = Str::uuid()->toString();
+                $file_extension = $file->getClientOriginalExtension();
+                if(Storage::putFileAs('public/program-logos', $request->file('logo'), $file_name . '.' . $file_extension)) {
+                    $program->logo_name = $file_name;
+                    $program->logo_extension = $file_extension;
+                } else {
+                    return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
+                }
             }
             $program->start_at = $request->input('start_at');
             $program->finish_at = $request->input('finish_at');

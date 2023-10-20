@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('code', 255)->nullable();
             $table->string('title', 511);
             $table->text('description')->nullable();
-            $table->binary('logo')->nullable();
+            $table->string('logo_name')->nullable();
+            $table->string('logo_extension')->nullable();
             $table->dateTime('start_at')->nullable();
             $table->dateTime('finish_at')->nullable();
             $table->enum('type', ['debate', 'other', 'session'])->default('session');
@@ -32,7 +33,6 @@ return new class extends Migration
             $table->foreign('deleted_by')->on('users')->references('id');
             $table->foreign('hall_id')->on('meeting_halls')->references('id');
         });
-        DB::statement('ALTER TABLE meeting_hall_programs MODIFY logo MEDIUMBLOB NULL');
     }
     public function down(): void
     {

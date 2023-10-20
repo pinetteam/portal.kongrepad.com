@@ -12,8 +12,9 @@
                         <tr>
                             <th scope="row" class="text-end w-25">{{ __('common.logo') }}:</th>
                             <td class="text-start w-25">
-                                @if($team->logo)
-                                    <img src="{{ $team->logo }}" alt="{{ $team->title }}" class="img-thumbnail img-fluid" />
+                                @if(isset($team->logo_name))
+                                    <img src="{{ asset('storage/team-logos/' . $team->logo_name . '.' . $team->logo_extension) }}" alt="{{ $team->title }}"
+                                         class="img-thumbnail" style="height:36px;"/>
                                 @else
                                     <i class="text-info">{{ __('common.unspecified') }}</i>
                                 @endif

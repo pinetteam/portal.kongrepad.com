@@ -7,6 +7,8 @@ use App\Http\Requests\Portal\Meeting\Hall\Program\Debate\Team\TeamRequest;
 use App\Http\Resources\Portal\Meeting\Hall\Program\Debate\Team\TeamResource;
 use App\Models\Meeting\Hall\Program\Debate\Team\Team;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
 class TeamController extends Controller
@@ -18,9 +20,16 @@ class TeamController extends Controller
             $team->sort_order = $request->input('sort_order');
             $team->debate_id = $request->input('debate_id');
             $team->code = $request->input('code');
-            if ($request->has('logo')) {
-                $logo = Image::make($request->file('logo'))->encode('data-url');
-                $team->logo = $logo;
+            if ($request->hasFile('logo')) {
+                $file = $request->file('logo');
+                $file_name = Str::uuid()->toString();
+                $file_extension = $file->getClientOriginalExtension();
+                if(Storage::putFileAs('public/team-logos', $request->file('logo'), $file_name . '.' . $file_extension)) {
+                    $team->logo_name = $file_name;
+                    $team->logo_extension = $file_extension;
+                } else {
+                    return back()->with('create_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
+                }
             }
             $team->title = $request->input('title');
             $team->description = $request->input('description');
@@ -50,9 +59,16 @@ class TeamController extends Controller
             $team->sort_order = $request->input('sort_order');
             $team->debate_id = $request->input('debate_id');
             $team->code = $request->input('code');
-            if ($request->has('logo')) {
-                $logo = Image::make($request->file('logo'))->encode('data-url');
-                $team->logo = $logo;
+            if ($request->hasFile('logo')) {
+                $file = $request->file('logo');
+                $file_name = Str::uuid()->toString();
+                $file_extension = $file->getClientOriginalExtension();
+                if(Storage::putFileAs('public/team-logos', $request->file('logo'), $file_name . '.' . $file_extension)) {
+                    $team->logo_name = $file_name;
+                    $team->logo_extension = $file_extension;
+                } else {
+                    return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
+                }
             }
             $team->title = $request->input('title');
             $team->description = $request->input('description');

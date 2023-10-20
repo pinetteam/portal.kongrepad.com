@@ -17,8 +17,9 @@
                                 <tr>
                                     <th scope="row" class="text-end w-50">{{ __('common.logo') }}:</th>
                                     <td class="text-start w-50">
-                                        @if($program->logo)
-                                            <img src="{{ $program->logo }}" alt="{{ $program->title }}" class="img-thumbnail img-fluid" />
+                                        @if(isset($program->logo_name))
+                                            <img src="{{ asset('storage/program-logos/' . $program->logo_name . '.' . $program->logo_extension) }}" alt="{{ $program->title }}"
+                                                 class="img-thumbnail" style="height:36px;"/>
                                         @else
                                             <i class="text-info">{{ __('common.unspecified') }}</i>
                                         @endif

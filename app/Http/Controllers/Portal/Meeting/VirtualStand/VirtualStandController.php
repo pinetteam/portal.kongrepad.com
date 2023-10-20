@@ -36,7 +36,7 @@ class VirtualStandController extends Controller
                     $virtual_stand->file_extension = $file_extension;
                     $virtual_stand->file_size = $request->file('file')->getSize();
                 } else {
-                    return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
+                    return back()->with('create_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
                 }
                 $img = Image::make($request->file('file'));
                 if(Storage::put('public/virtual-stands/' . $file_name. '_grayscale' . '.' .$file_extension, $img->greyscale()->encode())) {

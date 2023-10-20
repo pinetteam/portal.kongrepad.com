@@ -14,7 +14,8 @@ class TeamResource extends JsonResource
             'sort_order' => $this->sort_order,
             'debate_id' => $this->debate_id,
             'code' => $this->code,
-            'logo' => $this->logo ? explode(",", $this->logo)[1] : null,
+            'logo_name' => $this->logo_name,
+            'logo_extension' => $this->logo_extension,
             'title' => $this->title,
             'description' => $this->description,
             ];
