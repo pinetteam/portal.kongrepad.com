@@ -37,8 +37,8 @@
                                 <td rowspan="1">{{ $program->code }}</td>
                                 <td rowspan="1">{{ $program->title }}</td>
                                 <td rowspan="1">
-                                    @if($program->logo)
-                                        <img src="{{ $program->logo }}" alt="{{ $program->title }}"
+                                    @if(isset($program->logo_name))
+                                        <img src="{{ asset('storage/program-logos/' . $program->logo_name . '.' . $program->logo_extension) }}" alt="{{ $program->title }}"
                                              class="img-thumbnail" style="height:36px;"/>
                                     @else
                                         <i class="text-info">{{ __('common.unspecified') }}</i>

@@ -17,8 +17,9 @@ return new class extends Migration
             $table->unsignedInteger('sort_order')->nullable();
             $table->unsignedBigInteger('debate_id')->index();
             $table->string('code', 255)->nullable();
-            $table->binary('logo')->nullable();
             $table->string('title', 511);
+            $table->string('logo_name')->nullable();
+            $table->string('logo_extension')->nullable();
             $table->text('description')->nullable();
             $table->unsignedBigInteger('created_by')->index()->nullable();
             $table->unsignedBigInteger('updated_by')->index()->nullable();
@@ -30,7 +31,6 @@ return new class extends Migration
             $table->foreign('deleted_by')->on('users')->references('id');
             $table->foreign('debate_id')->on('meeting_hall_program_debates')->references('id');
         });
-        DB::statement('ALTER TABLE meeting_hall_program_debate_teams MODIFY logo MEDIUMBLOB NULL');
     }
 
     /**

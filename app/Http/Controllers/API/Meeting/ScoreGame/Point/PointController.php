@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\Meeting\ScoreGame\Point;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\API\Meeting\ScoreGame\Point\PointResource;
 use App\Models\Meeting\ScoreGame\Point\Point;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PointController extends Controller
@@ -24,7 +25,7 @@ class PointController extends Controller
             return [
                 'data' => null,
                 'status' => false,
-                'errors' => ["Yanlış qr code"]
+                'errors' => ["Geçersiz bir kare kod okuttunuz!"]
             ];
         }
         $qr_code = $request->user()->meeting->qrCodes()->get()->where('code', $request->input('code'))->first();
@@ -32,7 +33,7 @@ class PointController extends Controller
             return [
                 'data' => null,
                 'status' => false,
-                'errors' => ["Bu qr code daha önce okutulmuş"]
+                'errors' => ["Bu kare kodu daha önceden gösterdiniz!"]
             ];
         }
 
@@ -42,8 +43,14 @@ class PointController extends Controller
                 'status' => false,
                 'errors' => ["Daha önce okutulmuş veya yanlış qr code"]
             ];
+        } elseif (!Carbon::parse($qr_code->start_at)->isPast() || Carbon::parse($qr_code->finish_at)->isPast() ) {
+            return [
+                'data' => null,
+                'status' => false,
+                'errors' => ["Bu kare kod şu anda aktif değildir!"]
+            ];
         }
-            $point = new Point();
+        $point = new Point();
         $point->qr_code_id = $qr_code->id;
         $point->participant_id = $request->user()->id;
         $point->point = $qr_code->point;
