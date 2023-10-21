@@ -63,6 +63,10 @@ class MeetingHallProgramChairSeeder extends Seeder
                 'chair_id' => '122',
             ],
             [
+                'program_id' => 21,
+                'chair_id' => '123',
+            ],
+            [
                 'program_id' => 24,
                 'chair_id' => '126',
             ],

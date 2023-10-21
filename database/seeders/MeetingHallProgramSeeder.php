@@ -18,7 +18,7 @@ class MeetingHallProgramSeeder extends Seeder
                 'sort_order' => '10',
                 'code' => null,
                 'title' => 'Uzmanına Danış: Vakalarla Meme Kanseri',
-                'description' => 'Panelistler; Banu Öztürk, Didem Tunalı, Meral Günaldı, Berna Bozkurt Duman',
+                'description' => null,
                 'start_at' => '2023-11-01 13:30',
                 'finish_at' => '2023-11-01 14:30',
                 'type' => 'session',
