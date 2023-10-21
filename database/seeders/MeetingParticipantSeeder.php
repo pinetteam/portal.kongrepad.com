@@ -2436,7 +2436,7 @@ class MeetingParticipantSeeder extends Seeder
                 'username' => $username99,
                 'title' => null,
                 'first_name' => 'Engin',
-                'last_name' => 'Handem',
+                'last_name' => 'Hendem',
                 'identification_number' => null,
                 'organisation' => $faker99->company,
                 'email' => $faker99->companyEmail,

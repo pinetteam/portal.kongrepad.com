@@ -54,6 +54,9 @@
                                     <a class="btn btn-info btn-sm" href="{{ route("portal.debate-report.debate.report",['debate_id'=>$debate->id]) }}" title="{{ __('common.report') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.report') }} ">
                                         <span class="fa-regular fa-page"></span>
                                     </a>
+                                    <a class="btn btn-success btn-sm" href="{{ route("service.debate-report.start",['debate_id'=>$debate->id]) }}" title="{{ __('common.screen') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.screen') }} ">
+                                        <span class="fa-regular fa-presentation-screen"></span>
+                                    </a>
                                 </div>
                             </td>
                         </tr>

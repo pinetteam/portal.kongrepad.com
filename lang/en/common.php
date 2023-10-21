@@ -274,5 +274,8 @@ return [
     'vote' => 'Vote',
     'keypad-voting-started' => 'Keypad Voting Started',
     'debate-voting-started' => 'Debate Voting Started',
-    'debate-program' => 'Debate Program'
+    'debate-program' => 'Debate Program',
+    'debate-screen' => 'Debate Screen',
+    'keypad-screen' => 'Keypad Screen',
+    'survey-screen' => 'Survey Screen',
 ];

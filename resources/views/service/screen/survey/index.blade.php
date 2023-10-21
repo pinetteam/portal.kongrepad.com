@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>{{ __('common.questions-screen') }} | {{ config('app.name') }}</title>
+        <title>{{ __('common.survey-screen') }} | {{ config('app.name') }}</title>
         <meta name="csrf-token" content="{{ csrf_token() }}" />
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
     @vite(['resources/sass/app.scss'])
@@ -12,23 +12,28 @@
     </head>
     <body class="d-flex bg-dark h-100 align-items-center">
         <div class="container-fluid h-100">
-            <div class="row h-100">
+            <div class="row h-100 align-items-center">
                 <div id="carouselExample" class="carousel slide d-flex">
                     <div class="carousel-inner h-100">
                         <div class="carousel-item active">
-                            <h1>{{ $survey->title }}</h1>
+                            <h1 class="text-center text-white">{{ $survey->title }}</h1>
+                            <h2 class="text-center text-white">{{ $survey->description }}</h2>
                         </div>
                         @foreach($survey->questions as $question)
-                            <div class="carousel-item">
-                                <div class="fw-bold text-white fs-6">{{ $question->question }}</div>
-                                <hr />
-                                <ol class="list-group">
-                                    @foreach($question->options as $option)
-                                        <li class="list-group-item d-flex justify-content-between align-items-start bg-dark border-dark text-white">
-                                        {{ $option->option }}<span class="badge badge-warning">({{$option->votes->count()}} votes)</span>
-                                        </li>
-                                    @endforeach
-                                </ol>
+                            <div class="carousel-item p-5">
+                                <div class="card bg-dark shadow-lg m-5">
+                                    <div class="card-body overflow-scroll text-center">
+                                        <li class=" list-group-item fw-bold text-white fs-4 bg-dark border-dark">{{ $question->question }}</li>
+                                        <hr />
+                                        <ol class="list-group list-group-flush align-items-start justify-content-center">
+                                            @foreach($question->options as $option)
+                                                <li class="list-group-item d-flex bg-dark border-dark text-white">
+                                                    {{ $option->option }}<span class="p-1 mx-2 badge bg-success rounded-4 text-start text-black">({{ $option->votes->count() }} Votes)</span>
+                                                </li>
+                                            @endforeach
+                                        </ol>
+                                    </div>
+                                </div>
                             </div>
                         @endforeach
                     </div>
