@@ -46,14 +46,14 @@
             <div class="col">
                 <div class="card text-bg-dark border-0">
                     <div class="card-body">
-                        <img src="{{ asset('images/home-screenshot-01.png') }}" class="img-fluid rounded bg-dark" alt="KongrePad 01" />
+                        <img src="{{ asset('images/home-screenshot-01.png') }}" class="img-fluid rounded shadow" alt="KongrePad 01" />
                     </div>
                 </div>
             </div>
             <div class="col">
                 <div class="card text-bg-dark border-0">
                     <div class="card-body">
-                        <img src="{{ asset('images/home-screenshot-02.png') }}" class="img-fluid rounded bg-dark" alt="KongrePad 02" />
+                        <img src="{{ asset('images/home-screenshot-02.png') }}" class="img-fluid rounded shadow" alt="KongrePad 02" />
                     </div>
                 </div>
             </div>
