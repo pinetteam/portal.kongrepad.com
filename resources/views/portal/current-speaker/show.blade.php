@@ -17,9 +17,7 @@
         cluster: 'eu',
         forceTLS: true
     });
-
     var channel = pusher.subscribe('my-channel');
-
     channel.bind('form-submitted', function(data) {
         var node = document.createElement('li');
         var textNode = document.createTextNode(JSON.stringify(data.text));

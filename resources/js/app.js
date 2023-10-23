@@ -1,15 +1,17 @@
 import './bootstrap';
+
+// Tooltips
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
 
+// Loading bar
 window.onload = function() {
     document.getElementById("kp-loading").style.visibility = "hidden";
 }
 
+// Moment & TempusDominus timing packages
 import moment from'moment';
-//window.moment = Moment;
 import { TempusDominus } from '@eonasdan/tempus-dominus';
-
 function initializeDatePicker(element) {
     const datePicker = new TempusDominus(element, {
         localization: {
@@ -37,8 +39,6 @@ function initializeDatePicker(element) {
     });
     datePicker.dates.formatInput = date => moment(date).format('YYYY-MM-DD');
 }
-
-// Saat seçiciyi başlatan fonksiyon
 function initializeTimePicker(element) {
     const timePicker = new TempusDominus(element, {
         localization: {
@@ -67,8 +67,6 @@ function initializeTimePicker(element) {
     });
     timePicker.dates.formatInput = date => moment(date).format('HH:mm');
 }
-
-// Tarih ve saat seçiciyi başlatan fonksiyon
 function initializeDateTimePicker(element) {
     const dateTimePicker = new TempusDominus(element, {
         localization: {
@@ -97,8 +95,6 @@ function initializeDateTimePicker(element) {
     });
     dateTimePicker.dates.formatInput = date => moment(date).format('YYYY-MM-DD HH:mm');
 }
-
-// Tüm datetime picker alanlarını seçip ilgili başlatma fonksiyonunu çağıran fonksiyon
 function initializeDateTimePickers() {
     document.querySelectorAll('.date-picker').forEach((element) => {
         initializeDatePicker(element);
@@ -113,5 +109,3 @@ function initializeDateTimePickers() {
     });
 }
 initializeDateTimePickers();
-
-
