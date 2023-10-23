@@ -50,11 +50,11 @@ class SurveyReportController extends Controller
         $data['chart_data'] = json_encode($data);
         return view('portal.report.survey-report.chart.index', $data ,compact(['options', 'question']));
     }
-    public function showParticipants(string $survey, string $question_id)
+    public function showParticipants(string $survey)
     {
-        $question= Auth::user()->customer->surveyQuestions()->findOrFail($question_id);
-        $votes = Auth::user()->customer->surveyVotes()->where('question_id', $question_id)->paginate(20);
-        return view('portal.report.survey-report.participant.index', compact(['votes','question']));
+        $survey = Auth::user()->customer->surveys()->findOrFail($survey);
+        $votes = \App\Models\Meeting\Survey\Vote\Vote::where('survey_id', $survey->id)->groupBy('participant_id')->get();
+        return view('portal.report.survey-report.participant.index', compact(['survey','votes']));
     }
     public function showReport(string $survey){
         $survey = Auth::user()->customer->surveys()->findOrFail($survey);

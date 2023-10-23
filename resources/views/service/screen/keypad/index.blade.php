@@ -18,25 +18,15 @@
 </div>
 @if($keypad)
     <div class="ms-2 w-100 overflow-hidden">
-        <div class="card bg-dark mx-5 px-5">
+        <div class="card bg-dark shadow-lg m-5 px-5">
             <div class="card-body">
                 <div class="fw-bold text-center text-white fs-3">{{ isset($keypad->title) ? $keypad->title . ' ' : null }}{{ $keypad->keypad }}</div>
                 <hr />
-                <ol class="list-group">
+                <ol class="list-group align-content-center">
                     @foreach($keypad->options as $option)
-                        @if($keypad->votes->count() != 0)
-                            <div class="progress mt-2 h-25 mx-5" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success text-black text-center p-2 overflow-visible" style="width: {{ $option->votes->count() / $keypad->votes->count()*100 }}%">
-                                    {{ $option->option }} ({{ $option->votes->count() }} Votes)
-                                </div>
-                            </div>
-                        @elseif($keypad->votes->count() == 0)
-                            <div class="progress mt-2 h-25 mx-5" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success text-black text-center p-2 overflow-visible" style="width: {{ $option->votes->count()}}%">
-                                    {{ $option->option }} ({{ $option->votes->count() }} Votes)
-                                </div>
-                            </div>
-                @endif
+                        <li class="list-group-item overflow-scroll bg-dark border-dark text-white">
+                            {{ $option->option }}<span class="p-1 mx-2 badge bg-success rounded-4 text-start text-black">({{ $option->votes->count() }} Votes)</span>
+                        </li>
                 @endforeach
             </div>
         </div>

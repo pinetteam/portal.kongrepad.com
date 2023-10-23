@@ -27,7 +27,7 @@
                                         <hr />
                                         <ol class="list-group list-group-flush align-items-start justify-content-center">
                                             @foreach($question->options as $option)
-                                                <li class="list-group-item d-flex bg-dark border-dark text-white">
+                                                <li class="list-group-item overflow-scroll bg-dark border-dark text-white">
                                                     {{ $option->option }}<span class="p-1 mx-2 badge bg-success rounded-4 text-start text-black">({{ $option->votes->count() }} Votes)</span>
                                                 </li>
                                             @endforeach

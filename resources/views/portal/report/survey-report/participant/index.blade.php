@@ -1,21 +1,16 @@
 @extends('layout.portal.common')
-@section('title', $question->question . ' | ' . __('common.participants'))
+@section('title', $survey->title . ' | ' . __('common.participants'))
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">
-            <h1 class="m-0 text-center"><span class="fa-duotone fa-screen-users fa-fade"></span> <small>"{{ $question->question }}"</small> {{ __('common.participants') }}</h1>
+            <h1 class="m-0 text-center"><span class="fa-duotone fa-screen-users fa-fade"></span> <small>"{{ $survey->title }}"</small> {{ __('common.participants') }}</h1>
         </div>
         <div class="card-body p-0">
             <div class="table-responsive">
                 <table class="table table-dark table-striped table-hover">
-                    <caption class="text-end me-3">
-                        {{ $votes->links() }}
-                    </caption>
                     <thead class="thead-dark">
                     <tr>
                         <th scope="col"><span class="fa-regular fa-id-card mx-1"></span> {{ __('common.name') }}</th>
-                        <th scope="col"><span class="fa-regular fa-pen mx-1"></span> {{ __('common.answer') }}</th>
-                        <th scope="col"><span class="fa-regular fa-clock mx-1"></span> {{ __('common.vote-at') }}</th>
                         <th scope="col" class="text-end"></th>
                     </tr>
                     </thead>
@@ -30,11 +25,9 @@
                                 @endif
                                 {{ $vote->participant->full_name }}
                             </td>
-                            <td>{{ $vote->option->option }}</td>
-                            <td>{{ $vote->created_at }}</td>
                             <td class="text-end">
                                 <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
-                                    <a class="btn btn-info btn-sm" href="{{ route("portal.meeting.participant.survey",['meeting'=> $vote->participant->meeting->id, 'participant' => $vote->participant->id, 'survey' => $vote->survey->id]) }}" title="{{ __('common.show-report') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
+                                    <a class="btn btn-info btn-sm" href="{{ route("portal.meeting.participant.survey",['meeting'=> $survey->meeting->id, 'participant' => $vote->participant->id, 'survey' => $survey->id]) }}" title="{{ __('common.show-report') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
                                         <span class="fa-regular fa-eye"></span>
                                     </a>
                                 </div>

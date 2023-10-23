@@ -60,8 +60,8 @@
                             </td>
                             <td class="text-end">
                                 <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
-                                    <a class="btn btn-info btn-sm" href="{{ route("portal.survey-report.show",['survey_report'=>$survey->id]) }}" title="{{ __('common.show-report') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
-                                        <span class="fa-regular fa-eye"></span>
+                                    <a class="btn btn-info btn-sm" href="{{ route("portal.survey-report.survey.participants",['survey_id'=>$survey->id]) }}" title="{{ __('common.participants') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.participants') }}">
+                                        <span class="fa-regular fa-user"></span>
                                     </a>
                                     <a class="btn btn-success btn-sm" href="{{ route("portal.survey-report.report",['survey_id'=>$survey->id]) }}" title="{{ __('common.report') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.report') }} ">
                                         <span class="fa-regular fa-page"></span>

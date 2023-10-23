@@ -51,7 +51,7 @@ Route::prefix('portal')->name('portal.')->group(function () {
         Route::resource('/survey-report', \App\Http\Controllers\Portal\Report\Survey\SurveyReportController::class)->except(['create']);
         Route::get('/survey-report/{survey_id}/report',[\App\Http\Controllers\Portal\Report\Survey\SurveyReportController::class, 'showReport'])->name('survey-report.report');
         Route::get('/survey-report/{survey_id}/question/{question_id}/chart',[\App\Http\Controllers\Portal\Report\Survey\SurveyReportController::class, 'showChart'])->name('survey-report.question.chart');
-        Route::get('/survey-report/{survey_id}/question/{question_id}/participants',[\App\Http\Controllers\Portal\Report\Survey\SurveyReportController::class, 'showParticipants'])->name('survey-report.question.participants');
+        Route::get('/survey-report/{survey_id}/participants',[\App\Http\Controllers\Portal\Report\Survey\SurveyReportController::class, 'showParticipants'])->name('survey-report.survey.participants');
 
         Route::resource('/keypad-report', \App\Http\Controllers\Portal\Report\Keypad\KeypadReportController::class)->except(['create']);
         Route::get('/keypad-report/{keypad_id}/chart',[\App\Http\Controllers\Portal\Report\Keypad\KeypadReportController::class, 'showChart'])->name('keypad-report.question.chart');
