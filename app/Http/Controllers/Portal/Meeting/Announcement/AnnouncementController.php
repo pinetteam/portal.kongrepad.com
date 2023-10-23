@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Portal\Meeting\Announcement\AnnouncementRequest;
 use App\Http\Resources\Portal\Meeting\Announcement\AnnouncementResource;
 use App\Models\Meeting\Announcement\Announcement;
+use App\Notifications\AnnouncementNotification;
 use Illuminate\Support\Facades\Auth;
 
 class AnnouncementController extends Controller
@@ -28,8 +29,10 @@ class AnnouncementController extends Controller
             $announcement->title = $request->input('title');
             $announcement->status = $request->input('status');
             if ($announcement->save()) {
+                $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
                 $announcement->created_by = Auth::user()->id;
                 $announcement->save();
+                $meeting->participants->first()->notify(new AnnouncementNotification($announcement));
                 return back()->with('success', __('common.created-successfully'));
             } else {
                 return back()->with('create_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();

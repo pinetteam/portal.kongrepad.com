@@ -4,6 +4,7 @@
             <meta charset="utf-8" />
             <meta http-equiv="X-UA-Compatible" content="IE=edge" />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <meta name="apple-itunes-app" content="app-id=6463897045, app-argument=https://apps.apple.com/tr/app/kongrepad/id6463897045">
             <title>Home | {{ config('app.name') }}</title>
             <meta name="csrf-token" content="{{ csrf_token() }}" />
             <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
@@ -39,10 +40,10 @@
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <img class="img-fluid" src="{{ asset('images/homepage.png') }}">
+                                        <img class="img-fluid" src="{{ asset('storage/homepage/homepage.png') }}">
                                     </div>
                                     <div class="col">
-                                        <img class="img-fluid" src="{{ asset('images/dashboard.png') }}">
+                                        <img class="img-fluid" src="{{ asset('storage/homepage/dashboard.png') }}">
                                     </div>
                                 </div>
                             </div>

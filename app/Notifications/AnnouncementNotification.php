@@ -6,13 +6,13 @@ use NotificationChannels\PusherPushNotifications\PusherChannel;
 use NotificationChannels\PusherPushNotifications\PusherMessage;
 use Illuminate\Notifications\Notification;
 
-class DebateNotification extends Notification
+class AnnouncementNotification extends Notification
 {
-    public $hall;
+    public $announcement;
 
-    public function __construct($hall)
+    public function __construct($announcement)
     {
-        $this->hall = $hall;
+        $this->announcement = $announcement;
     }
     public function via($notifiable)
     {
@@ -25,8 +25,7 @@ class DebateNotification extends Notification
             ->iOS()
             ->badge(1)
             ->sound('success')
-            ->body(__('common.debate-voting-started'))
-            ->setOption('apns.data.hall_id', $this->hall->id)
-            ->setOption('apns.data.event', 'debate');
+            ->body($this->announcement->title)
+            ->setOption('apns.data.event', 'announcement');
     }
 }

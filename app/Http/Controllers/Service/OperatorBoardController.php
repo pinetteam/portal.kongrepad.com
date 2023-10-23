@@ -23,6 +23,20 @@ class OperatorBoardController extends Controller
             return back()->with('error', __('common.this-is-the-last-program'));
         else {
             $program = $programs->get($program_order);
+            foreach($programs as $temp_program){
+                if ($temp_program->debates->count() > 0 && $temp_program->id != $program->id) {
+                    foreach($temp_program->debates as $debate){
+                        $debate->on_vote = 0;
+                        $debate->save();
+                    }
+                }
+                if ($temp_program->sessions->count() > 0 && $temp_program->id != $program->id) {
+                    foreach($temp_program->sessions as $session){
+                        $session->on_air = 0;
+                        $session->save();
+                    }
+                }
+            }
             $program->is_started = 1;
             $program->save();
         }
