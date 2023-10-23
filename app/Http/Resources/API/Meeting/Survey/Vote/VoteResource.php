@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\Portal\Meeting\Survey\Vote;
+namespace App\Http\Resources\API\Meeting\Survey\Vote;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;

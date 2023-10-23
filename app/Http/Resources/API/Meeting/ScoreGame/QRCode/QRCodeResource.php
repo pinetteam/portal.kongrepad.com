@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\Portal\Meeting\ScoreGame\QRCode;
+namespace App\Http\Resources\API\Meeting\ScoreGame\QRCode;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
