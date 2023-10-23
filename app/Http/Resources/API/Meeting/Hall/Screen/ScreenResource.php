@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\Portal\Meeting\Hall\Screen;
+namespace App\Http\Resources\API\Meeting\Hall\Screen;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;

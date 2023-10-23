@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\Portal\Meeting\Hall\Program\Session\Keypad\Vote;
+namespace App\Http\Resources\API\Meeting\Hall\Program\Session\Keypad\Vote;
 
 use App\Models\Customer\Setting\Variable\Variable;
 use Carbon\Carbon;
