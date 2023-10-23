@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('debate_id')->index();
             $table->string('code', 255)->nullable();
             $table->string('title', 511);
-            $table->string('logo_name')->nullable();
+            $table->uuid('logo_name')->unique()->nullable();
             $table->string('logo_extension')->nullable();
             $table->text('description')->nullable();
             $table->unsignedBigInteger('created_by')->index()->nullable();

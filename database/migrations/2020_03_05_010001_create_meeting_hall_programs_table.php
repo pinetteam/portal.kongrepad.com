@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('code', 255)->nullable();
             $table->string('title', 511);
             $table->text('description')->nullable();
-            $table->string('logo_name')->nullable();
+            $table->uuid('logo_name')->nullable();
             $table->string('logo_extension')->nullable();
             $table->dateTime('start_at')->nullable();
             $table->dateTime('finish_at')->nullable();

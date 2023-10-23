@@ -21,14 +21,7 @@ class MeetingVirtualStandSeeder extends Seeder
                 'meeting_id' => '4',
                 'file_name' => 'a44d3e0e-ed42-4f19-b04d-e3eb0d06102e',
                 'file_extension' => 'png',
-                'title' => 'vs-3',
-                'status' => 1
-            ],
-            [
-                'meeting_id' => '4',
-                'file_name' => '6f195556-c062-475c-a900-9a1f02634cf6',
-                'file_extension' => 'png',
-                'title' => 'vs-4',
+                'title' => 'vs-2',
                 'status' => 1
             ],
         ]);
