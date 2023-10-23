@@ -38,19 +38,17 @@
         <div class="card-body p-0">
             <ol class="list-group list-group-numbered">
                 @foreach($survey_votes as $vote)
-                    <li class="list-group-item d-flex justify-content-between align-items-start bg-dark border-dark-subtle text-white">
-                        <div class="ms-2 w-100 overflow-hidden">
-                            <div class="fw-bold">{{ $vote->question->question }}</div>
-                            <hr />
-                            <ul class="list-group">
+                    <li class="list-group-item bg-dark border-0 text-white fw-bold">
+                        {{ $vote->question->question }}
+                        <ol class="list-group list-group-numbered list-group">
                             @foreach($vote->question->options as $option)
                                 @if($vote->option == $option)
-                                        <li class="list-group-item list-group-item-success d-flex justify-content-between align-items-start border-dark-subtle text-dark text-body-emphasis overflow-scroll">{{$option->option}}</li>
+                                    <li class="list-group-item list-group-item-success text-dark border-dark-subtle">{{$option->option}}</li>
                                 @elseif($vote->option != $option)
-                                        <li class="list-group-item d-flex justify-content-between align-items-start bg-dark border-dark text-white border-dark-subtle overflow-scroll">{{$option->option}}</li>
+                                    <li class="list-group-item bg-dark text-white border-dark-subtle">{{$option->option}}</li>
                                 @endif
                             @endforeach
-                        </div>
+                        </ol>
                     </li>
                 @endforeach
             </ol>
