@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\Portal\User\Role;
+namespace App\Http\Resources\API\User\Role;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
