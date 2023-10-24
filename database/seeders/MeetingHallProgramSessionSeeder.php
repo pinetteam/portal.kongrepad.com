@@ -1041,7 +1041,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
                 'code' => 'panel-10-1',
                 'title' => 'Baş Boyun Kanserinde İmmunoterapi',
                 'description' => null,
-                'start_at' => '2023-11-04 14:30',
+                'start_at' => '2023-11-04 14:00',
                 'finish_at' => '2023-11-04 14:20',
                 'on_air' => 0,
                 'questions_limit' => 3,
