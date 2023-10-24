@@ -102,7 +102,7 @@ class MeetingHallProgramSeeder extends Seeder
                 'sort_order' => '70',
                 'code' => null,
                 'title' => 'Açılış Konuşması',
-                'description' => null,
+                'description' => 'Konuşmacı: Başak Oyan Uluç',
                 'logo_name' => null,
                 'logo_extension' => null,
                 'start_at' => '2023-11-02 09:00',

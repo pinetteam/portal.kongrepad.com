@@ -11,10 +11,6 @@ class MeetingHallProgramChairSeeder extends Seeder
     {
         Chair::insert([
             [
-                'program_id' => 7,
-                'chair_id' => '129',
-            ],
-            [
                 'program_id' => 8,
                 'chair_id' => '108',
             ],
