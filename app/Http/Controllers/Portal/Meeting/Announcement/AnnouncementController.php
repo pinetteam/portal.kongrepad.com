@@ -32,7 +32,16 @@ class AnnouncementController extends Controller
                 $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
                 $announcement->created_by = Auth::user()->id;
                 $announcement->save();
-                $meeting->participants->first()->notify(new AnnouncementNotification($announcement));
+                if ($meeting->participants->where('type', 'attendee')->count() > 0){
+                    $meeting->participants->where('type', 'attendee')->first()->notify(new AnnouncementNotification($announcement));
+                }
+                if ($meeting->participants->where('type', 'agent')->count() > 0) {
+                    $meeting->participants->where('type', 'agent')->first()->notify(new AnnouncementNotification($announcement));
+                }
+
+                if ($meeting->participants->where('type', 'team')->count() > 0) {
+                    $meeting->participants->where('type', 'team')->first()->notify(new AnnouncementNotification($announcement));
+                }
                 return back()->with('success', __('common.created-successfully'));
             } else {
                 return back()->with('create_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();

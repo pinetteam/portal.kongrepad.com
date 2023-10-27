@@ -27,6 +27,10 @@ class KeypadNotification extends Notification
             ->sound('success')
             ->body(__('common.keypad-voting-started'))
             ->setOption('apns.data.hall_id', $this->hall->id)
-            ->setOption('apns.data.event', 'keypad');
+            ->setOption('apns.data.event', 'keypad')
+            ->withAndroid(
+                PusherMessage::create()
+                    ->title(__('common.keypad-voting-started'))
+            );
     }
 }

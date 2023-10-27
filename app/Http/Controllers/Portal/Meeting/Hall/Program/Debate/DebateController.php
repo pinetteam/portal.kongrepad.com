@@ -93,7 +93,9 @@ class DebateController extends Controller
                 $debate->voting_started_at = now()->format('Y-m-d H:i');;
                 $debate->voting_finished_at = null;
                 $debate->save();
-                $meeting->participants->first()->notify(new DebateNotification($hall));
+                if ($meeting->participants->where('type', 'attendee')->count() > 0){
+                    $meeting->participants->where('type', 'attendee')->first()->notify(new DebateNotification($hall));
+                }
                 return back()->with('success',__('common.voting-started'));
             }
             else{

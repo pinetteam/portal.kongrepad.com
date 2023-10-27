@@ -26,7 +26,7 @@ class QuestionController extends Controller
         $session = Auth::user()->customer->programSessions()->findOrFail($question->session_id);
         $hall = $session->program->hall;
         if(!$question->selected_for_show && $session->questions()->where('selected_for_show', true)->count() >= $session->questions_limit){
-            return back()->with('error', __('common.you-have-reached-the-question-limit'));
+            return back()->with('error', 'Soru limitine ulaştınız');
         }
         $question->selected_for_show = !$question->selected_for_show;
         if (!$question->save()) {
