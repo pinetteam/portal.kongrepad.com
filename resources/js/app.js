@@ -8,6 +8,9 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 window.onload = function() {
     document.getElementById("kp-loading").style.visibility = "hidden";
 }
+// Chart.js
+import Chart from 'chart.js/auto';
+window.Chart = Chart;
 
 // Moment & TempusDominus timing packages
 import moment from'moment';
