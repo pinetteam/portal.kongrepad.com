@@ -11,7 +11,7 @@ class AnnouncementController extends Controller
     public function index(Request $request)
     {
         return [
-        'data' => AnnouncementResource::collection($request->user()->meeting->announcements()->get()),
+        'data' => AnnouncementResource::collection($request->user()->meeting->announcements()->orderBy('created_at', 'desc')->get()),
         'status' => true,
         'errors' => null
     ];

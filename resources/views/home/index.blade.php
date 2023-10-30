@@ -23,7 +23,7 @@
         </div>
     </div>
     <div class="container" id="kp-home">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-3 gy-3 py-3">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-2 gy-3 py-3">
             <div class="col">
                 <div class="card text-bg-dark border-0">
                     <div class="card-body text-center">
@@ -35,7 +35,7 @@
                                 </a>
                             </div>
                             <div class="col">
-                                <a href="#" target="_blank" title="KongrePad PlayStore">
+                                <a href="https://play.google.com/store/apps/details?id=com.pinet.kongrepad&gl=TR" target="_blank" title="KongrePad PlayStore">
                                     <img src="{{ asset('images/play-store-download.svg') }}" class="img-fluid" alt="KongrePad PlayStore" />
                                 </a>
                             </div>
@@ -47,13 +47,6 @@
                 <div class="card text-bg-dark border-0">
                     <div class="card-body">
                         <img src="{{ asset('images/home-screenshot-01.png') }}" class="img-fluid rounded shadow" alt="KongrePad 01" />
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card text-bg-dark border-0">
-                    <div class="card-body">
-                        <img src="{{ asset('images/home-screenshot-02.png') }}" class="img-fluid rounded shadow" alt="KongrePad 02" />
                     </div>
                 </div>
             </div>

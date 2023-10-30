@@ -22,12 +22,29 @@
             <div class="card-body">
                 <div class="fw-bold text-center text-white fs-3">{{ isset($keypad->title) ? $keypad->title . ' ' : null }}{{ $keypad->keypad }}</div>
                 <hr />
-                <ol class="list-group align-content-center">
-                    @foreach($keypad->options as $option)
-                        <li class="list-group-item overflow-scroll bg-dark border-dark text-white">
-                            {{ $option->option }}<span class="p-1 mx-2 badge bg-success rounded-4 text-start text-black">({{ $option->votes->count() }} Votes)</span>
-                        </li>
-                @endforeach
+                <div class="w-100">
+                    <canvas id="chart"></canvas>
+                </div>
+                <script type="module">
+                    const ctx = document.getElementById('chart');
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                            datasets: [{
+                                data: [12, 19, 3, 5, 2, 3],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                </script>
             </div>
         </div>
     </div>

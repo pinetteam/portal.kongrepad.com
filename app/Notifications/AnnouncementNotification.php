@@ -26,6 +26,10 @@ class AnnouncementNotification extends Notification
             ->badge(1)
             ->sound('success')
             ->body($this->announcement->title)
-            ->setOption('apns.data.event', 'announcement');
+            ->setOption('apns.data.event', 'announcement')
+            ->withAndroid(
+                PusherMessage::create()
+                    ->title($this->announcement->title)
+            );
     }
 }

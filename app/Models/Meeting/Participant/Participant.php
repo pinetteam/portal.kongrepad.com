@@ -75,7 +75,7 @@ class Participant extends Model
     public function routeNotificationFor($channel)
     {
         if($channel === 'PusherPushNotifications'){
-            return 'meeting-'.$this->meeting_id;
+            return 'meeting-' . $this->meeting_id . '-' . $this->type;
         }
 
         $class = str_replace('\\', '.', get_class($this));

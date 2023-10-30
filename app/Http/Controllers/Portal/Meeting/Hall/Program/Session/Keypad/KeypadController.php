@@ -88,7 +88,9 @@ class KeypadController extends Controller
                 $keypad->voting_started_at = now()->format('Y-m-d H:i');;
                 $keypad->voting_finished_at = null;
                 $keypad->save();
-                $meeting->participants->first()->notify(new KeypadNotification($hall));
+                if ($meeting->participants->where('type', 'attendee')->count() > 0){
+                    $meeting->participants->where('type', 'attendee')->first()->notify(new KeypadNotification($hall));
+                }
                 return back()->with('success', __('common.voting-started'));
             }
             else{
