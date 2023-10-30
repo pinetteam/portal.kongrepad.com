@@ -21,6 +21,12 @@ class CustomerSeeder extends Seeder
                 'language' => 'en',
                 'status' => '1',
             ],
+            [
+                'code' => 'test-event',
+                'title' => 'T-Event',
+                'language' => 'en',
+                'status' => '1',
+            ],
         ]);
     }
 }

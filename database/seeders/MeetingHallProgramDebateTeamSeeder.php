@@ -23,7 +23,7 @@ class MeetingHallProgramDebateTeamSeeder extends Seeder
                 'title' => 'Adjuvan',
                 'logo_name' => '291a3752-39a6-47e2-b1bd-20120f9631c6',
                 'logo_extension' => 'png',
-                'description' => 'Mentorlar: Atike Pınar Erdoğan, Bekir Hacıoğlu, Özlem Ercelep'."\n".'Takım 2: Melek Çağlayan, Mustafa Emre Duygulu, Şeyma Eroğlu Savaş, Yaşar Çulha'
+                'description' => 'Mentorlar: Atike Pınar Erdoğan, Bekir Hacıoğlu, Özlem Ercelep'."\n".'Takım 2: Melek Çağlayan, Mustafa Emre Duygulu, Şeyma Eroğlu Savaş, Yaşar Culha'
             ],
             [
                 'debate_id' => '2',

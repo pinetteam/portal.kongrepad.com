@@ -11,12 +11,12 @@ class MeetingHallProgramSessionKeypadSeeder extends Seeder
     {
         Keypad::insert([
             [
-                'session_id' => '1',
-                'keypad' => 'Nadir görülen bir hasta ile karşılaştığınızda ilk bakacağınız kaynak hangisi olur?',
+                'session_id' => '32',
+                'keypad' => 'Evre II  adjuvan KHDAK olan hastalarınızda immünoterapi tedavisi uyguluyor musunuz?',
             ],
             [
-                'session_id' => '1',
-                'keypad' => 'Hastalara kemoterapi dozunu planlarken uyguladığınız yöntem hangisidir?',
+                'session_id' => '32',
+                'keypad' => 'Evre IIIa adjuvan KHDAK olan hastalarınızda immünoterapi tedavisi uyguluyor musunuz?',
             ],
             [
                 'session_id' => '1',

@@ -12,35 +12,19 @@ class MeetingHallProgramSessionKeypadOptionSeeder extends Seeder
         Option::insert([
             [
                 'keypad_id' => '1',
-                'option' => 'Uptodate',
+                'option' => 'Evet',
             ],
             [
                 'keypad_id' => '1',
-                'option' => 'Nccn',
-            ],
-            [
-                'keypad_id' => '1',
-                'option' => 'Esmo',
-            ],
-            [
-                'keypad_id' => '1',
-                'option' => 'Pubmed',
+                'option' => 'Hayır',
             ],
             [
                 'keypad_id' => '2',
-                'option' => 'BSA ne çıkarsa aynı dozda veririm',
+                'option' => 'Evet',
             ],
             [
                 'keypad_id' => '2',
-                'option' => 'Yan etkileri yönetmesi daha kolay olduğunu düşündüğüm için dozları biraz modifiye ederim.',
-            ],
-            [
-                'keypad_id' => '2',
-                'option' => 'Her hastaya BSA 1,5 olacak şekilde veririm.',
-            ],
-            [
-                'keypad_id' => '2',
-                'option' => 'Uygulanacak ilaca göre yaklaşımım değişir.',
+                'option' => 'Hayır',
             ],
         ]);
     }

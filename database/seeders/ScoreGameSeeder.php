@@ -17,9 +17,9 @@ class ScoreGameSeeder extends Seeder
         ScoreGame::insert([
             [
                 'meeting_id' => '4',
-                'start_at' => '2022-10-22 09:00',
-                'finish_at' => '2022-10-22 09:15',
-                'title' => 'Pfizer',
+                'start_at' => '2023-11-01 00:00',
+                'finish_at' => '2023-11-05 23:59',
+                'title' => 'Doğaya Can Ver',
                 'status' => 1,
             ],
         ]);

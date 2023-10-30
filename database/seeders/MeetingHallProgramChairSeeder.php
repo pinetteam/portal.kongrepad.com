@@ -242,6 +242,30 @@ class MeetingHallProgramChairSeeder extends Seeder
                 'program_id' => 6,
                 'chair_id' => '178',
             ],
+            [
+                'program_id' => 54,
+                'chair_id' => '179',
+            ],
+            [
+                'program_id' => 54,
+                'chair_id' => '180',
+            ],
+            [
+                'program_id' => 56,
+                'chair_id' => '184',
+            ],
+            [
+                'program_id' => 56,
+                'chair_id' => '185',
+            ],
+            [
+                'program_id' => 58,
+                'chair_id' => '190',
+            ],
+            [
+                'program_id' => 58,
+                'chair_id' => '191',
+            ],
         ]);
     }
 }

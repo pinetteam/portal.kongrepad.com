@@ -64,6 +64,54 @@ class ScreenSeeder extends Seeder
                 'type' => 'speaker',
                 'status' => 1,
             ],
+            [
+                'hall_id' => '6',
+                'code' => Str::uuid()->toString(),
+                'title' => 'Chair 1 Screen',
+                'description' => 'Chair 1 Screen',
+                'type' => 'chair',
+                'status' => 1,
+            ],
+            [
+                'hall_id' => '6',
+                'code' => Str::uuid()->toString(),
+                'title' => 'Chair 2 Screen',
+                'description' => 'Chair 2 Screen',
+                'type' => 'chair',
+                'status' => 1,
+            ],
+            [
+                'hall_id' => '6',
+                'code' => Str::uuid()->toString(),
+                'title' => 'Chair 3 Screen',
+                'description' => 'Chair 3 Screen',
+                'type' => 'chair',
+                'status' => 1,
+            ],
+            [
+                'hall_id' => '6',
+                'code' => Str::uuid()->toString(),
+                'title' => 'Document Screen',
+                'description' => 'Document Screen',
+                'type' => 'document',
+                'status' => 1,
+            ],
+            [
+                'hall_id' => '6',
+                'code' => Str::uuid()->toString(),
+                'title' => 'Questions Screen',
+                'description' => 'Questions Screen',
+                'type' => 'questions',
+                'status' => 1,
+            ],
+            [
+                'hall_id' => '6',
+                'code' => Str::uuid()->toString(),
+                'title' => 'Speaker Screen',
+                'description' => 'Speaker Screen',
+                'type' => 'speaker',
+                'status' => 1,
+            ]
         ]);
     }
 }
