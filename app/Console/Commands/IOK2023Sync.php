@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Meeting\Participant\Participant;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class IOK2023Sync extends Command
 {
@@ -34,6 +35,11 @@ class IOK2023Sync extends Command
         foreach ($values as $value) {
             $identification_number = $value['participant_id'];
             $username = $value['barcode'];
+            if($username) {
+                $username = $value['barcode'];
+            } else {
+                $username = $identification_number;
+            }
             $title = $value['title'];
             $first_name = $value['name'];
             $last_name = $value['surname'];
@@ -60,23 +66,23 @@ class IOK2023Sync extends Command
                 ['identification_number' => $identification_number],
                 [
                     'meeting_id' => 1,
-                    'username' => $identification_number,
+                    'username' => $username,
                     'title' => $title,
-                    'first_name' => $first_name,
-                    'last_name' => $last_name,
+                    'first_name' => Str::title($first_name),
+                    'last_name' => Str::title($last_name),
                     'identification_number' => $identification_number,
                     'organisation' => 'Belirtilmemiş',
                     'email' => $email,
                     'phone_country_id' => $phone_country_code,
                     'phone' => $phone,
-                    'password' => $identification_number,
-                    'type' => $identification_number,
+                    'password' => $password,
+                    'type' => $type,
                     'enrolled' => $enrolled,
                     'gdpr_consent' => 0,
                     'status' => 1,
                 ]
             );
-            Log::info("UOC: $identification_number:$username:$title:$first_name:$last_name:$email:$phone:$enrolled:$password:$type");
+            Log::info("UOC: $username:$title:$first_name:$last_name:$identification_number:$email:$phone_country_code:$phone:$password:$type:$enrolled");
         }
         Log::info("Synchronizing finished: ".date('d/m/Y H:i:s'));
         Log::info("---------------------------------------------------------");
