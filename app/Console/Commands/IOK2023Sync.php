@@ -4,7 +4,6 @@ namespace App\Console\Commands;
 
 use App\Models\Meeting\Participant\Participant;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
 class IOK2023Sync extends Command
@@ -30,8 +29,8 @@ class IOK2023Sync extends Command
     {
         Log::info("---------------------------------------------------------");
         Log::info("Synchronizing started: ".date('d/m/Y H:i:s'));
-        $response = Http::get('https://yesilkongre.com/manager/public/api/event/participants?pid=2134&token=Bf2vPiVsDfCesI5ZbsX59femGzqNsgf4mtX96fsV')->timeout(-1);
-        $values = $response->json();
+        $response = file_get_contents('https://yesilkongre.com/manager/public/api/event/participants?pid=2134&token=Bf2vPiVsDfCesI5ZbsX59femGzqNsgf4mtX96fsV');
+        $values = json_decode($response, true);
         foreach ($values as $value) {
             $identification_number = $value['participant_id'];
             $username = $value['barcode'];
