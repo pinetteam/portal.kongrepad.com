@@ -35,7 +35,7 @@
                                     @else
                                         <div class="spinner-border spinner-border-sm text-danger" role="status"></div>
                                     @endif
-                                    {{ $participant->full_name }}
+                                    {{ $participant->last_name }}, {{ $participant->first_name }}
                                 </td>
                                 <td>{{ $participant->identification_number_show }}</td>
                                 <td>{{ $participant->organisation_show }}</td>
