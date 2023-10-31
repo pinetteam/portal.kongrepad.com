@@ -32,6 +32,12 @@ class OperatorBoardController extends Controller
                 }
                 if ($temp_program->sessions->count() > 0 && $temp_program->id != $program->id) {
                     foreach($temp_program->sessions as $session){
+                        if ($session->keypads->count() > 0) {
+                            foreach($session->keypads as $keypad){
+                                $keypad->on_vote = 0;
+                                $keypad->save();
+                            }
+                        }
                         $session->on_air = 0;
                         $session->save();
                     }

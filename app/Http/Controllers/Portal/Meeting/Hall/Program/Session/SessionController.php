@@ -100,10 +100,14 @@ class SessionController extends Controller
         $program_session->on_air = !$program_session->on_air;
         if ($program_session->save()) {
             $meeting_hall_screen = $meeting_hall->screens()->where('type', 'speaker')->first();
-            event(new SpeakerEvent($meeting_hall_screen));
+            if ($meeting_hall_screen != null) {
+                event(new SpeakerEvent($meeting_hall_screen));
+            }
             event(new QuestionBoardEvent($meeting_hall));
             $meeting_hall_screen = $meeting_hall->screens()->where('type', 'questions')->first();
-            event(new QuestionsEvent($meeting_hall_screen));
+            if ($meeting_hall_screen != null) {
+                event(new QuestionsEvent($meeting_hall_screen));
+            }
             if($program_session->on_air)
                 return back()->with('success', __('common.session-started'));
             else

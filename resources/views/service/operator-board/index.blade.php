@@ -266,7 +266,7 @@
                                         document.getElementById('start-keypad-confirmation-form').action = button.getAttribute('data-route');
                                         confirmationModal.querySelector('#start-keypad-confirmation-record').textContent = button.getAttribute('data-record');
                                         if(button.getAttribute('data-start-stop') == 0)
-                                            confirmationModal.querySelector('#start-keypad-start-stop-record').textContent = '{{ __('common.are-you-sure-you-want-to-stop-voting-other-keypads-and-start') }}';
+                                            confirmationModal.querySelector('#start-keypad-start-stop-record').textContent = '{{ __('common.are-you-sure-you-want-to-stop-voting-other-keypads-and-start-voting') }}';
                                         else
                                             confirmationModal.querySelector('#start-keypad-start-stop-record').textContent = '{{ __('common.are-you-sure-you-want-to-stop-voting') }}';
                                         countdown = setInterval(function() {

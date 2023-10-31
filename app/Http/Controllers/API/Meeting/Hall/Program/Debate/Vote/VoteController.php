@@ -14,7 +14,7 @@ class VoteController extends Controller
                 return [
                     'data' => null,
                     'status' => false,
-                    'errors' => [__('you-have-already-voted')]
+                    'errors' => ["Zaten oy kullandınız!"]
                 ];
             }
             $vote = new Vote();

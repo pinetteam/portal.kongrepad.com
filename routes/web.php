@@ -26,10 +26,12 @@ Route::get('/service/screen/questions/event/{meeting_hall_screen_code}', [\App\H
 Route::get('/service/question-board/{code}', [\App\Http\Controllers\Service\QuestionBoardController::class, 'index'])->name('service.question-board.start');
 Route::get('/service/operator-board/{code}/{program_order}', [\App\Http\Controllers\Service\OperatorBoardController::class, 'index'])->name('service.operator-board.start');
 
-Route::get('/service/survey-report/{survey_id}',[\App\Http\Controllers\Service\SurveyReportBoardController::class, 'index'])->name('service.survey-report.start');
-Route::get('/service/keypad-report/{keypad_id}',[\App\Http\Controllers\Service\Screen\KeypadController::class, 'index'])->name('service.keypad-report.start');
-Route::get('/service/debate-report/{debate_id}',[\App\Http\Controllers\Service\Screen\DebateController::class, 'index'])->name('service.debate-report.start');
+Route::group(["middleware" => ['auth']], function () {
 
+    Route::get('/service/survey-report/{survey_id}', [\App\Http\Controllers\Service\SurveyReportBoardController::class, 'index'])->name('service.survey-report.start');
+    Route::get('/service/keypad-report/{keypad_id}', [\App\Http\Controllers\Service\Screen\KeypadController::class, 'index'])->name('service.keypad-report.start');
+    Route::get('/service/debate-report/{debate_id}', [\App\Http\Controllers\Service\Screen\DebateController::class, 'index'])->name('service.debate-report.start');
+});
 Route::group(["middleware" => ['guest']], function () {
     Route::get('/auth/login', [\App\Http\Controllers\Auth\LoginController::class, 'index'])->name('auth.login.index');
     Route::post('/auth/login', [\App\Http\Controllers\Auth\LoginController::class, 'store'])->name('auth.login.store');

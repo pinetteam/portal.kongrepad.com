@@ -19,6 +19,7 @@ class LoginController extends Controller
         }
         $participant_token = $participant->createToken('api-token')->plainTextToken;
         $participant->gdpr_consent = true;
+        $participant->enrolled = true;
         $participant->save();
         return response(['token' => $participant_token], 200);
     }

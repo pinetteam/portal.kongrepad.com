@@ -25,7 +25,7 @@ class KeypadNotification extends Notification
             ->iOS()
             ->badge(1)
             ->sound('success')
-            ->body(__('common.keypad-voting-started'))
+            ->body(__('Keypad oylaması başladı'))
             ->setOption('apns.data.hall_id', $this->hall->id)
             ->setOption('apns.data.event', 'keypad')
             ->withAndroid(
