@@ -64,16 +64,6 @@ class MeetingHallSeeder extends Seeder
                 'show_on_send_mail' => 0,
                 'status' => 1,
             ],
-            [
-                'meeting_id' => '1',
-                'code' => Str::uuid()->toString(),
-                'title' => 'Ana Salon',
-                'show_on_session' => 0,
-                'show_on_view_program' => 1,
-                'show_on_ask_question' => 0,
-                'show_on_send_mail' => 0,
-                'status' => 1,
-            ],
         ]);
     }
 }

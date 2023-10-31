@@ -30,7 +30,6 @@ class DatabaseSeeder extends Seeder
         $this->call(MeetingHallProgramSessionKeypadOptionSeeder::class);
         $this->call(MeetingHallProgramDebateSeeder::class);
         $this->call(MeetingHallProgramDebateTeamSeeder::class);
-        $this->call(MeetingHallProgramChairSeeder::class);
         $this->call(MeetingSurveySeeder::class);
         $this->call(MeetingSurveyQuestionSeeder::class);
         $this->call(MeetingSurveyQuestionOptionsSeeder::class);
