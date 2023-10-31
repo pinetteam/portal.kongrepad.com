@@ -18,3 +18,6 @@ php artisan optimize
 npm install
 npm run build
 php artisan storage:link
+
+crontab
+* * * * *               /usr/bin/php          /home/app.kongrepad.com/artisan schedule:run >> /dev/null 2>&1
