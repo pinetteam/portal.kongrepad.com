@@ -7,7 +7,8 @@ use Illuminate\Database\Seeder;
 
 class MeetingHallProgramDebateSeeder extends Seeder
 {
-    public function run(){
+    public function run(): void
+    {
         Debate::insert([
             [
                 'sort_order' => '10',

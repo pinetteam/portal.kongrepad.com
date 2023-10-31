@@ -20,7 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(MeetingSeeder::class);
         $this->call(ScoreGameSeeder::class);
-        $this->call(ScoreGameQrCodeSeeder::class);
         $this->call(MeetingParticipantSeeder::class);
         $this->call(MeetingHallSeeder::class);
         $this->call(ScreenSeeder::class);

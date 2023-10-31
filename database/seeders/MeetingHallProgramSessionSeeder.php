@@ -45,7 +45,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 3,
-                'speaker_id' => 5,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => 'Nüks Epitelyal Over Tümörlerine Yaklaşım',
                 'description' => null,
@@ -61,7 +61,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '20',
                 'program_id' => 3,
-                'speaker_id' => 6,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => 'Seks Kord Stromal Tümörler',
                 'description' => null,
@@ -77,7 +77,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '30',
                 'program_id' => 3,
-                'speaker_id' => 7,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => 'Erken Evre Endometrium Kanserinde Tedavi Planı',
                 'description' => null,
@@ -93,7 +93,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '30',
                 'program_id' => 3,
-                'speaker_id' => 8,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => 'Metastatik Evre Endometrium Kanserine Yaklaşım',
                 'description' => null,
@@ -109,7 +109,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '40',
                 'program_id' => 3,
-                'speaker_id' => 9,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => 'Serviks Kanserinde Sistemik Tedavi',
                 'description' => null,
@@ -141,7 +141,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 4,
-                'speaker_id' => 10,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => 'Agnostik Tedavi Kavramına Genel Bakış',
                 'description' => null,
@@ -157,7 +157,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '20',
                 'program_id' => 4,
-                'speaker_id' => 11,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => 'Kapsamlı Moleküler Testler; Kime? Hangisi? Ne Zaman?',
                 'description' => null,
@@ -173,7 +173,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '30',
                 'program_id' => 4,
-                'speaker_id' => 12,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => 'MSI ve TMB',
                 'description' => null,
@@ -189,7 +189,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '40',
                 'program_id' => 4,
-                'speaker_id' => 13,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => 'Diğer Agnostik Belirteçler (NTRK, RET, BRAF ve Ötesi)',
                 'description' => null,
@@ -205,7 +205,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '50',
                 'program_id' => 4,
-                'speaker_id' => 14,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => 'BRCA & HRD Agnostik Tedavi Belirteç Adayı mı?',
                 'description' => null,
@@ -237,7 +237,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 6,
-                'speaker_id' => 15,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => 'Testis Kanserinde 1. Basamak Tedavi Yaklaşımı',
                 'description' => null,
@@ -253,7 +253,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '20',
                 'program_id' => 6,
-                'speaker_id' => 16,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => 'Testis Kanserinde Salvage Tedavi',
                 'description' => null,
@@ -269,7 +269,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '30',
                 'program_id' => 6,
-                'speaker_id' => 17,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => 'Metastatik Hepatoselüler Karsinomda Tedavi Planı',
                 'description' => null,
@@ -301,7 +301,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
            [
                 'sort_order' => '10',
                 'program_id' => 8,
-                'speaker_id' => 18,
+               'speaker_id' => null,
                 'code' => 'panel-1-1',
                 'title' => 'Kolorektal Kanserinde Neoadjuvan Tedavi',
                'description' => null,
@@ -317,7 +317,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '20',
                 'program_id' => 8,
-                'speaker_id' => 19,
+                'speaker_id' => null,
                 'code' => 'panel-1-2',
                 'title' => 'Kolon Kanserinde Adjuvan Tedavi: Kime ve Nasıl?',
                 'description' => null,
@@ -333,7 +333,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '30',
                 'program_id' => 8,
-                'speaker_id' => 20,
+                'speaker_id' => null,
                 'code' => 'panel-1-3',
                 'title' => 'Metastatik Kolon Kanserinde Yeni Hedefe Yönelik Tedavi Seçenekleri',
                 'description' => null,
@@ -365,7 +365,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 9,
-                'speaker_id' => 21,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => 'LYNPARZA ile Over ve Meme Kanserlerinde Fark Yaratmaya Var Mısınız?',
                 'description' => null,
@@ -381,7 +381,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '20',
                 'program_id' => 9,
-                'speaker_id' => 22,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => 'LYNPARZA ile Over ve Meme Kanserlerinde Fark Yaratmaya Var Mısınız?',
                 'description' => null,
@@ -397,7 +397,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 11,
-                'speaker_id' => 23,
+                'speaker_id' => null,
                 'code' => 'panel-2-1',
                 'title' => 'İleri Evre Pankreas Kanserinde Tedaviler',
                 'description' => null,
@@ -413,7 +413,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '20',
                 'program_id' => 11,
-                'speaker_id' => 24,
+                'speaker_id' => null,
                 'code' => 'panel-2-2',
                 'title' => 'Mide ve Özofagus Kanserlerinde İmmünoterapi',
                 'description' => null,
@@ -445,7 +445,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 13,
-                'speaker_id' => 25,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => '1.Basamak mKHDAK Tedavisinde Klinik Verilerle CM 9LA ve Opdivo+Yervoy+2 Kür KT Deneyimi',
                 'description' => null,
@@ -461,7 +461,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 14,
-                'speaker_id' => 26,
+                'speaker_id' => null,
                 'code' => 'panel-3-1',
                 'title' => 'Endikasyon Dışı İlaç Kullanımında Klinisyen Bakış Açısı',
                 'description' => null,
@@ -477,7 +477,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '20',
                 'program_id' => 14,
-                'speaker_id' => 27,
+                'speaker_id' => null,
                 'code' => 'panel-3-2',
                 'title' => 'Endikasyon Dışı İlaç Kullanımında Hukuki Süreç',
                 'description' => null,
@@ -509,7 +509,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 15,
-                'speaker_id' => 28,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => 'Erken Evre Akciğer Kanserinde Cerrahi Yaklaşım',
                 'description' => null,
@@ -525,7 +525,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '20',
                 'program_id' => 15,
-                'speaker_id' => 29,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => 'Erken Evre Akciğer Kanserinde İmmunoterapi',
                 'description' => null,
@@ -541,7 +541,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 18,
-                'speaker_id' => 30,
+                'speaker_id' => null,
                 'code' => 'panel-4-1',
                 'title' => 'KHDAK: Patolog Bakış Açısı',
                 'description' => null,
@@ -557,7 +557,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '20',
                 'program_id' => 18,
-                'speaker_id' => 31,
+                'speaker_id' => null,
                 'code' => 'panel-4-2',
                 'title' => 'Hedefli Mutasyon Olmayan Metastatik KHDAK’de 1. Basamak Tedaviler',
                 'description' => null,
@@ -573,7 +573,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '30',
                 'program_id' => 18,
-                'speaker_id' => 32,
+                'speaker_id' => null,
                 'code' => 'panel-4-3',
                 'title' => 'EGFR ve ALK Dışı Mutasyon Pozitif Hastalarda Tedavi',
                 'description' => null,
@@ -605,7 +605,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 19,
-                'speaker_id' => 165,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => '1.Basamak mKHDAK Tedavisinde Pembrolizumab’ın Olgularla 5 Yıllık Güncel Sonuçları',
                 'description' => null,
@@ -621,7 +621,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 19,
-                'speaker_id' => 166,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => '1.Basamak mKHDAK Tedavisinde Pembrolizumab’ın Olgularla 5 Yıllık Güncel Sonuçları',
                 'description' => null,
@@ -637,7 +637,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 21,
-                'speaker_id' => 33,
+                'speaker_id' => null,
                 'code' => 'panel-5-1',
                 'title' => 'Adjuvanda Endokrin Tedavi',
                 'description' => null,
@@ -653,7 +653,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '20',
                 'program_id' => 21,
-                'speaker_id' => 34,
+                'speaker_id' => null,
                 'code' => 'panel-5-2',
                 'title' => 'Neoadjuvant Tedavi Sonrası Rezidü Hastalığa Yaklaşım',
                 'description' => null,
@@ -685,7 +685,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 22,
-                'speaker_id' => 35,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => 'HR(+) HER2(-) Metastatik Meme Kanserinde Yaşam için VALAMOR',
                 'description' => null,
@@ -701,7 +701,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '20',
                 'program_id' => 22,
-                'speaker_id' => 36,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => 'HR(+) HER2(-) Metastatik Meme Kanserinde Yaşam için VALAMOR',
                 'description' => null,
@@ -717,7 +717,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 24,
-                'speaker_id' => 37,
+                'speaker_id' => null,
                 'code' => 'panel-6-1',
                 'title' => 'Metastatik Triple Negatif Meme Kanserinde Yaklaşım',
                 'description' => null,
@@ -733,7 +733,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '20',
                 'program_id' => 24,
-                'speaker_id' => 38,
+                'speaker_id' => null,
                 'code' => 'panel-6-2',
                 'title' => 'Metastatik HER2(+) Meme Kanseri Tedavisinde Gelişmeler',
                 'description' => null,
@@ -765,7 +765,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 25,
-                'speaker_id' => 39,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => 'Metastatik Üçlü Negatif Meme Kanserinde Standartları Yükseltiyoruz',
                 'description' => null,
@@ -781,7 +781,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 27,
-                'speaker_id' => 118,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => 'CROWN ışığında Lorviqua: ALK+ mKHDAK 1. Basamak Tedavisinde Güncel Gelişmeler',
                 'description' => null,
@@ -797,7 +797,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 28,
-                'speaker_id' => 41,
+                'speaker_id' => null,
                 'code' => 'panel-7-1',
                 'title' => 'Erken Evre Melanomda Tedavi Seçenekleri',
                 'description' => null,
@@ -813,7 +813,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '20',
                 'program_id' => 28,
-                'speaker_id' => 42,
+                'speaker_id' => null,
                 'code' => 'panel-7-2',
                 'title' => 'Metastatik Melanomda Güncel Tedavi: 1. Basamak ve Ötesi',
                 'description' => null,
@@ -845,7 +845,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 34,
-                'speaker_id' => 46,
+                'speaker_id' => null,
                 'code' => 'panel-8-1',
                 'title' => 'Metastatik Böbrek Kanseri Tedavisinde Gelişmeler',
                 'description' => null,
@@ -861,7 +861,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '20',
                 'program_id' => 34,
-                'speaker_id' => 47,
+                'speaker_id' => null,
                 'code' => 'panel-8-2',
                 'title' => 'Metastatik Hormon Duyarlı Prostat Kanserinde Tedavi Yaklaşımı',
                 'description' => null,
@@ -877,7 +877,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '30',
                 'program_id' => 34,
-                'speaker_id' => 48,
+                'speaker_id' => null,
                 'code' => 'panel-8-3',
                 'title' => 'Metastatik Prostat Kanserinde PARP İnhibitörlerinin Yeri',
                 'description' => null,
@@ -893,7 +893,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '40',
                 'program_id' => 34,
-                'speaker_id' => 49,
+                'speaker_id' => null,
                 'code' => 'panel-8-4',
                 'title' => 'Metastatik Mesane Kanseri Tedavisinde Kemoterapinin Ötesi',
                 'description' => null,
@@ -925,7 +925,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 36,
-                'speaker_id' => 50,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => 'Prostat Kanseri Tedavisinde Önce XTANDI™',
                 'description' => null,
@@ -941,7 +941,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 37,
-                'speaker_id' => 51,
+                'speaker_id' => null,
                 'code' => 'panel-9-1',
                 'title' => 'Over Kanserinde HIPEC’ın Yeri Var mı?',
                 'description' => null,
@@ -957,7 +957,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '20',
                 'program_id' => 37,
-                'speaker_id' => 52,
+                'speaker_id' => null,
                 'code' => 'panel-9-2',
                 'title' => 'Endometrium Kanserinde Kemoterapinin Ötesi',
                 'description' => null,
@@ -989,7 +989,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 39,
-                'speaker_id' => 53,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => 'Over Kanseri İdame Tedavisinde Zejula ile Yeni Bir Dönem',
                 'description' => null,
@@ -1005,7 +1005,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '20',
                 'program_id' => 39,
-                'speaker_id' => 54,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => 'Over Kanseri İdame Tedavisinde Zejula ile Yeni Bir Dönem',
                 'description' => null,
@@ -1021,7 +1021,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '30',
                 'program_id' => 39,
-                'speaker_id' => 55,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => 'Over Kanseri İdame Tedavisinde Zejula ile Yeni Bir Dönem',
                 'description' => null,
@@ -1037,7 +1037,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 40,
-                'speaker_id' => 56,
+                'speaker_id' => null,
                 'code' => 'panel-10-1',
                 'title' => 'Baş Boyun Kanserinde İmmunoterapi',
                 'description' => null,
@@ -1053,7 +1053,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '20',
                 'program_id' => 40,
-                'speaker_id' => 57,
+                'speaker_id' => null,
                 'code' => 'panel-10-2',
                 'title' => 'Sarkomda Kişiselleştirilmiş Tedavi',
                 'description' => null,
@@ -1069,7 +1069,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '30',
                 'program_id' => 40,
-                'speaker_id' => 58,
+                'speaker_id' => null,
                 'code' => 'panel-10-3',
                 'title' => 'Kanser Tedavisi Sırasında Beraber Kullandığımız İlaçların Olumsuz Etkileşiminin Farkında mıyız?',
                 'description' => null,
@@ -1101,7 +1101,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 42,
-                'speaker_id' => 59,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => 'Erken Evre TNBC Tedavisinde Pembrolizumab',
                 'description' => null,
@@ -1117,7 +1117,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 46,
-                'speaker_id' => 60,
+                'speaker_id' => null,
                 'code' => 'panel-12-1',
                 'title' => 'Kanser Ağrısında Opiatlar',
                 'description' => null,
@@ -1133,7 +1133,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '20',
                 'program_id' => 46,
-                'speaker_id' => 61,
+                'speaker_id' => null,
                 'code' => 'panel-12-2',
                 'title' => 'Tirozin Kinaz Grubu İlaçlarda Yan Etki Yönetimi',
                 'description' => null,
@@ -1149,7 +1149,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '30',
                 'program_id' => 46,
-                'speaker_id' => 35,
+                'speaker_id' => null,
                 'code' => 'panel-12-3',
                 'title' => 'Kanserli Hastalarda Beslenme Desteği',
                 'description' => null,
@@ -1165,7 +1165,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '30',
                 'program_id' => 46,
-                'speaker_id' => 62,
+                'speaker_id' => null,
                 'code' => 'panel-12-4',
                 'title' => 'Akılcı İlaç Sunumu',
                 'description' => null,
@@ -1181,7 +1181,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 48,
-                'speaker_id' => 63,
+                'speaker_id' => null,
                 'code' => 'S-01',
                 'title' => 'Transvers Kolon Yerleşimli Opere Nonmetastatik Kolon Karsinomlu Hastalarda Hastalıksız Sağkalım Analizi - Tek Merkez Deneyimi',
                 'description' => null,
@@ -1197,7 +1197,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '20',
                 'program_id' => 48,
-                'speaker_id' => 64,
+                'speaker_id' => null,
                 'code' => 'S-02',
                 'title' => 'Erken Evre Kolon Kanseri Hastalarında Pre-operatif Dönemde Bakılan Kolon Inflamatuar Indeksinin Nükssüz Sağkalımla Ilişkisi',
                 'description' => null,
@@ -1213,7 +1213,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '30',
                 'program_id' => 48,
-                'speaker_id' => 65,
+                'speaker_id' => null,
                 'code' => 'S-03',
                 'title' => 'Kolon Kanserinde PD-1 Ekspresyon Düzeyi Ile Evre Arasındaki Ilişkinin Değerlendirilmesi',
                 'description' => null,
@@ -1229,7 +1229,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '40',
                 'program_id' => 48,
-                'speaker_id' => 66,
+                'speaker_id' => null,
                 'code' => 'S-04',
                 'title' => 'Neoadjuvan Tedavi Alan Rektum Kanserli Hastalarda Beden Kitle Indeksinin Önemi',
                 'description' => null,
@@ -1245,7 +1245,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '50',
                 'program_id' => 48,
-                'speaker_id' => 67,
+                'speaker_id' => null,
                 'code' => 'S-05',
                 'title' => '70 Yaş Üstü Evre-2 Ve Evre-3 Kolon Kanserli Hastalarda Oksaliplatinli Ve Oksaliplatinsiz Adjuvan Kemoterapi Rejimlerinin Karşilaştirilmali Etkinlik Analizi',
                 'description' => null,
@@ -1261,7 +1261,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '60',
                 'program_id' => 48,
-                'speaker_id' => 68,
+                'speaker_id' => null,
                 'code' => 'S-06',
                 'title' => 'Metastatik Kolorektal Kanserde Hiperüriseminin Prognostik Önemi',
                 'description' => null,
@@ -1277,7 +1277,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '70',
                 'program_id' => 48,
-                'speaker_id' => 69,
+                'speaker_id' => null,
                 'code' => 'S-07',
                 'title' => 'Metastatik Kolorektal Kanserde Prognostik Biyobelirteçler: Delta Prognostik Nutrisyon İndeksi, Delta Nötrofil/Lenfosit Oranı Ve Delta Trombosit/Lenfosit Oranı',
                 'description' => null,
@@ -1293,7 +1293,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '80',
                 'program_id' => 48,
-                'speaker_id' => 70,
+                'speaker_id' => null,
                 'code' => 'S-08',
                 'title' => 'Metastatik Kolorektal Kanser Hastalarında Standart Kemoterapi Ile Bevasizumab Kombine Tedavinin Karaciğer Küratif Tedavi Ve Sağkalıma Etkisi',
                 'description' => null,
@@ -1309,7 +1309,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '90',
                 'program_id' => 48,
-                'speaker_id' => 71,
+                'speaker_id' => null,
                 'code' => 'S-09',
                 'title' => 'Tek Merkez Deneyimi; Nöroendokrin Tümörlü Olgularin Serisi',
                 'description' => null,
@@ -1325,7 +1325,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '100',
                 'program_id' => 49,
-                'speaker_id' => 72,
+                'speaker_id' => null,
                 'code' => 'S-10',
                 'title' => 'Küratif Rezeksiyon Yapılmış Mide Kanseri Vakalarında PD-L1 Ekspresyonunun Klinikopatolojik Parametreler Ve Sağkalımla Ilişkisi',
                 'description' => null,
@@ -1341,7 +1341,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '110',
                 'program_id' => 49,
-                'speaker_id' => 73,
+                'speaker_id' => null,
                 'code' => 'S-11',
                 'title' => 'Perioperatif Kemoterapi Alan Lokal İleri Mide Kanserli Hastalarda Psoas Kas İndeksinin Klinik Önemi ',
                 'description' => null,
@@ -1357,7 +1357,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '120',
                 'program_id' => 49,
-                'speaker_id' => 74,
+                'speaker_id' => null,
                 'code' => 'S-12',
                 'title' => 'Metastatik Mide Kanseri Ile Takip Edilen Hastalarda Bilgisayarlı Tomografi Ile Değerlendirilen Lomber Kas Kalınlığının Sağ Kalım Üzerine Etkisi',
                 'description' => null,
@@ -1373,7 +1373,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '130',
                 'program_id' => 49,
-                'speaker_id' => 75,
+                'speaker_id' => null,
                 'code' => 'S-13',
                 'title' => 'Metastatik Her-2 Pozitif Mide Kanseri Olgularının Retrospektif Analizi: Tek Merkez Deneyimi',
                 'description' => null,
@@ -1389,7 +1389,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '140',
                 'program_id' => 49,
-                'speaker_id' => 76,
+                'speaker_id' => null,
                 'code' => 'S-14',
                 'title' => 'Her-2 Pozitif Mide Kanseri Tedavisine Trastuzumab Eklenmesinin Hastalık Progresyonuna Katkısı; Tek Merkez Deneyimi ',
                 'description' => null,
@@ -1405,7 +1405,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '150',
                 'program_id' => 49,
-                'speaker_id' => 77,
+                'speaker_id' => null,
                 'code' => 'S-15',
                 'title' => 'Erken Evre Pankreatikobiliyer Sistem Kanseri Tanılı Hastalarda Genel ve Hastalıksız Sağkalım',
                 'description' => null,
@@ -1421,7 +1421,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '160',
                 'program_id' => 49,
-                'speaker_id' => 78,
+                'speaker_id' => null,
                 'code' => 'S-16',
                 'title' => 'İleri Evre Hepatosellüler Karsinom Tanılı Hastalarda Sistemik Tedavi Etkililik Ve Güvenlilik Değerlendirmesi',
                 'description' => null,
@@ -1437,7 +1437,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '170',
                 'program_id' => 49,
-                'speaker_id' => 79,
+                'speaker_id' => null,
                 'code' => 'S-17',
                 'title' => 'İleri Evre Hepatoselüler Karsinom Tanılı Hastalarda Sağkalımı Etkileyen Faktörler',
                 'description' => null,
@@ -1453,7 +1453,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '180',
                 'program_id' => 49,
-                'speaker_id' => 80,
+                'speaker_id' => null,
                 'code' => 'S-18',
                 'title' => 'Kolanjiyokarsinom Hastalarında Platelet/albümin Oranının (Par) Prognostik Önemi',
                 'description' => null,
@@ -1469,7 +1469,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '190',
                 'program_id' => 50,
-                'speaker_id' => 81,
+                'speaker_id' => null,
                 'code' => 'S-19',
                 'title' => 'Akciğer Kanserinde Moleküler Testlerin Gerçek Yaşam Verileri: Tek Merkez Deneyimi',
                 'description' => null,
@@ -1485,7 +1485,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '200',
                 'program_id' => 50,
-                'speaker_id' => 82,
+                'speaker_id' => null,
                 'code' => 'S-20',
                 'title' => 'Opere Olan Küçük Hücre Dışı Akciğer Kanserli Hastalarda Primer Lezyonunun Pet/bt’deki Suv- Max Değerinin Sağkalım Için Prognostik Değeri',
                 'description' => null,
@@ -1501,7 +1501,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '210',
                 'program_id' => 50,
-                'speaker_id' => 83,
+                'speaker_id' => null,
                 'code' => 'S-21',
                 'title' => 'Metastatik Küçük Hücre Dışı Akciğer Kanseri Tanılı Hastalarda Afatinib Ve Erlotinib Tek Merkez Deneyimi',
                 'description' => null,
@@ -1517,7 +1517,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '220',
                 'program_id' => 50,
-                'speaker_id' => 84,
+                'speaker_id' => null,
                 'code' => 'S-22',
                 'title' => 'İkinci Basamak Tedavi Olarak Nivolumab Kullanan Küçük Hücreli Dışı Akciğer Kanserli Hastalarda Bazal Metabolizma Hızı ile Sağkalım İlişkisi',
                 'description' => null,
@@ -1533,7 +1533,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '230',
                 'program_id' => 50,
-                'speaker_id' => 85,
+                'speaker_id' => null,
                 'code' => 'S-23',
                 'title' => 'Metastatik Ya Da Unrezekrabl Akciğer Kanseri Tedavisinde Nivolumab Tedavi Yanıtlılığı Ve Sistemik Inflamatuar Index Değişimi Arasındaki Ilişki',
                 'description' => null,
@@ -1549,7 +1549,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '240',
                 'program_id' => 50,
-                'speaker_id' => 20,
+                'speaker_id' => null,
                 'code' => 'S-24',
                 'title' => 'Küçük Hücreli Akciğer Kanseri (Khak) Hücre Hattında Bcl-2 Inhibitörü Olan Venetoclax’ın Kemoduyarlılaştırma Ve Sitotoksik Etkisinin Değerlendirilmesi',
                 'description' => null,
@@ -1565,7 +1565,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '250',
                 'program_id' => 50,
-                'speaker_id' => 86,
+                'speaker_id' => null,
                 'code' => 'S-25',
                 'title' => ' Gastrointestinal Stromal Tümör Tanılı Hastaların Klinikopatolojik Özellikleri: Tek Merkez Deneyimi ',
                 'description' => null,
@@ -1581,7 +1581,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '260',
                 'program_id' => 50,
-                'speaker_id' => 87,
+                'speaker_id' => null,
                 'code' => 'S-26',
                 'title' => 'Gastrointestinal Stromal Tümör Tanısı Alan Hastaların Demografik Değerlendirilmesi ‘Tek Merkez Deneyimi’ ',
                 'description' => null,
@@ -1597,7 +1597,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '270',
                 'program_id' => 50,
-                'speaker_id' => 88,
+                'speaker_id' => null,
                 'code' => 'S-27',
                 'title' => 'Metastatik Gastrointestinal Stromal Tümörlerde Sağ Kalımı Etkileyen Faktörler: Tek Merkez Deneyimi',
                 'description' => null,
@@ -1613,7 +1613,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '280',
                 'program_id' => 50,
-                'speaker_id' => 89,
+                'speaker_id' => null,
                 'code' => 'S-28',
                 'title' => 'Metastatik Gastrointestinal Stromal Tümörlerde Sağ Kalımı Etkileyen Faktörler: Tek Merkez Deneyimi',
                 'description' => null,
@@ -1629,7 +1629,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '290',
                 'program_id' => 51,
-                'speaker_id' => 90,
+                'speaker_id' => null,
                 'code' => 'S-29',
                 'title' => 'İnvaziv Lobüler Meme Kanseri Görüntülemesinde 68Ga-FAPI-PET/BT, 18FDG-PET/BT’ye Alternatif Olabilir mi? ',
                 'description' => null,
@@ -1645,7 +1645,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '300',
                 'program_id' => 51,
-                'speaker_id' => 91,
+                'speaker_id' => null,
                 'code' => 'S-30',
                 'title' => 'Meme Kanserinde Mikrovasküler dansite ve FOXP3+ T Hücrelerinin Klinik ve Prognostik Etkileri ',
                 'description' => null,
@@ -1661,7 +1661,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '310',
                 'program_id' => 51,
-                'speaker_id' => 92,
+                'speaker_id' => null,
                 'code' => 'S-31',
                 'title' => 'Lokal Ileri Triple Negatif Meme Kanserli Hastalarda Doku Lipokalin-2 Ekspresyonunun Neoadjuvan Kemoterapi Sonrası Patolojik Yanıt Ilişkisi Ve Prognoz Üzerine Etkisi',
                 'description' => null,
@@ -1677,7 +1677,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '320',
                 'program_id' => 51,
-                'speaker_id' => 93,
+                'speaker_id' => null,
                 'code' => 'S-32',
                 'title' => 'Cdk4/6 Inhibitörü Tedavisi Alan Metastatik Meme Kanserli Hastalarda Albümin/alkalen Fosfataz Oranının Prognostik Ve Prediktif Önemi',
                 'description' => null,
@@ -1693,7 +1693,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '330',
                 'program_id' => 51,
-                'speaker_id' => 94,
+                'speaker_id' => null,
                 'code' => 'S-33',
                 'title' => 'Metastatik Hormon Pozitif Meme Kanserli CDK-4/6 İnhibitörü Kullanan Hastalarda İnflamatuar Markırların Prediktif Rolü',
                 'description' => null,
@@ -1709,7 +1709,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '340',
                 'program_id' => 51,
-                'speaker_id' => 35,
+                'speaker_id' => null,
                 'code' => 'S-34',
                 'title' => 'Platin Dirençli Metastatik Over Kanserinde FOLFOX- XELOX Rejimlerinin Etkinliğinin Retrospektif Olarak Değerlendirilmesi',
                 'description' => null,
@@ -1725,7 +1725,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '350',
                 'program_id' => 51,
-                'speaker_id' => 95,
+                'speaker_id' => null,
                 'code' => 'S-35',
                 'title' => 'Rekürren veya Metastatik Nazofarenks Karsinomlu hastalarda İmmunoterapi Deneyimi',
                 'description' => null,
@@ -1741,7 +1741,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '360',
                 'program_id' => 51,
-                'speaker_id' => 96,
+                'speaker_id' => null,
                 'code' => 'S-36',
                 'title' => 'Glioblastoma Multiforme Nedeni İle Takip Edilen Hastalarda Manyetik Rezonans İle Belirlenmiş Sarkopeninin Prognostik Önemi',
                 'description' => null,
@@ -1757,7 +1757,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '370',
                 'program_id' => 51,
-                'speaker_id' => 97,
+                'speaker_id' => null,
                 'code' => 'S-37',
                 'title' => 'Metastatik Anjiosarkom Hastalarında Paklitaksel Tedavisi Gerçek Yaşam Verileri: Tek Merkez Deneyimi',
                 'description' => null,
@@ -1773,7 +1773,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '380',
                 'program_id' => 52,
-                'speaker_id' => 98,
+                'speaker_id' => null,
                 'code' => 'S-38',
                 'title' => 'İleri Evre Şeffaf Hücreli Dışı Böbrek Kanseri Tanılı Hastalarda Birinci Basamak Tedavide Pazopanib Ve Sunitinib Tedavilerinin Etkinliklerinin Karşılaştırılması, Çok Merkezli Gerçek Yaşam Verisi',
                 'description' => null,
@@ -1789,7 +1789,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '390',
                 'program_id' => 52,
-                'speaker_id' => 99,
+                'speaker_id' => null,
                 'code' => 'S-39',
                 'title' => 'Nivolumab Ile Tedavi Edilen Renal Hücreli Karsinom Hastalarında Eş Zamanlı Proton Pompa Inhibitörlerinin Sağkalım Sonuçları Üzerindeki Etkisi',
                 'description' => null,
@@ -1805,7 +1805,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '400',
                 'program_id' => 52,
-                'speaker_id' => 100,
+                'speaker_id' => null,
                 'code' => 'S-40',
                 'title' => 'Nivolumab Tedavisi Alan Renal Hücreli Kanser Hastalarında Gfr Düşüklüğünün Tedavi Yanıtı Üzerindeki Etkileri',
                 'description' => null,
@@ -1821,7 +1821,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '410',
                 'program_id' => 52,
-                'speaker_id' => 101,
+                'speaker_id' => null,
                 'code' => 'S-41',
                 'title' => 'Nivolumab Tedavisi Alan Metastatik Renal Hücreli Karsinom Tanılı Hastalarda Prognostik Marker Olarak Gustave Roussy Immun Skoru',
                 'description' => null,
@@ -1837,7 +1837,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '420',
                 'program_id' => 52,
-                'speaker_id' => 102,
+                'speaker_id' => null,
                 'code' => 'S-42',
                 'title' => '70 Yaş Üzeri Metastatik Mesane Kanserli Hastalarda Gnri, Conut, Pni’nin Prognoza Etkisi',
                 'description' => null,
@@ -1853,7 +1853,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '430',
                 'program_id' => 52,
-                'speaker_id' => 103,
+                'speaker_id' => null,
                 'code' => 'S-43',
                 'title' => 'Nivolumab Ile Tedavi Edilen Böbrek Kanseri Ve Malign Melanomlu Hastalar Için Imdc Risk Skorunun Prognostik Değerinin Değerlendirilmesi',
                 'description' => null,
@@ -1869,7 +1869,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '440',
                 'program_id' => 52,
-                'speaker_id' => 104,
+                'speaker_id' => null,
                 'code' => 'S-44',
                 'title' => 'Yüksek Derecede Emetojenik Tedavi Alan Kemonaif Hastalarda Kemoterapiye Bağlı Gelişen Bulantı Ve Kusmanın Önlenmesinde Aprepitant Ve Fosaprepitantın Karşılaştırılması',
                 'description' => null,
@@ -1885,7 +1885,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '450',
                 'program_id' => 52,
-                'speaker_id' => 105,
+                'speaker_id' => null,
                 'code' => 'S-45',
                 'title' => 'Opioid Analjeziklerin İmmün Kontrol Noktası İnhibitörleri Kullanan Kanser Hastalarında Sağkalıma Etkisi ',
                 'description' => null,
@@ -1901,7 +1901,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '460',
                 'program_id' => 52,
-                'speaker_id' => 106,
+                'speaker_id' => null,
                 'code' => 'S-46',
                 'title' => 'İmmünoterapi Alan Solid Tümör Hastalarında Charlson Komorbidite Indeksinin Immünoterapi Ilişkili Yan Etkileri Öngörmedeki Etkinliğinin Değerlendirilmesi',
                 'description' => null,
@@ -1917,9 +1917,9 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '470',
                 'program_id' => 52,
-                'speaker_id' => 107,
+                'speaker_id' => null,
                 'code' => 'S-47',
-                'title' => 'Nötrofil /eozinofil Oranı (Ner), Lenfosit/eozinofil Oranı (Ler) Immün Kontrol Nokta Inhibitör Tedavisi Ilişkili Yan Etkiyi Predikte Edebilir Mi?',
+                'title' => 'Nötrofil/eozinofil Oranı (Ner), Lenfosit/eozinofil Oranı (Ler) Immün Kontrol Nokta Inhibitör Tedavisi Ilişkili Yan Etkiyi Predikte Edebilir Mi?',
                 'description' => null,
                 'start_at' => '2023-11-04 10:30',
                 'finish_at' => '2023-11-04 12:30',
@@ -1933,7 +1933,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 54,
-                'speaker_id' => 181,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => '6 Şubat Depremi, Deprem Organizasyonu ve Ulusal Verilerimiz',
                 'description' => null,
@@ -1949,7 +1949,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '20',
                 'program_id' => 54,
-                'speaker_id' => 182,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => 'Ezilme Sendromu ve Yönetimi',
                 'description' => null,
@@ -1965,7 +1965,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '30',
                 'program_id' => 54,
-                'speaker_id' => 183,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => 'Afetlere Nasıl Hazırlanalım?',
                 'description' => null,
@@ -1997,7 +1997,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 56,
-                'speaker_id' => 186,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => 'HD’den Vazgeçip Herkese HDF Yapalım. Gerçekçi mi? Gerekli mi?',
                 'description' => null,
@@ -2013,7 +2013,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '20',
                 'program_id' => 56,
-                'speaker_id' => 187,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => 'Yenidoğan/İnfantlarda HD, Teknolojik Gelişmeler',
                 'description' => null,
@@ -2029,7 +2029,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '30',
                 'program_id' => 56,
-                'speaker_id' => 188,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => 'Evde HD',
                 'description' => null,
@@ -2045,7 +2045,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '40',
                 'program_id' => 56,
-                'speaker_id' => 189,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => 'HD Enfeksiyoz Komplikasyonları: Korunma ve Tedavi',
                 'description' => null,
@@ -2077,7 +2077,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '10',
                 'program_id' => 58,
-                'speaker_id' => 192,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => 'PIRRT vs SLED vs CVVH(D) – Which One is Superior for Better AKI Outcomes?',
                 'description' => '09:30-10:00 (Ohio time)',
@@ -2093,7 +2093,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '20',
                 'program_id' => 58,
-                'speaker_id' => 193,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => 'Kardiyak Cerrahi Sonrası ABH Yönetimi',
                 'description' => null,
@@ -2109,7 +2109,7 @@ class MeetingHallProgramSessionSeeder extends Seeder
             [
                 'sort_order' => '30',
                 'program_id' => 58,
-                'speaker_id' => 194,
+                'speaker_id' => null,
                 'code' => null,
                 'title' => 'KİT Sonrası ABH Yönetimi',
                 'description' => null,

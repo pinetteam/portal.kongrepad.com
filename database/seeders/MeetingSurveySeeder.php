@@ -11,7 +11,7 @@ class MeetingSurveySeeder extends Seeder
     {
         Survey::insert([
             [
-                'meeting_id' => '4',
+                'meeting_id' => '1',
                 'title' => 'Anket 1',
                 'description' => '2023 Medikal Onkoloji İş İlişkili Rölatif Değerler Anketi',
                 'start_at' => '2023-11-01 10:30',
@@ -19,7 +19,7 @@ class MeetingSurveySeeder extends Seeder
                 'status' => 1
             ],
             [
-                'meeting_id' => '4',
+                'meeting_id' => '1',
                 'title' => 'Anket 2',
                 'description' => 'Tıbbi Onkologların Duktal Karsinoma İn Situ Yönetimini Etkileyen Faktörler',
                 'start_at' => '2023-11-01 10:30',
@@ -27,7 +27,7 @@ class MeetingSurveySeeder extends Seeder
                 'status' => 1
             ],
             [
-                'meeting_id' => '4',
+                'meeting_id' => '1',
                 'title' => 'Anket 3',
                 'description' => 'Tümör Board Katılım Anketi',
                 'start_at' => '2023-11-01 10:30',

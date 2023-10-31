@@ -15,7 +15,7 @@ class MeetingHallSeeder extends Seeder
     {
         Hall::insert([
             [
-                'meeting_id' => '4',
+                'meeting_id' => '1',
                 'code' => Str::uuid()->toString(),
                 'title' => 'Kurs Salonu-1',
                 'show_on_session' => 0,
@@ -25,7 +25,7 @@ class MeetingHallSeeder extends Seeder
                 'status' => 1,
             ],
             [
-                'meeting_id' => '4',
+                'meeting_id' => '1',
                 'code' => Str::uuid()->toString(),
                 'title' => 'Kurs Salonu-2',
                 'show_on_session' => 0,
@@ -35,7 +35,7 @@ class MeetingHallSeeder extends Seeder
                 'status' => 1,
             ],
             [
-                'meeting_id' => '4',
+                'meeting_id' => '1',
                 'code' => Str::uuid()->toString(),
                 'title' => 'Ana Salon',
                 'show_on_session' => 1,
@@ -45,7 +45,7 @@ class MeetingHallSeeder extends Seeder
                 'status' => 1,
             ],
             [
-                'meeting_id' => '4',
+                'meeting_id' => '1',
                 'code' => Str::uuid()->toString(),
                 'title' => 'Sözel Bildiriler',
                 'show_on_session' => 0,
@@ -55,7 +55,7 @@ class MeetingHallSeeder extends Seeder
                 'status' => 1,
             ],
             [
-                'meeting_id' => '4',
+                'meeting_id' => '1',
                 'code' => Str::uuid()->toString(),
                 'title' => 'Yan Salon',
                 'show_on_session' => 0,

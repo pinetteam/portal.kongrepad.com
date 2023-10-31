@@ -9,6 +9,7 @@ class MeetingHallProgramChairSeeder extends Seeder
 {
     public function run(): void
     {
+        /*
         Chair::insert([
             [
                 'program_id' => 8,
@@ -266,6 +267,6 @@ class MeetingHallProgramChairSeeder extends Seeder
                 'program_id' => 58,
                 'chair_id' => '191',
             ],
-        ]);
+        ]);*/
     }
 }

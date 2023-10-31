@@ -22,8 +22,6 @@ class MeetingHallProgramSessionKeypadSeeder extends Seeder
                 'session_id' => '1',
                 'keypad' => 'Kemoterapi uygulama şeması ile karar veremediğin bir durum oldu. Mesela mesna uygulaması. Nasıl davranırsın?',
             ],
-
-
         ]);
     }
 }
