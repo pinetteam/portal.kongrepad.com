@@ -3,6 +3,7 @@
 namespace App\Models\Meeting\ScoreGame;
 
 use App\Models\Customer\Customer;
+use App\Models\Meeting\Meeting;
 use App\Models\Meeting\ScoreGame\Point\Point;
 use App\Models\Meeting\ScoreGame\QRCode\QRCode;
 use App\Models\System\Setting\Variable\Variable;
@@ -64,6 +65,9 @@ class ScoreGame extends Model
     }
     public function qrCodes(){
         return $this->hasMany(QRCode::class, 'score_game_id', 'id');
+    }
+    public function meeting(){
+        return $this->belongsTo(Meeting::class, 'meeting_id', 'id');
     }
     public function points(){
         return $this->hasManyThrough(Point::class, QRCode::class, 'score_game_id', 'qr_code_id', 'id', 'id');

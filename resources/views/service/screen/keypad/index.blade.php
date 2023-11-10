@@ -20,31 +20,26 @@
     <div class="ms-2 w-100 overflow-hidden">
         <div class="card bg-dark shadow-lg m-5 px-5">
             <div class="card-body">
-                <div class="fw-bold text-center text-white fs-3">{{ isset($keypad->title) ? $keypad->title . ' ' : null }}{{ $keypad->keypad }}</div>
-                <hr />
-                <div class="w-100">
-                    <canvas id="chart"></canvas>
+
+                <div class="ms-2 w-100 overflow-hidden">
+                    <h1 class="fw-bold text-center text-white">{{ $keypad->keypad }}</h1>
+                    <hr />
+                    @foreach($keypad->options as $option)
+                        @if($keypad->votes->count() != 0)
+                            <div class="progress mt-2 h-25 bg-dark" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-info text-white text-center p-2 overflow-visible" style="width: {{ $option->votes->count() / $keypad->votes->count()*100 }}%; font-size: 72px">
+                                    {{ $option->option }} ({{$option->votes->count() / $keypad->votes->count()*100}}%)
+                                </div>
+                            </div>
+                        @elseif($keypad->votes->count() == 0)
+                            <div class="progress mt-2 h-25 bg-dark" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-info text-white text-center p-2 overflow-visible" style="width: {{ $option->votes->count()}}%; font-size: 72px">
+                                    {{ $option->option }} ({{ $option->votes->count() }}%)
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
                 </div>
-                <script type="module">
-                    const ctx = document.getElementById('chart');
-                    new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                            datasets: [{
-                                data: [12, 19, 3, 5, 2, 3],
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                y: {
-                                    beginAtZero: true
-                                }
-                            }
-                        }
-                    });
-                </script>
             </div>
         </div>
     </div>

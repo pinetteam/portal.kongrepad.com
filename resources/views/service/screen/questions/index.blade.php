@@ -20,7 +20,7 @@
                         if(!question.is_hidden_name) {
                             questionsHTML += ' | <small>' + question.questioner.first_name + ' ' + question.questioner.last_name + '</small>';
                         } else {
-                            questionsHTML += '| <small>Anonim</small>'
+                            questionsHTML += ' | <small>Anonim</small>'
                         }
                         questionsHTML += '<hr />';
                     });

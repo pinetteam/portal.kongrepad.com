@@ -1,5 +1,5 @@
 @extends('layout.portal.common')
-@section('title', $keypad->question .' | ' . __('common.report'))
+@section('title', $keypad->question . ' | ' . __('common.report'))
 @section('body')
     <div class="card text-bg-dark" xmlns="http://www.w3.org/1999/html">
         <div class="card-header">

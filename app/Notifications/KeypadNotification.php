@@ -25,12 +25,14 @@ class KeypadNotification extends Notification
             ->iOS()
             ->badge(1)
             ->sound('success')
-            ->body(__('Keypad oylaması başladı'))
+            ->body("Keypad oylaması başladı!")
             ->setOption('apns.data.hall_id', $this->hall->id)
             ->setOption('apns.data.event', 'keypad')
             ->withAndroid(
                 PusherMessage::create()
-                    ->title(__('common.keypad-voting-started'))
+                    ->title("Keypad oylaması başladı!")
+                    ->setOption('fcm.data.hall_id', $this->hall->id)
+                    ->setOption('fcm.data.event', 'keypad')
             );
     }
 }

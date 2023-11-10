@@ -12,6 +12,13 @@ class QuestionController extends Controller
     public function store(Request $request, int $hall)
     {
         $meeting_hall = $request->user()->meeting->halls()->findOrFail($hall);
+        if ($request->user()->type != "attendee") {
+            return [
+                'data' => null,
+                'status' => false,
+                'errors' => ["Soru sorma izniniz yoktur."]
+            ];
+        }
         $session = $meeting_hall->programSessions()->where('on_air', 1)->first();
         $question = new Question();
         $question->session_id = $session->id;

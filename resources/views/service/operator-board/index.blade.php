@@ -214,6 +214,7 @@
                                                             <td>{{ $keypad->sort_order }}</td>
                                                             <td>{{ $keypad->keypad }}</td>
                                                             <td>
+                                                                @if($session->on_air)
                                                                 <a href =""  title="{{ __('common.start-stop-voting') }}" data-bs-toggle="modal" data-bs-target="#start-keypad-confirmation-modal" data-route="{{ route('portal.meeting.hall.program.session.keypad.start-stop-voting',['meeting'=>$session->program->hall->meeting_id, 'keypad'=> $keypad->id,'session'=> $session->id,'program'=>$session->program_id, 'hall'=>$session->program->hall_id]) }}" data-record="{{ $keypad->keypad }}" data-start-stop="{{ $keypad->on_vote }}">
                                                                     @if($keypad->on_vote)
                                                                         <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
@@ -221,6 +222,9 @@
                                                                         <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
                                                                     @endif
                                                                 </a>
+                                                                @else
+                                                                    <i class="text-info">{{ __('common.first-you-should-start-session') }}</i>
+                                                                @endif
                                                             </td>
                                                         </tr>
                                                     @endforeach

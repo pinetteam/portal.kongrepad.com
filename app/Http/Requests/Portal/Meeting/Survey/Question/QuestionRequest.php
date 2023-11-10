@@ -20,7 +20,7 @@ class QuestionRequest extends FormRequest
                 return [
                     'sort_order' => 'nullable|integer',
                     'survey_id' => 'required|exists:meeting_surveys,id',
-                    'question' => 'required|max:255',
+                    'question' => 'required|max:511',
                     'status' => 'required|boolean',
                 ];
             }

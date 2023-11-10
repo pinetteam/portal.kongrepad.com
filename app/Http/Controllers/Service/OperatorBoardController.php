@@ -11,7 +11,7 @@ class OperatorBoardController extends Controller
     public function index(string $code, int $program_order)
     {
         $meeting_hall = Auth::user()->customer->halls()->where('meeting_halls.code', $code)->first();
-        $programs = $meeting_hall->programs;
+        $programs = $meeting_hall->programs()->orderBy('sort_order', 'ASC')->orderBy('start_at', 'ASC')->get();
         foreach($programs as $program){
             $program->is_started = 0;
             $program->save();

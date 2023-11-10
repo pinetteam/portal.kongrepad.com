@@ -81,7 +81,7 @@ class Program extends Model
     }
     public function chairs()
     {
-        return $this->belongsToMany(Participant::class, 'meeting_hall_program_chairs', 'program_id', 'chair_id');
+        return $this->belongsToMany(Participant::class, 'meeting_hall_program_chairs', 'program_id', 'chair_id')->where('meeting_hall_program_chairs.deleted_by', null);
     }
     public function sessions()
     {

@@ -15,7 +15,7 @@ class QuestionsController extends Controller
         try {
             $session = $meeting_hall_screen->hall->programSessions()->where('on_air', true)->first();
             if($session->questions) {
-                $questions = $session->questions()->where('selected_for_show', true)->with('questioner')->get();
+                $questions = $session->questions()->where('selected_for_show', true)->orderBy('created_at', 'desc')->with('questioner')->get();
             }
         } catch (\Exception $e) {
             $questions = null;

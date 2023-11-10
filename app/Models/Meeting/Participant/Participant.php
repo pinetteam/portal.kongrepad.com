@@ -2,7 +2,9 @@
 
 namespace App\Models\Meeting\Participant;
 
+use App\Models\Meeting\Hall\Program\Session\Question\Question;
 use App\Models\Meeting\Meeting;
+use App\Models\Meeting\ScoreGame\Point\Point;
 use App\Models\System\Country\Country;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -105,6 +107,14 @@ class Participant extends Model
     public function getFullNameAttribute()
     {
         return Str::of("$this->title $this->first_name $this->last_name")->trim();
+    }
+    public function getTotalScoreGamePoint(int $score_game_id)
+    {
+        return Point::where([['participant_id', $this->id]])->sum('point');
+    }
+    public function sessionQuestions()
+    {
+        return $this->hasMany(Question::class, 'questioner_id', 'id');
     }
     public function meeting()
     {

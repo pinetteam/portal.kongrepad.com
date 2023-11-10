@@ -278,4 +278,6 @@ return [
     'debate-screen' => 'Debate Screen',
     'keypad-screen' => 'Keypad Screen',
     'survey-screen' => 'Survey Screen',
+    'question-reports' => 'Question Reports',
+    'score-game-reports' => 'Score Game Reports',
 ];

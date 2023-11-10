@@ -100,6 +100,18 @@
                         {{ __('common.debate-reports') }}
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route("portal.report.score-game.index") }}">
+                        <span class="nav-icon fa-duotone fa-hundred-points fa-fade"></span>
+                        {{ __('common.score-game-reports') }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route("portal.report.question.index") }}">
+                        <span class="nav-icon fa-duotone fa-question fa-fade"></span>
+                        {{ __('common.question-reports') }}
+                    </a>
+                </li>
             </ul>
             <div class="sidebar-heading">
                 <span class="nav-icon fa-duotone fa-arrow-turn-down-right"></span> {{ __('common.system') }}

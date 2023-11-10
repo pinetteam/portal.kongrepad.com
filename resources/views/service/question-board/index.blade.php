@@ -19,7 +19,7 @@
                     questions.forEach(function(question) {
                         questionsHTML += '<tr>';
                         questionsHTML += '<td class="w-75">' + question.question + '</td>';
-                        if(question.is_hidden_name === 0)
+                        if(question.is_hidden_name == 0)
                             questionsHTML += '<td>' + question.questioner.first_name + ' ' + question.questioner.last_name + '</td>';
                         else
                             questionsHTML += '<td>Anonim</td>';
@@ -31,7 +31,7 @@
                     selected_questions.forEach(function(question) {
                         selectedQuestionsHTML += '<tr>';
                         selectedQuestionsHTML += '<td class="w-75">' + question.question + '</td>';
-                        if(question.is_hidden_name === 0)
+                        if(question.is_hidden_name == 0)
                             selectedQuestionsHTML += '<td>' + question.questioner.first_name + ' ' + question.questioner.last_name + '</td>';
                         else
                             selectedQuestionsHTML += '<td>Anonim</td>';
@@ -87,7 +87,7 @@
                         @foreach($questions as $question)
                             <tr>
                                 <td class="w-75">{{$question->question}}</td>
-                                @if(!$question->is_hidden_name)
+                                @if($question->is_hidden_name == 0)
                                     <td>{{$question->questioner->full_name}}</td>
                                 @else
                                     <td>Anonim</td>

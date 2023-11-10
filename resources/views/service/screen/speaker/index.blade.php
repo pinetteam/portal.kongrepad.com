@@ -33,12 +33,10 @@
 </div>
 @if($speaker)
     <div class="col">
-        <h1 class="text-white text-center w-100" id="speaker" style="font-size: 96px">{{ isset($speaker->title) ? $speaker->title . ' ' : null }}{{ $speaker->first_name }} {{ $speaker->last_name }}</h1>
-        <hr>
-        <h3 id="time" class="m-0 text-center text-danger" style="font-size: 56px"></h3>
+        <h1 class="text-white text-center w-100 fw-bold" id="speaker" style="font-size: 96px">{{ isset($speaker->title) ? $speaker->title . ' ' : null }}{{ $speaker->first_name }} {{ $speaker->last_name }}</h1>
     </div>
     @else
-    <h1 class="text-white text-center w-100" id="speaker" style="font-size: 72px">
+    <h1 class="text-white text-center w-100 fw-bold" id="speaker" style="font-size: 96px">
         <div class="spinner-grow text-success text-center" role="status">
             <span class="visually-hidden">{{ __('common.loading') }}</span>
         </div>
@@ -46,12 +44,5 @@
 @endif
 
 </body>
-<script type="text/javascript">
-    function showTime() {
-        var date = new Date()
-        document.getElementById('time').innerHTML = date.toLocaleTimeString('en-US');
-    }
-    setInterval(showTime, 1000);
-</script>
 </html>
 

@@ -40,7 +40,8 @@ class IOK2023Sync extends Command
             } else {
                 $username = $identification_number;
             }
-            $title = $value['title'];
+            //$title = $value['title'];
+            $title = null;
             $first_name = $value['name'];
             $last_name = $value['surname'];
             $email = $value['email'];

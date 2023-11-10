@@ -14,7 +14,7 @@ class ProgramController extends Controller
     {
 
         try{
-            $programs = $request->user()->meeting->halls()->findOrFail($hall)->programs()->get();
+            $programs = $request->user()->meeting->halls()->findOrFail($hall)->programs()->orderBy('sort_order', 'ASC')->orderBy('start_at', 'ASC')->get();
             $programs = ProgramResource::collection($programs)->groupBy(function($date) {
                 App::setLocale('tr');
                 return Carbon::parse($date->start_at)->translatedFormat('d F l');

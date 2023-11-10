@@ -32,9 +32,9 @@
     </div>
 </div>
 @if($chair)
-    <h1 class="text-white text-center w-100" id="chair" style="font-size: 72px">{{ isset($chair->title) ? $chair->title . ' ' : null }}{{ $chair->first_name }} {{ $chair->last_name }}</h1>
+    <h1 class="text-white text-center w-100 fw-bold" id="chair" style="font-size: 172px">{{ isset($chair->title) ? $chair->title . ' ' : null }}{{ $chair->first_name }} {{ $chair->last_name }}</h1>
 @else
-    <h1 class="text-white text-center w-100" id="chair" style="font-size: 72px">
+    <h1 class="text-white text-center w-100 fw-bold" id="chair" style="font-size: 172px">
         <div class="spinner-grow text-success text-center" role="status">
             <span class="visually-hidden">{{ __('common.loading') }}</span>
         </div>

@@ -25,12 +25,14 @@ class DebateNotification extends Notification
             ->iOS()
             ->badge(1)
             ->sound('success')
-            ->body("Debate oylaması başladı")
+            ->body("Debate oylaması başladı!")
             ->setOption('apns.data.hall_id', $this->hall->id)
             ->setOption('apns.data.event', 'debate')
             ->withAndroid(
                 PusherMessage::create()
-                    ->title(__('common.debate-voting-started'))
+                    ->title("Debate oylaması başladı!")
+                    ->setOption('fcm.data.hall_id', $this->hall->id)
+                    ->setOption('fcm.data.event', 'debate')
             );
     }
 }
