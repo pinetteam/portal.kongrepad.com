@@ -12,7 +12,7 @@
         <div class="card-body">
             <div class="ms-2 w-100 overflow-hidden">
                 <div class="fw-bold text-center">{{ $keypad->keypad }}</div>
-                <hr />
+                <hr/>
                 @foreach($keypad->options as $option)
                     @if($keypad->votes->count() != 0)
                         <div class="progress mt-2 h-25 bg-dark" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">

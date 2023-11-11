@@ -27,28 +27,7 @@ class SurveyReportController extends Controller
             'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        $data = [];
-        foreach ($survey->questions as $question) {
-            $data_temp = [];
-            foreach ($question->options as $option) {
-                $data_temp['label'][] = $option->option;
-                $data_temp['data'][] = (int)$option->votes->count();
-            }
-            $data['chart_data'][$question->id] = json_encode($data_temp);
-        }
-        return view('portal.report.survey-report.show', $data, compact(['survey', 'on_vote']));
-    }
-    public function showChart(string $survey, string $question_id)
-    {
-        $question= Auth::user()->customer->surveyQuestions()->findOrFail($question_id);
-        $options = Auth::user()->customer->surveyOptions()->where('question_id', $question_id)->paginate(20);
-        $data = [];
-        foreach($options as $option) {
-            $data['label'][] = $option->option;
-            $data['data'][] = (int) $option->votes->count();
-        }
-        $data['chart_data'] = json_encode($data);
-        return view('portal.report.survey-report.chart.index', $data ,compact(['options', 'question']));
+        return view('portal.report.survey-report.show', compact(['survey', 'on_vote']));
     }
     public function showParticipants(string $survey)
     {

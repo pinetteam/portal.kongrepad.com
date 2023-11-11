@@ -14,28 +14,7 @@ class DebateReportController extends Controller
             'passive' => ['value' => 0, 'title' => __('common.passive'), 'color' => 'danger'],
             'active' => ['value' => 1, 'title' => __('common.active'), 'color' => 'success'],
         ];
-        $data = [];
-        foreach ($debates as $debate) {
-            $data_temp = [];
-            foreach ($debate->teams as $team) {
-                $data_temp['label'][] = $team->title;
-                $data_temp['data'][] = (int)$team->votes->count();
-            }
-            $data['chart_data'][$debate->id] = json_encode($data_temp);
-        }
-        return view('portal.report.debate-report.index', $data, compact(['debates', 'on_vote']));
-    }
-    public function showChart(string $debate)
-    {
-        $title = Auth::user()->customer->debates()->findOrFail($debate);
-        $teams = Auth::user()->customer->teams()->where('debate_id', $debate)->paginate(20);
-        $data = [];
-        foreach($teams as $team) {
-            $data['label'][] = $team->title;
-            $data['data'][] = (int) $team->votes->count();
-        }
-        $data['chart_data'] = json_encode($data);
-        return view('portal.report.debate-report.chart.index', $data ,compact(['teams','title']));
+        return view('portal.report.debate-report.index', compact(['debates', 'on_vote']));
     }
     public function showParticipants(string $debate)
     {
