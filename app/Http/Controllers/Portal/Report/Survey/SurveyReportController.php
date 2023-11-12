@@ -33,7 +33,7 @@ class SurveyReportController extends Controller
     {
         $survey = Auth::user()->customer->surveys()->findOrFail($survey);
         $votes = \App\Models\Meeting\Survey\Vote\Vote::where('survey_id', $survey->id)->groupBy('participant_id')->get();
-        return view('portal.report.survey-report.participant.index', compact(['survey','votes']));
+        return view('portal.report.survey-report.participant.index', compact(['survey', 'votes']));
     }
     public function showReport(string $survey){
         $survey = Auth::user()->customer->surveys()->findOrFail($survey);

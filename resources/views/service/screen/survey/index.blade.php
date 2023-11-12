@@ -23,7 +23,7 @@
                     <div class="carousel-item p-5">
                         <div class="card bg-dark shadow-lg m-5">
                             <div class="card-body overflow-scroll text-center">
-                                <li class=" list-group-item fw-bold text-white fs-4 bg-dark border-dark">{{ $question->question }}</li>
+                                <ol class=" list-group-item fw-bold text-white fs-4 bg-dark border-dark">{{ $question->question }}</ol>
                                 <hr />
                                 <ol class="list-group list-group-flush align-items-start justify-content-center">
                                     @foreach($question->options as $option)

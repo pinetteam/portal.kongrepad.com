@@ -94,7 +94,6 @@ Route::prefix('portal')->name('portal.')->group(function () {
                     //Chair
                     Route::resource('/chair', \App\Http\Controllers\Portal\Meeting\Hall\Program\Chair\ChairController::class)->except(['create']);
 
-
                     //Session
                     Route::resource('/session', \App\Http\Controllers\Portal\Meeting\Hall\Program\Session\SessionController::class)->except(['index', 'create']);
                     Route::get('/start-stop-session/{session}', [\App\Http\Controllers\Portal\Meeting\Hall\Program\Session\SessionController::class,'start_stop'])->name('session.start-stop');
@@ -141,7 +140,6 @@ Route::prefix('portal')->name('portal.')->group(function () {
 */
 
         /* Program routes */
-
 
         Route::resource('/user', \App\Http\Controllers\Portal\User\UserController::class)->except(['create']);
         Route::resource('/user-role', \App\Http\Controllers\Portal\User\Role\UserRoleController::class)->except(['create']);

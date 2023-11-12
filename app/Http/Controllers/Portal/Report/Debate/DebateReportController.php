@@ -20,7 +20,7 @@ class DebateReportController extends Controller
     {
         $title = Auth::user()->customer->debates()->findOrFail($debate);
         $votes = Auth::user()->customer->debateVotes()->where('debate_id', $debate)->paginate(20);
-        return view('portal.report.debate-report.participant.index', compact(['votes','title']));
+        return view('portal.report.debate-report.participant.index', compact(['votes', 'title']));
     }
     public function showReport(string $debate_id)
     {

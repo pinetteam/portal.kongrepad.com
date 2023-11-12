@@ -1,5 +1,5 @@
 @extends('layout.portal.common')
-@section('title', $survey->title .' | ' . __('common.reports'))
+@section('title', $survey->title . ' | ' . __('common.reports'))
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">
