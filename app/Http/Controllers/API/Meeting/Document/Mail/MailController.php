@@ -20,7 +20,7 @@ class MailController extends Controller
                 return [
                     'data' => null,
                     'status' => false,
-                    'errors' => $e
+                    'errors' => [$e->getMessage()]
                 ];
             }
         }
@@ -46,7 +46,7 @@ class MailController extends Controller
                 return [
                     'data' => null,
                     'status' => false,
-                    'errors' => $e
+                    'errors' => [$e->getMessage()]
                 ];
             }
         }

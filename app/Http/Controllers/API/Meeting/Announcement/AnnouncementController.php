@@ -10,18 +10,19 @@ class AnnouncementController extends Controller
 {
     public function index(Request $request)
     {
-        return [
-        'data' => AnnouncementResource::collection($request->user()->meeting->announcements()->orderBy('created_at', 'desc')->get()),
-        'status' => true,
-        'errors' => null
-    ];
-    }
-    public function show(Request $request, string $id)
-    {
-        return [
-            'data' => new AnnouncementResource($request->user()->meeting->virtualStands()->where('meeting_virtual_stands.id',$id)->first()),
-            'status' => true,
-            'errors' => null
-        ];
+
+        try{
+            return [
+                'data' => AnnouncementResource::collection($request->user()->meeting->announcements()->orderBy('created_at', 'desc')->get()),
+                'status' => true,
+                'errors' => null
+            ];
+        } catch (\Throwable $e){
+            return [
+                'data' => null,
+                'status' => false,
+                'errors' => [$e->getMessage()]
+            ];
+        }
     }
 }

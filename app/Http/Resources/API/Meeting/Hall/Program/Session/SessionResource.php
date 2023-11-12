@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources\API\Meeting\Hall\Program\Session;
 
-use App\Http\Resources\API\Meeting\Document\DocumentResource;
 use App\Models\Meeting\Document\Mail\Mail;
 use Carbon\Carbon;
 use Illuminate\Http\Request;

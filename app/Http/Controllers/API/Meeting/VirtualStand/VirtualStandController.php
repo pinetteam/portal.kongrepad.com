@@ -10,18 +10,34 @@ class VirtualStandController extends Controller
 {
     public function index(Request $request)
     {
-        return [
-            'data' => VirtualStandResource::collection($request->user()->meeting->virtualStands()->where('meeting_virtual_stands.status', 1)->get())->shuffle(),
-            'status' => true,
-            'errors' => null
-        ];
+        try{
+            return [
+                'data' => VirtualStandResource::collection($request->user()->meeting->virtualStands()->where('meeting_virtual_stands.status', 1)->get())->shuffle(),
+                'status' => true,
+                'errors' => null
+            ];
+        } catch (\Throwable $e){
+            return [
+                'data' => null,
+                'status' => false,
+                'errors' => [$e->getMessage()]
+            ];
+        }
     }
     public function show(Request $request, string $id)
     {
-        return [
-            'data' => new VirtualStandResource($request->user()->meeting->virtualStands()->where('meeting_virtual_stands.id',$id)->first()),
-            'status' => true,
-            'errors' => null
-        ];
+        try{
+            return [
+                'data' => new VirtualStandResource($request->user()->meeting->virtualStands()->where('meeting_virtual_stands.id',$id)->first()),
+                'status' => true,
+                'errors' => null
+            ];
+        } catch (\Throwable $e){
+            return [
+                'data' => null,
+                'status' => false,
+                'errors' => [$e->getMessage()]
+            ];
+        }
     }
 }

@@ -14,20 +14,38 @@ class MeetingHallController extends Controller
 {
     public function index(Request $request)
     {
-        return [
-            'data' => HallResource::collection($request->user()->meeting->halls()->get()),
-            'status' => true,
-            'errors' => null
-        ];
+        try{
+            return [
+                'data' => HallResource::collection($request->user()->meeting->halls()->get()),
+                'status' => true,
+                'errors' => null
+            ];
+        } catch (\Throwable $e){
+
+            return [
+                'data' => null,
+                'status' => false,
+                'errors' => [$e->getMessage()]
+            ];
+        }
+
     }
     public function show(Request $request, int $id)
     {
+        try{
+            return [
+                'data' => new HallResource($request->user()->meeting->halls()->findOrFail($id)),
+                'status' => true,
+                'errors' => null
+            ];
+        } catch (\Throwable $e){
 
-        return [
-            'data' => new HallResource($request->user()->meeting->halls()->findOrFail($id)),
-            'status' => true,
-            'errors' => null
-        ];
+            return [
+                'data' => null,
+                'status' => false,
+                'errors' => [$e->getMessage()]
+            ];
+        }
     }
     public function active_keypad(Request $request, int $id)
     {

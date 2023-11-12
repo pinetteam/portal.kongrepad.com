@@ -33,7 +33,7 @@ class ProgramController extends Controller
             return [
                 'data' => null,
                 'status' => false,
-                'errors' => $e->getMessage()
+                'errors' => [$e->getMessage()]
             ];
         }
 
@@ -51,7 +51,7 @@ class ProgramController extends Controller
             return [
                 'data' => null,
                 'status' => false,
-                'errors' => [$e]
+                'errors' => [$e->getMessage()]
             ];
         }
     }

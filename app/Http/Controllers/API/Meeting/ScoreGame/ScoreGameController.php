@@ -10,10 +10,18 @@ class ScoreGameController extends Controller
 {
     public function index(Request $request)
     {
-        return [
-        'data' => new ScoreGameResource($request->user()->meeting->scoreGames()->first()),
-        'status' => true,
-        'errors' => null
-        ];
+        try{
+            return [
+                'data' => new ScoreGameResource($request->user()->meeting->scoreGames()->first()),
+                'status' => true,
+                'errors' => null
+            ];
+        } catch (\Throwable $e){
+            return [
+                'data' => null,
+                'status' => false,
+                'errors' => [$e->getMessage()]
+            ];
+        }
     }
 }

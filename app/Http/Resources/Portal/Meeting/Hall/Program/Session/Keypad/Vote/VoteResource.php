@@ -13,8 +13,8 @@ class VoteResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'option_id' => ['value'=>$this->option_id, 'type'=>'hidden'],
-            'participant_id' => ['value'=>$this->participant_id, 'type'=>'hidden'],
+            'option_id' => ['value' => $this->option_id, 'type' => 'hidden'],
+            'participant_id' => ['value' => $this->participant_id, 'type' => 'hidden'],
             'route' => route('portal.keypad-vote.update', $this->id),
         ];
     }

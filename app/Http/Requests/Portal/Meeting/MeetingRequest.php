@@ -34,6 +34,7 @@ class MeetingRequest extends FormRequest
     {
         return [
             'code' => __('common.code'),
+            'banner' => __('common.banner'),
             'title' => __('common.title'),
             'start_at' => __('common.start-at'),
             'finish_at' => __('common.finish-at'),

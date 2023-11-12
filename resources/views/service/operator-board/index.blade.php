@@ -265,7 +265,7 @@
                                     const button = event.relatedTarget;
                                     if(button) {
                                         confirmationFormSubmit.disabled = true;
-                                        waitForSeconds = 5;
+                                        waitForSeconds = 3;
                                         clearInterval(countdown);
                                         document.getElementById('start-keypad-confirmation-form').action = button.getAttribute('data-route');
                                         confirmationModal.querySelector('#start-keypad-confirmation-record').textContent = button.getAttribute('data-record');
@@ -285,7 +285,10 @@
                                 });
                                 confirmationFormSubmit.addEventListener('click', function() {
                                     confirmationFormSubmit.disabled = true;
-                                    confirmationFormSubmit.innerHTML = '<div class="spinner-border spinner-border-sm" role="status"></div> {{ __('common.deleting') }}';
+                                    if(button.getAttribute('data-start-stop') == 0)
+                                        confirmationFormSubmit.innerHTML = '<div class="spinner-border spinner-border-sm" role="status"></div> {{ __('common.starting') }}';
+                                    else
+                                        confirmationFormSubmit.innerHTML = '<div class="spinner-border spinner-border-sm" role="status"></div> {{ __('common.stopping') }}';
                                     document.getElementById('start-keypad-confirmation-form').submit();
                                 });
                             </script>
@@ -320,7 +323,7 @@
                                 const button = event.relatedTarget;
                                 if(button) {
                                     confirmationFormSubmit.disabled = true;
-                                    waitForSeconds = 5;
+                                    waitForSeconds = 3;
                                     clearInterval(countdown);
                                     document.getElementById('start-session-confirmation-form').action = button.getAttribute('data-route');
                                     confirmationModal.querySelector('#start-session-confirmation-record').textContent = button.getAttribute('data-record');
@@ -340,7 +343,10 @@
                             });
                             confirmationFormSubmit.addEventListener('click', function() {
                                 confirmationFormSubmit.disabled = true;
-                                confirmationFormSubmit.innerHTML = '<div class="spinner-border spinner-border-sm" role="status"></div> {{ __('common.deleting') }}';
+                                if(button.getAttribute('data-start-stop') == 0)
+                                    confirmationFormSubmit.innerHTML = '<div class="spinner-border spinner-border-sm" role="status"></div> {{ __('common.starting') }}';
+                                else
+                                    confirmationFormSubmit.innerHTML = '<div class="spinner-border spinner-border-sm" role="status"></div> {{ __('common.stopping') }}';
                                 document.getElementById('start-session-confirmation-form').submit();
                             });
                         </script>
@@ -417,7 +423,7 @@
                                 const button = event.relatedTarget;
                                 if(button) {
                                     confirmationFormSubmit.disabled = true;
-                                    waitForSeconds = 5;
+                                    waitForSeconds = 3;
                                     clearInterval(countdown);
                                     document.getElementById('start-debate-confirmation-form').action = button.getAttribute('data-route');
                                     confirmationModal.querySelector('#start-debate-confirmation-record').textContent = button.getAttribute('data-record');
@@ -437,7 +443,10 @@
                             });
                             confirmationFormSubmit.addEventListener('click', function() {
                                 confirmationFormSubmit.disabled = true;
-                                confirmationFormSubmit.innerHTML = '<div class="spinner-border spinner-border-sm" role="status"></div> {{ __('common.deleting') }}';
+                                if(button.getAttribute('data-start-stop') == 0)
+                                    confirmationFormSubmit.innerHTML = '<div class="spinner-border spinner-border-sm" role="status"></div> {{ __('common.starting') }}';
+                                else
+                                    confirmationFormSubmit.innerHTML = '<div class="spinner-border spinner-border-sm" role="status"></div> {{ __('common.stopping') }}';
                                 document.getElementById('start-debate-confirmation-form').submit();
                             });
                         </script>

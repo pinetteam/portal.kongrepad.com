@@ -25,7 +25,6 @@ class ScreenRequest extends FormRequest
     {
         return [
             'hall_id' => __('common.hall'),
-            'code' => __('common.code'),
             'title' => __('common.title'),
             'description' => __('common.description'),
             'type' => __('common.type'),

@@ -12,11 +12,19 @@ class PointController extends Controller
 {
     public function index(Request $request, int $score_game)
     {
-        return [
-            'data' => PointResource::collection($request->user()->meeting->scoreGames()->first()->points()->get()->where('participant_id', $request->user()->id)),
-            'status' => true,
-            'errors' => null
-        ];
+        try{
+            return [
+                'data' => PointResource::collection($request->user()->meeting->scoreGames()->first()->points()->get()->where('participant_id', $request->user()->id)),
+                'status' => true,
+                'errors' => null
+            ];
+        } catch (\Throwable $e){
+            return [
+                'data' => null,
+                'status' => false,
+                'errors' => [$e->getMessage()]
+            ];
+        }
     }
     public function store(Request $request, int $score_game)
     {

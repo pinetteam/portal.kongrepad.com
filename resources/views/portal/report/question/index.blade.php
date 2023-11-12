@@ -8,10 +8,13 @@
         <div class="card-body p-0">
             <div class="table-responsive">
                 <table class="table table-dark table-striped table-hover">
+                    <caption class="text-end me-3">
+                        {{ $participants->links() }}
+                    </caption>
                     <thead class="thead-dark">
                     <tr>
                         <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.name') }}</th>
-                        <th scope="col"><span class="fa-regular fa-hundred-points mx-1"></span> {{ __('common.point') }}</th>
+                        <th scope="col"><span class="fa-regular fa-question mx-1"></span> {{ __('common.questions') }}</th>
                     </tr>
                     </thead>
                     <tbody>

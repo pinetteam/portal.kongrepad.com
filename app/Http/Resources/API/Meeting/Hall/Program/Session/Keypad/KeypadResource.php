@@ -18,8 +18,8 @@ class KeypadResource extends JsonResource
             'title' => $this->title,
             'keypad' => $this->keypad,
             'options' => OptionResource::collection($this->options),
-            'voting_started_at' =>  $this->voting_started_at,
-            'voting_finished_at' =>  $this->voting_finished_at,
+            'voting_started_at' => $this->voting_started_at,
+            'voting_finished_at' => $this->voting_finished_at,
             'on_vote' => $this->on_vote,
         ];
     }

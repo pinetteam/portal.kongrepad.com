@@ -36,7 +36,7 @@ class QuestionController extends Controller
             return [
                 'data' => null,
                 'status' => false,
-                'errors' => ["error"]
+                'errors' => [$e->getMessage()]
             ];
         }
     }

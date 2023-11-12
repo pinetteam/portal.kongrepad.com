@@ -10,10 +10,18 @@ class ParticipantController extends Controller
 {
     public function index(Request $request)
     {
-        return [
-            'data' => new ParticipantResource($request->user()),
-            'status' => true,
-            'errors' => null
-        ];
+        try{
+            return [
+                'data' => new ParticipantResource($request->user()),
+                'status' => true,
+                'errors' => null
+            ];
+        } catch (\Throwable $e){
+            return [
+                'data' => null,
+                'status' => false,
+                'errors' => [$e->getMessage()]
+            ];
+        }
     }
 }

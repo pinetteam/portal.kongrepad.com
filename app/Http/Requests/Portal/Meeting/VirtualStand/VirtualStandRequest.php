@@ -44,6 +44,7 @@ class VirtualStandRequest extends FormRequest
         return [
             'meeting_id' => __('common.meeting'),
             'file' => __('common.file'),
+            'pdf' => __('common.pdf'),
             'title' => __('common.title'),
             'status' => __('common.status'),
         ];

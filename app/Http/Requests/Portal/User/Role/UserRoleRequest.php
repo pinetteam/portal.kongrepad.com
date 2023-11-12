@@ -30,7 +30,7 @@ class UserRoleRequest extends FormRequest
     {
         return [
             'title' => __('common.title'),
-            'routes' => __('common.routes'),
+            'access_scopes' => __('common.access-scopes'),
             'status' => __('common.status'),
         ];
     }
