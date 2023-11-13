@@ -46,10 +46,8 @@ Route::prefix('portal')->name('portal.')->group(function () {
     Route::group(["middleware" => ['auth']], function () {
         /*report routes*/
         Route::prefix('report')->name('report.')->group(function () {
-            Route::resource('/score-game', \App\Http\Controllers\Portal\Report\ScoreGame\ScoreGameController::class)->except(['create']);
-
-            Route::resource('/question', \App\Http\Controllers\Portal\Report\Question\QuestionController::class)->except(['create']);
-
+            Route::resource('/score-game', \App\Http\Controllers\Portal\Report\ScoreGame\ScoreGameController::class)->only(['index', 'show']);
+            Route::resource('/question', \App\Http\Controllers\Portal\Report\Question\QuestionController::class)->only(['index', 'show']);
             Route::resource('/survey-report', \App\Http\Controllers\Portal\Report\Survey\SurveyController::class)->except(['create']);
             Route::get('/survey-report/{survey}/report',[\App\Http\Controllers\Portal\Report\Survey\SurveyController::class, 'showReport'])->name('survey-report');
             Route::get('/survey-report/{survey}/participants',[\App\Http\Controllers\Portal\Report\Survey\SurveyController::class, 'showParticipants'])->name('survey-report.participants');
