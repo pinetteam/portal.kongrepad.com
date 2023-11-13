@@ -27,9 +27,9 @@ Route::get('/service/question-board/{code}', [\App\Http\Controllers\Service\Ques
 Route::get('/service/operator-board/{code}/{program_order}', [\App\Http\Controllers\Service\OperatorBoardController::class, 'index'])->name('service.operator-board.start');
 
 Route::group(["middleware" => ['auth']], function () {
-    Route::get('/service/survey-report/{survey_id}', [\App\Http\Controllers\Service\SurveyReportBoardController::class, 'index'])->name('service.survey-report.start');
-    Route::get('/service/keypad-report/{keypad_id}', [\App\Http\Controllers\Service\Screen\KeypadController::class, 'index'])->name('service.keypad-report.start');
-    Route::get('/service/debate-report/{debate_id}', [\App\Http\Controllers\Service\Screen\DebateController::class, 'index'])->name('service.debate-report.start');
+    Route::get('/service/survey-report/{survey}', [\App\Http\Controllers\Service\SurveyReportBoardController::class, 'index'])->name('service.survey-report.start');
+    Route::get('/service/keypad-report/{keypad}', [\App\Http\Controllers\Service\Screen\KeypadController::class, 'index'])->name('service.keypad-report.start');
+    Route::get('/service/debate-report/{debate}', [\App\Http\Controllers\Service\Screen\DebateController::class, 'index'])->name('service.debate-report.start');
 
 });
 Route::group(["middleware" => ['guest']], function () {
@@ -47,7 +47,20 @@ Route::prefix('portal')->name('portal.')->group(function () {
         /*report routes*/
         Route::prefix('report')->name('report.')->group(function () {
             Route::resource('/score-game', \App\Http\Controllers\Portal\Report\ScoreGame\ScoreGameController::class)->except(['create']);
+
             Route::resource('/question', \App\Http\Controllers\Portal\Report\Question\QuestionController::class)->except(['create']);
+
+            Route::resource('/survey-report', \App\Http\Controllers\Portal\Report\Survey\SurveyController::class)->except(['create']);
+            Route::get('/survey-report/{survey}/report',[\App\Http\Controllers\Portal\Report\Survey\SurveyController::class, 'showReport'])->name('survey-report');
+            Route::get('/survey-report/{survey}/participants',[\App\Http\Controllers\Portal\Report\Survey\SurveyController::class, 'showParticipants'])->name('survey-report.participants');
+
+            Route::resource('/keypad-report', \App\Http\Controllers\Portal\Report\Keypad\KeypadController::class)->except(['create']);
+            Route::get('/keypad-report/{keypad}/participants',[\App\Http\Controllers\Portal\Report\Keypad\KeypadController::class, 'showParticipants'])->name('keypad-report.participants');
+            Route::get('/keypad-report/{keypad}/report',[\App\Http\Controllers\Portal\Report\Keypad\KeypadController::class, 'showReport'])->name('keypad-report.question');
+
+            Route::resource('/debate-report', \App\Http\Controllers\Portal\Report\Debate\DebateController::class)->except(['create']);
+            Route::get('/debate-report/{debate}/participants',[\App\Http\Controllers\Portal\Report\Debate\DebateController::class, 'showParticipants'])->name('debate-report.participants');
+            Route::get('/debate-report/{debate}/report',[\App\Http\Controllers\Portal\Report\Debate\DebateController::class, 'showReport'])->name('debate-report');
         });
 
         /* Main routes */
@@ -56,17 +69,7 @@ Route::prefix('portal')->name('portal.')->group(function () {
         Route::get('/meeting/{meeting}/chair', [\App\Http\Controllers\Portal\DashboardController::class, 'chairIndex'])->name('dashboard.meeting.chair.index');
 
         /* Report routes */
-        Route::resource('/survey-report', \App\Http\Controllers\Portal\Report\Survey\SurveyController::class)->except(['create']);
-        Route::get('/survey-report/{survey_id}/report',[\App\Http\Controllers\Portal\Report\Survey\SurveyController::class, 'showReport'])->name('survey-report.report');
-        Route::get('/survey-report/{survey_id}/participants',[\App\Http\Controllers\Portal\Report\Survey\SurveyController::class, 'showParticipants'])->name('survey-report.survey.participants');
 
-        Route::resource('/keypad-report', \App\Http\Controllers\Portal\Report\Keypad\KeypadController::class)->except(['create']);
-        Route::get('/keypad-report/{keypad_id}/participants',[\App\Http\Controllers\Portal\Report\Keypad\KeypadController::class, 'showParticipants'])->name('keypad-report.question.participants');
-        Route::get('/keypad-report/{keypad_id}/report',[\App\Http\Controllers\Portal\Report\Keypad\KeypadController::class, 'showReport'])->name('keypad-report.question.report');
-
-        Route::resource('/debate-report', \App\Http\Controllers\Portal\Report\Debate\DebateController::class)->except(['create']);
-        Route::get('/debate-report/{debate_id}/participants',[\App\Http\Controllers\Portal\Report\Debate\DebateController::class, 'showParticipants'])->name('debate-report.debate.participants');
-        Route::get('/debate-report/{debate_id}/report',[\App\Http\Controllers\Portal\Report\Debate\DebateController::class, 'showReport'])->name('debate-report.debate.report');
 
         /* Meeting routes */
         Route::resource('/meeting', \App\Http\Controllers\Portal\Meeting\MeetingController::class)->except(['create']);

@@ -74,7 +74,7 @@
                                 </td>
                                 <td class="text-end">
                                     <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
-                                        <a class="btn btn-success btn-sm" href="{{ route("portal.survey-report.question.participants",['question_id'=>$question->id, 'survey_id'=>$survey->id]) }}" title="{{ __('common.participants') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.participants') }}">
+                                        <a class="btn btn-success btn-sm" href="{{ route("portal.report.survey-report.participants",['survey'=>$survey->id]) }}" title="{{ __('common.participants') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.participants') }}">
                                             <span class="fa-regular fa-user"></span>
                                         </a>
                                     </div>

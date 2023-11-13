@@ -83,19 +83,19 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route("portal.survey-report.index") }}">
+                    <a class="nav-link" href="{{ route("portal.report.survey-report.index") }}">
                         <span class="nav-icon fa-duotone fa-option fa-fade"></span>
                         {{ __('common.survey-reports') }}
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route("portal.keypad-report.index") }}">
+                    <a class="nav-link" href="{{ route("portal.report.keypad-report.index") }}">
                         <span class="nav-icon fa-duotone fa-chart-pie fa-fade"></span>
                         {{ __('common.keypad-reports') }}
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route("portal.debate-report.index") }}">
+                    <a class="nav-link" href="{{ route("portal.report.debate-report.index") }}">
                         <span class="nav-icon fa-duotone fa-podium-star fa-fade"></span>
                         {{ __('common.debate-reports') }}
                     </a>
