@@ -17,7 +17,7 @@
                     @if($debate->votes->count() != 0)
                         <div class="progress mt-2 h-25" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
                             <div class="progress-bar progress-bar-striped progress-bar-animated bg-success text-black text-center p-2 overflow-visible" style="width: {{ $team->votes->count() / $debate->votes->count()*100 }}%">
-                                {{ $team->title }} ({{$team->votes->count() / $debate->votes->count()*100}}%)
+                                {{ $team->title }} ({{round($team->votes->count() / $debate->votes->count()*100,2)}}%)
                             </div>
                         </div>
                     @elseif($debate->votes->count() == 0)

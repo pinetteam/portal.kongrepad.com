@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Portal\Report\Keypad;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
-class KeypadReportController extends Controller
+class KeypadController extends Controller
 {
     public function index()
     {

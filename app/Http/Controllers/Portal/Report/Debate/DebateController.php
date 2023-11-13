@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Portal\Report\Debate;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
-class DebateReportController extends Controller
+class DebateController extends Controller
 {
     public function index()
     {

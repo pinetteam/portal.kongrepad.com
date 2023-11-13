@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Portal\Report\Survey;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
-class SurveyReportController extends Controller
+class SurveyController extends Controller
 {
     public function index()
     {
