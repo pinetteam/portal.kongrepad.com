@@ -43,7 +43,7 @@
         </div>
         <div class="card-body p-0">
             <div class="container-fluid">
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-3 gy-3 py-3">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-4 gy-3 py-3">
                     <div class="col">
                         <div class="card text-bg-dark">
                             <div class="card-header">
@@ -85,6 +85,22 @@
                         <div class="card text-bg-dark">
                             <div class="card-header">
                                 <h1 class="m-0 text-center"><span class="badge text-bg-dark">3.</span> {{ __('common.environment') }}</h1>
+                            </div>
+                            <div class="card-body">
+                                <a class="btn btn-outline-light btn-lg w-100" href="{{ route('portal.meeting.hall.index', ['meeting' => $meeting->id]) }}" title="{{ __('common.show') }}">
+                                    <span class="fa-duotone fa-hotel"></span> {{ __('common.halls') }}
+                                </a>
+                                <hr />
+                                <a class="btn btn-outline-light btn-lg w-100" href="{{ route('portal.meeting.virtual-stand.index', ['meeting' => $meeting->id]) }}" title="{{ __('common.show') }}">
+                                    <span class="fa-duotone fa-browser"></span> {{ __('common.virtual-stands') }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card text-bg-dark">
+                            <div class="card-header">
+                                <h1 class="m-0 text-center"><span class="badge text-bg-dark">4.</span> {{ __('common.reports') }}</h1>
                             </div>
                             <div class="card-body">
                                 <a class="btn btn-outline-light btn-lg w-100" href="{{ route('portal.meeting.hall.index', ['meeting' => $meeting->id]) }}" title="{{ __('common.show') }}">
