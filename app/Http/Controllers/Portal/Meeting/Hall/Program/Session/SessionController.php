@@ -129,7 +129,6 @@ class SessionController extends Controller
             return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
         }
     }
-
     public function edit_question_limit(int $meeting, int $hall, int $program, int $id, int $increment){
         $program_session = Auth::user()->customer->programSessions()->findOrFail($id);
         $program_session->questions_limit = $program_session->questions_limit + $increment;

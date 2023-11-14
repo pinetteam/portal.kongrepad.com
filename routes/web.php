@@ -50,31 +50,26 @@ Route::prefix('portal')->name('portal.')->group(function () {
         Route::get('/meeting/{meeting}/chair', [\App\Http\Controllers\Portal\DashboardController::class, 'chairIndex'])->name('dashboard.meeting.chair.index');
         // Meeting routes
         Route::resource('/meeting', \App\Http\Controllers\Portal\Meeting\MeetingController::class)->except(['create']);
-
         Route::prefix('meeting')->name('meeting.')->group(function () {
             // Document routes
             Route::resource('/{meeting}/document', \App\Http\Controllers\Portal\Meeting\Document\DocumentController::class)->except(['create']);
             Route::resource('/{meeting}/virtual-stand', \App\Http\Controllers\Portal\Meeting\VirtualStand\VirtualStandController::class)->except(['create']);
             Route::resource('/{meeting}/announcement', \App\Http\Controllers\Portal\Meeting\Announcement\AnnouncementController::class)->except(['create']);
             Route::get('/{meeting}/document/download/{document}', [\App\Http\Controllers\Portal\Meeting\Document\DocumentController::class, 'download'])->name('document.download');
-
             // Report routes
             Route::prefix('{meeting}/report')->name('report.')->group(function () {
                 Route::resource('/score-game', \App\Http\Controllers\Portal\Report\ScoreGame\ScoreGameController::class)->only(['index', 'show']);
                 Route::resource('/question', \App\Http\Controllers\Portal\Report\Question\QuestionController::class)->only(['index', 'show']);
-                Route::resource('/survey', \App\Http\Controllers\Portal\Report\Survey\SurveyController::class)->except(['create']);
+                Route::resource('/survey', \App\Http\Controllers\Portal\Report\Survey\SurveyController::class)->only(['index', 'show']);
                 Route::get('/survey/{survey}/report',[\App\Http\Controllers\Portal\Report\Survey\SurveyController::class, 'showReport'])->name('survey');
                 Route::get('/survey/{survey}/participants',[\App\Http\Controllers\Portal\Report\Survey\SurveyController::class, 'showParticipants'])->name('survey.participants');
-
-                Route::resource('/keypad', \App\Http\Controllers\Portal\Report\Keypad\KeypadController::class)->except(['create']);
+                Route::resource('/keypad', \App\Http\Controllers\Portal\Report\Keypad\KeypadController::class)->only(['index', 'show']);
                 Route::get('/keypad/{keypad}/participants',[\App\Http\Controllers\Portal\Report\Keypad\KeypadController::class, 'showParticipants'])->name('keypad.participants');
                 Route::get('/keypad/{keypad}/report',[\App\Http\Controllers\Portal\Report\Keypad\KeypadController::class, 'showReport'])->name('keypad.question');
-
-                Route::resource('/debate', \App\Http\Controllers\Portal\Report\Debate\DebateController::class)->except(['create']);
+                Route::resource('/debate', \App\Http\Controllers\Portal\Report\Debate\DebateController::class)->only(['index', 'show']);
                 Route::get('/debate/{debate}/participants',[\App\Http\Controllers\Portal\Report\Debate\DebateController::class, 'showParticipants'])->name('debate.participants');
                 Route::get('/debate/{debate}/report',[\App\Http\Controllers\Portal\Report\Debate\DebateController::class, 'showReport'])->name('debate');
             });
-
             // Hall routes
             Route::resource('/{meeting}/hall', \App\Http\Controllers\Portal\Meeting\Hall\HallController::class)->except(['create']);
             Route::prefix('/{meeting}/hall/{hall}')->name('hall.')->group(function () {
@@ -108,7 +103,6 @@ Route::prefix('portal')->name('portal.')->group(function () {
             Route::resource('/{meeting}/participant', \App\Http\Controllers\Portal\Meeting\Participant\ParticipantController::class)->except(['create']);
             Route::get('/{meeting}/participant/{participant}/qr-code', [\App\Http\Controllers\Portal\Meeting\Participant\ParticipantController::class, 'qrCode'])->name('participant.qr-code');
             Route::get('/{meeting}/participant/{participant}/survey/{survey}', [\App\Http\Controllers\Portal\Meeting\Participant\ParticipantController::class, 'showSurvey'])->name('participant.survey');
-
             // Score Game Routes
             Route::resource('/{meeting}/score-game', \App\Http\Controllers\Portal\Meeting\ScoreGame\ScoreGameController::class)->except(['create']);
             Route::prefix('/{meeting}/score-game/{score_game}')->name('score-game.')->group(function () {
@@ -116,7 +110,6 @@ Route::prefix('portal')->name('portal.')->group(function () {
                 Route::get('/qr-code/{qr_code}/qr-code', [\App\Http\Controllers\Portal\Meeting\ScoreGame\QRCode\QRCodeController::class, 'qrCode'])->name('qr-code.qr-code');
                 Route::resource('/qr-code', \App\Http\Controllers\Portal\Meeting\ScoreGame\QRCode\QRCodeController::class)->except(['create', 'show']);
             });
-
             // Survey routes
             Route::resource('/{meeting}/survey', \App\Http\Controllers\Portal\Meeting\Survey\SurveyController::class)->except(['create']);
             Route::prefix('/{meeting}/survey/{survey}')->name('survey.')->group(function () {
@@ -127,8 +120,7 @@ Route::prefix('portal')->name('portal.')->group(function () {
         /*Route::resource('/hall', \App\Http\Controllers\Portal\Meeting\Hall\MeetingHallController::class)->except(['create']);
         Route::get('/hall/{meeting_hall_id}/current_speaker', [\App\Http\Controllers\Portal\Meeting\Hall\MeetingHallController::class, 'current_speaker'])->name('current-speaker.show');
         Route::get('/hall/{meeting_hall_id}/chair_board', [\App\Http\Controllers\Portal\Meeting\Hall\MeetingHallController::class, 'chair_board'])->name('chair-board.index');
-        Route::get('/hall/{meeting_hall_id}/current_chair/{chair_index}', [\App\Http\Controllers\Portal\Meeting\Hall\MeetingHallController::class, 'current_chair'])->name('current-chair.show');
-*/
+        Route::get('/hall/{meeting_hall_id}/current_chair/{chair_index}', [\App\Http\Controllers\Portal\Meeting\Hall\MeetingHallController::class, 'current_chair'])->name('current-chair.show');*/
         // Program routes
         Route::resource('/user', \App\Http\Controllers\Portal\User\UserController::class)->except(['create']);
         Route::resource('/user-role', \App\Http\Controllers\Portal\User\Role\UserRoleController::class)->except(['create']);

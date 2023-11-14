@@ -19,7 +19,6 @@ class QuestionController extends Controller
             return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();
         }
     }
-
    public function on_screen(int $id)
     {
         $question = Auth::user()->customer->sessionQuestions()->findOrFail($id);
