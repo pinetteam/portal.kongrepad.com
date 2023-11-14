@@ -250,7 +250,7 @@
                                      <div class="container text-center">
                                          <div class="row row-cols-1 row-cols-sm-1 row-cols-md-3 row-cols-xs-1 g-2">
                                              <div class="col border-2">
-                                                 <a class="text-white link-underline-dark" href="{{ route('portal.report.survey-report.index') }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
+                                                 <a class="text-white link-underline-dark" href="{{ route('portal.meeting.report.survey.index', $meeting->id) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
                                                      <span>
                                                          <div class="card-body p-0 shadow">
                                                              <div class="table-responsive">
@@ -272,7 +272,7 @@
                                                  </a>
                                              </div>
                                              <div class="col border-2">
-                                                 <a class="text-white link-underline-dark" href="{{ route('portal.report.debate-report.index') }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
+                                                 <a class="text-white link-underline-dark" href="{{ route('portal.meeting.report.debate.index', $meeting->id) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
                                                      <span>
                                                          <div class="card-body p-0 shadow">
                                                              <div class="table-responsive">
@@ -294,7 +294,7 @@
                                                  </a>
                                              </div>
                                              <div class="col border-2">
-                                                 <a class="text-white link-underline-dark" href="{{ route('portal.report.keypad-report.index') }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
+                                                 <a class="text-white link-underline-dark" href="{{ route('portal.meeting.report.keypad.index', $meeting->id) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
                                                      <span>
                                                          <div class="card-body p-0 shadow">
                                                              <div class="table-responsive">

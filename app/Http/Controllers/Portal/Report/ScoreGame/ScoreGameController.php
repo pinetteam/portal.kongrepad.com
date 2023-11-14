@@ -8,14 +8,16 @@ use Illuminate\Support\Facades\Auth;
 
 class ScoreGameController extends Controller
 {
-    public function index()
+    public function index(string $meeting)
     {
-        $score_games = Auth::user()->customer->scoreGames()->paginate(20);
-        return view('portal.report.score-game.index', compact(['score_games']));
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $score_games = $meeting->scoreGames()->paginate(20);
+        return view('portal.meeting.report.score-game.index', compact(['meeting', 'score_games']));
     }
-    public function show(int $id)
+    public function show(string $meeting, int $id)
     {
-        $score_game = Auth::user()->customer->scoreGames()->findOrFail($id);
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $score_game = $meeting->scoreGames()->findOrFail($id);
         $participants = $score_game->meeting->participants;
         $sortedParticipants = $participants->sortByDesc(function ($participant) use ($score_game) {
             return $participant->getTotalScoreGamePoint($score_game->id);
@@ -28,6 +30,6 @@ class ScoreGameController extends Controller
             'path' => request()->url(),
             'query' => request()->query(),
         ]);
-        return view('portal.report.score-game.show', compact(['score_game', 'participants']));
+        return view('portal.meeting.report.score-game.show', compact(['score_game', 'participants']));
     }
 }

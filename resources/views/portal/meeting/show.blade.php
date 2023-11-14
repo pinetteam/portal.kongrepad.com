@@ -103,12 +103,38 @@
                                 <h1 class="m-0 text-center"><span class="badge text-bg-dark">4.</span> {{ __('common.reports') }}</h1>
                             </div>
                             <div class="card-body">
-                                <a class="btn btn-outline-light btn-lg w-100" href="{{ route('portal.meeting.hall.index', ['meeting' => $meeting->id]) }}" title="{{ __('common.show') }}">
-                                    <span class="fa-duotone fa-hotel"></span> {{ __('common.halls') }}
+                                <a class="btn btn-outline-light btn-lg w-100" href="#">
+                                    <span class="nav-icon fa-duotone fa-chart-user fa-fade"></span>
+                                    {{ __('common.registration-reports') }}
                                 </a>
                                 <hr />
-                                <a class="btn btn-outline-light btn-lg w-100" href="{{ route('portal.meeting.virtual-stand.index', ['meeting' => $meeting->id]) }}" title="{{ __('common.show') }}">
-                                    <span class="fa-duotone fa-browser"></span> {{ __('common.virtual-stands') }}
+                                <a class="btn btn-outline-light btn-lg w-100" href="{{ route("portal.meeting.report.survey.index", ['meeting' => $meeting->id]) }}">
+                                    <span class="nav-icon fa-duotone fa-option fa-fade"></span>
+                                    {{ __('common.survey-reports') }}
+                                </a>
+                                <hr />
+                                <a class="btn btn-outline-light btn-lg w-100" href="{{ route("portal.meeting.report.keypad.index", ['meeting' => $meeting->id]) }}">
+                                    <span class="nav-icon fa-duotone fa-chart-pie fa-fade"></span>
+                                    {{ __('common.keypad-reports') }}
+                                </a>
+                                <hr />
+                                <a class="btn btn-outline-light btn-lg w-100" href="{{ route("portal.meeting.report.debate.index", ['meeting' => $meeting->id]) }}">
+                                    <span class="nav-icon fa-duotone fa-podium-star fa-fade"></span>
+                                    {{ __('common.debate-reports') }}
+                                </a>
+                                <hr />
+                                <a class="btn btn-outline-light btn-lg w-100" href="{{ route("portal.meeting.report.score-game.index", ['meeting' => $meeting->id]) }}">
+                                    <span class="nav-icon fa-duotone fa-hundred-points fa-fade"></span>
+                                    {{ __('common.score-game-reports') }}
+                                </a>
+                                <hr />
+                                <a class="btn btn-outline-light btn-lg w-100" href="{{ route("portal.meeting.report.question.index", ['meeting' => $meeting->id]) }}">
+                                    <span class="nav-icon fa-duotone fa-question fa-fade"></span>
+                                    {{ __('common.question-reports') }}
+                                </a>
+                                <hr />
+                                <a class="btn btn-outline-light btn-lg w-100" href="{{ route('portal.meeting.hall.index', ['meeting' => $meeting->id]) }}" title="{{ __('common.show') }}">
+                                    <span class="fa-duotone fa-hotel"></span> {{ __('common.halls') }}
                                 </a>
                             </div>
                         </div>

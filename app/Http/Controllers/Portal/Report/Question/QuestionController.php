@@ -21,6 +21,6 @@ class QuestionController extends Controller
             'path' => request()->url(),
             'query' => request()->query(),
         ]);
-        return view('portal.report.question.index', compact(['participants']));
+        return view('portal.meeting.report.question.index', compact(['participants']));
     }
 }

@@ -67,49 +67,13 @@
                 </li>
             </ul>
             <div class="sidebar-heading">
-                <span class="nav-icon fa-duotone fa-arrow-turn-down-right"></span> {{ __('common.statistic-and-report') }}
+                <span class="nav-icon fa-duotone fa-arrow-turn-down-right"></span> {{ __('common.statistic') }}
             </div>
             <ul class="nav nav-tabs flex-column">
                 <li class="nav-item">
                     <a class="nav-link" href="#">
                         <span class="nav-icon fa-duotone fa-wave-pulse fa-fade"></span>
                         {{ __('common.live-stats') }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <span class="nav-icon fa-duotone fa-chart-user fa-fade"></span>
-                        {{ __('common.registration-reports') }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route("portal.report.survey-report.index") }}">
-                        <span class="nav-icon fa-duotone fa-option fa-fade"></span>
-                        {{ __('common.survey-reports') }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route("portal.report.keypad-report.index") }}">
-                        <span class="nav-icon fa-duotone fa-chart-pie fa-fade"></span>
-                        {{ __('common.keypad-reports') }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route("portal.report.debate-report.index") }}">
-                        <span class="nav-icon fa-duotone fa-podium-star fa-fade"></span>
-                        {{ __('common.debate-reports') }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route("portal.report.score-game.index") }}">
-                        <span class="nav-icon fa-duotone fa-hundred-points fa-fade"></span>
-                        {{ __('common.score-game-reports') }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route("portal.report.question.index") }}">
-                        <span class="nav-icon fa-duotone fa-question fa-fade"></span>
-                        {{ __('common.question-reports') }}
                     </a>
                 </li>
             </ul>

@@ -3,7 +3,7 @@
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">
-            <h1 class="m-0 text-center"><span class="fa-duotone fa-hundred-points fa-fade"></span> {{ __('common.score-game-reports') }}</h1>
+            <h1 class="m-0 text-center"><span class="fa-duotone fa-hundred-points fa-fade"></span> <small>"{{ $meeting->title }}"</small> {{ __('common.score-game-reports') }}</h1>
         </div>
         <div class="card-body p-0">
             <div class="table-responsive">
@@ -55,7 +55,7 @@
                                 </td>
                                 <td class="text-end">
                                     <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
-                                        <a class="btn btn-info btn-sm" href="{{ route("portal.report.score-game.show", $score_game->id) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
+                                        <a class="btn btn-info btn-sm" href="{{ route("portal.meeting.report.score-game.show", ['score_game' => $score_game->id, 'meeting' => $meeting->id]) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
                                             <span class="fa-regular fa-eye"></span>
                                         </a>
                                     </div>

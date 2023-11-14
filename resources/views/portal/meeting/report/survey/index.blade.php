@@ -1,9 +1,9 @@
 @extends('layout.portal.common')
-@section('title', __('common.survey-reports'))
+@section('title', $meeting->title . ' | ' .  __('common.survey-reports'))
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">
-            <h1 class="m-0 text-center"><span class="fa-duotone fa-square-poll-horizontal fa-fade px-3 "></span>{{ __('common.surveys') }}</h1>
+            <h1 class="m-0 text-center"><span class="fa-duotone fa-square-poll-horizontal fa-fade px-3 "></span> <small>"{{ $meeting->title }}"</small> {{ __('common.surveys') }}</h1>
         </div>
 
         <div class="card-body p-0">
@@ -60,10 +60,10 @@
                             </td>
                             <td class="text-end">
                                 <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
-                                    <a class="btn btn-info btn-sm" href="{{ route("portal.report.survey-report.participants",['survey'=>$survey->id]) }}" title="{{ __('common.participants') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.participants') }}">
+                                    <a class="btn btn-info btn-sm" href="{{ route("portal.meeting.report.survey.participants",['survey'=>$survey->id, 'meeting'=>$survey->meeting->id]) }}" title="{{ __('common.participants') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.participants') }}">
                                         <span class="fa-regular fa-user"></span>
                                     </a>
-                                    <a class="btn btn-success btn-sm" href="{{ route("portal.report.survey-report",['survey'=>$survey->id]) }}" title="{{ __('common.report') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.report') }} ">
+                                    <a class="btn btn-success btn-sm" href="{{ route("portal.meeting.report.survey",['survey'=>$survey->id, 'meeting'=>$survey->meeting->id]) }}" title="{{ __('common.report') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.report') }} ">
                                         <span class="fa-regular fa-page"></span>
                                     </a>
                                     <a class="btn btn-info btn-sm" href="{{ route("service.survey-report.start",['survey'=>$survey->id]) }}" title="{{ __('common.screen') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.screen') }} ">

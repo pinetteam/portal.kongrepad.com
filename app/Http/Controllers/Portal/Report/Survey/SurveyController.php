@@ -7,9 +7,10 @@ use Illuminate\Support\Facades\Auth;
 
 class SurveyController extends Controller
 {
-    public function index()
+    public function index(string $meeting)
     {
-        $surveys = Auth::user()->customer->surveys()->paginate(20);
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $surveys = $meeting->surveys()->paginate(20);
         $statuses = [
             'passive' => ['value' => 0, 'title' => __('common.passive'), 'color' => 'danger'],
             'active' => ['value' => 1, 'title' => __('common.active'), 'color' => 'success'],
@@ -18,26 +19,29 @@ class SurveyController extends Controller
             'passive' => ['value' => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'active' => ['value' => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.report.survey-report.index', compact(['surveys', 'on_vote', 'statuses']));
+        return view('portal.meeting.report.survey.index', compact(['meeting', 'surveys', 'on_vote', 'statuses']));
     }
-    public function show(string $survey)
+    public function show(string $meeting, string $survey)
     {
-        $survey = Auth::user()->customer->surveys()->findOrFail($survey);
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $survey = $meeting->surveys()->findOrFail($survey);
         $on_vote = [
             'passive' => ["value" => 0, "title" => __('common.passive'), 'color' => 'danger'],
             'active' => ["value" => 1, "title" => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.report.survey-report.show', compact(['survey', 'on_vote']));
+        return view('portal.meeting.report.survey.show', compact(['survey', 'on_vote']));
     }
-    public function showParticipants(string $survey)
+    public function showParticipants(string $meeting, string $survey)
     {
-        $survey = Auth::user()->customer->surveys()->findOrFail($survey);
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $survey = $meeting->surveys()->findOrFail($survey);
         $votes = \App\Models\Meeting\Survey\Vote\Vote::where('survey_id', $survey->id)->groupBy('participant_id')->get();
-        return view('portal.report.survey-report.participant.index', compact(['survey', 'votes']));
+        return view('portal.meeting.report.survey.participant.index', compact(['survey', 'votes']));
     }
-    public function showReport(string $survey){
-        $survey = Auth::user()->customer->surveys()->findOrFail($survey);
-        return view('portal.report.survey-report.show-report', compact(['survey']));
+    public function showReport(string $meeting, string $survey){
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $survey = $meeting->surveys()->findOrFail($survey);
+        return view('portal.meeting.report.survey.report', compact(['survey']));
     }
     public function showScreen(string $survey){
         $survey = Auth::user()->customer->surveys()->findOrFail($survey);

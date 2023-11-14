@@ -266,4 +266,5 @@ return [
     'vote' => 'Oy',
     'keypad-voting-started' => 'Keypad Oylaması Başladı',
     'debate-voting-started' => 'Münazara Oylaması Başladı',
+    'statistic' => 'Statistics',
 ];
