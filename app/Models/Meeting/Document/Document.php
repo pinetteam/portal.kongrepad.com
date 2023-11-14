@@ -41,7 +41,6 @@ class Document extends Model
     {
         return isset($this->created_by) ? User::findOrFail($this->created_by)->full_name : __('common.unspecified');
     }
-
     public function sessions()
     {
         return $this->hasMany(Session::class, 'document_id', 'id');

@@ -44,7 +44,6 @@ class Vote extends Model
     {
         return $this->belongsTo(Keypad::class, 'keypad_id', 'id');
     }
-
     public function owner()
     {
         return $this->belongsTo(Participant::class, 'participant_id', 'id');

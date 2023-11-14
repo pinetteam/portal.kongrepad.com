@@ -124,7 +124,6 @@ class Customer extends Model
             ->where('customers.id', $this->getkey());
         return $debates;
     }
-
     public function teams()
     {
         $teams = Team::select('meeting_hall_program_debate_teams.*')
@@ -136,7 +135,6 @@ class Customer extends Model
             ->where('customers.id', $this->getkey());
         return $teams;
     }
-
     public function keypads()
     {
         $keypads = Keypad::select('meeting_hall_program_session_keypads.*')
@@ -148,7 +146,6 @@ class Customer extends Model
             ->where('customers.id', $this->getkey());
         return $keypads;
     }
-
     public function sessionQuestions()
     {
         $questions = \App\Models\Meeting\Hall\Program\Session\Question\Question::select('meeting_hall_program_session_questions.*')
@@ -160,7 +157,6 @@ class Customer extends Model
             ->where('customers.id', $this->getkey());
         return $questions;
     }
-
     public function options()
     {
         $keypads = Option::select('meeting_hall_program_session_keypad_options.*')
@@ -192,7 +188,6 @@ class Customer extends Model
             ->where('customers.id', $this->getkey());
         return $questions;
     }
-
     public function debateVotes()
     {
         $votes = Vote::select('meeting_hall_program_debate_votes.*')
@@ -204,7 +199,6 @@ class Customer extends Model
             ->where('customers.id', $this->getkey());
         return $votes;
     }
-
     public function keypadVotes()
     {
         $votes = \App\Models\Meeting\Hall\Program\Session\Keypad\Vote\Vote::select('meeting_hall_program_session_keypad_votes.*')
@@ -217,7 +211,6 @@ class Customer extends Model
             ->where('customers.id', $this->getkey());
         return $votes;
     }
-
     public function surveyVotes()
     {
         $surveyVotes = \App\Models\Meeting\Survey\Vote\Vote::select('meeting_survey_votes.*')
@@ -227,9 +220,6 @@ class Customer extends Model
             ->where('customers.id', $this->getkey());
         return $surveyVotes;
     }
-
-
-
     public function surveyParticipants()
     {
         $surveyParticipants = \App\Models\Meeting\Survey\Vote\Vote::select('meeting_survey_votes.*')
@@ -239,7 +229,6 @@ class Customer extends Model
             ->where('customers.id', $this->getkey());
         return $surveyParticipants;
     }
-
     public function settings()
     {
      $settings = Setting::select('customer_settings.*','system_setting_variables.*')

@@ -9,7 +9,6 @@ use Illuminate\Notifications\Notification;
 class DebateNotification extends Notification
 {
     public $hall;
-
     public function __construct($hall)
     {
         $this->hall = $hall;
@@ -18,7 +17,6 @@ class DebateNotification extends Notification
     {
         return [PusherChannel::class];
     }
-
     public function toPushNotification($notifiable)
     {
         return PusherMessage::create()

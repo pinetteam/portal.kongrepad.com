@@ -45,7 +45,6 @@ class QRCode extends Model
         'start_at' => 'datetime',
         'finish_at' => 'datetime',
     ];
-
     protected function startAt(): Attribute
     {
         $date_time_format = Variable::where('variable', 'date_time_format')->first()->settings()->where('customer_id', Auth::user()->customer->id ?? Customer::first()->id)->first()->value;

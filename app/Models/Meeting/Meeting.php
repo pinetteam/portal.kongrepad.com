@@ -128,7 +128,6 @@ class Meeting extends Model
             ->where('meetings.id', $this->getkey());
         return $program_sessions;
     }
-
     public function qrCodes()
     {
         $qr_codes = QRCode::select('meeting_score_game_qr_codes.*')
@@ -146,7 +145,6 @@ class Meeting extends Model
             ->where('meetings.id', $this->getkey());
         return $debates;
     }
-
     public function keypads()
     {
         $keypads = Keypad::select('meeting_hall_program_session_keypads.*')
@@ -157,7 +155,6 @@ class Meeting extends Model
             ->where('meetings.id', $this->getkey());
         return $keypads;
     }
-
     public function programChairs()
     {
         $chairs = Chair::select('meeting_hall_program_chairs.*')

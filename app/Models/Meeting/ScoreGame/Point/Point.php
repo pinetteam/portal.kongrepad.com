@@ -35,7 +35,6 @@ class Point extends Model
             get: fn (string $createdAt) => Carbon::createFromFormat('Y-m-d H:i:s', $createdAt)->format($date_time_format),
             );
     }
-
     public function qrCode()
     {
         return $this->belongsTo(QRCode::class, 'qr_code_id', 'id');

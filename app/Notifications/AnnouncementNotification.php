@@ -18,7 +18,6 @@ class AnnouncementNotification extends Notification
     {
         return [PusherChannel::class];
     }
-
     public function toPushNotification($notifiable)
     {
         return PusherMessage::create()

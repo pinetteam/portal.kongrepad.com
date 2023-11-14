@@ -30,7 +30,6 @@ class Variable extends Model
         'deleted_at' => 'datetime',
         'type_variables' => 'array',
     ];
-
     public function settings()
     {
         return $this->hasMany(Setting::class, 'variable_id', 'id');
