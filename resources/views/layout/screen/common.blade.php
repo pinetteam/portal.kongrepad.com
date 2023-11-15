@@ -9,7 +9,10 @@
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
     @vite(['resources/sass/app.scss'])
     @vite(['resources/js/app.js'])
+    @yield('script')
 </head>
+<body class="d-flex flex-column bg-dark h-100">
 @yield('body')
+</body>
 <x-common.popup.default />
 </html>

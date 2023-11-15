@@ -1,4 +1,4 @@
-@extends('layout.portal.common')
+@extends('layout.screen.common')
 @section('title', __('common.operator-board'))
 @section('body')
     <div class="container-fluid h-100">

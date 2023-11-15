@@ -11,6 +11,7 @@ use App\Http\Requests\Service\ScreenBoard\KeypadScreenRequest;
 use App\Http\Requests\Service\ScreenBoard\SpeakerScreenRequest;
 use App\Models\Meeting\Hall\Hall;
 use App\Models\Meeting\Hall\Screen\Screen;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class ScreenBoardController extends Controller
 {
@@ -79,10 +80,36 @@ class ScreenBoardController extends Controller
                     }])
                     ->findOrFail($request->input('keypad_id'));
             }
-            event(new KeypadEvent($screen, $keypad));
+            $keypadResource = new KeypadResource($keypad);
+            event(new KeypadEvent($screen, $keypadResource));
             return view('service.screen-board.index', compact(['hall', 'participants', 'screens', 'keypads']));
         } else {
             return back()->with('error', __('common.a-system-error-has-occurred'));
         }
+    }
+}
+
+class KeypadResource extends JsonResource
+{
+    public function toArray($request)
+    {
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'keypad' => $this->keypad,
+            'options' => OptionResource::collection($this->options),
+            'votes_count' => $this->votes_count,
+        ];
+    }
+}
+class OptionResource extends JsonResource
+{
+    public function toArray($request)
+    {
+        return [
+            'id' => $this->id,
+            'option' => $this->option,
+            'votes_count' => $this->votes_count,
+        ];
     }
 }

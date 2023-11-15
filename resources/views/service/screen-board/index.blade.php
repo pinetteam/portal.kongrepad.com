@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html class="h-100">
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{{__('common.screen-board')}} | {{ config('app.name') }}</title>
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
-    @vite(['resources/sass/app.scss'])
-    @vite(['resources/js/app.js'])
-</head>
+@extends('layout.screen.common')
+@section('title', __('common.screen-board'))
+@section('body')
 <body class="d-flex bg-dark flex-column h-100">
 <div class="container-fluid h-100">
     <div class="card text-bg-dark">
@@ -88,7 +79,11 @@
                                             <span class="fa-regular fa-tv"></span>
                                         </a>
                                     @elseif($screen->type == 'questions')
-                                        <a class="btn btn-outline-success btn-sm" href="{{ route('service.screen.keypad.index', ['meeting_hall_screen_code' => $screen->code]) }}" title="{{ __('common.questions') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.questions') }}" target="_blank">
+                                        <a class="btn btn-outline-success btn-sm" href="{{ route('service.screen.questions.index', ['meeting_hall_screen_code' => $screen->code]) }}" title="{{ __('common.questions') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.questions') }}" target="_blank">
+                                            <span class="fa-regular fa-tv"></span>
+                                        </a>
+                                    @elseif($screen->type == 'keypad')
+                                        <a class="btn btn-outline-success btn-sm" href="{{ route('service.screen.keypad.index', ['meeting_hall_screen_code' => $screen->code]) }}" title="{{ __('common.keypad') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.keypad') }}" target="_blank">
                                             <span class="fa-regular fa-tv"></span>
                                         </a>
                                     @endif
@@ -103,3 +98,4 @@
     </div>
 </div>
 </body>
+@endsection
