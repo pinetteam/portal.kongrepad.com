@@ -11,12 +11,10 @@
     @vite(['resources/sass/app.scss'])
     @vite(['resources/js/app.js'])
 </head>
-<header class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow" id="kp-header">
-    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 overflow-hidden text-center" href="{{ route("auth.login.index") }}">
-        {{ config('app.name') }}
-    </a>
+<header class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow justify-content-center" id="kp-header">
+    <img src="{{ asset('images/kongrepad-icon.png') }}" class="img-fluid my-2" width="60" alt="KongrePad 01" />
 </header>
-<body class="d-flex flex-column h-100 bg-dark">
+<body class="d-flex flex-column h-100 bg-dark pt-5">
     <div id="kp-loading" class="d-flex align-items-center justify-content-center">
         <div class="spinner-grow text-success" role="status">
             <span class="visually-hidden">{{ __('common.loading') }}</span>
@@ -27,7 +25,7 @@
             <div class="col">
                 <div class="card text-bg-dark border-0">
                     <div class="card-body text-center">
-                        <h1 class="h3 border-bottom border-dark-subtle">KongrePad'i indirin</h1>
+                        <h1 class="h3 border-bottom border-dark-subtle pt-4 pb-2">KongrePad'i indirin</h1>
                         <div class="row">
                             <div class="col">
                                 <a href="https://apps.apple.com/tr/app/kongrepad/id6463897045" target="_blank" title="KongrePad AppStore">
@@ -43,10 +41,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <div class="col m-0">
                 <div class="card text-bg-dark border-0">
                     <div class="card-body">
-                        <a href="{{ asset('app-debug.apk') }}"> APK </a>
                         <img src="{{ asset('images/home-screenshot-01.png') }}" class="img-fluid rounded shadow" alt="KongrePad 01" />
                     </div>
                 </div>

@@ -128,7 +128,7 @@ Route::prefix('portal')->name('portal.')->group(function () {
         Route::get('/hall/{meeting_hall_id}/current_chair/{chair_index}', [\App\Http\Controllers\Portal\Meeting\Hall\MeetingHallController::class, 'current_chair'])->name('current-chair.show');*/
         // Program routes
         Route::resource('/user', \App\Http\Controllers\Portal\User\UserController::class)->except(['create']);
-        Route::resource('/user-role', \App\Http\Controllers\Portal\User\Role\UserRoleController::class)->except(['create']);
+        Route::resource('/user-role', \App\Http\Controllers\Portal\User\Role\RoleController::class)->except(['create']);
         Route::resource('/setting', \App\Http\Controllers\Portal\Setting\SettingController::class)->only(['index', 'update']);
         Route::get('/session-question-on-screen/{id}', [\App\Http\Controllers\Portal\Meeting\Hall\Program\Session\Question\QuestionController::class,'on_screen'])->name('session-question.on-screen');
     });

@@ -9,7 +9,7 @@ use App\Models\System\Route\Route;
 use App\Models\User\Role\Role;
 use Illuminate\Support\Facades\Auth;
 
-class UserRoleController extends Controller
+class RoleController extends Controller
 {
     public function index()
     {
