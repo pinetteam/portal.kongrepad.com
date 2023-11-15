@@ -22,7 +22,7 @@
     </div>
     <div class="container" id="kp-home">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-2 gy-3 py-3">
-            <div class="col pt-5">
+            <div class="col pt-2">
                 <div class="card text-bg-dark border-0">
                     <div class="card-body text-center">
                         <h1 class="border-bottom border-dark-subtle pt-4 pb-2">KongrePad'i indirin</h1>
