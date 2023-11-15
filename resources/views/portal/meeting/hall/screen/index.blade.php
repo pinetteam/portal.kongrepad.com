@@ -84,6 +84,9 @@
             <x-input.hidden method="c" name="hall_id" :value="$hall->id" />
             <x-input.text method="c" name="title" title="title" icon="input-text" />
             <x-input.text method="c" name="description" title="description" icon="comment-dots" />
+            <x-input.file method="c" name="logo" title="logo" icon="image" />
+            <x-input.text method="c" name="font" title="font" icon="font" />
+            <x-input.text method="c" name="font_size" title="font-size" icon="text-size" />
             <x-input.select method="c" name="type" title="type" :options="$types" option_value="value" option_name="title" icon="person-military-pointing" />
             <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
@@ -94,6 +97,9 @@
             <x-input.hidden method="e" name="hall_id" :value="$hall->id" />
             <x-input.text method="e" name="title" title="title" icon="input-text" />
             <x-input.text method="e" name="description" title="description" icon="comment-dots" />
+            <x-input.file method="e" name="logo" title="logo" icon="image" />
+            <x-input.text method="e" name="font" title="font" icon="font" />
+            <x-input.text method="e" name="font_size" title="font-size" icon="text-size" />
             <x-input.select method="e" name="type" title="type" :options="$types" option_value="value" option_name="title" icon="person-military-pointing" />
             <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection

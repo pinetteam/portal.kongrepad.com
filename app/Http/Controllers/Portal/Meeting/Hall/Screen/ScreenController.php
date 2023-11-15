@@ -7,6 +7,7 @@ use App\Http\Requests\Portal\Meeting\Hall\Screen\ScreenRequest;
 use App\Http\Resources\Portal\Meeting\Hall\Screen\ScreenResource;
 use App\Models\Meeting\Hall\Screen\Screen;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ScreenController extends Controller
@@ -18,6 +19,7 @@ class ScreenController extends Controller
         $types = [
             'chair' => ['value' => 'chair', 'title' => __('common.chair')],
             'document' => ['value' => 'document', 'title' => __('common.document')],
+            'keypad' => ['value' => 'keypad', 'title' => __('common.keypad')],
             'questions' => ['value' => 'questions', 'title' => __('common.questions')],
             'speaker' => ['value' => 'speaker', 'title' => __('common.speaker')],
         ];
@@ -35,7 +37,20 @@ class ScreenController extends Controller
             $screen->code = Str::uuid()->toString();
             $screen->title = $request->input('title');
             $screen->description = $request->input('description');
+            $screen->font = $request->input('font');
+            $screen->font_size = $request->input('font_size');
             $screen->type = $request->input('type');
+            if ($request->hasFile('logo')) {
+                $file = $request->file('logo');
+                $file_name = Str::uuid()->toString();
+                $file_extension = $file->getClientOriginalExtension();
+                if(Storage::putFileAs('public/team-logos', $request->file('logo'), $file_name . '.' . $file_extension)) {
+                    $screen->logo_name = $file_name;
+                    $screen->logo_extension = $file_extension;
+                } else {
+                    return back()->with('create_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
+                }
+            }
             $screen->status = $request->input('status');
             if ($screen->save()) {
                 $screen->created_by = Auth::user()->id;
@@ -66,7 +81,20 @@ class ScreenController extends Controller
             $screen->hall_id = $request->input('hall_id');
             $screen->title = $request->input('title');
             $screen->description = $request->input('description');
+            $screen->font = $request->input('font');
+            $screen->font_size = $request->input('font_size');
             $screen->type = $request->input('type');
+            if ($request->hasFile('logo')) {
+                $file = $request->file('logo');
+                $file_name = Str::uuid()->toString();
+                $file_extension = $file->getClientOriginalExtension();
+                if(Storage::putFileAs('public/team-logos', $request->file('logo'), $file_name . '.' . $file_extension)) {
+                    $screen->logo_name = $file_name;
+                    $screen->logo_extension = $file_extension;
+                } else {
+                    return back()->with('create_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
+                }
+            }
             $screen->status = $request->input('status');
             if ($screen->save()) {
                 $screen->updated_by = Auth::user()->id;

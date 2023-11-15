@@ -266,5 +266,9 @@ return [
     'vote' => 'Oy',
     'keypad-voting-started' => 'Keypad Oylaması Başladı',
     'debate-voting-started' => 'Münazara Oylaması Başladı',
-    'statistic' => 'Statistics',
+    'statistic' => 'İstatistikler',
+    'screen-board' => 'Ekran Paneli',
+    'font' => 'Font',
+    'font-size' => 'Font Boyutu',
+    'content' => 'İçerik',
 ];

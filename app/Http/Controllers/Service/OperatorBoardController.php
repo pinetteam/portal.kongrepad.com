@@ -48,20 +48,28 @@ class OperatorBoardController extends Controller
         }
         $meeting_hall_screens = $meeting_hall->screens()->where('type', 'chair')->get();
         foreach ($meeting_hall_screens as $screen){
-            event(new ChairEvent($screen));
+            //event(new ChairEvent($screen));
         }
         if($program->type == 'session'){
             $chairs = Auth::user()->customer->participants()->whereNotIn('meeting_participants.id', $program->programChairs()->pluck('meeting_hall_program_chairs.chair_id'))->whereNot('meeting_participants.type', 'team')->get();
             $program_chairs = $program->programChairs()->get();
             $sessions = $program->sessions()->get();
-            return view('service.operator-board.index', compact(['meeting_hall', 'program', 'program_chairs', 'chairs', 'sessions']));
+            $chair_types = [
+                'chair' => ['value' => 'chair', 'title' => __('common.chair')],
+                'moderator' => ['value' => 'moderator', 'title' => __('common.moderator')],
+            ];
+            return view('service.operator-board.index', compact(['meeting_hall', 'program', 'program_chairs', 'chairs', 'chair_types', 'sessions']));
         } elseif($program->type == 'debate'){
             $chairs = Auth::user()->customer->participants()->whereNotIn('meeting_participants.id', $program->programChairs()->pluck('meeting_hall_program_chairs.chair_id'))->whereNot('meeting_participants.type', 'team')->get();
             $program_chairs = $program->programChairs()->get();
             $debates = $program->debates()->get();
-            return view('service.operator-board.index',compact(['meeting_hall', 'program', 'program_chairs', 'chairs', 'debates']));
+            $chair_types = [
+                'chair' => ['value' => 'chair', 'title' => __('common.chair')],
+                'moderator' => ['value' => 'moderator', 'title' => __('common.moderator')],
+            ];
+            return view('service.operator-board.index', compact(['meeting_hall', 'program', 'program_chairs', 'chairs', 'chair_types', 'debates']));
         } else {
-            return view('service.operator-board.index',compact(['meeting_hall', 'program']));
+            return view('service.operator-board.index', compact(['meeting_hall', 'program']));
         }
     }
 }

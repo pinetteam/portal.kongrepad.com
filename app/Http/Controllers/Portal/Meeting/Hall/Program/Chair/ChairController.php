@@ -15,6 +15,7 @@ class ChairController extends Controller
             $chair = new Chair();
             $chair->program_id = $request->input('program_id');
             $chair->chair_id = $request->input('chair_id');
+            $chair->type = $request->input('type');
             if ($chair->save()) {
                 $chair->created_by = Auth::user()->id;
                 $chair->save();

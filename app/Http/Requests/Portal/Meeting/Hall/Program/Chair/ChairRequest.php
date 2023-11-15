@@ -20,6 +20,7 @@ class ChairRequest extends FormRequest
                 return [
                     'program_id' => 'required|exists:meeting_hall_programs,id',
                     'chair_id' => 'required|exists:meeting_participants,id',
+                    'type' => 'required|in:chair,moderator',
                 ];
             }
             default:break;
@@ -30,6 +31,7 @@ class ChairRequest extends FormRequest
         return [
             'program_id' => __('common.program'),
             'chair_id' => __('common.moderator'),
+            'type' => __('common.type'),
         ];
     }
     public function failedValidation(Validator $validator)

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Portal\Meeting\Hall\Program\Debate;
 
-use App\Events\DebateEvent;
+use App\Events\Service\Debate\DebateEvent;
 use App\Events\Service\Screen\SpeakerEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Portal\Meeting\Hall\Program\Debate\DebateRequest;
@@ -96,7 +96,7 @@ class DebateController extends Controller
                 $debate->save();
                 $meeting_hall_screen = $hall->screens()->where('type', 'speaker')->first();
                 if ($meeting_hall_screen != null) {
-                    event(new SpeakerEvent($meeting_hall_screen));
+                    //event(new SpeakerEvent($meeting_hall_screen));
                 }
                 if ($meeting->participants->where('type', 'attendee')->count() > 0){
                     $meeting->participants->where('type', 'attendee')->first()->notify(new DebateNotification($hall));

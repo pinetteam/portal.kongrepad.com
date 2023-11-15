@@ -85,6 +85,7 @@
                             @section('chair-create-form')
                                 <x-input.hidden method="c" name="program_id" :value="$program->id" />
                                 <x-input.select method="c" name="chair_id" title="chair" :options="$chairs" option_value="id" option_name="full_name" icon="id-card" />
+                                <x-input.select method="c" name="type" title="type" :options="$chair_types" option_value="value" option_name="title" icon="person-military-pointing" />
                             @endsection
                         </x-crud.form.common.create>
                         <x-crud.form.common.delete name="chair" />
@@ -128,10 +129,11 @@
                                                     </td>
                                                     <td>
                                                         @if($session->speaker_id)
-                                                        {{ $session->speaker->full_name }}</td>
+                                                            {{ $session->speaker->full_name }}
                                                         @else
-                                                        <i class="text-info">{{ __('common.unspecified') }}</i>
+                                                            <i class="text-info">{{ __('common.unspecified') }}</i>
                                                         @endif
+                                                    </td>
                                                     <td>
                                                         @if($session->document_id)
                                                             <a href="{{ route('portal.meeting.document.download', ['meeting' => $program->hall->meeting_id, 'document' => $session->document->file_name]) }}" class="btn btn-sm btn-info w-100" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.view') }}">
@@ -285,10 +287,7 @@
                                 });
                                 confirmationFormSubmit.addEventListener('click', function() {
                                     confirmationFormSubmit.disabled = true;
-                                    if(button.getAttribute('data-start-stop') == 0)
-                                        confirmationFormSubmit.innerHTML = '<div class="spinner-border spinner-border-sm" role="status"></div> {{ __('common.starting') }}';
-                                    else
-                                        confirmationFormSubmit.innerHTML = '<div class="spinner-border spinner-border-sm" role="status"></div> {{ __('common.stopping') }}';
+                                    confirmationFormSubmit.innerHTML = '<div class="spinner-border spinner-border-sm" role="status"></div> {{ __('common.loading') }}';
                                     document.getElementById('start-keypad-confirmation-form').submit();
                                 });
                             </script>
@@ -343,10 +342,7 @@
                             });
                             confirmationFormSubmit.addEventListener('click', function() {
                                 confirmationFormSubmit.disabled = true;
-                                if(button.getAttribute('data-start-stop') == 0)
-                                    confirmationFormSubmit.innerHTML = '<div class="spinner-border spinner-border-sm" role="status"></div> {{ __('common.starting') }}';
-                                else
-                                    confirmationFormSubmit.innerHTML = '<div class="spinner-border spinner-border-sm" role="status"></div> {{ __('common.stopping') }}';
+                                confirmationFormSubmit.innerHTML = '<div class="spinner-border spinner-border-sm" role="status"></div> {{ __('common.loading') }}';
                                 document.getElementById('start-session-confirmation-form').submit();
                             });
                         </script>
@@ -443,10 +439,7 @@
                             });
                             confirmationFormSubmit.addEventListener('click', function() {
                                 confirmationFormSubmit.disabled = true;
-                                if(button.getAttribute('data-start-stop') == 0)
-                                    confirmationFormSubmit.innerHTML = '<div class="spinner-border spinner-border-sm" role="status"></div> {{ __('common.starting') }}';
-                                else
-                                    confirmationFormSubmit.innerHTML = '<div class="spinner-border spinner-border-sm" role="status"></div> {{ __('common.stopping') }}';
+                                confirmationFormSubmit.innerHTML = '<div class="spinner-border spinner-border-sm" role="status"></div> {{ __('common.loading') }}';
                                 document.getElementById('start-debate-confirmation-form').submit();
                             });
                         </script>

@@ -66,6 +66,9 @@
                                         <a class="btn btn-info btn-sm" href="{{ route('service.operator-board.start', ['code' => $hall->code, 'program_order' => 0]) }}" title="{{ __('common.operator-board') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.operator-board') }}">
                                             <span class="fa-regular fa-presentation-screen"></span>
                                         </a>
+                                        <a class="btn btn-warning btn-sm" href="{{ route('service.screen-board.start', ['code' => $hall->code]) }}" title="{{ __('common.screen-board') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.screen-board') }}">
+                                            <span class="fa-regular fa-presentation-screen"></span>
+                                        </a>
                                         <a class="btn btn-success btn-sm" href="{{ route('service.question-board.start', ['code' => $hall->code]) }}" title="{{ __('common.question-board') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.question-board') }}">
                                             <span class="fa-regular fa-question"></span>
                                         </a>

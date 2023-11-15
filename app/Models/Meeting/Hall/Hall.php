@@ -6,6 +6,7 @@ use App\Models\Meeting\Hall\Program\Debate\Debate;
 use App\Models\Meeting\Hall\Program\Program;
 use App\Models\Meeting\Hall\Program\Session\Session;
 use App\Models\Meeting\Hall\Screen\Screen;
+use App\Models\Meeting\Meeting;
 use App\Models\User\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -51,6 +52,10 @@ class Hall extends Model
     public function screens()
     {
         return $this->hasMany(Screen::class, 'hall_id', 'id');
+    }
+    public function meeting()
+    {
+        return $this->belongsTo(Meeting::class, 'meeting_id', 'id');
     }
     public function programSessions()
     {

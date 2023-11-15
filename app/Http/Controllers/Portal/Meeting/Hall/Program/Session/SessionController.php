@@ -101,7 +101,7 @@ class SessionController extends Controller
         if ($program_session->save()) {
             $meeting_hall_screen = $meeting_hall->screens()->where('type', 'speaker')->first();
             if ($meeting_hall_screen != null) {
-                event(new SpeakerEvent($meeting_hall_screen));
+                //event(new SpeakerEvent($meeting_hall_screen));
             }
             event(new QuestionBoardEvent($meeting_hall));
             $meeting_hall_screen = $meeting_hall->screens()->where('type', 'questions')->first();

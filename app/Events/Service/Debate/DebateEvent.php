@@ -1,20 +1,20 @@
 <?php
-namespace App\Events;
+namespace App\Events\Service\Debate;
 
 use Illuminate\Broadcasting\Channel;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
 
-class KeypadEvent implements ShouldBroadcast
+class DebateEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $hall;
     public $on_vote;
 
-    public function __construct($hall, $on_vote)
+    public function __construct($hall, bool $on_vote)
     {
         $this->hall = $hall;
         $this->on_vote = $on_vote;
@@ -29,7 +29,7 @@ class KeypadEvent implements ShouldBroadcast
 
     public function broadcastAs()
     {
-        return 'keypad';
+        return 'debate';
     }
 
     public function broadcastWith () {

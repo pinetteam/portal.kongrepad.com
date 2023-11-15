@@ -15,6 +15,7 @@ class Chair extends Model
         'sort_order',
         'program_id',
         'chair_id',
+        'type',
         'created_by',
         'updated_by',
         'deleted_by',

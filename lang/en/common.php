@@ -281,4 +281,8 @@ return [
     'keypad-session' => 'Keypad Session',
     'question-reports' => 'Question Reports',
     'score-game-reports' => 'Score Game Reports',
+    'screen-board' => 'Screen Board',
+    'font' => 'Font',
+    'font-size' => 'Font Size',
+    'content' => 'Content',
 ];

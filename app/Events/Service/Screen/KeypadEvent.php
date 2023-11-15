@@ -10,34 +10,34 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class ChairEvent implements ShouldBroadcast
+class KeypadEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     public $meeting_hall_screen;
-    public $participant;
-    public function __construct($meeting_hall_screen, $participant)
+    public $keypad;
+    public function __construct($meeting_hall_screen, $keypad)
     {
         $this->meeting_hall_screen = $meeting_hall_screen;
-        $this->participant = $participant;
+        $this->keypad = $keypad;
     }
     public function broadcastOn(): array
     {
         return [
-            new Channel('service.screen.chair.'.$this->meeting_hall_screen->code),
+            new Channel('service.screen.keypad.'.$this->meeting_hall_screen->code),
         ];
     }
     public function broadcastAs(): string
     {
-        return 'chair-event';
+        return 'keypad-event';
     }
     public function broadcastWith () {
         try {
             return [
-                'chair' => $this->participant,
+                'keypad' => $this->keypad,
             ];
         } catch (\Exception $e) {
             return [
-                'chair' => null,
+                'keypad' => null,
             ];
         }
     }

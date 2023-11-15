@@ -114,6 +114,7 @@
                         @section('chair-create-form')
                             <x-input.hidden method="c" name="program_id" :value="$program->id" />
                             <x-input.select method="c" name="chair_id" title="chair" :options="$chairs" option_value="id" option_name="full_name" icon="id-card" />
+                            <x-input.select method="c" name="type" title="type" :options="$chair_types" option_value="value" option_name="title" icon="person-military-pointing" />
                         @endsection
                     </x-crud.form.common.create>
                     <x-crud.form.common.delete name="chair" />
@@ -121,6 +122,7 @@
                         @section('chair-edit-form')
                             <x-input.hidden method="e" name="program_id" :value="$program->id" />
                             <x-input.select method="e" name="chair_id" title="chair" :options="$chairs" option_value="id" option_name="full_name" icon="id-card" />
+                            <x-input.select method="e" name="type" title="type" :options="$chair_types" option_value="value" option_name="title" icon="person-military-pointing" />
                         @endsection
                     </x-crud.form.common.edit>
                 </div>

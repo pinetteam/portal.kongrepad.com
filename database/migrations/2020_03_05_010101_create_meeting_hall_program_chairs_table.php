@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedInteger('sort_order')->nullable();
             $table->unsignedBigInteger('program_id')->index();
             $table->unsignedBigInteger('chair_id')->index();
+            $table->enum('type', ['chair', 'moderator']);
             $table->unsignedBigInteger('created_by')->index()->nullable();
             $table->unsignedBigInteger('updated_by')->index()->nullable();
             $table->unsignedBigInteger('deleted_by')->index()->nullable();

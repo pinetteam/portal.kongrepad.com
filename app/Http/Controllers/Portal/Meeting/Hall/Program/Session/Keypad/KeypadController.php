@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Portal\Meeting\Hall\Program\Session\Keypad;
 
-use App\Events\KeypadEvent;
+use App\Events\Service\Keypad\KeypadEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Portal\Meeting\Hall\Program\Session\Keypad\KeypadRequest;
 use App\Http\Resources\Portal\Meeting\Hall\Program\Session\Keypad\KeypadResource;

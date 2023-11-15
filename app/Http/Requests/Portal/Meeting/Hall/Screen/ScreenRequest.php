@@ -4,6 +4,7 @@ namespace App\Http\Requests\Portal\Meeting\Hall\Screen;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\File;
 
 class ScreenRequest extends FormRequest
 {
@@ -16,8 +17,11 @@ class ScreenRequest extends FormRequest
         return [
             'hall_id' => 'required|exists:meeting_halls,id',
             'title' => 'required|max:255',
+            'font' => 'nullable|max:255',
+            'font_size' => 'nullable|integer',
+            'logo' => ['nullable', File::types(['png','jpg','jpeg'])->max(12 * 1024),],
             'description' => 'nullable|max:65535',
-            'type' => 'required|in:chair,document,questions,speaker',
+            'type' => 'required|in:chair,document,keypad,questions,speaker',
             'status' => 'required|boolean',
         ];
     }
@@ -27,6 +31,9 @@ class ScreenRequest extends FormRequest
             'hall_id' => __('common.hall'),
             'title' => __('common.title'),
             'description' => __('common.description'),
+            'font' => __('common.font'),
+            'font_size' => __('common.font-size'),
+            'logo' => __('common.logo'),
             'type' => __('common.type'),
             'status' => __('common.status'),
         ];

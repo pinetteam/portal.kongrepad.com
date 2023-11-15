@@ -22,7 +22,7 @@ class ChairController extends Controller
     public function start($meeting_hall_screen_code)
     {
         $meeting_hall_screen = Screen::where('code', $meeting_hall_screen_code)->first();
-        event(new SpeakerEvent($meeting_hall_screen));
+        //event(new SpeakerEvent($meeting_hall_screen));
         return back();
     }
 }

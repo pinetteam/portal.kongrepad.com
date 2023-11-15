@@ -69,6 +69,13 @@
 </div>
 <div class="container-fluid h-100">
     @isset($session)
+        <div class="row row-cols-1">
+            <div class="col card text-bg-dark p-0">
+                <div class="card-header">
+                    <h2 class="text-center h3">{{ $session->speaker->full_name }} - {{ $session->title }}</h2>
+                </div>
+            </div>
+        </div>
         <div class="row row-cols-1 row-cols-sm-2 h-100">
             <div class="col card text-bg-dark p-0 h-100">
                 <div class="card-header">
@@ -86,9 +93,9 @@
                         <tbody id="questions" class="h-100">
                         @foreach($questions as $question)
                             <tr>
-                                <td class="w-75">{{$question->question}}</td>
+                                <td class="w-75">{{ $question->question }}</td>
                                 @if($question->is_hidden_name == 0)
-                                    <td>{{$question->questioner->full_name}}</td>
+                                    <td>{{ $question->questioner->full_name }}</td>
                                 @else
                                     <td>Anonim</td>
                                 @endif
@@ -123,9 +130,9 @@
                         <tbody id="selected-questions" class="h-100">
                         @foreach($selected_questions as $question)
                             <tr>
-                                <td class="w-75">{{$question->question}}</td>
+                                <td class="w-75">{{ $question->question }}</td>
                                 @if(!$question->is_hidden_name)
-                                    <td>{{$question->questioner->full_name}}</td>
+                                    <td>{{ $question->questioner->full_name }}</td>
                                 @else
                                     <td>Anonim</td>
                                 @endif

@@ -19,11 +19,16 @@ Route::get('/', function () {
 Route::get('/service/screen/speaker/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\SpeakerController::class, 'index'])->name('service.screen.speaker.index');
 Route::get('/service/screen/chair/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\ChairController::class, 'index'])->name('service.screen.chair.index');
 Route::get('/service/screen/speaker/event/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\SpeakerController::class, 'start'])->name('service.screen.speaker.start');
+Route::get('/service/screen/keypad/event/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\KeypadController::class, 'index'])->name('service.screen.keypad.index');
 
 Route::get('/service/screen/questions/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\QuestionsController::class, 'index'])->name('service.screen.questions.index');
 Route::get('/service/screen/questions/event/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\QuestionsController::class, 'start'])->name('service.screen.questions.start');
 
 Route::get('/service/question-board/{code}', [\App\Http\Controllers\Service\QuestionBoardController::class, 'index'])->name('service.question-board.start');
+Route::get('/service/screen-board/{code}', [\App\Http\Controllers\Service\ScreenBoardController::class, 'index'])->name('service.screen-board.start');
+Route::post('/service/screen-board/speaker-screen/{code}', [\App\Http\Controllers\Service\ScreenBoardController::class, 'speaker_screen'])->name('service.screen-board.speaker-screen');
+Route::post('/service/screen-board/chair-screen/{code}', [\App\Http\Controllers\Service\ScreenBoardController::class, 'chair_screen'])->name('service.screen-board.chair-screen');
+Route::post('/service/screen-board/keypad-screen/{code}', [\App\Http\Controllers\Service\ScreenBoardController::class, 'keypad_screen'])->name('service.screen-board.keypad-screen');
 Route::get('/service/operator-board/{code}/{program_order}', [\App\Http\Controllers\Service\OperatorBoardController::class, 'index'])->name('service.operator-board.start');
 
 Route::group(["middleware" => ['auth']], function () {

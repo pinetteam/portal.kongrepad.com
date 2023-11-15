@@ -94,12 +94,20 @@ class ProgramController extends Controller
                 'no' => ['value' => 0, 'title' => __('common.no'), 'color' => 'danger'],
                 'yes' => ['value' => 1, 'title' => __('common.yes'), 'color' => 'success'],
             ];
-            return view('portal.meeting.hall.program.show-session', compact(['documents', 'chairs', 'speakers', 'program', 'program_chairs', 'program_sessions', 'questions', 'questions_auto_start', 'statuses']));
+            $chair_types = [
+                'chair' => ['value' => 'chair', 'title' => __('common.chair')],
+                'moderator' => ['value' => 'moderator', 'title' => __('common.moderator')],
+            ];
+            return view('portal.meeting.hall.program.show-session', compact(['documents', 'chairs', 'chair_types', 'speakers', 'program', 'program_chairs', 'program_sessions', 'questions', 'questions_auto_start', 'statuses']));
         } else if($program->type == 'debate') {
             $debates = $program->debates()->get();
             $chairs = Auth::user()->customer->participants()->whereNotIn('meeting_participants.id', $program->programChairs()->pluck('meeting_hall_program_chairs.chair_id'))->whereNot('meeting_participants.type', 'team')->get();
             $program_chairs = $program->programChairs()->get();
-            return view('portal.meeting.hall.program.show-debate', compact(['program', 'program_chairs', 'chairs', 'debates', 'statuses']));
+            $chair_types = [
+                'chair' => ['value' => 'chair', 'title' => __('common.chair')],
+                'moderator' => ['value' => 'moderator', 'title' => __('common.moderator')],
+            ];
+            return view('portal.meeting.hall.program.show-debate', compact(['program', 'chair_types', 'program_chairs', 'chairs', 'debates', 'statuses']));
         } else if($program->type == 'other') {
             return view('portal.meeting.hall.program.show-other', compact(['program', 'statuses']));
         }
