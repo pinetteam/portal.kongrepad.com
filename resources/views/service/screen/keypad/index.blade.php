@@ -1,6 +1,6 @@
 @extends('layout.screen.common')
 @section('title', __('common.keypad-screen'))
-@section('body')
+@section('script')
     <script type="module">
         Echo.channel('service.screen.keypad.{{ $meeting_hall_screen->code }}')
             .listen('.keypad-event', data => {
@@ -10,7 +10,10 @@
                     var options = data.keypad.options;
                     var optionsHTML = '';
                     options.forEach(function(option) {
-                        optionsHTML += '<div class="progress mt-2 h-25 bg-dark" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> <div class="progress-bar progress-bar-striped progress-bar-animated bg-info text-white text-center p-2 overflow-visible" style="width:' + option.votes.length == 0 ? 0 : option.votes.length / keypad.votes.length*100 + '%">' + option.option + ' (' + keypad.votes.length == 0 ? 0 : option.votes.length / keypad.votes.length*100 + '%) </div> </div>';
+                        optionsHTML += '<div class="progress mt-2 h-25 bg-dark" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> <div class="progress-bar progress-bar-striped progress-bar-animated bg-info text-white text-center p-2 overflow-visible" style="width:'
+                        optionsHTML += option.votes_count == 0 ? 0 : option.votes_count / keypad.votes_count*100
+                        optionsHTML += '%; font-size: 72px">' + option.option + ' ('
+                        optionsHTML += keypad.votes_count == 0 ? 0 : option.votes_count / keypad.votes_count*100 + '%) </div> </div>';
                     });
                     document.getElementById("keypad-title").innerText = keypad.title;
                     document.getElementById("options").innerHTML = optionsHTML;
@@ -19,6 +22,8 @@
                 }
             });
     </script>
+@endsection
+@section('body')
     <div class="card text-bg-dark" xmlns="http://www.w3.org/1999/html">
         <div class="card-header">
             <h1 class="text-center" id="keypad-title"> {{ isset($keypad) ? $keypad->keypad : ""}} </h1>
