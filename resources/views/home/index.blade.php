@@ -22,10 +22,10 @@
     </div>
     <div class="container" id="kp-home">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-2 gy-3 py-3">
-            <div class="col">
+            <div class="col pt-5">
                 <div class="card text-bg-dark border-0">
                     <div class="card-body text-center">
-                        <h1 class="h3 border-bottom border-dark-subtle pt-4 pb-2">KongrePad'i indirin</h1>
+                        <h1 class="border-bottom border-dark-subtle pt-4 pb-2">KongrePad'i indirin</h1>
                         <div class="row">
                             <div class="col">
                                 <a href="https://apps.apple.com/tr/app/kongrepad/id6463897045" target="_blank" title="KongrePad AppStore">
@@ -41,10 +41,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col m-0">
+            <div class="col">
                 <div class="card text-bg-dark border-0">
                     <div class="card-body">
-                        <img src="{{ asset('images/home-screenshot-01.png') }}" class="img-fluid rounded shadow" alt="KongrePad 01" />
+                        <img src="{{ asset('images/home-screenshot.png') }}" class="img-fluid rounded-2" alt="KongrePad 01" />
                     </div>
                 </div>
             </div>
