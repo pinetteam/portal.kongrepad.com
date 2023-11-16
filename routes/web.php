@@ -23,6 +23,8 @@ Route::prefix('/service')->name('service.')->group(function () {
     Route::get('/screen/keypad/event/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\KeypadController::class, 'index'])->name('screen.keypad.index');
 
     Route::get('/screen/questions/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\QuestionsController::class, 'index'])->name('screen.questions.index');
+
+    Route::get('/screen/timer/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\TimerController::class, 'index'])->name('screen.timer.index');
     Route::get('/screen/questions/event/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\QuestionsController::class, 'start'])->name('screen.questions.start');
 
     Route::get('/question-board/{code}', [\App\Http\Controllers\Service\QuestionBoardController::class, 'index'])->name('question-board.start');
@@ -30,6 +32,7 @@ Route::prefix('/service')->name('service.')->group(function () {
     Route::post('/screen-board/speaker-screen/{code}', [\App\Http\Controllers\Service\ScreenBoardController::class, 'speaker_screen'])->name('screen-board.speaker-screen');
     Route::post('/screen-board/chair-screen/{code}', [\App\Http\Controllers\Service\ScreenBoardController::class, 'chair_screen'])->name('screen-board.chair-screen');
     Route::post('/screen-board/keypad-screen/{code}', [\App\Http\Controllers\Service\ScreenBoardController::class, 'keypad_screen'])->name('screen-board.keypad-screen');
+    Route::post('/screen-board/timer-screen/{code}/{action}', [\App\Http\Controllers\Service\ScreenBoardController::class, 'timer_screen'])->name('screen-board.timer-screen');
     Route::get('/operator-board/{code}/{program_order}', [\App\Http\Controllers\Service\OperatorBoardController::class, 'index'])->name('operator-board.start');
     Route::group(["middleware" => ['auth']], function () {
         Route::get('/survey-report/{survey}', [\App\Http\Controllers\Service\SurveyReportBoardController::class, 'index'])->name('survey-report.start');

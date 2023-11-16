@@ -22,6 +22,7 @@ class ScreenController extends Controller
             'keypad' => ['value' => 'keypad', 'title' => __('common.keypad')],
             'questions' => ['value' => 'questions', 'title' => __('common.questions')],
             'speaker' => ['value' => 'speaker', 'title' => __('common.speaker')],
+            'timer' => ['value' => 'timer', 'title' => __('common.timer')],
         ];
         $statuses = [
             'passive' => ['value' => 0, 'title' => __('common.passive'), 'color' => 'danger'],
@@ -44,7 +45,7 @@ class ScreenController extends Controller
                 $file = $request->file('logo');
                 $file_name = Str::uuid()->toString();
                 $file_extension = $file->getClientOriginalExtension();
-                if(Storage::putFileAs('public/team-logos', $request->file('logo'), $file_name . '.' . $file_extension)) {
+                if(Storage::putFileAs('public/screen-backgrounds', $request->file('logo'), $file_name . '.' . $file_extension)) {
                     $screen->logo_name = $file_name;
                     $screen->logo_extension = $file_extension;
                 } else {
@@ -88,7 +89,7 @@ class ScreenController extends Controller
                 $file = $request->file('logo');
                 $file_name = Str::uuid()->toString();
                 $file_extension = $file->getClientOriginalExtension();
-                if(Storage::putFileAs('public/team-logos', $request->file('logo'), $file_name . '.' . $file_extension)) {
+                if(Storage::putFileAs('public/screen-backgrounds', $request->file('logo'), $file_name . '.' . $file_extension)) {
                     $screen->logo_name = $file_name;
                     $screen->logo_extension = $file_extension;
                 } else {

@@ -271,4 +271,5 @@ return [
     'font' => 'Font',
     'font-size' => 'Font Boyutu',
     'content' => 'İçerik',
+    'timer' => 'Kronometre',
 ];

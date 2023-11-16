@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Service;
 use App\Events\Service\Screen\ChairEvent;
 use App\Events\Service\Screen\KeypadEvent;
 use App\Events\Service\Screen\SpeakerEvent;
+use App\Events\Service\Screen\TimerEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Service\ScreenBoard\ChairScreenRequest;
 use App\Http\Requests\Service\ScreenBoard\KeypadScreenRequest;
 use App\Http\Requests\Service\ScreenBoard\SpeakerScreenRequest;
+use App\Http\Requests\Service\ScreenBoard\TimerScreenRequest;
 use App\Models\Meeting\Hall\Hall;
 use App\Models\Meeting\Hall\Screen\Screen;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -82,6 +84,25 @@ class ScreenBoardController extends Controller
             }
             $keypadResource = new KeypadResource($keypad);
             event(new KeypadEvent($screen, $keypadResource));
+            return view('service.screen-board.index', compact(['hall', 'participants', 'screens', 'keypads']));
+        } else {
+            return back()->with('error', __('common.a-system-error-has-occurred'));
+        }
+    }
+    public function timer_screen(TimerScreenRequest $request, string $code, string $action)
+    {
+        if ($request->validated()) {
+            $screen = Screen::where('code', $code)->first();
+            $hall = $screen->hall;
+            $meeting = $hall->meeting;
+            $participants = $meeting->participants;
+            $screens = $hall->screens()->get();
+            $keypads = $meeting->keypads()->get();
+            if ($request->input('time') != null) {
+                event(new TimerEvent($screen, $request->input('time'), $action));
+            } else {
+                event(new TimerEvent($screen, 0, $action));
+            }
             return view('service.screen-board.index', compact(['hall', 'participants', 'screens', 'keypads']));
         } else {
             return back()->with('error', __('common.a-system-error-has-occurred'));

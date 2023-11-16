@@ -278,6 +278,7 @@ return [
     'debate-screen' => 'Debate Screen',
     'keypad-screen' => 'Keypad Screen',
     'survey-screen' => 'Survey Screen',
+    'timer-screen' => 'Timer Screen',
     'keypad-session' => 'Keypad Session',
     'question-reports' => 'Question Reports',
     'score-game-reports' => 'Score Game Reports',
@@ -285,5 +286,6 @@ return [
     'font' => 'Font',
     'font-size' => 'Font Size',
     'content' => 'Content',
+    'timer' => 'Timer',
     'enrolled-at' => 'Registered at',
 ];

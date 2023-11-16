@@ -19,7 +19,7 @@ class ScreenRequest extends FormRequest
             'title' => 'required|max:255',
             'font' => 'nullable|max:255',
             'font_size' => 'nullable|integer',
-            'logo' => ['nullable', File::types(['png','jpg','jpeg'])->max(12 * 1024),],
+            'background' => ['nullable', File::types(['png','jpg','jpeg'])->max(12 * 1024),],
             'description' => 'nullable|max:65535',
             'type' => 'required|in:chair,document,keypad,questions,speaker',
             'status' => 'required|boolean',
@@ -33,7 +33,7 @@ class ScreenRequest extends FormRequest
             'description' => __('common.description'),
             'font' => __('common.font'),
             'font_size' => __('common.font-size'),
-            'logo' => __('common.logo'),
+            'background' => __('common.background'),
             'type' => __('common.type'),
             'status' => __('common.status'),
         ];

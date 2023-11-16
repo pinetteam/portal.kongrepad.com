@@ -12,10 +12,13 @@
                     options.forEach(function(option) {
                         optionsHTML += '<div class="progress mt-2 h-25 bg-dark" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> <div class="progress-bar progress-bar-striped progress-bar-animated bg-info text-white text-center p-2 overflow-visible" style="width:'
                         optionsHTML += option.votes_count == 0 ? 0 : option.votes_count / keypad.votes_count*100
-                        optionsHTML += '%; font-size: 72px">' + option.option + ' ('
-                        optionsHTML += keypad.votes_count == 0 ? 0 : option.votes_count / keypad.votes_count*100 + '%) </div> </div>';
+                        optionsHTML += '%; font-size: 72px">'
+                        optionsHTML += option.option
+                        optionsHTML += ' ('
+                        optionsHTML += keypad.votes_count == 0 ? 0 : option.votes_count / keypad.votes_count*100
+                        optionsHTML +='%) </div> </div>';
                     });
-                    document.getElementById("keypad-title").innerText = keypad.title;
+                    document.getElementById("keypad-title").innerText = keypad.keypad;
                     document.getElementById("options").innerHTML = optionsHTML;
                 } else {
                     document.getElementById("options").innerHTML = '...';

@@ -14,9 +14,9 @@ return new class extends Migration
             $table->string('code', 255)->nullable();
             $table->string('title', 511);
             $table->text('description')->nullable();
-            $table->enum('type', ['chair', 'document', 'keypad', 'questions', 'speaker']);
-            $table->uuid('logo_name')->unique()->nullable();
-            $table->string('logo_extension')->nullable();
+            $table->enum('type', ['chair', 'document', 'keypad', 'questions', 'speaker', 'timer']);
+            $table->uuid('background_name')->unique()->nullable();
+            $table->string('background_extension')->nullable();
             $table->string('font')->nullable();
             $table->unsignedInteger('font_size')->nullable();
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
