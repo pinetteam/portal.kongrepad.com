@@ -103,7 +103,7 @@
                                 <h1 class="m-0 text-center"><span class="badge text-bg-dark">4.</span> {{ __('common.reports') }}</h1>
                             </div>
                             <div class="card-body">
-                                <a class="btn btn-outline-light btn-lg w-100" href="#">
+                                <a class="btn btn-outline-light btn-lg w-100" href="{{ route("portal.meeting.report.registration.index", ['meeting' => $meeting->id]) }}">
                                     <span class="nav-icon fa-duotone fa-chart-user fa-fade"></span>
                                     {{ __('common.registration-reports') }}
                                 </a>
@@ -131,10 +131,6 @@
                                 <a class="btn btn-outline-light btn-lg w-100" href="{{ route("portal.meeting.report.question.index", ['meeting' => $meeting->id]) }}">
                                     <span class="nav-icon fa-duotone fa-question fa-fade"></span>
                                     {{ __('common.question-reports') }}
-                                </a>
-                                <hr />
-                                <a class="btn btn-outline-light btn-lg w-100" href="{{ route('portal.meeting.hall.index', ['meeting' => $meeting->id]) }}" title="{{ __('common.show') }}">
-                                    <span class="fa-duotone fa-hotel"></span> {{ __('common.halls') }}
                                 </a>
                             </div>
                         </div>

@@ -35,6 +35,7 @@ class Participant extends Model
         'last_activity',
         'type',
         'enrolled',
+        'enrolled_at',
         'gdpr_consent',
         'status',
         'created_by',
@@ -50,6 +51,7 @@ class Participant extends Model
         'deleted_at',
         'last_login_datetime',
         'last_activity',
+        'enrolled_at',
     ];
     protected $casts = [
         'created_at' => 'datetime',
@@ -57,6 +59,7 @@ class Participant extends Model
         'deleted_at' => 'datetime',
         'last_login_datetime' => 'datetime',
         'last_activity' => 'timestamp',
+        'enrolled_at' => 'timestamp',
     ];
     protected $perPage = 30;
     public function getActivityStatusAttribute()
@@ -103,6 +106,21 @@ class Participant extends Model
     public function getLastLoginAttribute()
     {
         return isset($this->last_login_datetime) ? Carbon::parse($this->last_login_datetime)->diffForHumans() : __('common.not-logged-in-yet');
+    }
+    public function getEnrolledTimeAttribute()
+    {
+        if($this->enrolled !== false) {
+            $now = Carbon::now()->timestamp;
+            $enrolled_at = $this->enrolled_at;
+            $diff_in_seconds = $now-$enrolled_at;
+            if($diff_in_seconds<300) {
+                return $enrolled_at;
+            } else {
+                return __('common.not-registered-yet');
+            }
+        } else {
+            return __('common.not-registered-yet');
+        }
     }
     public function getFullNameAttribute()
     {

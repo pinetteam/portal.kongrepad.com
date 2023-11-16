@@ -285,4 +285,5 @@ return [
     'font' => 'Font',
     'font-size' => 'Font Size',
     'content' => 'Content',
+    'enrolled-at' => 'Registered at',
 ];

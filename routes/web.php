@@ -74,6 +74,7 @@ Route::prefix('portal')->name('portal.')->group(function () {
                 Route::resource('/debate', \App\Http\Controllers\Portal\Report\Debate\DebateController::class)->only(['index', 'show']);
                 Route::get('/debate/{debate}/participants',[\App\Http\Controllers\Portal\Report\Debate\DebateController::class, 'showParticipants'])->name('debate.participants');
                 Route::get('/debate/{debate}/report',[\App\Http\Controllers\Portal\Report\Debate\DebateController::class, 'showReport'])->name('debate');
+                Route::resource('/registration', \App\Http\Controllers\Portal\Report\Registration\RegistrationController::class)->only(['index']);
             });
             // Hall routes
             Route::resource('/{meeting}/hall', \App\Http\Controllers\Portal\Meeting\Hall\HallController::class)->except(['create']);

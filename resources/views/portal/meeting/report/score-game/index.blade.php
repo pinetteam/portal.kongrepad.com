@@ -1,5 +1,5 @@
 @extends('layout.portal.common')
-@section('title', __('common.score-game-reports'))
+@section('title', $meeting->title . ' | ' .  __('common.score-game-reports'))
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">
