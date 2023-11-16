@@ -16,27 +16,28 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home.index');
 });
-Route::get('/service/screen/speaker/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\SpeakerController::class, 'index'])->name('service.screen.speaker.index');
-Route::get('/service/screen/chair/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\ChairController::class, 'index'])->name('service.screen.chair.index');
-Route::get('/service/screen/speaker/event/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\SpeakerController::class, 'start'])->name('service.screen.speaker.start');
-Route::get('/service/screen/keypad/event/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\KeypadController::class, 'index'])->name('service.screen.keypad.index');
+Route::prefix('/service')->name('service.')->group(function () {
+    Route::get('/screen/speaker/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\SpeakerController::class, 'index'])->name('screen.speaker.index');
+    Route::get('/screen/chair/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\ChairController::class, 'index'])->name('screen.chair.index');
+    Route::get('/screen/speaker/event/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\SpeakerController::class, 'start'])->name('screen.speaker.start');
+    Route::get('/screen/keypad/event/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\KeypadController::class, 'index'])->name('screen.keypad.index');
 
-Route::get('/service/screen/questions/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\QuestionsController::class, 'index'])->name('service.screen.questions.index');
-Route::get('/service/screen/questions/event/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\QuestionsController::class, 'start'])->name('service.screen.questions.start');
+    Route::get('/screen/questions/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\QuestionsController::class, 'index'])->name('screen.questions.index');
+    Route::get('/screen/questions/event/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\QuestionsController::class, 'start'])->name('screen.questions.start');
 
-Route::get('/service/question-board/{code}', [\App\Http\Controllers\Service\QuestionBoardController::class, 'index'])->name('service.question-board.start');
-Route::get('/service/screen-board/{code}', [\App\Http\Controllers\Service\ScreenBoardController::class, 'index'])->name('service.screen-board.start');
-Route::post('/service/screen-board/speaker-screen/{code}', [\App\Http\Controllers\Service\ScreenBoardController::class, 'speaker_screen'])->name('service.screen-board.speaker-screen');
-Route::post('/service/screen-board/chair-screen/{code}', [\App\Http\Controllers\Service\ScreenBoardController::class, 'chair_screen'])->name('service.screen-board.chair-screen');
-Route::post('/service/screen-board/keypad-screen/{code}', [\App\Http\Controllers\Service\ScreenBoardController::class, 'keypad_screen'])->name('service.screen-board.keypad-screen');
-Route::get('/service/operator-board/{code}/{program_order}', [\App\Http\Controllers\Service\OperatorBoardController::class, 'index'])->name('service.operator-board.start');
-
-Route::group(["middleware" => ['auth']], function () {
-    Route::get('/service/survey-report/{survey}', [\App\Http\Controllers\Service\SurveyReportBoardController::class, 'index'])->name('service.survey-report.start');
-    Route::get('/service/keypad-report/{keypad}', [\App\Http\Controllers\Service\Screen\KeypadController::class, 'index'])->name('service.keypad-report.start');
-    Route::get('/service/debate-report/{debate}', [\App\Http\Controllers\Service\Screen\DebateController::class, 'index'])->name('service.debate-report.start');
-
+    Route::get('/question-board/{code}', [\App\Http\Controllers\Service\QuestionBoardController::class, 'index'])->name('question-board.start');
+    Route::get('/screen-board/{code}', [\App\Http\Controllers\Service\ScreenBoardController::class, 'index'])->name('screen-board.start');
+    Route::post('/screen-board/speaker-screen/{code}', [\App\Http\Controllers\Service\ScreenBoardController::class, 'speaker_screen'])->name('screen-board.speaker-screen');
+    Route::post('/screen-board/chair-screen/{code}', [\App\Http\Controllers\Service\ScreenBoardController::class, 'chair_screen'])->name('screen-board.chair-screen');
+    Route::post('/screen-board/keypad-screen/{code}', [\App\Http\Controllers\Service\ScreenBoardController::class, 'keypad_screen'])->name('screen-board.keypad-screen');
+    Route::get('/operator-board/{code}/{program_order}', [\App\Http\Controllers\Service\OperatorBoardController::class, 'index'])->name('operator-board.start');
+    Route::group(["middleware" => ['auth']], function () {
+        Route::get('/survey-report/{survey}', [\App\Http\Controllers\Service\SurveyReportBoardController::class, 'index'])->name('survey-report.start');
+        Route::get('/keypad-report/{keypad}', [\App\Http\Controllers\Service\Screen\KeypadController::class, 'index'])->name('keypad-report.start');
+        Route::get('/debate-report/{debate}', [\App\Http\Controllers\Service\Screen\DebateController::class, 'index'])->name('debate-report.start');
+    });
 });
+
 Route::group(["middleware" => ['guest']], function () {
     Route::get('/auth/login', [\App\Http\Controllers\Auth\LoginController::class, 'index'])->name('auth.login.index');
     Route::post('/auth/login', [\App\Http\Controllers\Auth\LoginController::class, 'store'])->name('auth.login.store');
@@ -106,6 +107,7 @@ Route::prefix('portal')->name('portal.')->group(function () {
                     });
                 });
             });
+            // Participant routes
             Route::resource('/{meeting}/participant', \App\Http\Controllers\Portal\Meeting\Participant\ParticipantController::class)->except(['create']);
             Route::get('/{meeting}/participant/{participant}/qr-code', [\App\Http\Controllers\Portal\Meeting\Participant\ParticipantController::class, 'qrCode'])->name('participant.qr-code');
             Route::get('/{meeting}/participant/{participant}/survey/{survey}', [\App\Http\Controllers\Portal\Meeting\Participant\ParticipantController::class, 'showSurvey'])->name('participant.survey');

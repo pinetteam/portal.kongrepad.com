@@ -102,7 +102,7 @@ return [
     'template-and-design' => 'Template & Design',
     'virtual-stands' => 'Virtual Stands',
     'virtual-stand' => 'Virtual Stand',
-    'statistic-and-report' => 'Statistic & Report',
+    'statistic' => 'Statistic',
     'live-stats' => 'Live Stats',
     'registration-reports' => 'Registration Reports',
     'a-system-error-has-occurred' => 'A system error has occurred!',
