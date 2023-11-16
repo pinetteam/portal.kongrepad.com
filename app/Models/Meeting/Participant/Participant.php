@@ -116,10 +116,10 @@ class Participant extends Model
             if($diff_in_seconds<300) {
                 return $enrolled_at;
             } else {
-                return __('common.not-registered-yet');
+                return __('common.not-enrolled-yet');
             }
         } else {
-            return __('common.not-registered-yet');
+            return __('common.not-enrolled-yet');
         }
     }
     public function getFullNameAttribute()
