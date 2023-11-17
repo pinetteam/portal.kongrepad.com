@@ -270,6 +270,9 @@ return [
     'screen-board' => 'Ekran Paneli',
     'font' => 'Font',
     'font-size' => 'Font Boyutu',
+    'font-color' => 'Font Rengi',
+    'white' => 'Beyaz',
+    'black' => 'Siyah',
     'content' => 'İçerik',
     'timer' => 'Kronometre',
 ];

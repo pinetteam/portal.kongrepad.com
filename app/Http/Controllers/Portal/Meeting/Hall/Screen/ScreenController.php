@@ -24,11 +24,15 @@ class ScreenController extends Controller
             'speaker' => ['value' => 'speaker', 'title' => __('common.speaker')],
             'timer' => ['value' => 'timer', 'title' => __('common.timer')],
         ];
+        $font_colors = [
+            'white' => ['value' => 'white', 'title' => __('common.white')],
+            'black' => ['value' => 'black', 'title' => __('common.black')],
+        ];
         $statuses = [
             'passive' => ['value' => 0, 'title' => __('common.passive'), 'color' => 'danger'],
             'active' => ['value' => 1, 'title' => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.meeting.hall.screen.index', compact(['hall', 'screens', 'types', 'statuses']));
+        return view('portal.meeting.hall.screen.index', compact(['hall', 'font_colors', 'screens', 'types', 'statuses']));
     }
     public function store(ScreenRequest $request, int $meeting, int $hall)
     {
@@ -40,14 +44,15 @@ class ScreenController extends Controller
             $screen->description = $request->input('description');
             $screen->font = $request->input('font');
             $screen->font_size = $request->input('font_size');
+            $screen->font_color = $request->input('font_color');
             $screen->type = $request->input('type');
-            if ($request->hasFile('logo')) {
-                $file = $request->file('logo');
+            if ($request->hasFile('background')) {
+                $file = $request->file('background');
                 $file_name = Str::uuid()->toString();
                 $file_extension = $file->getClientOriginalExtension();
-                if(Storage::putFileAs('public/screen-backgrounds', $request->file('logo'), $file_name . '.' . $file_extension)) {
-                    $screen->logo_name = $file_name;
-                    $screen->logo_extension = $file_extension;
+                if(Storage::putFileAs('public/screen-backgrounds', $request->file('background'), $file_name . '.' . $file_extension)) {
+                    $screen->background_name = $file_name;
+                    $screen->background_extension = $file_extension;
                 } else {
                     return back()->with('create_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
                 }
@@ -84,14 +89,15 @@ class ScreenController extends Controller
             $screen->description = $request->input('description');
             $screen->font = $request->input('font');
             $screen->font_size = $request->input('font_size');
+            $screen->font_color = $request->input('font_color');
             $screen->type = $request->input('type');
-            if ($request->hasFile('logo')) {
-                $file = $request->file('logo');
+            if ($request->hasFile('background')) {
+                $file = $request->file('background');
                 $file_name = Str::uuid()->toString();
                 $file_extension = $file->getClientOriginalExtension();
-                if(Storage::putFileAs('public/screen-backgrounds', $request->file('logo'), $file_name . '.' . $file_extension)) {
-                    $screen->logo_name = $file_name;
-                    $screen->logo_extension = $file_extension;
+                if(Storage::putFileAs('public/screen-backgrounds', $request->file('background'), $file_name . '.' . $file_extension)) {
+                    $screen->background_name = $file_name;
+                    $screen->background_extension = $file_extension;
                 } else {
                     return back()->with('create_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
                 }

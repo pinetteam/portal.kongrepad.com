@@ -18,21 +18,18 @@
     </script>
 @endsection
 @section('body')
-<div id="kp-loading" class="d-flex align-items-center justify-content-center">
-    <div class="spinner-grow text-success" role="status">
-        <span class="visually-hidden">{{ __('common.loading') }}</span>
-    </div>
-</div>
-@if($speaker)
+    @isset($meeting_hall_screen->background_name)
+        <div class="bg-img bg-cover" style="backgroud-color: #fff;background-image: url({{ asset('storage/screen-backgrounds/' . $meeting_hall_screen->background_name . '.' . $meeting_hall_screen->background_extension)}} ); height:100%; width:100%;">
+    @endisset
+    @if($speaker)
     <div class="d-flex align-items-center justify-content-center h-100">
-        <h1 class="text-white text-center w-100 fw-bold" id="speaker" style="font-size: 96px">{{ isset($speaker->title) ? $speaker->title . ' ' : null }}{{ $speaker->first_name }} {{ $speaker->last_name }}</h1>
+        <h1 class="text-{{$meeting_hall_screen->font_color}} text-center w-100 fw-bold" id="speaker" style="font-size: {{$meeting_hall_screen->font_size ?? 96}}px">{{ isset($speaker->title) ? $speaker->title . ' ' : null }}{{ $speaker->first_name }} {{ $speaker->last_name }}</h1>
     </div>
     @else
-    <h1 class="text-white text-center w-100 fw-bold" id="speaker" style="font-size: 96px">
-        <div class="spinner-grow text-success text-center" role="status">
-            <span class="visually-hidden">{{ __('common.loading') }}</span>
-        </div>
-    </h1>
+    <div class="d-flex align-items-center justify-content-center h-100">
+        <h1 class="text-{{$meeting_hall_screen->font_color}} text-center w-100 fw-bold" id="speaker" style="font-size: {{$meeting_hall_screen->font_size ?? 96}}px">
+        </h1>
+    </div>
 @endif
 @endsection
 

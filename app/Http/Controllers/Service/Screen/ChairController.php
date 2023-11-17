@@ -13,7 +13,11 @@ class ChairController extends Controller
         $meeting_hall_screen = Screen::where('code', $meeting_hall_screen_code)->first();
         try {
             $program = $meeting_hall_screen->hall->programs()->where('is_started', true)->first();
-            $chair = $program->programChairs()->get()[$meeting_hall_screen->id%3]->chair;
+            if($program){
+                $chair = $program->programChairs()->get()[$meeting_hall_screen->id%3]->chair;
+            } else {
+                $chair = null;
+            }
         } catch (\Exception $e) {
             $chair = null;
         }

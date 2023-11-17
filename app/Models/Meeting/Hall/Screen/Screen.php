@@ -21,6 +21,7 @@ class Screen extends Model
         'background_extension',
         'font',
         'font_size',
+        'font_color',
         'status',
         'created_by',
         'updated_by',

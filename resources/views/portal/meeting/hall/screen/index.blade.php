@@ -15,6 +15,9 @@
                         <tr>
                             <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}</th>
                             <th scope="col"><span class="fa-regular fa-person-military-pointing mx-1"></span> {{ __('common.type') }}</th>
+                            <th scope="col"><span class="fa-regular fa-font mx-1"></span> {{ __('common.font') }}</th>
+                            <th scope="col"><span class="fa-regular fa-text-size mx-1"></span> {{ __('common.font-size') }}</th>
+                            <th scope="col"><span class="fa-regular fa-palette mx-1"></span> {{ __('common.font-color') }}</th>
                             <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}</th>
                             <th scope="col" class="text-end"></th>
                         </tr>
@@ -24,6 +27,9 @@
                             <tr>
                                 <td>{{ $screen->title }}</td>
                                 <td>{{ __('common.'.$screen->type) }}</td>
+                                <td>{{ $screen->font }}</td>
+                                <td>{{ $screen->font_size }}</td>
+                                <td>{{ __('common.'.$screen->font_color) }}</td>
                                 <td >
                                     @if($screen->status)
                                         <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
@@ -88,6 +94,7 @@
             <x-input.text method="c" name="font" title="font" icon="font" />
             <x-input.text method="c" name="font_size" title="font-size" icon="text-size" />
             <x-input.select method="c" name="type" title="type" :options="$types" option_value="value" option_name="title" icon="person-military-pointing" />
+            <x-input.select method="c" name="font_color" title="font-color" :options="$font_colors" option_value="value" option_name="title" icon="palette" />
             <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.create>
@@ -101,6 +108,7 @@
             <x-input.text method="e" name="font" title="font" icon="font" />
             <x-input.text method="e" name="font_size" title="font-size" icon="text-size" />
             <x-input.select method="e" name="type" title="type" :options="$types" option_value="value" option_name="title" icon="person-military-pointing" />
+            <x-input.select method="e" name="font_color" title="font-color" :options="$font_colors" option_value="value" option_name="title" icon="palette" />
             <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.edit>

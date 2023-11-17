@@ -16,6 +16,7 @@ class ScreenResource extends JsonResource
             'description' => ['value' => $this->description, 'type' => 'text'],
             'font' => ['value' => $this->font, 'type' => 'text'],
             'font_size' => ['value' => $this->font_size, 'type' => 'number'],
+            'font_color' => ['value' => $this->font_color, 'type' => 'select'],
             'type' => ['value' => $this->type, 'type' => 'select'],
             'status' => ['value' => $this->status, 'type' => 'radio'],
             'route' => route('portal.meeting.hall.screen.update', ['meeting' => $this->hall->meeting_id, 'hall' => $this->hall->id, 'screen' => $this->id]),

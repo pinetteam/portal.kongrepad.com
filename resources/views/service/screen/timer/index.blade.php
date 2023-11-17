@@ -28,7 +28,6 @@
             stopwatch.innerText = minutes + ':' + seconds;
         }
 
-        // Initialize display
         updateDisplay();
         Echo.channel('service.screen.timer.{{ $meeting_hall_screen->code }}')
             .listen('.timer-event', data => {
@@ -51,8 +50,11 @@
     </script>
 @endsection
 @section('body')
-<div class="d-flex align-items-center justify-content-center h-100">
-    <div id="stopwatch" class="text-white" style="font-size: 96px">00:00:00</div>
-</div>
+    @isset($meeting_hall_screen->background_name)
+        <div class="bg-img bg-cover" style="backgroud-color: #fff;background-image: url({{ asset('storage/screen-backgrounds/' . $meeting_hall_screen->background_name . '.' . $meeting_hall_screen->background_extension)}} ); height:100%; width:100%;">
+    @endisset
+    <div class="d-flex align-items-center justify-content-center h-100">
+        <div id="stopwatch" class="text-{{$meeting_hall_screen->font_color}}" style="font-size: {{$meeting_hall_screen->font_size ?? 96}}px">00:00:00</div>
+    </div>
 @endsection
 
