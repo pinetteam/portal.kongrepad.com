@@ -21,12 +21,9 @@ Route::prefix('/service')->name('service.')->group(function () {
     Route::get('/screen/chair/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\ChairController::class, 'index'])->name('screen.chair.index');
     Route::get('/screen/speaker/event/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\SpeakerController::class, 'start'])->name('screen.speaker.start');
     Route::get('/screen/keypad/event/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\KeypadController::class, 'index'])->name('screen.keypad.index');
-
     Route::get('/screen/questions/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\QuestionsController::class, 'index'])->name('screen.questions.index');
-
     Route::get('/screen/timer/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\TimerController::class, 'index'])->name('screen.timer.index');
     Route::get('/screen/questions/event/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\QuestionsController::class, 'start'])->name('screen.questions.start');
-
     Route::get('/question-board/{code}', [\App\Http\Controllers\Service\QuestionBoardController::class, 'index'])->name('question-board.start');
     Route::get('/screen-board/{code}', [\App\Http\Controllers\Service\ScreenBoardController::class, 'index'])->name('screen-board.start');
     Route::post('/screen-board/speaker-screen/{code}', [\App\Http\Controllers\Service\ScreenBoardController::class, 'speaker_screen'])->name('screen-board.speaker-screen');
@@ -45,7 +42,6 @@ Route::group(["middleware" => ['guest']], function () {
     Route::get('/auth/login', [\App\Http\Controllers\Auth\LoginController::class, 'index'])->name('auth.login.index');
     Route::post('/auth/login', [\App\Http\Controllers\Auth\LoginController::class, 'store'])->name('auth.login.store');
 });
-
 Route::group(["middleware" => ['auth']], function () {
     Route::post('/auth/logout', [\App\Http\Controllers\Auth\LogoutController::class, 'store'])->name('auth.logout.store');
 });
