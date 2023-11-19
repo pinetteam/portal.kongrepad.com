@@ -13,6 +13,6 @@
 </head>
 <body class="d-flex justify-content-center align-items-center bg-dark h-100">
 @yield('body')
-</body>
 <x-common.popup.default />
+</body>
 </html>

@@ -40,5 +40,4 @@ class Option extends Model
     {
         return $this->hasMany(Vote::class, 'option_id', 'id');
     }
-
 }

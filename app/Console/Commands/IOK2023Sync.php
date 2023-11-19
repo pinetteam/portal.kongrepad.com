@@ -3,29 +3,16 @@
 namespace App\Console\Commands;
 
 use App\Models\Meeting\Participant\Participant;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
 
 class IOK2023Sync extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
     protected $signature = 'app:iok2023-sync';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'İmmünoterapi ve Onkoloji Kongresi 2023';
 
-    /**
-     * Execute the console command.
-     */
     public function handle()
     {
         Log::info("---------------------------------------------------------");
@@ -79,6 +66,7 @@ class IOK2023Sync extends Command
                     'password' => $password,
                     'type' => $type,
                     'enrolled' => $enrolled,
+                    'enrolled_at' => Carbon::now()->timestamp(),
                     'gdpr_consent' => 0,
                     'status' => 1,
                 ]

@@ -107,21 +107,6 @@ class Participant extends Model
     {
         return isset($this->last_login_datetime) ? Carbon::parse($this->last_login_datetime)->diffForHumans() : __('common.not-logged-in-yet');
     }
-    public function getEnrolledTimeAttribute()
-    {
-        if($this->enrolled !== false) {
-            $now = Carbon::now()->timestamp;
-            $enrolled_at = $this->enrolled_at;
-            $diff_in_seconds = $now-$enrolled_at;
-            if($diff_in_seconds<300) {
-                return $enrolled_at;
-            } else {
-                return __('common.not-enrolled-yet');
-            }
-        } else {
-            return __('common.not-enrolled-yet');
-        }
-    }
     public function getFullNameAttribute()
     {
         return Str::of("$this->title $this->first_name $this->last_name")->trim();

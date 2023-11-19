@@ -8,13 +8,13 @@ use Illuminate\Support\Facades\Auth;
 
 class ScoreGameController extends Controller
 {
-    public function index(string $meeting)
+    public function index(int $meeting)
     {
         $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
         $score_games = $meeting->scoreGames()->paginate(20);
         return view('portal.meeting.report.score-game.index', compact(['meeting', 'score_games']));
     }
-    public function show(string $meeting, int $id)
+    public function show(int $meeting, int $id)
     {
         $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
         $score_game = $meeting->scoreGames()->findOrFail($id);
