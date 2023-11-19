@@ -32,15 +32,12 @@ class ScreenBoardController extends Controller
             $screen = Screen::where('code', $code)->first();
             $hall = $screen->hall;
             $meeting = $hall->meeting;
-            $participants = $meeting->participants;
-            $screens = $hall->screens()->get();
             $participant = null;
-            $keypads = $meeting->keypads()->get();
             if ($request->input('speaker_id') != null) {
                 $participant = $meeting->participants()->findOrFail($request->input('speaker_id'));
             }
             event(new SpeakerEvent($screen, $participant));
-            return view('service.screen-board.index', compact(['hall', 'participants', 'screens', 'keypads']));
+            return back()->with('success', __('common.edited-successfully'));
         } else {
             return back()->with('error', __('common.a-system-error-has-occurred'));
         }
@@ -51,15 +48,12 @@ class ScreenBoardController extends Controller
             $screen = Screen::where('code', $code)->first();
             $hall = $screen->hall;
             $meeting = $hall->meeting;
-            $participants = $meeting->participants;
-            $screens = $hall->screens()->get();
             $participant = null;
-            $keypads = $meeting->keypads()->get();
             if ($request->input('chair_id') != null) {
                 $participant = $meeting->participants()->findOrFail($request->input('chair_id'));
             }
             event(new ChairEvent($screen, $participant));
-            return view('service.screen-board.index', compact(['hall', 'participants', 'screens', 'keypads']));
+            return back()->with('success', __('common.edited-successfully'));
         } else {
             return back()->with('error', __('common.a-system-error-has-occurred'));
         }
@@ -70,10 +64,7 @@ class ScreenBoardController extends Controller
             $screen = Screen::where('code', $code)->first();
             $hall = $screen->hall;
             $meeting = $hall->meeting;
-            $participants = $meeting->participants;
-            $screens = $hall->screens()->get();
             $keypad = null;
-            $keypads = $meeting->keypads()->get();
             if ($request->input('keypad_id') != null) {
                 $keypad = $meeting->keypads()
                     ->withCount('votes')
@@ -84,7 +75,7 @@ class ScreenBoardController extends Controller
             }
             $keypadResource = new KeypadResource($keypad);
             event(new KeypadEvent($screen, $keypadResource));
-            return view('service.screen-board.index', compact(['hall', 'participants', 'screens', 'keypads']));
+            return back()->with('success', __('common.edited-successfully'));
         } else {
             return back()->with('error', __('common.a-system-error-has-occurred'));
         }
@@ -93,17 +84,12 @@ class ScreenBoardController extends Controller
     {
         if ($request->validated()) {
             $screen = Screen::where('code', $code)->first();
-            $hall = $screen->hall;
-            $meeting = $hall->meeting;
-            $participants = $meeting->participants;
-            $screens = $hall->screens()->get();
-            $keypads = $meeting->keypads()->get();
             if ($request->input('time') != null) {
                 event(new TimerEvent($screen, $request->input('time'), $action));
             } else {
                 event(new TimerEvent($screen, 0, $action));
             }
-            return view('service.screen-board.index', compact(['hall', 'participants', 'screens', 'keypads']));
+            return back()->with('success', __('common.edited-successfully'));
         } else {
             return back()->with('error', __('common.a-system-error-has-occurred'));
         }

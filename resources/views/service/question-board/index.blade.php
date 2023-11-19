@@ -58,8 +58,14 @@
     @isset($session)
         <div class="row row-cols-1">
             <div class="col card text-bg-dark p-0">
-                <div class="card-header">
-                    <h2 class="text-center h3">{{ $session->speaker->full_name }} - {{ $session->title }}</h2>
+                <div class="card-header text-center">
+                    <h1 class="text-center">{{__('common.question-board')}}</h1>
+                    @isset($session->speaker)
+                        <h2 class="text-center h3">{{ $session->title }} <span class="badge bg-primary">{{ $session->speaker->full_name }}</span></h2>
+                    @endisset
+                    <span class="alert alert-info text-center" role="alert">
+                        Bu oturum için izin verilen maksimum soru limiti {{$session->questions_limit}} adettir.
+                    </span>
                 </div>
             </div>
         </div>

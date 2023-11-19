@@ -89,7 +89,7 @@
                                 @foreach($program_chairs as $program_chair)
                                     <tr>
                                         <td>{{ $program_chair->chair->full_name }}</td>
-                                        <td>{{ __('common.'.$program_chair->chair->type) }}</td>
+                                        <td>{{ __('common.'.$program_chair->type) }}</td>
                                         <td class="text-end">
                                             <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
                                                 <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">

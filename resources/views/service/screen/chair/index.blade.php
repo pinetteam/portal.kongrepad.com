@@ -19,7 +19,7 @@
 @endsection
 @section('body')
     @isset($meeting_hall_screen->background_name)
-        <div class="bg-img bg-cover" style="backgroud-color: #fff;background-image: url({{ asset('storage/screen-backgrounds/' . $meeting_hall_screen->background_name . '.' . $meeting_hall_screen->background_extension)}} ); height:100%; width:100%;">
+        <div class="bg-img" style="background-color: #fff;background-image: url({{ asset('storage/screen-backgrounds/' . $meeting_hall_screen->background_name . '.' . $meeting_hall_screen->background_extension)}} ); height:100%; width:100%; background-size: cover; background-repeat: no-repeat;">
     @endisset
     @if($chair)
         <div class="d-flex align-items-center justify-content-center h-100">

@@ -18,8 +18,8 @@ return new class extends Migration
             $table->uuid('background_name')->unique()->nullable();
             $table->string('background_extension')->nullable();
             $table->string('font')->nullable();
-            $table->unsignedInteger('font_size')->nullable();
-            $table->enum('font_color', ['white', 'black']);
+            $table->unsignedInteger('font_size')->default(72);
+            $table->enum('font_color', ['white', 'black'])->default('white');
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
             $table->unsignedBigInteger('created_by')->index()->nullable();
             $table->unsignedBigInteger('updated_by')->index()->nullable();
