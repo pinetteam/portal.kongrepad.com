@@ -105,7 +105,7 @@
                                             <tr>
                                                 <th scope="col"><span class="fa-regular fa-circle-play mx-1"></span> {{ __('common.is-started') }}</th>
                                                 <th scope="col"><span class="fa-regular fa-person-chalkboard mx-1"></span> {{ __('common.speaker') }}</th>
-                                                <th scope="col"><span class="fa-regular fa-presentation-screen mx-1"></span> {{ __('common.document') }}</th>
+                                                <th scope="col"><span class="fa-regular fa-folder-open mx-1"></span> {{ __('common.document') }}</th>
                                                 <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}</th>
                                                 <th scope="col"><span class="fa-regular fa-calendar-arrow-up mx-1"></span> {{ __('common.start-at') }}</th>
                                                 <th scope="col"><span class="fa-regular fa-calendar-arrow-down mx-1"></span> {{ __('common.finish-at') }}</th>

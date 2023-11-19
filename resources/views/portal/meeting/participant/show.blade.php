@@ -142,7 +142,7 @@
                                 <thead class="thead-dark">
                                 <tr>
                                     <th scope="col"><span class="fa-regular fa-calendar mx-1"></span> {{ __('common.date') }}</th>
-                                    <th scope="col"><span class="fa-regular fa-presentation-screen mx-1"></span> {{ __('common.document') }}</th>
+                                    <th scope="col"><span class="fa-regular fa-folder-open mx-1"></span> {{ __('common.document') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>

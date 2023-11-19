@@ -3,7 +3,7 @@
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">
-            <h1 class="m-0 text-center"><span class="fa-duotone fa-newspaper fa-fade"></span> <small>"{{ $meeting->title }}"</small> {{ __('common.programs') }}</h1>
+            <h1 class="m-0 text-center"><span class="fa-duotone fa-calendar-week fa-fade"></span> <small>"{{ $meeting->title }}"</small> {{ __('common.programs') }}</h1>
         </div>
         <div class="card-body p-0">
             <div class="card text-bg-dark mt-2">

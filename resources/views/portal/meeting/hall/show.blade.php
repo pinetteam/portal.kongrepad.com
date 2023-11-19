@@ -39,7 +39,7 @@
                         </div>
                         <div class="card-body">
                             <a class="btn btn-outline-light btn-lg w-100" href="{{ route('portal.meeting.hall.program.index', ['meeting' => $meeting->id, 'hall' => $hall->id]) }}" title="{{ __('common.show') }}">
-                                <span class="fa-duotone fa-presentation-screen"></span> {{ __('common.programs') }}
+                                <span class="fa-duotone fa-calendar-week"></span> {{ __('common.programs') }}
                             </a>
                         </div>
                     </div>

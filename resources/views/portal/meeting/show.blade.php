@@ -51,7 +51,7 @@
                             </div>
                             <div class="card-body">
                                 <a class="btn btn-outline-light btn-lg w-100" href="{{ route('portal.meeting.document.index', ['meeting' => $meeting->id]) }}" title="{{ __('common.show') }}">
-                                    <span class="fa-duotone fa-presentation-screen"></span> {{ __('common.documents') }}
+                                    <span class="fa-duotone fa-folder-open"></span> {{ __('common.documents') }}
                                 </a>
                                 <hr />
                                 <a class="btn btn-outline-light btn-lg w-100" href="{{ route('portal.meeting.participant.index', ['meeting' => $meeting->id]) }}" title="{{ __('common.show') }}">
