@@ -51,7 +51,7 @@ class SurveyController extends Controller
         ];
         return view('portal.meeting.survey.show', compact(['meeting', 'survey', 'statuses']));
     }
-    public function edit(string $meeting, string $id)
+    public function edit(int $meeting, int $id)
     {
         $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
         $survey = $meeting->surveys()->findOrFail($id);

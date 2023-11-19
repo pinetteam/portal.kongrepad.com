@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class QuestionController extends Controller
 {
-    public function store(QuestionRequest $request, string $meeting, string $survey)
+    public function store(QuestionRequest $request, int $meeting, int $survey)
     {
         if ($request->validated()) {
             $question = new Question();
@@ -27,7 +27,7 @@ class QuestionController extends Controller
             }
         }
     }
-    public function show(string $meeting, string $survey, string $id)
+    public function show(int $meeting, int $survey, int $id)
     {
         $survey = Auth::user()->customer->surveys()->findOrFail($survey);
         $question = $survey->questions()->findOrFail($id);
@@ -37,13 +37,13 @@ class QuestionController extends Controller
         ];
         return view('portal.meeting.survey.question.show', compact(['survey', 'question', 'statuses']));
     }
-    public function edit(string $meeting, string $survey, string $id)
+    public function edit(int $meeting, int $survey, int $id)
     {
         $survey = Auth::user()->customer->surveys()->findOrFail($survey);
         $question = $survey->questions()->findOrFail($id);
         return new QuestionResource($question);
     }
-    public function update(QuestionRequest $request, string $meeting, string $survey, string $id)
+    public function update(QuestionRequest $request, int $meeting, int $survey, int $id)
     {
         if ($request->validated()) {
             $survey = Auth::user()->customer->surveys()->findOrFail($survey);
@@ -61,7 +61,7 @@ class QuestionController extends Controller
             }
         }
     }
-    public function destroy(string $meeting, string $survey, string $id)
+    public function destroy(int $meeting, int $survey, int $id)
     {
         $survey = Auth::user()->customer->surveys()->findOrFail($survey);
         $question = $survey->questions()->findOrFail($id);

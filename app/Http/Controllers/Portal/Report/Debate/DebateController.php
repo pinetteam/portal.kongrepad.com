@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 class DebateController extends Controller
 {
-    public function index(string $meeting)
+    public function index(int $meeting)
     {
         $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
         $debates = $meeting->debates()->paginate(20);
@@ -17,14 +17,14 @@ class DebateController extends Controller
         ];
         return view('portal.meeting.report.debate.index', compact(['meeting', 'debates', 'on_vote']));
     }
-    public function showParticipants(string $meeting, string $debate)
+    public function showParticipants(int $meeting, int $id)
     {
         $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
-        $title = $meeting->debates()->findOrFail($debate);
-        $votes = Auth::user()->customer->debateVotes()->where('debate_id', $debate)->paginate(20);
+        $title = $meeting->debates()->findOrFail($id);
+        $votes = Auth::user()->customer->debateVotes()->where('debate_id', $id)->paginate(20);
         return view('portal.meeting.report.debate.participant.index', compact(['votes', 'title']));
     }
-    public function showReport(string $meeting, string $id)
+    public function showReport(int $meeting, int $id)
     {
         $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
         $debate = $meeting->debates()->findOrFail($id);

@@ -63,16 +63,18 @@
                     @isset($session->speaker)
                         <h2 class="text-center h3">{{ $session->title }} <span class="badge bg-primary">{{ $session->speaker->full_name }}</span></h2>
                     @endisset
-                    <span class="alert alert-info text-center" role="alert">
-                        Bu oturum için izin verilen maksimum soru limiti {{$session->questions_limit}} adettir.
-                    </span>
+                    <div>
+                        <span class="alert alert-info d-inline-flex align-items-center rounded border-danger py-1" role="alert">
+                            <i class="fa-duotone fa-circle-exclamation fa-fade px-1"></i>  Bu oturum için izin verilen maksimum soru limiti {{$session->questions_limit}} adettir.
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="row row-cols-1 row-cols-sm-2 h-100">
             <div class="col card text-bg-dark p-0 h-100">
                 <div class="card-header">
-                    <h2 class="text-center h3">Gelen Sorular</h2>
+                    <h2 class="text-center h3"><span class="fa-duotone fa-inbox-in fa-fade mx-1"></span> Gelen Sorular</h2>
                 </div>
                 <div class="card-body d-block p-0 overflow-y-auto h-100">
                     <table class="table table-dark table-striped table-hover w-100 table-scroll">
@@ -80,7 +82,7 @@
                             <tr>
                                 <th scope="col" class="w-75"><span class="fa-regular fa-messages-question mx-1"></span> Soru</th>
                                 <th scope="col"><span class="fa-regular fa-user mx-1"></span> İsim</th>
-                                <th scope="col"><span class="fa-regular fa-presentation-screen mx-1"></span> Seç</th>
+                                <th scope="col"><span class="fa-light fa-check mx-1"></span> Seç</th>
                             </tr>
                         </thead>
                         <tbody id="questions" class="h-100">
@@ -109,7 +111,7 @@
             </div>
             <div class="col card text-bg-dark p-0 h-100">
                 <div class="card-header">
-                    <h2 class="text-center h3">Seçilen Sorular</h2>
+                    <h2 class="text-center h3"><span class="fa-duotone fa-inbox-out fa-fade mx-1"></span> Seçilen Sorular</h2>
                 </div>
                 <div class="card-body d-block p-0 overflow-y-auto h-100">
                     <table class="table table-dark table-striped table-hover w-100 table-scroll">
@@ -117,7 +119,7 @@
                         <tr>
                             <th scope="col" class="w-75"><span class="fa-regular fa-messages-question mx-1"></span> Soru</th>
                             <th scope="col"><span class="fa-regular fa-user mx-1"></span> İsim</th>
-                            <th scope="col"><span class="fa-regular fa-presentation-screen mx-1"></span> Kaldır</th>
+                            <th scope="col"><span class="fa-light fa-xmark mx-1"></span> Kaldır</th>
                         </tr>
                         </thead>
                         <tbody id="selected-questions" class="h-100">
