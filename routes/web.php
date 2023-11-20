@@ -51,8 +51,6 @@ Route::prefix('portal')->name('portal.')->group(function () {
     Route::group(["middleware" => ['auth']], function () {
         // Main routes
         Route::get('/', [\App\Http\Controllers\Portal\DashboardController::class, 'index'])->name('dashboard.index');
-        Route::get('/meeting/{meeting}/program', [\App\Http\Controllers\Portal\DashboardController::class, 'programIndex'])->name('dashboard.meeting.program.index');
-        Route::get('/meeting/{meeting}/chair', [\App\Http\Controllers\Portal\DashboardController::class, 'chairIndex'])->name('dashboard.meeting.chair.index');
         // Meeting routes
         Route::resource('/meeting', \App\Http\Controllers\Portal\Meeting\MeetingController::class)->except(['create']);
         Route::prefix('meeting')->name('meeting.')->group(function () {
