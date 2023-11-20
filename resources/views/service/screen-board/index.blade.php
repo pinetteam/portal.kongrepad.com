@@ -125,7 +125,7 @@
                                                         <i class="fa-regular fa-triangle-exclamation"></i> {{ $message }}
                                                     </div>
                                                     @enderror
-                                                    <button type="submit" class="btn btn-success w-75" id="create-form-submit-{{ $screen->id }}">{{ __('common.edit') }}</button>
+                                                    <button type="submit" class="btn btn-success w-75" id="create-form-submit-{{ $screen->id }}">{{ __('common.reset') }}</button>
                                                 </div>
                                             </form>
                                         </div>

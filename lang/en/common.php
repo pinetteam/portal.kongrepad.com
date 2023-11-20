@@ -293,6 +293,7 @@ return [
     'background' => 'Background',
     'content' => 'Content',
     'timer' => 'Timer',
+    'reset' => 'Reset',
     'enrolled-at' => 'Registered at',
     'anonymous' => 'Anonymous',
 

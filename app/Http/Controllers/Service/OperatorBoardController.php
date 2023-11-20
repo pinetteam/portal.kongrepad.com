@@ -17,6 +17,8 @@ class OperatorBoardController extends Controller
             $program->save();
         }
         $programs = $programs->values();
+
+        $timer_screen = $meeting_hall->screens()->where('type', 'timer')->first();
         if($program_order == -1)
             return back()->with('error', __('common.there-is-not-any-program-before'));
         elseif ($program_order == count($programs))
@@ -58,7 +60,7 @@ class OperatorBoardController extends Controller
                 'chair' => ['value' => 'chair', 'title' => __('common.chair')],
                 'moderator' => ['value' => 'moderator', 'title' => __('common.moderator')],
             ];
-            return view('service.operator-board.index', compact(['meeting_hall', 'program', 'program_chairs', 'chairs', 'chair_types', 'sessions']));
+            return view('service.operator-board.index', compact(['meeting_hall', 'program', 'program_chairs', 'chairs', 'chair_types', 'sessions', 'timer_screen']));
         } elseif($program->type == 'debate'){
             $chairs = Auth::user()->customer->participants()->whereNotIn('meeting_participants.id', $program->programChairs()->pluck('meeting_hall_program_chairs.chair_id'))->whereNot('meeting_participants.type', 'team')->get();
             $program_chairs = $program->programChairs()->get();
@@ -67,9 +69,9 @@ class OperatorBoardController extends Controller
                 'chair' => ['value' => 'chair', 'title' => __('common.chair')],
                 'moderator' => ['value' => 'moderator', 'title' => __('common.moderator')],
             ];
-            return view('service.operator-board.index', compact(['meeting_hall', 'program', 'program_chairs', 'chairs', 'chair_types', 'debates']));
+            return view('service.operator-board.index', compact(['meeting_hall', 'program', 'program_chairs', 'chairs', 'chair_types', 'debates', 'timer_screen']));
         } else {
-            return view('service.operator-board.index', compact(['meeting_hall', 'program']));
+            return view('service.operator-board.index', compact(['meeting_hall', 'program', 'timer_screen']));
         }
     }
 }
