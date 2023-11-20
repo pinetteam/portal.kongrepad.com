@@ -38,7 +38,7 @@
             @if(!$question->is_hidden_name)
                 | <small>{{ $question->questioner->full_name }}</small>
             @else
-                | <small>Anonim</small>
+                | <small>{{ __('common.anonymous') }}</small>
             @endif
             <hr />
         @endforeach

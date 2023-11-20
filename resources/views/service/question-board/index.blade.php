@@ -60,6 +60,7 @@
             <div class="col card text-bg-dark p-0">
                 <div class="card-header text-center">
                     <h1 class="text-center">{{__('common.question-board')}}</h1>
+                    <h3 class="text-center">{{ $session->title }}</h3>
                     @isset($session->speaker)
                         <h2 class="text-center h3">{{ $session->title }} <span class="badge bg-primary">{{ $session->speaker->full_name }}</span></h2>
                     @endisset
@@ -129,7 +130,7 @@
                                 @if(!$question->is_hidden_name)
                                     <td>{{ $question->questioner->full_name }}</td>
                                 @else
-                                    <td>Anonim</td>
+                                    <td>{{ __('common.anonymous') }}</td>
                                 @endif
                                 <td>
                                     <a href="{{ route('portal.session-question.on-screen', [$question->id]) }}" title="{{ __('common.on-screen') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.on-screen') }}">

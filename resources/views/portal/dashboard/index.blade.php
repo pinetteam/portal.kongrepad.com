@@ -161,6 +161,9 @@
                                                                                 <a class="btn btn-info btn-sm" href="{{ route('portal.meeting.hall.show', ['meeting' => $meeting->id, 'hall' => $hall->id]) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
                                                                                     <span class="fa-regular fa-eye"></span>
                                                                                 </a>
+                                                                                <a class="btn btn-warning btn-sm" href="{{ route('portal.meeting.hall.program.index', ['meeting' => $meeting->id, 'hall' => $hall->id]) }}" title="{{ __('common.progams') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.programs') }}">
+                                                                                    <span class="fa-regular fa-calendar-week"></span>
+                                                                                </a>
                                                                             </td>
                                                                         </tr>
                                                                      </tbody>

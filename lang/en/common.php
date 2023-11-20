@@ -294,4 +294,6 @@ return [
     'content' => 'Content',
     'timer' => 'Timer',
     'enrolled-at' => 'Registered at',
+    'anonymous' => 'Anonymous',
+
 ];
