@@ -3,6 +3,8 @@
 namespace App\Models\Meeting\Hall\Screen;
 
 use App\Models\Meeting\Hall\Hall;
+use App\Models\Meeting\Hall\Program\Session\Keypad\Keypad;
+use App\Models\Meeting\Participant\Participant;
 use App\Models\User\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -22,6 +24,7 @@ class Screen extends Model
         'font',
         'font_size',
         'font_color',
+        'current_object_id',
         'status',
         'created_by',
         'updated_by',
@@ -44,5 +47,17 @@ class Screen extends Model
     public function hall()
     {
         return $this->belongsTo(Hall::class, 'hall_id', 'id');
+    }
+    public function getCurrentObjectNameAttribute()
+    {
+        if ($this->current_object_id){
+            if ($this->type == 'chair' || $this->type == 'speaker'){
+                return Participant::findOrFail($this->current_object_id)->full_name;
+            } elseif ($this->type == 'keypad') {
+                return Keypad::findOrFail($this->current_object_id)->keypad;
+            }
+        } else {
+            return null;
+        }
     }
 }

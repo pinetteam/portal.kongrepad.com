@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Service\Screen;
 
 use App\Http\Controllers\Controller;
+use App\Models\Meeting\Hall\Program\Session\Keypad\Keypad;
 use App\Models\Meeting\Hall\Screen\Screen;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,7 +13,11 @@ class KeypadController extends Controller
     {
         $meeting_hall_screen = Screen::where('code', $meeting_hall_screen_code)->first();
         try {
-            $keypad = Auth::user()->customer->keypads()->where('on_air', 1)->first();
+            if($meeting_hall_screen->current_object_id){
+                $keypad = Keypad::findOrFail($meeting_hall_screen->current_object_id);
+            } else {
+                $keypad = null;
+            }
         } catch (\Exception $e) {
             $keypad = null;
         }

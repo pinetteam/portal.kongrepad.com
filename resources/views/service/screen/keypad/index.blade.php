@@ -37,7 +37,7 @@
                     @isset($keypad)
                     @foreach($keypad->options as $option)
                         <div class="progress mt-2 h-25 bg-dark" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-info text-{{$meeting_hall_screen->font_color}} text-center p-2 overflow-visible" style="width: {{ $keypad->votes->count() == 0 ? 0 :$option->votes->count() / $keypad->votes->count()*100 }}%">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-info text-{{$meeting_hall_screen->font_color}} text-center p-2 overflow-visible" style="width: {{ $keypad->votes->count() == 0 ? 0 :$option->votes->count() / $keypad->votes->count()*100 }}%; font-size: {{$meeting_hall_screen->font_size ?? 72}}px">
                                 {{ $option->option }} ({{ $keypad->votes->count() == 0 ? 0 : round($option->votes->count() / $keypad->votes->count()*100, 2)}}%)
                             </div>
                         </div>

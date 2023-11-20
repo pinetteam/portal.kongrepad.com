@@ -36,6 +36,8 @@ class ScreenBoardController extends Controller
             if ($request->input('speaker_id') != null) {
                 $participant = $meeting->participants()->findOrFail($request->input('speaker_id'));
             }
+            $screen->current_object_id = $participant ? $participant->id : null;
+            $screen->save();
             event(new SpeakerEvent($screen, $participant));
             return back()->with('success', __('common.edited-successfully'));
         } else {
@@ -52,6 +54,8 @@ class ScreenBoardController extends Controller
             if ($request->input('chair_id') != null) {
                 $participant = $meeting->participants()->findOrFail($request->input('chair_id'));
             }
+            $screen->current_object_id = $participant ? $participant->id : null;
+            $screen->save();
             event(new ChairEvent($screen, $participant));
             return back()->with('success', __('common.edited-successfully'));
         } else {
@@ -73,6 +77,8 @@ class ScreenBoardController extends Controller
                     }])
                     ->findOrFail($request->input('keypad_id'));
             }
+            $screen->current_object_id = $keypad ? $keypad->id : null;
+            $screen->save();
             $keypadResource = new KeypadResource($keypad);
             event(new KeypadEvent($screen, $keypadResource));
             return back()->with('success', __('common.edited-successfully'));

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('background_extension')->nullable();
             $table->string('font')->nullable();
             $table->unsignedInteger('font_size')->default(72);
+            $table->unsignedInteger('current_object_id')->nullable();
             $table->enum('font_color', ['white', 'black'])->default('white');
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
             $table->unsignedBigInteger('created_by')->index()->nullable();
