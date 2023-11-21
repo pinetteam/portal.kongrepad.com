@@ -15,12 +15,19 @@ class KeypadController extends Controller
         try {
             if($meeting_hall_screen->current_object_id){
                 $keypad = Keypad::findOrFail($meeting_hall_screen->current_object_id);
+                $options = $keypad->options()->where('keypad_id', ($keypad->id))->paginate(20);
+                $data = [];
+                foreach($options as $option) {
+                    $data['label'][] = $option->option;
+                    $data['data'][] = (int) $option->votes->count();
+                }
+                $data['chart_data'] = json_encode($data);
             } else {
                 $keypad = null;
             }
         } catch (\Exception $e) {
             $keypad = null;
         }
-        return view('service.screen.keypad.index', compact(['meeting_hall_screen', 'keypad']));
+        return view('service.screen.keypad.index', $data, compact(['meeting_hall_screen', 'keypad', 'options']));
     }
 }
