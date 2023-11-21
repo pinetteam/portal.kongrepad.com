@@ -75,6 +75,14 @@ class ScreenSeeder extends Seeder
             [
                 'hall_id' => '3',
                 'code' => Str::uuid()->toString(),
+                'title' => 'Debate Screen',
+                'description' => 'Debate Screen',
+                'type' => 'debate',
+                'status' => 1,
+            ],
+            [
+                'hall_id' => '3',
+                'code' => Str::uuid()->toString(),
                 'title' => 'Timer Screen',
                 'description' => 'Timer Screen',
                 'type' => 'timer',

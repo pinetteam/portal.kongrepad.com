@@ -3,6 +3,7 @@
 namespace App\Models\Meeting\Hall\Screen;
 
 use App\Models\Meeting\Hall\Hall;
+use App\Models\Meeting\Hall\Program\Debate\Debate;
 use App\Models\Meeting\Hall\Program\Session\Keypad\Keypad;
 use App\Models\Meeting\Participant\Participant;
 use App\Models\User\User;
@@ -55,6 +56,8 @@ class Screen extends Model
                 return Participant::findOrFail($this->current_object_id)->full_name;
             } elseif ($this->type == 'keypad') {
                 return Keypad::findOrFail($this->current_object_id)->keypad;
+            } elseif ($this->type == 'debate') {
+                return Debate::findOrFail($this->current_object_id)->title;
             }
         } else {
             return null;

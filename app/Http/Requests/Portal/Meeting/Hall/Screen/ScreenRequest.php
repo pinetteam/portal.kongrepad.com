@@ -22,7 +22,7 @@ class ScreenRequest extends FormRequest
             'font_color' => 'nullable|in:white,black',
             'background' => ['nullable', File::types(['png','jpg','jpeg'])->max(12 * 1024),],
             'description' => 'nullable|max:65535',
-            'type' => 'required|in:chair,document,keypad,questions,speaker,timer',
+            'type' => 'required|in:chair,document,debate,keypad,questions,speaker,timer',
             'status' => 'required|boolean',
         ];
     }

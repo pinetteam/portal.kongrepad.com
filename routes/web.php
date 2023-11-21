@@ -31,7 +31,9 @@ Route::prefix('/service')->name('service.')->group(function () {
         Route::get('/chair/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\ChairController::class, 'index'])->name('chair.index');
         Route::get('/speaker/event/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\SpeakerController::class, 'start'])->name('speaker.start');
         Route::get('/keypad/event/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\KeypadController::class, 'index'])->name('keypad.index');
+        Route::get('/debate/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\DebateController::class, 'index'])->name('debate.index');
         Route::get('/questions/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\QuestionsController::class, 'index'])->name('questions.index');
+        Route::get('/document/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\DocumentController::class, 'index'])->name('document.index');
         Route::get('/timer/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\TimerController::class, 'index'])->name('timer.index');
         Route::get('/questions/event/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\QuestionsController::class, 'start'])->name('questions.start');
     });
@@ -40,6 +42,8 @@ Route::prefix('/service')->name('service.')->group(function () {
         Route::post('/speaker-screen/{code}', [\App\Http\Controllers\Service\ScreenBoardController::class, 'speaker_screen'])->name('speaker-screen');
         Route::post('/chair-screen/{code}', [\App\Http\Controllers\Service\ScreenBoardController::class, 'chair_screen'])->name('chair-screen');
         Route::post('/keypad-screen/{code}', [\App\Http\Controllers\Service\ScreenBoardController::class, 'keypad_screen'])->name('keypad-screen');
+        Route::post('/debate-screen/{code}', [\App\Http\Controllers\Service\ScreenBoardController::class, 'debate_screen'])->name('debate-screen');
+        Route::post('/document-screen/{code}', [\App\Http\Controllers\Service\ScreenBoardController::class, 'document_screen'])->name('document-screen');
         Route::post('/timer-screen/{code}/{action}', [\App\Http\Controllers\Service\ScreenBoardController::class, 'timer_screen'])->name('timer-screen');
     });
     Route::get('/question-board/{code}', [\App\Http\Controllers\Service\QuestionBoardController::class, 'index'])->name('question-board.start');

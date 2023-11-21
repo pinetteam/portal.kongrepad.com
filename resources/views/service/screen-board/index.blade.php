@@ -112,6 +112,66 @@
                                             </a>
                                         </div>
                                     </div>
+                                @elseif($screen->type == 'debate')
+                                    <div class="row justify-content-start align-items-center">
+                                        <div class="col-md-9 form-group mb-3">
+                                            <form method="POST" action="{{ route('service.screen-board.debate-screen', ['code' => $screen->code]) }}" name="create-form-{{ $screen->id }}" id="create-form-{{ $screen->id }}" enctype="multipart/form-data" autocomplete="nope">
+                                                <div class="container-fluid">
+                                                    @csrf
+                                                    <select name="debate_id" class="form-select @error('debate_id')is-invalid @enderror" id="c-debate_id" aria-label="{{ __('common.debate') }}" autocomplete="false" onchange="this.form.submit()">
+                                                        <option selected value="">{{ __('common.choose') }}</option>
+                                                        @foreach($debates as $option)
+                                                            @if(is_array($option))
+                                                                <option value="{{ $option['id'] }}"{{ $option['id'] == $screen->current_object_id ? ' selected' : '' }}>{{ $option['title'] }}</option>
+                                                            @else
+                                                                <option value="{{ $option->id }}"{{ $option->id == $screen->current_object_id ? ' selected' : '' }}>{{ $option->title }}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    </select>
+                                                    @error('debate_id')
+                                                    <div class="invalid-feedback d-block">
+                                                        <i class="fa-regular fa-triangle-exclamation"></i> {{ $message }}
+                                                    </div>
+                                                    @enderror
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-3 form-group mb-3">
+                                            <a class="btn btn-outline-success btn-sm" href="{{ route('service.screen.debate.index', ['meeting_hall_screen_code' => $screen->code]) }}" title="{{ __('common.debate') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.debate') }}" target="_blank">
+                                                <span class="fa-regular fa-tv"></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                @elseif($screen->type == 'document')
+                                    <div class="row justify-content-start align-items-center">
+                                        <div class="col-md-9 form-group mb-3">
+                                            <form method="POST" action="{{ route('service.screen-board.document-screen', ['code' => $screen->code]) }}" name="create-form-{{ $screen->id }}" id="create-form-{{ $screen->id }}" enctype="multipart/form-data" autocomplete="nope">
+                                                <div class="container-fluid">
+                                                    @csrf
+                                                    <select name="document_id" class="form-select @error('document_id')is-invalid @enderror" id="c-document_id" aria-label="{{ __('common.document') }}" autocomplete="false" onchange="this.form.submit()">
+                                                        <option selected value="">{{ __('common.choose') }}</option>
+                                                        @foreach($documents as $option)
+                                                            @if(is_array($option))
+                                                                <option value="{{ $option['id'] }}"{{ $option['id'] == $screen->current_object_id ? ' selected' : '' }}>{{ $option['title'] }}</option>
+                                                            @else
+                                                                <option value="{{ $option->id }}"{{ $option->id == $screen->current_object_id ? ' selected' : '' }}>{{ $option->title }}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    </select>
+                                                    @error('document_id')
+                                                    <div class="invalid-feedback d-block">
+                                                        <i class="fa-regular fa-triangle-exclamation"></i> {{ $message }}
+                                                    </div>
+                                                    @enderror
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-3 form-group mb-3">
+                                            <a class="btn btn-outline-success btn-sm" href="{{ route('service.screen.document.index', ['meeting_hall_screen_code' => $screen->code]) }}" title="{{ __('common.document') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.document') }}" target="_blank">
+                                                <span class="fa-regular fa-tv"></span>
+                                            </a>
+                                        </div>
+                                    </div>
                                 @elseif($screen->type == 'timer')
                                     <div class="row justify-content-start align-items-center">
                                         <div class="col-lg-6 form-group mb-3">

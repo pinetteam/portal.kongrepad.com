@@ -19,6 +19,7 @@ class ScreenController extends Controller
         $types = [
             'chair' => ['value' => 'chair', 'title' => __('common.chair')],
             'document' => ['value' => 'document', 'title' => __('common.document')],
+            'debate' => ['value' => 'debate', 'title' => __('common.debate')],
             'keypad' => ['value' => 'keypad', 'title' => __('common.keypad')],
             'questions' => ['value' => 'questions', 'title' => __('common.questions')],
             'speaker' => ['value' => 'speaker', 'title' => __('common.speaker')],

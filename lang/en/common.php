@@ -276,6 +276,7 @@ return [
     'debate-voting-started' => 'Debate Voting Started',
     'debate-program' => 'Debate Program',
     'debate-screen' => 'Debate Screen',
+    'document-screen' => 'Document Screen',
     'keypad-screen' => 'Keypad Screen',
     'survey-screen' => 'Survey Screen',
     'timer-screen' => 'Timer Screen',
