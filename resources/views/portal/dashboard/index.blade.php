@@ -153,15 +153,15 @@
                                                                                     <span class="fa-regular fa-rectangles-mixed"></span>
                                                                                 </a>
                                                                                 <a class="btn btn-warning btn-sm" href="{{ route('service.screen-board.start', ['code' => $hall->code]) }}" title="{{ __('common.screen-board') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.screen-board') }}">
-                                                                                    <span class="fa-regular fa-presentation-screen"></span>
+                                                                                    <span class="fa-regular fa-screen-users"></span>
                                                                                 </a>
                                                                                 <a class="btn btn-success btn-sm" href="{{ route('service.question-board.start', ['code' => $hall->code]) }}" title="{{ __('common.question-board') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.question-board') }}">
                                                                                     <span class="fa-regular fa-question"></span>
                                                                                 </a>
-                                                                                <a class="btn btn-info btn-sm" href="{{ route('portal.meeting.hall.show', ['meeting' => $meeting->id, 'hall' => $hall->id]) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
-                                                                                    <span class="fa-regular fa-eye"></span>
+                                                                                <a class="btn btn-secondary btn-sm" href="{{ route('portal.meeting.hall.screen.index', ['meeting' => $meeting->id, 'hall' => $hall->id]) }}" title="{{ __('common.screens') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.screens') }}">
+                                                                                    <span class="fa-duotone fa-presentation-screen"></span>
                                                                                 </a>
-                                                                                <a class="btn btn-warning btn-sm" href="{{ route('portal.meeting.hall.program.index', ['meeting' => $meeting->id, 'hall' => $hall->id]) }}" title="{{ __('common.progams') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.programs') }}">
+                                                                                <a class="btn btn-primary btn-sm" href="{{ route('portal.meeting.hall.program.index', ['meeting' => $meeting->id, 'hall' => $hall->id]) }}" title="{{ __('common.progams') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.programs') }}">
                                                                                     <span class="fa-regular fa-calendar-week"></span>
                                                                                 </a>
                                                                             </td>

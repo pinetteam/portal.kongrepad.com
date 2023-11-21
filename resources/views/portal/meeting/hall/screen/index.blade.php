@@ -3,7 +3,7 @@
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">
-            <h1 class="m-0 text-center"><span class="fa-duotone fa-display fa-fade"></span> <small>"{{ $hall->title }}"</small> {{ __('common.screens') }}</h1>
+            <h1 class="m-0 text-center"><span class="fa-duotone fa-presentation-screen fa-fade"></span> <small>"{{ $hall->title }}"</small> {{ __('common.screens') }}</h1>
         </div>
         <div class="card-body p-0">
             <div class="table-responsive">

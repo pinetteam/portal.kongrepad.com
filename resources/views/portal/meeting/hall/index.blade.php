@@ -67,7 +67,7 @@
                                             <span class="fa-regular fa-rectangles-mixed"></span>
                                         </a>
                                         <a class="btn btn-warning btn-sm" href="{{ route('service.screen-board.start', ['code' => $hall->code]) }}" title="{{ __('common.screen-board') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.screen-board') }}">
-                                            <span class="fa-regular fa-presentation-screen"></span>
+                                            <span class="fa-regular fa-screen-users"></span>
                                         </a>
                                         <a class="btn btn-success btn-sm" href="{{ route('service.question-board.start', ['code' => $hall->code]) }}" title="{{ __('common.question-board') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.question-board') }}">
                                             <span class="fa-regular fa-question"></span>

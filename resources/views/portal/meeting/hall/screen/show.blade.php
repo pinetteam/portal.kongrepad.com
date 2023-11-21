@@ -3,7 +3,7 @@
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">
-            <h1 class="text-center"><span class="fa-duotone fa-display fa-fade"></span> <small>"{{ $screen->title }}"</small></h1>
+            <h1 class="text-center"><span class="fa-duotone fa-presentation-screen fa-fade"></span> <small>"{{ $screen->title }}"</small></h1>
             <div class="table-responsive">
                 <table class="table table-dark table-striped-columns table-bordered">
                     <tr>

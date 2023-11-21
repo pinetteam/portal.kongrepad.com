@@ -27,9 +27,9 @@
     </script>
 @endsection
 @section('body')
-    <div class="card text-bg-dark">
+    <div class="card text-bg-dark border-dark">
         <div class="card-header">
-            <h1 class="text-center">
+            <h1 class="text-center p-2">
                 <span class="fa-regular fa-square-question fa-fade p-2 "></span>
                 <small>"{{ $keypad->keypad }}"</small>
             </h1>
@@ -83,13 +83,13 @@
                                     ctx.textAlign = 'center';
                                     ctx.fillStyle = "white";
                                     ctx.textBaseline = 'bottom';
-                                    ctx.font = "20px 'Helvetica Neue', Helvetica, Arial, sans-serif";
+                                    ctx.font = "30px 'Helvetica Neue', Helvetica, Arial, sans-serif";
 
                                     this.data.datasets.forEach(function (dataset, i) {
                                         var meta = chartInstance.controller.getDatasetMeta(i);
                                         meta.data.forEach(function (bar, index) {
                                             var data = dataset.data[index];
-                                            ctx.fillText(data, bar._model.x, bar._model.y + 30);
+                                            ctx.fillText(data, bar._model.x, bar._model.y + 40);
 
                                         });
                                     });
@@ -103,7 +103,7 @@
                                     ticks: {
                                         beginAtZero: true,
                                         fontColor: "white",
-                                        fontSize: 15,
+                                        fontSize: 30,
                                     },
                                     gridLines: {
                                         lineWidth: 1
@@ -113,7 +113,7 @@
                                     ticks: {
                                         beginAtZero: true,
                                         fontColor: "white",
-                                        fontSize: 20,
+                                        fontSize: 30,
                                     },
                                     gridLines: {
                                         lineWidth: 0
