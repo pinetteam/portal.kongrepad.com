@@ -24,10 +24,12 @@
             {{ config('app.name') }}
         @endif
     </a>
+    <div class="w-100">
+        @yield('search_bar')
+    </div>
     <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#kp-menu" aria-controls="kp-menu" aria-expanded="false">
         <i class="fa-regular fa-bars" id="kp-navbar-icon"></i>
     </button>
-    <input class="form-control w-100" id="kp-search-box" type="text" placeholder="{{ __('common.search') }}" aria-label="{{ __('common.search') }}" />
     <div class="navbar-nav d-none d-md-flex">
         <div class="nav-item text-nowrap"><a class="nav-link px-3" href="{{ route('auth.logout.store') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fa-regular fa-power-off"></i></a></div>
     </div>

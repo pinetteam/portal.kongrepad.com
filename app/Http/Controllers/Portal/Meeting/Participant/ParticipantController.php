@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Portal\Meeting\Participant;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Portal\Meeting\Participant\ParticipantRequest;
 use App\Http\Resources\Portal\Meeting\Participant\ParticipantResource;
-use App\Models\Meeting\Meeting;
+use Illuminate\Http\Request;
 use App\Models\Meeting\Participant\Participant;
 use App\Models\System\Country\Country;
 use Illuminate\Support\Facades\Auth;
@@ -18,6 +18,24 @@ class ParticipantController extends Controller
     {
         $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
         $participants = $meeting->participants()->orderBy('last_name')->paginate();
+        $phone_countries = Country::get();
+        $types = [
+            'agent' => ['value' => 'agent', 'title' => __('common.agent')],
+            'attendee' => ['value' => 'attendee', 'title' => __('common.attendee')],
+            'team' => ['value' => 'team', 'title' => __('common.team')],
+        ];
+        $statuses = [
+            'passive' => ['value' => 0, 'title' => __('common.passive'), 'color' => 'danger'],
+            'active' => ['value' => 1, 'title' => __('common.active'), 'color' => 'success'],
+        ];
+        return view('portal.meeting.participant.index', compact(['meeting', 'participants', 'phone_countries', 'types', 'statuses']));
+    }
+
+    public function search(Request $request, int $meeting)
+    {
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $name = $request->input('search');
+        $participants = $meeting->participants()->orderBy('last_name')->searchByName($name)->paginate();
         $phone_countries = Country::get();
         $types = [
             'agent' => ['value' => 'agent', 'title' => __('common.agent')],

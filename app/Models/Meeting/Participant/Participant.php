@@ -62,6 +62,13 @@ class Participant extends Model
         'enrolled_at' => 'timestamp',
     ];
     protected $perPage = 30;
+    public function scopeSearchByName($query, $name)
+    {
+        return $query->where(function($q) use ($name) {
+            $q->where('first_name', 'LIKE', '%' . $name . '%')
+                ->orWhere('last_name', 'LIKE', '%' . $name . '%');
+        });
+    }
     public function getActivityStatusAttribute()
     {
         if($this->last_activity !== null) {
