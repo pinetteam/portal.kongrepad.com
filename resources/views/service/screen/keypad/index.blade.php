@@ -34,12 +34,13 @@
                 <small>"{{ $keypad->keypad }}"</small>
             </h1>
         </div>
-        <div class="card-body">
-            <div class="chart-container">
-                <div class="bar-chart-container">
-                    <canvas id="bar-chart"></canvas>
+        @if($keypad->options)
+            <div class="card-body">
+                <div class="chart-container border-dark">
+                    <div class="bar-chart-container">
+                        <canvas id="bar-chart"></canvas>
+                    </div>
                 </div>
-            </div>
             <script>
                 $(function(){
                     var cData = JSON.parse(`<?php echo $chart_data; ?>`);
@@ -168,5 +169,6 @@
                 });
             </script>
         </div>
+        @endif
     </div>
 @endsection
