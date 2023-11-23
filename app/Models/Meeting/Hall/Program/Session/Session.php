@@ -30,6 +30,8 @@ class Session extends Model
         'description',
         'start_at',
         'finish_at',
+        'started_at',
+        'finished_at',
         'on_air',
         'questions_allowed',
         'questions_limit',
@@ -46,6 +48,8 @@ class Session extends Model
         'deleted_at',
         'start_at',
         'finish_at',
+        'started_at',
+        'finished_at',
     ];
     protected $casts = [
         'created_at' => 'datetime',
@@ -53,6 +57,8 @@ class Session extends Model
         'deleted_at' => 'datetime',
         'start_at' => 'datetime',
         'finish_at' => 'datetime',
+        'started_at' => 'datetime',
+        'finished_at' => 'datetime',
     ];
     protected function startAt(): Attribute
     {
@@ -69,6 +75,29 @@ class Session extends Model
             get: fn (string $finishAt) => Carbon::createFromFormat('Y-m-d H:i:s', $finishAt)->format($date_time_format),
             set: fn (string $finishAt) => Carbon::createFromFormat($date_time_format, $finishAt)->format('Y-m-d H:i:s'),
         );
+    }
+    protected function startedAt(): Attribute
+    {
+        $date_time_format = Variable::where('variable','date_time_format')->first()->settings()->where('customer_id', Auth::user()->customer->id ?? Customer::first()->id)->first()->value;
+        return Attribute::make(
+            get: fn ($startedAt) => $startedAt ? Carbon::createFromFormat('Y-m-d H:i:s', $startedAt)->format($date_time_format) : null,
+        );
+    }
+    protected function finishedAt(): Attribute
+    {
+        $date_time_format = Variable::where('variable','date_time_format')->first()->settings()->where('customer_id', Auth::user()->customer->id ?? Customer::first()->id)->first()->value;
+        return Attribute::make(
+            get: fn ($finishedAt) => $finishedAt ? Carbon::createFromFormat('Y-m-d H:i:s', $finishedAt)->format($date_time_format) : null,
+        );
+    }
+    public function getDurationAttribute()
+    {
+        if (isset($this->finished_at) && isset($this->started_at)) {
+            $started_at = Carbon::parse($this->started_at);
+            $finished_at = Carbon::parse($this->finished_at);
+            return $started_at->diffInMinutes($finished_at) . ':' . $started_at->diffInSeconds($finished_at)%60;
+        } else
+            return "Undefined";
     }
     public function getCreatedByNameAttribute()
     {

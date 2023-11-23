@@ -28,6 +28,7 @@ class QuestionController extends Controller
             return back()->with('error', 'Soru limitine ulaştınız');
         }
         $question->selected_for_show = !$question->selected_for_show;
+        $question->is_deselected = !$question->selected_for_show;
         if (!$question->save()) {
             return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();
         } else {

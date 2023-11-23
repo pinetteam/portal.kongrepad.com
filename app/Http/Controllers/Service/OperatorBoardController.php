@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Service;
 
 use App\Events\Service\Screen\ChairEvent;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class OperatorBoardController extends Controller
@@ -40,8 +41,11 @@ class OperatorBoardController extends Controller
                                 $keypad->save();
                             }
                         }
-                        $session->on_air = 0;
-                        $session->save();
+                        if($session->on_air == 1) {
+                            $session->finished_at = Carbon::now()->timestamp;
+                            $session->on_air = 0;
+                            $session->save();
+                        }
                     }
                 }
             }

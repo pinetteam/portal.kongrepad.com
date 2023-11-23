@@ -41,6 +41,10 @@
                             <a class="btn btn-outline-light btn-lg w-100" href="{{ route('portal.meeting.hall.program.index', ['meeting' => $meeting->id, 'hall' => $hall->id]) }}" title="{{ __('common.show') }}">
                                 <span class="fa-duotone fa-calendar-week"></span> {{ __('common.programs') }}
                             </a>
+                            <hr />
+                            <a class="btn btn-outline-light btn-lg w-100" href="{{ route('portal.meeting.hall.report.session.index', ['meeting' => $meeting->id, 'hall' => $hall->id]) }}" title="{{ __('common.show') }}">
+                                <span class="fa-duotone fa-page"></span> {{ __('common.session-reports') }}
+                            </a>
                         </div>
                     </div>
                 </div>

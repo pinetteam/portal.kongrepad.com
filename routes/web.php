@@ -68,7 +68,6 @@ Route::prefix('portal')->name('portal.')->group(function () {
             Route::resource('/{meeting}/announcement', \App\Http\Controllers\Portal\Meeting\Announcement\AnnouncementController::class)->except(['create']);
             Route::get('/{meeting}/document/download/{document}', [\App\Http\Controllers\Portal\Meeting\Document\DocumentController::class, 'download'])->name('document.download');
             Route::resource('/{meeting}/participant', \App\Http\Controllers\Portal\Meeting\Participant\ParticipantController::class)->except(['create']);
-            Route::get('/{meeting}/participant', [\App\Http\Controllers\Portal\Meeting\Participant\ParticipantController::class, 'search'])->name('participant.search');
             Route::get('/{meeting}/participant/{participant}/qr-code', [\App\Http\Controllers\Portal\Meeting\Participant\ParticipantController::class, 'qrCode'])->name('participant.qr-code');
             Route::get('/{meeting}/participant/{participant}/survey/{survey}', [\App\Http\Controllers\Portal\Meeting\Participant\ParticipantController::class, 'showSurvey'])->name('participant.survey');
             Route::resource('/{meeting}/score-game', \App\Http\Controllers\Portal\Meeting\ScoreGame\ScoreGameController::class)->except(['create']);
@@ -99,6 +98,12 @@ Route::prefix('portal')->name('portal.')->group(function () {
             });
 
             Route::resource('/{meeting}/hall', \App\Http\Controllers\Portal\Meeting\Hall\HallController::class)->except(['create']);
+            Route::prefix('{meeting}/hall/{hall}/report')->name('hall.report.')->group(function () {
+                Route::resource('/session', \App\Http\Controllers\Portal\Report\Session\SessionController::class)->only(['index', 'show']);
+                Route::prefix('/session/{session}')->name('session.')->group(function () {
+                    Route::resource('/question', \App\Http\Controllers\Portal\Report\Session\Question\QuestionController::class)->only(['index']);
+                });
+            });
             Route::prefix('/{meeting}/hall/{hall}')->name('hall.')->group(function () {
                 Route::resource('/screen', \App\Http\Controllers\Portal\Meeting\Hall\Screen\ScreenController::class)->except(['create']);
                 Route::resource('/program', \App\Http\Controllers\Portal\Meeting\Hall\Program\ProgramController::class)->except(['create']);

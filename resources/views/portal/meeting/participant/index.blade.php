@@ -1,7 +1,7 @@
 @extends('layout.portal.common')
 @section('title', $meeting->title . ' | ' . __('common.participants'))
 @section('search_bar')
-    <form action="{{ route('portal.meeting.participant.search', ['meeting' => $meeting->id]) }}" method="GET">
+    <form action="{{ route('portal.meeting.participant.index', ['meeting' => $meeting->id]) }}" method="GET">
         <div class="row align-items-center justify-content-center">
             <div class="col-xs-11 col-sm-10">
                 <input class="form-control" id="kp-search-box" type="text" name="search" placeholder="{{ __('common.search') }}" aria-label="{{ __('common.search') }}" value="{{ request()->query('search', '') ?? '' }}"/>

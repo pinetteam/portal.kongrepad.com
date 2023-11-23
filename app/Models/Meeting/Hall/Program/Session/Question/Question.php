@@ -18,6 +18,7 @@ class Question extends Model
         'question',
         'is_hidden_name',
         'selected_for_show',
+        'is_deselected',
         'created_by',
         'updated_by',
         'deleted_by',

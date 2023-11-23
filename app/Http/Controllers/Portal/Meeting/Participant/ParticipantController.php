@@ -14,10 +14,15 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class ParticipantController extends Controller
 {
-    public function index(int $meeting)
+    public function index(Request $request, int $meeting)
     {
         $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
-        $participants = $meeting->participants()->orderBy('last_name')->paginate();
+        if ($request->has('search')){
+            $participants = $meeting->participants()->orderBy('last_name')->searchByName($request->input('search'))->paginate();
+        }
+        else {
+            $participants = $meeting->participants()->orderBy('last_name')->paginate();
+        }
         $phone_countries = Country::get();
         $types = [
             'agent' => ['value' => 'agent', 'title' => __('common.agent')],

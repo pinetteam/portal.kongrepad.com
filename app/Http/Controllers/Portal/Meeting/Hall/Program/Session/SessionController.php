@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Portal\Meeting\Hall\Program\Session\SessionRequest;
 use App\Http\Resources\Portal\Meeting\Hall\Program\Session\SessionResource;
 use App\Models\Meeting\Hall\Program\Session\Session;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class SessionController extends Controller
@@ -93,11 +94,19 @@ class SessionController extends Controller
         foreach($meeting_hall->programSessions as $session){
             if($session->id == $id)
                 continue;
-            $session->on_air = 0;
-            $session->save();
+            if($session->on_air == 1) {
+                $session->finished_at = Carbon::now()->timestamp;
+                $session->on_air = 0;
+                $session->save();
+            }
         }
         $program_session = Auth::user()->customer->programSessions()->findOrFail($id);
         $program_session->on_air = !$program_session->on_air;
+        if($program_session->on_air == 0) {
+            $program_session->finished_at = Carbon::now()->timestamp;
+        } else {
+            $program_session->started_at = Carbon::now()->timestamp;
+        }
         if ($program_session->save()) {
             $meeting_hall_screen = $meeting_hall->screens()->where('type', 'speaker')->first();
             if ($meeting_hall_screen != null) {
