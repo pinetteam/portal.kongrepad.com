@@ -15,6 +15,8 @@
                         <tr>
                             <th scope="col"><span class="fa-regular fa-bee mx-1"></span> {{ __('common.meeting') }}</th>
                             <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}</th>
+                            <th scope="col"><span class="fa-regular fa-calendar-arrow-down mx-1"></span> {{ __('common.publish-at') }}</th>
+                            <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.is-published') }}</th>
                             <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}</th>
                             <th scope="col" class="text-end"></th>
                         </tr>
@@ -24,7 +26,15 @@
                             <tr>
                                 <td>{{ $meeting->title }}</td>
                                 <td>{{ $announcement->title }}</td>
-                                <td >
+                                <td>{{ $announcement->publish_at }}</td>
+                                <td>
+                                    @if($announcement->is_published)
+                                        <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
+                                    @else
+                                        <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
+                                    @endif
+                                </td>
+                                <td>
                                     @if($announcement->status)
                                         <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
                                     @else
@@ -64,6 +74,7 @@
         @section('announcement-create-form')
             <x-input.hidden method="c" name="meeting_id" :value="$meeting->id" />
             <x-input.text method="c" name="title" title="title" icon="input-text" />
+            <x-input.datetime method="c" name="publish_at" title="publish-at" icon="calendar-arrow-down" />
             <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.create>
@@ -72,6 +83,7 @@
         @section('announcement-edit-form')
             <x-input.hidden method="e" name="meeting_id" :value="$meeting->id" />
             <x-input.text method="e" name="title" title="title" icon="input-text" />
+            <x-input.datetime method="e" name="publish_at" title="publish-at" icon="calendar-arrow-down" />
             <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.edit>

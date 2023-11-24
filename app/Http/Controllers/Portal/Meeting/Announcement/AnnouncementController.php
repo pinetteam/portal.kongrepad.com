@@ -27,12 +27,13 @@ class AnnouncementController extends Controller
             $announcement = new Announcement();
             $announcement->meeting_id = $meeting;
             $announcement->title = $request->input('title');
+            $announcement->publish_at = $request->input('publish_at');
             $announcement->status = $request->input('status');
             if ($announcement->save()) {
                 $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
                 $announcement->created_by = Auth::user()->id;
                 $announcement->save();
-                if ($meeting->participants->where('type', 'attendee')->count() > 0){
+                /*if ($meeting->participants->where('type', 'attendee')->count() > 0){
                     $meeting->participants->where('type', 'attendee')->first()->notify(new AnnouncementNotification($announcement));
                 }
                 if ($meeting->participants->where('type', 'agent')->count() > 0) {
@@ -41,7 +42,7 @@ class AnnouncementController extends Controller
 
                 if ($meeting->participants->where('type', 'team')->count() > 0) {
                     $meeting->participants->where('type', 'team')->first()->notify(new AnnouncementNotification($announcement));
-                }
+                }*/
                 return back()->with('success', __('common.created-successfully'));
             } else {
                 return back()->with('create_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
@@ -66,6 +67,7 @@ class AnnouncementController extends Controller
             $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
             $announcement = $meeting->announcements()->findOrFail($id);
             $announcement->title = $request->input('title');
+            $announcement->publish_at = $request->input('publish_at');
             $announcement->status = $request->input('status');
             if ($announcement->save()) {
                 $announcement->updated_by = Auth::user()->id;

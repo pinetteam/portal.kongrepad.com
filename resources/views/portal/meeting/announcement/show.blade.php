@@ -25,6 +25,18 @@
                     <th scope="row" class="text-end w-25">{{ __('common.created-at') }}:</th>
                     <td class="text-start w-25">{{ $announcement->created_at }}</td>
                 </tr>
+                <tr>
+                    <th scope="row" class="text-end w-25">{{ __('common.is-published') }}:</th>
+                    <td class="text-start w-25">
+                    @if($announcement->is_published)
+                        <i style="color:green" class="fa-regular fa-toggle-large-on"></i>
+                    @else
+                        <i style="color:red" class="fa-regular fa-toggle-large-off"></i>
+                    @endif
+                    </td>
+                    <th scope="row" class="text-end w-25">{{ __('common.publish-at') }}:</th>
+                    <td class="text-start w-25">{{ $announcement->publish_at }}</td>
+                </tr>
             </table>
         </div>
     </div>

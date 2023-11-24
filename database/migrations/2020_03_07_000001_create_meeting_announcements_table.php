@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('meeting_announcements', function (Blueprint $table) {
@@ -16,6 +13,8 @@ return new class extends Migration
             $table->unsignedBigInteger('meeting_id')->index();
             $table->string('title', 511)->nullable();
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
+            $table->boolean('is_published')->default(0)->comment('0=no;1=yes');
+            $table->dateTime('publish_at')->nullable();
             $table->unsignedBigInteger('created_by')->index()->nullable();
             $table->unsignedBigInteger('updated_by')->index()->nullable();
             $table->unsignedBigInteger('deleted_by')->index()->nullable();
@@ -27,10 +26,6 @@ return new class extends Migration
             $table->foreign('meeting_id')->on('meetings')->references('id');
         });
     }
-
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('meeting_announcements');

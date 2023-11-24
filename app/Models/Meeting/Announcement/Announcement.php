@@ -20,6 +20,8 @@ class Announcement extends Model
         'meeting_id',
         'title',
         'status',
+        'is_published',
+        'publish_at',
         'created_by',
         'updated_by',
         'deleted_by',
@@ -28,15 +30,26 @@ class Announcement extends Model
         'deleted_at',
     ];
     protected $dates = [
+        'publish_at',
         'created_at',
         'updated_at',
         'deleted_at',
     ];
     protected $casts = [
+        'publish_at' => 'datetime',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
         'deleted_at' => 'datetime',
     ];
+
+    protected function publishAt(): Attribute
+    {
+        $date_time_format = Variable::where('variable','date_time_format')->first()->settings()->where('customer_id', Auth::user()->customer->id ?? Customer::first()->id)->first()->value;
+        return Attribute::make(
+            get: fn (string $publishAt) => Carbon::createFromFormat('Y-m-d H:i:s', $publishAt)->format($date_time_format),
+            set: fn (string $publishAt) => Carbon::createFromFormat($date_time_format, $publishAt)->format('Y-m-d H:i:s'),
+        );
+    }
     protected function createdAt(): Attribute
     {
         $date_time_format = Variable::where('variable', 'date_time_format')->first()->settings()->where('customer_id', Auth::user()->customer->id ?? Customer::first()->id)->first()->value;

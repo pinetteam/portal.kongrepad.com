@@ -20,6 +20,7 @@ class AnnouncementRequest extends FormRequest
                 return [
                     'meeting_id' => 'required|exists:meetings,id',
                     'title' => 'required|max:511',
+                    'publish_at' => 'required|date_format:Y-m-d H:i',
                     'status' => 'required|boolean',
                 ];
             }
@@ -31,6 +32,7 @@ class AnnouncementRequest extends FormRequest
         return [
             'meeting_id' => __('common.meeting'),
             'title' => __('common.title'),
+            'publish_at' => __('common.publish-at'),
             'status' => __('common.status'),
         ];
     }
