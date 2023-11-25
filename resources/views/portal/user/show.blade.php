@@ -1,5 +1,9 @@
 @extends('layout.portal.common')
 @section('title', $user->full_name)
+@section('breadcrumb')
+    <li class="breadcrumb-item text-white"><a href="{{ route("portal.user.index") }}" class="text-decoration-none">{{ __('common.users') }}</a></li>
+    <li class="breadcrumb-item active text-white" aria-current="page">{{ $user->full_name }}</li>
+@endsection
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">

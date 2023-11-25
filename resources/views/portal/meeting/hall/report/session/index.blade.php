@@ -1,5 +1,12 @@
 @extends('layout.portal.common')
 @section('title', $hall->title . ' | ' . __('common.session-reports'))
+@section('breadcrumb')
+    <li class="breadcrumb-item text-white"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none">{{ __('common.meetings') }}</a></li>
+    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.show', $hall->meeting->id) }}" class="text-decoration-none">{{ $hall->meeting->title }}</a></li>
+    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.hall.index', ['meeting' => $hall->meeting->id]) }}" class="text-decoration-none">{{ __('common.halls') }}</a></li>
+    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.hall.show', ['meeting' => $hall->meeting->id, 'hall' => $hall->id]) }}" class="text-decoration-none">{{ $hall->title }}</a></li>
+    <li class="breadcrumb-item active text-white" aria-current="page">{{ __('common.session-reports') }}</li>
+@endsection
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">

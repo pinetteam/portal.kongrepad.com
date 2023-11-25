@@ -1,5 +1,11 @@
 @extends('layout.portal.common')
 @section('title', $keypad->question . ' | ' . __('common.report'))
+@section('breadcrumb')
+    <li class="breadcrumb-item text-white"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none">{{ __('common.meetings') }}</a></li>
+    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.show', $keypad->session->program->hall->meeting->id) }}" class="text-decoration-none">{{ $keypad->session->program->hall->meeting->title }}</a></li>
+    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.report.keypad.index', ['meeting' => $keypad->session->program->hall->meeting->id]) }}" class="text-decoration-none">{{ __('common.keypad-reports') }}</a></li>
+    <li class="breadcrumb-item active text-white" aria-current="page">{{ $keypad->keypad }}</li>
+@endsection
 @section('body')
     <div class="card text-bg-dark" xmlns="http://www.w3.org/1999/html">
         <div class="card-header">

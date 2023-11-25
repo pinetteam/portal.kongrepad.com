@@ -1,5 +1,12 @@
 @extends('layout.portal.common')
-@section('title',$question->question . ' | ' . __('common.question'))
+@section('title', $question->question . ' | ' . __('common.question'))
+@section('breadcrumb')
+    <li class="breadcrumb-item text-white"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none">{{ __('common.meetings') }}</a></li>
+    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.show', $question->survey->meeting->id) }}" class="text-decoration-none">{{ $question->survey->meeting->title }}</a></li>
+    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.survey.index', ['meeting' => $question->survey->meeting->id]) }}" class="text-decoration-none">{{ __('common.surveys') }}</a></li>
+    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.survey.show', ['meeting' => $question->survey->meeting->id, $question->survey->id, ]) }}" class="text-decoration-none">{{ $question->survey->title }}</a></li>
+    <li class="breadcrumb-item active text-white" aria-current="page">{{ $question->question }}</li>
+@endsection
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">

@@ -1,5 +1,8 @@
 @extends('layout.portal.common')
 @section('title', __('common.user-roles'))
+@section('breadcrumb')
+    <li class="breadcrumb-item active text-white" aria-current="page">{{ __('common.user-roles') }}</li>
+@endsection
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">

@@ -1,5 +1,13 @@
 @extends('layout.portal.common')
 @section('title', $program->title)
+@section('breadcrumb')
+    <li class="breadcrumb-item text-white"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none">{{ __('common.meetings') }}</a></li>
+    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.show', $program->hall->meeting->id) }}" class="text-decoration-none">{{ $program->hall->meeting->title }}</a></li>
+    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.hall.index', ['meeting' => $program->hall->meeting->id]) }}" class="text-decoration-none">{{ __('common.halls') }}</a></li>
+    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.hall.show', ['meeting' => $program->hall->meeting->id, 'hall' => $program->hall->id]) }}" class="text-decoration-none">{{ $program->hall->title }}</a></li>
+    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.hall.program.index', ['meeting' => $program->hall->meeting->id, 'hall' => $program->hall->id]) }}" class="text-decoration-none">{{ __('common.programs') }}</a></li>
+    <li class="breadcrumb-item active text-white" aria-current="page">{{ $program->title }}</li>
+@endsection
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">
@@ -223,7 +231,7 @@
                 <x-input.number method="c" name="sort_order" title="sort" icon="circle-sort" />
                 <x-input.hidden method="c" name="program_id" :value="$program->id" />
                 <x-input.select method="c" name="speaker_id" title="speaker" :options="$speakers" option_value="id" option_name="full_name" icon="person-chalkboard" />
-                <x-input.select method="c" name="document_id" title="document" :options="$documents" option_value="id" option_name="title" icon="speakation-screen" />
+                <x-input.select method="c" name="document_id" title="document" :options="$documents" option_value="id" option_name="title" icon="presentation-screen" />
                 <x-input.text method="c" name="code" title="code" icon="code-simple" />
                 <x-input.text method="c" name="title" title="title" icon="input-text" />
                 <x-input.text method="c" name="description" title="description" icon="comment-dots" />
@@ -241,7 +249,7 @@
                 <x-input.number method="e" name="sort_order" title="sort" icon="circle-sort" />
                 <x-input.hidden method="e" name="program_id" :value="$program->id" />
                 <x-input.select method="e" name="speaker_id" title="speaker" :options="$speakers" option_value="id" option_name="full_name" icon="person-chalkboard" />
-                <x-input.select method="e" name="document_id" title="document" :options="$documents" option_value="id" option_name="title" icon="speakation-screen" />
+                <x-input.select method="e" name="document_id" title="document" :options="$documents" option_value="id" option_name="title" icon="presentation-screen" />
                 <x-input.text method="e" name="code" title="code" icon="code-simple" />
                 <x-input.text method="e" name="title" title="title" icon="input-text" />
                 <x-input.text method="e" name="description" title="description" icon="comment-dots" />

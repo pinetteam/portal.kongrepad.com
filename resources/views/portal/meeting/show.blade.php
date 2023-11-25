@@ -1,5 +1,9 @@
 @extends('layout.portal.common')
 @section('title', $meeting->title . ' | ' . __('common.meeting'))
+@section('breadcrumb')
+    <li class="breadcrumb-item text-white"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none">{{ __('common.meetings') }}</a></li>
+    <li class="breadcrumb-item active text-white" aria-current="page">{{ $meeting->title }}</li>
+@endsection
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">

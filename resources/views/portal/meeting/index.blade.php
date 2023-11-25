@@ -1,5 +1,8 @@
 @extends('layout.portal.common')
 @section('title', __('common.meetings'))
+@section('breadcrumb')
+    <li class="breadcrumb-item active text-white" aria-current="page">{{__('common.meetings')}}</li>
+@endsection
 @section('body')
     <div class="card text-bg-dark">
         <div class="card-header">

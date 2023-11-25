@@ -107,6 +107,12 @@
             </form>
         </nav>
         <main class="col-md-9 col-lg-10 ms-sm-auto px-md-4 flex-shrink-0" id="kp-main">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class="bg-dark p-2">
+                <ol class="breadcrumb m-3 text-white">
+                    <li class="breadcrumb-item text-white"><a href="{{ route("portal.dashboard.index") }}" class="text-decoration-none"><span class="nav-icon fa-duotone fa-house"></span></a></li>
+                    @yield('breadcrumb')
+                </ol>
+            </nav>
             @yield('body')
         </main>
         <footer class="bg-dark text-light col-12 px-md-4 ms-sm-auto px-md-4 shadow" id="kp-footer">
