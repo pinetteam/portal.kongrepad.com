@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Service\Screen;
 
 use App\Http\Controllers\Controller;
 use App\Models\Meeting\Hall\Program\Session\Keypad\Keypad;
+use App\Models\Meeting\Hall\Program\Session\Keypad\Option\Option;
 use App\Models\Meeting\Hall\Screen\Screen;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,19 +16,13 @@ class KeypadController extends Controller
         try {
             if($meeting_hall_screen->current_object_id){
                 $keypad = Keypad::findOrFail($meeting_hall_screen->current_object_id);
-                $options = $keypad->options()->where('keypad_id', ($keypad->id))->paginate(20);
-                $data = [];
-                foreach($options as $option) {
-                    $data['label'][] = $option->option;
-                    $data['data'][] = (int) $option->votes->count();
-                }
-                $data['chart_data'] = json_encode($data);
+                $options = Option::where('keypad_id', $keypad->id)->withCount('votes')->get();
             } else {
                 $keypad = null;
             }
         } catch (\Exception $e) {
             $keypad = null;
         }
-        return view('service.screen.keypad.index', $data, compact(['meeting_hall_screen', 'keypad', 'options']));
+        return view('service.screen.keypad.index', compact(['meeting_hall_screen', 'keypad', 'options']));
     }
 }

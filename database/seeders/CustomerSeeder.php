@@ -28,5 +28,14 @@ class CustomerSeeder extends Seeder
                 'status' => '1',
             ],
         ]);
+        Customer::insert([
+            [
+                'id' => 3,
+                'code' => 'educcon',
+                'title' => 'Educcon',
+                'language' => 'en',
+                'status' => '1',
+            ],
+        ]);
     }
 }
