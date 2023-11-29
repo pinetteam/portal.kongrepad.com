@@ -2,14 +2,7 @@
 @section('title', $meeting->title . ' | ' . __('common.participants'))
 @section('search_bar')
     <form action="{{ route('portal.meeting.participant.index', ['meeting' => $meeting->id]) }}" method="GET">
-        <div class="row align-items-center justify-content-center">
-            <div class="col-xs-11 col-sm-10">
-                <input class="form-control" id="kp-search-box" type="text" name="search" placeholder="{{ __('common.search') }}" aria-label="{{ __('common.search') }}" value="{{ request()->query('search', '') ?? '' }}"/>
-            </div>
-            <div class="col-xs-1 col-sm-1 d-flex justify-content-center">
-                <button class="bg-dark text-light" type="submit"><span class="fa-duotone fa-search fa-fade"></span></button>
-            </div>
-        </div>
+        <input class="form-control" id="kp-search-box" type="text" name="search" placeholder="{{ __('common.search') }}" aria-label="{{ __('common.search') }}" value="{{ request()->query('search', '') ?? '' }}"/>
     </form>
 @endsection
 @section('breadcrumb')

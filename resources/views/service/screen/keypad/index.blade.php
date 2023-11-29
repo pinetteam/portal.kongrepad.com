@@ -28,10 +28,15 @@
                                 },
                             },
                             data: {
-                                labels: options.map(row => row.option),
+                                labels: options.map((row, index) => {
+                                    const options_names = ['A', 'B', 'C', 'D', 'E'];
+                                    return options_names[index % options_names.length] + " - %" + +(options[index].votes_count*100/{{ $keypad->votes_count }}).toFixed(2);
+                                }),
                                 datasets: [
                                     {
-                                        data: options.map(row => row.votes_count),
+                                        data: options.map((row, index) => {
+                                            return +(options[index].votes_count*100/{{ $keypad->votes_count }}).toFixed(2);
+                                        }),
                                         backgroundColor: options.map((row, index) => {
                                             const colors = ['red', 'blue', 'green', 'yellow', 'purple'];
                                             return colors[index % colors.length];
@@ -49,7 +54,7 @@
     </script>
 @endsection
 @section('body')
-    <div class="card text-bg-dark border-dark">
+    <div class="card text-bg-dark border-dark w-100">
         <div class="card-header">
             <h1 class="text-center p-2">
                 <span class="fa-regular fa-square-question fa-fade p-2 "></span>
@@ -58,7 +63,7 @@
         </div>
         @if($options)
             <div class="card-body">
-                <div class="w-100 p-3"><canvas id="options"></canvas></div>
+                <canvas id="options" class="w-100 p-3"></canvas>
                 <script>
                     (async function() {
                         Chart.defaults.font.size = 18;
@@ -80,10 +85,15 @@
                                     }
                                 },
                                 data: {
-                                    labels: data.map(row => row.option),
+                                    labels: data.map((row, index) => {
+                                        const options = ['A', 'B', 'C', 'D', 'E'];
+                                        return options[index % options.length] + " - %" + +(data[index].votes_count*100/{{ $keypad->votes_count }}).toFixed(2);
+                                    }),
                                     datasets: [
                                         {
-                                            data: data.map(row => row.votes_count),
+                                            data: data.map((row, index) => {
+                                                return +(data[index].votes_count*100/{{ $keypad->votes_count }}).toFixed(2);
+                                            }),
                                             backgroundColor: data.map((row, index) => {
                                                 const colors = ['red', 'blue', 'green', 'yellow', 'purple'];
                                                 return colors[index % colors.length];

@@ -15,13 +15,15 @@ class KeypadController extends Controller
         $meeting_hall_screen = Screen::where('code', $meeting_hall_screen_code)->first();
         try {
             if($meeting_hall_screen->current_object_id){
-                $keypad = Keypad::findOrFail($meeting_hall_screen->current_object_id);
+                $keypad = Keypad::withCount('votes')->findOrFail($meeting_hall_screen->current_object_id);
                 $options = Option::where('keypad_id', $keypad->id)->withCount('votes')->get();
             } else {
                 $keypad = null;
+                $options = null;
             }
         } catch (\Exception $e) {
             $keypad = null;
+            $options = null;
         }
         return view('service.screen.keypad.index', compact(['meeting_hall_screen', 'keypad', 'options']));
     }

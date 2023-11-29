@@ -1,44 +1,105 @@
-<!DOCTYPE html>
-<html class="h-100">
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{{ __('common.debate-screen') }} | {{ config('app.name') }}</title>
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
-    @vite(['resources/sass/app.scss'])
-    @vite(['resources/js/app.js'])
-</head>
-<body class="d-flex bg-dark h-100 align-items-center">
-<div id="kp-loading" class="d-flex align-items-center justify-content-center">
-    <div class="spinner-grow text-success" role="status">
-        <span class="visually-hidden">{{ __('common.loading') }}</span>
-    </div>
-</div>
-@if($debate)
-    <div class="ms-2 w-100 overflow-hidden">
-        <div class="card bg-dark shadow-lg m-5 px-5">
+@extends('layout.screen.common')
+@section('title', __('common.debate-screen'))
+@section('script')
+    <script type="module">
+        var chart = null;
+        Echo.channel('service.screen.debate.{{ $meeting_hall_screen->code }}')
+            .listen('.debate-event', data => {
+                if(data.debate !== null) {
+                    if (chart){
+                        chart.destroy();
+                    }
+                    var teams = data.debate.teams
+                    Chart.defaults.font.size = 18;
+                    Chart.defaults.color = "#fff";
+                    chart = new Chart(
+                        document.getElementById('teams'),
+                        {
+                            type: 'bar',
+                            teams: {
+                                animation: false,
+                                plugins: {
+                                    legend: {
+                                        display: false,
+                                    },
+                                    tooltip: {
+                                        enabled: false
+                                    }
+                                },
+                            },
+                            data: {
+                                labels: teams.map(row => row.title),
+                                datasets: [
+                                    {
+                                        data: teams.map((row, index) => {
+                                            return +(teams[index].votes_count*100/{{ $debate->votes_count }}).toFixed(2);
+                                        }),
+                                        backgroundColor: teams.map((row, index) => {
+                                            const colors = ['red', 'blue', 'green', 'yellow', 'purple'];
+                                            return colors[index % colors.length];
+                                        })
+                                    }
+                                ]
+                            }
+                        }
+                    );
+                    document.getElementById("debate-title").innerText = data.debate.debate;
+                } else {
+                    document.getElementById("teams").innerHTML = '...';
+                }
+            });
+    </script>
+@endsection
+@section('body')
+    <div class="card text-bg-dark border-dark w-100">
+        <div class="card-header">
+            <h1 class="text-center p-2">
+                <span class="fa-regular fa-square-question fa-fade p-2 "></span>
+                <small id="debate-title">"{{ $debate->title }}"</small>
+            </h1>
+        </div>
+        @if($teams)
             <div class="card-body">
-                <div class="fw-bold text-center text-white fs-3">{{ isset($debate->title) ? $debate->title . ' ' : null }}</div>
-                <hr />
-                <ol class="list-group align-content-center">
-                @foreach($teams as $team)
-                    <li class="list-group-item overflow-scroll bg-dark border-dark text-white">
-                        {{ $team->title }}<span class="p-1 mx-2 badge bg-success rounded-4 text-start text-black">({{ $team->votes->count() }} Votes)</span>
-                    </li>
-                @endforeach
-                </ol>
+                <canvas id="teams" class="w-100 p-3"></canvas>
+                <script>
+                    (async function() {
+                        Chart.defaults.font.size = 18;
+                        Chart.defaults.color = "#fff";
+                        var data = @json($teams);
+                        new Chart(
+                            document.getElementById('teams'),
+                            {
+                                type: 'bar',
+                                teams: {
+                                    animation: false,
+                                    plugins: {
+                                        legend: {
+                                            display: false,
+                                        },
+                                        tooltip: {
+                                            enabled: false
+                                        }
+                                    }
+                                },
+                                data: {
+                                    labels: data.map(row => row.title),
+                                    datasets: [
+                                        {
+                                            data: data.map((row, index) => {
+                                                return +(data[index].votes_count*100/{{ $debate->votes_count }}).toFixed(2);
+                                            }),
+                                            backgroundColor: data.map((row, index) => {
+                                                const colors = ['red', 'blue', 'green', 'yellow', 'purple'];
+                                                return colors[index % colors.length];
+                                            })
+                                        }
+                                    ]
+                                }
+                            }
+                        );
+                    })();
+                </script>
             </div>
-        </div>
+        @endif
     </div>
-@else
-    <h1 class="text-white text-center w-100" id="chair" style="font-size: 72px">
-        <div class="spinner-grow text-success text-center" role="status">
-            <span class="visually-hidden">{{ __('common.loading') }}</span>
-        </div>
-    </h1>
-@endif
-</body>
-</html>
-
+@endsection
