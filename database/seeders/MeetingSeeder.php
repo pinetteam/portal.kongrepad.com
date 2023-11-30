@@ -23,6 +23,17 @@ class MeetingSeeder extends Seeder
                 'start_at' => '2023-11-01',
                 'finish_at' => '2023-11-05',
                 'status' => 1,
+            ],
+            [
+                'id' => '2',
+                'customer_id' => '1',
+                'code' => '2023',
+                'title' => 'Vakalarla İnteraktif Onkoloji Toplantısı',
+                'banner_name' => null,
+                'banner_extension' => null,
+                'start_at' => '2023-12-16',
+                'finish_at' => '2023-12-17',
+                'status' => 1,
             ]
         ]);
     }

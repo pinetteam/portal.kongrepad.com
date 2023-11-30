@@ -34,5 +34,6 @@ class DatabaseSeeder extends Seeder
         $this->call(MeetingSurveyQuestionSeeder::class);
         $this->call(MeetingSurveyQuestionOptionsSeeder::class);
         $this->call(MeetingVirtualStandSeeder::class);
+        $this->call(MeetingHallProgramChairSeeder::class);
     }
 }

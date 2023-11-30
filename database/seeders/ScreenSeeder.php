@@ -88,6 +88,14 @@ class ScreenSeeder extends Seeder
                 'type' => 'timer',
                 'status' => 1,
             ],
+            [
+                'hall_id' => '6',
+                'code' => Str::uuid()->toString(),
+                'title' => 'Keypad Screen',
+                'description' => 'Keypad Screen',
+                'type' => 'keypad',
+                'status' => 1,
+            ],
         ]);
     }
 }

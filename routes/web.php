@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +20,7 @@ Route::group(["middleware" => ['guest']], function () {
     Route::get('/auth/login', [\App\Http\Controllers\Auth\LoginController::class, 'index'])->name('auth.login.index');
     Route::post('/auth/login', [\App\Http\Controllers\Auth\LoginController::class, 'store'])->name('auth.login.store');
 });
+
 Route::group(["middleware" => ['auth']], function () {
     Route::post('/auth/logout', [\App\Http\Controllers\Auth\LogoutController::class, 'store'])->name('auth.logout.store');
 });
@@ -49,7 +49,7 @@ Route::prefix('/service')->name('service.')->group(function () {
     Route::get('/question-board/{code}', [\App\Http\Controllers\Service\QuestionBoardController::class, 'index'])->name('question-board.start');
     Route::get('/operator-board/{code}/{program_order}', [\App\Http\Controllers\Service\OperatorBoardController::class, 'index'])->name('operator-board.start');
     Route::group(["middleware" => ['auth']], function () {
-        Route::get('/survey-report/{survey}', [\App\Http\Controllers\Service\SurveyReportBoardController::class, 'index'])->name('survey-report.start');
+        Route::get('/survey-report/{survey}', [\App\Http\Controllers\Service\Screen\SurveyController::class, 'index'])->name('survey-report.start');
         Route::get('/keypad-report/{keypad}', [\App\Http\Controllers\Service\Screen\KeypadController::class, 'index'])->name('keypad-report.start');
         Route::get('/debate-report/{debate}', [\App\Http\Controllers\Service\Screen\DebateController::class, 'index'])->name('debate-report.start');
     });
@@ -81,7 +81,6 @@ Route::prefix('portal')->name('portal.')->group(function () {
                 Route::resource('/question', \App\Http\Controllers\Portal\Meeting\Survey\Question\QuestionController::class)->except(['create']);
                 Route::resource('/question/{question}/option', \App\Http\Controllers\Portal\Meeting\Survey\Question\Option\OptionController::class)->except(['create']);
             });
-
             Route::prefix('{meeting}/report')->name('report.')->group(function () {
                 Route::resource('/score-game', \App\Http\Controllers\Portal\Report\ScoreGame\ScoreGameController::class)->only(['index', 'show']);
                 Route::resource('/question', \App\Http\Controllers\Portal\Report\Question\QuestionController::class)->only(['index', 'show']);
@@ -96,7 +95,6 @@ Route::prefix('portal')->name('portal.')->group(function () {
                 Route::get('/debate/{debate}/report',[\App\Http\Controllers\Portal\Report\Debate\DebateController::class, 'showReport'])->name('debate');
                 Route::resource('/registration', \App\Http\Controllers\Portal\Report\Registration\RegistrationController::class)->only(['index']);
             });
-
             Route::resource('/{meeting}/hall', \App\Http\Controllers\Portal\Meeting\Hall\HallController::class)->except(['create']);
             Route::prefix('{meeting}/hall/{hall}/report')->name('hall.report.')->group(function () {
                 Route::resource('/session', \App\Http\Controllers\Portal\Report\Session\SessionController::class)->only(['index', 'show']);
