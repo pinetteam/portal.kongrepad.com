@@ -73,22 +73,22 @@ class CustomerSettingSeeder extends Seeder
             [
                 'customer_id' => '3',
                 'variable_id' => '1',
-                'value' => 'https://www.devent.com.tr/',
+                'value' => 'https://www.educcon.com.tr/',
             ],
             [
                 'customer_id' => '3',
                 'variable_id' => '2',
-                'value' => 'info@devent.com.tr',
+                'value' => 'info@educcon.com.tr',
             ],
             [
                 'customer_id' => '3',
                 'variable_id' => '3',
-                'value' => '+90 (312) 438 1039',
+                'value' => '+90 (555) 555 5555',
             ],
             [
                 'customer_id' => '3',
                 'variable_id' => '4',
-                'value' => 'Güzeltepe, Özvatan Sokağı No: 38/3, 06690 Çankaya/Ankara',
+                'value' => '',
             ],
 
             [

@@ -7,9 +7,9 @@
         <option selected value="">{{ __('common.choose') }}</option>
         @foreach($options as $option)
             @if(is_array($option))
-                <option value="{{ $option[$option_value] }}"{{ old($name)==$option[$option_value] ? ' selected' : '' }}>{{ $option[$option_name] }}</option>
+                <option @isset($option['font_type'])style="font-family: '{{ $option['font_type'] }}'" @endisset value="{{ $option[$option_value] }}"{{ old($name)==$option[$option_value] ? ' selected' : '' }}>{{ $option[$option_name] }}</option>
             @else
-                <option value="{{ $option->$option_value }}"{{ old($name)==$option->$option_value ? ' selected' : '' }}>{{ $option->$option_name }}</option>
+                <option @isset($option->font_type)style="font-family: '{{ $option->font_type }}'" @endisset value="{{ $option->$option_value }}"{{ old($name)==$option->$option_value ? ' selected' : '' }}>{{ $option->$option_name }}</option>
             @endif
         @endforeach
     </select>

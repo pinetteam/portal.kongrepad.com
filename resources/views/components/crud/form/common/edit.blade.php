@@ -98,6 +98,11 @@
                             if (textElement !== null) {
                                 textElement.value = value['value'];
                             }
+                        } else if(value['type'] === 'color') {
+                            const textElement = editModal.querySelector('#{{ $method }}-' + key);
+                            if (textElement !== null) {
+                                textElement.value = value['value'];
+                            }
                         }
                     }
                 })

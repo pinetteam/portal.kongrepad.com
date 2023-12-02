@@ -12,10 +12,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
+use Laravel\Scout\Searchable;
 
 class Participant extends Model
 {
-    use HasApiTokens, SoftDeletes, Notifiable;
+    use HasApiTokens, SoftDeletes, Notifiable, Searchable;
     protected $table = 'meeting_participants';
     protected $fillable = [
         'meeting_id',
@@ -68,6 +69,13 @@ class Participant extends Model
             $q->where('first_name', 'LIKE', '%' . $name . '%')
                 ->orWhere('last_name', 'LIKE', '%' . $name . '%');
         });
+    }
+    public function toSearchableArray()
+    {
+        return [
+            'first_name' => '',
+            'last_name' => '',
+        ];
     }
     public function getActivityStatusAttribute()
     {

@@ -17,9 +17,9 @@ class ScreenRequest extends FormRequest
         return [
             'hall_id' => 'required|exists:meeting_halls,id',
             'title' => 'required|max:255',
-            'font' => 'nullable|max:255',
+            'font' => 'required|in:Roboto,Hedvig Letters Serif,Open Sans,Montserrat,Nunito',
             'font_size' => 'nullable|integer',
-            'font_color' => 'nullable|in:white,black',
+            'font_color' => ['required', 'regex:/^#([a-f0-9]{6}|[a-f0-9]{3})$/i'],
             'background' => ['nullable', File::types(['png','jpg','jpeg'])->max(12 * 1024),],
             'description' => 'nullable|max:65535',
             'type' => 'required|in:chair,document,debate,keypad,questions,speaker,timer',

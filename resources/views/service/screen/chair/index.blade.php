@@ -23,11 +23,11 @@
     @endisset
     @if($chair)
         <div class="d-flex align-items-center justify-content-center h-100">
-            <h1 class="text-{{$meeting_hall_screen->font_color}} text-center w-100 fw-bold" id="chair" style="font-size: {{$meeting_hall_screen->font_size ?? 172}}px">{{ isset($chair->title) ? $chair->title . ' ' : null }}{{ $chair->first_name }} {{ $chair->last_name }}</h1>
+            <h1 class="text-center w-100 fw-bold" id="chair" style="font-size: {{ $meeting_hall_screen->font_size }}px; color: {{ $meeting_hall_screen->font_color }}; font-family: '{{ $meeting_hall_screen->font }}'">{{ isset($chair->title) ? $chair->title . ' ' : null }}{{ $chair->first_name }} {{ $chair->last_name }}</h1>
         </div>
     @else
         <div class="d-flex align-items-center justify-content-center h-100">
-            <h1 class="text-{{$meeting_hall_screen->font_color}} text-center w-100 fw-bold" id="chair" style="font-size: {{$meeting_hall_screen->font_size ?? 172}}px">
+            <h1 class="text-center w-100 fw-bold" id="chair" style="font-size: {{ $meeting_hall_screen->font_size }}px; color: {{ $meeting_hall_screen->font_color }}; font-family: '{{ $meeting_hall_screen->font }}'">
             </h1>
         </div>
     @endif

@@ -17,10 +17,10 @@ return new class extends Migration
             $table->enum('type', ['chair', 'document', 'debate', 'keypad', 'questions', 'speaker', 'timer']);
             $table->uuid('background_name')->unique()->nullable();
             $table->string('background_extension')->nullable();
-            $table->string('font')->nullable();
+            $table->enum('font', ['Roboto', 'Hedvig Letters Serif', 'Open Sans', 'Montserrat', 'Nunito'])->default('Roboto');
             $table->unsignedInteger('font_size')->default(72);
             $table->unsignedInteger('current_object_id')->nullable();
-            $table->enum('font_color', ['white', 'black'])->default('white');
+            $table->string('font_color', 7)->default('#FFFFFF');
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
             $table->unsignedBigInteger('created_by')->index()->nullable();
             $table->unsignedBigInteger('updated_by')->index()->nullable();

@@ -34,9 +34,9 @@
                             <tr>
                                 <td>{{ $screen->title }}</td>
                                 <td>{{ __('common.'.$screen->type) }}</td>
-                                <td>{{ $screen->font }}</td>
+                                <td style="font-family: '{{ $screen->font }}'" >{{ $screen->font }}</td>
                                 <td>{{ $screen->font_size }}</td>
-                                <td>{{ __('common.'.$screen->font_color) }}</td>
+                                <td><i style="color:{{$screen->font_color}}" class="fa-solid fa-square fa-xl"></i></td>
                                 <td >
                                     @if($screen->status)
                                         <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
@@ -46,25 +46,9 @@
                                 </td>
                                 <td class="text-end">
                                     <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
-                                        @if($screen->type == 'speaker')
-                                            <a class="btn btn-outline-success btn-sm" href="{{ route('service.screen.speaker.start', ['meeting_hall_screen_code' => $screen->code]) }}" title="{{ __('common.screen-event') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.screen-event') }}">
-                                                <span class="fa-regular fa-gamepad"></span>
-                                            </a>
-                                            <a class="btn btn-outline-success btn-sm" href="{{ route('service.screen.speaker.index', ['meeting_hall_screen_code' => $screen->code]) }}" title="{{ __('common.screen') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.screen') }}" target="_blank">
-                                                <span class="fa-regular fa-tv"></span>
-                                            </a>
-                                        @elseif($screen->type == 'chair')
-                                            <a class="btn btn-outline-success btn-sm" href="{{ route('service.screen.chair.index', ['meeting_hall_screen_code' => $screen->code]) }}" title="{{ __('common.screen') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.screen') }}" target="_blank">
-                                                <span class="fa-regular fa-tv"></span>
-                                            </a>
-                                        @elseif($screen->type == 'questions')
-                                            <a class="btn btn-outline-success btn-sm" href="{{ route('service.screen.questions.start', ['meeting_hall_screen_code' => $screen->code]) }}" title="{{ __('common.questions-event') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.questions-event') }}">
-                                                <span class="fa-regular fa-gamepad"></span>
-                                            </a>
-                                            <a class="btn btn-outline-success btn-sm" href="{{ route('service.screen.questions.index', ['meeting_hall_screen_code' => $screen->code]) }}" title="{{ __('common.questions') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.questions') }}" target="_blank">
-                                                <span class="fa-regular fa-tv"></span>
-                                            </a>
-                                        @endif
+                                        <a class="btn btn-outline-success btn-sm" href="{{ route('service.screen.' .$screen->type. '.index', ['meeting_hall_screen_code' => $screen->code]) }}" title="{{ __('common.screen') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.screen') }}" target="_blank">
+                                            <span class="fa-regular fa-tv"></span>
+                                        </a>
                                         <a class="btn btn-info btn-sm" href="{{ route('portal.meeting.hall.screen.show', ['meeting' => $hall->meeting_id, 'hall' => $hall->id, 'screen' => $screen->id]) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
                                             <span class="fa-regular fa-eye"></span>
                                         </a>
@@ -98,10 +82,10 @@
             <x-input.text method="c" name="title" title="title" icon="input-text" />
             <x-input.text method="c" name="description" title="description" icon="comment-dots" />
             <x-input.file method="c" name="background" title="background" icon="image" />
-            <x-input.text method="c" name="font" title="font" icon="font" />
+            <x-input.select method="c" name="font" title="font" :options="$fonts" option_value="value" option_name="title" icon="font" />
             <x-input.text method="c" name="font_size" title="font-size" icon="text-size" />
             <x-input.select method="c" name="type" title="type" :options="$types" option_value="value" option_name="title" icon="person-military-pointing" />
-            <x-input.select method="c" name="font_color" title="font-color" :options="$font_colors" option_value="value" option_name="title" icon="palette" />
+            <x-input.color method="c" name="font_color" title="font-color" icon="palette" />
             <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.create>
@@ -112,10 +96,10 @@
             <x-input.text method="e" name="title" title="title" icon="input-text" />
             <x-input.text method="e" name="description" title="description" icon="comment-dots" />
             <x-input.file method="e" name="background" title="background" icon="image" />
-            <x-input.text method="e" name="font" title="font" icon="font" />
+            <x-input.select method="e" name="font" title="font" :options="$fonts" option_value="value" option_name="title" icon="font" />
             <x-input.text method="e" name="font_size" title="font-size" icon="text-size" />
             <x-input.select method="e" name="type" title="type" :options="$types" option_value="value" option_name="title" icon="person-military-pointing" />
-            <x-input.select method="e" name="font_color" title="font-color" :options="$font_colors" option_value="value" option_name="title" icon="palette" />
+            <x-input.color method="e" name="font_color" title="font-color" icon="palette" />
             <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.edit>

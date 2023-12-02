@@ -64,7 +64,7 @@
         <div class="bg-img bg-cover" style="background-color: #fff;background-image: url({{ asset('storage/screen-backgrounds/' . $meeting_hall_screen->background_name . '.' . $meeting_hall_screen->background_extension)}} ); height:100%; width:100%; background-size: cover; background-repeat: no-repeat;">
     @endisset
     <div class="d-flex align-items-center justify-content-center h-100">
-        <div id="stopwatch" style="font-size: {{$meeting_hall_screen->font_size ?? 96}}px">00:00:00</div>
+        <div id="stopwatch" style="font-size: {{ $meeting_hall_screen->font_size }}px; color: {{ $meeting_hall_screen->font_color }}; font-family: '{{ $meeting_hall_screen->font }}'">00:00:00</div>
     </div>
 @endsection
 

@@ -32,7 +32,7 @@
                                 datasets: [
                                     {
                                         data: teams.map((row, index) => {
-                                            return +(teams[index].votes_count*100/{{ $debate->votes_count }}).toFixed(2);
+                                            return +(teams[index].votes_count*100/{{ $debate ? $debate->votes_count : 1}}).toFixed(2);
                                         }),
                                         backgroundColor: teams.map((row, index) => {
                                             const colors = ['red', 'blue', 'green', 'yellow', 'purple'];
@@ -55,13 +55,13 @@
         <div class="card-header">
             <h1 class="text-center p-2">
                 <span class="fa-regular fa-square-question fa-fade p-2 "></span>
-                <small id="debate-title">"{{ $debate->title }}"</small>
+                <small id="debate-title">"{{ $debate ? $debate->title : ""}}"</small>
             </h1>
         </div>
         @if($teams)
             <div class="card-body">
                 <canvas id="teams" class="w-100 p-3"></canvas>
-                <script>
+                <script type="module">
                     (async function() {
                         Chart.defaults.font.size = 18;
                         Chart.defaults.color = "#fff";
@@ -70,16 +70,16 @@
                             document.getElementById('teams'),
                             {
                                 type: 'bar',
-                                teams: {
+                                options: {
                                     animation: false,
                                     plugins: {
                                         legend: {
-                                            display: false,
+                                            display: false
                                         },
                                         tooltip: {
                                             enabled: false
-                                        }
-                                    }
+                                        },
+                                    },
                                 },
                                 data: {
                                     labels: data.map(row => row.title),

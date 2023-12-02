@@ -25,15 +25,18 @@ class ScreenController extends Controller
             'speaker' => ['value' => 'speaker', 'title' => __('common.speaker')],
             'timer' => ['value' => 'timer', 'title' => __('common.timer')],
         ];
-        $font_colors = [
-            'white' => ['value' => 'white', 'title' => __('common.white')],
-            'black' => ['value' => 'black', 'title' => __('common.black')],
+        $fonts = [
+            'Roboto' => ['value' => 'Roboto', 'title' => 'Roboto', 'font_type' => 'Roboto'],
+            'Hedvig Letters Serif' => ['value' => 'Hedvig Letters Serif', 'title' => 'Hedvig Letters Serif', 'font_type' => 'Hedvig Letters Serif'],
+            'Open Sans' => ['value' => 'Open Sans', 'title' => 'Open Sans', 'font_type' => 'Open Sans'],
+            'Montserrat' => ['value' => 'Montserrat', 'title' => 'Montserrat', 'font_type' => 'Montserrat'],
+            'Nunito' => ['value' => 'Nunito', 'title' => 'Nunito', 'font_type' => 'Nunito'],
         ];
         $statuses = [
             'passive' => ['value' => 0, 'title' => __('common.passive'), 'color' => 'danger'],
             'active' => ['value' => 1, 'title' => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.meeting.hall.screen.index', compact(['hall', 'font_colors', 'screens', 'types', 'statuses']));
+        return view('portal.meeting.hall.screen.index', compact(['hall', 'fonts', 'screens', 'types', 'statuses']));
     }
     public function store(ScreenRequest $request, int $meeting, int $hall)
     {

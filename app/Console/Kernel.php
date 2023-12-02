@@ -14,7 +14,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         // $schedule->command('app:iok2023-sync')->everyFiveMinutes()->withoutOverlapping();
-        // $schedule->command('announcements:publish')->everyMinute();
+        //$schedule->command('announcements:publish')->everyMinute();
     }
 
     /**

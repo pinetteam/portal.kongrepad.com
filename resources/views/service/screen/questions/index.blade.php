@@ -31,7 +31,7 @@
     </div>
 </div>
 @if($questions)
-    <h1 class="text-white text-start w-100 p-5" id="questions" style="font-size: 36px">
+    <h1 class="text-white text-start w-100 p-5" id="questions" style="font-size: {{ $meeting_hall_screen->font_size }}px; color: {{ $meeting_hall_screen->font_color }}; font-family: '{{ $meeting_hall_screen->font }}'">
         <hr/>
         @foreach($questions as $question)
             {{ $question->question }}
@@ -42,12 +42,6 @@
             @endif
             <hr />
         @endforeach
-    </h1>
-@else
-    <h1 class="text-white text-start w-100 p-5" id="questions" style="font-size: 72px">
-        <div class="spinner-grow text-success text-center" role="status">
-            <span class="visually-hidden">{{ __('common.loading') }}</span>
-        </div>
     </h1>
 @endif
 </body>

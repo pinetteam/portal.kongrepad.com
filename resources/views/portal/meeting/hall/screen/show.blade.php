@@ -21,14 +21,20 @@
                         <td class="text-start w-25">{{ $screen->code }}</td>
                     </tr>
                     <tr>
-                        <th scope="row" class="text-end w-25">{{ __('common.hall') }}:</th>
-                        <td class="text-start w-25">{{ $screen->hall->title }}</td>
+                        <th scope="row" class="text-end w-25">{{ __('common.description') }}:</th>
+                        <td class="text-start w-25">{{ $screen->description }}</td>
                         <th scope="row" class="text-end w-25">{{ __('common.type') }}:</th>
                         <td class="text-start w-25">{{ __('common.'.$screen->type) }}</td>
                     </tr>
                     <tr>
-                        <th scope="row" class="text-end w-25">{{ __('common.description') }}:</th>
-                        <td class="text-start w-25">{{ $screen->description }}</td>
+                        <th scope="row" class="text-end w-25">{{ __('common.font') }}:</th>
+                        <td style="font-family: '{{ $screen->font }}'" class="text-start w-25">{{ $screen->font }}</td>
+                        <th scope="row" class="text-end w-25">{{ __('common.font-size') }}:</th>
+                        <td class="text-start w-25">{{ $screen->font_size }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="text-end w-25">{{ __('common.font-color') }}:</th>
+                        <td><i style="color:{{$screen->font_color}}" class="fa-solid fa-square fa-xl"></i></td>
                         <th scope="row" class="text-end w-25">{{ __('common.status') }}:</th>
                         <td class="text-start w-25">
                             @if($screen->status)
