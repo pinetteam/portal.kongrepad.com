@@ -42,7 +42,11 @@ class OperatorBoardController extends Controller
                             }
                         }
                         if($session->on_air == 1) {
-                            $session->finished_at = Carbon::now()->timestamp;
+                            $session_log = new \App\Models\Log\Meeting\Hall\Program\Session\Session();
+                            $session_log->action = 'stop';
+                            $session_log->session_id = $session->id;
+                            $session_log->created_by = Auth::user()->id;
+                            $session_log->save();
                             $session->on_air = 0;
                             $session->save();
                         }

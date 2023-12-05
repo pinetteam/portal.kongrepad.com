@@ -19,8 +19,6 @@ class SessionResource extends JsonResource
             'description' => ['value' => $this->description, 'type' => 'text'],
             'start_at' => ['value' => $this->start_at, 'type' => 'datetime'],
             'finish_at' => ['value' => $this->finish_at, 'type' => 'datetime'],
-            'started_at' => ['value' => $this->started_at, 'type' => 'datetime'],
-            'finished_at' => ['value' => $this->finished_at, 'type' => 'datetime'],
             'on_air' => ['value' => $this->on_air, 'type' => 'radio'],
             'questions_allowed' => ['value' => $this->questions_allowed, 'type' => 'radio'],
             'questions_limit' => ['value' => $this->questions_limit, 'type' => 'number'],

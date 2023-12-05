@@ -65,6 +65,7 @@
                                                         <th scope="col">{{ __('common.started-at') }}</th>
                                                         <th scope="col">{{ __('common.finished-at') }}</th>
                                                         <th scope="col">{{ __('common.duration') }}</th>
+                                                        <th scope="col">{{ __('common.questions') }}</th>
                                                         <th scope="col" class="text-end"></th>
                                                     </tr>
                                                     </thead>
@@ -80,9 +81,10 @@
                                                             </td>
                                                             <td>{{ $program_session->sort_order }}</td>
                                                             <td>{{ $program_session->title }}</td>
-                                                            <td>{{ $program_session->started_at }}</td>
-                                                            <td>{{ $program_session->finished_at }}</td>
+                                                            <td>{{ $program_session->logs()->where('action', 'start')->count() > 0 ? $program_session->logs()->where('action','start')->first()->created_at : __('common.not-started-yet') }}</td>
+                                                            <td>{{ $program_session->logs()->where('action', 'stop')->count() > 0 ? $program_session->logs()->latest()->where('action','stop')->first()->created_at : __('common.not-finished-yet') }}</td>
                                                             <td>{{ $program_session->duration }}</td>
+                                                            <td>{{ $program_session->questions()->count() }}</td>
                                                             <td class="text-end">
                                                                 <div class="btn-group" role="group"
                                                                      aria-label="{{ __('common.processes') }}">

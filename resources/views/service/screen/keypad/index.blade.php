@@ -35,12 +35,12 @@
                             data: {
                                 labels: options.map((row, index) => {
                                     const options_names = ['A', 'B', 'C', 'D', 'E'];
-                                    return options_names[index % options_names.length] + " - %" + +(options[index].votes_count*100/{{ $keypad ? $keypad->votes_count : 1 }}).toFixed(2);
+                                    return options_names[index % options_names.length] + " - %" + +(options[index].votes_count*100/data.keypad.votes_count).toFixed(2);
                                 }),
                                 datasets: [
                                     {
                                         data: options.map((row, index) => {
-                                            return +(options[index].votes_count*100/{{ $keypad ? $keypad->votes_count : 1}}).toFixed(2);
+                                            return +(options[index].votes_count*100/data.keypad.votes_count).toFixed(2);
                                         }),
                                         backgroundColor: options.map((row, index) => {
                                             const colors = ['red', 'blue', 'green', 'yellow', 'purple'];

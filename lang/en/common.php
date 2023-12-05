@@ -304,5 +304,6 @@ return [
     'reset' => 'Reset',
     'enrolled-at' => 'Registered at',
     'anonymous' => 'Anonymous',
-
+    'not-finished-yet' => 'Not finished yet',
+    'not-started-yet' => 'Not started yet',
 ];

@@ -20,8 +20,6 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->dateTime('start_at')->nullable();
             $table->dateTime('finish_at')->nullable();
-            $table->dateTime('started_at')->nullable();
-            $table->dateTime('finished_at')->nullable();
             $table->boolean('on_air')->default(0)->comment('0=no;1=yes');
             $table->boolean('questions_allowed')->default(0)->comment('0=passive;1=active');
             $table->unsignedInteger('questions_limit')->nullable()->default(0);

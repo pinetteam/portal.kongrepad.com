@@ -32,7 +32,7 @@
                                 datasets: [
                                     {
                                         data: teams.map((row, index) => {
-                                            return +(teams[index].votes_count*100/{{ $debate ? $debate->votes_count : 1}}).toFixed(2);
+                                            return teams[index].votes_count;
                                         }),
                                         backgroundColor: teams.map((row, index) => {
                                             const colors = ['red', 'blue', 'green', 'yellow', 'purple'];
@@ -86,7 +86,7 @@
                                     datasets: [
                                         {
                                             data: data.map((row, index) => {
-                                                return +(data[index].votes_count*100/{{ $debate->votes_count }}).toFixed(2);
+                                                return data[index].votes_count;
                                             }),
                                             backgroundColor: data.map((row, index) => {
                                                 const colors = ['red', 'blue', 'green', 'yellow', 'purple'];

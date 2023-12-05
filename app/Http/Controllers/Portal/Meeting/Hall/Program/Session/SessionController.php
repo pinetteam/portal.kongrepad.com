@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Portal\Meeting\Hall\Program\Session;
 
 use App\Events\Service\QuestionBoard\QuestionBoardEvent;
 use App\Events\Service\Screen\QuestionsEvent;
-use App\Events\Service\Screen\SpeakerEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Portal\Meeting\Hall\Program\Session\SessionRequest;
 use App\Http\Resources\Portal\Meeting\Hall\Program\Session\SessionResource;
@@ -95,7 +94,11 @@ class SessionController extends Controller
             if($session->id == $id)
                 continue;
             if($session->on_air == 1) {
-                $session->finished_at = Carbon::now()->timestamp;
+                $session_log = new \App\Models\Log\Meeting\Hall\Program\Session\Session();
+                $session_log->session_id = $session->id;
+                $session_log->created_by = Auth::user()->id;
+                $session_log->action = 'stop';
+                $session_log->save();
                 $session->on_air = 0;
                 $session->save();
             }
@@ -103,9 +106,17 @@ class SessionController extends Controller
         $program_session = Auth::user()->customer->programSessions()->findOrFail($id);
         $program_session->on_air = !$program_session->on_air;
         if($program_session->on_air == 0) {
-            $program_session->finished_at = Carbon::now()->timestamp;
+            $session_log = new \App\Models\Log\Meeting\Hall\Program\Session\Session();
+            $session_log->session_id = $program_session->id;
+            $session_log->created_by = Auth::user()->id;
+            $session_log->action = 'stop';
+            $session_log->save();
         } else {
-            $program_session->started_at = Carbon::now()->timestamp;
+            $session_log = new \App\Models\Log\Meeting\Hall\Program\Session\Session();
+            $session_log->session_id = $program_session->id;
+            $session_log->created_by = Auth::user()->id;
+            $session_log->action = 'start';
+            $session_log->save();
         }
         if ($program_session->save()) {
             $meeting_hall_screen = $meeting_hall->screens()->where('type', 'speaker')->first();
