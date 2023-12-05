@@ -28,7 +28,13 @@ class QuestionController extends Controller
             return back()->with('error', 'Soru limitine ulaştınız');
         }
         $question->selected_for_show = !$question->selected_for_show;
-        $question->is_deselected = !$question->selected_for_show;
+
+        $question_log = new \App\Models\Log\Meeting\Hall\Program\Session\Question\Question();
+        $question_log->question_id = $question->id;
+        $question_log->created_by = Auth::user()->id;
+        $question_log->action = $question->selected_for_show ? 'select' : 'deselect';
+        $question_log->save();
+
         if (!$question->save()) {
             return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();
         } else {

@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('meeting_hall_program_session_logs', function (Blueprint $table) {
+        Schema::create('meeting_hall_program_session_question_logs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('session_id')->index();
+            $table->unsignedBigInteger('question_id')->index();
             $table->unsignedBigInteger('created_by')->index()->nullable();
-            $table->enum('action', ['start', 'stop']);
+            $table->enum('action', ['select', 'deselect']);
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('created_by')->on('users')->references('id');
-            $table->foreign('session_id')->on('meeting_hall_program_sessions')->references('id');
+            $table->foreign('question_id')->on('meeting_hall_program_session_questions')->references('id');
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('meeting_hall_program_session_logs');
+        Schema::dropIfExists('meeting_hall_program_session_question_logs');
     }
 };

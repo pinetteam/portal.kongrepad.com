@@ -42,7 +42,7 @@
                                 @endif
                             </td>
                             <td>
-                                @if($question->selected_for_show)
+                                @if($question->logs()->where('action', 'select')->count() > 0)
                                     <i style="color:green"
                                        class="fa-regular fa-toggle-on fa-xg"></i>
                                 @else
@@ -50,7 +50,7 @@
                                 @endif
                             </td>
                             <td>
-                                @if($question->is_deselected)
+                                @if($question->logs()->where('action', 'deselect')->count() > 0)
                                     <i style="color:green"
                                        class="fa-regular fa-toggle-on fa-xg"></i>
                                 @else
