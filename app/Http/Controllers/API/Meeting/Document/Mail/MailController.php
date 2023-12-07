@@ -31,7 +31,8 @@ class MailController extends Controller
         ];
     }
     public function send_all(Request $request){
-        $documents = $request->user()->meeting->documents()->get();
+
+        /*$documents = $request->user()->meeting->documents()->get();
         foreach ($documents as $document){
             if(!$document->sharing_via_email)
                 continue;
@@ -49,6 +50,18 @@ class MailController extends Controller
                     'errors' => [$e->getMessage()]
                 ];
             }
+        }
+        */
+        $participant = $request->user();
+        try{
+            $participant->requested_all_documents = 1;
+            $participant->save();
+        } catch (\Throwable $e){
+            return [
+                'data' => null,
+                'status' => false,
+                'errors' => [$e->getMessage()]
+            ];
         }
         return [
             'data' => null,

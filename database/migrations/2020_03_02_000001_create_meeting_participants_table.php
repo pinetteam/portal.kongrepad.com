@@ -26,6 +26,7 @@ return new class extends Migration
             $table->dateTime('last_login_datetime')->nullable();
             $table->timestamp('last_activity')->nullable();
             $table->enum('type', ['agent', 'attendee', 'team'])->default('attendee');
+            $table->boolean('requested_all_documents')->default(0)->comment('0=no;1=yes');
             $table->boolean('enrolled')->default(0)->comment('0=no;1=yes');
             $table->timestamp('enrolled_at')->nullable();
             $table->boolean('gdpr_consent')->default(0)->comment('0=not-approved;1=approved');

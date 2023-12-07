@@ -18,7 +18,6 @@ class Question extends Model
         'question',
         'is_hidden_name',
         'selected_for_show',
-        'is_deselected',
         'created_by',
         'updated_by',
         'deleted_by',
@@ -40,5 +39,10 @@ class Question extends Model
     public function questioner()
     {
         return $this->belongsTo(Participant::class, 'questioner_id', 'id');
+    }
+
+    public function logs()
+    {
+        return $this->hasMany(\App\Models\Log\Meeting\Hall\Program\Session\Question\Question::class,'question_id','id');
     }
 }

@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('question', 511);
             $table->boolean('is_hidden_name')->default(0)->comment('0=no;1=yes');
             $table->boolean('selected_for_show')->default(0)->comment('0=no;1=yes');
-            $table->boolean('is_deselected')->default(0)->comment('0=no;1=yes');
             $table->unsignedBigInteger('created_by')->index()->nullable();
             $table->unsignedBigInteger('updated_by')->index()->nullable();
             $table->unsignedBigInteger('deleted_by')->index()->nullable();
