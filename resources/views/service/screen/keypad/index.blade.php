@@ -1,62 +1,6 @@
 @extends('layout.screen.common')
 @section('title', __('common.keypad-screen'))
 @section('script')
-    <script type="module">
-        var chart = null;
-        Echo.channel('service.screen.keypad.{{ $meeting_hall_screen->code }}')
-            .listen('.keypad-event', data => {
-                if(data.keypad !== null) {
-                    if (chart){
-                        chart.destroy();
-                    }
-                    var options = data.keypad.options
-                    Chart.defaults.font.size = 18;
-                    Chart.defaults.color = "#fff";
-                    chart = new Chart(
-                        document.getElementById('options'),
-                        {
-                            type: 'bar',
-                            options: {
-                                animation: false,
-
-                                plugins: {
-                                    ChartDataLabels,
-                                    datalabels: {
-                                        color: '#36A2EB'
-                                    },
-                                    legend: {
-                                        display: false,
-                                    },
-                                    tooltip: {
-                                        enabled: false
-                                    }
-                                },
-                            },
-                            data: {
-                                labels: options.map((row, index) => {
-                                    const options_names = ['A', 'B', 'C', 'D', 'E'];
-                                    return options_names[index % options_names.length] + " - %" + +(options[index].votes_count*100/data.keypad.votes_count).toFixed(2);
-                                }),
-                                datasets: [
-                                    {
-                                        data: options.map((row, index) => {
-                                            return +(options[index].votes_count*100/data.keypad.votes_count).toFixed(2);
-                                        }),
-                                        backgroundColor: options.map((row, index) => {
-                                            const colors = ['red', 'blue', 'green', 'yellow', 'purple'];
-                                            return colors[index % colors.length];
-                                        })
-                                    }
-                                ]
-                            }
-                        }
-                    );
-                    document.getElementById("keypad-title").innerText = data.keypad.keypad;
-                } else {
-                    document.getElementById("options").innerHTML = '...';
-                }
-            });
-    </script>
 @endsection
 @section('body')
     <div class="card text-bg-dark w-100">
@@ -71,23 +15,98 @@
                 <div class="card-body">
                     <canvas id="options" class="w-100 p-3"></canvas>
                     <script type="module">
+                        var chart = Chart.getChart("0");
+                        Echo.channel('service.screen.keypad.{{ $meeting_hall_screen->code }}')
+                            .listen('.keypad-event', data => {
+                                if(data.keypad !== null) {
+                                    if (chart){
+                                        chart.destroy();
+                                    }
+                                    var options = data.keypad.options
+                                    Chart.defaults.font.size = {{ $meeting_hall_screen->font_size }};
+                                    Chart.defaults.color = "{{ $meeting_hall_screen->font_color }}";
+                                    chart = new Chart(
+                                        document.getElementById('options'),
+                                        {
+                                            type: 'bar',
+                                            options: {
+                                                layout: {
+                                                    padding: {
+                                                        top: 40
+                                                    }
+                                                },
+                                                animation: false,
+                                                plugins: {
+                                                    datalabels: {
+                                                        color: '{{ $meeting_hall_screen->font_color }}',
+                                                        align: 'end',
+                                                        anchor: 'end',
+                                                        formatter: function(value, context) {
+                                                            return context.chart.data.labels[context.dataIndex];
+                                                        }
+                                                    },
+                                                    legend: {
+                                                        display: false,
+                                                    },
+                                                    tooltip: {
+                                                        enabled: false
+                                                    },
+                                                }
+                                            },
+                                            data: {
+                                                labels: options.map((row, index) => {
+                                                    const options_names = ['A', 'B', 'C', 'D', 'E'];
+                                                    return options_names[index % options_names.length] + " - %" + +(options[index].votes_count*100/data.keypad.votes_count).toFixed(2);
+                                                }),
+                                                datasets: [
+                                                    {
+                                                        data: options.map((row, index) => {
+                                                            return +(options[index].votes_count*100/data.keypad.votes_count).toFixed(2);
+                                                        }),
+                                                        backgroundColor: options.map((row, index) => {
+                                                            const colors = ['red', 'blue', 'green', 'yellow', 'purple'];
+                                                            return colors[index % colors.length];
+                                                        })
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    );
+                                    document.getElementById("keypad-title").innerText = data.keypad.keypad;
+                                } else {
+                                    document.getElementById("options").innerHTML = '...';
+                                }
+                            });
                         (async function() {
-                            Chart.defaults.font.size = 18;
-                            Chart.defaults.color = "#fff";
+                            Chart.defaults.font.size = {{ $meeting_hall_screen->font_size }};
+                            Chart.defaults.color = "{{ $meeting_hall_screen->font_color }}";
                             var data = @json($options);
-                            new Chart(
+                            chart = new Chart(
                                 document.getElementById('options'),
                                 {
                                     type: 'bar',
                                     options: {
+                                        layout: {
+                                            padding: {
+                                                top: 40
+                                            }
+                                        },
                                         animation: false,
                                         plugins: {
+                                            datalabels: {
+                                                color: '#fff',
+                                                align: 'end',
+                                                anchor: 'end',
+                                                formatter: function(value, context) {
+                                                    return context.chart.data.labels[context.dataIndex];
+                                                }
+                                            },
                                             legend: {
                                                 display: false,
                                             },
                                             tooltip: {
                                                 enabled: false
-                                            }
+                                            },
                                         }
                                     },
                                     data: {

@@ -1,55 +1,5 @@
 @extends('layout.screen.common')
 @section('title', __('common.debate-screen'))
-@section('script')
-    <script type="module">
-        var chart = null;
-        Echo.channel('service.screen.debate.{{ $meeting_hall_screen->code }}')
-            .listen('.debate-event', data => {
-                if(data.debate !== null) {
-                    if (chart){
-                        chart.destroy();
-                    }
-                    var teams = data.debate.teams
-                    Chart.defaults.font.size = 18;
-                    Chart.defaults.color = "#fff";
-                    chart = new Chart(
-                        document.getElementById('teams'),
-                        {
-                            type: 'bar',
-                            teams: {
-                                animation: false,
-                                plugins: {
-                                    legend: {
-                                        display: false,
-                                    },
-                                    tooltip: {
-                                        enabled: false
-                                    }
-                                },
-                            },
-                            data: {
-                                labels: teams.map(row => row.title),
-                                datasets: [
-                                    {
-                                        data: teams.map((row, index) => {
-                                            return teams[index].votes_count;
-                                        }),
-                                        backgroundColor: teams.map((row, index) => {
-                                            const colors = ['red', 'blue', 'green', 'yellow', 'purple'];
-                                            return colors[index % colors.length];
-                                        })
-                                    }
-                                ]
-                            }
-                        }
-                    );
-                    document.getElementById("debate-title").innerText = data.debate.debate;
-                } else {
-                    document.getElementById("teams").innerHTML = '...';
-                }
-            });
-    </script>
-@endsection
 @section('body')
     <div class="card text-bg-dark border-dark w-100">
         <div class="card-header">
@@ -62,24 +12,99 @@
             <div class="card-body">
                 <canvas id="teams" class="w-100 p-3"></canvas>
                 <script type="module">
+                    var chart = null;
+                    Echo.channel('service.screen.debate.{{ $meeting_hall_screen->code }}')
+                        .listen('.debate-event', data => {
+                            if(data.debate !== null) {
+                                if (chart){
+                                    chart.destroy();
+                                }
+                                console.log(data.debate)
+                                var teams = data.debate.teams
+                                Chart.defaults.font.size = {{ $meeting_hall_screen->font_size }};
+                                Chart.defaults.color = "{{ $meeting_hall_screen->font_color }}";
+                                chart = new Chart(
+                                    document.getElementById('teams'),
+                                    {
+                                        type: 'bar',
+                                        options: {
+                                            layout: {
+                                                padding: {
+                                                    top: 40
+                                                }
+                                            },
+                                            animation: false,
+                                            plugins: {
+                                                datalabels: {
+                                                    color: '{{ $meeting_hall_screen->font_color }}',
+                                                    align: 'end',
+                                                    anchor: 'end',
+                                                    formatter: function(value, context) {
+                                                        return  value;
+                                                    }
+                                                },
+                                                legend: {
+                                                    display: false,
+                                                },
+                                                tooltip: {
+                                                    enabled: false
+                                                },
+                                            }
+                                        },
+                                        data: {
+                                            labels: teams.map((row, index) => {
+                                                return teams[index].title;
+                                            }),
+                                            datasets: [
+                                                {
+                                                    data: teams.map((row, index) => {
+                                                        return teams[index].votes_count;
+                                                    }),
+                                                    backgroundColor: teams.map((row, index) => {
+                                                        const colors = ['red', 'blue', 'green', 'yellow', 'purple'];
+                                                        return colors[index % colors.length];
+                                                    })
+                                                }
+                                            ]
+                                        }
+                                    }
+                                );
+                                document.getElementById("debate-title").innerText = data.debate.title;
+                            } else {
+                                document.getElementById("teams").innerHTML = '...';
+                            }
+                        });
                     (async function() {
-                        Chart.defaults.font.size = 18;
-                        Chart.defaults.color = "#fff";
+                        Chart.defaults.font.size = {{ $meeting_hall_screen->font_size }};
+                        Chart.defaults.color = "{{ $meeting_hall_screen->font_color }}";
                         var data = @json($teams);
-                        new Chart(
+                        chart = new Chart(
                             document.getElementById('teams'),
                             {
                                 type: 'bar',
                                 options: {
+                                    layout: {
+                                        padding: {
+                                            top: 40
+                                        }
+                                    },
                                     animation: false,
                                     plugins: {
+                                        datalabels: {
+                                            color: '{{ $meeting_hall_screen->font_color }}',
+                                            align: 'end',
+                                            anchor: 'end',
+                                            formatter: function(value, context) {
+                                                return  value;
+                                            }
+                                        },
                                         legend: {
-                                            display: false
+                                            display: false,
                                         },
                                         tooltip: {
                                             enabled: false
                                         },
-                                    },
+                                    }
                                 },
                                 data: {
                                     labels: data.map(row => row.title),

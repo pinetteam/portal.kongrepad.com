@@ -10,6 +10,8 @@ window.onload = function() {
 }
 // Chart.js
 import Chart from 'chart.js/auto';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+Chart.register(ChartDataLabels);
 window.Chart = Chart;
 
 // Moment & TempusDominus timing packages

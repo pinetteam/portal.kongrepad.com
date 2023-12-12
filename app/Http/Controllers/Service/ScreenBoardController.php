@@ -15,6 +15,8 @@ use App\Http\Requests\Service\ScreenBoard\DocumentScreenRequest;
 use App\Http\Requests\Service\ScreenBoard\KeypadScreenRequest;
 use App\Http\Requests\Service\ScreenBoard\SpeakerScreenRequest;
 use App\Http\Requests\Service\ScreenBoard\TimerScreenRequest;
+use App\Http\Resources\Pusher\Meeting\Hall\Program\Debate\DebateResource;
+use App\Http\Resources\Pusher\Meeting\Hall\Program\Session\Keypad\KeypadResource;
 use App\Models\Meeting\Hall\Hall;
 use App\Models\Meeting\Hall\Screen\Screen;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -149,53 +151,5 @@ class ScreenBoardController extends Controller
         } else {
             return back()->with('error', __('common.a-system-error-has-occurred'));
         }
-    }
-}
-
-class KeypadResource extends JsonResource
-{
-    public function toArray($request)
-    {
-        return [
-            'id' => $this->id,
-            'title' => $this->title,
-            'keypad' => $this->keypad,
-            'options' => OptionResource::collection($this->options),
-            'votes_count' => $this->votes_count,
-        ];
-    }
-}
-class OptionResource extends JsonResource
-{
-    public function toArray($request)
-    {
-        return [
-            'id' => $this->id,
-            'option' => $this->option,
-            'votes_count' => $this->votes_count,
-        ];
-    }
-}
-class DebateResource extends JsonResource
-{
-    public function toArray($request)
-    {
-        return [
-            'id' => $this->id,
-            'title' => $this->title,
-            'options' => TeamResource::collection($this->teams),
-            'votes_count' => $this->votes_count,
-        ];
-    }
-}
-class TeamResource extends JsonResource
-{
-    public function toArray($request)
-    {
-        return [
-            'id' => $this->id,
-            'title' => $this->title,
-            'votes_count' => $this->votes_count,
-        ];
     }
 }
