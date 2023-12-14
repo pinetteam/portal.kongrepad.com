@@ -16,6 +16,13 @@ class VoteController extends Controller
                 'errors' => ["Zaten oy kullandınız!"]
             ];
         }
+        if ($request->user()->meeting->keypads()->get()->where('id', $keypad)->first()->on_vote == 0) {
+            return [
+                'data' => null,
+                'status' => false,
+                'errors' => ["Bu keypad oylaması sona erdi!"]
+            ];
+        }
             $vote = new Vote();
             $vote->option_id = $request->input('option');
             $vote->participant_id = $request->user()->id;

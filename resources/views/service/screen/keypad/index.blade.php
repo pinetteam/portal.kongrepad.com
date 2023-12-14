@@ -42,7 +42,7 @@
                                                         align: 'end',
                                                         anchor: 'end',
                                                         formatter: function(value, context) {
-                                                            return context.chart.data.labels[context.dataIndex];
+                                                            return '%' + value;
                                                         }
                                                     },
                                                     legend: {
@@ -56,7 +56,7 @@
                                             data: {
                                                 labels: options.map((row, index) => {
                                                     const options_names = ['A', 'B', 'C', 'D', 'E'];
-                                                    return options_names[index % options_names.length] + " - %" + +(options[index].votes_count*100/data.keypad.votes_count).toFixed(2);
+                                                    return options_names[index % options_names.length];
                                                 }),
                                                 datasets: [
                                                     {
@@ -98,7 +98,7 @@
                                                 align: 'end',
                                                 anchor: 'end',
                                                 formatter: function(value, context) {
-                                                    return context.chart.data.labels[context.dataIndex];
+                                                    return '%' + value;
                                                 }
                                             },
                                             legend: {
@@ -112,7 +112,7 @@
                                     data: {
                                         labels: data.map((row, index) => {
                                             const options = ['A', 'B', 'C', 'D', 'E'];
-                                            return options[index % options.length] + " - %" + +(data[index].votes_count*100/{{ $keypad ? $keypad->votes_count : 1 }}).toFixed(2);
+                                            return options[index % options.length];
                                         }),
                                         datasets: [
                                             {

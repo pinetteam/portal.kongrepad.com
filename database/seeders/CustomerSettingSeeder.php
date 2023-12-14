@@ -127,6 +127,63 @@ class CustomerSettingSeeder extends Seeder
                 'variable_id' => '11',
                 'value' => '',
             ],
+            [
+                'customer_id' => '4',
+                'variable_id' => '1',
+                'value' => 'https://www.test.com.tr/',
+            ],
+            [
+                'customer_id' => '4',
+                'variable_id' => '2',
+                'value' => 'info@test.com.tr',
+            ],
+            [
+                'customer_id' => '4',
+                'variable_id' => '3',
+                'value' => '+90 (555) 555 5555',
+            ],
+            [
+                'customer_id' => '4',
+                'variable_id' => '4',
+                'value' => '',
+            ],
+
+            [
+                'customer_id' => '4',
+                'variable_id' => '5',
+                'value' => 'Europe/Istanbul',
+            ],
+            [
+                'customer_id' => '4',
+                'variable_id' => '6',
+                'value' => 'Y-m-d H:i',
+            ],
+            [
+                'customer_id' => '4',
+                'variable_id' => '7',
+                'value' => 'Y-m-d',
+            ],
+            [
+                'customer_id' => '4',
+                'variable_id' => '8',
+                'value' => 'H:i:s',
+            ],
+
+            [
+                'customer_id' => '4',
+                'variable_id' => '9',
+                'value' => '',
+            ],
+            [
+                'customer_id' => '4',
+                'variable_id' => '10',
+                'value' => '',
+            ],
+            [
+                'customer_id' => '4',
+                'variable_id' => '11',
+                'value' => '',
+            ],
         ]);
     }
 }

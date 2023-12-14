@@ -37,5 +37,14 @@ class CustomerSeeder extends Seeder
                 'status' => '1',
             ],
         ]);
+        Customer::insert([
+            [
+                'id' => 4,
+                'code' => 'test',
+                'title' => 'Test',
+                'language' => 'en',
+                'status' => '1',
+            ],
+        ]);
     }
 }

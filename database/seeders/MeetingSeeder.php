@@ -34,6 +34,17 @@ class MeetingSeeder extends Seeder
                 'start_at' => '2023-12-16',
                 'finish_at' => '2023-12-17',
                 'status' => 1,
+            ],
+            [
+                'id' => '3',
+                'customer_id' => '4',
+                'code' => 'test',
+                'title' => 'Test Oturumu',
+                'banner_name' => null,
+                'banner_extension' => null,
+                'start_at' => '2023-12-16',
+                'finish_at' => '2023-12-17',
+                'status' => 1,
             ]
         ]);
     }
