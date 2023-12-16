@@ -27,7 +27,7 @@ class MeetingSeeder extends Seeder
             [
                 'id' => '2',
                 'customer_id' => '1',
-                'code' => '2023',
+                'code' => 'vakalarla-interaktif-onkoloji-2023',
                 'title' => 'Vakalarla İnteraktif Onkoloji Toplantısı',
                 'banner_name' => null,
                 'banner_extension' => null,

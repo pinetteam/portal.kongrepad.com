@@ -64,7 +64,10 @@ class MeetingHallSeeder extends Seeder
                 'show_on_send_mail' => 0,
                 'status' => 1,
             ],
+        ]);
+        Hall::insert([
             [
+                'id' => '6',
                 'meeting_id' => '2',
                 'code' => Str::uuid()->toString(),
                 'title' => 'Ana Salon',

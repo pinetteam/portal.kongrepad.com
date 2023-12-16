@@ -7,7 +7,6 @@
         @if($keypad)
             <div class="card-header">
                 <h1 class="text-center p-2">
-                    <span class="fa-regular fa-square-question fa-fade p-2 "></span>
                     <small id="keypad-title">"{{ $keypad->keypad }}"</small>
                 </h1>
             </div>
@@ -55,7 +54,7 @@
                                             },
                                             data: {
                                                 labels: options.map((row, index) => {
-                                                    const options_names = ['A', 'B', 'C', 'D', 'E'];
+                                                    const options_names = ['A', 'B', 'C', 'D', 'E', 'F'];
                                                     return options_names[index % options_names.length];
                                                 }),
                                                 datasets: [
@@ -64,7 +63,7 @@
                                                             return +(options[index].votes_count*100/data.keypad.votes_count).toFixed(2);
                                                         }),
                                                         backgroundColor: options.map((row, index) => {
-                                                            const colors = ['red', 'blue', 'green', 'yellow', 'purple'];
+                                                            const colors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange'];
                                                             return colors[index % colors.length];
                                                         })
                                                     }
@@ -111,7 +110,7 @@
                                     },
                                     data: {
                                         labels: data.map((row, index) => {
-                                            const options = ['A', 'B', 'C', 'D', 'E'];
+                                            const options = ['A', 'B', 'C', 'D', 'E', 'F'];
                                             return options[index % options.length];
                                         }),
                                         datasets: [
@@ -120,7 +119,7 @@
                                                     return +(data[index].votes_count*100/{{ $keypad ? $keypad->votes_count : 1 }}).toFixed(2);
                                                 }),
                                                 backgroundColor: data.map((row, index) => {
-                                                    const colors = ['red', 'blue', 'green', 'yellow', 'purple'];
+                                                    const colors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange'];
                                                     return colors[index % colors.length];
                                                 })
                                             }

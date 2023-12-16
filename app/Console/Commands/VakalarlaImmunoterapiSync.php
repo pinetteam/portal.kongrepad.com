@@ -2,22 +2,23 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Meeting\Meeting;
 use App\Models\Meeting\Participant\Participant;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 
-class IOK2023Sync extends Command
+class VakalarlaImmunoterapiSync extends Command
 {
-    protected $signature = 'app:iok2023-sync';
+    protected $signature = 'app:vakalarla-sync';
 
-    protected $description = 'İmmünoterapi ve Onkoloji Kongresi 2023';
+    protected $description = 'Vakalarla İnteraktif Onkoloji Toplantısı 2023';
 
     public function handle()
     {
         Log::info("---------------------------------------------------------");
         Log::info("Synchronizing started: ".date('d/m/Y H:i:s'));
-        $response = file_get_contents('https://yesilkongre.com/manager/public/api/event/participants?pid=2134&token=Bf2vPiVsDfCesI5ZbsX59femGzqNsgf4mtX96fsV');
+        $response = file_get_contents('https://yesilkongre.com/manager/public/api/event/participants?pid=2351&token=Vn6XBBzLdxW1T1OVGbA0BDS4I9QmQ9Mmk41XTzLm');
         $values = json_decode($response, true);
         foreach ($values as $value) {
             $identification_number = $value['participant_id'];
@@ -53,7 +54,7 @@ class IOK2023Sync extends Command
             Participant::updateOrCreate(
                 ['identification_number' => $identification_number],
                 [
-                    'meeting_id' => 1,
+                    'meeting_id' => Meeting::where('code', 'vakalarla-interaktif-onkoloji-2023')->first()->id,
                     'username' => $username,
                     'title' => $title,
                     'first_name' => $first_name,
@@ -66,7 +67,6 @@ class IOK2023Sync extends Command
                     'password' => $password,
                     'type' => $type,
                     'enrolled' => $enrolled,
-                    'gdpr_consent' => 0,
                     'status' => 1,
                 ]
             );

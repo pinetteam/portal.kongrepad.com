@@ -18,10 +18,10 @@ class SettingController extends Controller
         $setting_groups = Auth::user()->customer->settings()->get()->groupBy('group');
         return view('portal.setting.index', compact(['customer', 'setting_groups']));
     }
-    public function update(Request $request, $setting_id)
+    public function update(Request $request, int $id)
     {
         $customer = Auth::user()->customer;
-        $setting = Auth::user()->customer->settings()->findOrFail($setting_id);
+        $setting = Auth::user()->customer->settings()->findOrFail($id);
         if ($request->has('logo')) {
             $validated = $request->validate([
                 'logo' => 'required|mimes:png',

@@ -2,6 +2,7 @@
 
 namespace App\Models\Customer\Setting;
 
+use App\Models\System\Setting\Variable\Variable;
 use Illuminate\Database\Eloquent\Model;
 
 class Setting extends Model
@@ -22,4 +23,9 @@ class Setting extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
+    public function variable()
+    {
+        return $this->belongsTo(Variable::class, 'variable_id', 'id');
+    }
 }
