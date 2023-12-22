@@ -75,7 +75,7 @@ class Session extends Model
         if ($this->logs()->latest()->where('action','stop')->first() != null && $this->logs()->where('action', 'start')->first() !== null) {
             $started_at = Carbon::parse($this->logs()->latest()->where('action','stop')->first()->created_at);
             $finished_at = Carbon::parse($this->logs()->where('action', 'start')->first()->created_at);
-            return $started_at->diffInMinutes($finished_at) . ':' . $started_at->diffInSeconds($finished_at)%60;
+            return gmdate('H:i:s', $started_at->diffInSeconds($finished_at));
         } else
             return __('common.not-finished-yet');
     }
@@ -93,7 +93,7 @@ class Session extends Model
     }
     public function keypads()
     {
-        return $this->hasMany(Keypad::class,'session_id','id');
+        return $this->hasMany(Keypad::class,'session_id','id')->orderBy('sort_order', 'ASC');
     }
     public function questions()
     {

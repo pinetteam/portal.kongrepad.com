@@ -216,17 +216,24 @@
                                                             <td>{{ $keypad->sort_order }}</td>
                                                             <td>{{ $keypad->keypad }}</td>
                                                             <td>
-                                                                @if($session->on_air)
-                                                                <a href =""  title="{{ __('common.start-stop-voting') }}" data-bs-toggle="modal" data-bs-target="#start-keypad-confirmation-modal" data-route="{{ route('portal.meeting.hall.program.session.keypad.start-stop-voting',['meeting'=>$session->program->hall->meeting_id, 'keypad'=> $keypad->id,'session'=> $session->id,'program'=>$session->program_id, 'hall'=>$session->program->hall_id]) }}" data-record="{{ $keypad->keypad }}" data-start-stop="{{ $keypad->on_vote }}">
-                                                                    @if($keypad->on_vote)
-                                                                        <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
+                                                                <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
+                                                                    @if($session->on_air)
+                                                                    <a href =""  title="{{ __('common.start-stop-voting') }}" data-bs-toggle="modal" data-bs-target="#start-keypad-confirmation-modal" data-route="{{ route('portal.meeting.hall.program.session.keypad.start-stop-voting',['meeting'=>$session->program->hall->meeting_id, 'keypad'=> $keypad->id,'session'=> $session->id,'program'=>$session->program_id, 'hall'=>$session->program->hall_id]) }}" data-record="{{ $keypad->keypad }}" data-start-stop="{{ $keypad->on_vote }}">
+                                                                        @if($keypad->on_vote)
+                                                                            <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
+                                                                        @else
+                                                                            <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
+                                                                        @endif
+                                                                    </a>
                                                                     @else
-                                                                        <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
+                                                                        <i class="text-info">{{ __('common.first-you-should-start-session') }}</i>
                                                                     @endif
-                                                                </a>
-                                                                @else
-                                                                    <i class="text-info">{{ __('common.first-you-should-start-session') }}</i>
-                                                                @endif
+                                                                    @if($keypad->on_vote)
+                                                                    <a href =""  title="{{ __('common.resend-voting') }}" data-bs-toggle="modal" data-bs-target="#start-keypad-confirmation-modal" data-route="{{ route('portal.meeting.hall.program.session.keypad.resend-voting',['meeting'=>$session->program->hall->meeting_id, 'keypad'=> $keypad->id,'session'=> $session->id,'program'=>$session->program_id, 'hall'=>$session->program->hall_id]) }}" data-record="{{ $keypad->keypad }}" data-start-stop="{{ $keypad->on_vote }}">
+                                                                        <i style="color:red" class="fa-regular fa-recycle fa-xg"></i>
+                                                                    </a>
+                                                                    @endif
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -267,7 +274,7 @@
                                     const button = event.relatedTarget;
                                     if(button) {
                                         confirmationFormSubmit.disabled = true;
-                                        waitForSeconds = 3;
+                                        waitForSeconds = 1;
                                         clearInterval(countdown);
                                         document.getElementById('start-keypad-confirmation-form').action = button.getAttribute('data-route');
                                         confirmationModal.querySelector('#start-keypad-confirmation-record').textContent = button.getAttribute('data-record');
@@ -322,7 +329,7 @@
                                 const button = event.relatedTarget;
                                 if(button) {
                                     confirmationFormSubmit.disabled = true;
-                                    waitForSeconds = 3;
+                                    waitForSeconds = 1;
                                     clearInterval(countdown);
                                     document.getElementById('start-session-confirmation-form').action = button.getAttribute('data-route');
                                     confirmationModal.querySelector('#start-session-confirmation-record').textContent = button.getAttribute('data-record');
@@ -419,7 +426,7 @@
                                 const button = event.relatedTarget;
                                 if(button) {
                                     confirmationFormSubmit.disabled = true;
-                                    waitForSeconds = 3;
+                                    waitForSeconds = 1;
                                     clearInterval(countdown);
                                     document.getElementById('start-debate-confirmation-form').action = button.getAttribute('data-route');
                                     confirmationModal.querySelector('#start-debate-confirmation-record').textContent = button.getAttribute('data-record');

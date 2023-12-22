@@ -78,6 +78,7 @@ class KeypadController extends Controller
                 continue;
             $keypad = Auth::user()->customer->keypads()->findOrFail($keypad->id);
             $keypad->on_vote = 0;
+            $keypad->voting_finished_at = now()->format('Y-m-d H:i');
             $keypad->save();
         }
         $keypad = Auth::user()->customer->keypads()->findOrFail($id);
@@ -85,7 +86,7 @@ class KeypadController extends Controller
         if ($keypad->save()) {
             event(new KeypadEvent(hall: $hall, on_vote: $keypad->on_vote));
             if($keypad->on_vote){
-                $keypad->voting_started_at = now()->format('Y-m-d H:i');;
+                $keypad->voting_started_at = now()->format('Y-m-d H:i');
                 $keypad->voting_finished_at = null;
                 $keypad->save();
                 if ($meeting->participants->where('type', 'attendee')->count() > 0){
@@ -94,12 +95,23 @@ class KeypadController extends Controller
                 return back()->with('success', __('common.voting-started'));
             }
             else{
-                $keypad->voting_finished_at = now()->format('Y-m-d H:i');;
+                $keypad->voting_finished_at = now()->format('Y-m-d H:i');
                 $keypad->save();
                 return back()->with('success', __('common.voting-stopped'));
             }
         } else {
             return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
+        }
+    }
+    public function resend_voting(int $meeting, int $hall, int $program, int $session, int $id)
+    {
+        $hall = Auth::user()->customer->halls()->findOrFail($hall);
+        $keypad = Auth::user()->customer->keypads()->findOrFail($id);
+        try {
+            event(new KeypadEvent(hall: $hall, on_vote: $keypad->on_vote));
+            return back()->with('success', __('common.voting-resend'));
+        } catch (\Throwable $e) {
+            return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();
         }
     }
 }

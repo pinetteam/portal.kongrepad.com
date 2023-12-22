@@ -155,6 +155,7 @@ return [
     'show' => 'Show',
     'create' => 'Create',
     'edit' => 'Edit',
+    'update' => 'Update',
     'delete' => 'Delete',
     'close' => 'Close',
     'title' => 'Title',
@@ -306,4 +307,6 @@ return [
     'anonymous' => 'Anonymous',
     'not-finished-yet' => 'Not finished yet',
     'not-started-yet' => 'Not started yet',
+    'first-you-should-start-session' => 'First you should start session',
+    'resend-voting' => 'Resend voting',
 ];

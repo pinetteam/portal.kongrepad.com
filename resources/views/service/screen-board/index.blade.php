@@ -46,7 +46,7 @@
                                                 @enderror
                                             </div>
                                             <div class="col-lg-4 form-group mb-3">
-                                                <button type="submit" class="btn btn-success w-75" id="create-form-submit-{{ $screen->id }}">{{ __('common.edit') }}</button>
+                                                <button type="submit" class="btn btn-success w-75" id="create-form-submit-{{ $screen->id }}">{{ __('common.update') }}</button>
                                             </div>
                                         </div>
                                     </form>
@@ -72,7 +72,7 @@
                                             @enderror
                                         </div>
                                         <div class="col-lg-4 form-group mb-3">
-                                            <button type="submit" class="btn btn-success w-75" id="create-form-submit-{{ $screen->id }}">{{ __('common.edit') }}</button>
+                                            <button type="submit" class="btn btn-success w-75" id="create-form-submit-{{ $screen->id }}">{{ __('common.update') }}</button>
                                         </div>
                                     </div>
                                     </form>
@@ -98,7 +98,7 @@
                                             @enderror
                                         </div>
                                         <div class="col-lg-4 form-group mb-3">
-                                            <button type="submit" class="btn btn-success w-75" id="create-form-submit-{{ $screen->id }}">{{ __('common.edit') }}</button>
+                                            <button type="submit" class="btn btn-success w-75" id="create-form-submit-{{ $screen->id }}">{{ __('common.update') }}</button>
                                         </div>
                                     </div>
                                 </form>
@@ -124,7 +124,7 @@
                                                 @enderror
                                             </div>
                                             <div class="col-lg-4 form-group mb-3">
-                                                <button type="submit" class="btn btn-success w-75" id="create-form-submit-{{ $screen->id }}">{{ __('common.edit') }}</button>
+                                                <button type="submit" class="btn btn-success w-75" id="create-form-submit-{{ $screen->id }}">{{ __('common.update') }}</button>
                                             </div>
                                         </div>
                                     </form>
@@ -150,7 +150,7 @@
                                                 @enderror
                                             </div>
                                             <div class="col-lg-4 form-group mb-3">
-                                                <button type="submit" class="btn btn-success w-75" id="create-form-submit-{{ $screen->id }}">{{ __('common.edit') }}</button>
+                                                <button type="submit" class="btn btn-success w-75" id="create-form-submit-{{ $screen->id }}">{{ __('common.update') }}</button>
                                             </div>
                                         </div>
                                     </form>

@@ -121,6 +121,7 @@ Route::prefix('portal')->name('portal.')->group(function () {
                         Route::resource('/keypad', \App\Http\Controllers\Portal\Meeting\Hall\Program\Session\Keypad\KeypadController::class)->except(['index', 'create']);
                         Route::resource('/question', \App\Http\Controllers\Portal\Meeting\Hall\Program\Session\Question\QuestionController::class)->only(['destroy']);
                         Route::get('/start-stop-keypad-voting/{keypad}', [\App\Http\Controllers\Portal\Meeting\Hall\Program\Session\Keypad\KeypadController::class,'start_stop_voting'])->name('keypad.start-stop-voting');
+                        Route::get('/resend-keypad-voting/{keypad}', [\App\Http\Controllers\Portal\Meeting\Hall\Program\Session\Keypad\KeypadController::class,'resend_voting'])->name('keypad.resend-voting');
                         Route::prefix('/keypad/{keypad}')->name('keypad.')->group(function () {
                             Route::resource('/option', \App\Http\Controllers\Portal\Meeting\Hall\Program\Session\Keypad\Option\OptionController::class)->except(['create']);
                         });
