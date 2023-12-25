@@ -91,7 +91,7 @@ class DebateController extends Controller
         if ($debate->save()) {
             event(new DebateEvent($hall, $debate->on_vote));
             if($debate->on_vote){
-                $debate->voting_started_at = now()->format('Y-m-d H:i');;
+                $debate->voting_started_at = now()->format('Y-m-d H:i');
                 $debate->voting_finished_at = null;
                 $debate->save();
                 $meeting_hall_screen = $hall->screens()->where('type', 'speaker')->first();

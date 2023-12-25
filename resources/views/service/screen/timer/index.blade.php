@@ -4,9 +4,14 @@
     <script type="module">
         let stopwatch = document.getElementById('stopwatch');
 
-        let totalTime = 600;
+        let totalTime = {{ $meeting_hall_screen->timer->status == 1 ? $meeting_hall_screen->timer->time_left - Carbon::now()->timestamp + $meeting_hall_screen->timer->started_at : $meeting_hall_screen->timer->time_left }};
         let tInterval;
         let running = false;
+        if ({{ $meeting_hall_screen->timer->status }} === 1) {
+            tInterval = setInterval(updateTime, 1000);
+            running = true;
+        }
+
 
         function updateTime() {
             totalTime--;
@@ -41,13 +46,16 @@
         updateDisplay();
         Echo.channel('service.screen.timer.{{ $meeting_hall_screen->code }}')
             .listen('.timer-event', data => {
-                if(data.action === 'restart') {
+                if(data.action === 'reset') {
                     clearInterval(tInterval);
-                    totalTime = data.time * 60;
+                    totalTime = data.time;
                     updateDisplay();
+                    running = false;
                 } else if (data.action === 'stop'){
                     if (running) {
                         clearInterval(tInterval);
+                        totalTime = data.time;
+                        updateDisplay();
                         running = false;
                     }
                 }else if (data.action === 'start'){

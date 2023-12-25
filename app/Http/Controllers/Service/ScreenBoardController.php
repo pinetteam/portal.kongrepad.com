@@ -19,6 +19,7 @@ use App\Http\Resources\Pusher\Meeting\Hall\Program\Debate\DebateResource;
 use App\Http\Resources\Pusher\Meeting\Hall\Program\Session\Keypad\KeypadResource;
 use App\Models\Meeting\Hall\Hall;
 use App\Models\Meeting\Hall\Screen\Screen;
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ScreenBoardController extends Controller
@@ -142,10 +143,29 @@ class ScreenBoardController extends Controller
     {
         if ($request->validated()) {
             $screen = Screen::where('code', $code)->first();
-            if ($request->input('time') != null) {
-                event(new TimerEvent($screen, $request->input('time'), $action));
-            } else {
-                event(new TimerEvent($screen, 0, $action));
+            $timer = $screen->timer;
+            if ($action == 'reset') {
+                $timer->time_left = $timer->time;
+                $timer->status = 0;
+                $timer->save();
+                event(new TimerEvent($screen, $timer->time_left, 'reset'));
+            } else  if ($action == 'start') {
+                $timer->started_at = Carbon::now()->timestamp;
+                $timer->status = 1;
+                $timer->save();
+                event(new TimerEvent($screen, $timer->time_left, $action));
+            } else  if ($action == 'stop') {
+                $now = Carbon::now()->timestamp;
+                $timer->time_left = $timer->time_left - $now + $timer->started_at;
+                $timer->status = 0;
+                $timer->save();
+                event(new TimerEvent($screen, $timer->time_left, 'stop'));
+            } else  if ($action == 'edit') {
+                $timer->time = $request->input('time')*60;
+                $timer->time_left = $timer->time;
+                $timer->status = 0;
+                $timer->save();
+                event(new TimerEvent($screen, $timer->time_left, 'reset'));
             }
             return back()->with('success', __('common.edited-successfully'));
         } else {

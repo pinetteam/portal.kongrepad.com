@@ -5,6 +5,7 @@ namespace App\Models\Meeting\Hall\Screen;
 use App\Models\Meeting\Hall\Hall;
 use App\Models\Meeting\Hall\Program\Debate\Debate;
 use App\Models\Meeting\Hall\Program\Session\Keypad\Keypad;
+use App\Models\Meeting\Hall\Screen\Timer\Timer;
 use App\Models\Meeting\Participant\Participant;
 use App\Models\User\User;
 use Illuminate\Database\Eloquent\Model;
@@ -48,6 +49,10 @@ class Screen extends Model
     public function hall()
     {
         return $this->belongsTo(Hall::class, 'hall_id', 'id');
+    }
+    public function timer()
+    {
+        return $this->hasOne(Timer::class, 'screen_id', 'id');
     }
     public function getCurrentObjectNameAttribute()
     {

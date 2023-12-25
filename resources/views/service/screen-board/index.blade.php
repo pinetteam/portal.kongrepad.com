@@ -157,7 +157,7 @@
                                 @elseif($screen->type == 'timer')
                                     <div class="row justify-content-start align-items-center">
                                         <div class="col-lg-6 form-group mb-3">
-                                            <form method="POST" action="{{ route('service.screen-board.timer-screen', ['code' => $screen->code, 'action' => 'restart']) }}" name="create-form-{{ $screen->id }}" id="create-form-{{ $screen->id }}" enctype="multipart/form-data" autocomplete="nope">
+                                            <form method="POST" action="{{ route('service.screen-board.timer-screen', ['code' => $screen->code, 'action' => 'edit']) }}" name="create-form-{{ $screen->id }}" id="create-form-{{ $screen->id }}" enctype="multipart/form-data" autocomplete="nope">
                                                 <div class="container-fluid">
                                                     @csrf
                                                     <x-input.hidden name="time" :value="0" />
@@ -182,6 +182,11 @@
                                                         @csrf
                                                         <x-input.hidden name="time" :value="null" />
                                                         <button type="submit" class="btn btn-danger w-100" id="create-form-submit-{{ $screen->id }}"><span class="fa-regular fa-stop"></span></button>
+                                                </form>
+                                                <form method="POST" action="{{ route('service.screen-board.timer-screen', ['code' => $screen->code, 'action' => 'reset']) }}" name="stop-form-{{ $screen->id }}" id="stop-form-{{ $screen->id }}" enctype="multipart/form-data" autocomplete="nope">
+                                                        @csrf
+                                                        <x-input.hidden name="time" :value="null" />
+                                                        <button type="submit" class="btn btn-warning w-100" id="create-form-submit-{{ $screen->id }}"><span class="fa-regular fa-power-off"></span></button>
                                                 </form>
                                             </div>
                                         </div>
