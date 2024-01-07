@@ -6,7 +6,7 @@ use App\Models\Meeting\Hall\Screen\Screen;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
-class ScreenSeeder extends Seeder
+class MeetingHallScreenSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -81,14 +81,6 @@ class ScreenSeeder extends Seeder
                 'status' => 1,
             ],
             [
-                'hall_id' => '3',
-                'code' => Str::uuid()->toString(),
-                'title' => 'Timer Screen',
-                'description' => 'Timer Screen',
-                'type' => 'timer',
-                'status' => 1,
-            ],
-            [
                 'hall_id' => '6',
                 'code' => Str::uuid()->toString(),
                 'title' => 'Chair 1 Screen',
@@ -152,8 +144,19 @@ class ScreenSeeder extends Seeder
                 'type' => 'debate',
                 'status' => 1,
             ],
+        ]);
+        Screen::insert([
             [
-                'hall_id' => '6',
+                'id' => '17',
+                'hall_id' => '3',
+                'code' => Str::uuid()->toString(),
+                'title' => 'Timer Screen',
+                'description' => 'Timer Screen',
+                'type' => 'timer',
+                'status' => 1,
+            ],
+            [
+                'id' => '18',
                 'code' => Str::uuid()->toString(),
                 'title' => 'Timer Screen',
                 'description' => 'Timer Screen',

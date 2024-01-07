@@ -21,6 +21,7 @@ return new class extends Migration
             $table->binary('icon')->nullable();
             $table->binary('logo')->nullable();
             $table->enum('language', ['en', 'tr'])->default('en');
+            $table->enum('type', ['demo', 'full_access'])->default('full_access');
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
             $table->timestamps();
             $table->softDeletes();

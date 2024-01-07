@@ -185,7 +185,6 @@ return [
     'chairs' => 'Chairs',
     'teams' => 'Teams',
     'speaker' => 'Speaker',
-    'current-speaker' => 'Current Speaker',
     'current-chair' => 'Current Chair',
     'add-new-chair' => 'Add New Chair',
     'show-qr-code' => 'Show Qr Code',
@@ -309,4 +308,6 @@ return [
     'not-started-yet' => 'Not started yet',
     'first-you-should-start-session' => 'First you should start session',
     'resend-voting' => 'Resend voting',
+    'repeat-password' => 'Repeat password',
+    'demo-request' => 'Demo request',
 ];

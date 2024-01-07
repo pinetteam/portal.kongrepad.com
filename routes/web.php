@@ -55,11 +55,13 @@ Route::prefix('/service')->name('service.')->group(function () {
     });
 });
 
+Route::resource('/demo', \App\Http\Controllers\License\LicenseController::class)->except(['create']);;
 Route::prefix('portal')->name('portal.')->group(function () {
     //Route::group(["middleware" => ['auth','user.role.control']], function () {
     Route::group(["middleware" => ['auth']], function () {
         // Main routes
         Route::get('/', [\App\Http\Controllers\Portal\DashboardController::class, 'index'])->name('dashboard.index');
+        // Demo Request routes
         // Meeting routes
         Route::resource('/meeting', \App\Http\Controllers\Portal\Meeting\MeetingController::class)->except(['create']);
         Route::prefix('meeting')->name('meeting.')->group(function () {

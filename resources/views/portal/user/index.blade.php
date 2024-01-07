@@ -81,7 +81,7 @@
     <x-crud.form.common.create name="user">
         @section('user-create-form')
             <x-input.select method="c" name="user_role_id" title="user-role" :options="$user_roles" option_value="id" option_name="title" icon="person-military-pointing" />
-            <x-input.text method="c" name="username" title="username" icon="id-card-clip" />
+            <x-input.text method="c" name="username" title="username" icon="user" />
             <x-input.text method="c" name="first_name" title="first-name" icon="id-card" />
             <x-input.text method="c" name="last_name" title="last-name" icon="id-card" />
             <x-input.email method="c" name="email" title="email" icon="envelope" />
@@ -95,7 +95,7 @@
     <x-crud.form.common.edit name="user">
         @section('user-edit-form')
             <x-input.select method="e" name="user_role_id" title="user-role" :options="$user_roles" option_value="id" option_name="title" icon="person-military-pointing" />
-            <x-input.text method="e" name="username" title="username" icon="id-card-clip" />
+            <x-input.text method="e" name="username" title="username" icon="user" />
             <x-input.text method="e" name="first_name" title="first-name" icon="id-card" />
             <x-input.text method="e" name="last_name" title="last-name" icon="id-card" />
             <x-input.email method="e" name="email" title="email" icon="envelope" />

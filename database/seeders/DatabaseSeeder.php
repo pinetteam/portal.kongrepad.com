@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ScoreGameSeeder::class);
         $this->call(MeetingParticipantSeeder::class);
         $this->call(MeetingHallSeeder::class);
-        $this->call(ScreenSeeder::class);
+        $this->call(MeetingHallScreenSeeder::class);
         $this->call(MeetingHallProgramSeeder::class);
         $this->call(MeetingHallProgramSessionSeeder::class);
         $this->call(MeetingHallProgramSessionKeypadQuestionSeeder::class);

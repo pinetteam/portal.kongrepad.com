@@ -456,40 +456,47 @@
                     <div class="container-fluid">
                     <h2 class="m-0 text-center ">{{ __('common.timer-screen') }}</h2>
                         @isset($timer_screen)
-                        <div class="row justify-content-center">
-                            <div class="col-lg-5 form-group mb-3">
-                                <form method="POST" action="{{ route('service.screen-board.timer-screen', ['code' => $timer_screen->code, 'action' => 'restart']) }}" name="create-form-{{ $timer_screen->id }}" id="create-form-{{ $timer_screen->id }}" enctype="multipart/form-data" autocomplete="nope">
-                                    <div class="container-fluid">
-                                        @csrf
-                                        <x-input.hidden name="time" :value="0" />
-                                        <input type="number" name="time" class="form-control text-center @error('time')is-invalid @enderror" id="c-time" placeholder="{{ __('common.time') }}" min="0" autocomplete="false" />
-                                        @error('time')
-                                        <div class="invalid-feedback d-block">
-                                            <i class="fa-regular fa-triangle-exclamation"></i> {{ $message }}
+                            <div class="row justify-content-start align-items-center">
+                                <div class="col-lg-6 form-group mb-3">
+                                    <form method="POST" action="{{ route('service.screen-board.timer-screen', ['code' => $timer_screen->code, 'action' => 'edit']) }}" name="create-form-{{ $timer_screen->id }}" id="create-form-{{ $timer_screen->id }}" enctype="multipart/form-data" autocomplete="nope">
+                                        <div class="container-fluid">
+                                            @csrf
+                                            <x-input.hidden name="time" :value="0" />
+                                            <input type="number" name="time" class="form-control @error('time')is-invalid @enderror" id="c-time" placeholder="{{ __('common.time') }}" min="0" autocomplete="false" />
+                                            @error('time')
+                                            <div class="invalid-feedback d-block">
+                                                <i class="fa-regular fa-triangle-exclamation"></i> {{ $message }}
+                                            </div>
+                                            @enderror
+                                            <button type="submit" class="btn btn-success w-75" id="create-form-submit-{{ $timer_screen->id }}">{{ __('common.reset') }}</button>
                                         </div>
-                                        @enderror
-                                        <button type="submit" class="btn btn-success w-100" id="create-form-submit-{{ $timer_screen->id }}">{{ __('common.reset') }}</button>
+                                    </form>
+                                </div>
+                                <div class="col-lg-6 form-group">
+                                    <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
+                                        <form method="POST" action="{{ route('service.screen.timer.index', ['meeting_hall_screen_code' => $timer_screen->code]) }}" name="index-{{ $timer_screen->id }}" id="index-{{ $timer_screen->id }}" enctype="multipart/form-data" autocomplete="nope">
+                                            @csrf
+                                            <x-input.hidden name="time" :value="null" />
+                                            <button type="submit" class="btn btn-primary w-100" id="create-form-submit-{{ $timer_screen->id }}"><span class="fa-regular fa-presentation-screen"></span></button>
+                                        </form>
+                                        <form method="POST" action="{{ route('service.screen-board.timer-screen', ['code' => $timer_screen->code, 'action' => 'start']) }}" name="start-form-{{ $timer_screen->id }}" id="start-form-{{ $timer_screen->id }}" enctype="multipart/form-data" autocomplete="nope">
+                                            @csrf
+                                            <x-input.hidden name="time" :value="null" />
+                                            <button type="submit" class="btn btn-success w-100" id="create-form-submit-{{ $timer_screen->id }}"><span class="fa-regular fa-play"></span></button>
+                                        </form>
+                                        <form method="POST" action="{{ route('service.screen-board.timer-screen', ['code' => $timer_screen->code, 'action' => 'stop']) }}" name="stop-form-{{ $timer_screen->id }}" id="stop-form-{{ $timer_screen->id }}" enctype="multipart/form-data" autocomplete="nope">
+                                            @csrf
+                                            <x-input.hidden name="time" :value="null" />
+                                            <button type="submit" class="btn btn-danger w-100" id="create-form-submit-{{ $timer_screen->id }}"><span class="fa-regular fa-stop"></span></button>
+                                        </form>
+                                        <form method="POST" action="{{ route('service.screen-board.timer-screen', ['code' => $timer_screen->code, 'action' => 'reset']) }}" name="stop-form-{{ $timer_screen->id }}" id="stop-form-{{ $timer_screen->id }}" enctype="multipart/form-data" autocomplete="nope">
+                                            @csrf
+                                            <x-input.hidden name="time" :value="null" />
+                                            <button type="submit" class="btn btn-warning w-100" id="create-form-submit-{{ $timer_screen->id }}"><span class="fa-regular fa-power-off"></span></button>
+                                        </form>
                                     </div>
-                                </form>
-                            </div>
-                            <div class="col-lg-5 form-group">
-                                <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
-                                    <form method="POST" action="{{ route('service.screen-board.timer-screen', ['code' => $timer_screen->code, 'action' => 'start']) }}" name="start-form-{{ $timer_screen->id }}" id="start-form-{{ $timer_screen->id }}" enctype="multipart/form-data" autocomplete="nope">
-                                        @csrf
-                                        <x-input.hidden name="time" :value="null" />
-                                        <button type="submit" class="btn btn-success w-100" id="create-form-submit-{{ $timer_screen->id }}"><span class="fa-regular fa-play"></span></button>
-                                    </form>
-                                    <form method="POST" action="{{ route('service.screen-board.timer-screen', ['code' => $timer_screen->code, 'action' => 'stop']) }}" name="stop-form-{{ $timer_screen->id }}" id="stop-form-{{ $timer_screen->id }}" enctype="multipart/form-data" autocomplete="nope">
-                                        @csrf
-                                        <x-input.hidden name="time" :value="null" />
-                                        <button type="submit" class="btn btn-danger w-100" id="create-form-submit-{{ $timer_screen->id }}"><span class="fa-regular fa-stop"></span></button>
-                                    </form>
-                                    <a class="btn btn-outline-success btn-sm" href="{{ route('service.screen.timer.index', ['meeting_hall_screen_code' => $timer_screen->code]) }}" title="{{ __('common.timer') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.timer') }}" target="_blank">
-                                        <span class="fa-regular fa-tv"></span>
-                                    </a>
                                 </div>
                             </div>
-                        </div>
                         @endisset
                     <h2 class="m-0 text-center h3"><div id="time"></div></h2>
                     </div>
