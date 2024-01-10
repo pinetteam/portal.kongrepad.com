@@ -11,6 +11,10 @@ class ScoreGameController extends Controller
     public function index(Request $request)
     {
         try{
+            $log = new \App\Models\Log\Meeting\Participant\Participant();
+            $log->participant_id = $request->user()->id;
+            $log->action = "get-score-game";
+            $log->save();
             return [
                 'data' => new ScoreGameResource($request->user()->meeting->scoreGames()->first()),
                 'status' => true,

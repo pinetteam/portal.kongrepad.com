@@ -23,6 +23,10 @@ class VoteController extends Controller
             $vote->debate_id = $debate;
             try{
                 $vote->save();
+                $log = new \App\Models\Log\Meeting\Participant\Participant();
+                $log->participant_id = $request->user()->id;
+                $log->action = "send-debate-vote";
+                $log->save();
                 return [
                     'data' => null,
                     'status' => true,

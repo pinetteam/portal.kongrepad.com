@@ -12,6 +12,10 @@ class VoteController extends Controller
 
         $survey = $request->user()->meeting->surveys()->findOrFail($survey);
         $options = explode(',', str_replace(['[',"]"],"",$request->input('options')));
+        $log = new \App\Models\Log\Meeting\Participant\Participant();
+        $log->participant_id = $request->user()->id;
+        $log->action = "vote-survey";
+        $log->save();
         foreach ($options as $option){
             $vote = new Vote();
             $vote->option_id = $option;

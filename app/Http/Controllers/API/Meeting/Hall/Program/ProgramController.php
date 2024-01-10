@@ -23,6 +23,10 @@ class ProgramController extends Controller
             foreach(json_decode($programs, true) as $key => $val) {
                 array_push($result, ['day' => $key, 'programs' => $val]);
             }
+            $log = new \App\Models\Log\Meeting\Participant\Participant();
+            $log->participant_id = $request->user()->id;
+            $log->action = "get-programs";
+            $log->save();
             return [
                 'data' => $result,
                 'status' => true,

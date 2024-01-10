@@ -26,6 +26,10 @@ class QuestionController extends Controller
         $question->is_hidden_name = $request->input('is_hidden_name');
         $question->question = $request->input('question');
         try{
+            $log = new \App\Models\Log\Meeting\Participant\Participant();
+            $log->participant_id = $request->user()->id;
+            $log->action = "ask-question";
+            $log->save();
             return [
                 'data' => $question->save() && event(new QuestionBoardEvent($meeting_hall)),
                 'status' => true,

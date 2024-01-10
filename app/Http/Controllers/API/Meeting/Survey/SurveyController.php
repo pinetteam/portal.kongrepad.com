@@ -11,6 +11,10 @@ class SurveyController extends Controller
     public function index(Request $request)
     {
         try{
+            $log = new \App\Models\Log\Meeting\Participant\Participant();
+            $log->participant_id = $request->user()->id;
+            $log->action = "get-surveys";
+            $log->save();
             return [
                 'data' => SurveyResource::collection( $request->user()->meeting->surveys()->get())->additional(['some_id => 1']),
                 'status' => true,
@@ -27,6 +31,10 @@ class SurveyController extends Controller
     public function show(Request $request, string $id)
     {
         try{
+            $log = new \App\Models\Log\Meeting\Participant\Participant();
+            $log->participant_id = $request->user()->id;
+            $log->action = "get-survey";
+            $log->save();
             return [
                 'data' => new SurveyResource( $request->user()->meeting->surveys()->findOrFail($id)),
                 'status' => true,

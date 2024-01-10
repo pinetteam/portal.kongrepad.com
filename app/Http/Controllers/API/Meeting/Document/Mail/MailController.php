@@ -24,6 +24,10 @@ class MailController extends Controller
                 ];
             }
         }
+        $log = new \App\Models\Log\Meeting\Participant\Participant();
+        $log->participant_id = $request->user()->id;
+        $log->action = "send-mail";
+        $log->save();
         return [
             'data' => null,
             'status' => true,
@@ -56,6 +60,10 @@ class MailController extends Controller
         try{
             $participant->requested_all_documents = 1;
             $participant->save();
+            $log = new \App\Models\Log\Meeting\Participant\Participant();
+            $log->participant_id = $request->user()->id;
+            $log->action = "send-all-mail";
+            $log->save();
         } catch (\Throwable $e){
             return [
                 'data' => null,

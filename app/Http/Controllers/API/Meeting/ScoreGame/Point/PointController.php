@@ -13,6 +13,10 @@ class PointController extends Controller
     public function index(Request $request, int $score_game)
     {
         try{
+            $log = new \App\Models\Log\Meeting\Participant\Participant();
+            $log->participant_id = $request->user()->id;
+            $log->action = "get-score-game-points";
+            $log->save();
             return [
                 'data' => PointResource::collection($request->user()->meeting->scoreGames()->first()->points()->get()->where('participant_id', $request->user()->id)),
                 'status' => true,
@@ -29,6 +33,10 @@ class PointController extends Controller
     public function store(Request $request, int $score_game)
     {
 
+        $log = new \App\Models\Log\Meeting\Participant\Participant();
+        $log->participant_id = $request->user()->id;
+        $log->action = "scan-qr-code";
+        $log->save();
         if($request->user()->meeting->qrCodes()->get()->where('code', $request->input('code'))->count() == 0){
             return [
                 'data' => null,

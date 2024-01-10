@@ -11,6 +11,10 @@ class VirtualStandController extends Controller
     public function index(Request $request)
     {
         try{
+            $log = new \App\Models\Log\Meeting\Participant\Participant();
+            $log->participant_id = $request->user()->id;
+            $log->action = "get-virtual-stands";
+            $log->save();
             return [
                 'data' => VirtualStandResource::collection($request->user()->meeting->virtualStands()->where('meeting_virtual_stands.status', 1)->get())->shuffle(),
                 'status' => true,
@@ -27,6 +31,10 @@ class VirtualStandController extends Controller
     public function show(Request $request, string $id)
     {
         try{
+            $log = new \App\Models\Log\Meeting\Participant\Participant();
+            $log->participant_id = $request->user()->id;
+            $log->action = "get-virtual-stand";
+            $log->save();
             return [
                 'data' => new VirtualStandResource($request->user()->meeting->virtualStands()->where('meeting_virtual_stands.id',$id)->first()),
                 'status' => true,

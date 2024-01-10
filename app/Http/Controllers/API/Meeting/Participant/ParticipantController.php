@@ -11,6 +11,10 @@ class ParticipantController extends Controller
     public function index(Request $request)
     {
         try{
+            $log = new \App\Models\Log\Meeting\Participant\Participant();
+            $log->participant_id = $request->user()->id;
+            $log->action = "get-participant";
+            $log->save();
             return [
                 'data' => new ParticipantResource($request->user()),
                 'status' => true,

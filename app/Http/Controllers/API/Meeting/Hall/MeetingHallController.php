@@ -15,6 +15,10 @@ class MeetingHallController extends Controller
     public function index(Request $request)
     {
         try{
+            $log = new \App\Models\Log\Meeting\Participant\Participant();
+            $log->participant_id = $request->user()->id;
+            $log->action = "get-halls";
+            $log->save();
             return [
                 'data' => HallResource::collection($request->user()->meeting->halls()->get()),
                 'status' => true,
@@ -33,6 +37,10 @@ class MeetingHallController extends Controller
     public function show(Request $request, int $id)
     {
         try{
+            $log = new \App\Models\Log\Meeting\Participant\Participant();
+            $log->participant_id = $request->user()->id;
+            $log->action = "get-hall";
+            $log->save();
             return [
                 'data' => new HallResource($request->user()->meeting->halls()->findOrFail($id)),
                 'status' => true,
@@ -58,6 +66,10 @@ class MeetingHallController extends Controller
         }
         $keypad = $session->keypads()->where('on_vote', 1)->first();
         $result = [];
+        $log = new \App\Models\Log\Meeting\Participant\Participant();
+        $log->participant_id = $request->user()->id;
+        $log->action = "get-active-keypad";
+        $log->save();
         if(isset($keypad)) {
             $result['data'] = new KeypadResource($keypad);
             $result['status'] = true;
@@ -75,6 +87,10 @@ class MeetingHallController extends Controller
         $meeting_hall =  $request->user()->meeting->halls()->where("meeting_halls.id", $id)->first();
         $debate = $meeting_hall->debates()->where('on_vote', 1)->first();
         $result = [];
+        $log = new \App\Models\Log\Meeting\Participant\Participant();
+        $log->participant_id = $request->user()->id;
+        $log->action = "get-active-debate";
+        $log->save();
         if(isset($debate)) {
             $result['data'] = new DebateResource($debate);
             $result['status'] = true;
@@ -92,6 +108,10 @@ class MeetingHallController extends Controller
         $meeting_hall = $request->user()->meeting->halls()->findOrFail($id);
         $session = $meeting_hall->programSessions()->where('on_air', 1)->first();
         $result = [];
+        $log = new \App\Models\Log\Meeting\Participant\Participant();
+        $log->participant_id = $request->user()->id;
+        $log->action = "get-active-document";
+        $log->save();
         if(isset($session)) {
             if(isset($session->document)) {
                 $result['data'] = new DocumentResource($session->document);

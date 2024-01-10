@@ -10,6 +10,10 @@ class ProgramSessionController extends Controller
 {
     public function index(Request $request, int $program){
         try{
+            $log = new \App\Models\Log\Meeting\Participant\Participant();
+            $log->participant_id = $request->user()->id;
+            $log->action = "get-sessions";
+            $log->save();
             return [
                 'data' => SessionResource::collection($request->user()->meeting->programs()->findOrFail($program)->sessions),
                 'status' => true,

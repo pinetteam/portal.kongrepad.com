@@ -12,6 +12,10 @@ class AnnouncementController extends Controller
     {
 
         try{
+            $log = new \App\Models\Log\Meeting\Participant\Participant();
+            $log->participant_id = $request->user()->id;
+            $log->action = "get-announcements";
+            $log->save();
             return [
                 'data' => AnnouncementResource::collection($request->user()->meeting->announcements()->orderBy('created_at', 'desc')->get()),
                 'status' => true,

@@ -11,6 +11,10 @@ class MeetingController extends Controller
     public function index(Request $request)
     {
         try {
+            $log = new \App\Models\Log\Meeting\Participant\Participant();
+            $log->participant_id = $request->user()->id;
+            $log->action = "get-meeting";
+            $log->save();
             return [
                 'data' => new MeetingResource($request->user()->meeting),
                 'status' => true,

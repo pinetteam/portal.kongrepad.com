@@ -29,6 +29,10 @@ class VoteController extends Controller
             $vote->keypad_id = $keypad;
             try{
                 $vote->save();
+                $log = new \App\Models\Log\Meeting\Participant\Participant();
+                $log->participant_id = $request->user()->id;
+                $log->action = "send-keypad-vote";
+                $log->save();
                 return [
                     'data' => null,
                     'status' => true,

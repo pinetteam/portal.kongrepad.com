@@ -157,6 +157,7 @@ class MeetingHallScreenSeeder extends Seeder
             ],
             [
                 'id' => '18',
+                'hall_id' => '6',
                 'code' => Str::uuid()->toString(),
                 'title' => 'Timer Screen',
                 'description' => 'Timer Screen',
