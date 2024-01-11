@@ -20,7 +20,6 @@ use App\Http\Resources\Pusher\Meeting\Hall\Program\Session\Keypad\KeypadResource
 use App\Models\Meeting\Hall\Hall;
 use App\Models\Meeting\Hall\Screen\Screen;
 use Carbon\Carbon;
-use Illuminate\Http\Resources\Json\JsonResource;
 
 class ScreenBoardController extends Controller
 {
@@ -29,7 +28,7 @@ class ScreenBoardController extends Controller
         $hall = Hall::where('code', $code)->first();
         $meeting = $hall->meeting;
         $participants = $meeting->participants;
-        $screens = $hall->screens()->get();
+        $screens = $hall->screens()->get()->sortBy('title');
         $keypads = $meeting->keypads()->get();
         $documents = $meeting->documents()->get();
         $debates = $meeting->debates()->get();

@@ -114,6 +114,10 @@ class Participant extends Model
     {
         return isset($this->last_login_datetime) ? Carbon::parse($this->last_login_datetime)->diffForHumans() : __('common.not-logged-in-yet');
     }
+    public function getLastUserActivityAttribute()
+    {
+        return $this->logs()->count() > 0 ? Carbon::parse($this->logs()->latest()->first()->created_at)->diffForHumans() : __('common.not-logged-in-yet');
+    }
     public function getFullNameAttribute()
     {
         return Str::of("$this->title $this->first_name $this->last_name")->trim();
@@ -125,6 +129,10 @@ class Participant extends Model
     public function sessionQuestions()
     {
         return $this->hasMany(Question::class, 'questioner_id', 'id');
+    }
+    public function logs()
+    {
+        return $this->hasMany(\App\Models\Log\Meeting\Participant\Participant::class, 'participant_id', 'id');
     }
     public function meeting()
     {

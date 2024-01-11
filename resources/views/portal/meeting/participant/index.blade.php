@@ -51,7 +51,7 @@
                                 <td>{{ $participant->organisation_show }}</td>
                                 <td>{{ $participant->email }}</td>
                                 <td>{{ $participant->full_phone }}</td>
-                                <td>{{ $participant->last_login }}</td>
+                                <td>{{ $participant->last_user_activity }}</td>
                                 <td>{{ __('common.'.$participant->type) }}</td>
                                 <td>
                                     @if($participant->enrolled)
