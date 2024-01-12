@@ -18,6 +18,21 @@ window.Chart = Chart;
 import moment from'moment';
 import { TempusDominus } from '@eonasdan/tempus-dominus';
 function initializeDatePicker(element) {
+    var dateFormat = "YYYY-MM-DD"
+    fetch('/get-date-format')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            dateFormat = data.date_format;
+        })
+        .catch(error => {
+            console.error('Error fetching date format:', error);
+        });
+
     const datePicker = new TempusDominus(element, {
         localization: {
             locale: 'tr-TR',
@@ -42,9 +57,24 @@ function initializeDatePicker(element) {
             }
         }
     });
-    datePicker.dates.formatInput = date => moment(date).format('YYYY-MM-DD');
+    datePicker.dates.formatInput = date => moment(date).format(dateFormat);
 }
 function initializeTimePicker(element) {
+    var timeFormat = "HH:mm"
+    fetch('/get-time-format')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            timeFormat = data.time_format;
+        })
+        .catch(error => {
+            console.error('Error fetching date format:', error);
+        });
+
     const timePicker = new TempusDominus(element, {
         localization: {
             locale: 'tr-TR',
@@ -70,9 +100,23 @@ function initializeTimePicker(element) {
             }
         }
     });
-    timePicker.dates.formatInput = date => moment(date).format('HH:mm');
+    timePicker.dates.formatInput = date => moment(date).format(timeFormat);
 }
 function initializeDateTimePicker(element) {
+    var dateTimeFormat = "YYYY-MM-DD HH:mm"
+    fetch('/get-date-time-format')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            dateTimeFormat = data.date_time_format;
+        })
+        .catch(error => {
+            console.error('Error fetching date format:', error);
+        });
     const dateTimePicker = new TempusDominus(element, {
         localization: {
             locale: 'tr-TR',
@@ -98,7 +142,7 @@ function initializeDateTimePicker(element) {
             }
         }
     });
-    dateTimePicker.dates.formatInput = date => moment(date).format('YYYY-MM-DD HH:mm');
+    dateTimePicker.dates.formatInput = date => moment(date).format(dateTimeFormat);
 }
 function initializeDateTimePickers() {
     document.querySelectorAll('.date-picker').forEach((element) => {
