@@ -1,10 +1,10 @@
 @extends('layout.portal.common')
 @section('title', __('common.hall') . ' | ' . $hall->title)
 @section('breadcrumb')
-    <li class="breadcrumb-item text-white"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none">{{ __('common.meetings') }}</a></li>
-    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.show', $hall->meeting->id) }}" class="text-decoration-none">{{ $hall->meeting->title }}</a></li>
-    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.hall.index', ['meeting' => $hall->meeting->id]) }}" class="text-decoration-none">{{ __('common.halls') }}</a></li>
-    <li class="breadcrumb-item active text-white" aria-current="page">{{ $hall->title }}</li>
+    <li class="breadcrumb-item"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none text-white">{{ __('common.meetings') }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.show', $hall->meeting->id) }}" class="text-decoration-none text-white">{{ $hall->meeting->title }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.hall.index', ['meeting' => $hall->meeting->id]) }}" class="text-decoration-none text-white">{{ __('common.halls') }}</a></li>
+    <li class="breadcrumb-item active text-white text-decoration-underline" aria-current="page">{{ $hall->title }}</li>
 @endsection
 @section('body')
 <div class="card text-bg-dark">

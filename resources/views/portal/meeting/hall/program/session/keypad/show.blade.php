@@ -1,14 +1,14 @@
 @extends('layout.portal.common')
 @section('title', $keypad->keypad)
 @section('breadcrumb')
-    <li class="breadcrumb-item text-white"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none">{{ __('common.meetings') }}</a></li>
-    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.show', $keypad->session->program->hall->meeting->id) }}" class="text-decoration-none">{{ $keypad->session->program->hall->meeting->title }}</a></li>
-    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.hall.index', ['meeting' => $keypad->session->program->hall->meeting->id]) }}" class="text-decoration-none">{{ __('common.halls') }}</a></li>
-    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.hall.show', ['meeting' => $keypad->session->program->hall->meeting->id, 'hall' => $keypad->session->program->hall->id]) }}" class="text-decoration-none">{{ $keypad->session->program->hall->title }}</a></li>
-    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.hall.program.index', ['meeting' => $keypad->session->program->hall->meeting->id, 'hall' => $keypad->session->program->hall->id]) }}" class="text-decoration-none">{{ __('common.programs') }}</a></li>
-    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.hall.program.show', ['meeting' => $keypad->session->program->hall->meeting->id, 'hall' => $keypad->session->program->hall->id, 'program' => $keypad->session->program->id]) }}" class="text-decoration-none">{{ $keypad->session->program->title }}</a></li>
-    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.hall.program.session.show', ['meeting' => $keypad->session->program->hall->meeting->id, 'hall' => $keypad->session->program->hall->id, 'program' => $keypad->session->program->id, 'session' => $keypad->session->id]) }}" class="text-decoration-none">{{ $keypad->session->program->title }}</a></li>
-    <li class="breadcrumb-item active text-white" aria-current="page">{{ $keypad->title }}</li>
+    <li class="breadcrumb-item text-white"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none text-white">{{ __('common.meetings') }}</a></li>
+    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.show', $keypad->session->program->hall->meeting->id) }}" class="text-decoration-none text-white">{{ $keypad->session->program->hall->meeting->title }}</a></li>
+    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.hall.index', ['meeting' => $keypad->session->program->hall->meeting->id]) }}" class="text-decoration-none text-white">{{ __('common.halls') }}</a></li>
+    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.hall.show', ['meeting' => $keypad->session->program->hall->meeting->id, 'hall' => $keypad->session->program->hall->id]) }}" class="text-decoration-none text-white">{{ $keypad->session->program->hall->title }}</a></li>
+    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.hall.program.index', ['meeting' => $keypad->session->program->hall->meeting->id, 'hall' => $keypad->session->program->hall->id]) }}" class="text-decoration-none text-white">{{ __('common.programs') }}</a></li>
+    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.hall.program.show', ['meeting' => $keypad->session->program->hall->meeting->id, 'hall' => $keypad->session->program->hall->id, 'program' => $keypad->session->program->id]) }}" class="text-decoration-none text-white">{{ $keypad->session->program->title }}</a></li>
+    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.hall.program.session.show', ['meeting' => $keypad->session->program->hall->meeting->id, 'hall' => $keypad->session->program->hall->id, 'program' => $keypad->session->program->id, 'session' => $keypad->session->id]) }}" class="text-decoration-none text-white">{{ $keypad->session->program->title }}</a></li>
+    <li class="breadcrumb-item active text-white text-decoration-underline" aria-current="page">{{ $keypad->title }}</li>
 @endsection
 @section('body')
     <div class="card text-bg-dark">

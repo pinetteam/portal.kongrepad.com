@@ -1,14 +1,14 @@
 @extends('layout.portal.common')
 @section('title', $team->title . ' | ' . __('common.team'))
 @section('breadcrumb')
-    <li class="breadcrumb-item text-white"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none">{{ __('common.meetings') }}</a></li>
-    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.show', $team->debate->program->hall->meeting->id) }}" class="text-decoration-none">{{ $team->debate->program->hall->meeting->title }}</a></li>
-    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.hall.index', ['meeting' => $team->debate->program->hall->meeting->id]) }}" class="text-decoration-none">{{ __('common.halls') }}</a></li>
-    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.hall.show', ['meeting' => $team->debate->program->hall->meeting->id, 'hall' => $team->debate->program->hall->id]) }}" class="text-decoration-none">{{ $team->debate->program->hall->title }}</a></li>
-    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.hall.program.index', ['meeting' => $team->debate->program->hall->meeting->id, 'hall' => $team->debate->program->hall->id]) }}" class="text-decoration-none">{{ __('common.programs') }}</a></li>
-    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.hall.program.show', ['meeting' => $team->debate->program->hall->meeting->id, 'hall' => $team->debate->program->hall->id, 'program' => $team->debate->program->id]) }}" class="text-decoration-none">{{ $team->debate->program->title }}</a></li>
-    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.hall.program.debate.show', ['meeting' => $team->debate->program->hall->meeting->id, 'hall' => $team->debate->program->hall->id, 'program' => $team->debate->program->id, 'debate' => $team->debate->id]) }}" class="text-decoration-none">{{ $team->debate->title }}</a></li>
-    <li class="breadcrumb-item active text-white" aria-current="page">{{ $team->title }}</li>
+    <li class="breadcrumb-item"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none text-white">{{ __('common.meetings') }}</a></li>
+    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.show', $team->debate->program->hall->meeting->id) }}" class="text-decoration-none text-white">{{ $team->debate->program->hall->meeting->title }}</a></li>
+    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.hall.index', ['meeting' => $team->debate->program->hall->meeting->id]) }}" class="text-decoration-none text-white">{{ __('common.halls') }}</a></li>
+    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.hall.show', ['meeting' => $team->debate->program->hall->meeting->id, 'hall' => $team->debate->program->hall->id]) }}" class="text-decoration-none text-white">{{ $team->debate->program->hall->title }}</a></li>
+    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.hall.program.index', ['meeting' => $team->debate->program->hall->meeting->id, 'hall' => $team->debate->program->hall->id]) }}" class="text-decoration-none text-white">{{ __('common.programs') }}</a></li>
+    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.hall.program.show', ['meeting' => $team->debate->program->hall->meeting->id, 'hall' => $team->debate->program->hall->id, 'program' => $team->debate->program->id]) }}" class="text-decoration-none text-white">{{ $team->debate->program->title }}</a></li>
+    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.hall.program.debate.show', ['meeting' => $team->debate->program->hall->meeting->id, 'hall' => $team->debate->program->hall->id, 'program' => $team->debate->program->id, 'debate' => $team->debate->id]) }}" class="text-decoration-none text-white">{{ $team->debate->title }}</a></li>
+    <li class="breadcrumb-item active text-white text-decoration-underline" aria-current="page">{{ $team->title }}</li>
 @endsection
 @section('body')
     <div class="card text-bg-dark">

@@ -2,17 +2,19 @@
 @section('title', __('common.dashboard'))
 @section('body')
     <div class="card bg-dark">
-        <div class="card-header bg-dark text-white">
+        <div class="card-header bg-dark text-white border-dark">
             <h1 class="m-0 text-center">{{ __('common.dashboard') }}</h1>
         </div>
         <div class="card-body mt-2">
             <div class="container text-center">
                 <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-xs-1 row-gap-5">
                     @foreach($meetings as $meeting)
+                        <div class="row w-100">
+                            <h4 class="pb-3 text-white text-center">{{ __('common.meeting') }} | {{ $meeting->title }}</h4>
+                        </div>
                         <div class="col border-2">
                             <div class="card bg-dark border-dark">
-                                <div class="card-body">
-                                    <h4 class="pb-3 text-white text-center">{{ __('common.meeting') }} | {{ $meeting->title }}</h4>
+                                <div class="card-block">
                                     <div class="container text-center">
                                         <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-xs-1 g-2">
                                             <div class="col border-2">
@@ -134,13 +136,12 @@
                         <div class="col border-2">
                              <div class="card bg-dark border-dark">
                                  <div class="card-body mb-3">
-                                     <h4 class="pb-3 text-white text-center">{{ __('common.meeting-halls') }} | {{ $meeting->title }}</h4>
                                      <div class="container text-center">
                                          <div class="row row-cols-1 g-2">
                                              @foreach($meeting->halls as $hall)
-                                                 <div class="col border-2">
+                                                 <div class="col">
                                                   <span>
-                                                       <div class="card-body p-0 shadow">
+                                                       <div class="card-block p-0 shadow">
                                                              <div class="table-responsive">
                                                                  <table class="table table-dark table-borderless">
                                                                      <tbody>
@@ -178,6 +179,7 @@
                                  </div>
                              </div>
                          </div>
+                        <hr class="text-bg-primary w-100">
                     @endforeach
                 </div>
             </div>

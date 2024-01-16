@@ -35,22 +35,32 @@
                 <div class="card-header bg-dark text-white">
                     <h1 class="m-0 text-center">{{ __('common.demo-request') }}</h1>
                 </div>
-                <div class="card-body mt-2">
+                <div class="card-body m-2">
                     <div class="container text-center">
                         <form method="POST" action="{{ route('demo.store') }}" name="demo-create-form" id="demo-create-form" enctype="multipart/form-data" autocomplete="nope">
                             @csrf
                             <div class="container-fluid">
-                                <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-3 justify-content-center">
-                                    <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-xs-1 row-gap-5">
-                                        <x-input.text method="c" name="title" title="title" icon="input-text" />
-                                        <x-input.text method="c" name="email" title="email" icon="envelope" />
-                                        <x-input.text method="c" name="username" title="username" icon="user" />
-                                        <x-input.password method="c" name="password" title="password" icon="lock" />
-                                        <x-input.password method="c" name="repeat_password" title="repeat-password" icon="lock" />
+                                <div class="row row-cols-1 row-cols-sm-1 row-cols-xl-1 justify-content-center">
+                                    <div class="w-50 h-1 row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-xs-1 row-gap-3 shadow-lg">
+                                        <div class="card bg-dark border-dark text-white mt-2 shadow-sm p-2">
+                                            <x-input.text method="c" name="title" title="title" icon="input-text" />
+                                        </div>
+                                        <div class="card bg-dark border-dark text-white mt-2 shadow-sm p-2">
+                                            <x-input.text method="c" name="email" title="email" icon="envelope" />
+                                        </div>
+                                        <div class="card bg-dark border-dark text-white mt-2 shadow-sm p-2">
+                                            <x-input.text method="c" name="username" title="username" icon="user" />
+                                        </div>
+                                        <div class="card bg-dark border-dark text-white mt-2 shadow-sm p-2">
+                                            <x-input.password method="c" name="password" title="password" icon="lock" />
+                                        </div>
+                                        <div class="card bg-dark border-dark text-white mt-2 shadow-sm p-2">
+                                            <x-input.password method="c" name="repeat_password" title="repeat-password" icon="lock" />
+                                        </div>
+                                        <button type="submit" class="btn btn-success w-100 mb-2" id="demo-create-form-submit">{{ __('common.create') }}</button>
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-success w-75" id="demo-create-form-submit">{{ __('common.create') }}</button>
                         </form>
                     </div>
                 </div>

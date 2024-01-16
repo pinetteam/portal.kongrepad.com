@@ -1,9 +1,9 @@
 @extends('layout.portal.common')
 @section('title', $meeting->title . ' | ' . __('common.score-games'))
 @section('breadcrumb')
-    <li class="breadcrumb-item text-white"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none">{{ __('common.meetings') }}</a></li>
-    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.show', $meeting->id) }}" class="text-decoration-none">{{ $meeting->title }}</a></li>
-    <li class="breadcrumb-item active text-white" aria-current="page">{{ __('common.score-games') }}</li>
+    <li class="breadcrumb-item text-white"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none text-white">{{ __('common.meetings') }}</a></li>
+    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.show', $meeting->id) }}" class="text-decoration-none text-white">{{ $meeting->title }}</a></li>
+    <li class="breadcrumb-item active text-white text-decoration-underline" aria-current="page">{{ __('common.score-games') }}</li>
 @endsection
 @section('body')
     <div class="card text-bg-dark">
