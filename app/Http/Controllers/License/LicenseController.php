@@ -6,15 +6,95 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\License\LicenseRequest;
 use App\Models\Customer\Customer;
 use App\Models\Customer\Setting\Setting;
+use App\Models\System\Country\Country;
 use App\Models\User\User;
 use Faker\Factory;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 class LicenseController extends Controller
 {
     public function index()
     {
-        return view('portal.demo.index');
+        $phone_countries = Country::get();
+        $timezones = [
+            'Europe/Amsterdam' => ['value' => 'Europe/Amsterdam', 'title' => 'Europe/Amsterdam'],
+            'Europe/Andorra' => ['value' => 'Europe/Andorra', 'title' => 'Europe/Andorra'],
+            'Europe/Astrakhan' => ['value' => 'Europe/Astrakhan', 'title' => 'Europe/Astrakhan'],
+            'Europe/Athens' => ['value' => 'Europe/Athens', 'title' => 'Europe/Athens'],
+            'Europe/Belgrade' => ['value' => 'Europe/Belgrade', 'title' => 'Europe/Belgrade'],
+            'Europe/Berlin' => ['value' => 'Europe/Berlin', 'title' => 'Europe/Berlin'],
+            'Europe/Bratislava' => ['value' => 'Europe/Bratislava', 'title' => 'Europe/Bratislava'],
+            'Europe/Brussels' => ['value' => 'Europe/Brussels', 'title' => 'Europe/Brussels'],
+            'Europe/Bucharest' => ['value' => 'Europe/Bucharest', 'title' => 'Europe/Bucharest'],
+            'Europe/Budapest' => ['value' => 'Europe/Budapest', 'title' => 'Europe/Budapest'],
+            'Europe/Busingen' => ['value' => 'Europe/Busingen', 'title' => 'Europe/Busingen'],
+            'Europe/Chisinau' => ['value' => 'Europe/Chisinau', 'title' => 'Europe/Chisinau'],
+            'Europe/Copenhagen' => ['value' => 'Europe/Copenhagen', 'title' => 'Europe/Copenhagen'],
+            'Europe/Dublin' => ['value' => 'Europe/Copenhagen', 'title' => 'Europe/Dublin'],
+            'Europe/Gibraltar' => ['value' => 'Europe/Gibraltar', 'title' => 'Europe/Gibraltar'],
+            'Europe/Guernsey' => ['value' => 'Europe/Guernsey', 'title' => 'Europe/Guernsey'],
+            'Europe/Helsinki' => ['value' => 'Europe/Helsinki', 'title' => 'Europe/Helsinki'],
+            'Europe/Isle_of_Man' => ['value' => 'Europe/Isle_of_Man', 'title' => 'Europe/Isle_of_Man'],
+            'Europe/Istanbul' => ['value' => 'Europe/Istanbul', 'title' => 'Europe/Istanbul'],
+            'Europe/Jersey' => ['value' => 'Europe/Jersey', 'title' => 'Europe/Jersey'],
+            'Europe/Kaliningrad' => ['value' => 'Europe/Kaliningrad', 'title' => 'Europe/Kaliningrad'],
+            'Europe/Kirov' => ['value' => 'Europe/Kirov', 'title' => 'Europe/Kirov'],
+            'Europe/Kyiv' => ['value' => 'Europe/Kyiv', 'title' => 'Europe/Kyiv'],
+            'Europe/Lisbon' => ['value' => 'Europe/Lisbon', 'title' => 'Europe/Lisbon'],
+            'Europe/Ljubljana' => ['value' => 'Europe/Ljubljana', 'title' => 'Europe/Ljubljana'],
+            'Europe/London' => ['value' => 'Europe/London', 'title' => 'Europe/London'],
+            'Europe/Luxembourg' => ['value' => 'Europe/Luxembourg', 'title' => 'Europe/Luxembourg'],
+            'Europe/Madrid' => ['value' => 'Europe/Madrid', 'title' => 'Europe/Madrid'],
+            'Europe/Malta' => ['value' => 'Europe/Malta', 'title' => 'Europe/Malta'],
+            'Europe/Mariehamn' => ['value' => 'Europe/Mariehamn', 'title' => 'Europe/Mariehamn'],
+            'Europe/Minsk' => ['value' => 'Europe/Minsk', 'title' => 'Europe/Minsk'],
+            'Europe/Monaco' => ['value' => 'Europe/Monaco', 'title' => 'Europe/Monaco'],
+            'Europe/Moscow' => ['value' => 'Europe/Moscow', 'title' => 'Europe/Moscow'],
+            'Europe/Oslo' => ['value' => 'Europe/Oslo', 'title' => 'Europe/Oslo'],
+            'Europe/Paris' => ['value' => 'Europe/Paris', 'title' => 'Europe/Paris'],
+            'Europe/Podgorica' => ['value' => 'Europe/Podgorica', 'title' => 'Europe/Podgorica'],
+            'Europe/Prague' => ['value' => 'Europe/Prague', 'title' => 'Europe/Prague'],
+            'Europe/Riga' => ['value' => 'Europe/Riga', 'title' => 'Europe/Riga'],
+            'Europe/Rome' => ['value' => 'Europe/Rome', 'title' => 'Europe/Rome'],
+            'Europe/Samara' => ['value' => 'Europe/Samara', 'title' => 'Europe/Samara'],
+            'Europe/San_Marino' => ['value' => 'Europe/San_Marino', 'title' => 'Europe/San_Marino'],
+            'Europe/Sarajevo' => ['value' => 'Europe/Sarajevo', 'title' => 'Europe/Sarajevo'],
+            'Europe/Saratov' => ['value' => 'Europe/Saratov', 'title' => 'Europe/Saratov'],
+            'Europe/Simferopol' => ['value' => 'Europe/Simferopol', 'title' => 'Europe/Simferopol'],
+            'Europe/Skopje' => ['value' => 'Europe/Skopje', 'title' => 'Europe/Skopje'],
+            'Europe/Sofia' => ['value' => 'Europe/Sofia', 'title' => 'Europe/Sofia'],
+            'Europe/Stockholm' => ['value' => 'Europe/Stockholm', 'title' => 'Europe/Stockholm'],
+            'Europe/Tallinn' => ['value' => 'Europe/Tallinn', 'title' => 'Europe/Tallinn'],
+            'Europe/Tirane' => ['value' => 'Europe/Tirane', 'title' => 'Europe/Tirane'],
+            'Europe/Ulyanovsk' => ['value' => 'Europe/Ulyanovsk', 'title' => 'Europe/Ulyanovsk'],
+            'Europe/Vaduz' => ['value' => 'Europe/Vaduz', 'title' => 'Europe/Vaduz'],
+            'Europe/Vatican' => ['value' => 'Europe/Vatican', 'title' => 'Europe/Vatican'],
+            'Europe/Vienna' => ['value' => 'Europe/Vienna', 'title' => 'Europe/Vienna'],
+            'Europe/Vilnius' => ['value' => 'Europe/Vilnius', 'title' => 'Europe/Vilnius'],
+            'Europe/Volgograd' => ['value' => 'Europe/Volgograd', 'title' => 'Europe/Volgograd'],
+            'Europe/Warsaw' => ['value' => 'Europe/Warsaw', 'title' => 'Europe/Warsaw'],
+            'Europe/Zagreb' => ['value' => 'Europe/Zagreb', 'title' => 'Europe/Zagreb'],
+            'Europe/Zurich' => ['value' => 'Europe/Zurich', 'title' => 'Europe/Zurich'],
+        ];
+        $datetime_formats = [
+            'Y/m/d H:i:s' => ['value' => 'Y/m/d H:i:s', 'title' => 'Y/m/d H:i:s'],
+            'd/m/Y H:i:s' => ['value' => 'd/m/Y H:i:s', 'title' => 'd/m/Y H:i:s'],
+            'Y-m-d H:i:s' => ['value' => 'Y-m-d H:i:s', 'title' => 'Y-m-d H:i:s'],
+            'Y-m-d H:i' => ['value' => 'Y-m-d H:i', 'title' => 'Y-m-d H:i'],
+            'd-m-Y H:i:s' => ['value' => 'd-m-Y H:i:s', 'title' => 'd-m-Y H:i:s'],
+            'd-m-Y H:i' => ['value' => 'd-m-Y H:i', 'title' => 'd-m-Y H:i'],
+        ];
+        $date_formats = [
+            'Y/m/d' => ['value' => 'Y/m/d', 'title' => 'Y/m/d'],
+            'd/m/Y' => ['value' => 'd/m/Y', 'title' => 'd/m/Y'],
+            'Y-m-d' => ['value' => 'Y-m-d', 'title' => 'Y-m-d'],
+            'd-m-Y' => ['value' => 'd-m-Y', 'title' => 'd-m-Y'],
+        ];
+        $time_formats = [
+            'H:i:s' => ['value' => 'H:i:s', 'title' => 'H:i:s'],
+        ];
+        return view('portal.demo.index', compact(['phone_countries', 'time_formats', 'date_formats', 'datetime_formats', 'timezones']));
     }
     public function store(LicenseRequest $request)
     {
@@ -22,12 +102,16 @@ class LicenseController extends Controller
             $customer = new Customer();
             $customer->title = $request->input('title');
             $customer->code = Str::slug($request->input('title'));
+            if ($request->has('logo')) {
+                $logo = Image::make($request->file('logo'))->encode('data-url');
+                $customer->logo = $logo;
+            }
             if ($customer->save()) {
                 Setting::insert([
                     [
                         'customer_id' => $customer->id,
                         'variable_id' => '1',
-                        'value' => '',
+                        'value' => $request->input('web_address'),
                     ],
                     [
                         'customer_id' => $customer->id,
@@ -37,33 +121,33 @@ class LicenseController extends Controller
                     [
                         'customer_id' => $customer->id,
                         'variable_id' => '3',
-                        'value' => '',
+                        'value' => $request->input('phone_country') . ' ' . $request->input('phone'),
                     ],
                     [
                         'customer_id' => $customer->id,
                         'variable_id' => '4',
-                        'value' => '',
+                        'value' => $request->input('address'),
                     ],
 
                     [
                         'customer_id' => $customer->id,
                         'variable_id' => '5',
-                        'value' => 'Europe/Istanbul',
+                        'value' => $request->input('timezone') ?? 'Europe/Istanbul',
                     ],
                     [
                         'customer_id' => $customer->id,
                         'variable_id' => '6',
-                        'value' => 'Y-m-d H:i',
+                        'value' => $request->input('datetime_format') ?? 'Y-m-d H:i',
                     ],
                     [
                         'customer_id' => $customer->id,
                         'variable_id' => '7',
-                        'value' => 'Y-m-d',
+                        'value' => $request->input('date_format') ?? 'Y-m-d',
                     ],
                     [
                         'customer_id' => $customer->id,
                         'variable_id' => '8',
-                        'value' => 'H:i:s',
+                        'value' => $request->input('time_format') ?? 'H:i:s',
                     ],
 
                     [
@@ -104,10 +188,7 @@ class LicenseController extends Controller
                         'status' => 1,
                     ],
                 ]);
-                $remember = [
-                    'remember' => ['value' => 1, 'title' => 'always-login-on-this-device'],
-                ];
-                return view('auth.login.index', compact('remember'))->with('success', __('common.created-successfully'));
+                return back()->with('success', __('common.demo-account-created-successfully'));
             } else {
                 return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();
             }

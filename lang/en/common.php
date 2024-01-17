@@ -310,4 +310,7 @@ return [
     'resend-voting' => 'Resend voting',
     'repeat-password' => 'Repeat password',
     'demo-request' => 'Demo request',
+    'theme' => 'Theme',
+    'web-address' => 'Web address',
+    'demo-account-created-successfully' => 'Demo account created successfully',
 ];

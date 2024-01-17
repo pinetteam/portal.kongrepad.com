@@ -55,7 +55,8 @@ function initializeDatePicker(element) {
                 today: false,
                 clear: false
             }
-        }
+        },
+        useCurrent: false
     });
     datePicker.dates.formatInput = date => moment(date).format(dateFormat);
 }
@@ -97,7 +98,8 @@ function initializeTimePicker(element) {
             buttons: {
                 today: false,
                 clear: false
-            }
+            },
+            useCurrent: false
         }
     });
     timePicker.dates.formatInput = date => moment(date).format(timeFormat);
@@ -139,7 +141,8 @@ function initializeDateTimePicker(element) {
             buttons: {
                 today: false,
                 clear: false
-            }
+            },
+            useCurrent: false
         }
     });
     dateTimePicker.dates.formatInput = date => moment(date).format(dateTimeFormat);

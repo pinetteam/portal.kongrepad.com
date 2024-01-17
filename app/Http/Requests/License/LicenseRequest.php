@@ -4,6 +4,7 @@ namespace App\Http\Requests\License;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\File;
 
 class LicenseRequest extends FormRequest
 {
@@ -22,7 +23,16 @@ class LicenseRequest extends FormRequest
                     'email' => 'required|email|max:255',
                     'username' => 'required|max:255',
                     'password' => 'required|min:6',
+                    'logo' => ['nullable', File::types(['png'])->max(24 * 1024),],
+                    'web-address' => 'nullable|max:255',
+                    'address' => 'nullable|max:512',
                     'repeat_password' => 'required_with:password|same:password|min:6',
+                    'phone_country' => 'nullable|required_with:phone',
+                    'timezone' => 'nullable',
+                    'time_format' => 'nullable',
+                    'date_format' => 'nullable',
+                    'datetime_format' => 'nullable',
+                    'phone' => 'nullable|max:31|required_with:phone_country_id',
                 ];
             }
             default:break;
@@ -36,6 +46,12 @@ class LicenseRequest extends FormRequest
             'username' => __('common.username'),
             'password' => __('common.password'),
             'repeat_password' => __('common.repeat-password'),
+            'phone_country_id' => __('common.phone-country'),
+            'timezone' => __('common.timezone'),
+            'time_format' => __('common.time-format'),
+            'date_format' => __('common.date-format'),
+            'datetime_format' => __('common.date-time-format'),
+            'phone' => __('common.phone'),
         ];
     }
     public function failedValidation(Validator $validator)

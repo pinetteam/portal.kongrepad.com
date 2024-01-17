@@ -42,10 +42,10 @@
                         </td>
                     </tr>
                     <tr>
+                        <th scope="row" class="text-end w-25">{{ __('common.theme') }}:</th>
+                        <td class="text-start w-25">{{ $score_game->theme }}</td>
                         <th scope="row" class="text-end w-25">{{ __('common.created-by') }}:</th>
                         <td class="text-start w-25">{{ $score_game->created_by_name }}</td>
-                        <th scope="row" class="text-end w-25">{{ __('common.created-at') }}:</th>
-                        <td class="text-start w-25">{{ $score_game->created_at }}</td>
                     </tr>
                 </table>
             </div>

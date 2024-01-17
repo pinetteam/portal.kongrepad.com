@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{{ config('app.name') }}</title>
+    <title>{{ config('app.name') . ' | ' . __('common.demo-request')}}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
     @vite(['resources/sass/app.scss'])
@@ -18,15 +18,8 @@
 </div>
 <header class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow" id="kp-header">
     <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 overflow-hidden text-center" href="{{ route("portal.dashboard.index") }}">
-        @if(Auth()->check() && isset(Auth()->user()->customer->title))
-            {{ Auth()->user()->customer->title }}
-        @else
-            {{ config('app.name') }}
-        @endif
+        {{ config('app.name') }}
     </a>
-    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#kp-menu" aria-controls="kp-menu" aria-expanded="false">
-        <i class="fa-regular fa-bars" id="kp-navbar-icon"></i>
-    </button>
 </header>
 <div class="container-fluid h-100">
     <div class="row h-100">
@@ -56,6 +49,33 @@
                                         </div>
                                         <div class="card bg-dark border-dark text-white mt-2 shadow-sm p-2">
                                             <x-input.password method="c" name="repeat_password" title="repeat-password" icon="lock" />
+                                        </div>
+                                        <div class="card bg-dark border-dark text-white mt-2 shadow-sm p-2">
+                                            <x-input.file method="c" name="logo" title="logo" icon="image"/>
+                                        </div>
+                                        <div class="card bg-dark border-dark text-white mt-2 shadow-sm p-2">
+                                            <x-input.text method="c" name="web_address" title="web-address" icon="globe" />
+                                        </div>
+                                        <div class="card bg-dark border-dark text-white mt-2 shadow-sm p-2">
+                                            <x-input.text method="c" name="address" title="address" icon="location-dot" />
+                                        </div>
+                                        <div class="card bg-dark border-dark text-white mt-2 shadow-sm p-2">
+                                            <x-input.select method="c" name="phone_country" title="phone-country" :options="$phone_countries" option_value="phone_code" option_name="name" icon="flag" />
+                                        </div>
+                                        <div class="card bg-dark border-dark text-white mt-2 shadow-sm p-2">
+                                            <x-input.text method="c" name="phone" title="phone" icon="mobile-screen" />
+                                        </div>
+                                        <div class="card bg-dark border-dark text-white mt-2 shadow-sm p-2">
+                                            <x-input.select method="c" name="timezone" title="timezone" :options="$timezones" option_value="value" option_name="title" icon="flag" />
+                                        </div>
+                                        <div class="card bg-dark border-dark text-white mt-2 shadow-sm p-2">
+                                            <x-input.select method="c" name="time_format" title="time-format" :options="$time_formats" option_value="value" option_name="title" icon="clock" />
+                                        </div>
+                                        <div class="card bg-dark border-dark text-white mt-2 shadow-sm p-2">
+                                            <x-input.select method="c" name="date_format" title="date-format" :options="$date_formats" option_value="value" option_name="title" icon="calendar" />
+                                        </div>
+                                        <div class="card bg-dark border-dark text-white mt-2 shadow-sm p-2">
+                                            <x-input.select method="c" name="datetime_format" title="date-time-format" :options="$datetime_formats" option_value="value" option_name="title" icon="calendar" />
                                         </div>
                                         <button type="submit" class="btn btn-success w-100 mb-2" id="demo-create-form-submit">{{ __('common.create') }}</button>
                                     </div>

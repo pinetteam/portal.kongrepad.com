@@ -15,6 +15,7 @@ return new class extends Migration
             $table->binary('logo')->nullable();
             $table->dateTime('start_at');
             $table->dateTime('finish_at');
+            $table->enum('theme', ['score_game', 'donation'])->default('score_game');
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
             $table->unsignedBigInteger('created_by')->index()->nullable();
             $table->unsignedBigInteger('updated_by')->index()->nullable();

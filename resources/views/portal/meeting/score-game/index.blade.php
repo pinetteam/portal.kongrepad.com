@@ -22,6 +22,7 @@
                             <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}</th>
                             <th scope="col"><span class="fa-regular fa-calendar-arrow-up mx-1"></span> {{ __('common.start-at') }}</th>
                             <th scope="col"><span class="fa-regular fa-calendar-arrow-down mx-1"></span> {{ __('common.finish-at') }}</th>
+                            <th scope="col"><span class="fa-regular fa-image-landscape mx-1"></span> {{ __('common.theme') }}</th>
                             <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}</th>
                             <th scope="col" class="text-end"></th>
                         </tr>
@@ -51,6 +52,7 @@
                                         <i class="text-info">{{ __('common.unspecified') }}</i>
                                     @endif
                                 </td>
+                                <td>{{ $score_game->theme }}</td>
                                 <td>
                                     @if($score_game->status)
                                         <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
@@ -94,6 +96,7 @@
             <x-input.file method="c" name="logo" title="logo" icon="image" />
             <x-input.datetime method="c" name="start_at" title="start-at" icon="calendar-arrow-down" />
             <x-input.datetime method="c" name="finish_at" title="finish-at" icon="calendar-arrow-down" />
+            <x-input.select method="c" name="theme" title="theme" :options="$themes" option_value="value" option_name="title" icon="image-landscape" />
             <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.create>
@@ -105,6 +108,7 @@
             <x-input.file method="e" name="logo" title="logo" icon="image" />
             <x-input.datetime method="e" name="start_at" title="start-at" icon="calendar-arrow-down" />
             <x-input.datetime method="e" name="finish_at" title="finish-at" icon="calendar-arrow-down" />
+            <x-input.select method="e" name="theme" title="theme" :options="$themes" option_value="value" option_name="title" icon="image-landscape" />
             <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.edit>

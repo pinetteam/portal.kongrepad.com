@@ -19,7 +19,11 @@ class ScoreGameController extends Controller
             'passive' => ['value' => 0, 'title' => __('common.passive'), 'color' => 'danger'],
             'active' => ['value' => 1, 'title' => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.meeting.score-game.index', compact(['meeting', 'score_games', 'statuses']));
+        $themes = [
+            'score_game' => ['value' => 'score_game', 'title' => __('common.score-game')],
+            'donation' => ['value' => 'donation', 'title' => __('common.donation')],
+        ];
+        return view('portal.meeting.score-game.index', compact(['meeting', 'score_games', 'statuses', 'themes']));
     }
     public function store(ScoreGameRequest $request)
     {
@@ -33,6 +37,7 @@ class ScoreGameController extends Controller
             }
             $score_game->start_at = $request->input('start_at');
             $score_game->finish_at = $request->input('finish_at');
+            $score_game->theme = $request->input('theme');
             $score_game->status = $request->input('status');
             if ($score_game->save()) {
                 $score_game->created_by = Auth::user()->id;
@@ -73,6 +78,7 @@ class ScoreGameController extends Controller
             }
             $score_game->start_at = $request->input('start_at');
             $score_game->finish_at = $request->input('finish_at');
+            $score_game->theme = $request->input('theme');
             $score_game->status = $request->input('status');
             if ($score_game->save()) {
                 $score_game->updated_by = Auth::user()->id;

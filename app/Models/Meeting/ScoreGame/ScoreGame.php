@@ -24,6 +24,7 @@ class ScoreGame extends Model
         'logo',
         'start_at',
         'finish_at',
+        'theme',
         'status',
         'created_by',
         'updated_by',

@@ -18,6 +18,7 @@ class ScoreGameResource extends JsonResource
             'user_total_point' => intval($this->points()->where('participant_id', $request->user()->id)->sum('meeting_score_game_points.point')),
             'start_at' => $this->start_at,
             'finish_at' => $this->finish_at,
+            'theme' => $this->theme,
             'status' => $this->status,
             ];
     }
