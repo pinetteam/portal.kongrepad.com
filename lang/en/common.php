@@ -309,8 +309,12 @@ return [
     'first-you-should-start-session' => 'First you should start session',
     'resend-voting' => 'Resend voting',
     'repeat-password' => 'Repeat password',
-    'demo-request' => 'Demo request',
+    'demo-request' => 'Demo Request',
     'theme' => 'Theme',
     'web-address' => 'Web address',
     'demo-account-created-successfully' => 'Demo account created successfully',
+    'try-it-for-free' => 'Try it for free!',
+    'add-more-information' => 'Add more information',
+    'do-you-have-an-account' => 'Do you have an account?',
+    'sign-in' => 'Sign in!'
 ];
