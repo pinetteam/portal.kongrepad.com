@@ -85,7 +85,7 @@
             <x-input.text method="c" name="first_name" title="first-name" icon="id-card" />
             <x-input.text method="c" name="last_name" title="last-name" icon="id-card" />
             <x-input.email method="c" name="email" title="email" icon="envelope" />
-            <x-input.select method="c" name="phone_country_id" title="phone-country" :options="$phone_countries" option_value="id" option_name="NameAndCode" icon="flag" />
+            <x-input.select method="c" name="phone_country_id" title="phone-country" :options="$phone_countries" option_value="id" option_name="NameAndCode" icon="flag" :searchable="true" />
             <x-input.number method="c" name="phone" title="phone" icon="mobile-screen" />
             <x-input.password method="c" name="password" title="password" icon="lock" />
             <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
@@ -99,7 +99,7 @@
             <x-input.text method="e" name="first_name" title="first-name" icon="id-card" />
             <x-input.text method="e" name="last_name" title="last-name" icon="id-card" />
             <x-input.email method="e" name="email" title="email" icon="envelope" />
-            <x-input.select method="e" name="phone_country_id" title="phone-country" :options="$phone_countries" option_value="id" option_name="NameAndCode" icon="flag" />
+            <x-input.select method="e" name="phone_country_id" title="phone-country" :options="$phone_countries" option_value="id" option_name="NameAndCode" icon="flag" :searchable="true" />
             <x-input.number method="e" name="phone" title="phone" icon="mobile-screen" />
             <x-input.password method="e" name="password" title="password" icon="lock" />
             <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />

@@ -8,6 +8,10 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 window.onload = function() {
     document.getElementById("kp-loading").style.visibility = "hidden";
 }
+
+//SlimSelect.js
+import SlimSelect from 'slim-select'
+
 // Chart.js
 import Chart from 'chart.js/auto';
 import ChartDataLabels from 'chartjs-plugin-datalabels';

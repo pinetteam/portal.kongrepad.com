@@ -121,7 +121,7 @@
                     <x-crud.form.common.create name="chair">
                         @section('chair-create-form')
                             <x-input.hidden method="c" name="program_id" :value="$program->id" />
-                            <x-input.select method="c" name="chair_id" title="chair" :options="$chairs" option_value="id" option_name="full_name" icon="id-card" />
+                            <x-input.select method="c" name="chair_id" title="chair" :options="$chairs" option_value="id" option_name="full_name" icon="id-card" :searchable="true"/>
                             <x-input.select method="c" name="type" title="type" :options="$chair_types" option_value="value" option_name="title" icon="person-military-pointing" />
                         @endsection
                     </x-crud.form.common.create>
@@ -129,7 +129,7 @@
                     <x-crud.form.common.edit name="chair">
                         @section('chair-edit-form')
                             <x-input.hidden method="e" name="program_id" :value="$program->id" />
-                            <x-input.select method="e" name="chair_id" title="chair" :options="$chairs" option_value="id" option_name="full_name" icon="id-card" />
+                            <x-input.select method="e" name="chair_id" title="chair" :options="$chairs" option_value="id" option_name="full_name" icon="id-card" :searchable="true" />
                             <x-input.select method="e" name="type" title="type" :options="$chair_types" option_value="value" option_name="title" icon="person-military-pointing" />
                         @endsection
                     </x-crud.form.common.edit>
@@ -230,8 +230,8 @@
             @section('session-create-form')
                 <x-input.number method="c" name="sort_order" title="sort" icon="circle-sort" />
                 <x-input.hidden method="c" name="program_id" :value="$program->id" />
-                <x-input.select method="c" name="speaker_id" title="speaker" :options="$speakers" option_value="id" option_name="full_name" icon="person-chalkboard" />
-                <x-input.select method="c" name="document_id" title="document" :options="$documents" option_value="id" option_name="title" icon="presentation-screen" />
+                <x-input.select method="c" name="speaker_id" title="speaker" :options="$speakers" option_value="id" option_name="full_name" icon="person-chalkboard" :searchable="true"/>
+                <x-input.select method="c" name="document_id" title="document" :options="$documents" option_value="id" option_name="title" icon="presentation-screen" :searchable="true"/>
                 <x-input.text method="c" name="code" title="code" icon="code-simple" />
                 <x-input.text method="c" name="title" title="title" icon="input-text" />
                 <x-input.text method="c" name="description" title="description" icon="comment-dots" />
@@ -248,8 +248,8 @@
             @section('session-edit-form')
                 <x-input.number method="e" name="sort_order" title="sort" icon="circle-sort" />
                 <x-input.hidden method="e" name="program_id" :value="$program->id" />
-                <x-input.select method="e" name="speaker_id" title="speaker" :options="$speakers" option_value="id" option_name="full_name" icon="person-chalkboard" />
-                <x-input.select method="e" name="document_id" title="document" :options="$documents" option_value="id" option_name="title" icon="presentation-screen" />
+                <x-input.select method="e" name="speaker_id" title="speaker" :options="$speakers" option_value="id" option_name="full_name" icon="person-chalkboard" :searchable="true" />
+                <x-input.select method="e" name="document_id" title="document" :options="$documents" option_value="id" option_name="title" icon="presentation-screen" :searchable="true" />
                 <x-input.text method="e" name="code" title="code" icon="code-simple" />
                 <x-input.text method="e" name="title" title="title" icon="input-text" />
                 <x-input.text method="e" name="description" title="description" icon="comment-dots" />

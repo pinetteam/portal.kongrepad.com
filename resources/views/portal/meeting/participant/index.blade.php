@@ -118,7 +118,7 @@
             <x-input.text method="c" name="identification_number" title="identification-number" icon="fingerprint" />
             <x-input.text method="c" name="organisation" title="organisation" icon="building-columns" />
             <x-input.email method="c" name="email" title="email" icon="envelope" />
-            <x-input.select method="c" name="phone_country_id" title="phone-country" :options="$phone_countries" option_value="id" option_name="name" icon="flag" />
+            <x-input.select method="c" name="phone_country_id" title="phone-country" :options="$phone_countries" option_value="id" option_name="name" icon="flag" :searchable="true"/>
             <x-input.text method="c" name="phone" title="phone" icon="mobile-screen" />
             <x-input.text method="c" name="password" title="password" icon="lock" />
             <x-input.select method="c" name="type" title="type" :options="$types" option_value="value" option_name="title" icon="person-military-pointing" />
@@ -135,7 +135,7 @@
             <x-input.text method="e" name="identification_number" title="identification-number" icon="fingerprint" />
             <x-input.text method="e" name="organisation" title="organisation" icon="building-columns" />
             <x-input.email method="e" name="email" title="email" icon="envelope" />
-            <x-input.select method="e" name="phone_country_id" title="phone-country" :options="$phone_countries" option_value="id" option_name="name" icon="flag" />
+            <x-input.select method="e" name="phone_country_id" title="phone-country" :options="$phone_countries" option_value="id" option_name="name" icon="flag" :searchable="true"/>
             <x-input.text method="e" name="phone" title="phone" icon="mobile-screen" />
             <x-input.text method="e" name="password" title="password" icon="lock" />
             <x-input.select method="e" name="type" title="type" :options="$types" option_value="value" option_name="title" icon="person-military-pointing" />

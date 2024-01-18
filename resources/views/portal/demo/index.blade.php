@@ -60,13 +60,13 @@
                                             <x-input.text method="c" name="address" title="address" icon="location-dot" />
                                         </div>
                                         <div class="card bg-dark border-dark text-white mt-2 shadow-sm p-2">
-                                            <x-input.select method="c" name="phone_country" title="phone-country" :options="$phone_countries" option_value="phone_code" option_name="name" icon="flag" />
+                                            <x-input.select method="c" name="phone_country" title="phone-country" :options="$phone_countries" option_value="phone_code" option_name="name" icon="flag" :searchable="true" />
                                         </div>
                                         <div class="card bg-dark border-dark text-white mt-2 shadow-sm p-2">
                                             <x-input.text method="c" name="phone" title="phone" icon="mobile-screen" />
                                         </div>
                                         <div class="card bg-dark border-dark text-white mt-2 shadow-sm p-2">
-                                            <x-input.select method="c" name="timezone" title="timezone" :options="$timezones" option_value="value" option_name="title" icon="flag" />
+                                            <x-input.select method="c" name="timezone" title="timezone" :options="$timezones" option_value="value" option_name="title" icon="flag" :searchable="true" />
                                         </div>
                                         <div class="card bg-dark border-dark text-white mt-2 shadow-sm p-2">
                                             <x-input.select method="c" name="time_format" title="time-format" :options="$time_formats" option_value="value" option_name="title" icon="clock" />

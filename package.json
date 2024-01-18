@@ -19,6 +19,7 @@
         "@fortawesome/fontawesome-pro": "^6.4.2",
         "chart.js": "^4.4.0",
         "chartjs-plugin-datalabels": "^2.2.0",
-        "moment": "^2.29.4"
+        "moment": "^2.29.4",
+        "slim-select": "^2.8.1"
     }
 }
