@@ -29,9 +29,9 @@
                             <div class="container text-center justify-content-center align-items-center">
                                 <form method="POST" action="{{ route('demo.store') }}" name="demo-create-form" id="demo-create-form" enctype="multipart/form-data" autocomplete="nope">
                                     @csrf
-                                    <div class=" w-100 container justify-content-center align-items-center">
-                                        <div class="col-md-6 offset-md-3">
-                                            <div class="w-100 h-1 row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-xs-1 row-gap-1">
+                                    <div class=" w-100 container justify-content-center align-items-center d-block">
+                                        <div class="col-md-6 offset-md-3 justify-content-center align-items-center">
+                                            <div class="w-100 h-1 row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-xs-1 row-gap-1 d-block justify-content-center align-items-center overflow-auto">
                                                 <div class="row">
                                                     <h1 class="m-0 text-center text-dark-emphasis">{{ __('common.demo-request') }}</h1>
                                                 </div>
@@ -138,7 +138,7 @@
                 </main>
             </div>
         </div>
-    <footer class="bg-dark text-light col-12 px-md-4 ms-sm-auto px-md-4 shadow" id="kp-footer">
+    <footer class="bg-dark text-light col-12 shadow px-2" id="kp-footer">
         Copyright © 2017-{{ date('Y') }} {{ config('app.name') }}
     </footer>
 <x-common.popup.default />
