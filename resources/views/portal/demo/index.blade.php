@@ -73,7 +73,7 @@
                                                 <div class="row row-cols-1 row-cols-md-2 row-cols-sm-1 row-cols-xl-2 justify-content-center mt-2">
                                                     <div class="col mb-2">
                                                         <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                            <span class="fa-plus" style="white-space: nowrap;white-space: small"> {{ __('common.add-more-information') }}</span>
+                                                            <span class="fa-plus" style="white-space: nowrap;"> {{ __('common.add-more-information') }}</span>
                                                         </button>
                                                     </div>
                                                     <div class="col">
