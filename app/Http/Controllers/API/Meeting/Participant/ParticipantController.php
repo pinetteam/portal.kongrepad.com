@@ -4,19 +4,19 @@ namespace App\Http\Controllers\API\Meeting\Participant;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\API\Meeting\Participant\ParticipantResource;
+use App\Http\Traits\ParticipantLog;
 use Illuminate\Http\Request;
 
 class ParticipantController extends Controller
 {
+    use ParticipantLog;
     public function index(Request $request)
     {
         try{
-            $log = new \App\Models\Log\Meeting\Participant\Participant();
-            $log->participant_id = $request->user()->id;
-            $log->action = "get-participant";
-            $log->save();
+            $participant = $request->user();
+            $this->logParticipantAction($request->user()->id, "get-participant", $participant->full_name);
             return [
-                'data' => new ParticipantResource($request->user()),
+                'data' => new ParticipantResource($participant),
                 'status' => true,
                 'errors' => null
             ];

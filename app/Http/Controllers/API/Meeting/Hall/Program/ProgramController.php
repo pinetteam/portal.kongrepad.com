@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\Meeting\Hall\Program;
 
+use App\Http\Traits\ParticipantLog;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\API\Meeting\Hall\Program\ProgramResource;
@@ -10,11 +11,12 @@ use Illuminate\Http\Request;
 
 class ProgramController extends Controller
 {
+    use ParticipantLog;
     public function index(Request $request, int $hall)
     {
-
         try{
-            $programs = $request->user()->meeting->halls()->findOrFail($hall)->programs()->orderBy('sort_order', 'ASC')->orderBy('start_at', 'ASC')->get();
+            $hall = $request->user()->meeting->halls()->findOrFail($hall);
+            $programs = $hall->programs()->orderBy('sort_order', 'ASC')->orderBy('start_at', 'ASC')->get();
             $programs = ProgramResource::collection($programs)->groupBy(function($date) {
                 App::setLocale('tr');
                 return Carbon::parse($date->start_at)->translatedFormat('d F l');
@@ -23,10 +25,8 @@ class ProgramController extends Controller
             foreach(json_decode($programs, true) as $key => $val) {
                 array_push($result, ['day' => $key, 'programs' => $val]);
             }
-            $log = new \App\Models\Log\Meeting\Participant\Participant();
-            $log->participant_id = $request->user()->id;
-            $log->action = "get-programs";
-            $log->save();
+
+            $this->logParticipantAction($request->user()->id, "get-programs", __('common.hall') . ': ' . $hall->title);
             return [
                 'data' => $result,
                 'status' => true,
@@ -45,8 +45,10 @@ class ProgramController extends Controller
     public function show(Request $request, int $hall, int $id)
     {
         try{
+            $program = $request->user()->meeting->halls()->findOrFail($hall)->programs()->findOrFail($id);
+            $this->logParticipantAction($request->user()->id, "get-program", $program->title);
             return [
-                'data' => new ProgramResource($request->user()->meeting->halls()->findOrFail($hall)->programs()->findOrFail($id)),
+                'data' => new ProgramResource($program),
                 'status' => true,
                 'errors' => null
             ];

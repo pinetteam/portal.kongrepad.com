@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('participant_id')->index();
             $table->string('action', 511);
+            $table->string('object', 511);
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('participant_id')->on('meeting_participants')->references('id');

@@ -4,21 +4,21 @@ namespace App\Http\Controllers\API\Meeting\ScoreGame\Point;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\API\Meeting\ScoreGame\Point\PointResource;
+use App\Http\Traits\ParticipantLog;
 use App\Models\Meeting\ScoreGame\Point\Point;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PointController extends Controller
 {
+    use ParticipantLog;
     public function index(Request $request, int $score_game)
     {
         try{
-            $log = new \App\Models\Log\Meeting\Participant\Participant();
-            $log->participant_id = $request->user()->id;
-            $log->action = "get-score-game-points";
-            $log->save();
+            $score_game = $request->user()->meeting->scoreGames()->first();
+            $this->logParticipantAction($request->user()->id, "get-score-game-points", __('common.score-game') . ': ' . $score_game->title);
             return [
-                'data' => PointResource::collection($request->user()->meeting->scoreGames()->first()->points()->get()->where('participant_id', $request->user()->id)),
+                'data' => PointResource::collection($score_game->points()->get()->where('participant_id', $request->user()->id)),
                 'status' => true,
                 'errors' => null
             ];
@@ -32,11 +32,8 @@ class PointController extends Controller
     }
     public function store(Request $request, int $score_game)
     {
-
-        $log = new \App\Models\Log\Meeting\Participant\Participant();
-        $log->participant_id = $request->user()->id;
-        $log->action = "scan-qr-code";
-        $log->save();
+        $score_game = $request->user()->meeting->scoreGames()->first();
+        $this->logParticipantAction($request->user()->id, "scan-qr-code", __('common.score-game') . ': ' . $score_game->title);
         if($request->user()->meeting->qrCodes()->get()->where('code', $request->input('code'))->count() == 0){
             return [
                 'data' => null,
@@ -45,7 +42,7 @@ class PointController extends Controller
             ];
         }
         $qr_code = $request->user()->meeting->qrCodes()->get()->where('code', $request->input('code'))->first();
-        if($request->user()->meeting->scoreGames()->first()->points()->get()->where('participant_id', $request->user()->id)->where('qr_code_id', $qr_code->id)->count() > 0){
+        if($score_game->points()->get()->where('participant_id', $request->user()->id)->where('qr_code_id', $qr_code->id)->count() > 0){
             return [
                 'data' => null,
                 'status' => false,

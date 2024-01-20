@@ -3,19 +3,18 @@
 namespace App\Http\Controllers\API\Meeting\Survey\Vote;
 
 use App\Http\Controllers\Controller;
+use App\Http\Traits\ParticipantLog;
 use App\Models\Meeting\Survey\Vote\Vote;
 use Illuminate\Http\Request;
 
 class VoteController extends Controller
 {
+    use ParticipantLog;
     public function store(Request $request, int $survey){
 
         $survey = $request->user()->meeting->surveys()->findOrFail($survey);
         $options = explode(',', str_replace(['[',"]"],"",$request->input('options')));
-        $log = new \App\Models\Log\Meeting\Participant\Participant();
-        $log->participant_id = $request->user()->id;
-        $log->action = "vote-survey";
-        $log->save();
+        $this->logParticipantAction($request->user()->id, "vote-survey", __('common.survey') . ': ' . $survey->title);
         foreach ($options as $option){
             $vote = new Vote();
             $vote->option_id = $option;

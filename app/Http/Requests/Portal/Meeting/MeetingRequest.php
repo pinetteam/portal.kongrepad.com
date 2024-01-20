@@ -22,6 +22,18 @@ class MeetingRequest extends FormRequest
                     'code' => 'required|max:511',
                     'banner' => ['nullable', File::types(['jpeg', 'jpg'])],
                     'title' => 'required|max:511',
+                    'type' => 'required|in:standard,premium',
+                    'start_at' => 'required|date_format:Y-m-d|before_or_equal:finish_at|required_with:finish_at',
+                    'finish_at' => 'required|date_format:Y-m-d|after_or_equal:start_at|required_with:start_at',
+                    'status' => 'required|boolean',
+                ];
+            }
+            case 'PATCH' || 'PUT':
+            {
+                return [
+                    'code' => 'required|max:511',
+                    'banner' => ['nullable', File::types(['jpeg', 'jpg'])],
+                    'title' => 'required|max:511',
                     'start_at' => 'required|date_format:Y-m-d|before_or_equal:finish_at|required_with:finish_at',
                     'finish_at' => 'required|date_format:Y-m-d|after_or_equal:start_at|required_with:start_at',
                     'status' => 'required|boolean',

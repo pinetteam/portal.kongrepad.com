@@ -15,11 +15,15 @@ class MeetingController extends Controller
     public function index()
     {
         $meetings = Auth::user()->customer->meetings()->paginate();
+        $types = [
+            'standard' => ['value' => 'standard', 'title' => __('common.standard')],
+            'premium' => ['value' => 'premium', 'title' => __('common.premium')],
+        ];
         $statuses = [
             'passive' => ['value' => 0, 'title' => __('common.passive'), 'color' => 'danger'],
             'active' => ['value' => 1, 'title' => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.meeting.index', compact(['meetings', 'statuses']));
+        return view('portal.meeting.index', compact(['meetings', 'statuses', 'types']));
     }
     public function store(MeetingRequest $request)
     {
@@ -40,6 +44,7 @@ class MeetingController extends Controller
             }
             $meeting->code = $request->input('code');
             $meeting->title = $request->input('title');
+            $meeting->type = $request->input('type');
             $meeting->start_at = $request->input('start_at');
             $meeting->finish_at = $request->input('finish_at');
             $meeting->status = $request->input('status');

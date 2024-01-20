@@ -84,6 +84,9 @@
                                         <a class="btn btn-info btn-sm" href="{{ route('portal.meeting.participant.show', ['meeting' => $meeting->id, 'participant' => $participant->id]) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
                                             <span class="fa-regular fa-eye"></span>
                                         </a>
+                                        <a class="btn btn-secondary btn-sm" href="{{ route('portal.meeting.log.participant.show', ['meeting' => $meeting->id, 'participant' => $participant->id]) }}" title="{{ __('common.logs') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.logs') }}">
+                                            <span class="fa-regular fa-chart-user"></span>
+                                        </a>
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.edit') }}">
                                             <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#participant-edit-modal" data-route="{{ route('portal.meeting.participant.update', ['meeting' => $meeting->id, 'participant' => $participant->id]) }}" data-resource="{{ route('portal.meeting.participant.edit', ['meeting' => $meeting->id, 'participant' => $participant->id]) }}" data-id="{{ $participant->id }}">
                                                 <span class="fa-regular fa-pen-to-square"></span>

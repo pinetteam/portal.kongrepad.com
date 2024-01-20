@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\API\Meeting\Hall\Program\Session\Keypad\Vote;
 
 use App\Http\Controllers\Controller;
+use App\Http\Traits\ParticipantLog;
 use App\Models\Meeting\Hall\Program\Session\Keypad\Vote\Vote;
 use Illuminate\Http\Request;
 
 class VoteController extends Controller
 {
+    use ParticipantLog;
     public function store(Request $request, int $keypad){
         if ($request->user()->meeting->keypads()->get()->where('id', $keypad)->first()->votes()->get()->where('participant_id', $request->user()->id)->count() > 0) {
             return [
@@ -29,10 +31,7 @@ class VoteController extends Controller
             $vote->keypad_id = $keypad;
             try{
                 $vote->save();
-                $log = new \App\Models\Log\Meeting\Participant\Participant();
-                $log->participant_id = $request->user()->id;
-                $log->action = "send-keypad-vote";
-                $log->save();
+                $this->logParticipantAction($request->user()->id, "send-keypad-vote", $request->user()->meeting->keypads()->get()->where('id', $keypad)->first()->title);
                 return [
                     'data' => null,
                     'status' => true,

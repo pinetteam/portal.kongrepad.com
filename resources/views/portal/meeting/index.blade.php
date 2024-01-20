@@ -18,10 +18,12 @@
                         <tr>
                             <th scope="col"><span class="fa-regular fa-code-simple mx-1"></span> {{ __('common.code') }}</th>
                             <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}</th>
+                            <th scope="col"><span class="fa-regular fa-person-military-pointing mx-1"></span> {{ __('common.type') }}</th>
                             <th scope="col"><span class="fa-regular fa-calendar-arrow-up mx-1"></span> {{ __('common.start-at') }}</th>
                             <th scope="col"><span class="fa-regular fa-calendar-arrow-down mx-1"></span> {{ __('common.finish-at') }}</th>
                             <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}</th>
                             <th scope="col" class="text-end"></th>
+                        </tr>
                         </tr>
                     </thead>
                     <tbody>
@@ -29,6 +31,7 @@
                             <tr>
                                 <td>{{ $meeting->code }}</td>
                                 <td>{{ $meeting->title }}</td>
+                                <td>{{ __('common.' . $meeting->type) }}</td>
                                 <td>{{ $meeting->start_at }}</td>
                                 <td>{{ $meeting->finish_at }}</td>
                                 <td>
@@ -72,6 +75,7 @@
             <x-input.file method="c" name="banner" title="banner" icon="image"/>
             <x-input.text method="c" name="code" title="code" icon="code-simple" />
             <x-input.text method="c" name="title" title="title" icon="input-text" />
+            <x-input.select method="c" name="type" title="type" :options="$types" option_value="value" option_name="title" icon="person-military-pointing" />
             <x-input.date method="c" name="start_at" title="start-at" icon="calendar-arrow-up" />
             <x-input.date method="c" name="finish_at" title="finish-at" icon="calendar-arrow-down" />
             <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />

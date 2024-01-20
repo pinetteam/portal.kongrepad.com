@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('title', 255);
             $table->binary('icon')->nullable();
             $table->binary('logo')->nullable();
+            $table->bigInteger('credit')->nullable();
             $table->enum('language', ['en', 'tr'])->default('en');
             $table->enum('type', ['demo', 'full_access'])->default('full_access');
             $table->boolean('status')->default(1)->comment('0=passive;1=active');

@@ -103,6 +103,7 @@ class LicenseController extends Controller
             $customer = new Customer();
             $customer->title = $request->input('title');
             $customer->code = Str::slug($request->input('title'));
+            $customer->credit = 100;
             if ($request->has('logo')) {
                 $logo = Image::make($request->file('logo'))->encode('data-url');
                 $customer->logo = $logo;

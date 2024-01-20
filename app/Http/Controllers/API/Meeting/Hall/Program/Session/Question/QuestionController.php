@@ -4,11 +4,13 @@ namespace App\Http\Controllers\API\Meeting\Hall\Program\Session\Question;
 
 use App\Events\Service\QuestionBoard\QuestionBoardEvent;
 use App\Http\Controllers\Controller;
+use App\Http\Traits\ParticipantLog;
 use App\Models\Meeting\Hall\Program\Session\Question\Question;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
+    use ParticipantLog;
     public function store(Request $request, int $hall)
     {
         $meeting_hall = $request->user()->meeting->halls()->findOrFail($hall);
@@ -26,10 +28,7 @@ class QuestionController extends Controller
         $question->is_hidden_name = $request->input('is_hidden_name');
         $question->question = $request->input('question');
         try{
-            $log = new \App\Models\Log\Meeting\Participant\Participant();
-            $log->participant_id = $request->user()->id;
-            $log->action = "ask-question";
-            $log->save();
+            $this->logParticipantAction($request->user()->id, "ask-question", __('common.session') . ': ' . $session->title);
             return [
                 'data' => $question->save() && event(new QuestionBoardEvent($meeting_hall)),
                 'status' => true,

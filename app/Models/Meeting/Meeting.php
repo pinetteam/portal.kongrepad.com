@@ -35,6 +35,7 @@ class Meeting extends Model
         'banner_size',
         'code',
         'title',
+        'type',
         'start_at',
         'finish_at',
         'status',
@@ -117,6 +118,11 @@ class Meeting extends Model
     public function programs()
     {
         return $this->hasManyThrough(Program::class, Hall::class, 'meeting_id', 'hall_id', 'id');
+    }
+
+    public function participantLogs()
+    {
+        return $this->hasManyThrough(\App\Models\Log\Meeting\Participant\Participant::class, Participant::class, 'meeting_id', 'participant_id', 'id');
     }
 
     public function programSessions()

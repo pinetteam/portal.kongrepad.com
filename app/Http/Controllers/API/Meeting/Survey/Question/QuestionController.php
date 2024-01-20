@@ -4,18 +4,18 @@ namespace App\Http\Controllers\API\Meeting\Survey\Question;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\API\Meeting\Survey\Question\QuestionResource;
+use App\Http\Traits\ParticipantLog;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
+    use ParticipantLog;
     public function index(Request $request, int $survey){
         try{
-            $log = new \App\Models\Log\Meeting\Participant\Participant();
-            $log->participant_id = $request->user()->id;
-            $log->action = "get-survey-questions";
-            $log->save();
+            $survey = $request->user()->meeting->surveys()->findOrFail($survey);
+            $this->logParticipantAction($request->user()->id, "get-survey-questions", __('common.survey') . ': ' . $survey->title);
             return [
-                'data' => QuestionResource::collection($request->user()->meeting->surveys()->findOrFail($survey)->questions()->get()),
+                'data' => QuestionResource::collection($survey->questions()->get()),
                 'status' => true,
                 'errors' => null
             ];
@@ -29,12 +29,10 @@ class QuestionController extends Controller
     }
     public function show(Request $request, int $survey, int $id){
         try{
-            $log = new \App\Models\Log\Meeting\Participant\Participant();
-            $log->participant_id = $request->user()->id;
-            $log->action = "get-survey-question";
-            $log->save();
+            $question = $request->user()->meeting->surveys()->findOrFail($survey)->questions()->findOrFail($id);
+            $this->logParticipantAction($request->user()->id, "get-survey-question", $question->title);
             return [
-                'data' => new QuestionResource($request->user()->meeting->surveys()->findOrFail($survey)->questions()->findOrFail($id)),
+                'data' => new QuestionResource($question),
                 'status' => true,
                 'errors' => null
             ];

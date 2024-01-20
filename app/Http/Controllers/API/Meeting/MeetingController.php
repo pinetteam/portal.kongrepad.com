@@ -4,25 +4,25 @@ namespace App\Http\Controllers\API\Meeting;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\API\Meeting\MeetingResource;
+use App\Http\Traits\ParticipantLog;
 use Illuminate\Http\Request;
 
 class MeetingController extends Controller
 {
+    use ParticipantLog;
     public function index(Request $request)
     {
         try {
-            $log = new \App\Models\Log\Meeting\Participant\Participant();
-            $log->participant_id = $request->user()->id;
-            $log->action = "get-meeting";
-            $log->save();
+            $meeting = $request->user()->meeting;
+            $this->logParticipantAction($request->user()->id, "get-meeting", $meeting->title);
             return [
-                'data' => new MeetingResource($request->user()->meeting),
+                'data' => new MeetingResource($meeting),
                 'status' => true,
                 'errors' => null
             ];
         } catch (\Throwable $e) {
             return [
-                'data' => new MeetingResource($request->user()->meeting),
+                'data' => null,
                 'status' => false,
                 'errors' => [$e->getMessage()]
             ];

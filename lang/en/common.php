@@ -316,5 +316,11 @@ return [
     'try-it-for-free' => 'Try it for free!',
     'add-more-information' => 'Add more information',
     'do-you-have-an-account' => 'Do you have an account?',
-    'sign-in' => 'Sign in!'
+    'sign-in' => 'Sign in!',
+    'standard' => 'Standard',
+    'premium' => 'Premium',
+    'action' => 'Action',
+    'object' => 'Object',
+    'participant-logs' => 'Participant logs',
+    'logs' => 'Logs',
 ];

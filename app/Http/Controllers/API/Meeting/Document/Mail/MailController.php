@@ -3,13 +3,15 @@
 namespace App\Http\Controllers\API\Meeting\Document\Mail;
 
 use App\Http\Controllers\Controller;
+use App\Http\Traits\ParticipantLog;
 use App\Models\Meeting\Document\Mail\Mail;
 use Illuminate\Http\Request;
 
 class MailController extends Controller
 {
+    use ParticipantLog;
     public function store(Request $request){
-        $documents = explode(',', str_replace(['[',"]"],"",$request->input('documents')));
+        $documents = explode(',', str_replace(['[', "]"], "", $request->input('documents')));
         foreach ($documents as $document){
             $mail = new Mail();
             $mail->document_id = intval($document);
@@ -24,10 +26,7 @@ class MailController extends Controller
                 ];
             }
         }
-        $log = new \App\Models\Log\Meeting\Participant\Participant();
-        $log->participant_id = $request->user()->id;
-        $log->action = "send-mail";
-        $log->save();
+        $this->logParticipantAction($request->user()->id, "send-mail", $request->input('documents'));
         return [
             'data' => null,
             'status' => true,
@@ -60,10 +59,7 @@ class MailController extends Controller
         try{
             $participant->requested_all_documents = 1;
             $participant->save();
-            $log = new \App\Models\Log\Meeting\Participant\Participant();
-            $log->participant_id = $request->user()->id;
-            $log->action = "send-all-mail";
-            $log->save();
+            $this->logParticipantAction($request->user()->id, "send-all-mail", __('common.meeting') . ': ' . $participant->meeting->title);
         } catch (\Throwable $e){
             return [
                 'data' => null,

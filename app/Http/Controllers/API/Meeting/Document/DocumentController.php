@@ -4,19 +4,19 @@ namespace App\Http\Controllers\API\Meeting\Document;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\API\Meeting\Document\DocumentResource;
+use App\Http\Traits\ParticipantLog;
 use Illuminate\Http\Request;
 
 class DocumentController extends Controller
 {
+    use ParticipantLog;
     public function index(Request $request)
     {
         try{
-            $log = new \App\Models\Log\Meeting\Participant\Participant();
-            $log->participant_id = $request->user()->id;
-            $log->action = "get-documents";
-            $log->save();
+            $meeting = $request->user()->meeting;
+            $this->logParticipantAction($request->user()->id, "get-documents", __('common.meeting') . ': ' . $meeting->title);
             return [
-                'data' => DocumentResource::collection($request->user()->meeting->documents()->get()),
+                'data' => DocumentResource::collection($meeting->documents()->get()),
                 'status' => true,
                 'errors' => null
             ];

@@ -92,6 +92,9 @@
                             const selectElement = editModal.querySelector('#{{ $method }}-' + key);
                             if (selectElement !== null) {
                                 selectElement.value = value['value'];
+                                if(selects['{{ $method }}-' + key] != null){
+                                    selects['{{ $method }}-' + key].setSelected(value['value'].toString())
+                                }
                             }
                         } else if(value['type'] === 'text') {
                             const textElement = editModal.querySelector('#{{ $method }}-' + key);
