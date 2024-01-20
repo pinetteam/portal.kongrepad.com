@@ -4,19 +4,19 @@ namespace App\Http\Controllers\API\Meeting\Survey;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\API\Meeting\Survey\SurveyResource;
+use App\Http\Traits\ParticipantLog;
 use Illuminate\Http\Request;
 
 class SurveyController extends Controller
 {
+    use ParticipantLog;
     public function index(Request $request)
     {
         try{
-            $log = new \App\Models\Log\Meeting\Participant\Participant();
-            $log->participant_id = $request->user()->id;
-            $log->action = "get-surveys";
-            $log->save();
+            $meeting = $request->user()->meeting;
+            $this->logParticipantAction($request->user()->id, "get-surveys", __('common.meeting') . ': ' . $meeting->title);
             return [
-                'data' => SurveyResource::collection( $request->user()->meeting->surveys()->get())->additional(['some_id => 1']),
+                'data' => SurveyResource::collection( $meeting->surveys()->get())->additional(['some_id => 1']),
                 'status' => true,
                 'errors' => null
             ];
@@ -31,12 +31,10 @@ class SurveyController extends Controller
     public function show(Request $request, string $id)
     {
         try{
-            $log = new \App\Models\Log\Meeting\Participant\Participant();
-            $log->participant_id = $request->user()->id;
-            $log->action = "get-survey";
-            $log->save();
+            $survey = $request->user()->meeting->surveys()->findOrFail($id);
+            $this->logParticipantAction($request->user()->id, "get-survey", $survey->title);
             return [
-                'data' => new SurveyResource( $request->user()->meeting->surveys()->findOrFail($id)),
+                'data' => new SurveyResource($survey),
                 'status' => true,
                 'errors' => null
             ];

@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\API\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Traits\ParticipantLog;
 use App\Models\Meeting\Participant\Participant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+    use ParticipantLog;
     public function participant(Request $request)
     {
         $participant = Participant::where('username', $request->username)->first();
@@ -21,10 +23,7 @@ class LoginController extends Controller
         $participant->gdpr_consent = true;
         $participant->enrolled = true;
         $participant->save();
-        $log = new \App\Models\Log\Meeting\Participant\Participant();
-        $log->participant_id = $participant->id;
-        $log->action = "login";
-        $log->save();
+        $this->logParticipantAction($participant->id, "login", $participant->full_name);
         return response(['token' => $participant_token], 200);
     }
 }

@@ -102,6 +102,10 @@ Route::prefix('portal')->name('portal.')->group(function () {
                 Route::get('/debate/{debate}/report',[\App\Http\Controllers\Portal\Report\Debate\DebateController::class, 'showReport'])->name('debate');
                 Route::resource('/registration', \App\Http\Controllers\Portal\Report\Registration\RegistrationController::class)->only(['index']);
             });
+            //Logs
+            Route::prefix('{meeting}/log')->name('log.')->group(function () {
+                Route::resource('/participant', \App\Http\Controllers\Portal\Log\Participant\ParticipantController::class)->only(['index', 'show']);
+            });
             Route::resource('/{meeting}/hall', \App\Http\Controllers\Portal\Meeting\Hall\HallController::class)->except(['create']);
             Route::prefix('{meeting}/hall/{hall}/report')->name('hall.report.')->group(function () {
                 Route::resource('/session', \App\Http\Controllers\Portal\Report\Session\SessionController::class)->only(['index', 'show']);

@@ -4,19 +4,19 @@ namespace App\Http\Controllers\API\Meeting\ScoreGame;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\API\Meeting\ScoreGame\ScoreGameResource;
+use App\Http\Traits\ParticipantLog;
 use Illuminate\Http\Request;
 
 class ScoreGameController extends Controller
 {
+    use ParticipantLog;
     public function index(Request $request)
     {
         try{
-            $log = new \App\Models\Log\Meeting\Participant\Participant();
-            $log->participant_id = $request->user()->id;
-            $log->action = "get-score-game";
-            $log->save();
+            $meeting = $request->user()->meeting;
+            $this->logParticipantAction($request->user()->id, "get-score-games", __('common.meeting') . ': ' . $meeting->title);
             return [
-                'data' => new ScoreGameResource($request->user()->meeting->scoreGames()->first()),
+                'data' => new ScoreGameResource($meeting->scoreGames()->first()),
                 'status' => true,
                 'errors' => null
             ];

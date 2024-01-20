@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedInteger('banner_size')->comment('(kb)')->nullable();
             $table->string('code', 511);
             $table->string('title', 511);
+            $table->enum('type', ['standard', 'premium']);
             $table->date('start_at');
             $table->date('finish_at');
             $table->boolean('status')->default(1)->comment('0=passive;1=active');

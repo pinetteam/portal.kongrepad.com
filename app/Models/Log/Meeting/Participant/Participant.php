@@ -12,6 +12,7 @@ class Participant extends Model
     protected $fillable = [
         'participant_id',
         'action',
+        'object',
     ];
     protected $dates = [
         'created_at',

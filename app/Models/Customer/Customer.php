@@ -34,6 +34,7 @@ class Customer extends Model
         'title',
         'icon',
         'logo',
+        'credit',
         'language',
         'status',
     ];

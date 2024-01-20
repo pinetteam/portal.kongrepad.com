@@ -18,8 +18,6 @@
                         @endif
                     </tr>
                     <tr>
-                        <th scope="row" class="text-end w-25">{{ __('common.code') }}:</th>
-                        <td class="text-start w-25">{{ $meeting->code }}</td>
                         <th scope="row" class="text-end w-25">{{ __('common.meeting-title') }}:</th>
                         <td class="text-start w-25">
                             @if($meeting->status)
@@ -29,6 +27,8 @@
                             @endif
                             {{ $meeting->title }}
                         </td>
+                        <th scope="row" class="text-end w-25">{{ __('common.type') }}:</th>
+                        <td class="text-start w-25">{{ __('common.' . $meeting->type) }}</td>
                     </tr>
                     <tr>
                         <th scope="row" class="text-end w-25">{{ __('common.start-at') }}:</th>
@@ -107,6 +107,11 @@
                                 <h1 class="m-0 text-center"><span class="badge text-bg-dark">4.</span> {{ __('common.reports') }}</h1>
                             </div>
                             <div class="card-body">
+                                <a class="btn btn-outline-light btn-lg w-100" href="{{ route("portal.meeting.log.participant.index", ['meeting' => $meeting->id]) }}">
+                                    <span class="nav-icon fa-duotone fa-chart-user fa-fade"></span>
+                                    {{ __('common.participant-logs') }}
+                                </a>
+                                <hr />
                                 <a class="btn btn-outline-light btn-lg w-100" href="{{ route("portal.meeting.report.registration.index", ['meeting' => $meeting->id]) }}">
                                     <span class="nav-icon fa-duotone fa-chart-user fa-fade"></span>
                                     {{ __('common.registration-reports') }}

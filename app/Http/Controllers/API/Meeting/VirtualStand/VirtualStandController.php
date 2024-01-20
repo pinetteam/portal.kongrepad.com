@@ -4,19 +4,19 @@ namespace App\Http\Controllers\API\Meeting\VirtualStand;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\API\Meeting\VirtualStand\VirtualStandResource;
+use App\Http\Traits\ParticipantLog;
 use Illuminate\Http\Request;
 
 class VirtualStandController extends Controller
 {
+    use ParticipantLog;
     public function index(Request $request)
     {
         try{
-            $log = new \App\Models\Log\Meeting\Participant\Participant();
-            $log->participant_id = $request->user()->id;
-            $log->action = "get-virtual-stands";
-            $log->save();
+            $meeting = $request->user()->meeting;
+            $this->logParticipantAction($request->user()->id, "get-virtual-stands", __('common.meeting') . ': ' . $meeting->title);
             return [
-                'data' => VirtualStandResource::collection($request->user()->meeting->virtualStands()->where('meeting_virtual_stands.status', 1)->get())->shuffle(),
+                'data' => VirtualStandResource::collection($meeting->virtualStands()->where('meeting_virtual_stands.status', 1)->get())->shuffle(),
                 'status' => true,
                 'errors' => null
             ];
@@ -31,12 +31,10 @@ class VirtualStandController extends Controller
     public function show(Request $request, string $id)
     {
         try{
-            $log = new \App\Models\Log\Meeting\Participant\Participant();
-            $log->participant_id = $request->user()->id;
-            $log->action = "get-virtual-stand";
-            $log->save();
+            $stand = $request->user()->meeting->virtualStands()->where('meeting_virtual_stands.id',$id)->first();
+            $this->logParticipantAction($request->user()->id, "get-virtual-stand", $stand->title);
             return [
-                'data' => new VirtualStandResource($request->user()->meeting->virtualStands()->where('meeting_virtual_stands.id',$id)->first()),
+                'data' => new VirtualStandResource($stand),
                 'status' => true,
                 'errors' => null
             ];
