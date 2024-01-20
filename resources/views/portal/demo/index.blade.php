@@ -21,7 +21,7 @@
             <span class="visually-hidden">{{ __('common.loading') }}</span>
         </div>
     </div>
-        <div class="bg-image p-0 overflow-x-hidden" style="background-image: url('{{ URL::asset('images/registration.png')}}');background-size: cover;   background-repeat: no-repeat;background-position: center}">
+        <div class="bg-gradient bg-dark p-0 overflow-x-hidden text-white">
             <div class="row h-100">
                 <main class="ms-sm-auto px-md-4 flex-shrink-0" id="kp-main">
                     <div class="card bg-transparent border-0">
@@ -33,40 +33,40 @@
                                         <div class="col-md-6 offset-md-3 justify-content-center align-items-center">
                                             <div class="w-100 h-1 row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-xs-1 row-gap-1 d-block justify-content-center align-items-center overflow-auto">
                                                 <div class="row">
-                                                    <h1 class="m-0 text-center text-dark-emphasis">{{ __('common.demo-request') }}</h1>
+                                                    <h1 class="m-0 text-center text-white">{{ __('common.demo-request') }}</h1>
                                                 </div>
-                                                <hr/>
+                                                <hr class="text-white"/>
                                                 <div class="row">
-                                                    <div class="card bg-transparent border-0 text-dark-emphasis px-2">
+                                                    <div class="card bg-transparent border-0 text-white px-2">
                                                         <x-input.text method="c" name="title" title="title" icon="input-text" />
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="card bg-transparent border-0 text-dark-emphasis px-2">
+                                                    <div class="card bg-transparent border-0 text-white px-2">
                                                         <x-input.text method="c" name="email" title="email" icon="envelope" />
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="card bg-transparent border-0 text-dark-emphasis px-2">
+                                                    <div class="card bg-transparent border-0 text-white px-2">
                                                         <x-input.text method="c" name="username" title="username" icon="user" />
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="card bg-transparent border-0 text-dark-emphasis px-2">
+                                                    <div class="card bg-transparent border-0 text-white px-2">
                                                         <x-input.password method="c" name="password" title="password" icon="lock" />
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="card bg-transparent border-0 text-dark-emphasis px-2">
+                                                    <div class="card bg-transparent border-0 text-white px-2">
                                                         <x-input.password method="c" name="repeat_password" title="repeat-password" icon="lock" />
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="card bg-transparent border-0 text-dark-emphasisp-0 px-2">
+                                                    <div class="card bg-transparent border-0 text-white p-0 px-2">
                                                         <x-input.select method="c" name="timezone" title="timezone" :options="$timezones" option_value="value" option_name="title" icon="flag" :searchable="true" />                                                    </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="card bg-transparent border-0 text-dark-emphasis px-2">
+                                                    <div class="card bg-transparent border-0 text-white px-2">
                                                         <x-input.select method="c" name="time_format" title="time-format" :options="$time_formats" option_value="value" option_name="title" icon="clock" />
                                                     </div>
                                                 </div>
@@ -80,7 +80,7 @@
                                                         <button type="submit" class="btn btn-success w-100" id="demo-create-form-submit">
                                                             <span style="white-space: nowrap">{{ __('common.try-it-for-free')}}</span></button>
                                                     </div>
-                                                    <p class="mt-2">{{ __('common.do-you-have-an-account')}} <a href="{{ route('auth.login.index')}}" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">{{ __('common.sign-in')}}</a></p>
+                                                    <p class="mt-2 text-white">{{ __('common.do-you-have-an-account')}} <a href="{{ route('auth.login.index')}}" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover text-info">{{ __('common.sign-in')}}</a></p>
                                                 </div>
                                                 <div class="modal fade justify-content-center" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog justify-content-center">
