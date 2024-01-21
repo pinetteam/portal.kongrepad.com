@@ -16,7 +16,7 @@ class PointController extends Controller
     {
         try{
             $score_game = $request->user()->meeting->scoreGames()->first();
-            $this->logParticipantAction($request->user()->id, "get-score-game-points", __('common.score-game') . ': ' . $score_game->title);
+            $this->logParticipantAction($request->user(), "get-score-game-points", __('common.score-game') . ': ' . $score_game->title);
             return [
                 'data' => PointResource::collection($score_game->points()->get()->where('participant_id', $request->user()->id)),
                 'status' => true,
@@ -33,7 +33,7 @@ class PointController extends Controller
     public function store(Request $request, int $score_game)
     {
         $score_game = $request->user()->meeting->scoreGames()->first();
-        $this->logParticipantAction($request->user()->id, "scan-qr-code", __('common.score-game') . ': ' . $score_game->title);
+        $this->logParticipantAction($request->user(), "scan-qr-code", __('common.score-game') . ': ' . $score_game->title);
         if($request->user()->meeting->qrCodes()->get()->where('code', $request->input('code'))->count() == 0){
             return [
                 'data' => null,

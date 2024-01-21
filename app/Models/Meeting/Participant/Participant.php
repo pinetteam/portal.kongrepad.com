@@ -2,6 +2,7 @@
 
 namespace App\Models\Meeting\Participant;
 
+use App\Models\Log\Meeting\Participant\DailyAccess\DailyAccess;
 use App\Models\Meeting\Hall\Program\Session\Question\Question;
 use App\Models\Meeting\Meeting;
 use App\Models\Meeting\ScoreGame\Point\Point;
@@ -133,6 +134,10 @@ class Participant extends Model
     public function logs()
     {
         return $this->hasMany(\App\Models\Log\Meeting\Participant\Participant::class, 'participant_id', 'id');
+    }
+    public function dailyAccesses()
+    {
+        return $this->hasMany(DailyAccess::class, 'participant_id', 'id');
     }
     public function meeting()
     {

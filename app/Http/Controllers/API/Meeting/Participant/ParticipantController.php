@@ -14,7 +14,7 @@ class ParticipantController extends Controller
     {
         try{
             $participant = $request->user();
-            $this->logParticipantAction($request->user()->id, "get-participant", $participant->full_name);
+            $this->logParticipantAction($request->user(), "get-participant", $participant->full_name);
             return [
                 'data' => new ParticipantResource($participant),
                 'status' => true,

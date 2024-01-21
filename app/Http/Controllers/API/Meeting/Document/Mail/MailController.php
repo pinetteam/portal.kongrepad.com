@@ -26,7 +26,7 @@ class MailController extends Controller
                 ];
             }
         }
-        $this->logParticipantAction($request->user()->id, "send-mail", $request->input('documents'));
+        $this->logParticipantAction($request->user(), "send-mail", $request->input('documents'));
         return [
             'data' => null,
             'status' => true,
@@ -59,7 +59,7 @@ class MailController extends Controller
         try{
             $participant->requested_all_documents = 1;
             $participant->save();
-            $this->logParticipantAction($request->user()->id, "send-all-mail", __('common.meeting') . ': ' . $participant->meeting->title);
+            $this->logParticipantAction($request->user(), "send-all-mail", __('common.meeting') . ': ' . $participant->meeting->title);
         } catch (\Throwable $e){
             return [
                 'data' => null,

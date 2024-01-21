@@ -14,7 +14,7 @@ class VirtualStandController extends Controller
     {
         try{
             $meeting = $request->user()->meeting;
-            $this->logParticipantAction($request->user()->id, "get-virtual-stands", __('common.meeting') . ': ' . $meeting->title);
+            $this->logParticipantAction($request->user(), "get-virtual-stands", __('common.meeting') . ': ' . $meeting->title);
             return [
                 'data' => VirtualStandResource::collection($meeting->virtualStands()->where('meeting_virtual_stands.status', 1)->get())->shuffle(),
                 'status' => true,

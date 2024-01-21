@@ -14,7 +14,7 @@ class MeetingController extends Controller
     {
         try {
             $meeting = $request->user()->meeting;
-            $this->logParticipantAction($request->user()->id, "get-meeting", $meeting->title);
+            $this->logParticipantAction($request->user(), "get-meeting", $meeting->title);
             return [
                 'data' => new MeetingResource($meeting),
                 'status' => true,

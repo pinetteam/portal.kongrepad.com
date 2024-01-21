@@ -31,7 +31,7 @@ class VoteController extends Controller
             $vote->keypad_id = $keypad;
             try{
                 $vote->save();
-                $this->logParticipantAction($request->user()->id, "send-keypad-vote", $request->user()->meeting->keypads()->get()->where('id', $keypad)->first()->title);
+                $this->logParticipantAction($request->user(), "send-keypad-vote", $request->user()->meeting->keypads()->get()->where('id', $keypad)->first()->title);
                 return [
                     'data' => null,
                     'status' => true,

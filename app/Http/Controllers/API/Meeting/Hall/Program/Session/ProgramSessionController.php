@@ -13,7 +13,7 @@ class ProgramSessionController extends Controller
     public function index(Request $request, int $program){
         try{
             $program = $request->user()->meeting->programs()->findOrFail($program);
-            $this->logParticipantAction($request->user()->id, "get-sessions", __('common.program') . ': ' . $program->title);
+            $this->logParticipantAction($request->user(), "get-sessions", __('common.program') . ': ' . $program->title);
             return [
                 'data' => SessionResource::collection($program->sessions),
                 'status' => true,
@@ -34,7 +34,7 @@ class ProgramSessionController extends Controller
     {
         try{
             $session = $request->user()->meeting->programs()->findOrFail($program)->sessions->findOrFail($id);
-            $this->logParticipantAction($request->user()->id, "get-session", $session->title);
+            $this->logParticipantAction($request->user(), "get-session", $session->title);
             return [
                 'data' => new SessionResource($session),
                 'status' => true,

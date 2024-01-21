@@ -15,7 +15,7 @@ class AnnouncementController extends Controller
 
         try{
             $meeting = $request->user()->meeting;
-            $this->logParticipantAction($request->user()->id, "get-announcements", __('common.meeting') . ': ' . $meeting->title);;
+            $this->logParticipantAction($request->user(), "get-announcements", __('common.meeting') . ': ' . $meeting->title);;
             return [
                 'data' => AnnouncementResource::collection($meeting->announcements()->orderBy('created_at', 'desc')->get()),
                 'status' => true,
