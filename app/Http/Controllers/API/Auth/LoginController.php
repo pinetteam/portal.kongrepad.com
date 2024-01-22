@@ -23,7 +23,7 @@ class LoginController extends Controller
         $participant->gdpr_consent = true;
         $participant->enrolled = true;
         $participant->save();
-        $this->logParticipantAction($participant->id, "login", $participant->full_name);
+        $this->logParticipantAction($participant, "login", $participant->full_name);
         return response(['token' => $participant_token], 200);
     }
 }

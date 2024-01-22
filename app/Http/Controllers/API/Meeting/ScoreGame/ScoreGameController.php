@@ -14,7 +14,7 @@ class ScoreGameController extends Controller
     {
         try{
             $meeting = $request->user()->meeting;
-            $this->logParticipantAction($request->user()->id, "get-score-games", __('common.meeting') . ': ' . $meeting->title);
+            $this->logParticipantAction($request->user(), "get-score-games", __('common.meeting') . ': ' . $meeting->title);
             return [
                 'data' => new ScoreGameResource($meeting->scoreGames()->first()),
                 'status' => true,

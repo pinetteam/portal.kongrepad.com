@@ -86,6 +86,10 @@ class Meeting extends Model
             ->where('meetings.id', $this->getkey());
         return $chairs;
     }
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, 'customer_id', 'id');
+    }
     public function announcements()
     {
         return $this->hasMany(Announcement::class, 'meeting_id', 'id');

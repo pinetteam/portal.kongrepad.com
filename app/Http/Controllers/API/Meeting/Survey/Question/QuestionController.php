@@ -13,7 +13,7 @@ class QuestionController extends Controller
     public function index(Request $request, int $survey){
         try{
             $survey = $request->user()->meeting->surveys()->findOrFail($survey);
-            $this->logParticipantAction($request->user()->id, "get-survey-questions", __('common.survey') . ': ' . $survey->title);
+            $this->logParticipantAction($request->user(), "get-survey-questions", __('common.survey') . ': ' . $survey->title);
             return [
                 'data' => QuestionResource::collection($survey->questions()->get()),
                 'status' => true,
@@ -30,7 +30,7 @@ class QuestionController extends Controller
     public function show(Request $request, int $survey, int $id){
         try{
             $question = $request->user()->meeting->surveys()->findOrFail($survey)->questions()->findOrFail($id);
-            $this->logParticipantAction($request->user()->id, "get-survey-question", $question->title);
+            $this->logParticipantAction($request->user(), "get-survey-question", $question->title);
             return [
                 'data' => new QuestionResource($question),
                 'status' => true,

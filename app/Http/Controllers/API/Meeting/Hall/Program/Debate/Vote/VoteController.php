@@ -24,7 +24,7 @@ class VoteController extends Controller
             $vote->debate_id = $debate;
             try{
                 $vote->save();
-                $this->logParticipantAction($request->user()->id, "send-debate-vote", $request->user()->meeting->debates()->get()->where('id', $debate)->first()->title);
+                $this->logParticipantAction($request->user(), "send-debate-vote", $request->user()->meeting->debates()->get()->where('id', $debate)->first()->title);
                 return [
                     'data' => null,
                     'status' => true,

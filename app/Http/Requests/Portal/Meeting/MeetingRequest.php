@@ -48,6 +48,7 @@ class MeetingRequest extends FormRequest
             'code' => __('common.code'),
             'banner' => __('common.banner'),
             'title' => __('common.title'),
+            'type' => __('common.type'),
             'start_at' => __('common.start-at'),
             'finish_at' => __('common.finish-at'),
             'status' => __('common.status'),

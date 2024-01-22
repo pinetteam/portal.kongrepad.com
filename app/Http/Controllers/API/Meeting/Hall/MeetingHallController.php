@@ -18,7 +18,7 @@ class MeetingHallController extends Controller
     {
         try{
             $meeting = $request->user()->meeting;
-            $this->logParticipantAction($request->user()->id, "get-halls", __('common.meeting') . ': ' . $meeting->title);
+            $this->logParticipantAction($request->user(), "get-halls", __('common.meeting') . ': ' . $meeting->title);
             return [
                 'data' => HallResource::collection($meeting->halls()->get()),
                 'status' => true,
@@ -38,7 +38,7 @@ class MeetingHallController extends Controller
     {
         try{
             $hall = $request->user()->meeting->halls()->findOrFail($id);
-            $this->logParticipantAction($request->user()->id, "get-hall", $hall->title);
+            $this->logParticipantAction($request->user(), "get-hall", $hall->title);
             return [
                 'data' => new HallResource($hall),
                 'status' => true,
@@ -64,7 +64,7 @@ class MeetingHallController extends Controller
         }
         $keypad = $session->keypads()->where('on_vote', 1)->first();
         $result = [];
-        $this->logParticipantAction($request->user()->id, "get-active-keypad", __('common.hall') . ': ' . $meeting_hall->title);
+        $this->logParticipantAction($request->user(), "get-active-keypad", __('common.hall') . ': ' . $meeting_hall->title);
         if(isset($keypad)) {
             $result['data'] = new KeypadResource($keypad);
             $result['status'] = true;
@@ -82,7 +82,7 @@ class MeetingHallController extends Controller
         $meeting_hall =  $request->user()->meeting->halls()->where("meeting_halls.id", $id)->first();
         $debate = $meeting_hall->debates()->where('on_vote', 1)->first();
         $result = [];
-        $this->logParticipantAction($request->user()->id, "get-active-debate", __('common.hall') . ': ' . $meeting_hall->title);
+        $this->logParticipantAction($request->user(), "get-active-debate", __('common.hall') . ': ' . $meeting_hall->title);
         if(isset($debate)) {
             $result['data'] = new DebateResource($debate);
             $result['status'] = true;
@@ -100,7 +100,7 @@ class MeetingHallController extends Controller
         $meeting_hall = $request->user()->meeting->halls()->findOrFail($id);
         $session = $meeting_hall->programSessions()->where('on_air', 1)->first();
         $result = [];
-        $this->logParticipantAction($request->user()->id, "get-active-document", __('common.hall') . ': ' . $meeting_hall->title);
+        $this->logParticipantAction($request->user(), "get-active-document", __('common.hall') . ': ' . $meeting_hall->title);
         if(isset($session)) {
             if(isset($session->document)) {
                 $result['data'] = new DocumentResource($session->document);
@@ -124,7 +124,7 @@ class MeetingHallController extends Controller
         $meeting_hall = $request->user()->meeting->halls()->findOrFail($id);
         $session = $meeting_hall->programSessions()->where('on_air', 1)->first();
         $result = [];
-        $this->logParticipantAction($request->user()->id, "get-active-session", __('common.hall') . ': ' . $meeting_hall->title);
+        $this->logParticipantAction($request->user(), "get-active-session", __('common.hall') . ': ' . $meeting_hall->title);
         if(isset($session)) {
             $result['data'] = new SessionResource($session);
             $result['status'] = true;

@@ -14,7 +14,7 @@ class SurveyController extends Controller
     {
         try{
             $meeting = $request->user()->meeting;
-            $this->logParticipantAction($request->user()->id, "get-surveys", __('common.meeting') . ': ' . $meeting->title);
+            $this->logParticipantAction($request->user(), "get-surveys", __('common.meeting') . ': ' . $meeting->title);
             return [
                 'data' => SurveyResource::collection( $meeting->surveys()->get())->additional(['some_id => 1']),
                 'status' => true,

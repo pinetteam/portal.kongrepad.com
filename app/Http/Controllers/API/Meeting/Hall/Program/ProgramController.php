@@ -26,7 +26,7 @@ class ProgramController extends Controller
                 array_push($result, ['day' => $key, 'programs' => $val]);
             }
 
-            $this->logParticipantAction($request->user()->id, "get-programs", __('common.hall') . ': ' . $hall->title);
+            $this->logParticipantAction($request->user(), "get-programs", __('common.hall') . ': ' . $hall->title);
             return [
                 'data' => $result,
                 'status' => true,
@@ -46,7 +46,7 @@ class ProgramController extends Controller
     {
         try{
             $program = $request->user()->meeting->halls()->findOrFail($hall)->programs()->findOrFail($id);
-            $this->logParticipantAction($request->user()->id, "get-program", $program->title);
+            $this->logParticipantAction($request->user(), "get-program", $program->title);
             return [
                 'data' => new ProgramResource($program),
                 'status' => true,
