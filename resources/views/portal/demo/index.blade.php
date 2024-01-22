@@ -70,16 +70,16 @@
                                                         <x-input.select method="c" name="time_format" title="time-format" :options="$time_formats" option_value="value" option_name="title" icon="clock" />
                                                     </div>
                                                 </div>
-                                                <div class="row row-cols-1 row-cols-md-2 row-cols-sm-1 row-cols-xl-2 justify-content-center mt-2">
-                                                    <div class="col mb-2">
-                                                        <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                            <span class="fa-plus" style="white-space: nowrap;"> {{ __('common.add-more-information') }}</span>
-                                                        </button>
+                                                <div class="row row-cols-1 row-cols-md-1 row-cols-sm-1 row-cols-xl-1 justify-content-center mt-2">
+                                                    <div class="btn-group gap-2 d-flex">
+                                                            <button type="button" class="btn btn-primary w-100 btn-block" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                                <span class="fa-plus" style="white-space: normal;"> {{ __('common.add-more-information') }}</span>
+                                                            </button>
+                                                            <button type="submit" class="btn btn-success w-100 btn-block" id="demo-create-form-submit">
+                                                                <span style="white-space: nowrap">{{ __('common.try-it-for-free')}}</span></button>
                                                     </div>
-                                                    <div class="col">
-                                                        <button type="submit" class="btn btn-success w-100" id="demo-create-form-submit">
-                                                            <span style="white-space: nowrap">{{ __('common.try-it-for-free')}}</span></button>
-                                                    </div>
+                                                </div>
+                                                <div class="row">
                                                     <p class="mt-2 text-white">{{ __('common.do-you-have-an-account')}} <a href="{{ route('auth.login.index')}}" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover text-info">{{ __('common.sign-in')}}</a></p>
                                                 </div>
                                                 <div class="modal fade justify-content-center" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
