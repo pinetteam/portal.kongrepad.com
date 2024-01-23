@@ -18,12 +18,7 @@ class LoginController extends Controller
     public function store(Request $request)
     {
         $credentials = $request->only('username', 'password');
-        if ($request->has('remember.0')) {
-            $remember = true;
-        } else {
-            $remember = false;
-        }
-        if(Auth::attempt($credentials, $remember)) {
+        if(Auth::attempt($credentials, $request->has('remember.0'))) {
             $user = Auth::user();
             $user->last_login_ip = $_SERVER['REMOTE_ADDR'];
             $user->last_login_agent = $_SERVER['HTTP_USER_AGENT'];

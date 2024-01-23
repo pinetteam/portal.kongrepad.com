@@ -9,6 +9,7 @@ use App\Models\Customer\Setting\Setting;
 use App\Models\System\Country\Country;
 use App\Models\User\User;
 use Faker\Factory;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
@@ -178,8 +179,8 @@ class LicenseController extends Controller
                         'last_name' => $request->input('username'),
                         'email' => $request->input('email'),
                         'email_verified_at' => now(),
-                        'phone_country_id' => '223',
-                        'phone' => '5555555555',
+                        'phone_country_id' => Country::where('phone_code', $request->input('phone_country'))->first()->id,
+                        'phone' => $request->input('phone'),
                         'phone_verified_at' => now(),
                         'password' => bcrypt($request->input('password')),
                         'register_ip' => $faker1->ipv4,
@@ -190,7 +191,15 @@ class LicenseController extends Controller
                         'status' => 1,
                     ],
                 ]);
-                return back()->with('success', __('common.demo-account-created-successfully'));
+                $credentials = $request->only('username', 'password');
+                if(Auth::attempt($credentials)){
+                    $user = Auth::user();
+                    $user->last_login_ip = $_SERVER['REMOTE_ADDR'];
+                    $user->last_login_agent = $_SERVER['HTTP_USER_AGENT'];
+                    $user->last_login_datetime = date("Y-m-d H:i:s");
+                    $user->save();
+                    return redirect()->route('portal.dashboard.index')->with('success', __('common.demo-account-created-successfully'));
+                }
             } else {
                 return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();
             }

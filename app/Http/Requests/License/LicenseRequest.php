@@ -27,12 +27,12 @@ class LicenseRequest extends FormRequest
                     'web-address' => 'nullable|max:255',
                     'address' => 'nullable|max:512',
                     'repeat_password' => 'required_with:password|same:password|min:6',
-                    'phone_country' => 'nullable|required_with:phone',
+                    'phone_country' => 'required|required_with:phone',
+                    'phone' => 'required|max:31|required_with:phone_country_id',
                     'timezone' => 'nullable',
                     'time_format' => 'nullable',
                     'date_format' => 'nullable',
                     'datetime_format' => 'nullable',
-                    'phone' => 'nullable|max:31|required_with:phone_country_id',
                 ];
             }
             default:break;
@@ -46,7 +46,9 @@ class LicenseRequest extends FormRequest
             'username' => __('common.username'),
             'password' => __('common.password'),
             'repeat_password' => __('common.repeat-password'),
-            'phone_country_id' => __('common.phone-country'),
+            'phone_country' => __('common.phone-country'),
+            'web_address' => __('common.web_address'),
+            'address' => __('common.address'),
             'timezone' => __('common.timezone'),
             'time_format' => __('common.time-format'),
             'date_format' => __('common.date-format'),

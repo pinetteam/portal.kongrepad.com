@@ -25,11 +25,9 @@
     <script src="https://unpkg.com/slim-select@latest/dist/slimselect.min.js"></script>
     <link href="https://unpkg.com/slim-select@latest/dist/slimselect.css" rel="stylesheet">
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var selects = selects || {}
-            selects['{{ $method }}-{{ $name }}'] = new SlimSelect({
-                select: "#{{ $method }}-{{ $name }}"
-            });
+        var selects = selects || {}
+        selects['{{ $method }}-{{ $name }}'] = new SlimSelect({
+            select: "#{{ $method }}-{{ $name }}"
         });
     </script>
 @endif

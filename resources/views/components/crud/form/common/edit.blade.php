@@ -1,5 +1,5 @@
 @props(['name' => 'default', 'method' => 'e'])
-<div class="modal fade" id="{{ $name }}-edit-modal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="#{{ $name }}-edit-modal-label" aria-hidden="true">
+<div class="modal fade" id="{{ $name }}-edit-modal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="#{{ $name }}-edit-modal-label" aria-hidden="true" data-bs-focus="false">
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content bg-dark">
             <form method="POST" action="" name="{{ $name }}-edit-form" id="{{ $name }}-edit-form" enctype="multipart/form-data" autocomplete="nope">
@@ -92,7 +92,7 @@
                             const selectElement = editModal.querySelector('#{{ $method }}-' + key);
                             if (selectElement !== null) {
                                 selectElement.value = value['value'];
-                                if(selects['{{ $method }}-' + key] != null){
+                                if(typeof selects !== 'undefined' && selects['{{ $method }}-' + key] != null){
                                     selects['{{ $method }}-' + key].setSelected(value['value'].toString())
                                 }
                             }
