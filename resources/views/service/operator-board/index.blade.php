@@ -45,7 +45,7 @@
                             </div>
                             @isset($timer_screen)
                             <div class="card-body p-0 m-2">
-                                <div class="container-fluid p-2">
+                                <div class="container-fluid p-4">
                                         <div class="row-col-1 justify-content-start align-items-center">
                                             <div class="col-lg-6 form-group mb-3">
                                                 <form method="POST" action="{{ route('service.screen-board.timer-screen', ['code' => $timer_screen->code, 'action' => 'edit']) }}" name="create-form-{{ $timer_screen->id }}" id="create-form-{{ $timer_screen->id }}" enctype="multipart/form-data" autocomplete="nope">
