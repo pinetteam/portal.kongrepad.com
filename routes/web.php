@@ -56,7 +56,7 @@ Route::prefix('/service')->name('service.')->group(function () {
 });
 
 // Demo Request routes
-Route::resource('/demo', \App\Http\Controllers\License\LicenseController::class)->except(['create']);
+Route::resource('/register', \App\Http\Controllers\License\LicenseController::class)->except(['create']);
 // System routes
 Route::get('/get-date-format', [\App\Http\Controllers\System\Setting\Variable\VariableController::class, 'getDateFormat'])->name('get-date-format');
 Route::get('/get-time-format', [\App\Http\Controllers\System\Setting\Variable\VariableController::class, 'getTimeFormat'])->name('get-time-format');

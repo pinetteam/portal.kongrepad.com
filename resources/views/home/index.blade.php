@@ -11,33 +11,29 @@
     @vite(['resources/sass/app.scss'])
     @vite(['resources/js/app.js'])
 </head>
-<header class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow justify-content-center" id="kp-header">
-    <img src="{{ asset('images/kongrepad-icon.png') }}" class="img-fluid my-2" width="60" alt="KongrePad 01" />
+<header class="navbar navbar-dark fixed-top bg-dark p-0 shadow" id="kp-header">
+    <a class="navbar-brand ms-3 overflow-hidden ps-3" href="{{ route("auth.login.index") }}">
+        {{ config('app.name') }}
+    </a>
 </header>
-<body class="d-flex flex-column h-100 bg-dark pt-5">
+<body class="d-flex flex-column h-100 bg-dark">
     <div id="kp-loading" class="d-flex align-items-center justify-content-center">
         <div class="spinner-grow text-success" role="status">
             <span class="visually-hidden">{{ __('common.loading') }}</span>
         </div>
     </div>
-    <div class="container" id="kp-home">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-2 gy-3 py-3">
-            <div class="col pt-2">
-                <div class="card text-bg-dark border-0">
-                    <div class="card-body text-center">
-                        <h1 class="border-bottom border-dark-subtle pt-4 pb-2">KongrePad'i indirin</h1>
-                        <div class="row">
-                            <div class="col">
-                                <a href="https://apps.apple.com/tr/app/kongrepad/id6463897045" target="_blank" title="KongrePad AppStore">
-                                    <img src="{{ asset('images/app-store-download.svg') }}" class="img-fluid" alt="KongrePad AppStore" />
-                                </a>
-                            </div>
-                            <div class="col">
-                                <a href="https://play.google.com/store/apps/details?id=com.pinet.kongrepad&gl=TR" target="_blank" title="KongrePad PlayStore">
-                                    <img src="{{ asset('images/play-store-download.svg') }}" class="img-fluid" alt="KongrePad PlayStore" />
-                                </a>
-                            </div>
-                        </div>
+    <div class="container mt-4" id="kp-home">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-2 gy-3 py-3 align-items-center">
+            <div class="col mt-0">
+                <h1 class="border-bottom border-dark-subtle  text-white text-center">{{ __('common.welcome-to-kongrepad')}}</h1>
+                <div class="row pt-2">
+                    <div class="col">
+                        <a href="{{ route('auth.login.index')}}" class="btn btn-primary w-100 btn-block rounded-2" tabindex="-1" role="button" aria-disabled="true">{{ __('common.sign-in')}}</a>
+                    </div>
+                    <div class="col">
+                        <a href="{{ route('register.index')}}" class="btn btn-success w-100 btn-block rounded-2" tabindex="-1" role="button" aria-disabled="true">
+                            <span style="white-space: nowrap">{{ __('common.try-it-for-free')}}</span>
+                        </a>
                     </div>
                 </div>
             </div>

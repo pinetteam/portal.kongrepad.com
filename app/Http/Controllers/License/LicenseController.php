@@ -96,7 +96,7 @@ class LicenseController extends Controller
             'H:i:s' => ['value' => 'H:i:s', 'title' => 'H:i:s'],
             'H:i' => ['value' => 'H:i', 'title' => 'H:i'],
         ];
-        return view('portal.demo.index', compact(['phone_countries', 'time_formats', 'date_formats', 'datetime_formats', 'timezones']));
+        return view('portal.register.index', compact(['phone_countries', 'time_formats', 'date_formats', 'datetime_formats', 'timezones']));
     }
     public function store(LicenseRequest $request)
     {

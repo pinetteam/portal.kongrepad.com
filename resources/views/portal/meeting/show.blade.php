@@ -12,7 +12,7 @@
                 <table class="table table-dark table-striped-columns table-bordered">
                     <tr>
                         @if(isset($meeting->banner_name) && isset($meeting->banner_extension))
-                            <img src="{{ asset('storage/meeting-banners/' . $meeting->banner_name . '.' . $meeting->banner_extension) }}" alt="{{ $meeting->title }}" width="720" height="180">
+                            <img class="img-fluid mx-auto d-block mb-2 w-100" src="{{ asset('storage/meeting-banners/' . $meeting->banner_name . '.' . $meeting->banner_extension) }}" alt="{{ $meeting->title }}">
                         @else
                             <i class="text-info">{{ __('common.unspecified') }}</i>
                         @endif

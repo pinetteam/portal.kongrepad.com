@@ -309,7 +309,7 @@ return [
     'first-you-should-start-session' => 'First you should start session',
     'resend-voting' => 'Resend voting',
     'repeat-password' => 'Repeat password',
-    'demo-request' => 'Demo Request',
+    'demo-request' => 'Registration Request',
     'theme' => 'Theme',
     'web-address' => 'Web address',
     'demo-account-created-successfully' => 'Demo account created successfully',
@@ -323,4 +323,5 @@ return [
     'object' => 'Object',
     'participant-logs' => 'Participant logs',
     'logs' => 'Logs',
+    'welcome-to-kongrepad' => 'Welcome to Kongrepad!',
 ];

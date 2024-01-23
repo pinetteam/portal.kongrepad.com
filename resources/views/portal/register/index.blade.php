@@ -27,7 +27,7 @@
                     <div class="card bg-transparent border-0">
                         <div class="card-body m-2 justify-content-center w-100">
                             <div class="container text-center justify-content-center align-items-center">
-                                <form method="POST" action="{{ route('demo.store') }}" name="demo-create-form" id="demo-create-form" enctype="multipart/form-data" autocomplete="nope">
+                                <form method="POST" action="{{ route('register.store') }}" name="demo-create-form" id="demo-create-form" enctype="multipart/form-data" autocomplete="nope">
                                     @csrf
                                     <div class=" w-100 container justify-content-center align-items-center d-block">
                                         <div class="col-md-6 offset-md-3 justify-content-center align-items-center">

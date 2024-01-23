@@ -35,9 +35,9 @@
                     <th scope="row" class="text-end w-25">{{ __('common.is-published') }}:</th>
                     <td class="text-start w-25">
                     @if($announcement->is_published)
-                        <i style="color:green" class="fa-regular fa-toggle-large-on"></i>
+                        <i style="color:green" class="fa-regular fa-toggle-on"></i>
                     @else
-                        <i style="color:red" class="fa-regular fa-toggle-large-off"></i>
+                        <i style="color:red" class="fa-regular fa-toggle-off"></i>
                     @endif
                     </td>
                     <th scope="row" class="text-end w-25">{{ __('common.publish-at') }}:</th>

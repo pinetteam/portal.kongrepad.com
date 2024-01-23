@@ -1,7 +1,7 @@
 @extends('layout.portal.common')
 @section('title', $meeting->title .' | ' . __('common.announcements'))
 @section('breadcrumb')
-    <li class="breadcrumb-item text-white"><a href="{{ route("portal.meeting.index") }}" class=" text-white text-decoration-none">{{ __('common.meetings') }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route("portal.meeting.index") }}" class=" text-white text-decoration-none">{{ __('common.meetings') }}</a></li>
     <li class="breadcrumb-item"><a href="{{ route('portal.meeting.show', $meeting->id) }}" class="text-decoration-none text-white">{{ $meeting->title }}</a></li>
     <li class="breadcrumb-item active text-decoration-underline text-white" aria-current="page">{{ __('common.announcements') }}</li>
 @endsection
