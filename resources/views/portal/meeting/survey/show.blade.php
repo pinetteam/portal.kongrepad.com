@@ -214,7 +214,6 @@
     <x-crud.form.common.edit method="e-o" name="option">
         @section('option-edit-form')
             <x-input.hidden method="e-o" name="survey_id" :value="$survey->id"/>
-            <x-input.hidden method="e-o" name="question_id" value="1"/>
             <x-input.text method="e-o" name="option" title="option" icon="list-dropdown"/>
             <x-input.number method="e-o" name="sort_order" title="sort" icon="circle-sort"/>
             <x-input.radio method="e-o" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on"/>

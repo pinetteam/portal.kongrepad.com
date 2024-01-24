@@ -39,7 +39,6 @@ class OptionController extends Controller
         if ($request->validated()) {
             $option = Auth::user()->customer->surveyOptions()->findOrFail($id);
             $option->sort_order = $request->input('sort_order');
-            $option->question_id = $request->input('question_id');
             $option->status= $request->input('status');
             $option->option = $request->input('option');
             if ($option->save()) {

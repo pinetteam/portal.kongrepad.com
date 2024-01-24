@@ -15,12 +15,21 @@ class OptionRequest extends FormRequest
     {
         switch($this->method())
         {
-            case 'POST' || 'PATCH' || 'PUT':
+            case 'POST':
             {
                 return [
                     'sort_order' => 'nullable|integer',
                     'survey_id' => 'required|exists:meeting_surveys,id',
                     'question_id' => 'required|exists:meeting_survey_questions,id',
+                    'option' => 'required|max:255',
+                    'status' => 'required|boolean',
+                ];
+            }
+            case 'PATCH' || 'PUT':
+            {
+                return [
+                    'sort_order' => 'nullable|integer',
+                    'survey_id' => 'required|exists:meeting_surveys,id',
                     'option' => 'required|max:255',
                     'status' => 'required|boolean',
                 ];

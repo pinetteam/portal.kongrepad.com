@@ -38,10 +38,6 @@ function initializeDatePicker(element) {
         });
 
     const datePicker = new TempusDominus(element, {
-        localization: {
-            locale: 'tr-TR',
-            format: 'DD/MM/YYYY'
-        },
         display: {
             viewMode: 'calendar',
             components: {
@@ -81,10 +77,6 @@ function initializeTimePicker(element) {
         });
 
     const timePicker = new TempusDominus(element, {
-        localization: {
-            locale: 'tr-TR',
-            format: 'HH:mm'
-        },
         display: {
             viewMode: 'clock',
             components: {
@@ -102,9 +94,9 @@ function initializeTimePicker(element) {
             buttons: {
                 today: false,
                 clear: false
-            },
-            useCurrent: false
-        }
+            }
+        },
+        useCurrent: false
     });
     timePicker.dates.formatInput = date => moment(date).format(timeFormat);
 }
@@ -124,10 +116,6 @@ function initializeDateTimePicker(element) {
             console.error('Error fetching date format:', error);
         });
     const dateTimePicker = new TempusDominus(element, {
-        localization: {
-            locale: 'tr-TR',
-            format: 'DD/MM/YYYY HH:mm'
-        },
         display: {
             viewMode: 'calendar',
             components: {
@@ -145,9 +133,9 @@ function initializeDateTimePicker(element) {
             buttons: {
                 today: false,
                 clear: false
-            },
-            useCurrent: false
-        }
+            }
+        },
+        useCurrent: false
     });
     dateTimePicker.dates.formatInput = date => moment(date).format(dateTimeFormat);
 }

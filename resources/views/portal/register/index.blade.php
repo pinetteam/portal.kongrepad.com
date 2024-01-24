@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{{ config('app.name') . ' | ' . __('common.demo-request')}}</title>
+    <title>{{ config('app.name') . ' | ' . __('common.register')}}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
     @vite(['resources/sass/app.scss'])
@@ -27,13 +27,13 @@
                     <div class="card bg-transparent border-0">
                         <div class="card-body m-2 justify-content-center w-100">
                             <div class="container text-center justify-content-center align-items-center">
-                                <form method="POST" action="{{ route('register.store') }}" name="demo-create-form" id="demo-create-form" enctype="multipart/form-data" autocomplete="nope">
+                                <form method="POST" action="{{ route('register.store') }}" name="register-create-form" id="register-create-form" enctype="multipart/form-data" autocomplete="nope">
                                     @csrf
                                     <div class=" w-100 container justify-content-center align-items-center d-block">
                                         <div class="col-md-6 offset-md-3 justify-content-center align-items-center">
                                             <div class="w-100 h-1 row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-xs-1 row-gap-1 d-block justify-content-center align-items-center overflow-auto">
                                                 <div class="row">
-                                                    <h1 class="m-0 text-center text-white">{{ __('common.demo-request') }}</h1>
+                                                    <h1 class="m-0 text-center text-white">{{ __('common.register') }}</h1>
                                                 </div>
                                                 <hr class="text-white"/>
                                                 <div class="row">
@@ -75,7 +75,7 @@
                                                             <button type="button" class="btn btn-primary w-100 btn-block" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                                                 <span class="fa-plus" style="white-space: normal;"> {{ __('common.add-more-information') }}</span>
                                                             </button>
-                                                            <button type="submit" class="btn btn-success w-100 btn-block" id="demo-create-form-submit">
+                                                            <button type="submit" class="btn btn-success w-100 btn-block" id="register-create-form-submit">
                                                                 <span style="white-space: nowrap">{{ __('common.try-it-for-free')}}</span></button>
                                                     </div>
                                                 </div>
@@ -122,7 +122,7 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    <button type="submit" class="btn btn-success w-100 my-2" id="demo-create-form-submit">{{ __('common.try-it-for-free') }}</button>
+                                                                    <button type="submit" class="btn btn-success w-100 my-2" id="register-create-form-submit">{{ __('common.try-it-for-free') }}</button>
                                                                 </div>
                                                             </div>
                                                         </div>

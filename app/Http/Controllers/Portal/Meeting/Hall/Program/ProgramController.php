@@ -75,15 +75,16 @@ class ProgramController extends Controller
     public function show(int $meeting, int $hall, int $id)
     {
         $hall = Auth::user()->customer->halls()->findOrFail($hall);
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
         $program = $hall->programs()->findOrFail($id);
         $statuses = [
             'passive' => ['value' => 0, 'title' => __('common.passive'), 'color' => 'danger'],
             'active' => ['value' => 1, 'title' => __('common.active'), 'color' => 'success'],
         ];
         if($program->type=='session') {
-            $documents = Auth::user()->customer->documents()->get();
-            $chairs = Auth::user()->customer->participants()->whereNotIn('meeting_participants.id', $program->programChairs()->pluck('meeting_hall_program_chairs.chair_id'))->whereNot('meeting_participants.type', 'team')->get();
-            $speakers = Auth::user()->customer->participants()->whereNot('meeting_participants.type', 'team')->get();
+            $documents = $meeting->documents()->get();
+            $chairs = $meeting->participants()->whereNotIn('meeting_participants.id', $program->programChairs()->pluck('meeting_hall_program_chairs.chair_id'))->whereNot('meeting_participants.type', 'team')->get();
+            $speakers = $meeting->participants()->whereNot('meeting_participants.type', 'team')->get();
             $program_chairs = $program->programChairs()->get();
             $program_sessions = $program->sessions()->get();
             $questions = [
@@ -101,7 +102,7 @@ class ProgramController extends Controller
             return view('portal.meeting.hall.program.show-session', compact(['documents', 'chairs', 'chair_types', 'speakers', 'program', 'program_chairs', 'program_sessions', 'questions', 'questions_auto_start', 'statuses']));
         } else if($program->type == 'debate') {
             $debates = $program->debates()->get();
-            $chairs = Auth::user()->customer->participants()->whereNotIn('meeting_participants.id', $program->programChairs()->pluck('meeting_hall_program_chairs.chair_id'))->whereNot('meeting_participants.type', 'team')->get();
+            $chairs = $meeting->participants()->whereNotIn('meeting_participants.id', $program->programChairs()->pluck('meeting_hall_program_chairs.chair_id'))->whereNot('meeting_participants.type', 'team')->get();
             $program_chairs = $program->programChairs()->get();
             $chair_types = [
                 'chair' => ['value' => 'chair', 'title' => __('common.chair')],

@@ -15,7 +15,7 @@ class QuestionController extends Controller
             $survey = $request->user()->meeting->surveys()->findOrFail($survey);
             $this->logParticipantAction($request->user(), "get-survey-questions", __('common.survey') . ': ' . $survey->title);
             return [
-                'data' => QuestionResource::collection($survey->questions()->get()),
+                'data' => QuestionResource::collection($survey->questions()->where('status', 1)->get()),
                 'status' => true,
                 'errors' => null
             ];

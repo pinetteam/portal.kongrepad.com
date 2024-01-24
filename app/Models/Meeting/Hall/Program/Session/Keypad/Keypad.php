@@ -73,7 +73,7 @@ class Keypad extends Model
     }
     public function options()
     {
-        return $this->hasMany(Option::class, 'keypad_id', 'id');
+        return $this->hasMany(Option::class, 'keypad_id', 'id')->orderBy('sort_order');
     }
     public function votes()
     {

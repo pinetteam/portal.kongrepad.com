@@ -29,5 +29,8 @@
         selects['{{ $method }}-{{ $name }}'] = new SlimSelect({
             select: "#{{ $method }}-{{ $name }}"
         });
+        if("{{ old($name )}}" !== "") {
+            selects['{{ $method }}-{{ $name }}'].setSelected("{{ old($name )}}");
+        }
     </script>
 @endif

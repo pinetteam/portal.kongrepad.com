@@ -52,6 +52,7 @@
                         } else if(value['type'] === 'date') {
                             const dateElement = editModal.querySelector('#{{ $method }}-' + key);
                             if (dateElement !== null) {
+                                console.log(value['value']);
                                 dateElement.value = value['value'];
                             }
                         } else if(value['type'] === 'datetime') {
@@ -92,7 +93,7 @@
                             const selectElement = editModal.querySelector('#{{ $method }}-' + key);
                             if (selectElement !== null) {
                                 selectElement.value = value['value'];
-                                if(typeof selects !== 'undefined' && selects['{{ $method }}-' + key] != null){
+                                if(typeof selects !== 'undefined' && selects['{{ $method }}-' + key] != null && value['value'] !== null){
                                     selects['{{ $method }}-' + key].setSelected(value['value'].toString())
                                 }
                             }

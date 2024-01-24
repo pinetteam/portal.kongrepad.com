@@ -324,4 +324,5 @@ return [
     'participant-logs' => 'Participant logs',
     'logs' => 'Logs',
     'welcome-to-kongrepad' => 'Welcome to Kongrepad!',
+    'register' => 'Register',
 ];

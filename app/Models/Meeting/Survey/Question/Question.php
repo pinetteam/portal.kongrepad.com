@@ -42,7 +42,7 @@ class Question extends Model
     }
     public function options()
     {
-        return $this->hasMany(Option::class, 'question_id', 'id');
+        return $this->hasMany(Option::class, 'question_id', 'id')->orderBy('sort_order');
     }
     public function votes()
     {

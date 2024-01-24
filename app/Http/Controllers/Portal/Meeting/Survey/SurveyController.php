@@ -72,7 +72,7 @@ class SurveyController extends Controller
             if ($survey->save()) {
                 $survey->updated_by = Auth::user()->id;
                 $survey->save();
-                return back()->with('success',__('common.created-successfully'));
+                return back()->with('success',__('common.edited-successfully'));
             } else {
                 return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
             }
@@ -90,21 +90,4 @@ class SurveyController extends Controller
             return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();
         }
     }
-    /*
-    public function start_stop(string $meeting, string $id)
-    {
-        $survey = Auth::user()->customer->surveys()->findOrFail($id);
-        $survey->on_vote = !$survey->on_vote;
-        if ($survey->save()) {
-            if($survey->on_vote){
-                return back()->with('success',__('common.voting-started'));
-            }
-            else{
-                return back()->with('success',__('common.voting-stopped'));
-            }
-        } else {
-            return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
-        }
-    }
-    */
 }

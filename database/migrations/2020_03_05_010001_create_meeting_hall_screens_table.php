@@ -18,7 +18,7 @@ return new class extends Migration
             $table->uuid('background_name')->unique()->nullable();
             $table->string('background_extension')->nullable();
             $table->enum('font', ['Roboto', 'Hedvig Letters Serif', 'Open Sans', 'Montserrat', 'Nunito'])->default('Roboto');
-            $table->unsignedInteger('font_size')->default(72)->nullable();
+            $table->unsignedInteger('font_size')->default(72);
             $table->unsignedInteger('current_object_id')->nullable();
             $table->string('font_color', 7)->default('#FFFFFF');
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
