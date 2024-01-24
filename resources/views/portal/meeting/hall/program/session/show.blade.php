@@ -1,12 +1,12 @@
 @extends('layout.portal.common')
 @section('title', $session->title)
 @section('breadcrumb')
-    <li class="breadcrumb-item text-white"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none text-white">{{ __('common.meetings') }}</a></li>
-    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.show', $session->program->hall->meeting->id) }}" class="text-decoration-none">{{ $session->program->hall->meeting->title }}</a></li>
-    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.hall.index', ['meeting' => $session->program->hall->meeting->id]) }}" class="text-decoration-none text-white">{{ __('common.halls') }}</a></li>
-    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.hall.show', ['meeting' => $session->program->hall->meeting->id, 'hall' => $session->program->hall->id]) }}" class="text-decoration-none">{{ $session->program->hall->title }}</a></li>
-    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.hall.program.index', ['meeting' => $session->program->hall->meeting->id, 'hall' => $session->program->hall->id]) }}" class="text-decoration-none text-white">{{ __('common.programs') }}</a></li>
-    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.hall.program.show', ['meeting' => $session->program->hall->meeting->id, 'hall' => $session->program->hall->id, 'program' => $session->program->id]) }}" class="text-decoration-none text-white">{{ $session->program->title }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none text-white">{{ __('common.meetings') }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.show', $session->program->hall->meeting->id) }}" class="text-decoration-none text-white">{{ $session->program->hall->meeting->title }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.hall.index', ['meeting' => $session->program->hall->meeting->id]) }}" class="text-decoration-none text-white">{{ __('common.halls') }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.hall.show', ['meeting' => $session->program->hall->meeting->id, 'hall' => $session->program->hall->id]) }}" class="text-decoration-none text-white">{{ $session->program->hall->title }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.hall.program.index', ['meeting' => $session->program->hall->meeting->id, 'hall' => $session->program->hall->id]) }}" class="text-decoration-none text-white">{{ __('common.programs') }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.hall.program.show', ['meeting' => $session->program->hall->meeting->id, 'hall' => $session->program->hall->id, 'program' => $session->program->id]) }}" class="text-decoration-none text-white">{{ $session->program->title }}</a></li>
     <li class="breadcrumb-item active text-white text-decoration-underline" aria-current="page">{{ $session->title }}</li>
 @endsection
 @section('body')

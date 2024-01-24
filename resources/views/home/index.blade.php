@@ -25,22 +25,42 @@
     <div class="container mt-4" id="kp-home">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-2 gy-3 py-3 align-items-center">
             <div class="col mt-0">
-                <h1 class="border-bottom border-dark-subtle  text-white text-center">{{ __('common.welcome-to-kongrepad')}}</h1>
-                <div class="row pt-2">
-                    <div class="col">
-                        <a href="{{ route('auth.login.index')}}" class="btn btn-primary w-100 btn-block rounded-2" tabindex="-1" role="button" aria-disabled="true">{{ __('common.sign-in')}}</a>
+                <div id="carouselExampleRide" class="carousel slide" data-bs-ride="true">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <h1 class="border-bottom border-dark-subtle text-white text-center">{{ __('common.welcome-to-kongrepad')}}</h1>
+                            <div class="row pt-2">
+                                <div class="col">
+                                    <a href="{{ route('auth.login.index')}}" class="btn btn-primary w-100 btn-block rounded-2" tabindex="-1" role="button" aria-disabled="true">{{ __('common.sign-in')}}</a>
+                                </div>
+                                <div class="col">
+                                    <a href="{{ route('register.index')}}" class="btn btn-success w-100 btn-block rounded-2" tabindex="-1" role="button" aria-disabled="true">
+                                        <span style="white-space: nowrap">{{ __('common.try-it-for-free')}}</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="..." class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="..." class="d-block w-100" alt="...">
+                        </div>
                     </div>
-                    <div class="col">
-                        <a href="{{ route('register.index')}}" class="btn btn-success w-100 btn-block rounded-2" tabindex="-1" role="button" aria-disabled="true">
-                            <span style="white-space: nowrap">{{ __('common.try-it-for-free')}}</span>
-                        </a>
-                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
             </div>
-            <div class="col">
+            <div class="col justify-content-center align-items-center text-center">
                 <div class="card text-bg-dark border-0">
                     <div class="card-body">
-                        <img src="{{ asset('images/home-screenshot.png') }}" class="img-fluid rounded-2" alt="KongrePad 01" />
+                        <img src="{{ asset('images/home-screenshot.png') }}" class="img-fluid rounded-2 w-75" alt="KongrePad 01" />
                     </div>
                 </div>
             </div>
