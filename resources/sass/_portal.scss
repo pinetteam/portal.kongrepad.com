@@ -188,3 +188,14 @@
     font-size: 2em;
     line-height: 1em;
 }
+.carousel-control-prev-icon {
+    position: absolute;
+    bottom: 85px;
+    left: -20px;
+}
+
+.carousel-control-next-icon {
+    position: absolute;
+    bottom: 85px;
+    right: -20px;
+}
