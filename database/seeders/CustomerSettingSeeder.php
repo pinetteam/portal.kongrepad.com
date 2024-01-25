@@ -42,32 +42,27 @@ class CustomerSettingSeeder extends Seeder
             [
                 'customer_id' => '1',
                 'variable_id' => '6',
-                'value' => 'Y-m-d H:i',
-            ],
-            [
-                'customer_id' => '1',
-                'variable_id' => '7',
                 'value' => 'Y-m-d',
             ],
             [
                 'customer_id' => '1',
-                'variable_id' => '8',
-                'value' => 'H:i:s',
+                'variable_id' => '7',
+                'value' => '24H',
             ],
 
             [
                 'customer_id' => '1',
-                'variable_id' => '9',
+                'variable_id' => '8',
                 'value' => 'https://www.facebook.com/deventsocial/',
             ],
             [
                 'customer_id' => '1',
-                'variable_id' => '10',
+                'variable_id' => '9',
                 'value' => 'https://www.instagram.com/deventsocial/',
             ],
             [
                 'customer_id' => '1',
-                'variable_id' => '11',
+                'variable_id' => '10',
                 'value' => 'https://twitter.com/deventsocial/',
             ],
             [
@@ -99,19 +94,19 @@ class CustomerSettingSeeder extends Seeder
             [
                 'customer_id' => '3',
                 'variable_id' => '6',
-                'value' => 'Y-m-d H:i',
-            ],
-            [
-                'customer_id' => '3',
-                'variable_id' => '7',
                 'value' => 'Y-m-d',
             ],
             [
                 'customer_id' => '3',
-                'variable_id' => '8',
-                'value' => 'H:i:s',
+                'variable_id' => '7',
+                'value' => '24-h',
             ],
 
+            [
+                'customer_id' => '3',
+                'variable_id' => '8',
+                'value' => '',
+            ],
             [
                 'customer_id' => '3',
                 'variable_id' => '9',
@@ -120,11 +115,6 @@ class CustomerSettingSeeder extends Seeder
             [
                 'customer_id' => '3',
                 'variable_id' => '10',
-                'value' => '',
-            ],
-            [
-                'customer_id' => '3',
-                'variable_id' => '11',
                 'value' => '',
             ],
             [
@@ -156,19 +146,19 @@ class CustomerSettingSeeder extends Seeder
             [
                 'customer_id' => '4',
                 'variable_id' => '6',
-                'value' => 'Y-m-d H:i',
-            ],
-            [
-                'customer_id' => '4',
-                'variable_id' => '7',
                 'value' => 'Y-m-d',
             ],
             [
                 'customer_id' => '4',
-                'variable_id' => '8',
-                'value' => 'H:i:s',
+                'variable_id' => '7',
+                'value' => '24-h',
             ],
 
+            [
+                'customer_id' => '4',
+                'variable_id' => '8',
+                'value' => '',
+            ],
             [
                 'customer_id' => '4',
                 'variable_id' => '9',
@@ -177,11 +167,6 @@ class CustomerSettingSeeder extends Seeder
             [
                 'customer_id' => '4',
                 'variable_id' => '10',
-                'value' => '',
-            ],
-            [
-                'customer_id' => '4',
-                'variable_id' => '11',
                 'value' => '',
             ],
         ]);

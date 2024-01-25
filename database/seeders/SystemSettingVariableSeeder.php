@@ -72,14 +72,6 @@ class SystemSettingVariableSeeder extends Seeder
             'Europe/Zagreb' => ['value' => 'Europe/Zagreb', 'title' => 'Europe/Zagreb'],
             'Europe/Zurich' => ['value' => 'Europe/Zurich', 'title' => 'Europe/Zurich'],
         ];
-        $datetime_formats = [
-            'Y/m/d H:i:s' => ['value' => 'Y/m/d H:i:s', 'title' => 'Y/m/d H:i:s'],
-            'd/m/Y H:i:s' => ['value' => 'd/m/Y H:i:s', 'title' => 'd/m/Y H:i:s'],
-            'Y-m-d H:i:s' => ['value' => 'Y-m-d H:i:s', 'title' => 'Y-m-d H:i:s'],
-            'Y-m-d H:i' => ['value' => 'Y-m-d H:i', 'title' => 'Y-m-d H:i'],
-            'd-m-Y H:i:s' => ['value' => 'd-m-Y H:i:s', 'title' => 'd-m-Y H:i:s'],
-            'd-m-Y H:i' => ['value' => 'd-m-Y H:i', 'title' => 'd-m-Y H:i'],
-        ];
         $date_formats = [
             'Y/m/d' => ['value' => 'Y/m/d', 'title' => 'Y/m/d'],
             'd/m/Y' => ['value' => 'd/m/Y', 'title' => 'd/m/Y'],
@@ -87,7 +79,8 @@ class SystemSettingVariableSeeder extends Seeder
             'd-m-Y' => ['value' => 'd-m-Y', 'title' => 'd-m-Y'],
         ];
         $time_formats = [
-            'H:i:s' => ['value' => 'H:i:s', 'title' => 'H:i:s'],
+            '24H' => ['value' => '24H', 'title' => '24-h'],
+            '12H' => ['value' => '12H', 'title' => '12-h'],
         ];
         Variable::insert([
             [
@@ -133,15 +126,6 @@ class SystemSettingVariableSeeder extends Seeder
                 'variable' => 'timezone',
                 'type' => 'select',
                 'type_variables' => json_encode($timezones),
-                'status' => '1',
-            ],
-            [
-                'group' => 'localisation',
-                'sort_order' => '20',
-                'title' => 'date-time-format',
-                'variable' => 'date_time_format',
-                'type' => 'select',
-                'type_variables' => json_encode($datetime_formats),
                 'status' => '1',
             ],
             [

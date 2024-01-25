@@ -32,7 +32,6 @@ class LicenseRequest extends FormRequest
                     'timezone' => 'nullable',
                     'time_format' => 'nullable',
                     'date_format' => 'nullable',
-                    'datetime_format' => 'nullable',
                 ];
             }
             default:break;
@@ -52,7 +51,6 @@ class LicenseRequest extends FormRequest
             'timezone' => __('common.timezone'),
             'time_format' => __('common.time-format'),
             'date_format' => __('common.date-format'),
-            'datetime_format' => __('common.date-time-format'),
             'phone' => __('common.phone'),
         ];
     }

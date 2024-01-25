@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedInteger('sort_order')->nullable();
             $table->string('title', 255);
             $table->string('variable', 255);
-            $table->enum('type', ['checkbox', 'date', 'datetime', 'email', 'number', 'radio', 'select', 'text', 'time'])->default('text');
+            $table->enum('type', ['checkbox', 'date', 'email', 'number', 'radio', 'select', 'text', 'time'])->default('text');
             $table->json('type_variables')->nullable();
             $table->boolean('status')->default(1)->comment('0=passive;1=active');
             $table->timestamps();

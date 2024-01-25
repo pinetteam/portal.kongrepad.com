@@ -116,11 +116,6 @@
                                                                                 <x-input.select method="c" name="date_format" title="date-format" :options="$date_formats" option_value="value" option_name="title" icon="calendar" />
                                                                             </div>
                                                                         </div>
-                                                                        <div class="col">
-                                                                            <div class="card bg-transparent border-0 text-dark-emphasis px-2">
-                                                                                <x-input.select method="c" name="datetime_format" title="date-time-format" :options="$datetime_formats" option_value="value" option_name="title" icon="calendar" />
-                                                                            </div>
-                                                                        </div>
                                                                     </div>
                                                                     <button type="submit" class="btn btn-success w-100 my-2" id="register-create-form-submit">{{ __('common.try-it-for-free') }}</button>
                                                                 </div>

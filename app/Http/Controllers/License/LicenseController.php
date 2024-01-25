@@ -78,14 +78,6 @@ class LicenseController extends Controller
             'Europe/Zagreb' => ['value' => 'Europe/Zagreb', 'title' => 'Europe/Zagreb'],
             'Europe/Zurich' => ['value' => 'Europe/Zurich', 'title' => 'Europe/Zurich'],
         ];
-        $datetime_formats = [
-            'Y/m/d H:i:s' => ['value' => 'Y/m/d H:i:s', 'title' => 'Y/m/d H:i:s'],
-            'd/m/Y H:i:s' => ['value' => 'd/m/Y H:i:s', 'title' => 'd/m/Y H:i:s'],
-            'Y-m-d H:i:s' => ['value' => 'Y-m-d H:i:s', 'title' => 'Y-m-d H:i:s'],
-            'Y-m-d H:i' => ['value' => 'Y-m-d H:i', 'title' => 'Y-m-d H:i'],
-            'd-m-Y H:i:s' => ['value' => 'd-m-Y H:i:s', 'title' => 'd-m-Y H:i:s'],
-            'd-m-Y H:i' => ['value' => 'd-m-Y H:i', 'title' => 'd-m-Y H:i'],
-        ];
         $date_formats = [
             'Y/m/d' => ['value' => 'Y/m/d', 'title' => 'Y/m/d'],
             'd/m/Y' => ['value' => 'd/m/Y', 'title' => 'd/m/Y'],
@@ -93,10 +85,10 @@ class LicenseController extends Controller
             'd-m-Y' => ['value' => 'd-m-Y', 'title' => 'd-m-Y'],
         ];
         $time_formats = [
-            'H:i:s' => ['value' => 'H:i:s', 'title' => 'H:i:s'],
-            'H:i' => ['value' => 'H:i', 'title' => 'H:i'],
+            '24H' => ['value' => '24H', 'title' => '24-h'],
+            '12H' => ['value' => '12H', 'title' => '12-h'],
         ];
-        return view('portal.register.index', compact(['phone_countries', 'time_formats', 'date_formats', 'datetime_formats', 'timezones']));
+        return view('portal.register.index', compact(['phone_countries', 'time_formats', 'date_formats', 'timezones']));
     }
     public function store(LicenseRequest $request)
     {
@@ -140,32 +132,27 @@ class LicenseController extends Controller
                     [
                         'customer_id' => $customer->id,
                         'variable_id' => '6',
-                        'value' => $request->input('datetime_format') ?? 'Y-m-d H:i',
-                    ],
-                    [
-                        'customer_id' => $customer->id,
-                        'variable_id' => '7',
                         'value' => $request->input('date_format') ?? 'Y-m-d',
                     ],
                     [
                         'customer_id' => $customer->id,
-                        'variable_id' => '8',
-                        'value' => $request->input('time_format') ?? 'H:i:s',
+                        'variable_id' => '7',
+                        'value' => $request->input('time_format') ?? '24-h',
                     ],
 
                     [
                         'customer_id' => $customer->id,
-                        'variable_id' => '9',
+                        'variable_id' => '8',
                         'value' => 'https://www.facebook.com/',
                     ],
                     [
                         'customer_id' => $customer->id,
-                        'variable_id' => '10',
+                        'variable_id' => '9',
                         'value' => 'https://www.instagram.com/',
                     ],
                     [
                         'customer_id' => $customer->id,
-                        'variable_id' => '11',
+                        'variable_id' => '10',
                         'value' => 'https://twitter.com/',
                     ],
                 ]);

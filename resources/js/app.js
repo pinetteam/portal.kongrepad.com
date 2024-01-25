@@ -21,9 +21,27 @@ window.Chart = Chart;
 // Moment & TempusDominus timing packages
 import moment from'moment';
 import { TempusDominus } from '@eonasdan/tempus-dominus';
-function initializeDatePicker(element) {
-    var dateFormat = "YYYY-MM-DD"
-    fetch('/get-date-format')
+
+var timeFormat = "24H"
+var dateFormat = "YYYY-MM-DD"
+var dateTimeFormat = "YYYY-MM-DD"
+async function fetchData() {
+    var time_format = ""
+    await fetch('/get-time-format')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            timeFormat = data.time_format;
+            time_format = timeFormat === '24H' ? "" : " A"
+        })
+        .catch(error => {
+            console.error('Error fetching date format:', error);
+        });
+    await fetch('/get-date-format')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -32,10 +50,14 @@ function initializeDatePicker(element) {
         })
         .then(data => {
             dateFormat = data.date_format;
+            dateTimeFormat = dateFormat + " hh:mm" + time_format
         })
         .catch(error => {
             console.error('Error fetching date format:', error);
         });
+}
+fetchData()
+function initializeDatePicker(element) {
 
     const datePicker = new TempusDominus(element, {
         display: {
@@ -61,22 +83,10 @@ function initializeDatePicker(element) {
     datePicker.dates.formatInput = date => moment(date).format(dateFormat);
 }
 function initializeTimePicker(element) {
-    var timeFormat = "HH:mm"
-    fetch('/get-time-format')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            timeFormat = data.time_format;
-        })
-        .catch(error => {
-            console.error('Error fetching date format:', error);
-        });
-
     const timePicker = new TempusDominus(element, {
+        localization: {
+            hourCycle: timeFormat === '24H' ? 'h23' : 'h12',
+        },
         display: {
             viewMode: 'clock',
             components: {
@@ -89,7 +99,6 @@ function initializeTimePicker(element) {
                 hours: true,
                 minutes: true,
                 seconds: false,
-                useTwentyfourHour: true
             },
             buttons: {
                 today: false,
@@ -98,24 +107,13 @@ function initializeTimePicker(element) {
         },
         useCurrent: false
     });
-    timePicker.dates.formatInput = date => moment(date).format(timeFormat);
+    timePicker.dates.formatInput = date => moment(date).format('HH:mm'  + time_format);
 }
 function initializeDateTimePicker(element) {
-    var dateTimeFormat = "YYYY-MM-DD HH:mm"
-    fetch('/get-date-time-format')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            dateTimeFormat = data.date_time_format;
-        })
-        .catch(error => {
-            console.error('Error fetching date format:', error);
-        });
     const dateTimePicker = new TempusDominus(element, {
+        localization: {
+            hourCycle: timeFormat === '24H' ? 'h23' : 'h12',
+        },
         display: {
             viewMode: 'calendar',
             components: {
@@ -128,7 +126,6 @@ function initializeDateTimePicker(element) {
                 hours: true,
                 minutes: true,
                 seconds: false,
-                useTwentyfourHour: true
             },
             buttons: {
                 today: false,
