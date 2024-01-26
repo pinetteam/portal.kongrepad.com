@@ -36,13 +36,38 @@
                         <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                         <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
                         <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="3" aria-label="Slide 4"></button>
                     </div>
                     <div class="carousel-inner align-items-center">
                         <div class="carousel-item active align-items-center" data-bs-interval="10000">
                             <div class="container align-items-center mb-4">
-                                <h1 class="border-bottom border-dark-subtle text-white text-center">{{ __('common.welcome-to-kongrepad')}}</h1>
+                                <h1 class="border-bottom border-dark-subtle text-white text-center">What is KongrePad?</h1>
                                     <div class="row pt-2 align-items-center text-center">
                                         <div class="btn-group w-100 mb-4">
+                                        <div class="col">
+                                            <h5 class="text-white">KongrePad allows you to control your congress via a single phone application without the need for an extra device. Thanks to its database structure, it can be used in more than one congress at the same time.</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item" data-bs-interval="2000">
+                            <div class="container align-items-center mb-4">
+                                <h1 class="border-bottom border-dark-subtle text-white text-center">Advantages</h1>
+                                <div class="row pt-2 align-items-center text-center">
+                                    <div class="btn-group w-100 mb-4">
+                                        <div class="col">
+                                            <h5 class="text-white">The timer, session chair or speaker name, document, keypad and debate voting results can be dynamically displayed on the screens. The font, font size and background of each screen can be changed.</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item" data-bs-interval="2000">
+                            <div class="container align-items-center mb-4">
+                                <h1 class="border-bottom border-dark-subtle text-white text-center">{{ __('common.welcome-to-kongrepad')}}</h1>
+                                <div class="row pt-2 align-items-center text-center">
+                                    <div class="btn-group w-100 mb-4">
                                         <div class="col">
                                             <a href="{{ route('auth.login.index')}}" class="btn btn-primary w-75 btn-block rounded-2" tabindex="-1" role="button" aria-disabled="true">{{ __('common.sign-in')}}</a>
                                         </div>
@@ -56,15 +81,20 @@
                             </div>
                         </div>
                         <div class="carousel-item" data-bs-interval="2000">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Second slide label</h5>
-                                <p>Some representative placeholder content for the second slide.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Third slide label</h5>
-                                <p>Some representative placeholder content for the third slide.</p>
+                            <div class="container align-items-center">
+                                <h1 class="border-bottom border-dark-subtle text-white text-center mb-0">Download KongrePad</h1>
+                                <div class="row">
+                                    <div class="col">
+                                        <a href="https://apps.apple.com/tr/app/kongrepad/id6463897045" target="_blank" title="KongrePad AppStore">
+                                            <img src="{{ asset('images/app-store-download.svg') }}" class="img-fluid" alt="KongrePad AppStore" />
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="https://play.google.com/store/apps/details?id=com.pinet.kongrepad&gl=TR" target="_blank" title="KongrePad PlayStore">
+                                            <img src="{{ asset('images/play-store-download.svg') }}" class="img-fluid" alt="KongrePad PlayStore" />
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -81,7 +111,54 @@
             <div class="col justify-content-center align-items-center text-center">
                 <div class="card text-bg-dark border-0">
                     <div class="card-body">
-                        <img src="{{ asset('images/home-screenshot.png') }}" class="img-fluid rounded-2 w-75" alt="KongrePad 01" />
+                        <img src="{{ asset('images/home-screenshot.png') }}" class="img-fluid rounded-2 w-50" alt="KongrePad 01" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+                <div class="card h-100 bg-color2 text-white shadow-lg">
+                    <div class="h1 m-3"><span class="fa-duotone fa-square-poll-horizontal fa-fade"></span></div>
+                    <div class="card-body">
+                        <h5 class="card-title">Surveys</h5>
+                        <p class="card-text">Surveys can be conducted and detailed survey reports can be obtained. All users can answer the surveys via their phone.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 bg-color1 text-white shadow-sm">
+                    <div class="h1 m-3"><span class="fa-duotone fa-fade fa-calendar-week text-white"></span></div>
+                    <div class="card-body">
+                        <h5 class="card-title">Keypads</h5>
+                        <p class="card-text">Keypads can be made and detailed keypad reports can be obtained. All users can answer the question via their phone.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 bg-color2 text-white shadow-lg">
+                    <div class="h1 m-3"><span class="fa-duotone fa-question fa-fade"></span></div>
+                    <div class="card-body">
+                        <h5 class="card-title">Asking Question</h5>
+                        <p class="card-text">Participants can ask questions to the speaker anonymously or under their own names during the session.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 bg-color1 text-white shadow-sm">
+                    <div class="h1 m-3"><span class="fa-duotone fa-podium-star fa-fade"></span></div>
+                    <div class="card-body">
+                        <h5 class="card-title">Debate</h5>
+                        <p class="card-text">Debates can be created. You can create any teams you want. Participants can vote via the application.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 bg-color2 text-white shadow-lg">
+                    <div class="h1 m-3"><span class="fa-duotone fa-chart-user fa-fade"></span></div>
+                    <div class="card-body">
+                        <h5 class="card-title">Reports</h5>
+                        <p class="card-text">Thanks to the QR code scanning system, attendance at the session can be made and attendance can be seen. Thanks to the log system, user movements, keypad and debate participation and sessions can be reported. Surveys can be conducted and detailed survey reports can be obtained.</p>
                     </div>
                 </div>
             </div>
