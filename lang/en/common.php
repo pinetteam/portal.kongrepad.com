@@ -325,4 +325,10 @@ return [
     'logs' => 'Logs',
     'welcome-to-kongrepad' => 'Welcome to Kongrepad!',
     'register' => 'Register',
+    '24-h' => '24 Hour',
+    '12-h' => '12 Hour',
+    'localisation' => 'Localisation',
+    'social' => 'Social',
+    'credit' => 'Credit',
+    'purchase' => 'Purchase',
 ];

@@ -11,6 +11,19 @@
         <div class="card-body p-0">
             <div class="row">
                 <div class="col-lg-3 col-md-12 col-sm-12">
+
+                    <div class="card text-bg-dark">
+                        <div class="card-body p-2">
+                            <div class="d-block text-center">
+                                <h1>{{ __('common.credit') . ': ' . $customer->credit }}</h1>
+                                <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.purchase') }}">
+                                    <button class="btn btn-warning btn-sm w-100" title="{{ __('common.edit') }}" href="#">
+                                        <span class="fa-regular fa-shopping-cart"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="card text-bg-dark">
                         <form action="{{ route('portal.setting.update', $customer->id) }}" method="post" enctype="multipart/form-data">
                             @csrf
@@ -40,7 +53,7 @@
                 </div>
                 <div class="col-lg-9 col-md-12 col-sm-12">
                     @foreach($setting_groups as $group => $settings)
-                        <h1>{{$group}}</h1>
+                        <h1>{{ __('common.' . $group) }}</h1>
                     <div class="table-responsive">
                         <table class="table table-dark table-striped table-hover table-bordered mb-0">
                             <thead class="thead-dark">
@@ -115,8 +128,8 @@
                             @endforeach
                             </tbody>
                         </table>
-                        @endforeach
                     </div>
+                    @endforeach
                 </div>
             </div>
         </div>

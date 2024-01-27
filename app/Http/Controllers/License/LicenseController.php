@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\License\LicenseRequest;
 use App\Models\Customer\Customer;
 use App\Models\Customer\Setting\Setting;
+use App\Models\Meeting\Meeting;
 use App\Models\System\Country\Country;
 use App\Models\User\User;
 use Faker\Factory;
@@ -178,6 +179,18 @@ class LicenseController extends Controller
                         'status' => 1,
                     ],
                 ]);
+
+                $meeting = new Meeting();
+                $meeting->title = "test-meeting";
+                $meeting->code = "test-meeting";
+                $meeting->customer_id = $customer->id;
+                $meeting->banner_name = null;
+                $meeting->banner_extension = null;
+                $meeting->type = "standard";
+                $meeting->start_at = '2024-01-01';
+                $meeting->finish_at = '2024-12-31';
+                $meeting->status = 1;
+                $meeting->save();
                 $credentials = $request->only('username', 'password');
                 if(Auth::attempt($credentials)){
                     $user = Auth::user();
@@ -191,13 +204,5 @@ class LicenseController extends Controller
                 return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();
             }
         }
-    }
-    public function edit(int $id)
-    {
-        //
-    }
-    public function update(LicenseRequest $request, int $id)
-    {
-        //
     }
 }
