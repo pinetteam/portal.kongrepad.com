@@ -60,7 +60,6 @@ Route::resource('/register', \App\Http\Controllers\License\LicenseController::cl
 // System routes
 Route::get('/get-date-format', [\App\Http\Controllers\System\Setting\Variable\VariableController::class, 'getDateFormat'])->name('get-date-format');
 Route::get('/get-time-format', [\App\Http\Controllers\System\Setting\Variable\VariableController::class, 'getTimeFormat'])->name('get-time-format');
-Route::get('/get-date-time-format', [\App\Http\Controllers\System\Setting\Variable\VariableController::class, 'getDateTimeFormat'])->name('get-date-time-format');
 
 Route::prefix('portal')->name('portal.')->group(function () {
     //Route::group(["middleware" => ['auth','user.role.control']], function () {
