@@ -16,13 +16,17 @@
         {{ config('app.name') }}
     </a>
     <div class="text-end btn-group mx-3 gap-2">
+        <a href="" class="btn btn-block text-end rounded-2 btn-sm text-white text-decoration-underline" tabindex="-1" role="button" aria-disabled="true">{{ trans('common.tutorials') }}</a>
+        <a href="" class="btn btn-block rounded-2 btn-sm text-white text-decoration-underline" tabindex="-1" role="button" aria-disabled="true">
+            <span style="white-space: nowrap">{{ trans('common.pricing') }}</span>
+        </a>
         <a href="{{ route('auth.login.index')}}" class="btn btn-primary btn-block text-end rounded-2 btn-sm" tabindex="-1" role="button" aria-disabled="true">{{ __('common.sign-in')}}</a>
         <a href="{{ route('register.index')}}" class="btn btn-success btn-block rounded-2 btn-sm" tabindex="-1" role="button" aria-disabled="true">
             <span style="white-space: nowrap">{{ __('common.try-it-for-free')}}</span>
         </a>
     </div>
 </header>
-<body class="d-flex flex-column h-100 bg-dark">
+<body class="d-flex flex-column bg-dark">
     <div id="kp-loading" class="d-flex align-items-center justify-content-center">
         <div class="spinner-grow text-success" role="status">
             <span class="visually-hidden">{{ __('common.loading') }}</span>
@@ -146,6 +150,15 @@
             </div>
             <div class="col">
                 <div class="card h-100 bg-color2 text-white shadow-lg">
+                    <div class="h1 m-3"><span class="fa-duotone fa-browser fa-fade"></span></div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ __('common.virtual-stands') }}</h5>
+                        <p class="card-text">{{ trans('common.elevate_your_congress_with_kongrepad_by_showcasing') }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 bg-color2 text-white shadow-lg">
                     <div class="h1 m-3"><span class="fa-duotone fa-coin fa-fade"></span></div>
                     <div class="card-body">
                         <h5 class="card-title">{{ trans('common.affordable') }}</h5>
@@ -164,7 +177,15 @@
             </div>
         </div>
         <div class="row">
-            <h3 class="text-light mt-3">{{ trans('common.check_out_the_services_kongrepad_offers') }}</h3>
+            <hr class="text-light">
+            <p class="text-light"><span class="fa-regular fa-solid fa-thumbtack px-2"></span> {{ trans('common.introducing_kongrepad_a_revolutionary_congress_mana') }}</p>
+            <a href="{{ route('register.index')}}" class="btn btn-success btn-block rounded-2 mb-3 mx-3 btn-sm w-25" tabindex="-1" role="button" aria-disabled="true">
+                <span style="white-space: nowrap">{{ __('common.try-it-for-free')}}</span>
+                <span class="fa-solid fa-regular fa-arrow-right mx-2"></span>
+            </a>
+        </div>
+        <div class="row">
+            <h3 class="text-light mt-2">{{ trans('common.check_out_the_services_kongrepad_offers') }}</h3>
             <hr class="text-light">
         </div>
         <div class="row row-cols-1 row-cols-md-4 g-4">
@@ -330,8 +351,15 @@
             </div>
         </div>
     </div>
+    <div class="bg-color2 text-end text-white mb-4 px-4 py-4 flex">
+        <span class="fa-phone fa-fade fa-regular mx-2"></span><h7>0 312 911 91 13</h7>
+        <span class="fa-envelope fa-fade fa-regular mx-2"></span><h7>info@pinet.com.tr</h7>
+        <div class="row mt-1">
+            <a class="text-white" href="https://www.pinet.com.tr/privacy-policy.html">{{ trans('common.privacy_policy') }}</a>
+        </div>
+    </div>
 </body>
-<footer class="bg-dark text-light col-12 px-md-4 ms-sm-auto px-md-4 shadow" id="kp-footer">
-    Copyright © 2017-{{ date('Y') }} {{ config('app.name') }}
+<footer class="bg-dark text-light col-12 px-md-0 ms-sm-auto shadow" id="kp-footer">
+    <div class="fixed-bottom bg-dark shadow px-md-4">Copyright © 2017-{{ date('Y') }} {{ config('app.name') }} </div>
 </footer>
 </html>

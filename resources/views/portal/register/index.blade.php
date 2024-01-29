@@ -35,6 +35,10 @@
                                                 <div class="row">
                                                     <h1 class="m-0 text-center text-white">{{ __('common.register') }}</h1>
                                                 </div>
+                                                <div class="alert alert-success alert-dismissible fade show my-3" role="alert">
+                                                    Register now and get <strong>100 free credits!</strong>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                </div>
                                                 <hr class="text-white"/>
                                                 <div class="row">
                                                     <div class="card bg-transparent border-0 text-white px-2">
