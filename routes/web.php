@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home.index');
 });
+Route::get('/pricing', function () {
+    return view('pricing.index');
+})->name('portal.pricing');
 
 Route::group(["middleware" => ['guest']], function () {
     Route::get('/auth/login', [\App\Http\Controllers\Auth\LoginController::class, 'index'])->name('auth.login.index');

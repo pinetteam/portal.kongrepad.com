@@ -17,7 +17,7 @@
     </a>
     <div class="text-end btn-group mx-3 gap-2">
         <a href="" class="btn btn-block text-end rounded-2 btn-sm text-white text-decoration-underline" tabindex="-1" role="button" aria-disabled="true">{{ trans('common.tutorials') }}</a>
-        <a href="" class="btn btn-block rounded-2 btn-sm text-white text-decoration-underline" tabindex="-1" role="button" aria-disabled="true">
+        <a href="{{ route('portal.pricing')}}" class="btn btn-block rounded-2 btn-sm text-white text-decoration-underline" tabindex="-1" role="button" aria-disabled="true">
             <span style="white-space: nowrap">{{ trans('common.pricing') }}</span>
         </a>
         <a href="{{ route('auth.login.index')}}" class="btn btn-primary btn-block text-end rounded-2 btn-sm" tabindex="-1" role="button" aria-disabled="true">{{ __('common.sign-in')}}</a>

@@ -385,5 +385,7 @@ return [
     'introducing_kongrepad_a_revolutionary_congress_mana' => 'Introducing KongrePad, a revolutionary Congress Management Web Application that brings a new level of sophistication to organizing and participating in congress events. Accessible from any internet-connected device, KongrePad offers features that redefine engagement: from watching live presentations on your phone to facilitating instant interaction through keypad questions and interactive Q&A. Users can cast votes during debates, track attendance efficiently using QR codes, and generate comprehensive reports on session insights. KongrePad streamlines document requests, conducts score games, and dynamically manages screen displays for a personalized experience. With virtual stands showcasing sponsor logos and promotions, KongrePad transforms congress management into a seamless, interactive, and memorable experience, making every event truly exceptional.',
     'privacy_policy' => 'Privacy Policy',
     'tutorials' => 'Tutorials',
-    'pricing' => 'Pricing'
+    'pricing' => 'Pricing',
+    'each_participants_daily_login_is_deducted_from_you2' => 'Each participant\'s daily login is deducted from your credits. This amount is 10 credits for standard congresses and 12 credits for premium congresses. For example, a standard congress lasting 5 days with 50 participants will cost you 2500 credits.',
+    'prices' => 'PRICES'
 ];
