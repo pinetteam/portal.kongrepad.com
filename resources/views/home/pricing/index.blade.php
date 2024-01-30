@@ -11,9 +11,19 @@
     @vite(['resources/js/app.js'])
 </head>
 <header class="navbar navbar-dark fixed-top bg-dark p-0 shadow" id="kp-header">
-    <a class="navbar-brand ms-3 overflow-hidden ps-3" href="{{ route("auth.login.index") }}">
+    <a class="navbar-brand ms-3 overflow-hidden ps-3" href="{{ route("home.index") }}">
         {{ config('app.name') }}
     </a>
+    <div class="text-end btn-group mx-3 gap-2">
+        <a href="" class="btn btn-block text-end rounded-2 btn-sm text-white text-decoration-underline" tabindex="-1" role="button" aria-disabled="true">{{ trans('common.tutorials') }}</a>
+        <a href="{{ route('home.pricing')}}" class="btn btn-block rounded-2 btn-sm text-white text-decoration-underline" tabindex="-1" role="button" aria-disabled="true">
+            <span style="white-space: nowrap">{{ trans('common.pricing') }}</span>
+        </a>
+        <a href="{{ route('auth.login.index')}}" class="btn btn-primary btn-block text-end rounded-2 btn-sm" tabindex="-1" role="button" aria-disabled="true">{{ __('common.sign-in')}}</a>
+        <a href="{{ route('register.index')}}" class="btn btn-success btn-block rounded-2 btn-sm" tabindex="-1" role="button" aria-disabled="true">
+            <span style="white-space: nowrap">{{ __('common.try-it-for-free')}}</span>
+        </a>
+    </div>
 </header>
 <body class="d-flex flex-column bg-dark">
     <div id="kp-loading" class="d-flex align-items-center justify-content-center">

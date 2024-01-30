@@ -12,12 +12,12 @@
     @vite(['resources/js/app.js'])
 </head>
 <header class="navbar navbar-dark fixed-top bg-dark p-0 shadow" id="kp-header">
-    <a class="navbar-brand ms-3 overflow-hidden ps-3" href="{{ route("auth.login.index") }}">
+    <a class="navbar-brand ms-3 overflow-hidden ps-3" href="{{ route("home.index") }}">
         {{ config('app.name') }}
     </a>
     <div class="text-end btn-group mx-3 gap-2">
         <a href="" class="btn btn-block text-end rounded-2 btn-sm text-white text-decoration-underline" tabindex="-1" role="button" aria-disabled="true">{{ trans('common.tutorials') }}</a>
-        <a href="{{ route('portal.pricing')}}" class="btn btn-block rounded-2 btn-sm text-white text-decoration-underline" tabindex="-1" role="button" aria-disabled="true">
+        <a href="{{ route('home.pricing')}}" class="btn btn-block rounded-2 btn-sm text-white text-decoration-underline" tabindex="-1" role="button" aria-disabled="true">
             <span style="white-space: nowrap">{{ trans('common.pricing') }}</span>
         </a>
         <a href="{{ route('auth.login.index')}}" class="btn btn-primary btn-block text-end rounded-2 btn-sm" tabindex="-1" role="button" aria-disabled="true">{{ __('common.sign-in')}}</a>
@@ -111,7 +111,7 @@
             <h3 class="text-light">{{ trans('common.empower_your_events_elevate_your_experience_stream') }}</h3>
             <hr class="text-light">
         </div>
-        <div class="row row-cols-1 row-cols-md-3 g-4 mb-4">
+        <div class="row row-cols-1 row-cols-md-3 g-4 mb-4 text-center">
             <div class="col">
                 <div class="card h-100 bg-color2 text-white shadow-lg">
                     <div class="h1 m-3"><span class="fa-duotone fa-cloud-check fa-fade"></span></div>
@@ -150,15 +150,6 @@
             </div>
             <div class="col">
                 <div class="card h-100 bg-color2 text-white shadow-lg">
-                    <div class="h1 m-3"><span class="fa-duotone fa-browser fa-fade"></span></div>
-                    <div class="card-body">
-                        <h5 class="card-title">{{ __('common.virtual-stands') }}</h5>
-                        <p class="card-text">{{ trans('common.elevate_your_congress_with_kongrepad_by_showcasing') }}</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100 bg-color2 text-white shadow-lg">
                     <div class="h1 m-3"><span class="fa-duotone fa-coin fa-fade"></span></div>
                     <div class="card-body">
                         <h5 class="card-title">{{ trans('common.affordable') }}</h5>
@@ -176,10 +167,10 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row justify-content-center">
             <hr class="text-light">
-            <p class="text-light"><span class="fa-regular fa-solid fa-thumbtack px-2"></span> {{ trans('common.introducing_kongrepad_a_revolutionary_congress_mana') }}</p>
-            <a href="{{ route('register.index')}}" class="btn btn-success btn-block rounded-2 mb-3 mx-3 btn-sm w-25" tabindex="-1" role="button" aria-disabled="true">
+            <p class="text-light text-center"><span class="fa-regular fa-solid fa-thumbtack px-2"></span> {{ trans('common.introducing_kongrepad_a_revolutionary_congress_mana') }}</p>
+            <a href="{{ route('register.index')}}" class="btn btn-success btn-block rounded-2 mb-3 mx-3 btn-sm w-50" tabindex="-1" role="button" aria-disabled="true">
                 <span style="white-space: nowrap">{{ __('common.try-it-for-free')}}</span>
                 <span class="fa-solid fa-regular fa-arrow-right mx-2"></span>
             </a>
@@ -188,7 +179,7 @@
             <h3 class="text-light mt-2">{{ trans('common.check_out_the_services_kongrepad_offers') }}</h3>
             <hr class="text-light">
         </div>
-        <div class="row row-cols-1 row-cols-md-4 g-4">
+        <div class="row row-cols-1 row-cols-md-4 g-4 justify-content-center text-center">
             <div class="col">
                 <div class="card h-100 bg-color2 text-white shadow-lg">
                     <div class="h1 m-3"><span class="fa-duotone fa-square-poll-horizontal fa-fade"></span></div>
@@ -229,7 +220,7 @@
                 <div class="card h-100 bg-color2 text-white shadow-lg">
                     <div class="h1 m-3"><span class="fa-duotone fa-chart-user fa-fade"></span></div>
                     <div class="card-body">
-                        <h5 class="card-title">{{ trans('common.reports2') }}</h5>
+                        <h5 class="card-title">{{ trans('common.reports') }}</h5>
                         <p class="card-text">{{ trans('common.thanks_to_the_qr_code_scanning_system_attendance_a') }}</p>
                     </div>
                 </div>
@@ -258,6 +249,24 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ trans('common.screen_management') }}</h5>
                         <p class="card-text">{{ trans('common.the_timer_session_chair_or_speaker_name_document_k') }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 bg-color2 text-white shadow-lg">
+                    <div class="h1 m-3"><span class="fa-duotone fa-browser fa-fade"></span></div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ __('common.virtual-stands') }}</h5>
+                        <p class="card-text">{{ trans('common.elevate_your_congress_with_kongrepad_by_showcasing') }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 bg-color2 text-white shadow-lg">
+                    <div class="h1 m-3"><span class="fa-duotone fa-square-poll-vertical fa-fade"></span></div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ __('common.surveys') }}</h5>
+                        <p class="card-text">{{ trans('common.effortlessly_collect_attendee_feedback_and_insights_with_our_integrated_survey_tool') }}</p>
                     </div>
                 </div>
             </div>
@@ -351,11 +360,17 @@
             </div>
         </div>
     </div>
-    <div class="bg-color2 text-end text-white mb-4 px-4 py-4 flex">
-        <span class="fa-phone fa-fade fa-regular mx-2"></span><h7>0 312 911 91 13</h7>
-        <span class="fa-envelope fa-fade fa-regular mx-2"></span><h7>info@pinet.com.tr</h7>
-        <div class="row mt-1">
-            <a class="text-white" href="https://www.pinet.com.tr/privacy-policy.html">{{ trans('common.privacy_policy') }}</a>
+    <div class="bg-color2 container flex">
+        <div class="row align-items-center my-2">
+            <div class="col">
+                <p class="text-white"><span class="fa-phone fa-fade fa-regular mx-2"></span>0 312 911 91 13</p>
+            </div>
+            <div class="col">
+                <p class="text-white"><span class="fa-envelope fa-fade fa-regular mx-2"></span>info@pinet.com.tr</p>
+            </div>
+            <div class="col">
+                <p><a class="text-white text-decoration-none" href="https://www.pinet.com.tr/privacy-policy.html"><span class="fa-fingerprint fa-fade fa-regular mx-2"></span>{{ __('common.privacy_policy') }}</a></p>
+            </div>
         </div>
     </div>
 </body>
