@@ -42,7 +42,7 @@
                                                 <hr class="text-white"/>
                                                 <div class="row">
                                                     <div class="card bg-transparent border-0 text-white px-2">
-                                                        <x-input.text method="c" name="customer-title" title="title" icon="input-text" />
+                                                        <x-input.text method="c" name="title" title="company-title" icon="input-text" />
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -65,10 +65,20 @@
                                                         <x-input.password method="c" name="repeat_password" title="repeat-password" icon="lock" />
                                                     </div>
                                                 </div>
+                                                <div class="row">
+                                                    <div class="card bg-transparent border-0 text-white px-2">
+                                                        <x-input.select method="c" name="phone_country" title="phone-country" :options="$phone_countries" option_value="phone_code" option_name="name" icon="flag" :searchable="true" />
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="card bg-transparent border-0 text-white px-2">
+                                                        <x-input.text method="c" name="phone" title="phone" icon="mobile-screen" />
+                                                    </div>
+                                                </div>
                                                 <div class="row row-cols-1 row-cols-md-1 row-cols-sm-1 row-cols-xl-1 justify-content-center mt-2">
                                                     <div class="btn-group gap-2 d-flex">
                                                             <button type="button" class="btn btn-primary w-100 btn-block" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                                <span class="fa-plus" style="white-space: normal;"> {{ __('common.add-company-information') }}</span>
+                                                                <span class="fa-plus" style="white-space: normal;"> {{ __('common.add-more-information') . '('. __('common.optional') . ')'}}</span>
                                                             </button>
                                                             <button type="submit" class="btn btn-success w-100 btn-block" id="register-create-form-submit">
                                                                 <span style="white-space: nowrap">{{ __('common.try-it-for-free')}}</span></button>
@@ -111,18 +121,6 @@
                                                                 </div>
                                                                 <div class="card bg-transparent border-0 text-dark-emphasis px-2">
                                                                     <x-input.text method="c" name="address" title="address" icon="location-dot" />
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col">
-                                                                        <div class="card bg-transparent border-0 text-dark-emphasis px-2">
-                                                                            <x-input.select method="c" name="phone_country" title="phone-country" :options="$phone_countries" option_value="phone_code" option_name="name" icon="flag" :searchable="true" />
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col">
-                                                                        <div class="card bg-transparent border-0 text-dark-emphasis px-2">
-                                                                            <x-input.text method="c" name="phone" title="phone" icon="mobile-screen" />
-                                                                        </div>
-                                                                    </div>
                                                                 </div>
                                                                 <div>
                                                                     <div class="row">

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\License\LicenseRequest;
 use App\Models\Customer\Customer;
 use App\Models\Customer\Setting\Setting;
+use App\Models\Meeting\Hall\Hall;
 use App\Models\Meeting\Meeting;
 use App\Models\System\Country\Country;
 use App\Models\User\User;
@@ -191,6 +192,16 @@ class LicenseController extends Controller
                 $meeting->finish_at = '2024-12-31';
                 $meeting->status = 1;
                 $meeting->save();
+                $hall = new Hall();
+                $hall->meeting_id = $meeting->id;
+                $hall->code = Str::uuid()->toString();
+                $hall->title = "test-hall";
+                $hall->show_on_session = 1;
+                $hall->show_on_view_program = 1;
+                $hall->show_on_ask_question = 1;
+                $hall->show_on_send_mail = 1;
+                $hall->status = 1;
+                $hall->save();
                 $credentials = $request->only('username', 'password');
                 if(Auth::attempt($credentials)){
                     $user = Auth::user();
