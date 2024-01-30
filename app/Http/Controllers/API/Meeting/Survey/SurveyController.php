@@ -32,7 +32,7 @@ class SurveyController extends Controller
     {
         try{
             $survey = $request->user()->meeting->surveys()->findOrFail($id);
-            $this->logParticipantAction($request->user()->id, "get-survey", $survey->title);
+            $this->logParticipantAction($request->user(), "get-survey", $survey->title);
             return [
                 'data' => new SurveyResource($survey),
                 'status' => true,
