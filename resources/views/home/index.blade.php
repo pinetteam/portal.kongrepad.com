@@ -167,10 +167,10 @@
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center">
+        <div class="row">
             <hr class="text-light">
-            <p class="text-light text-center"><span class="fa-regular fa-solid fa-thumbtack px-2"></span> {{ trans('common.introducing_kongrepad_a_revolutionary_congress_mana') }}</p>
-            <a href="{{ route('register.index')}}" class="btn btn-success btn-block rounded-2 mb-3 mx-3 btn-sm w-50" tabindex="-1" role="button" aria-disabled="true">
+            <p class="text-light"><span class="fa-regular fa-solid fa-thumbtack px-2"></span> {{ trans('common.introducing_kongrepad_a_revolutionary_congress_mana') }}</p>
+            <a href="{{ route('register.index')}}" class="btn btn-success btn-block rounded-2 mb-3 mx-3 btn-sm w-25" tabindex="-1" role="button" aria-disabled="true">
                 <span style="white-space: nowrap">{{ __('common.try-it-for-free')}}</span>
                 <span class="fa-solid fa-regular fa-arrow-right mx-2"></span>
             </a>
@@ -360,7 +360,7 @@
             </div>
         </div>
     </div>
-    <div class="bg-color2 container flex">
+    <div class="bg-color2 text-white text-center mb-4 px-4 flex">
         <div class="row align-items-center my-2">
             <div class="col">
                 <p class="text-white"><span class="fa-phone fa-fade fa-regular mx-2"></span>0 312 911 91 13</p>
