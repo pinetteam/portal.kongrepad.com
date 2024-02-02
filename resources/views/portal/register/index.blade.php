@@ -21,7 +21,7 @@
         <span class="visually-hidden">{{ __('common.loading') }}</span>
     </div>
 </div>
-<div class="bg-gradient bg-color2 p-0 overflow-x-hidden text-white">
+<div class="bg-gradient bg-dark p-0 overflow-x-hidden text-white">
     <div class="row h-100">
         <main class="ms-sm-auto px-md-4 flex-shrink-0" id="kp-main">
             <div class="card bg-transparent justify-content-center w-100 m-2 border-0">
@@ -39,7 +39,7 @@
                             <hr class="text-white"/>
                             <div class="row column-gap-0 align-items-center text-center">
                                 <div class="col p-0 flex-column w-100">
-                                    <div class="card bg-transparent text-center p-5 text-black border-end border-0 border-light border-opacity-50">
+                                    <div class="card bg-transparent text-center p-5 text-black border-end border-0 border-light border-opacity-25">
                                         <h5 class="text-white">{{ trans('common.create_your_kongrepad_account') }}</h5>
                                         <hr class="text-light">
                                         <div class="row">
