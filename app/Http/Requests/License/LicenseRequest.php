@@ -20,8 +20,8 @@ class LicenseRequest extends FormRequest
             {
                 return [
                     'title' => 'required|max:255',
-                    'email' => 'required|email|max:255',
-                    'username' => 'required|max:255',
+                    'email' => 'required|unique:users,email|email|max:255',
+                    'username' => 'required|unique:users,username|max:255',
                     'password' => 'required|min:6',
                     'logo' => ['nullable', File::types(['png'])->max(24 * 1024),],
                     'web-address' => 'nullable|max:255',

@@ -146,7 +146,7 @@ function initializeDateTimePicker(element) {
                         },
                         useCurrent: false
                     });
-                    dateTimePicker.dates.formatInput = date => moment(date).format(dateFormat + ' hh:mm' + (timeFormat === '24H' ? '' : ' A'));
+                    dateTimePicker.dates.formatInput = date => moment(date).format(dateFormat + ' HH:mm' + (timeFormat === '24H' ? '' : ' A'));
                 })
                 .catch(error => {
                     console.error('Error fetching date format:', error);

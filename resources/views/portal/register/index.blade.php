@@ -87,7 +87,7 @@
                                                 <div class="row">
                                                     <p class="mt-2 text-white">{{ __('common.do-you-have-an-account')}} <a href="{{ route('auth.login.index')}}" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover text-info">{{ __('common.sign-in')}}</a></p>
                                                 </div>
-                                                <div class="modal fade justify-content-center" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade justify-content-center" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-focus="false">
                                                     <div class="modal-dialog justify-content-center">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -105,15 +105,15 @@
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col">
-                                                                        <div class="card bg-transparent border-0 text-white text-dark-emphasis p-0 px-2">
-                                                                            <x-input.select method="c" name="timezone" title="timezone" :options="$timezones" option_value="value" option_name="title" icon="flag" :searchable="true" />                                                    </div>
+                                                                        <div class="card bg-transparent border-0 text-dark-emphasis -0 px-2">
+                                                                            <x-input.select method="c" name="time_format" title="time-format" :options="$time_formats" option_value="value" option_name="title" icon="clock" />
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col">
-                                                                        <div class="card bg-transparent border-0 text-dark-emphasis -0 px-2">
-                                                                            <x-input.select method="c" name="time_format" title="time-format" :options="$time_formats" option_value="value" option_name="title" icon="clock" />
-                                                                        </div>
+                                                                        <div class="card bg-transparent border-0 text-white text-dark-emphasis p-0 px-2">
+                                                                            <x-input.select method="c" name="timezone" title="timezone" :options="$timezones" option_value="value" option_name="title" icon="flag" :searchable="true" />                                                    </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="card bg-transparent border-0 text-dark-emphasis px-2">
@@ -123,13 +123,6 @@
                                                                     <x-input.text method="c" name="address" title="address" icon="location-dot" />
                                                                 </div>
                                                                 <div>
-                                                                    <div class="row">
-                                                                        <div class="col">
-                                                                            <div class="card bg-transparent border-0 text-dark-emphasis px-2">
-                                                                                <x-input.select method="c" name="date_format" title="date-format" :options="$date_formats" option_value="value" option_name="title" icon="calendar" />
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
                                                                     <button type="submit" class="btn btn-success w-100 my-2" id="register-create-form-submit">{{ __('common.try-it-for-free') }}</button>
                                                                 </div>
                                                             </div>
