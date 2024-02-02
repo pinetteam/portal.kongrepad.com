@@ -390,5 +390,7 @@ return [
     'tutorials' => 'Tutorials',
     'pricing' => 'Pricing',
     'each_participants_daily_login_is_deducted_from_you2' => 'Each participant\'s daily login is deducted from your credits. This amount is 10 credits for standard congresses and 12 credits for premium congresses. For example, a standard congress lasting 5 days with 50 participants will cost you 2500 credits.',
-    'prices' => 'PRICES'
+    'prices' => 'PRICES',
+    'add_more_informationoptional' => 'Add More İnformation(Optional)',
+    'create_your_kongrepad_account' => 'Create your KongrePad Account'
 ];
