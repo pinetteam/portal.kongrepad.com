@@ -32,42 +32,43 @@ class PointController extends Controller
     }
     public function store(Request $request, int $score_game)
     {
-        $score_game = $request->user()->meeting->scoreGames()->first();
-        $this->logParticipantAction($request->user(), "scan-qr-code", __('common.score-game') . ': ' . $score_game->title);
-        if($request->user()->meeting->qrCodes()->get()->where('code', $request->input('code'))->count() == 0){
-            return [
-                'data' => null,
-                'status' => false,
-                'errors' => ["Geçersiz bir kare kod okuttunuz!"]
-            ];
-        }
-        $qr_code = $request->user()->meeting->qrCodes()->get()->where('code', $request->input('code'))->first();
-        if($score_game->points()->get()->where('participant_id', $request->user()->id)->where('qr_code_id', $qr_code->id)->count() > 0){
-            return [
-                'data' => null,
-                'status' => false,
-                'errors' => ["Bu kare kodu daha önceden gösterdiniz!"]
-            ];
-        }
 
-        if(!isset($qr_code)){
-            return [
-                'data' => null,
-                'status' => false,
-                'errors' => ["Daha önce okutulmuş veya yanlış qr code"]
-            ];
-        } elseif (!Carbon::parse($qr_code->start_at)->isPast() || Carbon::parse($qr_code->finish_at)->isPast() ) {
-            return [
-                'data' => null,
-                'status' => false,
-                'errors' => ["Bu kare kod şu anda aktif değildir!"]
-            ];
-        }
-        $point = new Point();
-        $point->qr_code_id = $qr_code->id;
-        $point->participant_id = $request->user()->id;
-        $point->point = $qr_code->point;
         try{
+            $score_game = $request->user()->meeting->scoreGames()->first();
+            $this->logParticipantAction($request->user(), "scan-qr-code", __('common.score-game') . ': ' . $score_game->title);
+            if($request->user()->meeting->qrCodes()->get()->where('code', $request->input('code'))->count() == 0){
+                return [
+                    'data' => null,
+                    'status' => false,
+                    'errors' => ["Geçersiz bir kare kod okuttunuz!"]
+                ];
+            }
+            $qr_code = $request->user()->meeting->qrCodes()->get()->where('code', $request->input('code'))->first();
+            if($score_game->points()->get()->where('participant_id', $request->user()->id)->where('qr_code_id', $qr_code->id)->count() > 0){
+                return [
+                    'data' => null,
+                    'status' => false,
+                    'errors' => ["Bu kare kodu daha önceden gösterdiniz!"]
+                ];
+            }
+
+            if(!isset($qr_code)){
+                return [
+                    'data' => null,
+                    'status' => false,
+                    'errors' => ["Daha önce okutulmuş veya yanlış qr code"]
+                ];
+            } elseif (!Carbon::parse($qr_code->start_at)->isPast() || Carbon::parse($qr_code->finish_at)->isPast() ) {
+                return [
+                    'data' => null,
+                    'status' => false,
+                    'errors' => ["Bu kare kod şu anda aktif değildir!"]
+                ];
+            }
+            $point = new Point();
+            $point->qr_code_id = $qr_code->id;
+            $point->participant_id = $request->user()->id;
+            $point->point = $qr_code->point;
             return [
                 'data' => $point->save(),
                 'status' => true,

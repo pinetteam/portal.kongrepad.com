@@ -27,8 +27,8 @@
                             <tr>
                                 <td>{{ $user_role->title }}</td>
                                 <td>
-                                    @foreach($user_role->routes as $route)
-                                    {{ $route }}
+                                    @foreach(json_decode($user_role->routes) as $route)
+                                    {{ $route }}<br>
                                     @endforeach
                                 </td>
                                 <td>

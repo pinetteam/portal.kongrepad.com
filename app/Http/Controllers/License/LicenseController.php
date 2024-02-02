@@ -9,6 +9,7 @@ use App\Models\Customer\Setting\Setting;
 use App\Models\Meeting\Hall\Hall;
 use App\Models\Meeting\Meeting;
 use App\Models\System\Country\Country;
+use App\Models\User\Role\Role;
 use App\Models\User\User;
 use Faker\Factory;
 use Illuminate\Support\Facades\Auth;
@@ -159,10 +160,25 @@ class LicenseController extends Controller
                     ],
                 ]);
                 $faker1 = Factory::create();
+
+
+                $routes = [
+                    'portal.dashboard.index',
+                    'portal.meeting.index',
+                    'portal.user.index',
+                    'portal.setting.index',
+                ];
+                $role1 = new Role();
+                $role1->customer_id = $customer->id;
+                $role1->title = 'Manager';
+                $role1->routes = json_encode($routes);
+                $role1->status = 1;
+                $role1->save();
+
                 User::insert([
                     [
                         'customer_id' => $customer->id,
-                        'user_role_id' => '1',
+                        'user_role_id' => $role1->id,
                         'username' => $request->input('username'),
                         'first_name' => 'Manager',
                         'last_name' => $request->input('username'),
