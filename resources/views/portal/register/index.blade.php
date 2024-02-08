@@ -24,7 +24,7 @@
 <div class="bg-gradient bg-dark p-0 overflow-x-hidden text-white">
     <div class="row h-100">
         <main class="ms-sm-auto px-md-4 flex-shrink-0" id="kp-main">
-            <div class="card bg-transparent justify-content-center w-100 m-2 border-0">
+            <div class="card bg-transparent justify-content-center w-100 m-0 border-0 mt-2">
                 <div class="container text-center align-items-center container-fluid content-row d-block">
                     <form method="POST" action="{{ route('register.store') }}" name="register-create-form" id="register-create-form" enctype="multipart/form-data" autocomplete="nope">
                         @csrf
