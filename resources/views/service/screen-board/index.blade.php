@@ -17,7 +17,7 @@
                                 <p>{{ $screen->title }}</p>
                             </div>
                             <div class="card-body">
-                                <div class="ratio ratio-16x9">
+                                <div class="ratio ratio-16x9 border border-white">
                                     <iframe src="{{ route('service.screen.' . $screen->type . '.index', ['meeting_hall_screen_code' => $screen->code]) }}" title="screen" class="ratio ratio-16x9" allowfullscreen></iframe>
                                     <a href="{{ route('service.screen.' . $screen->type . '.index', ['meeting_hall_screen_code' => $screen->code]) }}" class="position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(0,0,0,0); border: none;" title="{{ __('common.screen') }}" target="_blank">
                                     </a>

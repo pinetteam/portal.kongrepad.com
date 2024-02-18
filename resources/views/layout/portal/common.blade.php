@@ -52,23 +52,6 @@
                 </li>
             </ul>
             <div class="sidebar-heading">
-                <span class="nav-icon fa-duotone fa-arrow-turn-down-right"></span> {{ __('common.application') }}
-            </div>
-            <ul class="nav nav-tabs flex-column">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <span class="nav-icon fa-duotone fa-brush fa-fade"></span>
-                        {{ __('common.template-and-design') }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <span class="nav-icon fa-duotone fa-rectangle-ad fa-fade"></span>
-                        {{ __('common.advertisements') }}
-                    </a>
-                </li>
-            </ul>
-            <div class="sidebar-heading">
                 <span class="nav-icon fa-duotone fa-arrow-turn-down-right"></span> {{ __('common.statistic') }}
             </div>
             <ul class="nav nav-tabs flex-column">
