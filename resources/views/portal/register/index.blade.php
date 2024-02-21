@@ -37,8 +37,8 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                             <hr class="text-white"/>
-                            <div class="row column-gap-0 align-items-center text-center">
-                                <div class="col p-0 flex-column w-100">
+                            <div class="row align-items-center text-center justify-content-center">
+                                <div class="col col-sm-12 col-lg-6 p-0 flex-column">
                                     <div class="card bg-transparent text-center p-5 text-black border-end border-0 border-light border-opacity-25">
                                         <h5 class="text-white">{{ trans('common.create_your_kongrepad_account') }}</h5>
                                         <hr class="text-light">
@@ -68,18 +68,20 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="card bg-transparent border-0 text-white px-2">
-                                                <x-input.select method="c" name="phone_country" title="phone-country" :options="$phone_countries" option_value="phone_code" option_name="name" icon="flag" :searchable="true" />
+                                            <div class="col col-sm-12 col-lg-6 p-0">
+                                                <div class="card bg-transparent border-0 text-white px-2">
+                                                    <x-input.select method="c" name="phone_country" title="phone-country" :options="$phone_countries" option_value="phone_code" option_name="name" icon="flag" :searchable="true" />
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="card bg-transparent border-0 text-white px-2">
-                                                <x-input.text method="c" name="phone" title="phone" icon="mobile-screen" />
+                                            <div class="col col-sm-12 col-lg-6 p-0">
+                                                <div class="card bg-transparent border-0 text-white px-2">
+                                                    <x-input.text method="c" name="phone" title="phone" icon="mobile-screen" />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col p-0 w-100 d-block">
+                                <!--- <div class="col p-0 w-100 d-block">
                                     <div class="card text-center bg-transparent border-0 p-5 text-white">
                                         <h5 class="text-white">{{ trans('common.add_more_informationoptional') }}</h5>
                                         <hr>
@@ -111,7 +113,7 @@
                                             <x-input.text method="c" name="address" title="address" icon="location-dot" />
                                         </div>
                                     </div>
-                                </div>
+                                </div> --->
                             </div>
                             <div class="row justify-content-center mt-2">
                                 <button type="submit" class="btn btn-success w-50 btn-block" id="register-create-form-submit">
