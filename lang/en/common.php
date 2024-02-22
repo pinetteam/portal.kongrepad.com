@@ -394,4 +394,9 @@ return [
     'add_more_informationoptional' => 'Add More Information(Optional)',
     'create_your_kongrepad_account' => 'Create your KongrePad Account',
     'donation' => 'Donation',
+    'incoming-questions' => 'Incoming Questions',
+    'selected-questions' => 'Selected Questions',
+    'add' => 'Add',
+    'remove' => 'Remove',
+
 ];
