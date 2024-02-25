@@ -26,20 +26,20 @@
         <main class="ms-sm-auto px-md-4 flex-shrink-0" id="kp-main">
             <div class="card bg-transparent justify-content-center w-100 m-0 border-0 mt-2">
                 <div class="container text-center align-items-center container-fluid content-row d-block">
+                    <div class="alert alert-success alert-dismissible fade show my-3" role="alert">
+                        Register now and get <strong>100 free credits!</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
                     <form method="POST" action="{{ route('register.store') }}" name="register-create-form" id="register-create-form" enctype="multipart/form-data" autocomplete="nope">
                         @csrf
                         <div class="col justify-content-center align-items-center">
                             <div class="row">
                                 <h1 class="m-0 text-center text-white">{{ __('common.register') }}</h1>
                             </div>
-                            <div class="alert alert-success alert-dismissible fade show my-3" role="alert">
-                                Register now and get <strong>100 free credits!</strong>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
                             <hr class="text-white"/>
                             <div class="row align-items-center text-center justify-content-center">
                                 <div class="col col-sm-12 col-lg-6 p-0 flex-column">
-                                    <div class="card bg-transparent text-center p-5 text-black border-end border-0 border-light border-opacity-25">
+                                    <div class="card bg-transparent text-center p-5 text-black">
                                         <h5 class="text-white">{{ trans('common.create_your_kongrepad_account') }}</h5>
                                         <hr class="text-light">
                                         <div class="row">
@@ -58,16 +58,6 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="card bg-transparent border-0 text-white px-2">
-                                                <x-input.password method="c" name="password" title="password" icon="lock" />
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="card bg-transparent border-0 text-white px-2">
-                                                <x-input.password method="c" name="repeat_password" title="repeat-password" icon="lock" />
-                                            </div>
-                                        </div>
-                                        <div class="row">
                                             <div class="col col-sm-12 col-lg-6 p-0">
                                                 <div class="card bg-transparent border-0 text-white px-2">
                                                     <x-input.select method="c" name="phone_country" title="phone-country" :options="$phone_countries" option_value="phone_code" option_name="name" icon="flag" :searchable="true" />
@@ -76,6 +66,18 @@
                                             <div class="col col-sm-12 col-lg-6 p-0">
                                                 <div class="card bg-transparent border-0 text-white px-2">
                                                     <x-input.text method="c" name="phone" title="phone" icon="mobile-screen" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col col-sm-12 col-lg-6 p-0">
+                                                <div class="card bg-transparent border-0 text-white px-2">
+                                                    <x-input.password method="c" name="password" title="password" icon="lock" />
+                                                </div>
+                                            </div>
+                                            <div class="col col-sm-12 col-lg-6 p-0">
+                                                <div class="card bg-transparent border-0 text-white px-2">
+                                                    <x-input.password method="c" name="repeat_password" title="repeat-password" icon="lock" />
                                                 </div>
                                             </div>
                                         </div>

@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('meeting_hall_program_session_logs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('session_id')->index();
-            $table->unsignedBigInteger('created_by')->index()->nullable();
             $table->enum('action', ['start', 'stop']);
+            $table->unsignedBigInteger('created_by')->index()->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('created_by')->on('users')->references('id');
