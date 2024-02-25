@@ -44,7 +44,7 @@
                                         <hr class="text-light">
                                         <div class="row">
                                             <div class="card bg-transparent border-0 text-white px-2">
-                                                <x-input.text method="c" name="title" title="company-title" icon="input-text" />
+                                                <x-input.text method="c" name="title" title="company-title" icon="input-text"/>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -54,7 +54,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="card bg-transparent border-0 text-white px-2">
-                                                <x-input.text method="c" name="username" title="username" icon="user" />
+                                                <x-input.text method="c" name="username" title="username" icon="user" :value="$random_username"/>
                                             </div>
                                         </div>
                                         <div class="row">

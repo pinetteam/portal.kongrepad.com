@@ -91,7 +91,11 @@ class LicenseController extends Controller
             '24H' => ['value' => '24H', 'title' => '24-h'],
             '12H' => ['value' => '12H', 'title' => '12-h'],
         ];
-        return view('portal.register.index', compact(['phone_countries', 'time_formats', 'date_formats', 'timezones']));
+        $random_username = 'user_' . strval(mt_rand(100000, 999999));
+        while (User::where('username', $random_username)->exists()) {
+            $random_username = 'user_' . strval(mt_rand(100000, 999999));
+        }
+        return view('portal.register.index', compact(['phone_countries', 'time_formats', 'date_formats', 'timezones', 'random_username']));
     }
     public function store(LicenseRequest $request)
     {
