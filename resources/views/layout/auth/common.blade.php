@@ -20,6 +20,14 @@
         <a class="navbar-brand ms-3 overflow-hidden ps-3" href="{{ route("auth.login.index") }}">
             {{ config('app.name') }}
         </a>
+
+        <form action="{{ route('change.locale') }}" method="POST">
+            @csrf
+            <select name="locale" onchange="this.form.submit()">
+                <option value="en" {{ session('locale') == 'en' ? 'selected' : '' }}>TR</option>
+                <option value="tr" {{ session('locale') == 'tr' ? 'selected' : '' }}>EN</option>
+            </select>
+        </form>
     </header>
     <div class="container">
         <div class="row h-100 vertical-offset-100 d-flex justify-content-center">

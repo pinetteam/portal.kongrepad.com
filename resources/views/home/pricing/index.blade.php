@@ -23,6 +23,13 @@
         <a href="{{ route('register.index')}}" class="btn btn-success btn-block rounded-2 btn-sm" tabindex="-1" role="button" aria-disabled="true">
             <span style="white-space: nowrap">{{ __('common.try-it-for-free')}}</span>
         </a>
+        <form action="{{ route('change.locale') }}" method="POST">
+            @csrf
+            <select name="locale" onchange="this.form.submit()">
+                <option value="en" {{ session('locale') == 'en' ? 'selected' : '' }}>TR</option>
+                <option value="tr" {{ session('locale') == 'tr' ? 'selected' : '' }}>EN</option>
+            </select>
+        </form>
     </div>
 </header>
 <body class="d-flex flex-column bg-dark">

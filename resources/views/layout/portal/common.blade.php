@@ -30,6 +30,15 @@
     <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#kp-menu" aria-controls="kp-menu" aria-expanded="false">
         <i class="fa-regular fa-bars" id="kp-navbar-icon"></i>
     </button>
+    <div class="navbar-nav d-flex">
+        <form action="{{ route('change.locale') }}" method="POST">
+            @csrf
+            <select name="locale" onchange="this.form.submit()">
+                <option value="en" {{ session('locale') == 'en' ? 'selected' : '' }}>TR</option>
+                <option value="tr" {{ session('locale') == 'tr' ? 'selected' : '' }}>EN</option>
+            </select>
+        </form>
+    </div>
     <div class="navbar-nav d-none d-md-flex">
         <div class="nav-item text-nowrap"><a class="nav-link px-3" href="{{ route('auth.logout.store') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fa-regular fa-power-off"></i></a></div>
     </div>

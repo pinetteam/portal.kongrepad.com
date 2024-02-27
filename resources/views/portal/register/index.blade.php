@@ -14,6 +14,13 @@
     <a class="navbar-brand ms-3 overflow-hidden ps-3" href="{{ route("auth.login.index") }}">
         {{ config('app.name') }}
     </a>
+    <form action="{{ route('change.locale') }}" method="POST">
+        @csrf
+        <select name="locale" onchange="this.form.submit()">
+            <option value="en" {{ session('locale') == 'en' ? 'selected' : '' }}>TR</option>
+            <option value="tr" {{ session('locale') == 'tr' ? 'selected' : '' }}>EN</option>
+        </select>
+    </form>
 </header>
 <body class="d-flex flex-column h-100">
 <div id="kp-loading" class="d-flex align-items-center justify-content-center">
@@ -60,7 +67,7 @@
                                         <div class="row">
                                             <div class="col col-sm-12 col-lg-6 p-0">
                                                 <div class="card bg-transparent border-0 text-white px-2">
-                                                    <x-input.select method="c" name="phone_country" title="phone-country" :options="$phone_countries" option_value="phone_code" option_name="name" icon="flag" :searchable="true" />
+                                                    <x-input.select method="c" name="phone_country" title="phone-country" :options="$phone_countries" option_value="phone_code" option_name="NameAndCode" icon="flag" :searchable="true" />
                                                 </div>
                                             </div>
                                             <div class="col col-sm-12 col-lg-6 p-0">
