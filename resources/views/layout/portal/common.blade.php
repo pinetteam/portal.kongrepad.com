@@ -65,7 +65,7 @@
             </div>
             <ul class="nav nav-tabs flex-column">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{ route("portal.live-stats.index") }}">
                         <span class="nav-icon fa-duotone fa-wave-pulse fa-fade"></span>
                         {{ __('common.live-stats') }}
                     </a>

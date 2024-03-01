@@ -71,6 +71,7 @@ Route::prefix('portal')->name('portal.')->group(function () {
     Route::group(["middleware" => ['auth', 'setLocale']], function () {
         // Main routes
         Route::get('/', [\App\Http\Controllers\Portal\DashboardController::class, 'index'])->name('dashboard.index');
+        Route::get('/live-stats', [\App\Http\Controllers\Portal\LiveStatsController::class, 'index'])->name('live-stats.index');
         // Meeting routes
         Route::resource('/meeting', \App\Http\Controllers\Portal\Meeting\MeetingController::class)->except(['create']);
         Route::prefix('meeting')->name('meeting.')->group(function () {

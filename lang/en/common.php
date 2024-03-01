@@ -398,5 +398,8 @@ return [
     'selected-questions' => 'Selected Questions',
     'add' => 'Add',
     'remove' => 'Remove',
+    'enrolled-participants' => 'Enrolled participants',
+    'logged-in-participants' => 'Logged in participants',
+    'active-participants' => 'Active participants',
 
 ];

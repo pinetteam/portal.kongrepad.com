@@ -368,4 +368,7 @@ return [
     'selected-questions' => 'Seçilen Sorular',
     'add' => 'Ekle',
     'remove' => 'Kaldır',
+    'enrolled-participants' => 'Kayıt yapan katılımcılar',
+    'logged-in-participants' => 'Giriş yapan katılımcılar',
+    'active-participants' => 'Aktif katılımcılar',
 ];
