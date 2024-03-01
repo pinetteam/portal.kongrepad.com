@@ -371,4 +371,6 @@ return [
     'enrolled-participants' => 'Kayıt yapan katılımcılar',
     'logged-in-participants' => 'Giriş yapan katılımcılar',
     'active-participants' => 'Aktif katılımcılar',
+    'is-your-kongrepad-verification-code' => 'KongrePad onay kodunuz.',
+    'kongrepad-account-created' => 'KongrePad hesabınız oluşturuldu.',
 ];

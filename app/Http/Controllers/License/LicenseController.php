@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\License;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Service\SMS\NetGSM\SendSMS;
 use App\Http\Requests\License\LicenseRequest;
 use App\Models\Customer\Customer;
 use App\Models\Customer\Setting\Setting;
@@ -15,6 +16,7 @@ use Faker\Factory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Mail;
 
 class LicenseController extends Controller
 {
@@ -178,6 +180,14 @@ class LicenseController extends Controller
                 $role1->routes = json_encode($routes);
                 $role1->status = 1;
                 $role1->save();
+
+                $auth_code = strval(mt_rand(100000, 999999));
+                SendSMS::toMany($request->input('phone_country'), $request->input('phone'), $auth_code . __('common.is-your-kongrepad-verification-code'));
+                $mail_data = [
+                    "subject" => __('common.kongrepad-account-created'),
+                    "body" => __('common.kongrepad-account-created'),
+                ];
+                Mail::to($request->input('email'))->send(new \App\Mail\Announcement($mail_data));
 
                 User::insert([
                     [

@@ -401,5 +401,7 @@ return [
     'enrolled-participants' => 'Enrolled participants',
     'logged-in-participants' => 'Logged in participants',
     'active-participants' => 'Active participants',
+    'is-your-kongrepad-verification-code' => 'is your KongrePad verification code.',
+    'kongrepad-account-created' => 'Your KongrePad account has been created.',
 
 ];
