@@ -11,51 +11,65 @@
     @vite(['resources/sass/app.scss'])
     @vite(['resources/js/app.js'])
 </head>
-<header class="navbar navbar-dark fixed-top bg-dark p-0 shadow" id="kp-header">
-    <a class="navbar-brand ms-3 overflow-hidden ps-3" href="{{ route("home.index") }}">
-        {{ config('app.name') }}
-    </a>
-    <div class="text-end btn-group mx-3 gap-2">
-        <a href="" class="btn btn-block text-end rounded-2 btn-sm text-white text-decoration-underline" tabindex="-1" role="button" aria-disabled="true">{{ trans('common.tutorials') }}</a>
-        <a href="{{ route('home.pricing')}}" class="btn btn-block rounded-2 btn-sm text-white text-decoration-underline" tabindex="-1" role="button" aria-disabled="true">
-            <span style="white-space: nowrap">{{ trans('common.pricing') }}</span>
+<nav class="navbar navbar-dark navbar-expand-lg sticky-top bg-dark p-0 shadow" id="kp-header">
+    <div class="container-fluid">
+        <a class="navbar-brand ms-3 overflow-hidden ps-3" href="{{ route("home.index") }}">
+            {{ config('app.name') }}
         </a>
-        <a href="{{ route('auth.login.index')}}" class="btn btn-primary btn-block text-end rounded-2 btn-sm" tabindex="-1" role="button" aria-disabled="true">{{ __('common.sign-in')}}</a>
-        <a href="{{ route('register.index')}}" class="btn btn-success btn-block rounded-2 btn-sm" tabindex="-1" role="button" aria-disabled="true">
-            <span style="white-space: nowrap">{{ __('common.try-it-for-free')}}</span>
-        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                <ul class="navbar-nav mx-4">
+                    <li class="nav-item">
+                        <a href="" class="nav-link text-white" tabindex="-1" role="button" aria-disabled="true">{{ trans('common.tutorials') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('home.pricing')}}" class="nav-link text-white" tabindex="-1" role="button" aria-disabled="true">
+                            <span style="white-space: nowrap">{{ trans('common.pricing') }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('auth.login.index')}}" class="nav-link text-light" tabindex="-1" role="button" aria-disabled="true">{{ __('common.sign-in')}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('register.index')}}" class="btn btn-orange btn-block rounded-2 btn-sm text-light mx-2" tabindex="-1" role="button" aria-disabled="true">
+                            <span style="white-space: nowrap">{{ __('common.try-it-for-free')}}</span>
+                        </a>
+                    </li>
+                </ul>
+        </div>
         <form action="{{ route('change.locale') }}" method="POST">
             @csrf
-            <select name="locale" onchange="this.form.submit()">
-                <option value="en" {{ session('locale') == 'en' ? 'selected' : '' }}>TR</option>
-                <option value="tr" {{ session('locale') == 'tr' ? 'selected' : '' }}>EN</option>
+            <select class="bg-color2 text-light mx-4 mx-lg-3 mt-lg-0 mt-2 mb-2 mb-lg-0" name="locale" onchange="this.form.submit()">
+                <option value="en" {{ session('locale') == 'en' ? 'selected' : '' }}>EN</option>
+                <option value="tr" {{ session('locale') == 'tr' ? 'selected' : '' }}>TR</option>
             </select>
         </form>
     </div>
-</header>
+</nav>
 <body class="d-flex flex-column bg-dark">
     <div id="kp-loading" class="d-flex align-items-center justify-content-center">
         <div class="spinner-grow text-success" role="status">
             <span class="visually-hidden">{{ __('common.loading') }}</span>
         </div>
     </div>
-    <div class="container mt-4" id="kp-home">
+    <div class="container mt-4 background-image" id="kp-home">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-2 gy-3 py-3 align-items-center">
             <div class="col mt-0">
                 <div id="carouselExampleDark" class="carousel carousel-dark slide">
                     <div class="carousel-indicators mb-0">
                         <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                         <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
                     </div>
                     <div class="carousel-inner align-items-center">
                         <div class="carousel-item active align-items-center" data-bs-interval="10000">
                             <div class="container align-items-center mb-4">
-                                <h1 class="border-bottom border-dark-subtle text-white text-center">{{ trans('common.what_is_kongrepad2') }}</h1>
+                                <h1 class="border-bottom border-dark-subtle text-white text-center">{{ trans('common.what_is_kongrepad') }}</h1>
                                     <div class="row pt-2 align-items-center text-center">
                                         <div class="btn-group w-100 mb-4">
                                         <div class="col">
-                                            <h5 class="text-white">{{ trans('common.kongrepad_is_an_application_platform_with_live_key2') }}</h5>
+                                            <h5 class="text-white">{{ trans('common.kongrepad_is_an_application_platform_with_live_key') }}</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -78,38 +92,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="carousel-item" data-bs-interval="2000">
-                            <div class="container align-items-center">
-                                <h1 class="border-bottom border-dark-subtle text-white text-center mb-0">{{ trans('common.download_kongrepad') }}</h1>
-                                <div class="row">
-                                    <div class="col">
-                                        <a href="https://apps.apple.com/tr/app/kongrepad/id6463897045" target="_blank" title="KongrePad AppStore">
-                                            <img src="{{ asset('images/app-store-download.svg') }}" class="img-fluid" alt="KongrePad AppStore" />
-                                        </a>
-                                    </div>
-                                    <div class="col">
-                                        <a href="https://play.google.com/store/apps/details?id=com.pinet.kongrepad&gl=TR" target="_blank" title="KongrePad PlayStore">
-                                            <img src="{{ asset('images/play-store-download.svg') }}" class="img-fluid" alt="KongrePad PlayStore" />
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
                 </div>
             </div>
             <div class="col justify-content-center align-items-center text-center">
                 <div class="card text-bg-dark border-0">
                     <div class="card-body">
-                        <img src="{{ asset('images/home-screenshot.png') }}" class="img-fluid rounded-2 w-50" alt="KongrePad 01" />
+                        <img src="{{ asset('images/homepage.png') }}" class="img-fluid rounded-2 w-100" alt="KongrePad 01" />
                     </div>
                 </div>
             </div>
@@ -367,21 +356,45 @@
             </div>
         </div>
     </div>
-    <div class="bg-color2 text-white text-center mb-4 px-4 flex">
-        <div class="row align-items-center my-2">
-            <div class="col">
-                <p class="text-white"><span class="fa-phone fa-fade fa-regular mx-2"></span>0 312 911 91 13</p>
+    <div class="bg-color2 text-white text-center px-0 flex">
+        <div class="row align-items-center">
+            <div class="col-md-6" id="footer-info-left">
+                <div class="footer-info-container text-center">
+                    <img src="https://pinet.com.tr/images/logos/pinet-white-logo.svg" class="footer-info-logo text-center mt-2" alt="Pinet Bilişim" width="100">
+                    <ul class="list-group float-left w-100">
+                        <li class="list-group-item text-center bg-color2 border-color2"><a href="https://pinet.com.tr/about-us.html" class="footer-info-link text-light">About Us</a></li>
+                        <li class="list-group-item text-center bg-color2 border-color2"><a href="https://pinet.com.tr/about-us.html" class="footer-info-link text-light">Partners</a></li>
+                        <li class="list-group-item text-center bg-color2 border-color2"><a href="https://blog.pinet.com.tr/" class="footer-info-link text-light">Blog</a></li>
+                        <li class="list-group-item text-center bg-color2 border-color2"><a href="https://pinet.com.tr/contact.html" class="footer-info-link text-light">Contact</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="col">
-                <p class="text-white"><span class="fa-envelope fa-fade fa-regular mx-2"></span>info@pinet.com.tr</p>
-            </div>
-            <div class="col">
-                <p><a class="text-white text-decoration-none" href="https://www.pinet.com.tr/privacy-policy.html"><span class="fa-fingerprint fa-fade fa-regular mx-2"></span>{{ __('common.privacy_policy') }}</a></p>
+            <div class="col-md-6 text-center bg-dark" id="footer-info-right">
+                <div class="footer-info-container mt-4 text-center">
+                    <a href="https://www.facebook.com/pinetbilisim/" class="footer-info-social-link h1"><i class="fab fa-facebook-square mr-2"></i></a>
+                    <a href="https://twitter.com/pinetbilisim" class="footer-info-social-link h1"><i class="fab fa-twitter-square mr-2"></i></a>
+                    <a href="https://www.instagram.com/pinetbilisim/" class="footer-info-social-link h1"><i class="fab fa-instagram-square mr-2"></i></a>
+                    <a href="https://github.com/pinetbilisim" class="footer-info-social-link h1"><i class="fab fa-github-square mr-2"></i></a>
+                    <a href="https://www.linkedin.com/company/pinetbilisim/" class="footer-info-social-link h1"><i class="fab fa-linkedin mr-2"></i></a>
+                    <ul class="list-group float-left w-100">
+                        <li class="list-group-item text-md-left text-center h5 bg-dark text-light border-dark"><strong><i class="fas fa-location-arrow"></i> Ankara, Turkey</strong></li>
+                        <li class="list-group-item text-md-left text-center bg-dark text-light border-dark"><i class="fad fa-map-marker-alt"></i> Bahçelievler Mah. 323/1 Cadde 10/50C No: 65, Gölbaşı/Ankara</li>
+                        <li class="list-group-item text-md-left text-center bg-dark border-dark"><i class="fad fa-phone text-light"></i> <a href="tel:+90 (312) 9119113" class="footer-info-link text-light">+90 (312) 9119113</a></li>
+                        <li class="list-group-item text-md-left text-center bg-dark text-light border-dark"><i class="fa-envelope fa-regular"></i> <a href="/cdn-cgi/l/email-protection#88e1e6eee7c8f8e1e6edfca6ebe7e5a6fcfa" class="footer-info-link text-light"><span class="__cf_email__" data-cfemail="6900070f06291900070c1d470a0604471d1b">info@pinet.com.tr</span></a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
 </body>
-<footer class="bg-dark text-light col-12 px-md-0 ms-sm-auto shadow" id="kp-footer">
-    <div class="fixed-bottom bg-dark shadow px-md-4">Copyright © 2017-{{ date('Y') }} {{ config('app.name') }} </div>
+<footer class="bg-dark text-light col-12 px-md-0 ms-sm-auto my-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="bg-dark px-md-4">Copyright © 2017-{{ date('Y') }} {{ config('app.name') }} </div>
+                <p class="pb-2"><a href="#" class="text-decoration-underline text-light"><strong>{{ __('common.privacy_policy') }}</strong></a></p>
+            </div>
+        </div>
+    </div>
 </footer>
 </html>
