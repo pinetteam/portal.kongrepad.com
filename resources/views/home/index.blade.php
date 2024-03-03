@@ -54,7 +54,7 @@
             <span class="visually-hidden">{{ __('common.loading') }}</span>
         </div>
     </div>
-    <div class="container mt-4 background-image" id="kp-home">
+    <div class="container-fluid mt-4 background-image" id="kp-home">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-2 gy-3 py-3 align-items-center">
             <div class="col mt-0">
                 <div id="carouselExampleDark" class="carousel carousel-dark slide">
@@ -175,7 +175,7 @@
             <h3 class="text-light mt-2">{{ trans('common.check_out_the_services_kongrepad_offers') }}</h3>
             <hr class="text-light">
         </div>
-        <div class="row row-cols-1 row-cols-md-4 g-4 justify-content-center text-center">
+        <div class="row row-cols-1 row-cols-md-4 g-4 mb-5 justify-content-center text-center">
             <div class="col">
                 <div class="card h-100 bg-color2 text-white shadow-lg">
                     <div class="h1 m-3"><span class="fa-duotone fa-square-poll-horizontal fa-fade"></span></div>
@@ -263,6 +263,49 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ __('common.surveys') }}</h5>
                         <p class="card-text">{{ trans('common.effortlessly_collect_attendee_feedback_and_insights_with_our_integrated_survey_tool') }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="showcase">
+            <div class="container-fluid mt-4">
+                <div class="row">
+                    <div class="col-md-12" id="our-customers-said">
+                        <h1 class="text-center mb-0 text-light">Our customers said</h1>
+                        <hr class="text-light w-100" />
+                        <div id="our-customers-said-carousel" class="carousel carousel-dark slide py-2" data-ride="carousel">
+                            <div class="carousel-indicators mb-0">
+                                <button type="button" data-bs-target="#our-customers-said-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#our-customers-said-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                <button type="button" data-bs-target="#our-customers-said-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                            </div>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <div class="text-center my-4">
+                                        <blockquote class="blockquote w-50 mx-auto text-center">
+                                            <p class="mb-2 text-light">We have been developing business smoothly for years with Pinet, with which we work as a solution partner. Thank you to the relevant and relevant team.</p>
+                                            <footer class="blockquote-footer mt-2">Olgun Emre Aktaş <cite title="Source Title" class="small">General Manager at Sophos</cite></footer>
+                                        </blockquote>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="text-center my-4">
+                                        <blockquote class="blockquote w-50 mx-auto text-center">
+                                            <p class="mb-2 text-light">With EmlakCRM you provided, we reduced our operating costs to a minimum. We have had a strong bond with you over the years. Thank you for your effort.</p>
+                                            <footer class="blockquote-footer mt-2">Ferhat Ertürk <cite title="Source Title">General Manager at TOBAŞ</cite></footer>
+                                        </blockquote>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="text-center my-4">
+                                        <blockquote class="blockquote w-50 mx-auto text-center">
+                                            <p class="mb-2 text-light">We would like to thank Pinet for facilitating the planning of our network architecture and the management of many offices.</p>
+                                            <footer class="blockquote-footer mt-2">Hüseyin Tecer <cite title="Source Title">IT Manager at PTT PAL</cite></footer>
+                                        </blockquote>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -374,7 +417,6 @@
                     <a href="https://www.facebook.com/pinetbilisim/" class="footer-info-social-link h1"><i class="fab fa-facebook-square mr-2"></i></a>
                     <a href="https://twitter.com/pinetbilisim" class="footer-info-social-link h1"><i class="fab fa-twitter-square mr-2"></i></a>
                     <a href="https://www.instagram.com/pinetbilisim/" class="footer-info-social-link h1"><i class="fab fa-instagram-square mr-2"></i></a>
-                    <a href="https://github.com/pinetbilisim" class="footer-info-social-link h1"><i class="fab fa-github-square mr-2"></i></a>
                     <a href="https://www.linkedin.com/company/pinetbilisim/" class="footer-info-social-link h1"><i class="fab fa-linkedin mr-2"></i></a>
                     <ul class="list-group float-left w-100">
                         <li class="list-group-item text-md-left text-center h5 bg-dark text-light border-dark"><strong><i class="fas fa-location-arrow"></i> Ankara, Turkey</strong></li>
