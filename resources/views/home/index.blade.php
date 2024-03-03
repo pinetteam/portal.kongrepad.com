@@ -64,7 +64,7 @@
                     </div>
                     <div class="carousel-inner align-items-center">
                         <div class="carousel-item active align-items-center" data-bs-interval="10000">
-                            <div class="container align-items-center mb-4">
+                            <div class="container align-items-center mb-4 mx-lg-4">
                                 <h1 class="border-bottom border-dark-subtle text-white text-center">{{ trans('common.what_is_kongrepad') }}</h1>
                                     <div class="row pt-2 align-items-center text-center">
                                         <div class="btn-group w-100 mb-4">
@@ -103,11 +103,11 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row mx-lg-4 mx-2">
             <h3 class="text-light">{{ trans('common.empower_your_events_elevate_your_experience_stream') }}</h3>
             <hr class="text-light">
         </div>
-        <div class="row row-cols-1 row-cols-md-3 g-4 mb-4 text-center">
+        <div class="row row-cols-1 row-cols-md-3 g-4 mb-4 text-center mx-lg-4 mx-2">
             <div class="col">
                 <div class="card h-100 bg-color2 text-white shadow-lg">
                     <div class="h1 m-3"><span class="fa-duotone fa-cloud-check fa-fade"></span></div>
@@ -163,19 +163,19 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row mx-2 mx-lg-4 my-3">
             <hr class="text-light">
             <p class="text-light"><span class="fa-regular fa-solid fa-thumbtack px-2"></span> {{ trans('common.introducing_kongrepad_a_revolutionary_congress_mana') }}</p>
-            <a href="{{ route('register.index')}}" class="btn btn-success btn-block rounded-2 mb-3 mx-3 btn-sm w-25" tabindex="-1" role="button" aria-disabled="true">
+            <a href="{{ route('register.index')}}" class="btn btn-success btn-block rounded-2 mx-3 btn-sm w-25" tabindex="-1" role="button" aria-disabled="true">
                 <span style="white-space: nowrap">{{ __('common.try-it-for-free')}}</span>
                 <span class="fa-solid fa-regular fa-arrow-right mx-2"></span>
             </a>
         </div>
-        <div class="row">
+        <div class="row mx-2 mx-lg-4">
             <h3 class="text-light mt-2">{{ trans('common.check_out_the_services_kongrepad_offers') }}</h3>
             <hr class="text-light">
         </div>
-        <div class="row row-cols-1 row-cols-md-4 g-4 mb-5 justify-content-center text-center">
+        <div class="row row-cols-1 row-cols-md-4 g-4 mb-5 justify-content-center text-center mx-2 mx-lg-4">
             <div class="col">
                 <div class="card h-100 bg-color2 text-white shadow-lg">
                     <div class="h1 m-3"><span class="fa-duotone fa-square-poll-horizontal fa-fade"></span></div>
@@ -269,7 +269,7 @@
         </div>
         <div id="showcase">
             <div class="container-fluid mt-4">
-                <div class="row">
+                <div class="row mx-lg-1">
                     <div class="col-md-12" id="our-customers-said">
                         <h1 class="text-center mb-0 text-light">Our customers said</h1>
                         <hr class="text-light w-100" />
@@ -310,11 +310,11 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row mx-2 mx-lg-4">
             <h3 class="text-light mt-3 mt-5">{{ trans('common.frequently_asked_questions') }}</h3>
             <hr class="text-light">
         </div>
-        <div class="row">
+        <div class="row mx-2 mx-lg-4">
             <div class="accordion accordion-flush text-white" id="accordionFlushExample">
                 <div class="accordion-item">
                     <h2 class="accordion-header">
