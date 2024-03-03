@@ -65,10 +65,15 @@ Route::resource('/register', \App\Http\Controllers\License\LicenseController::cl
 // System routes
 Route::get('/get-date-format', [\App\Http\Controllers\System\Setting\Variable\VariableController::class, 'getDateFormat'])->name('get-date-format');
 Route::get('/get-time-format', [\App\Http\Controllers\System\Setting\Variable\VariableController::class, 'getTimeFormat'])->name('get-time-format');
-
+// Sms verification routes
+Route::group(["middleware" => ['auth', 'setLocale']], function () {
+    Route::get('/sms-verification', [\App\Http\Controllers\Auth\VerificationController::class, 'index'])->name('portal.sms-verification.index');
+    Route::get('/send-sms', [\App\Http\Controllers\Auth\VerificationController::class, 'resend_code'])->name('portal.send-sms.index');
+    Route::post('/sms-verification', [\App\Http\Controllers\Auth\VerificationController::class, 'store'])->name('portal.sms-verification.store');
+    Route::patch('/edit-phone', [\App\Http\Controllers\Auth\VerificationController::class, 'edit_phone'])->name('portal.phone.update');
+});
 Route::prefix('portal')->name('portal.')->group(function () {
-    //Route::group(["middleware" => ['auth','user.role.control']], function () {
-    Route::group(["middleware" => ['auth', 'setLocale']], function () {
+    Route::group(["middleware" => ['auth', 'phone.verified', 'setLocale']], function () {
         // Main routes
         Route::get('/', [\App\Http\Controllers\Portal\DashboardController::class, 'index'])->name('dashboard.index');
         Route::get('/live-stats', [\App\Http\Controllers\Portal\LiveStatsController::class, 'index'])->name('live-stats.index');
@@ -145,8 +150,9 @@ Route::prefix('portal')->name('portal.')->group(function () {
                 });
             });
         });
-        Route::resource('/user', \App\Http\Controllers\Portal\User\UserController::class)->except(['create']);
+        Route::get('/user/{user}/get-phone', [\App\Http\Controllers\Portal\User\UserController::class, 'get_phone'])->name('user.get-phone')->withoutMiddleware('phone.verified');
         Route::resource('/user-role', \App\Http\Controllers\Portal\User\Role\RoleController::class)->except(['create']);
+        Route::resource('/user', \App\Http\Controllers\Portal\User\UserController::class)->except(['create']);
         Route::resource('/setting', \App\Http\Controllers\Portal\Setting\SettingController::class)->only(['index', 'update']);
         Route::get('/session-question-on-screen/{id}', [\App\Http\Controllers\Portal\Meeting\Hall\Program\Session\Question\QuestionController::class,'on_screen'])->name('session-question.on-screen');
     });

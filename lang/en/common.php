@@ -403,5 +403,12 @@ return [
     'active-participants' => 'Active participants',
     'is-your-kongrepad-verification-code' => 'is your KongrePad verification code.',
     'kongrepad-account-created' => 'Your KongrePad account has been created.',
+    'verify-your-phone-number' => 'Verify your phone number',
+    'enter-the-code' => 'Enter the code',
+    'edit-phone-number' => 'Edit phone number',
+    'resend-sms' => 'Resend sms',
+    'sms-send-successfully' => 'Sms send succesfully',
+    'verify' => 'Verify',
+    'send' => 'Send',
 
 ];

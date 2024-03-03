@@ -24,7 +24,7 @@ class ScoreGameRequest extends FormRequest
                     'logo' => ['nullable', File::types(['png'])->max(12 * 1024),],
                     'start_at' => 'required|date_format:Y-m-d H:i|before_or_equal:finish_at|required_with:finish_at',
                     'finish_at' => 'required|date_format:Y-m-d H:i|after_or_equal:start_at|required_with:start_at',
-                    'theme' => 'required|in:score_game,theme',
+                    'theme' => 'required|in:score_game,donation',
                     'status' => 'required|boolean',
                 ];
             }

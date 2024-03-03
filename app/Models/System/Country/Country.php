@@ -29,6 +29,6 @@ class Country extends Model
     ];
     public function getNameAndCodeAttribute()
     {
-        return Str::of($this->name . " | +". $this->phone_code)->trim();
+        return Str::of($this->name . " (+". $this->phone_code . ")")->trim();
     }
 }

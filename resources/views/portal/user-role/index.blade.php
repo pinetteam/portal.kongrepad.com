@@ -27,9 +27,7 @@
                             <tr>
                                 <td>{{ $user_role->title }}</td>
                                 <td>
-                                    @foreach(json_decode($user_role->routes) as $route)
-                                    {{ $route }}<br>
-                                    @endforeach
+                                    {{ $user_role->routes }}
                                 </td>
                                 <td>
                                     @if($user_role->status)

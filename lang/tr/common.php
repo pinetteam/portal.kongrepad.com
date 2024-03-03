@@ -380,4 +380,11 @@ return [
     'active-participants' => 'Aktif katılımcılar',
     'is-your-kongrepad-verification-code' => 'KongrePad onay kodunuz.',
     'kongrepad-account-created' => 'KongrePad hesabınız oluşturuldu.',
+    'verify-your-phone-number' => 'Telefon numaranızı onaylayın',
+    'enter-the-code' => 'Kodu giriniz',
+    'edit-phone-number' => 'Telefon numarasını düzenle',
+    'resend-sms' => 'Tekrar sms gönder',
+    'sms-send-successfully' => 'Sms başarıyla gönderildi',
+    'verify' => 'Onayla',
+    'send' => 'Gönder',
 ];

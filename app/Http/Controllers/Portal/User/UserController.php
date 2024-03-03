@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Portal\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Portal\User\UserRequest;
+use App\Http\Resources\Portal\User\UserPhoneResource;
 use App\Http\Resources\Portal\User\UserResource;
 use App\Models\System\Country\Country;
 use App\Models\User\User;
@@ -52,6 +53,11 @@ class UserController extends Controller
     {
         $user = Auth::user()->customer->users()->findOrFail($id);
         return new UserResource($user);
+    }
+    public function get_phone(int $id)
+    {
+        $user = Auth::user()->customer->users()->findOrFail($id);
+        return new UserPhoneResource($user);
     }
     public function update(UserRequest $request, $id)
     {

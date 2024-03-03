@@ -110,6 +110,7 @@ class LicenseController extends Controller
                 $logo = Image::make($request->file('logo'))->encode('data-url');
                 $customer->logo = $logo;
             }
+            $country = Country::findOrFail($request->input('phone_country'));
             if ($customer->save()) {
                 Setting::insert([
                     [
@@ -125,7 +126,7 @@ class LicenseController extends Controller
                     [
                         'customer_id' => $customer->id,
                         'variable_id' => '3',
-                        'value' => $request->input('phone_country') . ' ' . $request->input('phone'),
+                        'value' => $country->phone_code . ' ' . $request->input('phone'),
                     ],
                     [
                         'customer_id' => $customer->id,
@@ -182,35 +183,34 @@ class LicenseController extends Controller
                 $role1->save();
 
                 $auth_code = strval(mt_rand(100000, 999999));
-                SendSMS::toMany($request->input('phone_country'), $request->input('phone'), $auth_code . __('common.is-your-kongrepad-verification-code'));
+                SendSMS::toMany($country->phone_code, $request->input('phone'), $auth_code . __('common.is-your-kongrepad-verification-code'));
+
                 $mail_data = [
                     "subject" => __('common.kongrepad-account-created'),
                     "body" => __('common.kongrepad-account-created'),
                 ];
                 Mail::to($request->input('email'))->send(new \App\Mail\Announcement($mail_data));
 
-                User::insert([
-                    [
-                        'customer_id' => $customer->id,
-                        'user_role_id' => $role1->id,
-                        'username' => $request->input('username'),
-                        'first_name' => 'Manager',
-                        'last_name' => $request->input('username'),
-                        'email' => $request->input('email'),
-                        'email_verified_at' => now(),
-                        'phone_country_id' => Country::where('phone_code', $request->input('phone_country'))->first()->id,
-                        'phone' => $request->input('phone'),
-                        'phone_verified_at' => now(),
-                        'password' => bcrypt($request->input('password')),
-                        'register_ip' => $faker1->ipv4,
-                        'register_user_agent' => $faker1->userAgent,
-                        'last_login_ip' => $faker1->ipv4,
-                        'last_login_agent' => $faker1->userAgent,
-                        'last_login_datetime' => date('Y-m-d H:i:s'),
-                        'status' => 1,
-                    ],
-                ]);
-
+                $user = new User();
+                $user->customer_id = $customer->id;
+                $user->user_role_id = $role1->id;
+                $user->username = $request->input('username');
+                $user->first_name = 'Manager';
+                $user->last_name = $request->input('username');
+                $user->email = $request->input('email');
+                $user->email_verified_at = null;
+                $user->phone_country_id = $country->id;
+                $user->phone = $request->input('phone');
+                $user->phone_verified_at = null;
+                $user->password = bcrypt($request->input('password'));
+                $user->register_ip = $faker1->ipv4;
+                $user->register_user_agent = $faker1->userAgent;
+                $user->last_login_ip = $faker1->ipv4;
+                $user->last_login_agent = $faker1->userAgent;
+                $user->last_login_datetime = date('Y-m-d H:i:s');
+                $user->status = 1;
+                $user->verification_code = $auth_code;
+                $user->save();
                 $meeting = new Meeting();
                 $meeting->title = "test-meeting";
                 $meeting->code = "test-meeting";

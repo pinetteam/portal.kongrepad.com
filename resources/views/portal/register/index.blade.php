@@ -67,7 +67,7 @@
                                         <div class="row">
                                             <div class="col col-sm-12 col-lg-6 p-0">
                                                 <div class="card bg-transparent border-0 text-white px-2">
-                                                    <x-input.select method="c" name="phone_country" title="phone-country" :options="$phone_countries" option_value="phone_code" option_name="NameAndCode" icon="flag" :searchable="true" />
+                                                    <x-input.select method="c" name="phone_country" title="phone-country" :options="$phone_countries" option_value="id" option_name="NameAndCode" icon="flag" :searchable="true" />
                                                 </div>
                                             </div>
                                             <div class="col col-sm-12 col-lg-6 p-0">
