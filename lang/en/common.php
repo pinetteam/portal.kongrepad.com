@@ -410,5 +410,6 @@ return [
     'sms-send-successfully' => 'Sms send succesfully',
     'verify' => 'Verify',
     'send' => 'Send',
+    'our_customers_said' => 'Our customers said'
 
 ];

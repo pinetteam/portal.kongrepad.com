@@ -19,7 +19,7 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <div class="collapse navbar-collapse pb-2" id="navbarTogglerDemo01">
                 <ul class="navbar-nav mx-4">
                     <li class="nav-item">
                         <a href="" class="nav-link text-white" tabindex="-1" role="button" aria-disabled="true">{{ trans('common.tutorials') }}</a>
@@ -41,7 +41,7 @@
         </div>
         <form action="{{ route('change.locale') }}" method="POST">
             @csrf
-            <select class="bg-color2 text-light mx-4 mx-lg-3 mt-lg-0 mt-2 mb-2 mb-lg-0" name="locale" onchange="this.form.submit()">
+            <select class="bg-color2 text-light mx-5 mx-lg-3 my-lg-0 my-2 px-2" name="locale" onchange="this.form.submit()">
                 <option value="en" {{ session('locale') == 'en' ? 'selected' : '' }}>EN</option>
                 <option value="tr" {{ session('locale') == 'tr' ? 'selected' : '' }}>TR</option>
             </select>
@@ -54,7 +54,7 @@
             <span class="visually-hidden">{{ __('common.loading') }}</span>
         </div>
     </div>
-    <div class="container-fluid mt-4 background-image" id="kp-home">
+    <div class="container-fluid background-image" id="kp-home">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-2 gy-3 py-3 align-items-center">
             <div class="col mt-0">
                 <div id="carouselExampleDark" class="carousel carousel-dark slide">
@@ -64,7 +64,7 @@
                     </div>
                     <div class="carousel-inner align-items-center">
                         <div class="carousel-item active align-items-center" data-bs-interval="10000">
-                            <div class="container align-items-center mb-4 mx-lg-4">
+                            <div class="container align-items-center mb-4 mx-lg-3">
                                 <h1 class="border-bottom border-dark-subtle text-white text-center">{{ trans('common.what_is_kongrepad') }}</h1>
                                     <div class="row pt-2 align-items-center text-center">
                                         <div class="btn-group w-100 mb-4">
@@ -109,7 +109,7 @@
         </div>
         <div class="row row-cols-1 row-cols-md-3 g-4 mb-4 text-center mx-lg-4 mx-2">
             <div class="col">
-                <div class="card h-100 bg-color2 text-white shadow-lg">
+                <div class="card h-100 bg-color2 text-white shadow">
                     <div class="h1 m-3"><span class="fa-duotone fa-cloud-check fa-fade"></span></div>
                     <div class="card-body">
                         <h5 class="card-title">{{ trans('common.cloud_based') }}</h5>
@@ -118,7 +118,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card h-100 bg-color2 text-white shadow-lg">
+                <div class="card h-100 bg-color2 text-white shadow">
                     <div class="h1 m-3"><span class="fa-duotone fa-mobile-signal-out fa-fade"></span></div>
                     <div class="card-body">
                         <h5 class="card-title">{{ trans('common.mobile_app') }}</h5>
@@ -127,7 +127,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card h-100 bg-color2 text-white shadow-lg">
+                <div class="card h-100 bg-color2 text-white shadow">
                     <div class="h1 m-3"><span class="fa-duotone fa-user-tie fa-fade"></span></div>
                     <div class="card-body">
                         <h5 class="card-title">{{ trans('common.easy_to_use') }}</h5>
@@ -136,7 +136,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card h-100 bg-color2 text-white shadow-lg">
+                <div class="card h-100 bg-color2 text-white shadow">
                     <div class="h1 m-3"><span class="fa-duotone fa-people-roof fa-fade"></span></div>
                     <div class="card-body">
                         <h5 class="card-title">{{ trans('common.multiple_users') }}</h5>
@@ -145,7 +145,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card h-100 bg-color2 text-white shadow-lg">
+                <div class="card h-100 bg-color2 text-white shadow">
                     <div class="h1 m-3"><span class="fa-duotone fa-coin fa-fade"></span></div>
                     <div class="card-body">
                         <h5 class="card-title">{{ trans('common.affordable') }}</h5>
@@ -154,7 +154,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card h-100 bg-color2 text-white shadow-lg">
+                <div class="card h-100 bg-color2 text-white shadow">
                     <div class="h1 m-3"><span class="fa-duotone fa-video fa-fade"></span></div>
                     <div class="card-body">
                         <h5 class="card-title">{{ trans('common.video_tutorials') }}</h5>
@@ -167,7 +167,7 @@
             <hr class="text-light">
             <p class="text-light"><span class="fa-regular fa-solid fa-thumbtack px-2"></span> {{ trans('common.introducing_kongrepad_a_revolutionary_congress_mana') }}</p>
             <a href="{{ route('register.index')}}" class="btn btn-success btn-block rounded-2 mx-3 btn-sm w-25" tabindex="-1" role="button" aria-disabled="true">
-                <span style="white-space: nowrap">{{ __('common.try-it-for-free')}}</span>
+                <span>{{ __('common.try-it-for-free')}}</span>
                 <span class="fa-solid fa-regular fa-arrow-right mx-2"></span>
             </a>
         </div>
@@ -177,7 +177,7 @@
         </div>
         <div class="row row-cols-1 row-cols-md-4 g-4 mb-5 justify-content-center text-center mx-2 mx-lg-4">
             <div class="col">
-                <div class="card h-100 bg-color2 text-white shadow-lg">
+                <div class="card h-100 bg-color2 text-white shadow">
                     <div class="h1 m-3"><span class="fa-duotone fa-square-poll-horizontal fa-fade"></span></div>
                     <div class="card-body">
                         <h5 class="card-title">{{ trans('common.follow_live_document') }}</h5>
@@ -186,7 +186,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card h-100 bg-color2 text-white shadow-sm">
+                <div class="card h-100 bg-color2 text-white shadow">
                     <div class="h1 m-3"><span class="fa-duotone fa-fade fa-calendar-week text-white"></span></div>
                     <div class="card-body">
                         <h5 class="card-title">{{ trans('common.keypad_questions') }}</h5>
@@ -195,7 +195,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card h-100 bg-color2 text-white shadow-lg">
+                <div class="card h-100 bg-color2 text-white shadow">
                     <div class="h1 m-3"><span class="fa-duotone fa-question fa-fade"></span></div>
                     <div class="card-body">
                         <h5 class="card-title">{{ trans('common.asking_question') }}</h5>
@@ -204,7 +204,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card h-100 bg-color2 text-white shadow-sm">
+                <div class="card h-100 bg-color2 text-white shadow">
                     <div class="h1 m-3"><span class="fa-duotone fa-podium-star fa-fade"></span></div>
                     <div class="card-body">
                         <h5 class="card-title">{{ trans('common.debate_voting') }}</h5>
@@ -213,7 +213,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card h-100 bg-color2 text-white shadow-lg">
+                <div class="card h-100 bg-color2 text-white shadow">
                     <div class="h1 m-3"><span class="fa-duotone fa-chart-user fa-fade"></span></div>
                     <div class="card-body">
                         <h5 class="card-title">{{ trans('common.reports') }}</h5>
@@ -222,7 +222,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card h-100 bg-color2 text-white shadow-sm">
+                <div class="card h-100 bg-color2 text-white shadow">
                     <div class="h1 m-3"><span class="fa-duotone fa-hand fa-fade"></span></div>
                     <div class="card-body">
                         <h5 class="card-title">{{ trans('common.document_request') }}</h5>
@@ -231,7 +231,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card h-100 bg-color2 text-white shadow-sm">
+                <div class="card h-100 bg-color2 text-white shadow">
                     <div class="h1 m-3"><span class="fa-duotone fa-hundred-points fa-fade"></span></div>
                     <div class="card-body">
                         <h5 class="card-title">{{ trans('common.score_games') }}</h5>
@@ -240,7 +240,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card h-100 bg-color2 text-white shadow-sm">
+                <div class="card h-100 bg-color2 text-white shadow">
                     <div class="h1 m-3"><span class="fa-duotone fa-screen-users fa-fade"></span></div>
                     <div class="card-body">
                         <h5 class="card-title">{{ trans('common.screen_management') }}</h5>
@@ -249,7 +249,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card h-100 bg-color2 text-white shadow-lg">
+                <div class="card h-100 bg-color2 text-white shadow">
                     <div class="h1 m-3"><span class="fa-duotone fa-browser fa-fade"></span></div>
                     <div class="card-body">
                         <h5 class="card-title">{{ __('common.virtual-stands') }}</h5>
@@ -258,7 +258,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card h-100 bg-color2 text-white shadow-lg">
+                <div class="card h-100 bg-color2 text-white shadow">
                     <div class="h1 m-3"><span class="fa-duotone fa-square-poll-vertical fa-fade"></span></div>
                     <div class="card-body">
                         <h5 class="card-title">{{ __('common.surveys') }}</h5>
@@ -271,7 +271,7 @@
             <div class="container-fluid mt-4">
                 <div class="row mx-lg-1">
                     <div class="col-md-12" id="our-customers-said">
-                        <h1 class="text-center mb-0 text-light">Our customers said</h1>
+                        <h1 class="text-center mb-0 text-light">{{ trans('common.our_customers_said') }}</h1>
                         <hr class="text-light w-100" />
                         <div id="our-customers-said-carousel" class="carousel carousel-dark slide py-2" data-ride="carousel">
                             <div class="carousel-indicators mb-0">

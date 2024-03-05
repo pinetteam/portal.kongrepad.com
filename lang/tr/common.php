@@ -387,4 +387,5 @@ return [
     'sms-send-successfully' => 'Sms başarıyla gönderildi',
     'verify' => 'Onayla',
     'send' => 'Gönder',
+    'our_customers_said' => 'Müşterilerimiz'
 ];
