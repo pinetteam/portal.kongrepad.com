@@ -43,7 +43,7 @@ class DocumentController extends Controller
                 } else {
                     return back()->with('create_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
                 }
-            }
+            } else
             $document->title = $request->input('title');
             $document->allowed_to_review = $request->input('allowed_to_review');
             $document->sharing_via_email = $request->input('sharing_via_email');

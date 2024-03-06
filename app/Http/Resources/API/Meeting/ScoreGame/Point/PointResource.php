@@ -11,7 +11,6 @@ class PointResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
-        App::setLocale('tr');
         return [
             'id' => $this->id,
             'qr_code_id' => $this->qr_code_id,

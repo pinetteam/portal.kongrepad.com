@@ -23,6 +23,7 @@ Route::group(["middleware" => ['setLocale']], function () {
     Route::group(["middleware" => ['guest']], function () {
         Route::get('/auth/login', [\App\Http\Controllers\Auth\LoginController::class, 'index'])->name('auth.login.index');
         Route::post('/auth/login', [\App\Http\Controllers\Auth\LoginController::class, 'store'])->name('auth.login.store');
+        Route::resource('/auth/register', \App\Http\Controllers\License\LicenseController::class)->only(['store', 'index']);
     });
 
     Route::group(["middleware" => ['auth']], function () {
@@ -60,8 +61,6 @@ Route::group(["middleware" => ['setLocale']], function () {
     });
 });
 
-// Register route
-Route::resource('/register', \App\Http\Controllers\License\LicenseController::class)->only(['store', 'index']);
 // System routes
 Route::get('/get-date-format', [\App\Http\Controllers\System\Setting\Variable\VariableController::class, 'getDateFormat'])->name('get-date-format');
 Route::get('/get-time-format', [\App\Http\Controllers\System\Setting\Variable\VariableController::class, 'getTimeFormat'])->name('get-time-format');

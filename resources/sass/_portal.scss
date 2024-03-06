@@ -24,6 +24,8 @@
     vertical-align: middle;
 }
 
+
+
 /*
  * Common Variables
  */
@@ -127,10 +129,6 @@
     border-radius: 0 !important;
 }
 
-.ss-search {
-    border-radius: 0 !important;
-}
-
 .ss-list {
     border-radius: 0 !important;
 }
@@ -141,6 +139,11 @@
 
 .ss-search {
     height: 36px;
+    border: none;
+}
+
+div.ss-search input[type="search"] {
+    border: none !important;
 }
 
 /*
