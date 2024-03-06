@@ -18,7 +18,6 @@
                     </caption>
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col"><span class="fa-regular fa-bee mx-1"></span> {{ __('common.meeting') }}</th>
                             <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.title') }}</th>
                             <th scope="col"><span class="fa-regular fa-calendar-arrow-down mx-1"></span> {{ __('common.publish-at') }}</th>
                             <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.is-published') }}</th>
@@ -29,7 +28,6 @@
                     <tbody>
                         @foreach($announcements as $announcement)
                             <tr>
-                                <td>{{ $meeting->title }}</td>
                                 <td>{{ $announcement->title }}</td>
                                 <td>{{ $announcement->publish_at }}</td>
                                 <td>
