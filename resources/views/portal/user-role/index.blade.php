@@ -27,7 +27,9 @@
                             <tr>
                                 <td>{{ $user_role->title }}</td>
                                 <td>
-                                    {{ $user_role->routes }}
+                                    @foreach($user_role->routes as $route)
+                                        {{ $route }}
+                                    @endforeach
                                 </td>
                                 <td>
                                     @if($user_role->status)

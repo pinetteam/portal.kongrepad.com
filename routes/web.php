@@ -13,12 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::group(["middleware" => ['setLocale']], function () {
-    Route::get('/', function () {
-        return view('home.index');
-    })->name('home.index');
-    Route::get('/pricing', function () {
-        return view('home.pricing.index');
-    })->name('home.pricing');
     Route::post('/change-locale', [\App\Http\Controllers\System\Locale\LocaleController::class, 'changeLocale'])->name('change.locale');
     Route::group(["middleware" => ['guest']], function () {
         Route::get('/auth/login', [\App\Http\Controllers\Auth\LoginController::class, 'index'])->name('auth.login.index');

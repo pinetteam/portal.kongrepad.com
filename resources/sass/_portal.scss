@@ -137,13 +137,20 @@
     height: 36px;
 }
 
-.ss-search {
-    height: 36px;
-    border: none;
+.ss-search input[type="search"] {
+    border-radius: 0 !important; /* Set border-radius to 0 with !important */
+}
+
+.ss-search .ss-select {
+    border-radius: inherit !important; /* Inherit the border-radius from the parent */
 }
 
 div.ss-search input[type="search"] {
     border: none !important;
+}
+
+.ss-selected {
+    background-color: $dark !important;
 }
 
 /*

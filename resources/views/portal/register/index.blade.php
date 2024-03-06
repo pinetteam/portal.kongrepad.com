@@ -11,7 +11,7 @@
     @vite(['resources/js/app.js'])
 </head>
 <header class="navbar navbar-dark fixed-top bg-dark p-0 shadow" id="kp-header">
-    <a class="navbar-brand ms-3 overflow-hidden ps-3" href="{{ route("auth.login.index") }}">
+    <a class="navbar-brand ms-3 overflow-hidden ps-3" href="https://kongrepad.com">
         {{ config('app.name') }}
     </a>
     <form action="{{ route('change.locale') }}" method="POST">
