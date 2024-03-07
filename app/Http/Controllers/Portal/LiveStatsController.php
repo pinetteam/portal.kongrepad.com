@@ -9,7 +9,7 @@ class LiveStatsController extends Controller
 {
     public function index()
     {
-        $meetings = Auth::user()->customer->meetings()->where('status','1')->paginate(20);
+        $meetings = Auth::user()->customer->meetings()->where('status', '1')->paginate(20);
         return view('portal.live-stats.index', compact(['meetings']));
     }
 }
