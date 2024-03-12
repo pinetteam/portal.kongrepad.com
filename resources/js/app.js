@@ -1,5 +1,8 @@
 import './bootstrap';
 
+// SlimSelect.js
+import SlimSelect from 'slim-select';
+
 // Tooltips
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
@@ -9,8 +12,6 @@ window.onload = function() {
     document.getElementById("kp-loading").style.visibility = "hidden";
 }
 
-// SlimSelect.js
-import SlimSelect from 'slim-select';
 
 // Chart.js
 import Chart from 'chart.js/auto';

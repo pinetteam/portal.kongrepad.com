@@ -24,7 +24,6 @@
                             <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}</th>
                             <th scope="col" class="text-end"></th>
                         </tr>
-                        </tr>
                     </thead>
                     <tbody>
                         @foreach($meetings as $meeting)
