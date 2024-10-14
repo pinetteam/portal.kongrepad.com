@@ -410,6 +410,6 @@ return [
     'sms-send-successfully' => 'Sms send succesfully',
     'verify' => 'Verify',
     'send' => 'Send',
-    'our_customers_said' => 'Our customers said'
-
+    'our_customers_said' => 'Our customers said',
+    'the_maximum_question_limit_allowed_for_this_session_is' => '<i class="fa-duotone fa-circle-exclamation fa-fade px-1"></i> The maximum question limit allowed for this session is :questions_limit'
 ];
