@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Events\Service\Debate;
 
 use Illuminate\Broadcasting\Channel;
@@ -6,33 +7,67 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use App\Models\Meeting\Hall\Hall;
 
 class DebateEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $hall;
-    public $on_vote;
+    /**
+     * The hall instance.
+     *
+     * @var Hall
+     */
+    public Hall $hall;
 
-    public function __construct($hall, bool $on_vote)
+    /**
+     * Indicates if voting is active.
+     *
+     * @var bool
+     */
+    public bool $on_vote;
+
+    /**
+     * Create a new event instance.
+     *
+     * @param Hall $hall
+     * @param bool $on_vote
+     */
+    public function __construct(Hall $hall, bool $on_vote)
     {
         $this->hall = $hall;
         $this->on_vote = $on_vote;
     }
 
-    public function broadcastOn()
+    /**
+     * Get the channels the event should broadcast on.
+     *
+     * @return array
+     */
+    public function broadcastOn(): array
     {
         return [
-            new Channel('meeting-'.$this->hall->meeting_id),
+            new Channel('meeting-' . $this->hall->meeting_id),
         ];
     }
 
-    public function broadcastAs()
+    /**
+     * Get the event name for broadcasting.
+     *
+     * @return string
+     */
+    public function broadcastAs(): string
     {
         return 'debate';
     }
 
-    public function broadcastWith () {
+    /**
+     * Get the data to broadcast with.
+     *
+     * @return array
+     */
+    public function broadcastWith(): array
+    {
         return [
             'hall_id' => $this->hall->id,
             'on_vote' => $this->on_vote,

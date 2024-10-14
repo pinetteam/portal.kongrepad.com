@@ -11,13 +11,17 @@
     @vite(['resources/js/app.js'])
     @yield('script')
 </head>
-<body class="d-flex text-bg-dark justify-content-center align-items-center h-100">
+<body class="d-flex flex-column h-100">
 <div id="kp-loading" class="d-flex align-items-center justify-content-center">
     <div class="spinner-grow text-success" role="status">
         <span class="visually-hidden">{{ __('common.loading') }}</span>
     </div>
 </div>
-@yield('body')
+<div class="container-fluid h-100">
+    <div class="row h-100">
+        @yield('body')
+    </div>
+</div>
 <x-common.popup.default />
 </body>
 </html>
