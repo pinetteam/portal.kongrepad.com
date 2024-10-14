@@ -16,37 +16,10 @@ class CustomerSeeder extends Seeder
     {
         Customer::insert([
             [
-                'code' => 'devent',
-                'title' => 'D-Event',
+                'code' => 'kongrepad',
+                'title' => 'KongrePad',
                 'credit' => 10000,
-                'language' => 'en',
-                'status' => '1',
-            ],
-            [
-                'code' => 'test-event',
-                'title' => 'T-Event',
-                'credit' => 10000,
-                'language' => 'en',
-                'status' => '1',
-            ],
-        ]);
-        Customer::insert([
-            [
-                'id' => 3,
-                'code' => 'educcon',
-                'title' => 'Educcon',
-                'credit' => 10000,
-                'language' => 'en',
-                'status' => '1',
-            ],
-        ]);
-        Customer::insert([
-            [
-                'id' => 4,
-                'code' => 'test',
-                'title' => 'Test',
-                'credit' => 10000,
-                'language' => 'en',
+                'language' => 'tr',
                 'status' => '1',
             ],
         ]);
