@@ -16,9 +16,6 @@ class UserRoleSeeder extends Seeder
     {
         $routes = [
             'portal.dashboard.index',
-            'portal.meeting.index',
-            'portal.user.index',
-            'portal.setting.index',
         ];
 
         Role::insert([

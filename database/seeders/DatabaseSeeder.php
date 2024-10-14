@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserRoleSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(MeetingSeeder::class);
-        $this->call(ScoreGameSeeder::class);
+        /*$this->call(ScoreGameSeeder::class);
         $this->call(MeetingParticipantSeeder::class);
         $this->call(MeetingHallSeeder::class);
         $this->call(MeetingHallScreenSeeder::class);
@@ -35,6 +35,6 @@ class DatabaseSeeder extends Seeder
         $this->call(MeetingSurveyQuestionSeeder::class);
         $this->call(MeetingSurveyQuestionOptionsSeeder::class);
         $this->call(MeetingVirtualStandSeeder::class);
-        $this->call(MeetingHallProgramChairSeeder::class);
+        $this->call(MeetingHallProgramChairSeeder::class);*/
     }
 }
