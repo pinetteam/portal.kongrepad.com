@@ -162,4 +162,23 @@ class MeetingHallController extends Controller
 
         return response()->json($result, 200);
     }
+
+    public function active_debate(Request $request, int $id)
+    {
+        $meeting_hall =  $request->user()->meeting->halls()->where("meeting_halls.id", $id)->first();
+        $debate = $meeting_hall->debates()->where('on_vote', 1)->first();
+        $result = [];
+        $this->logParticipantAction($request->user(), "get-active-debate", __('common.hall') . ': ' . $meeting_hall->title);
+        if(isset($debate)) {
+            $result['data'] = new DebateResource($debate);
+            $result['status'] = true;
+            $result['errors'] = null;
+        }
+        else{
+            $result['data'] = null;
+            $result['status'] = false;
+            $result['errors'] = [__('common.there-is-not-active-debate')];
+        }
+        return $result;
+    }
 }
