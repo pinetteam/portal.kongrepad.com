@@ -27,7 +27,7 @@ class ScreenBoardController extends Controller
     {
         $hall = Hall::where('code', $code)->first();
         $meeting = $hall->meeting;
-        $participants = $meeting->participants;
+        $participants = $meeting->participants()->get()->sortBy('first_name');
         $screens = $hall->screens()->get()->sortBy('title');
         $keypads = $meeting->keypads()->get();
         $documents = $meeting->documents()->get();
