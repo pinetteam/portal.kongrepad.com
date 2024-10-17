@@ -18,7 +18,7 @@
     </div>
 </div>
 <div class="container-fluid h-100">
-    <div class="row h-100">
+    <div class="row h-100 row-cols-1">
         @yield('body')
     </div>
 </div>

@@ -29,7 +29,7 @@ Route::group(["middleware" => ['setLocale']], function () {
             Route::get('/speaker/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\SpeakerController::class, 'index'])->name('speaker.index');
             Route::get('/chair/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\ChairController::class, 'index'])->name('chair.index');
             Route::get('/speaker/event/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\SpeakerController::class, 'start'])->name('speaker.start');
-            Route::get('/keypad/event/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\KeypadController::class, 'index'])->name('keypad.index');
+            Route::get('/keypad/event/{meeting_hall_screen_code}',[ \App\Http\Controllers\Service\Screen\KeypadController::class, 'index'])->name('keypad.index');
             Route::get('/debate/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\DebateController::class, 'index'])->name('debate.index');
             Route::get('/questions/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\QuestionsController::class, 'index'])->name('questions.index');
             Route::get('/document/{meeting_hall_screen_code}', [\App\Http\Controllers\Service\Screen\DocumentController::class, 'index'])->name('document.index');
