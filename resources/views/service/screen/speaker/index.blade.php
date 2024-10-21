@@ -22,14 +22,13 @@
         <div class="bg-img bg-cover" style="background-color: #fff;background-image: url({{ asset('storage/screen-backgrounds/' . $meeting_hall_screen->background_name . '.' . $meeting_hall_screen->background_extension)}} ); height:100%; width:100%; background-size: cover; background-repeat: no-repeat;">
     @endisset
     @if($speaker)
-    <div class="d-flex align-items-center justify-content-center h-100">
-        <h1 class="text-center w-100 fw-bold" id="speaker" style="font-size: {{ $meeting_hall_screen->font_size }}px; color: {{ $meeting_hall_screen->font_color }}; font-family: '{{ $meeting_hall_screen->font }}'">{{ isset($speaker->title) ? $speaker->title . ' ' : null }}{{ $speaker->first_name }} {{ $speaker->last_name }}</h1>
+        <div class="d-flex align-items-center">
+            <h1 class="text-center w-100 fw-bold" id="speaker" style="font-size: {{ $meeting_hall_screen->font_size }}px; color: {{ $meeting_hall_screen->font_color }}; font-family: '{{ $meeting_hall_screen->font }}'; padding-top: 500px;">{{ isset($speaker->title) ? $speaker->title . ' ' : null }}{{ $speaker->first_name }} {{ $speaker->last_name }}</h1>
     </div>
     @else
-    <div class="d-flex align-items-center justify-content-center h-100">
-        <h1 class="text-center w-100 fw-bold" id="speaker" style="font-size: {{ $meeting_hall_screen->font_size }}px; color: {{ $meeting_hall_screen->font_color }}; font-family: '{{ $meeting_hall_screen->font }}'">
-        </h1>
-    </div>
-@endif
+        <div class="d-flex align-items-center">
+            <h1 class="text-center w-100 fw-bold" id="speaker" style="font-size: {{ $meeting_hall_screen->font_size }}px; color: {{ $meeting_hall_screen->font_color }}; font-family: '{{ $meeting_hall_screen->font }}'; padding-top: 500px;"></h1>
+        </div>
+    @endif
 @endsection
 
