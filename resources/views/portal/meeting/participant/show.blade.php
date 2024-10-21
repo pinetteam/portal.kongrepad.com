@@ -155,7 +155,7 @@
                                 @foreach($requested_documents as $request)
                                     <tr>
                                         <td>{{ $request->created_at }}</td>
-                                        <td>{{ $request->document->title }}</td>
+                                        <td>{{ $request->document->file_name }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
