@@ -4,7 +4,7 @@
     <div class="card text-bg-dark border-dark w-100">
         <div class="card-header">
             <h1 class="text-center p-2">
-                <span class="fa-regular fa-square-question fa-fade p-2 "></span>
+                <span class="fa-regular fa-square-question fa-fade p-0"></span>
                 <small id="debate-title">"{{ $debate ? $debate->title : ""}}"</small>
             </h1>
         </div>
@@ -30,7 +30,7 @@
                                         options: {
                                             layout: {
                                                 padding: {
-                                                    top: 40
+                                                    top: 0
                                                 }
                                             },
                                             animation: false,

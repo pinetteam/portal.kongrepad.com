@@ -12,7 +12,7 @@
             </div>
             @if($options)
                 <div class="card-body">
-                    <canvas id="options" class="w-100 p-3"></canvas>
+                    <canvas id="options" class="w-100 p-0"></canvas>
                     <script type="module">
                         var chart = Chart.getChart("0");
                         Echo.channel('service.screen.keypad.{{ $meeting_hall_screen->code }}')
@@ -31,7 +31,7 @@
                                             options: {
                                                 layout: {
                                                     padding: {
-                                                        top: 40
+                                                        top: 0
                                                     }
                                                 },
                                                 animation: false,
@@ -87,7 +87,7 @@
                                     options: {
                                         layout: {
                                             padding: {
-                                                top: 40
+                                                top: 70
                                             }
                                         },
                                         animation: false,

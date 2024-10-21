@@ -271,7 +271,7 @@
         @section('session-edit-form')
             <x-input.hidden method="e-s" name="program_id" :value="1"/>
             <x-input.select method="e-s" name="speaker_id" title="speaker" :options="$speakers" option_value="id" option_name="full_name" icon="person-chalkboard" :searchable="true"/>
-            <x-input.select method="e-s" name="document_id" title="document" :options="$documents" option_value="id" option_name="title" icon="speakation-screen" :searchable="true"/>
+            <x-input.select method="e-s" name="document_id" title="document" :options="$documents" option_value="id" option_name="file_name" icon="speakation-screen" :searchable="true"/>
             <x-input.number method="e-s" name="sort_order" title="sort" icon="circle-sort"/>
             <x-input.text method="e-s" name="code" title="code" icon="code-simple"/>
             <x-input.text method="e-s" name="title" title="title" icon="input-text"/>

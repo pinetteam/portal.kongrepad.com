@@ -27,7 +27,11 @@
             var questionHTML = '<tr id="question-' + question.id + '">';
             questionHTML += '<td class="w-75">' + question.question + '</td>';
             if (question.is_hidden_name == 0)
-                questionHTML += '<td>' + question.questioner.first_name + ' ' + question.questioner.last_name + '</td>';
+                if(question.questioner.first_name && question.questioner.last_name) {
+                    questionHTML += '<td>' + question.questioner.first_name + ' ' + question.questioner.last_name + '</td>';
+                } else {
+                    questionHTML += '<td>İsim</td>';
+                }
             else
                 questionHTML += '<td>Anonymous</td>';
             if (type === 'incoming') {
