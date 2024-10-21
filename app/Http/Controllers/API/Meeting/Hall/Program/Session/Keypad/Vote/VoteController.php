@@ -6,76 +6,44 @@ use App\Http\Controllers\Controller;
 use App\Http\Traits\ParticipantLog;
 use App\Models\Meeting\Hall\Program\Session\Keypad\Vote\Vote;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class VoteController extends Controller
 {
     use ParticipantLog;
-
-    /**
-     * Store the participant's vote for a keypad session.
-     *
-     * @param Request $request
-     * @param int $keypad
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function store(Request $request, int $keypad)
-    {
-        // Get the keypad instance
-        $keypadInstance = $request->user()->meeting->keypads()->where('id', $keypad)->first();
-
-        // Check if the user has already voted
-        if ($keypadInstance->votes()->where('participant_id', $request->user()->id)->exists()) {
-            return response()->json([
+    public function store(Request $request, int $keypad){
+        if ($request->user()->meeting->keypads()->get()->where('id', $keypad)->first()->votes()->get()->where('participant_id', $request->user()->id)->count() > 0) {
+            return [
                 'data' => null,
                 'status' => false,
-                'errors' => ["You have already voted in this keypad session!"]
-            ], 400); // Bad Request
+                'errors' => ["Zaten oy kullandınız!"]
+            ];
         }
-
-        // Check if the voting session is still active
-        if ($keypadInstance->on_vote == 0) {
-            return response()->json([
+        if ($request->user()->meeting->keypads()->get()->where('id', $keypad)->first()->on_vote == 0) {
+            return [
                 'data' => null,
                 'status' => false,
-                'errors' => ["This keypad voting session has ended!"]
-            ], 400); // Bad Request
+                'errors' => ["Bu keypad oylaması sona erdi!"]
+            ];
         }
-
-        // Create a new vote
         $vote = new Vote();
         $vote->option_id = $request->input('option');
         $vote->participant_id = $request->user()->id;
         $vote->keypad_id = $keypad;
-
-        try {
-            // Save the vote
+        try{
             $vote->save();
-
-            // Log the participant's action
-            $this->logParticipantAction(
-                $request->user(),
-                "send-keypad-vote",
-                $keypadInstance->title
-            );
-
-            // Return success response
-            return response()->json([
+            $this->logParticipantAction($request->user(), "send-keypad-vote", $request->user()->meeting->keypads()->get()->where('id', $keypad)->first()->title);
+            return [
                 'data' => null,
                 'status' => true,
                 'errors' => null
-            ], 200);
-
-        } catch (\Throwable $e) {
-            // Log the error
-            Log::error('Keypad VoteController Error: ' . $e->getMessage());
-
-            // Return error response
-            return response()->json([
+            ];
+        } catch (\Throwable $e){
+            return [
                 'data' => null,
                 'status' => false,
-                'errors' => ['An error occurred while saving your vote. Please try again.']
-            ], 500); // Internal Server Error
+                'errors' => ['error']
+            ];
         }
     }
 }
+
