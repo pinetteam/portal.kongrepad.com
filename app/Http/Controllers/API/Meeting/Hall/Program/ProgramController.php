@@ -33,7 +33,8 @@ class ProgramController extends Controller
 
             // Group programs by day
             $programs = ProgramResource::collection($programs)->groupBy(function ($date) {
-                return Carbon::parse($date->start_at)->translatedFormat('d F l');
+                App::setLocale('tr');
+                return Carbon::parse($date->start_at)->translatedFormat('d F, l');
             });
 
             // Prepare result array
