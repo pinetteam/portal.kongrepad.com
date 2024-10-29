@@ -90,7 +90,7 @@ class SessionController extends Controller
     public function start_stop(int $meeting, int $hall, int $program, int $id)
     {
         $meeting_hall = Auth::user()->customer->halls()->findOrFail($hall);
-        foreach($meeting_hall->programSessions as $session){
+        foreach($meeting_hall->programSessions as $session) {
             if($session->id == $id)
                 continue;
             if($session->on_air == 1) {
@@ -119,10 +119,6 @@ class SessionController extends Controller
             $session_log->save();
         }
         if ($program_session->save()) {
-            $meeting_hall_screen = $meeting_hall->screens()->where('type', 'speaker')->first();
-            if ($meeting_hall_screen != null) {
-                //event(new SpeakerEvent($meeting_hall_screen));
-            }
             event(new QuestionBoardEvent($meeting_hall));
             $meeting_hall_screen = $meeting_hall->screens()->where('type', 'questions')->first();
             if ($meeting_hall_screen != null) {

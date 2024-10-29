@@ -29,7 +29,6 @@ class AnnouncementNotification extends Notification
             ->withAndroid(
                 PusherMessage::create()
                     ->body('📢 ' . $this->announcement->title)
-                    ->title('📢 ' . $this->announcement->title)
                     ->setOption('fcm.data.event', 'announcement')
             );
     }
