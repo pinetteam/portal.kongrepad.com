@@ -30,6 +30,7 @@ class KeypadNotification extends Notification
             ->withAndroid(
                 PusherMessage::create()
                     ->title("Keypad oylaması başladı!")
+                    ->body("Keypad oylaması başladı!")
                     ->setOption('fcm.data.hall_id', $this->hall->id)
                     ->setOption('fcm.data.event', 'keypad')
             );

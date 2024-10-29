@@ -29,6 +29,7 @@ class DebateNotification extends Notification
             ->withAndroid(
                 PusherMessage::create()
                     ->title("Debate oylaması başladı!")
+                    ->body("Debate oylaması başladı!")
                     ->setOption('fcm.data.hall_id', $this->hall->id)
                     ->setOption('fcm.data.event', 'debate')
             );
