@@ -17,7 +17,7 @@ class IOK2024Sync extends Command
     {
         Log::info("---------------------------------------------------------");
         Log::info("Synchronizing started: ".date('d/m/Y H:i:s'));
-        $response = file_get_contents('https://yesilkongre.com/manager/public/api/event/participants?pid=2330&token=scy8BYdU65KXQJobkWam0BPuanQnDFwuLFzm1FlZ');
+        $response = file_get_contents('https://yesilkongre.com/manager/public/api/event/participants?pid=2438&token=e46bEwDMW9qKL2cxxQedSu4hypt4yUyGkG6yxY64');
         $values = json_decode($response, true);
         foreach ($values as $value) {
             $identification_number = $value['participant_id'];
