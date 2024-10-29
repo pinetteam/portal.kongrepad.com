@@ -41,7 +41,7 @@ class IOK2024Sync extends Command
             $enrolled = $value['status'];
             $password = $value['id'];
             $register_type = $value['registerType'];
-            if ($register_type=='KATILIMCI' || $register_type=='KONUŞMACI' || $register_type=='MODERATÖR') {
+            if ($register_type=='KATILIMCI' || $register_type=='OTURUM BAŞKANI' || $register_type=='KONUŞMACI' || $register_type=='MODERATÖR') {
                 $type = "attendee";
             } elseif ($register_type=='FİRMA TEMSİLCİSİ' || $register_type=='STANDI OLMAYAN FİRMA TEMSİLCİSİ') {
                 $type = "agent";
