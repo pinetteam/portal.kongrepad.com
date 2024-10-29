@@ -15,6 +15,7 @@ class IOK2024Sync extends Command
 
     public function handle()
     {
+        $write_error = false;
         Log::info("---------------------------------------------------------");
         Log::info("Synchronizing started: ".date('d/m/Y H:i:s'));
         $response = file_get_contents('https://yesilkongre.com/manager/public/api/event/participants?pid=2438&token=e46bEwDMW9qKL2cxxQedSu4hypt4yUyGkG6yxY64');
@@ -49,6 +50,7 @@ class IOK2024Sync extends Command
                 $type = "team";
             } else {
                 Log::info("Type error!");
+                $write_error = true;
             }
             Participant::updateOrCreate(
                 ['identification_number' => $identification_number],
@@ -70,7 +72,9 @@ class IOK2024Sync extends Command
                     'status' => 1,
                 ]
             );
-            Log::info("UOC: $username:$title:$first_name:$last_name:$identification_number:$email:$phone_country_code:$phone:$password:$type:$enrolled");
+            if($write_error) {
+                Log::info("UOC: $username:$title:$first_name:$last_name:$identification_number:$email:$phone_country_code:$phone:$password:$type:$enrolled");
+            }
         }
         Log::info("Synchronizing finished: ".date('d/m/Y H:i:s'));
         Log::info("---------------------------------------------------------");

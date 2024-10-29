@@ -39,7 +39,7 @@ class PublishAnnouncements extends Command
            $announcement->save();
        }
 
-        Log::info("Announcements published: ".date('d/m/Y H:i:s'));
-        Log::info("---------------------------------------------------------");
+        //Log::info("Announcements published: ".date('d/m/Y H:i:s'));
+        //Log::info("---------------------------------------------------------");
     }
 }
