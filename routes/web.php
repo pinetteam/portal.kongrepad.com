@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/', function () {
+    return view('home.index');
+});
+
 Route::group(["middleware" => ['setLocale']], function () {
     Route::post('/change-locale', [\App\Http\Controllers\System\Locale\LocaleController::class, 'changeLocale'])->name('change.locale');
     Route::group(["middleware" => ['guest']], function () {
