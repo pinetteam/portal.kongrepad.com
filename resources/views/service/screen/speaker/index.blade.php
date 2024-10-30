@@ -19,16 +19,19 @@
 @endsection
 @section('body')
     @isset($meeting_hall_screen->background_name)
-        <div class="bg-img bg-cover" style="background-color: #fff;background-image: url({{ asset('storage/screen-backgrounds/' . $meeting_hall_screen->background_name . '.' . $meeting_hall_screen->background_extension)}} ); height:100%; width:100%; background-size: cover; background-repeat: no-repeat;">
+        <div class="bg-img" style="background-color: #fff;background-image: url({{ asset('storage/screen-backgrounds/' . $meeting_hall_screen->background_name . '.' . $meeting_hall_screen->background_extension)}} ); height:100%; width:100%; background-size: cover; background-repeat: no-repeat;">
     @endisset
-    @if($speaker)
-        <div class="d-flex align-items-center">
-            <h1 class="text-center w-100 fw-bold" id="speaker" style="font-size: {{ $meeting_hall_screen->font_size }}px; color: {{ $meeting_hall_screen->font_color }}; font-family: '{{ $meeting_hall_screen->font }}'; padding-top: 500px;">{{ isset($speaker->title) ? $speaker->title . ' ' : null }}{{ $speaker->first_name }} {{ $speaker->last_name }}</h1>
-    </div>
-    @else
-        <div class="d-flex align-items-center">
-            <h1 class="text-center w-100 fw-bold" id="speaker" style="font-size: {{ $meeting_hall_screen->font_size }}px; color: {{ $meeting_hall_screen->font_color }}; font-family: '{{ $meeting_hall_screen->font }}'; padding-top: 500px;"></h1>
+        @if($speaker)
+            <div class="d-flex align-items-center">
+                <h1 class="text-center w-100" id="chair" style="font-size: {{ $meeting_hall_screen->font_size }}vw; color: {{ $meeting_hall_screen->font_color }}; font-family: '{{ $meeting_hall_screen->font }}'; padding-top: 12%; font-weight: 900">{{ isset($speaker->title) ? $speaker->title . ' ' : null }}{{ $speaker->first_name }} {{ $speaker->last_name }}</h1>
+            </div>
+        @else
+            <div class="d-flex align-items-center">
+                <h1 class="text-center w-100" id="chair" style="font-size: {{ $meeting_hall_screen->font_size }}vw; color: {{ $meeting_hall_screen->font_color }}; font-family: '{{ $meeting_hall_screen->font }}'; padding-top: 12%; font-weight: 900">...</h1>
+                </h1>
+            </div>
+        @endif
+    @isset($meeting_hall_screen->background_name)
         </div>
-    @endif
+    @endisset
 @endsection
-
