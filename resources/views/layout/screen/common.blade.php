@@ -18,6 +18,5 @@
         </div>
     </div>
     @yield('body')
-    <x-common.popup.default />
 </body>
 </html>

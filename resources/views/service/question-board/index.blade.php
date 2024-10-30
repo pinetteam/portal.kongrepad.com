@@ -2,6 +2,9 @@
 @section('title', __('common.question-board'))
 @section('script')
     <script type="module">
+        document.addEventListener("contextmenu", function (e){
+            e.preventDefault();
+        }, false);
         Echo.channel('service.screen.question-board.{{ $hall->code }}')
             .listen('.question-board-event', data => {
                 location.reload();
