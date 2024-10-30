@@ -66,18 +66,18 @@
                         @endisset
                         <div>
                         <span class="alert alert-info d-inline-flex align-items-center rounded border-danger py-1" role="alert">
-                            <i class="fa-duotone fa-circle-exclamation fa-fade px-1"></i>  The maximum question limit allowed for this session is {{$session->questions_limit}}
+                            <i class="fa-duotone fa-circle-exclamation fa-fade px-1"></i>  Maksimum izin verilen soru adedi: {{$session->questions_limit}}
                         </span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row row-cols-1 row-cols-sm-2 h-100">
+            <div class="row row-cols-1 row-cols-sm-2 h-75">
                 <div class="col card text-bg-dark p-0 h-100">
                     <div class="card-header">
                         <h2 class="text-center h3"><span class="fa-duotone fa-inbox-in fa-fade mx-1"></span> {{__('common.incoming-questions')}}</h2>
                     </div>
-                    <div class="card-body d-block p-0 overflow-y-auto h-100">
+                    <div class="card-body d-block p-0 overflow-y-auto">
                         <table class="table table-dark table-striped table-hover w-100 table-scroll">
                             <thead class="thead-dark">
                             <tr>
@@ -114,7 +114,7 @@
                     <div class="card-header">
                         <h2 class="text-center h3"><span class="fa-duotone fa-inbox-out fa-fade mx-1"></span> {{__('common.selected-questions')}}</h2>
                     </div>
-                    <div class="card-body d-block p-0 overflow-y-auto h-100">
+                    <div class="card-body d-block p-0 overflow-y-auto">
                         <table class="table table-dark table-striped table-hover w-100 table-scroll">
                             <thead class="thead-dark">
                             <tr>
