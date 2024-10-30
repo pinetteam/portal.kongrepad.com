@@ -63,11 +63,10 @@
                 <div class="col card text-bg-dark p-0">
                     <div class="card-header text-center">
                         <h1 class="text-center">{{__('common.question-board')}}</h1>
-                        <h3 class="text-center">{{ $session->title }}</h3>
                         @isset($session->speaker)
-                            <h2 class="text-center h3">{{ $session->title }} <span class="badge bg-primary">{{ $session->speaker->full_name }}</span></h2>
+                            <h2 class="text-center h3">"<b class="text-danger">{{ $session->title }}</b>" | Konuşmacı:<span class="badge bg-primary">{{ $session->speaker->full_name }}</span></h2>
                         @endisset
-                        <div>
+                        <div class="d-block">
                         <span class="alert alert-info d-inline-flex align-items-center rounded border-danger py-1" role="alert">
                             <i class="fa-duotone fa-circle-exclamation fa-fade px-1"></i>  Maksimum izin verilen soru adedi: {{$session->questions_limit}}
                         </span>
@@ -99,7 +98,7 @@
                                         <td>{{__('common.anonymous')}}</td>
                                     @endif
                                     <td>
-                                        <a href="{{ route('portal.session-question.on-screen', [$question->id]) }}" title="{{ __('common.on-screen') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.on-screen') }}">
+                                        <a href="{{ route('portal.session-question.on-screen', [$question->id]) }}" title="{{ __('common.on-screen') }}">
                                             @if($question->selected_for_show)
                                                 <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
                                             @else
@@ -136,7 +135,7 @@
                                         <td>{{ __('common.anonymous') }}</td>
                                     @endif
                                     <td>
-                                        <a href="{{ route('portal.session-question.on-screen', [$question->id]) }}" title="{{ __('common.on-screen') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.on-screen') }}">
+                                        <a href="{{ route('portal.session-question.on-screen', [$question->id]) }}" title="{{ __('common.on-incoming') }}">
                                             @if($question->selected_for_show)
                                                 <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
                                             @else
