@@ -188,6 +188,35 @@
                         </div>
                     </div>
                 </div>
+                <div class="col border-5 border-dark card text-bg-dark p-2">
+                    <h2 class="m-0 text-center h3">{{ __('common.participant-logs') }}</h2>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-dark table-striped table-hover">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col"><span class="fa-regular fa-id-card mx-1"></span> {{ __('common.participant') }}</th>
+                                    <th scope="col"><span class="fa-regular fa-globe-pointer mx-1"></span> {{ __('common.action') }}</th>
+                                    <th scope="col"><span class="fa-regular fa-object-group mx-1"></span> {{ __('common.object') }}</th>
+                                    <th scope="col"><span class="fa-regular fa-clock mx-1"></span> {{ __('common.time') }}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                        @foreach($logs as $log)
+                                            <tr>
+                                                <td>
+                                                    {{ $log->participant->full_name }}
+                                                </td>
+                                                <td>{{ $log->action }}</td>
+                                                <td>{{ $log->object }}</td>
+                                                <td>{{ $log->created_at }}</td>
+                                            </tr>
+                                        @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

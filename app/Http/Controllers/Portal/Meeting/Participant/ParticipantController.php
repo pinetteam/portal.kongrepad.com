@@ -89,7 +89,8 @@ class ParticipantController extends Controller
         $keypad_votes = \App\Models\Meeting\Hall\Program\Session\Keypad\Vote\Vote::where('participant_id', $participant->id)->groupBy('keypad_id')->get();
         $requested_documents = \App\Models\Meeting\Document\Mail\Mail::where('participant_id', $participant->id)->groupBy('document_id')->get();
         $score_game_points = Point::where('participant_id', $participant->id)->get();
-        return view('portal.meeting.participant.show', compact(['debate_votes', 'keypad_votes', 'meeting', 'participant', 'requested_documents', 'survey_votes', 'score_game_points']));
+        $logs = \App\Models\Log\Meeting\Participant\Participant::where('participant_id', $participant->id)->orderBy('id', 'DESC')->limit(100)->get();
+        return view('portal.meeting.participant.show', compact(['debate_votes', 'keypad_votes', 'meeting', 'participant', 'requested_documents', 'survey_votes', 'score_game_points', 'logs']));
     }
     public function edit(int $meeting, int $id)
     {
