@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         // $schedule->command('inspire')->hourly();
-        $schedule->command('app:iok2024-sync')->everyFiveMinutes()->withoutOverlapping();
+        //$schedule->command('app:iok2024-sync')->everyFiveMinutes()->withoutOverlapping();
         // $schedule->command('app:vakalarla-sync')->everyFiveMinutes()->withoutOverlapping();
         $schedule->command('announcements:publish')->everyMinute();
     }

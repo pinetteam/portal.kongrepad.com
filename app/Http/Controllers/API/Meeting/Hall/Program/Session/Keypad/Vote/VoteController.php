@@ -30,7 +30,7 @@ class VoteController extends Controller
         $vote->option_id = $request->input('option');
         $vote->participant_id = $request->user()->id;
         $vote->keypad_id = $keypad;
-        Log::info('Keypad vote has been requested! option_id="'.$request->input('option_id').'"+participant_id="'.$request->user()->id.'"+debate_id="'.$keypad.'"');
+        Log::info('Keypad vote has been requested! option_id="'.$request->input('option').'"+participant_id="'.$request->user()->id.'"+keypad_id="'.$keypad.'"');
         try{
             $vote->save();
             $this->logParticipantAction($request->user(), "send-keypad-vote", $request->user()->meeting->keypads()->get()->where('id', $keypad)->first()->title);
