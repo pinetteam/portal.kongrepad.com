@@ -163,6 +163,31 @@
                         </div>
                     </div>
                 </div>
+                <div class="col border-5 border-dark card text-bg-dark p-2">
+                    <h2 class="m-0 text-center h3">{{ __('common.score-game-points') }}</h2>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-dark table-striped table-hover">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col"><span class="fa-regular fa-calendar mx-1"></span> {{ __('common.date') }}</th>
+                                    <th scope="col"><span class="fa-regular fa-folder-open mx-1"></span> {{ __('common.qr-code') }}</th>
+                                    <th scope="col"><span class="fa-regular fa-folder-open mx-1"></span> {{ __('common.point') }}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($score_game_points as $score_game_point)
+                                    <tr>
+                                        <td>{{ $score_game_point->created_at }}</td>
+                                        <td>{{ $score_game_point->qrCode->title }} </td>
+                                        <td>{{ $score_game_point->point }}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Portal\Meeting\Participant;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Portal\Meeting\Participant\ParticipantRequest;
 use App\Http\Resources\Portal\Meeting\Participant\ParticipantResource;
+use App\Models\Meeting\ScoreGame\Point\Point;
 use Illuminate\Http\Request;
 use App\Models\Meeting\Participant\Participant;
 use App\Models\System\Country\Country;
@@ -87,7 +88,8 @@ class ParticipantController extends Controller
         $debate_votes = \App\Models\Meeting\Hall\Program\Debate\Vote\Vote::where('participant_id', $participant->id)->groupBy('debate_id')->get();
         $keypad_votes = \App\Models\Meeting\Hall\Program\Session\Keypad\Vote\Vote::where('participant_id', $participant->id)->groupBy('keypad_id')->get();
         $requested_documents = \App\Models\Meeting\Document\Mail\Mail::where('participant_id', $participant->id)->groupBy('document_id')->get();
-        return view('portal.meeting.participant.show', compact(['debate_votes', 'keypad_votes', 'meeting', 'participant', 'requested_documents', 'survey_votes']));
+        $score_game_points = Point::where('participant_id', $participant->id)->get();
+        return view('portal.meeting.participant.show', compact(['debate_votes', 'keypad_votes', 'meeting', 'participant', 'requested_documents', 'survey_votes', 'score_game_points']));
     }
     public function edit(int $meeting, int $id)
     {

@@ -26,7 +26,7 @@
                     <tbody>
                         @foreach($participants as $participant)
                             <tr>
-                                <td>{{ $participant->full_name }}</td>
+                                <td><a href="{{ route('portal.meeting.participant.show', ['meeting' => $score_game->meeting->id, 'participant' => $participant->id]) }}" class="fw-bold text-white text-decoration-none">{{ $participant->full_name }}</a></td>
                                 <td>{{ $participant->getTotalScoreGamePoint(1) }}</td>
                             </tr>
                         @endforeach

@@ -391,4 +391,6 @@ return [
     'the_maximum_question_limit_allowed_for_this_session_is' => '<i class="fa-duotone fa-circle-exclamation fa-fade px-1"></i> Bu oturum için izin verilen maksimum soru limiti :questions_limit',
     'question-board' => 'Soru Paneli',
     'loading' => 'Yükleniyor',
+    'qr-code' => 'Kare Kod',
+    'score-game-points' => 'Skor Oyunu Puanları',
 ];
