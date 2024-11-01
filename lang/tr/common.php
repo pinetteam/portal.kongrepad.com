@@ -403,4 +403,7 @@ return [
     'get-programs' => ' Bilimsel programı açtı',
     'send-all-mail' => ' Tüm dökümanları talep etti',
     'scan-qr-code' => ' Puan topladı',
+    'send-debate-vote' => ' Debate oyu gönderdi',
+    'send-mail' => ' Mail gönderme talebi oluşturdu',
+    'ask-question' => ' Konuşmacıya soru iletti',
 ];
