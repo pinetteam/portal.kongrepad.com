@@ -407,4 +407,5 @@ return [
     'send-mail' => ' Mail gönderme talebi oluşturdu',
     'ask-question' => ' Konuşmacıya soru iletti',
     'online-participants' => ' Çevrimiçi katılımcılar',
+    'total-participants' => ' Toplam Katılımcı',
 ];

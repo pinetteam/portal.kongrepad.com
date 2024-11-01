@@ -24,6 +24,7 @@
                         <th scope="col"><span class="fa-regular fa-calendar-arrow-up mx-1"></span> {{ __('common.start-at') }}</th>
                         <th scope="col"><span class="fa-regular fa-calendar-arrow-down mx-1"></span> {{ __('common.finish-at') }}</th>
                         <th scope="col"><span class="fa-regular fa-calendar-arrow-down mx-1"></span> {{ __('common.question-count') }}</th>
+                        <th scope="col"><span class="fa-regular fa-calendar-arrow-down mx-1"></span> {{ __('common.total-participants') }}</th>
                         <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.on_vote') }}</th>
                         <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}</th>
                         <th scope="col" class="text-end"></th>
@@ -49,6 +50,7 @@
                                 @endif
                             </td>
                             <td>{{ $survey->questions->count() }}</td>
+                            <td>{{ $survey->votes->groupBy('participant_id')->count() }}</td>
                             <td>
                                 @if($survey->on_vote)
                                     <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
