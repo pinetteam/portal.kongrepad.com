@@ -16,7 +16,7 @@
                 <h1 class="fw-bold text-white">{{ __('common.online-participants') }}: <span class="badge text-bg-success">{{ $meeting->participantLogs->where('created_at', '>=', \Carbon\Carbon::now()->subMinutes(15))->groupBy('participant_id')->count() }} / {{ $meeting->participants->count() }}</span></h1>
             </div>
             <div class="card-footer p-0">
-                <h2 class="h3 m-0 text-center"><span class="fa-duotone fa-screen-users fa-fade"></span> {{ __('common.logged-in-participants') }}</h2>
+                <h2 class="h3 text-center mt-2"><span class="fa-duotone fa-screen-users fa-fade"></span> {{ __('common.logged-in-participants') }}</h2>
                 <div class="table-responsive">
                     <table class="table table-dark table-striped table-hover">
                         <thead class="thead-dark">
