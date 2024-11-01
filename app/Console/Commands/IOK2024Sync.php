@@ -68,7 +68,6 @@ class IOK2024Sync extends Command
                     'password' => $password,
                     'type' => $type,
                     'enrolled' => $enrolled,
-                    'gdpr_consent' => 0,
                     'status' => 1,
                 ]
             );

@@ -49,7 +49,7 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="text-center">
-                                                                        <h4 class="text-white">{{ $meeting->participants->where('gdpr_consent', 1)->count() }} / {{ $meeting->participants->count() }}
+                                                                        <h4 class="text-white">{{ $meeting->participantLogs->where('action', 'login')->groupBy('participant_id', 'action')->count() }} / {{ $meeting->participants->count() }}
                                                                         </h4>
                                                                     </td>
                                                                 </tr>
@@ -70,7 +70,7 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="text-center">
-                                                                        <h4> {{ $meeting->participantLogs->where('created_at', '>=', \Carbon\Carbon::now()->subMinute())->groupBy('participant_id')->count() }}</h4>
+                                                                        <h4 class="text-white">{{ $meeting->participantLogs->where('created_at', '>=', \Carbon\Carbon::now()->subMinutes(15))->groupBy('participant_id')->count() }}</h4>
                                                                     </td>
                                                                 </tr>
                                                                 </tbody>

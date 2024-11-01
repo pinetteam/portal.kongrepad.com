@@ -18,16 +18,16 @@
                     </caption>
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col"><span class="fa-regular fa-globe-pointer mx-1"></span> {{ __('common.action') }}</th>
-                            <th scope="col"><span class="fa-regular fa-object-group mx-1"></span> {{ __('common.object') }}</th>
+                            <th scope="col"><span class="fa-regular fa-globe-pointer mx-1"></span> {{ __('common.participant') }}</th>
+                            <th scope="col"><span class="fa-regular fa-object-group mx-1"></span> {{ __('common.action') }}</th>
                             <th scope="col"><span class="fa-regular fa-clock mx-1"></span> {{ __('common.time') }}</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($logs as $log)
                             <tr>
-                                <td>{{ $log->action }}</td>
-                                <td>{{ $log->object }}</td>
+                                <td>{{ $log->participant->full_name }}</td>
+                                <td>{{ __('common.'.$log->action) }}</td>
                                 <td>{{ $log->created_at }}</td>
                             </tr>
                         @endforeach
