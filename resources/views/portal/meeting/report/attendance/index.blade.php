@@ -19,14 +19,17 @@
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col"><span class="fa-regular fa-image mx-1"></span> {{ __('common.participant') }}</th>
-                            <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.point') }}</th>
+                            <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.point-hours-minutes') }}</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($participant_logs as $participant_log)
+                            @php
+                                $time = \Carbon\Carbon::createFromTime(0, 0)->addMinutes(round($participant_log->total_actions*20/60));
+                            @endphp
                             <tr>
                                 <td>{{ $participant_log->participant->full_name }}</td>
-                                <td>{{ $participant_log->total_actions }}</td>
+                                <td>{{ $time->format('H:i') }}</td>
                             </tr>
                         @endforeach
                     </tbody>

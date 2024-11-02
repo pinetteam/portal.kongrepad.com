@@ -416,4 +416,5 @@ return [
     'qr-code' => 'QR Code',
     'score-game-points' => 'Score Game Points',
     'attendance-reports' => ' Attendance Reports',
+    'point-hours-minutes' => ' Points (Hours:Minutes)',
 ];

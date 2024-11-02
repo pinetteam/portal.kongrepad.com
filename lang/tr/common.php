@@ -409,4 +409,6 @@ return [
     'online-participants' => ' Çevrimiçi katılımcılar',
     'total-participants' => ' Toplam Katılımcı',
     'attendance-reports' => ' Katılım Raporları',
+    'point-hours-minutes' => ' Puan (Saat:Dakika)',
+
 ];
