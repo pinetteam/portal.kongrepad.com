@@ -408,4 +408,5 @@ return [
     'ask-question' => ' Konuşmacıya soru iletti',
     'online-participants' => ' Çevrimiçi katılımcılar',
     'total-participants' => ' Toplam Katılımcı',
+    'attendance-reports' => ' Katılım Raporları',
 ];

@@ -415,4 +415,5 @@ return [
     'loading' => 'Loading...',
     'qr-code' => 'QR Code',
     'score-game-points' => 'Score Game Points',
+    'attendance-reports' => ' Attendance Reports',
 ];

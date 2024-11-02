@@ -107,6 +107,11 @@
                                 <h1 class="m-0 text-center"><span class="badge text-bg-dark">4.</span> {{ __('common.reports') }}</h1>
                             </div>
                             <div class="card-body">
+                                <a class="btn btn-outline-light btn-lg w-100" href="{{ route("portal.meeting.report.attendance.index", ['meeting' => $meeting->id]) }}">
+                                    <span class="nav-icon fa-duotone fa-chart-user fa-fade"></span>
+                                    {{ __('common.attendance-reports') }}
+                                </a>
+                                <hr />
                                 <a class="btn btn-outline-light btn-lg w-100" href="{{ route("portal.meeting.log.participant.index", ['meeting' => $meeting->id]) }}">
                                     <span class="nav-icon fa-duotone fa-chart-user fa-fade"></span>
                                     {{ __('common.participant-logs') }}
