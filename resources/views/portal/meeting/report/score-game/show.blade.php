@@ -14,20 +14,20 @@
         <div class="card-body p-0">
             <div class="table-responsive">
                 <table class="table table-dark table-striped table-hover">
-                    <caption class="text-end me-3">
-                        {{ $participants->links() }}
-                    </caption>
                     <thead class="thead-dark">
-                    <tr>
-                        <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.name') }}</th>
-                        <th scope="col"><span class="fa-regular fa-hundred-points mx-1"></span> {{ __('common.point') }}</th>
-                    </tr>
+                        <tr>
+                            <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.name') }}</th>
+                            <th scope="col"><span class="fa-regular fa-hundred-points mx-1"></span> {{ __('common.point') }}</th>
+                        </tr>
                     </thead>
                     <tbody>
-                        @foreach($participants as $participant)
+                        @foreach($score_game_points as $score_game_point)
+                            @php
+                                $participant = \App\Models\Meeting\Participant\Participant::findOrFail($score_game_point->participant_id);
+                            @endphp
                             <tr>
                                 <td><a href="{{ route('portal.meeting.participant.show', ['meeting' => $score_game->meeting->id, 'participant' => $participant->id]) }}" class="fw-bold text-white text-decoration-none">{{ $participant->full_name }}</a></td>
-                                <td>{{ $participant->getTotalScoreGamePoint(1) }}</td>
+                                <td>{{ $score_game_point->total_points }}</td>
                             </tr>
                         @endforeach
                     </tbody>

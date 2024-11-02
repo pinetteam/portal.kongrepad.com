@@ -27,15 +27,6 @@ class Point extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
-    protected function createdAt(): Attribute
-    {
-        $time_format = Variable::where('variable','time_format')->first()->settings()->where('customer_id', Auth::user()->customer->id ?? Customer::first()->id)->first()->value == '24H' ? ' H:i' : ' g:i A';
-        $date_time_format = Variable::where('variable','date_format')->first()->settings()->where('customer_id', Auth::user()->customer->id ?? Customer::first()->id)->first()->value . $time_format;
-
-        return Attribute::make(
-            get: fn (string $createdAt) => Carbon::createFromFormat('Y-m-d H:i:s', $createdAt)->format($date_time_format),
-            );
-    }
     public function qrCode()
     {
         return $this->belongsTo(QRCode::class, 'qr_code_id', 'id');
