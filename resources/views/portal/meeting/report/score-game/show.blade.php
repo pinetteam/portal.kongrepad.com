@@ -14,6 +14,9 @@
         <div class="card-body p-0">
             <div class="table-responsive">
                 <table class="table table-dark table-striped table-hover">
+                    <caption class="text-end me-3">
+                        {{ $score_game_points->links() }}
+                    </caption>
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col"><span class="fa-regular fa-input-text mx-1"></span> {{ __('common.name') }}</th>
