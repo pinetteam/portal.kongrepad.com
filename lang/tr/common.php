@@ -410,5 +410,9 @@ return [
     'total-participants' => ' Toplam Katılımcı',
     'attendance-reports' => ' Katılım Raporları',
     'point-hours-minutes' => ' Puan (Saat:Dakika)',
+    'get-login-code' => 'Giriş Kodunu Alın',
+    'get-the-access-code-for-kongrepad' => 'KongrePad erişim kodunu edinin!',
+    'send-by-email' => 'E-posta ile gönder',
+    'send-via-sms' => 'SMS ile gönder',
 
 ];

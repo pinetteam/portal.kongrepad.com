@@ -143,6 +143,18 @@ class ParticipantController extends Controller
         $participant = $meeting->participants()->findOrFail($id);
         return QrCode::size(256)->generate($participant->username);
     }
+    public function send_code_by_email(int $meeting, int $id)
+    {
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $participant = $meeting->participants()->findOrFail($id);
+        return QrCode::size(256)->generate($participant->username);
+    }
+    public function send_code_via_sms(int $meeting, int $id)
+    {
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $participant = $meeting->participants()->findOrFail($id);
+        return QrCode::size(256)->generate($participant->username);
+    }
     public function showSurvey(int $meeting, int $id, int $survey)
     {
         $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);

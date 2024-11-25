@@ -81,6 +81,12 @@
                                                 <span class="fa-regular fa-qrcode"></span>
                                             </button>
                                         </div>
+                                        <a class="btn btn-info btn-sm" href="{{ route('portal.meeting.participant.send-code-by-email', ['meeting' => $meeting->id, 'participant' => $participant->id]) }}" title="{{ __('common.send-code-by-email') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
+                                            <span class="fa-regular fa-envelope"></span>
+                                        </a>
+                                        <a class="btn btn-info btn-sm" href="{{ route('portal.meeting.participant.send-code-via-sms', ['meeting' => $meeting->id, 'participant' => $participant->id]) }}" title="{{ __('common.send-send-code-via-sms') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
+                                            <span class="fa-regular fa-message-sms"></span>
+                                        </a>
                                         <a class="btn btn-info btn-sm" href="{{ route('portal.meeting.participant.show', ['meeting' => $meeting->id, 'participant' => $participant->id]) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
                                             <span class="fa-regular fa-eye"></span>
                                         </a>

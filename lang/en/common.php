@@ -417,4 +417,10 @@ return [
     'score-game-points' => 'Score Game Points',
     'attendance-reports' => ' Attendance Reports',
     'point-hours-minutes' => ' Points (Hours:Minutes)',
+    'get-login-code' => 'Get Login Code',
+    'get-the-access-code-for-kongrepad' => 'Get the access code for KongrePad!',
+    'send-by-email' => 'Send by e-mail',
+    'send-via-sms' => 'Send via SMS',
+
+
 ];

@@ -10,7 +10,6 @@ class SetLocale
     {
         $locale = $request->session()->get('locale', 'en');
         app()->setLocale($locale);
-
         return $next($request);
     }
 }

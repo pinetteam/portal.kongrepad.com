@@ -12,8 +12,11 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', function () {
-    return view('home.index');
+Route::group(["middleware" => ['setLocale']], function () {
+    Route::get('/', [\App\Http\Controllers\Home\HomeController::class, 'index'])->name('home.index');
+    Route::prefix('/end-user')->name('end-user.')->group(function () {
+        Route::resource('/get-code', \App\Http\Controllers\EndUser\GetCode\GetCodeController::class)->only(['store', 'index']);
+    });
 });
 
 Route::group(["middleware" => ['setLocale']], function () {
@@ -83,6 +86,8 @@ Route::prefix('portal')->name('portal.')->group(function () {
             Route::get('/{meeting}/document/download/{document}', [\App\Http\Controllers\Portal\Meeting\Document\DocumentController::class, 'download'])->name('document.download');
             Route::resource('/{meeting}/participant', \App\Http\Controllers\Portal\Meeting\Participant\ParticipantController::class)->except(['create']);
             Route::get('/{meeting}/participant/{participant}/qr-code', [\App\Http\Controllers\Portal\Meeting\Participant\ParticipantController::class, 'qrCode'])->name('participant.qr-code');
+            Route::get('/{meeting}/participant/{participant}/send-code-by-email', [\App\Http\Controllers\Portal\Meeting\Participant\ParticipantController::class, 'send_code_by_email'])->name('participant.send-code-by-email');
+            Route::get('/{meeting}/participant/{participant}/send-code-via-sms', [\App\Http\Controllers\Portal\Meeting\Participant\ParticipantController::class, 'send_code_via_sms'])->name('participant.send-code-via-sms');
             Route::get('/{meeting}/participant/{participant}/survey/{survey}', [\App\Http\Controllers\Portal\Meeting\Participant\ParticipantController::class, 'showSurvey'])->name('participant.survey');
             Route::resource('/{meeting}/score-game', \App\Http\Controllers\Portal\Meeting\ScoreGame\ScoreGameController::class)->except(['create']);
             Route::prefix('/{meeting}/score-game/{score_game}')->name('score-game.')->group(function () {
