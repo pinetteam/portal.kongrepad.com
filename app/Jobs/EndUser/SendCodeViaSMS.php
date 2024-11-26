@@ -21,7 +21,7 @@ class SendCodeViaSMS implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct(array $recipient, string $message)
+    public function __construct(string $recipient, string $message)
     {
         $this->recipient = $recipient;
         $this->message = $message;

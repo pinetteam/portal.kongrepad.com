@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\EndUser\GetCode;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Service\SMS\NetGSM\NetGSMSMSController;
 use App\Http\Requests\EndUser\GetCode\GetCodeRequest;
 use App\Jobs\EndUser\SendCodeByEmail;
 use App\Jobs\EndUser\SendCodeViaSMS;
@@ -35,9 +36,8 @@ class GetCodeController extends Controller
             } elseif ($type == 'sms') {
                 $participant = Participant::where('phone', $request->input('phone'))->orderBy('id', 'desc')->first();
                 if($participant) {
-                    $recipient = ["$participant->phone"];
-                    $message = 'Bu bir test mesajıdır.';
-                    dispatch(new SendCodeViaSMS($recipient, $message));
+                    $message = 'Sayın '. $participant->full_name.' KongrePad uygulamasına giriş yapabilmeniz için giriş kodunuz: '. $participant->username;
+                    dispatch(new SendCodeViaSMS($participant->phone, $message));
                     return back()->with('success', __('common.you-will-be-informed-via-sms-as-soon-as-possible'));
                 } else {
                     return back()->with('error', __('common.no-such-user-found'));
