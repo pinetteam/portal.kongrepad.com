@@ -43,19 +43,19 @@
 <body>
 <div class="container">
     <div class="header">
-        <h1>Hesabınıza Giriş</h1>
+        <h1>KongrePad için erişim kodunuz</h1>
     </div>
     <div class="content">
         <p>Merhaba, {{ $recipient['full_name'] ?? 'Kullanıcı' }}</p>
-        <p>Aşağıdaki QR kodu kullanarak hesabınıza giriş yapabilirsiniz:</p>
+        <p>Aşağıdaki kare kodu kullanarak KongrePad hesabınıza giriş yapabilirsiniz:</p>
         <div class="qr-code">
-            <img src="data:image/png;base64,{{ $qr_code_image }}" alt="QR Kod">
+            <img src="data:image/svg+xml;base64, {!! $qr_code_image !!}" alt="QR Kod" style="width: 256px; height: 256px;">
         </div>
-        <p>Ya da şu kodu kullanabilirsiniz:</p>
+        <p>Eğer kameranız çalışmıyorsa veya kare kodu tarayamıyorsanız, aşağıdaki kodu kullanarak giriş yapabilirsiniz:</p>
         <h3>{{ $recipient['username'] ?? '-' }}</h3>
     </div>
     <div class="footer">
-        <p>© {{ now()->year }} KongrePad. Tüm hakları saklıdır.</p>
+        <p>Copyright © 2017-{{ now()->year }} KongrePad.</p>
     </div>
 </div>
 </body>

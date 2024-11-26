@@ -42,9 +42,13 @@ class SendCode extends Mailable
     {
         // QR kodu oluştur
         $qr_code_image = base64_encode(
-            QrCode::size(256)->generate($this->recipient['username'])
+            QrCode::size(256)
+                ->style('dot')
+                ->eye('circle')
+                ->gradient(255, 0, 0, 0, 0, 255, 'diagonal')
+                ->margin(1)
+                ->generate($this->recipient['username'])
         );
-
         return new Content(
             view: 'mails.end-user.send-code',
             with: [
@@ -52,15 +56,5 @@ class SendCode extends Mailable
                 'qr_code_image' => $qr_code_image,
             ],
         );
-    }
-
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-     */
-    public function attachments(): array
-    {
-        return [];
     }
 }
