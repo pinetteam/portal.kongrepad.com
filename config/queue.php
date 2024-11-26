@@ -36,9 +36,9 @@ return [
 
         'database' => [
             'driver' => 'database',
-            'table' => 'jobs',
+            'table' => 'system_jobs',
             'queue' => 'default',
-            'retry_after' => 90,
+            'retry_after' => 60,
             'after_commit' => false,
         ],
 
@@ -46,7 +46,7 @@ return [
             'driver' => 'beanstalkd',
             'host' => 'localhost',
             'queue' => 'default',
-            'retry_after' => 90,
+            'retry_after' => 60,
             'block_for' => 0,
             'after_commit' => false,
         ],

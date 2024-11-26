@@ -419,8 +419,11 @@ return [
     'point-hours-minutes' => ' Points (Hours:Minutes)',
     'get-login-code' => 'Get Login Code',
     'get-the-access-code-for-kongrepad' => 'Get the access code for KongrePad!',
+    'send-code-by-email' => 'Send code by e-mail',
     'send-by-email' => 'Send by e-mail',
+    'send-code-via-sms' => 'Send code via SMS',
     'send-via-sms' => 'Send via SMS',
-
-
+    'no-such-user-found' => 'No such user found!',
+    'you-will-be-informed-via-sms-as-soon-as-possible' => 'You will be informed via SMS as soon as possible!',
+    'you-will-be-informed-by-email-as-soon-as-possible' => 'You will be informed by E-mail as soon as possible!',
 ];

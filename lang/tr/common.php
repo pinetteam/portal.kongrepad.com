@@ -12,12 +12,12 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-    'success-modal-title' => '<i class="fa-regular fa-circle-check"></i> Success',
-    'success-modal-close' => '<i class="fa-regular fa-circle-check"></i> Close',
-    'warning-modal-title' => '<i class="fa-regular fa-circle-info"></i> Warning',
-    'warning-modal-close' => '<i class="fa-regular fa-circle-info"></i> Close',
-    'error-modal-title' => '<i class="fa-regular fa-circle-xmark"></i> Error',
-    'error-modal-close' => '<i class="fa-regular fa-circle-xmark"></i> Close',
+    'success-modal-title' => '<i class="fa-regular fa-circle-check"></i> Başarılı',
+    'success-modal-close' => '<i class="fa-regular fa-circle-check"></i> Kapat',
+    'warning-modal-title' => '<i class="fa-regular fa-circle-info"></i> Uyarı',
+    'warning-modal-close' => '<i class="fa-regular fa-circle-info"></i> Kapat',
+    'error-modal-title' => '<i class="fa-regular fa-circle-xmark"></i> Hata',
+    'error-modal-close' => '<i class="fa-regular fa-circle-xmark"></i> Kapat',
     'login' => 'Giriş',
     'username' => 'Kullanıcı Adı',
     'always-login-on-this-device' => 'Oturumu bu cihazda hep açık tut',
@@ -143,7 +143,7 @@ return [
     'you-have-successfully-logged-in' => 'Başarıyla giriş yaptınız!',
     'you-have-successfully-logged-out' => 'Başarıyla çıkış yaptınız!',
     'your-credentials-do-not-match' => 'Kimlik bilgileriniz eşleşmiyor!',
-    'email' => 'E-mail',
+    'email' => 'E-posta',
     'active' => 'Aktif',
     'passive' => 'Pasif',
     'show' => 'Göster',
@@ -412,7 +412,11 @@ return [
     'point-hours-minutes' => ' Puan (Saat:Dakika)',
     'get-login-code' => 'Giriş Kodunu Alın',
     'get-the-access-code-for-kongrepad' => 'KongrePad erişim kodunu edinin!',
+    'send-code-by-email' => 'E-posta ile kodu gönder',
     'send-by-email' => 'E-posta ile gönder',
+    'send-code-via-sms' => 'SMS ile kodu gönder',
     'send-via-sms' => 'SMS ile gönder',
-
+    'no-such-user-found' => 'Böyle bir kullanıcı bulunamadı!',
+    'you-will-be-informed-via-sms-as-soon-as-possible' => 'En kısa sürede sms ile bilgilendirileceksiniz!',
+    'you-will-be-informed-by-email-as-soon-as-possible' => 'En kısa sürede e-posta ile bilgilendirileceksiniz!',
 ];
