@@ -107,9 +107,6 @@
             </nav>
             @yield('body')
         </main>
-        <footer class="bg-dark text-light col-12 px-md-4 ms-sm-auto px-md-4 shadow" id="kp-footer">
-            Copyright © 2017-{{ date('Y') }} {{ config('app.name') }}
-        </footer>
     </div>
 </div>
 <x-common.popup.default />

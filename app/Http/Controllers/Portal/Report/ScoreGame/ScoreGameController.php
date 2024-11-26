@@ -23,7 +23,7 @@ class ScoreGameController extends Controller
         $score_game = $meeting->scoreGames()->findOrFail($id);
         $score_game_points = $score_game->points()
             ->select('meeting_score_game_points.*', DB::raw('SUM(meeting_score_game_points.point) as total_points'))
-            ->groupBy('meeting_score_game_points.participant_id')->orderBy('total_points', 'DESC')->paginate(50);
+            ->groupBy('meeting_score_game_points.participant_id')->orderBy('total_points', 'DESC')->paginate(300);
         return view('portal.meeting.report.score-game.show', compact(['score_game', 'score_game_points']));
     }
 }
