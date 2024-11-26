@@ -30,8 +30,11 @@ class SendCode extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('info@kongrepad.com', 'KongrePad'),
-            subject: 'KongrePad için erişim kodunuz'
+            from: new Address('no-reply@kongrepad.com', 'KongrePad'),
+            replyTo: [
+                new Address('info@kongrepad.com', 'KongrePad'),
+            ],
+            subject: 'KongrePad için erişim kodunuz',
         );
     }
 
