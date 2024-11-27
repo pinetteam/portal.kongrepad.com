@@ -13,9 +13,6 @@ class NetGSMSMSController extends Controller
     protected $header;
     protected $app_key;
 
-    /**
-     * NetgsmService Constructor
-     */
     public function __construct()
     {
         $this->api_url = 'https://api.netgsm.com.tr/sms/send/xml';
@@ -25,15 +22,7 @@ class NetGSMSMSController extends Controller
         $this->app_key = config('sms.netgsm.app_key');
     }
 
-    /**
-     * SMS Gönder
-     *
-     * @param string $message
-     * @param array $recipients
-     * @return mixed
-     * @throws Exception
-     */
-    public function sendSms(string $message, string $recipient)
+    public function sendSms(string $recipient, string $message)
     {
         $xmlData = '<?xml version="1.0" encoding="UTF-8"?>
             <mainbody>
@@ -49,7 +38,6 @@ class NetGSMSMSController extends Controller
                     <no>0' . $recipient . '</no>
                 </body>
             </mainbody>';
-
         // cURL ile XML POST isteği gönder
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $this->api_url);
@@ -59,15 +47,11 @@ class NetGSMSMSController extends Controller
         curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: text/xml']);
         curl_setopt($ch, CURLOPT_TIMEOUT, 30);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $xmlData);
-
         $result = curl_exec($ch);
-
         if (curl_errno($ch)) {
             throw new Exception('cURL Error: ' . curl_error($ch));
         }
-
         curl_close($ch);
-
         return $result;
     }
 }

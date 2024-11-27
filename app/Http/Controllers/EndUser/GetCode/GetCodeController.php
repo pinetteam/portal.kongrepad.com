@@ -8,6 +8,7 @@ use App\Http\Requests\EndUser\GetCode\GetCodeRequest;
 use App\Jobs\EndUser\SendCodeByEmail;
 use App\Jobs\EndUser\SendCodeViaSMS;
 use App\Models\Meeting\Participant\Participant;
+use App\Service\SMS\NetGSM;
 
 class GetCodeController extends Controller
 {
@@ -18,8 +19,10 @@ class GetCodeController extends Controller
     {
         return view('end-user.get-code.index');
     }
+
     /**
      * Store a newly created resource in storage.
+     * @throws \Exception
      */
     public function store(GetCodeRequest $request)
     {
@@ -37,7 +40,11 @@ class GetCodeController extends Controller
                 $participant = Participant::where('phone', $request->input('phone'))->orderBy('id', 'desc')->first();
                 if($participant) {
                     $message = 'Sayın '. $participant->full_name.' KongrePad uygulamasına giriş yapabilmeniz için giriş kodunuz: '. $participant->username;
-                    dispatch(new SendCodeViaSMS($participant->phone, $message));
+                    return config('sms.netgsm.username').config('sms.netgsm.password').config('sms.netgsm.header');
+
+                    $response = (new \App\Service\SMS\NetGSM)->sendToOne($participant->phone, $message);
+                    return $response;
+                    //dispatch(new SendCodeViaSMS($participant->phone, $message));
                     return back()->with('success', __('common.you-will-be-informed-via-sms-as-soon-as-possible'));
                 } else {
                     return back()->with('error', __('common.no-such-user-found'));

@@ -2,7 +2,7 @@
 
 namespace App\Jobs\EndUser;
 
-use App\Http\Controllers\Service\SMS\NetGSM\NetGSMSMSController;
+use App\Service\SMS\NetGSM;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -15,8 +15,8 @@ class SendCodeViaSMS implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $recipient;
-    protected $message;
+    protected string $recipient;
+    protected string $message;
 
     /**
      * Create a new job instance.
@@ -30,11 +30,11 @@ class SendCodeViaSMS implements ShouldQueue
     /**
      * Execute the job.
      */
-    public function handle(NetGSMSMSController $net_gsm_ervice): void
+    public function handle(NetGSM $net_gsm_ervice): void
     {
         Log::info('SMS Request:', ['recipient' => $this->recipient, 'message' => $this->message]);
         try {
-            $response = $net_gsm_ervice->sendSms($this->recipient, $this->message);
+            $response = $net_gsm_ervice->sendToOne($this->recipient, $this->message);
             Log::info('SMS Response:', ['response' => $response]);
         } catch (Exception $e) {
             Log::error('SMS Sending Failed:', ['error' => $e->getMessage()]);
