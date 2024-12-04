@@ -6,7 +6,7 @@ use App\Models\Meeting\Announcement\Announcement;
 use App\Notifications\AnnouncementNotification;
 use Illuminate\Console\Command;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Notification;
 
 class PublishAnnouncements extends Command
 {
@@ -19,27 +19,68 @@ class PublishAnnouncements extends Command
         parent::__construct();
     }
 
-    public function handle()
+    public function handle(): void
     {
         $now = Carbon::now();
-        $announcements = Announcement::where('publish_at', '<=', $now)->where('is_published', 0)->get();
-       foreach ($announcements as $announcement){
-           $meeting = $announcement->meeting;
-            //todo will open this on prod
-            if ($meeting->participants->where('type', 'attendee')->count() > 0){
-                $meeting->participants->where('type', 'attendee')->first()->notify(new AnnouncementNotification($announcement));
-            }
-            if ($meeting->participants->where('type', 'agent')->count() > 0) {
-                $meeting->participants->where('type', 'agent')->first()->notify(new AnnouncementNotification($announcement));
-            }
-            if ($meeting->participants->where('type', 'team')->count() > 0) {
-                $meeting->participants->where('type', 'team')->first()->notify(new AnnouncementNotification($announcement));
-            }
-           $announcement->is_published = 1;
-           $announcement->save();
-       }
 
-        //Log::info("Announcements published: ".date('d/m/Y H:i:s'));
-        //Log::info("---------------------------------------------------------");
+        // Yayınlanmamış duyuruları al
+        $announcements = Announcement::where('publish_at', '<=', $now)
+            ->where('is_published', 0)
+            ->get();
+
+        if ($announcements->isEmpty()) {
+            $this->info('No announcements to publish...');
+            return;
+        }
+
+        foreach ($announcements as $announcement) {
+            // İlgi alanı oluştur
+            $interests = ['meeting-' . $announcement->id . '-announcement'];
+
+            // Bildirim başlık ve içeriği
+            $notificationData = [
+                'interests' => $interests,
+                'title' => $announcement->title,
+                'body' => $announcement->title,
+            ];
+
+            // Katılımcı türüne göre bildirimi gönder
+            $this->sendNotifications($announcement, 'agent', $notificationData, 'agents');
+            $this->sendNotifications($announcement, 'attendee', $notificationData, 'attendees');
+            $this->sendNotifications($announcement, 'team', $notificationData, 'teams');
+
+            // Duyurunun yayınlandığını işaretle
+            $announcement->update(['is_published' => 1]);
+            $this->info('Announcement ' . $announcement->id . ' marked as published.');
+        }
+    }
+
+    /**
+     * Katılımcılara bildirim gönderir.
+     *
+     * @param Announcement $announcement
+     * @param string $type Katılımcı türü
+     * @param array $notificationData Bildirim verisi
+     * @param string $label Log için etiket
+     * @return void
+     */
+    private function sendNotifications(Announcement $announcement, string $type, array $notificationData, string $label): void
+    {
+        // Önce ilgili meeting kontrol ediliyor
+        if (!$announcement->meeting) {
+            $this->error('No meeting found for announcement ID: ' . $announcement->id);
+            return;
+        }
+
+        // Katılımcıları çek
+        $participants = $announcement->meeting->participants()->where('type', $type)->get();
+
+        if ($participants->isNotEmpty()) {
+            // Katılımcılara bildirim gönder
+            Notification::send($participants, new AnnouncementNotification($notificationData));
+            $this->info('Announcement ' . $announcement->id . ' sent to ' . $label . '!');
+        } else {
+            $this->info('No participants of type "' . $type . '" found for announcement ID: ' . $announcement->id);
+        }
     }
 }

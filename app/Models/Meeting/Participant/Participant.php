@@ -63,6 +63,12 @@ class Participant extends Model
         'enrolled_at' => 'timestamp',
     ];
     protected $perPage = 30;
+    public function routeNotificationFor($channel)
+    {
+        if ($channel === 'pusher_beams') {
+            return 'meeting-' . $this->meeting->id . '-' . $this->type . '-' . $this->id;
+        }
+    }
     public function scopeSearchByName($query, $name)
     {
         return $query->where(function($q) use ($name) {
@@ -84,16 +90,6 @@ class Participant extends Model
         } else {
             return false;
         }
-    }
-    public function routeNotificationFor($channel)
-    {
-        if($channel === 'PusherPushNotifications'){
-            return 'meeting-' . $this->meeting_id . '-' . $this->type;
-        }
-
-        $class = str_replace('\\', '.', get_class($this));
-
-        return $class.'.'.$this->getKey();
     }
     public function phoneCountry()
     {
