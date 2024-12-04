@@ -22,8 +22,9 @@ class AnnouncementNotification extends Notification
     {
         return [
             'interests' => ['debug-meeting-3-attendee'],
-            'title'     => $this->announcement->title,
-            'body'      => $this->announcement->body,
+            'title' => $this->announcement['title'],
+            'body' => $this->announcement['body'],
+
         ];
     }
 }
