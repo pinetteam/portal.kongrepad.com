@@ -1,34 +1,32 @@
 @props(['name' => 'default', 'method' => 'e'])
-<div class="modal fade" id="{{ $name }}-edit-modal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="#{{ $name }}-edit-modal-label" aria-hidden="true" data-bs-focus="false">
-    <div class="modal-dialog modal-xl modal-dialog-centered">
-        <div class="modal-content bg-dark">
-            <form method="POST" action="" name="{{ $name }}-edit-form" id="{{ $name }}-edit-form" enctype="multipart/form-data" autocomplete="nope">
-                @csrf
-                <input name="_method" type="hidden" value="PATCH" />
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="{{ $name }}-edit-modal-label">{{ __('common.edit') }}</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container-fluid">
-                        <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-3 justify-content-center">
-                            @yield($name.'-edit-form')
-                        </div>
+<div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="{{ $name }}-edit-modal" aria-labelledby="{{ $name }}-edit-modal-label">
+    <div class="offcanvas-header bg-kongre-primary text-white">
+        <h5 class="offcanvas-title" id="{{ $name }}-edit-modal-label">{{ __('common.edit') }}</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body bg-kongre-secondary text-white">
+        <form method="POST" action="" name="{{ $name }}-edit-form" id="{{ $name }}-edit-form" enctype="multipart/form-data" autocomplete="nope" class="h-100 d-flex flex-column">
+            @csrf
+            <input name="_method" type="hidden" value="PATCH" />
+            <div class="flex-grow-1 overflow-auto">
+                <div class="container-fluid">
+                    <div class="row row-cols-1 justify-content-center">
+                        @yield($name.'-edit-form')
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <div class="btn-group w-100" role="group" aria-label="{{ __('common.processes') }}">
-                        <button type="button" class="btn btn-danger w-25" data-bs-dismiss="modal">{{ __('common.close') }}</button>
-                        <button type="submit" class="btn btn-success w-75" id="{{ $name }}-edit-form-submit">{{ __('common.edit') }}</button>
-                    </div>
+            </div>
+            <div class="mt-3 pt-3 border-top border-dark">
+                <div class="btn-group w-100" role="group" aria-label="{{ __('common.processes') }}">
+                    <button type="button" class="btn btn-danger w-25" data-bs-dismiss="offcanvas">{{ __('common.close') }}</button>
+                    <button type="submit" class="btn btn-success w-75" id="{{ $name }}-edit-form-submit">{{ __('common.edit') }}</button>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 </div>
 <script type="module">
     const editModal = document.getElementById('{{ $name }}-edit-modal');
-    editModal.addEventListener('show.bs.modal', event => {
+    editModal.addEventListener('show.bs.offcanvas', event => {
         document.getElementById("kp-loading").style.visibility = "visible";
         if(event.relatedTarget) {
             const button = event.relatedTarget;
@@ -113,7 +111,7 @@
                 .catch();
         }
     })
-    editModal.addEventListener('hide.bs.modal', event => {
+    editModal.addEventListener('hide.bs.offcanvas', event => {
         const formControl = document.querySelectorAll('.form-control');
         const invalidFeedback = document.querySelectorAll('.invalid-feedback');
         invalidFeedback.forEach(element => {
@@ -124,18 +122,11 @@
             element.value = null;
         });
     });
-    const editFormSubmit = document.getElementById('{{ $name }}-edit-form-submit');
-    editFormSubmit.addEventListener('click', function() {
-        editFormSubmit.disabled = true;
-        editFormSubmit.innerHTML = '<div class="spinner-border spinner-border-sm" role="status"></div> {{ __('common.editing') }}';
-        document.getElementById('{{ $name }}-edit-form').submit();
-        document.getElementById("kp-loading").style.visibility = "visible";
-    });
 </script>
 @if($errors->any() && session('method') && session('route') && session('route') && session('name') == $name)
     @if(session('method')=='PATCH' || session('method')=='PUT')
         <script type="module">
-            new bootstrap.Modal('#{{ $name }}-edit-modal', {}).show();
+            new bootstrap.Offcanvas('#{{ $name }}-edit-modal', {}).show();
             document.getElementById('{{ $name }}-edit-form').action = '{{ session('route') }}';
         </script>
     @endif

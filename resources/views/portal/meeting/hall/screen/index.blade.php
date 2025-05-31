@@ -53,12 +53,12 @@
                                             <span class="fa-regular fa-eye"></span>
                                         </a>
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.edit') }}">
-                                            <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#screen-edit-modal" data-route="{{ route('portal.meeting.hall.screen.update', ['meeting' => $hall->meeting_id, 'hall' => $hall->id, 'screen' => $screen->id]) }}" data-resource="{{ route('portal.meeting.hall.screen.edit', ['meeting' => $hall->meeting_id, 'hall' => $hall->id, 'screen' => $screen->id]) }}" data-id="{{ $hall->id }}">
+                                            <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="offcanvas" data-bs-target="#screen-edit-modal" data-route="{{ route('portal.meeting.hall.screen.update', ['meeting' => $hall->meeting_id, 'hall' => $hall->id, 'screen' => $screen->id]) }}" data-resource="{{ route('portal.meeting.hall.screen.edit', ['meeting' => $hall->meeting_id, 'hall' => $hall->id, 'screen' => $screen->id]) }}" data-id="{{ $hall->id }}">
                                                 <span class="fa-regular fa-pen-to-square"></span>
                                             </button>
                                         </div>
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
-                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#screen-delete-modal" data-route="{{ route('portal.meeting.hall.screen.destroy', ['meeting' => $hall->meeting_id, 'hall' => $hall->id, 'screen' => $screen->id]) }}" data-record="{{ $hall->title }}">
+                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="offcanvas" data-bs-target="#screen-delete-modal" data-route="{{ route('portal.meeting.hall.screen.destroy', ['meeting' => $hall->meeting_id, 'hall' => $hall->id, 'screen' => $screen->id]) }}" data-record="{{ $hall->title }}">
                                                 <span class="fa-regular fa-trash"></span>
                                             </button>
                                         </div>
@@ -71,7 +71,7 @@
             </div>
         </div>
         <div class="card-footer d-flex justify-content-center">
-            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#screen-create-modal" data-route="{{ route('portal.meeting.hall.screen.store', ['meeting' => $hall->meeting_id, 'hall' => $hall->id]) }}">
+            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="offcanvas" data-bs-target="#screen-create-modal" data-route="{{ route('portal.meeting.hall.screen.store', ['meeting' => $hall->meeting_id, 'hall' => $hall->id]) }}">
                 <i class="fa-solid fa-plus"></i> {{ __('common.create-new-screen') }}
             </button>
         </div>

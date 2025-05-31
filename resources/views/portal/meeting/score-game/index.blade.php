@@ -1,14 +1,14 @@
-@extends('layout.portal.common')
+@extends('layout.portal.meeting-detail')
 @section('title', $meeting->title . ' | ' . __('common.score-games'))
 @section('breadcrumb')
-    <li class="breadcrumb-item text-white"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none text-white">{{ __('common.meetings') }}</a></li>
-    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.show', $meeting->id) }}" class="text-decoration-none text-white">{{ $meeting->title }}</a></li>
-    <li class="breadcrumb-item active text-white text-decoration-underline" aria-current="page">{{ __('common.score-games') }}</li>
+    <li class="breadcrumb-item"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none">{{ __('common.meetings') }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.show', $meeting->id) }}" class="text-decoration-none">{{ $meeting->title }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ __('common.score-games') }}</li>
 @endsection
-@section('body')
-    <div class="card text-bg-dark">
+@section('meeting_content')
+    <div class="card bg-kongre-secondary">
         <div class="card-header">
-            <h1 class="m-0 text-center"><span class="fa-duotone fa-hundred-points fa-fade"></span> <small>"{{ $meeting->title }}"</small> {{ __('common.score-games') }}</h1>
+            <h1 class="m-0 text-center"><span class="fa-duotone fa-hundred-points fa-fade"></span> {{ __('common.score-games') }}</h1>
         </div>
         <div class="card-body p-0">
             <div class="table-responsive">
@@ -55,23 +55,23 @@
                                 <td>{{ $score_game->theme }}</td>
                                 <td>
                                     @if($score_game->status)
-                                        <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
+                                        <i style="color:var(--kongre-success)" class="fa-regular fa-toggle-on fa-xg"></i>
                                     @else
-                                        <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
+                                        <i style="color:var(--kongre-danger)" class="fa-regular fa-toggle-off fa-xg"></i>
                                     @endif
                                 </td>
                                 <td class="text-end">
                                     <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
-                                        <a class="btn btn-info btn-sm" href="{{ route('portal.meeting.score-game.show', ['meeting' => $meeting->id, 'score_game' => $score_game->id]) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
+                                        <a class="btn btn-kongre-accent btn-sm" href="{{ route('portal.meeting.score-game.show', ['meeting' => $meeting->id, 'score_game' => $score_game->id]) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
                                             <span class="fa-regular fa-eye"></span>
                                         </a>
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.edit') }}">
-                                            <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#score-game-edit-modal" data-route="{{ route('portal.meeting.score-game.update', ['meeting' => $meeting->id, 'score_game' => $score_game->id]) }}" data-resource="{{ route('portal.meeting.score-game.edit', ['meeting' => $meeting->id, 'score_game' => $score_game->id]) }}" data-id="{{ $score_game->id }}">
+                                            <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="offcanvas" data-bs-target="#score-game-edit-modal" data-route="{{ route('portal.meeting.score-game.update', ['meeting' => $meeting->id, 'score_game' => $score_game->id]) }}" data-resource="{{ route('portal.meeting.score-game.edit', ['meeting' => $meeting->id, 'score_game' => $score_game->id]) }}" data-id="{{ $score_game->id }}">
                                                 <span class="fa-regular fa-pen-to-square"></span>
                                             </button>
                                         </div>
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
-                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#score-game-delete-modal" data-route="{{ route('portal.meeting.score-game.destroy', ['meeting' => $meeting->id, 'score_game' => $score_game->id]) }}" data-record="{{ $score_game->title }}">
+                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="offcanvas" data-bs-target="#score-game-delete-modal" data-route="{{ route('portal.meeting.score-game.destroy', ['meeting' => $meeting->id, 'score_game' => $score_game->id]) }}" data-record="{{ $score_game->title }}">
                                                 <span class="fa-regular fa-trash"></span>
                                             </button>
                                         </div>
@@ -84,7 +84,7 @@
             </div>
         </div>
         <div class="card-footer d-flex justify-content-center">
-            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#score-game-create-modal" data-route="{{ route('portal.meeting.score-game.store', ['meeting' => $meeting->id]) }}">
+            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="offcanvas" data-bs-target="#score-game-create-modal" data-route="{{ route('portal.meeting.score-game.store', ['meeting' => $meeting->id]) }}">
                 <i class="fa-solid fa-plus"></i> {{ __('common.create-new-score-game') }}
             </button>
         </div>

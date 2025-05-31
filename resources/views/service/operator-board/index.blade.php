@@ -122,7 +122,7 @@
                                             @foreach($sessions as $session)
                                                 <tr>
                                                     <td>
-                                                        <a href =""  title="{{ __('common.start-stop') }}" data-bs-toggle="modal" data-bs-target="#start-session-confirmation-modal" data-route="{{ route('portal.meeting.hall.program.session.start-stop', ['meeting' => $program->hall->meeting_id, 'hall' => $program->hall->id, 'program' => $program->id, 'session' => $session->id]) }}" data-record="{{ $session->title }}" data-start-stop="{{ $session->on_air }} " data-bs-title="{{ __('common.start-stop') }}">
+                                                        <a href =""  title="{{ __('common.start-stop') }}" data-bs-toggle="offcanvas" data-bs-target="#start-session-confirmation-modal" data-route="{{ route('portal.meeting.hall.program.session.start-stop', ['meeting' => $program->hall->meeting_id, 'hall' => $program->hall->id, 'program' => $program->id, 'session' => $session->id]) }}" data-record="{{ $session->title }}" data-start-stop="{{ $session->on_air }} " data-bs-title="{{ __('common.start-stop') }}">
                                                                 @if($session->on_air)
                                                                     <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
                                                                 @else
@@ -181,7 +181,7 @@
                                                     <td>
                                                         <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
                                                             <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.keypads') }}">
-                                                                <button class="btn btn-warning btn-sm" title="{{ __('common.keypads') }}" data-bs-toggle="modal" data-bs-target="#session-keypads-modal-{{$session->id}}" >
+                                                                <button class="btn btn-warning btn-sm" title="{{ __('common.keypads') }}" data-bs-toggle="offcanvas" data-bs-target="#session-keypads-modal-{{$session->id}}" >
                                                                     <span class="fa-regular fa-tablet"></span>
                                                                 </button>
                                                             </div>
@@ -221,7 +221,7 @@
                                                             <td>
                                                                 <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
                                                                     @if($session->on_air)
-                                                                    <a href =""  title="{{ __('common.start-stop-voting') }}" data-bs-toggle="modal" data-bs-target="#start-keypad-confirmation-modal" data-route="{{ route('portal.meeting.hall.program.session.keypad.start-stop-voting',['meeting'=>$session->program->hall->meeting_id, 'keypad'=> $keypad->id,'session'=> $session->id,'program'=>$session->program_id, 'hall'=>$session->program->hall_id]) }}" data-record="{{ $keypad->keypad }}" data-start-stop="{{ $keypad->on_vote }}">
+                                                                    <a href =""  title="{{ __('common.start-stop-voting') }}" data-bs-toggle="offcanvas" data-bs-target="#start-keypad-confirmation-modal" data-route="{{ route('portal.meeting.hall.program.session.keypad.start-stop-voting',['meeting'=>$session->program->hall->meeting_id, 'keypad'=> $keypad->id,'session'=> $session->id,'program'=>$session->program_id, 'hall'=>$session->program->hall_id]) }}" data-record="{{ $keypad->keypad }}" data-start-stop="{{ $keypad->on_vote }}">
                                                                         @if($keypad->on_vote)
                                                                             <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
                                                                         @else
@@ -232,7 +232,7 @@
                                                                         <i class="text-info">{{ __('common.first-you-should-start-session') }}</i>
                                                                     @endif
                                                                     @if($keypad->on_vote)
-                                                                    <a href =""  title="{{ __('common.resend-voting') }}" data-bs-toggle="modal" data-bs-target="#start-keypad-confirmation-modal" data-route="{{ route('portal.meeting.hall.program.session.keypad.resend-voting',['meeting'=>$session->program->hall->meeting_id, 'keypad'=> $keypad->id,'session'=> $session->id,'program'=>$session->program_id, 'hall'=>$session->program->hall_id]) }}" data-record="{{ $keypad->keypad }}" data-start-stop="{{ $keypad->on_vote }}">
+                                                                    <a href =""  title="{{ __('common.resend-voting') }}" data-bs-toggle="offcanvas" data-bs-target="#start-keypad-confirmation-modal" data-route="{{ route('portal.meeting.hall.program.session.keypad.resend-voting',['meeting'=>$session->program->hall->meeting_id, 'keypad'=> $keypad->id,'session'=> $session->id,'program'=>$session->program_id, 'hall'=>$session->program->hall_id]) }}" data-record="{{ $keypad->keypad }}" data-start-stop="{{ $keypad->on_vote }}">
                                                                         <i style="color:red" class="fa-regular fa-recycle fa-xg"></i>
                                                                     </a>
                                                                     @endif
@@ -381,7 +381,7 @@
                                                     <td>{{ $debate->title }}</td>
                                                     <td>{{ $debate->description }}</td>
                                                     <td>
-                                                        <a href =""  title="{{ __('common.start-stop') }}" data-bs-toggle="modal" data-bs-target="#start-debate-confirmation-modal" data-route="{{ route('portal.meeting.hall.program.debate.start-stop-voting', ['meeting' => $meeting_hall->meeting_id, 'hall' => $meeting_hall->id, 'program' => $program->id, 'debate' => $debate->id]) }}" data-record="{{ $debate->title }}" data-start-stop="{{ $debate->on_vote }}">
+                                                        <a href =""  title="{{ __('common.start-stop') }}" data-bs-toggle="offcanvas" data-bs-target="#start-debate-confirmation-modal" data-route="{{ route('portal.meeting.hall.program.debate.start-stop-voting', ['meeting' => $meeting_hall->meeting_id, 'hall' => $meeting_hall->id, 'program' => $program->id, 'debate' => $debate->id]) }}" data-record="{{ $debate->title }}" data-start-stop="{{ $debate->on_vote }}">
                                                             @if($debate->on_vote)
                                                             <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
                                                             @else

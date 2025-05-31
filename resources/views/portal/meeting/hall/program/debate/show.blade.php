@@ -92,12 +92,12 @@
                                         <span class="fa-regular fa-eye"></span>
                                     </a>
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.edit') }}">
-                                        <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#team-edit-modal" data-route="{{ route('portal.meeting.hall.program.debate.team.update', ['meeting' => $debate->program->hall->meeting_id, 'hall' => $debate->program->hall->id, 'program' => $debate->program_id, 'debate' => $debate->id, 'team' => $team->id]) }}" data-resource="{{ route('portal.meeting.hall.program.debate.team.edit', ['meeting' => $debate->program->hall->meeting_id, 'hall' => $debate->program->hall->id, 'program' => $debate->program_id, 'debate' => $debate->id, 'team' => $team->id]) }}" data-id="{{ $team->id }}">
+                                        <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="offcanvas" data-bs-target="#team-edit-modal" data-route="{{ route('portal.meeting.hall.program.debate.team.update', ['meeting' => $debate->program->hall->meeting_id, 'hall' => $debate->program->hall->id, 'program' => $debate->program_id, 'debate' => $debate->id, 'team' => $team->id]) }}" data-resource="{{ route('portal.meeting.hall.program.debate.team.edit', ['meeting' => $debate->program->hall->meeting_id, 'hall' => $debate->program->hall->id, 'program' => $debate->program_id, 'debate' => $debate->id, 'team' => $team->id]) }}" data-id="{{ $team->id }}">
                                             <span class="fa-regular fa-pen-to-square"></span>
                                         </button>
                                     </div>
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
-                                        <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#team-delete-modal" data-route="{{ route('portal.meeting.hall.program.debate.team.destroy', ['meeting' => $debate->program->hall->meeting_id, 'hall' => $debate->program->hall->id, 'program' => $debate->program_id, 'debate' => $debate->id, 'team' => $team->id]) }}" data-record="{{ $team->title }}">
+                                        <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="offcanvas" data-bs-target="#team-delete-modal" data-route="{{ route('portal.meeting.hall.program.debate.team.destroy', ['meeting' => $debate->program->hall->meeting_id, 'hall' => $debate->program->hall->id, 'program' => $debate->program_id, 'debate' => $debate->id, 'team' => $team->id]) }}" data-record="{{ $team->title }}">
                                             <span class="fa-regular fa-trash"></span>
                                         </button>
                                     </div>
@@ -110,7 +110,7 @@
             </div>
         </div>
         <div class="card-footer d-flex justify-content-center">
-            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#team-create-modal" data-route="{{ route('portal.meeting.hall.program.debate.team.store', ['meeting' => $debate->program->hall->meeting_id, 'hall' => $debate->program->hall_id, 'program' => $debate->program_id, 'debate' => $debate->id]) }}">
+            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="offcanvas" data-bs-target="#team-create-modal" data-route="{{ route('portal.meeting.hall.program.debate.team.store', ['meeting' => $debate->program->hall->meeting_id, 'hall' => $debate->program->hall_id, 'program' => $debate->program_id, 'debate' => $debate->id]) }}">
                 <i class="fa-solid fa-plus"></i> {{ __('common.add-new-team') }}
             </button>
         </div>

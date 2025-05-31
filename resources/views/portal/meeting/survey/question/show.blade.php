@@ -69,7 +69,7 @@
                                                  data-bs-custom-class="kp-tooltip"
                                                  data-bs-title="{{ __('common.edit')}}">
                                                 <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}"
-                                                        data-bs-toggle="modal" data-bs-target="#option-edit-modal"
+                                                        data-bs-toggle="offcanvas" data-bs-target="#option-edit-modal"
                                                         data-route="{{ route('portal.meeting.survey.option.update',['meeting' => $question->survey->meeting_id, 'survey' => $question->survey_id, 'question' => $question->id, 'option' => $option->id]) }}"
                                                         data-resource="{{ route('portal.meeting.survey.option.edit',['meeting' => $question->survey->meeting_id, 'survey' => $question->survey_id, 'question' => $question->id, 'option' => $option->id]) }}"
                                                         data-id="{{ $option->id }}">
@@ -80,7 +80,7 @@
                                                  data-bs-custom-class="kp-tooltip"
                                                  data-bs-title="{{ __('common.delete') }}">
                                                 <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}"
-                                                        data-bs-toggle="modal" data-bs-target="#option-delete-modal"
+                                                        data-bs-toggle="offcanvas" data-bs-target="#option-delete-modal"
                                                         data-route="{{ route('portal.meeting.survey.option.show', ['meeting' => $question->survey->meeting_id, 'survey' => $question->survey_id, 'question' => $question->id, 'option' => $option->id]) }}"
                                                         data-record="{{ $option->option }}">
                                                     <span class="fa-regular fa-trash"></span>
@@ -95,7 +95,7 @@
                     </div>
                 </div>
                 <div class="card-footer d-flex justify-content-center">
-                    <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal"
+                    <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="offcanvas"
                             data-bs-target="#option-create-modal"
                             data-route="{{ route('portal.meeting.survey.option.store',['meeting' => $question->survey->meeting_id, 'survey' => $question->survey_id, 'question' => $question->id]) }}">
                         <i class="fa-solid fa-plus"></i> {{ __('common.create-new-option') }}

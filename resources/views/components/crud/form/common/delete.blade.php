@@ -1,33 +1,33 @@
 @props(['name' => 'default'])
-<div class="modal fade" id="{{ $name }}-delete-modal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="#{{ $name }}-delete-modal-label" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content bg-dark">
-            <form method="POST" action="" name="{{ $name }}-delete-form" id="{{ $name }}-delete-form" autocomplete="nope">
-                @csrf
-                <input name="_method" type="hidden" value="DELETE">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="{{ $name }}-delete-modal-label">{{ __('common.delete') }}</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
+<div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="{{ $name }}-delete-modal" aria-labelledby="{{ $name }}-delete-modal-label">
+    <div class="offcanvas-header bg-kongre-primary text-white">
+        <h5 class="offcanvas-title" id="{{ $name }}-delete-modal-label">{{ __('common.delete') }}</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body bg-kongre-secondary text-white">
+        <form method="POST" action="" name="{{ $name }}-delete-form" id="{{ $name }}-delete-form" autocomplete="nope" class="h-100 d-flex flex-column">
+            @csrf
+            <input name="_method" type="hidden" value="DELETE">
+            <div class="flex-grow-1 overflow-auto">
+                <div class="alert alert-danger">
                     <p>{{ __('common.are-you-sure-you-want-to-delete') }} <strong id="{{ $name }}-delete-record" class="text-danger"></strong> ?</p>
                     <p><em id="{{ $name }}-delete-record" class="text-danger">{{__('common.this-operation-will-delete-all-related-objects')}}</em></p>
                 </div>
-                <div class="modal-footer">
-                    <div class="btn-group w-100" role="group" aria-label="{{ __('common.processes') }}">
-                        <button type="button" class="btn btn-danger w-25" data-bs-dismiss="modal">{{ __('common.close') }}</button>
-                        <button type="submit" class="btn btn-success w-75" id="{{ $name }}-delete-form-submit">{{ __('common.delete') }}</button>
-                    </div>
+            </div>
+            <div class="mt-3 pt-3 border-top border-dark">
+                <div class="btn-group w-100" role="group" aria-label="{{ __('common.processes') }}">
+                    <button type="button" class="btn btn-danger w-25" data-bs-dismiss="offcanvas">{{ __('common.close') }}</button>
+                    <button type="submit" class="btn btn-success w-75" id="{{ $name }}-delete-form-submit">{{ __('common.delete') }}</button>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 </div>
 <script type="module">
     const deleteFormSubmit = document.getElementById('{{ $name }}-delete-form-submit');
     const deleteModal = document.getElementById('{{ $name }}-delete-modal');
     var waitForSeconds, countdown;
-    deleteModal.addEventListener('show.bs.modal', event => {
+    deleteModal.addEventListener('show.bs.offcanvas', event => {
         const button = event.relatedTarget;
         if(button) {
             deleteFormSubmit.disabled = true;
@@ -44,11 +44,5 @@
             }, 1000);
         }
         deleteFormSubmit.innerHTML = '{{ __('common.delete') }} (' + (waitForSeconds) + ')';
-    });
-    deleteFormSubmit.addEventListener('click', function() {
-        deleteFormSubmit.disabled = true;
-        deleteFormSubmit.innerHTML = '<div class="spinner-border spinner-border-sm" role="status"></div> {{ __('common.deleting') }}';
-        document.getElementById('{{ $name }}-delete-form').submit();
-        document.getElementById("kp-loading").style.visibility = "visible";
     });
 </script>

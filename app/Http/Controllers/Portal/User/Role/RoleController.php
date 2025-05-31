@@ -74,4 +74,15 @@ class RoleController extends Controller
             return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();
         }
     }
+    
+    public function show(int $id)
+    {
+        $user_role = Auth::user()->customer->userRoles()->findOrFail($id);
+        $routes = json_decode(Route::get(), true);
+        $statuses = [
+            'passive' => ['value' => 0, 'title' => __('common.passive'), 'color' => 'danger'],
+            'active' => ['value' => 1, 'title' => __('common.active'), 'color' => 'success'],
+        ];
+        return view('portal.user-role.show', compact(['user_role', 'routes', 'statuses']));
+    }
 }

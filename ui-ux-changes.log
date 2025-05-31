@@ -1,0 +1,203 @@
+# KongrePad-Web UI/UX İyileştirme Çalışması Log Dosyası
+
+## 2023-07-12 - İlk Aşama: Toplantı Detay Sayfası Yeniden Tasarımı
+
+### Yapılan Değişiklikler:
+1. Toplantı detay sayfası için özel bir layout oluşturuldu: `resources/views/layout/portal/meeting-detail.blade.php`
+2. Toplantı detay sayfası (`resources/views/portal/meeting/show.blade.php`) yeni layout'u kullanacak şekilde düzenlendi
+3. Eski kart yapısı kaldırıldı ve yerine sol tarafta bir sidebar menüsü eklendi
+4. Tüm menü öğeleri kategorilere ayrılarak sidebar'a taşındı:
+   - Genel Bilgiler
+   - Hazırlık (Dokümanlar, Katılımcılar)
+   - Etkinlik ve Aktiviteler (Duyurular, Skor Oyunları, Anketler)
+   - Ortam (Salonlar, Sanal Standlar)
+   - Raporlar (Tüm rapor türleri)
+5. Toplantı bilgileri daha modern ve kullanıcı dostu bir şekilde yeniden tasarlandı
+6. İstatistik kartı eklenerek toplantı hakkında özet bilgiler sunuldu
+
+### Geri Alma Talimatları:
+Bu değişiklikleri geri almak için:
+1. `resources/views/portal/meeting/show.blade.php` dosyasını önceki haline getirin
+2. `resources/views/layout/portal/meeting-detail.blade.php` dosyasını silin
+
+### Sonraki Aşamalar:
+1. Diğer toplantı alt sayfalarını (dokümanlar, katılımcılar vb.) yeni layout'u kullanacak şekilde düzenlemek
+2. Ana menü yapısını iyileştirmek
+3. Mobil görünümü optimize etmek
+
+## 2023-07-13 - İkinci Aşama: Renk Paleti ve Kullanıcı Deneyimi İyileştirmeleri
+
+### Yapılan Değişiklikler:
+1. Profesyonel bir kongre yönetim sistemine uygun yeni renk paleti tanımlandı:
+   - Koyu mavi tonları (primary: #2c3e50, secondary: #34495e)
+   - Vurgu rengi olarak mavi (accent: #3498db)
+   - Diğer yardımcı renkler (success, danger, warning, info)
+2. Tanımsız metinler düzeltildi:
+   - `common.general-info` yerine `common.overview` kullanıldı
+   - `common.basic-info` yerine `common.meeting_info` kullanıldı
+   - `common.time-info` yerine `common.schedule` kullanıldı
+   - `common.creation-info` yerine `common.creation_details` kullanıldı
+3. Aktif menü öğesinin belirgin olması sağlandı:
+   - Aktif menü öğesi için `request()->is()` kontrolü eklendi
+   - Aktif menü öğesi için özel stil tanımlandı
+4. Kontrast sorunları giderildi:
+   - Metin renkleri daha belirgin hale getirildi
+   - Arka plan renkleri ile metin renkleri arasındaki kontrast artırıldı
+5. Kartlar ve diğer UI bileşenleri için tutarlı stil tanımları eklendi:
+   - Gölgeler
+   - Yuvarlatılmış köşeler
+   - Tutarlı kenar çizgileri
+   - İkon renkleri
+6. Breadcrumb (gezinme çubuğu) yeniden tasarlandı:
+   - Daha belirgin ve modern görünüm
+   - Daha iyi kontrast
+
+### Geri Alma Talimatları:
+Bu değişiklikleri geri almak için:
+1. `resources/views/layout/portal/meeting-detail.blade.php` dosyasını önceki haline getirin
+2. `resources/views/portal/meeting/show.blade.php` dosyasını önceki haline getirin
+
+### Sonraki Aşamalar:
+1. Diğer toplantı alt sayfalarını yeni stil ve renk paletiyle uyumlu hale getirmek
+2. Ana menü yapısını ve navigasyonu daha da iyileştirmek
+3. Mobil görünümü optimize etmek
+4. Dil dosyalarında eksik çevirileri tamamlamak
+
+## 2023-07-14 - Üçüncü Aşama: Dil Çevirileri ve Alt Sayfaların Uyumlu Hale Getirilmesi
+
+### Yapılan Değişiklikler:
+1. Dil dosyalarında eksik çeviriler eklendi:
+   - Türkçe ve İngilizce dil dosyalarına eksik çeviriler eklendi:
+     - `common.meeting_info` (Toplantı Bilgileri / Meeting Information)
+     - `common.overview` (Genel Bakış / Overview)
+     - `common.schedule` (Zaman Çizelgesi / Schedule)
+     - `common.creation_details` (Oluşturma Detayları / Creation Details)
+2. Dokümanlar sayfası yeni layout'u kullanacak şekilde düzenlendi:
+   - `resources/views/portal/meeting/document/index.blade.php` dosyası güncellendi
+   - Yeni renk paleti ve stillerle uyumlu hale getirildi
+   - Aktif menü öğesi belirginleştirildi
+3. Tutarlı stil ve renk kullanımı sağlandı:
+   - Buton renkleri güncellendi (`btn-info` → `btn-kongre-accent`)
+   - Durum ikonları için değişken renk kullanımı eklendi (`green` → `var(--kongre-success)`)
+
+### Geri Alma Talimatları:
+Bu değişiklikleri geri almak için:
+1. `lang/tr/common.php` ve `lang/en/common.php` dosyalarından eklenen çevirileri kaldırın
+2. `resources/views/portal/meeting/document/index.blade.php` dosyasını önceki haline getirin
+
+### Sonraki Aşamalar:
+1. Diğer alt sayfaları da (katılımcılar, anketler, salonlar vb.) yeni layout'u kullanacak şekilde düzenlemek
+2. Mobil görünümü daha da iyileştirmek
+3. Kullanıcı geri bildirimleri doğrultusunda ince ayarlar yapmak 
+
+## 2023-07-15 - Dördüncü Aşama: Katılımcılar Sayfasını Yeniden Tasarlama
+
+### Yapılan Değişiklikler:
+1. Katılımcılar sayfası (`resources/views/portal/meeting/participant/index.blade.php`) yeni layout'u kullanacak şekilde düzenlendi:
+   - `layout.portal.common` yerine `layout.portal.meeting-detail` kullanıldı
+   - `@section('body')` yerine `@section('meeting_content')` kullanıldı
+   - Başlıktaki meeting title tekrarı kaldırıldı
+2. Stil ve görsel tutarlılık sağlandı:
+   - `text-bg-dark` yerine `bg-kongre-secondary` kullanıldı
+   - Sabit renk değerleri yerine CSS değişkenleri kullanıldı:
+     - `color:green` → `color:var(--kongre-success)`
+     - `color:red` → `color:var(--kongre-danger)`
+   - Buton renkleri standartlaştırıldı:
+     - `btn-info` → `btn-kongre-accent`
+3. Breadcrumb (gezinme çubuğu) tutarlı hale getirildi:
+   - Eski `text-white` ve `text-decoration-underline` sınıfları kaldırıldı
+   - Yeni tasarımla uyumlu daha temiz bir görünüm sağlandı
+
+### Geri Alma Talimatları:
+Bu değişiklikleri geri almak için:
+1. `resources/views/portal/meeting/participant/index.blade.php` dosyasını önceki haline getirin
+
+### Sonraki Aşamalar:
+1. Diğer alt sayfaları da (anketler, salonlar, duyurular, vb.) yeni layout'u kullanacak şekilde düzenlemek
+2. Detay sayfalarının (participant/show.blade.php gibi) tasarımlarını iyileştirmek
+3. Tablo tasarımlarını daha modern hale getirmek
+4. Mobil görünümü optimize etmek
+
+## 2023-07-15 - Beşinci Aşama: Duyurular Sayfasını Yeniden Tasarlama
+
+### Yapılan Değişiklikler:
+1. Duyurular sayfası (`resources/views/portal/meeting/announcement/index.blade.php`) yeni layout'u kullanacak şekilde düzenlendi:
+   - `layout.portal.common` yerine `layout.portal.meeting-detail` kullanıldı
+   - `@section('body')` yerine `@section('meeting_content')` kullanıldı
+   - Başlıktaki meeting title tekrarı kaldırıldı
+2. Stil ve görsel tutarlılık sağlandı:
+   - `text-bg-dark` yerine `bg-kongre-secondary` kullanıldı
+   - Sabit renk değerleri yerine CSS değişkenleri kullanıldı:
+     - `color:green` → `color:var(--kongre-success)`
+     - `color:red` → `color:var(--kongre-danger)`
+   - Buton renkleri standartlaştırıldı:
+     - `btn-info` → `btn-kongre-accent`
+3. Breadcrumb (gezinme çubuğu) tutarlı hale getirildi:
+   - Eski stil sınıfları (`text-white`, `text-decoration-underline`) kaldırıldı
+   - Yeni tasarımla uyumlu daha temiz bir görünüm sağlandı
+
+### Geri Alma Talimatları:
+Bu değişiklikleri geri almak için:
+1. `resources/views/portal/meeting/announcement/index.blade.php` dosyasını önceki haline getirin
+
+### Sonraki Aşamalar:
+1. Diğer alt sayfaların (anketler, salonlar, skor oyunları vb.) tasarımlarını güncellemek
+2. Detay sayfalarının (announcement/show.blade.php gibi) tasarımlarını iyileştirmek
+3. Mobil görünümü optimize etmek
+4. Kullanıcı geri bildirimleri doğrultusunda ince ayarlar yapmak
+
+## 2023-07-16 - Altıncı Aşama: Sanal Stand Sayfasını Yeniden Tasarlama
+
+### Yapılan Değişiklikler:
+1. Sanal Stand sayfası (`resources/views/portal/meeting/virtual-stand/index.blade.php`) yeni layout'u kullanacak şekilde düzenlendi:
+   - `layout.portal.common` yerine `layout.portal.meeting-detail` kullanıldı
+   - `@section('body')` yerine `@section('meeting_content')` kullanıldı
+   - Başlıktaki meeting title tekrarı kaldırıldı
+2. Stil ve görsel tutarlılık sağlandı:
+   - `text-bg-dark` yerine `bg-kongre-secondary` kullanıldı
+   - Sabit renk değerleri yerine CSS değişkenleri kullanıldı:
+     - `color:green` → `color:var(--kongre-success)`
+     - `color:red` → `color:var(--kongre-danger)`
+   - Buton renkleri standartlaştırıldı:
+     - `btn-info` → `btn-kongre-accent`
+3. Breadcrumb (gezinme çubuğu) tutarlı hale getirildi:
+   - Eski stil sınıfları (`text-white`, `text-decoration-underline`) kaldırıldı
+   - Yeni tasarımla uyumlu daha temiz bir görünüm sağlandı
+
+### Geri Alma Talimatları:
+Bu değişiklikleri geri almak için:
+1. `resources/views/portal/meeting/virtual-stand/index.blade.php` dosyasını önceki haline getirin
+
+### Sonraki Aşamalar:
+1. Kalan alt sayfaların tasarımlarını da aynı şekilde güncellemek (skor oyunları, anketler vb.)
+2. Detay sayfalarının (virtual-stand/show.blade.php gibi) tasarımlarını iyileştirmek
+3. Mobil görünümü optimize etmek
+4. Kullanıcı geri bildirimleri doğrultusunda ince ayarlar yapmak
+
+## 2023-07-16 - Yedinci Aşama: Skor Oyunları Sayfasını Yeniden Tasarlama
+
+### Yapılan Değişiklikler:
+1. Skor Oyunları sayfası (`resources/views/portal/meeting/score-game/index.blade.php`) yeni layout'u kullanacak şekilde düzenlendi:
+   - `layout.portal.common` yerine `layout.portal.meeting-detail` kullanıldı
+   - `@section('body')` yerine `@section('meeting_content')` kullanıldı
+   - Başlıktaki meeting title tekrarı kaldırıldı
+2. Stil ve görsel tutarlılık sağlandı:
+   - `text-bg-dark` yerine `bg-kongre-secondary` kullanıldı
+   - Sabit renk değerleri yerine CSS değişkenleri kullanıldı:
+     - `color:green` → `color:var(--kongre-success)`
+     - `color:red` → `color:var(--kongre-danger)`
+   - Buton renkleri standartlaştırıldı:
+     - `btn-info` → `btn-kongre-accent`
+3. Breadcrumb (gezinme çubuğu) tutarlı hale getirildi:
+   - Eski stil sınıfları (`text-white` vb.) kaldırıldı
+   - Yeni tasarımla uyumlu daha temiz bir görünüm sağlandı
+
+### Geri Alma Talimatları:
+Bu değişiklikleri geri almak için:
+1. `resources/views/portal/meeting/score-game/index.blade.php` dosyasını önceki haline getirin
+
+### Sonraki Aşamalar:
+1. Kalan alt sayfaların (anketler, salonlar vb.) tasarımlarını güncellemek 
+2. Detay sayfalarının tasarımlarını iyileştirmek
+3. Mobil görünümü optimize etmek
+4. Kullanıcı geri bildirimleri doğrultusunda ince ayarlar yapmak 

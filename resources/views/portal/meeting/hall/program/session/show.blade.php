@@ -87,7 +87,7 @@
                                 <td class="text-end" rowspan="1">
                                     <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.add-option')}}">
-                                            <button type="button" class="btn btn-outline-success btn-sm w-100  " data-bs-toggle="modal" data-bs-target="#option-create-modal" data-route="{{ route('portal.meeting.hall.program.session.keypad.option.store',['meeting'=>$session->program->hall->meeting_id, 'keypad'=> $keypad->id,'session'=> $session->id,'program'=>$session->program_id, 'hall'=>$session->program->hall_id]) }}">
+                                            <button type="button" class="btn btn-outline-success btn-sm w-100  " data-bs-toggle="offcanvas" data-bs-target="#option-create-modal" data-route="{{ route('portal.meeting.hall.program.session.keypad.option.store',['meeting'=>$session->program->hall->meeting_id, 'keypad'=> $keypad->id,'session'=> $session->id,'program'=>$session->program_id, 'hall'=>$session->program->hall_id]) }}">
                                                 <span class="fa-plus" style="white-space: nowrap"> {{ __('common.add-option') }}</span>
                                             </button>
                                         </div>
@@ -99,7 +99,7 @@
                                              data-bs-title="{{ __('common.edit')}}">
                                             <button class="btn btn-warning btn-sm"
                                                     title="{{ __('common.edit') }}"
-                                                    data-bs-toggle="modal"
+                                                    data-bs-toggle="offcanvas"
                                                     data-bs-target="#keypad-edit-modal"
                                                     data-route="{{ route('portal.meeting.hall.program.session.keypad.update',['meeting'=>$session->program->hall->meeting_id, 'keypad'=> $keypad->id,'session'=> $session->id,'program'=>$session->program_id, 'hall'=>$session->program->hall_id]) }}"
                                                     data-resource="{{ route('portal.meeting.hall.program.session.keypad.edit',['meeting'=>$session->program->hall->meeting_id, 'keypad'=> $keypad->id,'session'=> $session->id,'program'=>$session->program_id, 'hall'=>$session->program->hall_id]) }}"
@@ -112,7 +112,7 @@
                                              data-bs-title="{{ __('common.delete') }}">
                                             <button class="btn btn-danger btn-sm"
                                                     title="{{ __('common.delete') }}"
-                                                    data-bs-toggle="modal"
+                                                    data-bs-toggle="offcanvas"
                                                     data-bs-target="#keypad-delete-modal"
                                                     data-route="{{ route('portal.meeting.hall.program.session.keypad.destroy',['meeting'=>$session->program->hall->meeting_id, 'keypad'=> $keypad->id,'session'=> $session->id,'program'=>$session->program_id, 'hall'=>$session->program->hall_id]) }}"
                                                     data-record="{{ $keypad->keypad }}">
@@ -141,12 +141,12 @@
                                                     <td class="text-end">
                                                         <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
                                                             <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.edit')}}">
-                                                                <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#option-edit-modal" data-route="{{ route('portal.meeting.hall.program.session.keypad.option.update',['meeting'=>$session->program->hall->meeting_id, 'keypad'=> $keypad->id,'session'=> $session->id,'program'=>$session->program_id, 'hall'=>$session->program->hall_id, 'option'=>$option->id]) }}" data-resource="{{ route('portal.meeting.hall.program.session.keypad.option.edit',['meeting'=>$session->program->hall->meeting_id, 'keypad'=> $keypad->id,'session'=> $session->id,'program'=>$session->program_id, 'hall'=>$session->program->hall_id, 'option'=>$option->id]) }}" data-id="{{ $option->id }}">
+                                                                <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="offcanvas" data-bs-target="#option-edit-modal" data-route="{{ route('portal.meeting.hall.program.session.keypad.option.update',['meeting'=>$session->program->hall->meeting_id, 'keypad'=> $keypad->id,'session'=> $session->id,'program'=>$session->program_id, 'hall'=>$session->program->hall_id, 'option'=>$option->id]) }}" data-resource="{{ route('portal.meeting.hall.program.session.keypad.option.edit',['meeting'=>$session->program->hall->meeting_id, 'keypad'=> $keypad->id,'session'=> $session->id,'program'=>$session->program_id, 'hall'=>$session->program->hall_id, 'option'=>$option->id]) }}" data-id="{{ $option->id }}">
                                                                     <span class="fa-regular fa-pen-to-square"></span>
                                                                 </button>
                                                             </div>
                                                             <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
-                                                                <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#option-delete-modal" data-route="{{ route('portal.meeting.hall.program.session.keypad.option.destroy',['meeting'=>$session->program->hall->meeting_id, 'keypad'=> $keypad->id,'session'=> $session->id,'program'=>$session->program_id, 'hall'=>$session->program->hall_id, 'option'=>$option->id]) }}">
+                                                                <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="offcanvas" data-bs-target="#option-delete-modal" data-route="{{ route('portal.meeting.hall.program.session.keypad.option.destroy',['meeting'=>$session->program->hall->meeting_id, 'keypad'=> $keypad->id,'session'=> $session->id,'program'=>$session->program_id, 'hall'=>$session->program->hall_id, 'option'=>$option->id]) }}">
                                                                     <span class="fa-regular fa-trash"></span>
                                                                 </button>
                                                             </div>
@@ -163,7 +163,7 @@
                             @endforeach
                         </table>
                             <div class="card-footer d-flex justify-content-center">
-                                <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#keypad-create-modal" data-route="{{ route('portal.meeting.hall.program.session.keypad.store', ['meeting'=>$session->program->hall->meeting_id, 'hall'=>$session->program->hall_id, 'program'=>$session->program_id, 'session'=> $session->id]) }}">
+                                <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="offcanvas" data-bs-target="#keypad-create-modal" data-route="{{ route('portal.meeting.hall.program.session.keypad.store', ['meeting'=>$session->program->hall->meeting_id, 'hall'=>$session->program->hall_id, 'program'=>$session->program_id, 'session'=> $session->id]) }}">
                                     <i class="fa-solid fa-plus"></i> {{ __('common.create-new-keypad') }}
                                 </button>
                             </div>

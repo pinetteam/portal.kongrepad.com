@@ -1,14 +1,14 @@
-@extends('layout.portal.common')
+@extends('layout.portal.meeting-detail')
 @section('title', $meeting->title . ' | ' . __('common.surveys'))
 @section('breadcrumb')
-    <li class="breadcrumb-item text-white"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none text-white">{{ __('common.meetings') }}</a></li>
-    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.show', $meeting->id) }}" class="text-decoration-none text-white">{{ $meeting->title }}</a></li>
-    <li class="breadcrumb-item active text-white text-decoration-underline" aria-current="page">{{ __('common.surveys') }}</li>
+    <li class="breadcrumb-item"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none">{{ __('common.meetings') }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.show', $meeting->id) }}" class="text-decoration-none">{{ $meeting->title }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ __('common.surveys') }}</li>
 @endsection
-@section('body')
-    <div class="card text-bg-dark">
+@section('meeting_content')
+    <div class="card bg-kongre-secondary">
         <div class="card-header">
-            <h1 class="m-0 text-center"><span class="fa-duotone fa-square-poll-horizontal fa-fade"></span> <small>"{{ $meeting->title }}"</small> {{ __('common.surveys') }}</h1>
+            <h1 class="m-0 text-center"><span class="fa-duotone fa-square-poll-horizontal fa-fade"></span> {{ __('common.surveys') }}</h1>
         </div>
         <div class="card-body p-0">
             <div class="table-responsive">
@@ -49,23 +49,23 @@
                                 <td>{{ $survey->questions->count() }}</td>
                                 <td>
                                     @if($survey->status)
-                                        <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
+                                        <i style="color:var(--kongre-success)" class="fa-regular fa-toggle-on fa-xg"></i>
                                     @else
-                                        <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
+                                        <i style="color:var(--kongre-danger)" class="fa-regular fa-toggle-off fa-xg"></i>
                                     @endif
                                 </td>
                                 <td class="text-end">
                                     <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
-                                        <a class="btn btn-info btn-sm" href="{{ route('portal.meeting.survey.show', ['meeting' =>  $meeting->id, 'survey' => $survey->id]) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
+                                        <a class="btn btn-kongre-accent btn-sm" href="{{ route('portal.meeting.survey.show', ['meeting' =>  $meeting->id, 'survey' => $survey->id]) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
                                             <span class="fa-regular fa-eye"></span>
                                         </a>
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.edit')}}">
-                                            <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#survey-edit-modal" data-route="{{ route('portal.meeting.survey.update', ['meeting' => $meeting->id, 'survey' => $survey->id]) }}" data-resource="{{ route('portal.meeting.survey.edit', ['meeting' => $meeting->id, 'survey' => $survey->id]) }}" data-id="{{ $survey->id }}">
+                                            <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="offcanvas" data-bs-target="#survey-edit-modal" data-route="{{ route('portal.meeting.survey.update', ['meeting' => $meeting->id, 'survey' => $survey->id]) }}" data-resource="{{ route('portal.meeting.survey.edit', ['meeting' => $meeting->id, 'survey' => $survey->id]) }}" data-id="{{ $survey->id }}">
                                                 <span class="fa-regular fa-pen-to-square"></span>
                                             </button>
                                         </div>
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
-                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#survey-delete-modal" data-route="{{ route('portal.meeting.survey.destroy', ['meeting' => $meeting->id, 'survey' => $survey->id]) }}" data-record="{{ $survey->title }}">
+                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="offcanvas" data-bs-target="#survey-delete-modal" data-route="{{ route('portal.meeting.survey.destroy', ['meeting' => $meeting->id, 'survey' => $survey->id]) }}" data-record="{{ $survey->title }}">
                                                 <span class="fa-regular fa-trash"></span>
                                             </button>
                                         </div>
@@ -78,7 +78,7 @@
             </div>
         </div>
         <div class="card-footer d-flex justify-content-center">
-            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#survey-create-modal" data-route="{{ route('portal.meeting.survey.store', ['meeting' => $meeting->id]) }}">
+            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="offcanvas" data-bs-target="#survey-create-modal" data-route="{{ route('portal.meeting.survey.store', ['meeting' => $meeting->id]) }}">
                 <i class="fa-solid fa-plus"></i> {{ __('common.create-new-survey') }}
             </button>
         </div>

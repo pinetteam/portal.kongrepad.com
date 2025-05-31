@@ -1,14 +1,14 @@
-@extends('layout.portal.common')
+@extends('layout.portal.meeting-detail')
 @section('title', $meeting->title . ' | ' . __('common.virtual-stands'))
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none text-white">{{ __('common.meetings') }}</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.show', $meeting->id) }}" class="text-decoration-none text-white">{{ $meeting->title }}</a></li>
-    <li class="breadcrumb-item active text-white text-decoration-underline" aria-current="page">{{ __('common.virtual-stands') }}</li>
+    <li class="breadcrumb-item"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none">{{ __('common.meetings') }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.show', $meeting->id) }}" class="text-decoration-none">{{ $meeting->title }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ __('common.virtual-stands') }}</li>
 @endsection
-@section('body')
-    <div class="card text-bg-dark">
+@section('meeting_content')
+    <div class="card bg-kongre-secondary">
         <div class="card-header">
-            <h1 class="m-0 text-center"><span class="fa-duotone fa-browser fa-fade"></span> <small>"{{ $meeting->title }}"</small> {{ __('common.virtual-stands') }}</h1>
+            <h1 class="m-0 text-center"><span class="fa-duotone fa-browser fa-fade"></span> {{ __('common.virtual-stands') }}</h1>
         </div>
         <div class="card-body p-0">
             <div class="table-responsive">
@@ -38,23 +38,23 @@
                             <td>{{ $virtual_stand->title }}</td>
                             <td>
                                 @if($virtual_stand->status)
-                                    <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
+                                    <i style="color:var(--kongre-success)" class="fa-regular fa-toggle-on fa-xg"></i>
                                 @else
-                                    <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
+                                    <i style="color:var(--kongre-danger)" class="fa-regular fa-toggle-off fa-xg"></i>
                                 @endif
                             </td>
                             <td class="text-end">
                                 <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
-                                    <a class="btn btn-info btn-sm" href="{{ route('portal.meeting.virtual-stand.show', ['meeting' => $meeting->id, 'virtual_stand' => $virtual_stand->id]) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
+                                    <a class="btn btn-kongre-accent btn-sm" href="{{ route('portal.meeting.virtual-stand.show', ['meeting' => $meeting->id, 'virtual_stand' => $virtual_stand->id]) }}" title="{{ __('common.show') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show') }}">
                                         <span class="fa-regular fa-eye"></span>
                                     </a>
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.edit') }}">
-                                        <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#virtual-stand-edit-modal" data-route="{{ route('portal.meeting.virtual-stand.update', ['meeting' => $meeting->id, 'virtual_stand' => $virtual_stand->id]) }}" data-resource="{{ route('portal.meeting.virtual-stand.edit', ['meeting' => $meeting->id, 'virtual_stand' => $virtual_stand->id]) }}" data-id="{{ $virtual_stand->id }}">
+                                        <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="offcanvas" data-bs-target="#virtual-stand-edit-modal" data-route="{{ route('portal.meeting.virtual-stand.update', ['meeting' => $meeting->id, 'virtual_stand' => $virtual_stand->id]) }}" data-resource="{{ route('portal.meeting.virtual-stand.edit', ['meeting' => $meeting->id, 'virtual_stand' => $virtual_stand->id]) }}" data-id="{{ $virtual_stand->id }}">
                                             <span class="fa-regular fa-pen-to-square"></span>
                                         </button>
                                     </div>
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
-                                        <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#virtual-stand-delete-modal" data-route="{{ route('portal.meeting.virtual-stand.destroy', ['meeting' => $meeting->id, 'virtual_stand' => $virtual_stand->id]) }}" data-record="{{ $virtual_stand->title }}">
+                                        <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="offcanvas" data-bs-target="#virtual-stand-delete-modal" data-route="{{ route('portal.meeting.virtual-stand.destroy', ['meeting' => $meeting->id, 'virtual_stand' => $virtual_stand->id]) }}" data-record="{{ $virtual_stand->title }}">
                                             <span class="fa-regular fa-trash"></span>
                                         </button>
                                     </div>
@@ -67,7 +67,7 @@
             </div>
         </div>
         <div class="card-footer d-flex justify-content-center">
-            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#virtual-stand-create-modal" data-route="{{ route('portal.meeting.virtual-stand.store', ['meeting' => $meeting->id]) }}">
+            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="offcanvas" data-bs-target="#virtual-stand-create-modal" data-route="{{ route('portal.meeting.virtual-stand.store', ['meeting' => $meeting->id]) }}">
                 <i class="fa-solid fa-plus"></i> {{ __('common.create-new-virtual-stand') }}
             </button>
         </div>

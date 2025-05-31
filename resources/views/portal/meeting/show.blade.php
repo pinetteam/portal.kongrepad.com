@@ -1,151 +1,108 @@
-@extends('layout.portal.common')
+@extends('layout.portal.meeting-detail')
 @section('title', $meeting->title . ' | ' . __('common.meeting'))
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none text-white">{{ __('common.meetings') }}</a></li>
-    <li class="breadcrumb-item active text-white text-decoration-underline" aria-current="page">{{ $meeting->title }}</li>
+    <li class="breadcrumb-item"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none">{{ __('common.meetings') }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ $meeting->title }}</li>
 @endsection
-@section('body')
-    <div class="card text-bg-dark">
+@section('meeting_content')
+    <div class="card meeting-info-banner">
         <div class="card-header">
-            <h1 class="text-center"><span class="fa-duotone fa-bee fa-fade"></span> <small>"{{ $meeting->title }}"</small> {{ __('common.meeting') }}</h1>
-            <div class="table-responsive">
-                <table class="table table-dark table-striped-columns table-bordered">
-                    <tr>
-                        @if(isset($meeting->banner_name) && isset($meeting->banner_extension))
-                            <img class="img-fluid mx-auto d-block mb-2 w-100" src="{{ asset('storage/meeting-banners/' . $meeting->banner_name . '.' . $meeting->banner_extension) }}" alt="{{ $meeting->title }}">
-                        @else
-                            <i class="text-info">{{ __('common.unspecified') }}</i>
-                        @endif
-                    </tr>
-                    <tr>
-                        <th scope="row" class="text-end w-25">{{ __('common.meeting-title') }}:</th>
-                        <td class="text-start w-25">
-                            @if($meeting->status)
-                                <i style="color:green" class="fa-regular fa-toggle-on"></i>
-                            @else
-                                <i style="color:red" class="fa-regular fa-toggle-off"></i>
-                            @endif
-                            {{ $meeting->title }}
-                        </td>
-                        <th scope="row" class="text-end w-25">{{ __('common.type') }}:</th>
-                        <td class="text-start w-25">{{ __('common.' . $meeting->type) }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="text-end w-25">{{ __('common.start-at') }}:</th>
-                        <td class="text-start w-25">{{ $meeting->start_at }}</td>
-                        <th scope="row" class="text-end w-25">{{ __('common.finish-at') }}:</th>
-                        <td class="text-start w-25">{{ $meeting->finish_at }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="text-end w-25">{{ __('common.created-by') }}:</th>
-                        <td class="text-start w-25">{{ $meeting->created_by }}</td>
-                        <th scope="row" class="text-end w-25">{{ __('common.created-at') }}:</th>
-                        <td class="text-start w-25">{{ $meeting->created_at }}</td>
-                    </tr>
-                </table>
-            </div>
+            <h1 class="text-center"><span class="fa-duotone fa-bee fa-fade"></span> {{ $meeting->title }}</h1>
         </div>
-        <div class="card-body p-0">
-            <div class="container-fluid">
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-4 gy-3 py-3">
-                    <div class="col">
-                        <div class="card text-bg-dark">
-                            <div class="card-header">
-                                <h1 class="m-0 text-center"><span class="badge text-bg-dark">1.</span> {{ __('common.preparation') }}</h1>
+        <div class="card-body">
+            <div class="row mb-4">
+                @if(isset($meeting->banner_name) && isset($meeting->banner_extension))
+                    <div class="col-12 mb-4">
+                        <img class="img-fluid rounded shadow-sm" src="{{ asset('storage/meeting-banners/' . $meeting->banner_name . '.' . $meeting->banner_extension) }}" alt="{{ $meeting->title }}">
+                    </div>
+                @endif
+                
+                <div class="col-md-6">
+                    <div class="card bg-kongre-secondary border-kongre mb-3">
+                        <div class="card-header bg-transparent border-kongre">
+                            <h5 class="m-0"><i class="fa-duotone fa-circle-info me-2 text-kongre-light"></i>{{ __('common.meeting_info') }}</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label class="text-label">{{ __('common.meeting-title') }}:</label>
+                                <div class="text-value">
+                                    @if($meeting->status)
+                                        <i style="color:var(--kongre-success)" class="fa-regular fa-toggle-on me-2"></i>
+                                    @else
+                                        <i style="color:var(--kongre-danger)" class="fa-regular fa-toggle-off me-2"></i>
+                                    @endif
+                                    {{ $meeting->title }}
+                                </div>
                             </div>
-                            <div class="card-body">
-                                <a class="btn btn-outline-light btn-lg w-100" href="{{ route('portal.meeting.document.index', ['meeting' => $meeting->id]) }}" title="{{ __('common.show') }}">
-                                    <span class="fa-duotone fa-folder-open"></span> {{ __('common.documents') }}
-                                </a>
-                                <hr />
-                                <a class="btn btn-outline-light btn-lg w-100" href="{{ route('portal.meeting.participant.index', ['meeting' => $meeting->id]) }}" title="{{ __('common.show') }}">
-                                    <span class="fa-duotone fa-screen-users"></span> {{ __('common.participants') }}
-                                </a>
+                            <div class="mb-3">
+                                <label class="text-label">{{ __('common.type') }}:</label>
+                                <div class="text-value">{{ __('common.' . $meeting->type) }}</div>
                             </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="card text-bg-dark">
-                            <div class="card-header">
-                                <h1 class="m-0 text-center"><span class="badge text-bg-dark">2.</span> {{ __('common.event-and-activity') }}</h1>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="card bg-kongre-secondary border-kongre mb-3">
+                        <div class="card-header bg-transparent border-kongre">
+                            <h5 class="m-0"><i class="fa-duotone fa-calendar-days me-2 text-kongre-light"></i>{{ __('common.schedule') }}</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label class="text-label">{{ __('common.start-at') }}:</label>
+                                <div class="text-value">{{ $meeting->start_at }}</div>
                             </div>
-                            <div class="card-body">
-                                <a class="btn btn-outline-light btn-lg w-100" href="{{ route('portal.meeting.announcement.index', ['meeting' => $meeting->id]) }}" title="{{ __('common.show') }}">
-                                    <span class="fa-duotone fa-megaphone"></span> {{ __('common.announcements') }}
-                                </a>
-                                <hr />
-                                <a class="btn btn-outline-light btn-lg w-100" href="{{ route('portal.meeting.score-game.index', ['meeting' => $meeting->id]) }}" title="{{ __('common.show') }}">
-                                    <span class="fa-duotone fa-hundred-points"></span>
-                                    {{ __('common.score-games') }}
-                                </a>
-                                <hr />
-                                <a class="btn btn-outline-light btn-lg w-100" href="{{ route('portal.meeting.survey.index', ['meeting' => $meeting->id]) }}" title="{{ __('common.show') }}">
-                                    <span class="fa-duotone fa-square-poll-horizontal"></span> {{ __('common.surveys') }}
-                                </a>
+                            <div class="mb-3">
+                                <label class="text-label">{{ __('common.finish-at') }}:</label>
+                                <div class="text-value">{{ $meeting->finish_at }}</div>
                             </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="card text-bg-dark">
-                            <div class="card-header">
-                                <h1 class="m-0 text-center"><span class="badge text-bg-dark">3.</span> {{ __('common.environment') }}</h1>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="card bg-kongre-secondary border-kongre">
+                        <div class="card-header bg-transparent border-kongre">
+                            <h5 class="m-0"><i class="fa-duotone fa-user-gear me-2 text-kongre-light"></i>{{ __('common.creation_details') }}</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label class="text-label">{{ __('common.created-by') }}:</label>
+                                <div class="text-value">{{ $meeting->created_by }}</div>
                             </div>
-                            <div class="card-body">
-                                <a class="btn btn-outline-light btn-lg w-100" href="{{ route('portal.meeting.hall.index', ['meeting' => $meeting->id]) }}" title="{{ __('common.show') }}">
-                                    <span class="fa-duotone fa-hotel"></span> {{ __('common.halls') }}
-                                </a>
-                                <hr />
-                                <a class="btn btn-outline-light btn-lg w-100" href="{{ route('portal.meeting.virtual-stand.index', ['meeting' => $meeting->id]) }}" title="{{ __('common.show') }}">
-                                    <span class="fa-duotone fa-browser"></span> {{ __('common.virtual-stands') }}
-                                </a>
+                            <div class="mb-3">
+                                <label class="text-label">{{ __('common.created-at') }}:</label>
+                                <div class="text-value">{{ $meeting->created_at }}</div>
                             </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="card text-bg-dark">
-                            <div class="card-header">
-                                <h1 class="m-0 text-center"><span class="badge text-bg-dark">4.</span> {{ __('common.reports') }}</h1>
-                            </div>
-                            <div class="card-body">
-                                <a class="btn btn-outline-light btn-lg w-100" href="{{ route("portal.meeting.report.attendance.index", ['meeting' => $meeting->id]) }}">
-                                    <span class="nav-icon fa-duotone fa-chart-user fa-fade"></span>
-                                    {{ __('common.attendance-reports') }}
-                                </a>
-                                <hr />
-                                <a class="btn btn-outline-light btn-lg w-100" href="{{ route("portal.meeting.log.participant.index", ['meeting' => $meeting->id]) }}">
-                                    <span class="nav-icon fa-duotone fa-chart-user fa-fade"></span>
-                                    {{ __('common.participant-logs') }}
-                                </a>
-                                <hr />
-                                <a class="btn btn-outline-light btn-lg w-100" href="{{ route("portal.meeting.report.registration.index", ['meeting' => $meeting->id]) }}">
-                                    <span class="nav-icon fa-duotone fa-chart-user fa-fade"></span>
-                                    {{ __('common.registration-reports') }}
-                                </a>
-                                <hr />
-                                <a class="btn btn-outline-light btn-lg w-100" href="{{ route("portal.meeting.report.survey.index", ['meeting' => $meeting->id]) }}">
-                                    <span class="nav-icon fa-duotone fa-option fa-fade"></span>
-                                    {{ __('common.survey-reports') }}
-                                </a>
-                                <hr />
-                                <a class="btn btn-outline-light btn-lg w-100" href="{{ route("portal.meeting.report.keypad.index", ['meeting' => $meeting->id]) }}">
-                                    <span class="nav-icon fa-duotone fa-chart-pie fa-fade"></span>
-                                    {{ __('common.keypad-reports') }}
-                                </a>
-                                <hr />
-                                <a class="btn btn-outline-light btn-lg w-100" href="{{ route("portal.meeting.report.debate.index", ['meeting' => $meeting->id]) }}">
-                                    <span class="nav-icon fa-duotone fa-podium-star fa-fade"></span>
-                                    {{ __('common.debate-reports') }}
-                                </a>
-                                <hr />
-                                <a class="btn btn-outline-light btn-lg w-100" href="{{ route("portal.meeting.report.score-game.index", ['meeting' => $meeting->id]) }}">
-                                    <span class="nav-icon fa-duotone fa-hundred-points fa-fade"></span>
-                                    {{ __('common.score-game-reports') }}
-                                </a>
-                                <hr />
-                                <a class="btn btn-outline-light btn-lg w-100" href="{{ route("portal.meeting.report.question.index", ['meeting' => $meeting->id]) }}">
-                                    <span class="nav-icon fa-duotone fa-question fa-fade"></span>
-                                    {{ __('common.question-reports') }}
-                                </a>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="card bg-kongre-secondary border-kongre">
+                        <div class="card-header bg-transparent border-kongre">
+                            <h5 class="m-0"><i class="fa-duotone fa-chart-simple me-2 text-kongre-light"></i>{{ __('common.statistics') }}</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row text-center">
+                                <div class="col-4">
+                                    <div class="border-end border-kongre">
+                                        <div class="stats-value">{{$meeting->participants->count()}}</div>
+                                        <div class="stats-label">{{ __('common.participants') }}</div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="border-end border-kongre">
+                                        <div class="stats-value">{{$meeting->halls->count()}}</div>
+                                        <div class="stats-label">{{ __('common.halls') }}</div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div>
+                                        <div class="stats-value">{{$meeting->documents->count()}}</div>
+                                        <div class="stats-label">{{ __('common.documents') }}</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -1,39 +1,37 @@
 @props(['name' => 'default'])
-<div class="modal fade" id="{{ $name }}-create-modal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="#{{ $name }}-create-modal-label" aria-hidden="true" data-bs-focus="false">
-    <div class="modal-dialog modal-xl modal-dialog-centered">
-        <div class="modal-content bg-dark">
-            <form method="POST" action="" name="{{ $name }}-create-form" id="{{ $name }}-create-form" enctype="multipart/form-data" autocomplete="nope">
-                @csrf
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="{{ $name }}-create-modal-label">{{ __('common.create') }}</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container-fluid">
-                        <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-3 justify-content-center">
-                            @yield($name.'-create-form')
-                        </div>
+<div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="{{ $name }}-create-modal" aria-labelledby="{{ $name }}-create-modal-label">
+    <div class="offcanvas-header bg-kongre-primary text-white">
+        <h5 class="offcanvas-title" id="{{ $name }}-create-modal-label">{{ __('common.create') }}</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body bg-kongre-secondary text-white">
+        <form method="POST" action="" name="{{ $name }}-create-form" id="{{ $name }}-create-form" enctype="multipart/form-data" autocomplete="nope" class="h-100 d-flex flex-column">
+            @csrf
+            <div class="flex-grow-1 overflow-auto">
+                <div class="container-fluid">
+                    <div class="row row-cols-1 justify-content-center">
+                        @yield($name.'-create-form')
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <div class="btn-group w-100" role="group" aria-label="{{ __('common.processes') }}">
-                        <button type="button" class="btn btn-danger w-25" data-bs-dismiss="modal">{{__('common.close')}}</button>
-                        <button type="submit" class="btn btn-success w-75" id="{{ $name }}-create-form-submit">{{ __('common.create') }}</button>
-                    </div>
+            </div>
+            <div class="mt-3 pt-3 border-top border-dark">
+                <div class="btn-group w-100" role="group" aria-label="{{ __('common.processes') }}">
+                    <button type="button" class="btn btn-danger w-25" data-bs-dismiss="offcanvas">{{__('common.close')}}</button>
+                    <button type="submit" class="btn btn-success w-75" id="{{ $name }}-create-form-submit">{{ __('common.create') }}</button>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 </div>
 <script type="module">
     const createModal = document.getElementById('{{ $name }}-create-modal');
-    createModal.addEventListener('show.bs.modal', event => {
+    createModal.addEventListener('show.bs.offcanvas', event => {
         const button = event.relatedTarget;
         if(button) {
             document.getElementById('{{ $name }}-create-form').action = button.getAttribute('data-route');
         }
     });
-    createModal.addEventListener('hide.bs.modal', event => {
+    createModal.addEventListener('hide.bs.offcanvas', event => {
         const formControl = document.querySelectorAll('.form-control');
         const invalidFeedback = document.querySelectorAll('.invalid-feedback');
         invalidFeedback.forEach(element => {
@@ -44,18 +42,11 @@
             element.value = null;
         });
     });
-    const createFormSubmit = document.getElementById('{{ $name }}-create-form-submit');
-    createFormSubmit.addEventListener('click', function() {
-        createFormSubmit.disabled = true;
-        createFormSubmit.innerHTML = '<div class="spinner-border spinner-border-sm" role="status"></div> {{ __('common.creating') }}';
-        document.getElementById('{{ $name }}-create-form').submit();
-        document.getElementById("kp-loading").style.visibility = "visible";
-    });
 </script>
 @if($errors->any() && session('method') && session('name') == $name)
     @if(session('method')=='POST')
         <script type="module">
-            new bootstrap.Modal('#{{ $name }}-create-modal', {}).show();
+            new bootstrap.Offcanvas('#{{ $name }}-create-modal', {}).show();
             document.getElementById('{{ $name }}-create-form').action = '{{ session('route') }}';
         </script>
     @endif

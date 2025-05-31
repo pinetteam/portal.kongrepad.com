@@ -89,17 +89,17 @@
                                 <td class="text-end">
                                     <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.show-qr-code') }}">
-                                            <button class="btn btn-outline-success btn-sm" title="{{ __('common.show-qr-code') }}" data-bs-toggle="modal" data-bs-target="#show-qr-code-modal" data-resource="{{ route('portal.meeting.score-game.qr-code.qr-code', ['meeting' => $meeting->id, 'score_game' => $score_game->id, 'qr_code' => $qr_code->id]) }}" data-id="{{ $qr_code->id }}">
+                                            <button class="btn btn-outline-success btn-sm" title="{{ __('common.show-qr-code') }}" data-bs-toggle="offcanvas" data-bs-target="#show-qr-code-modal" data-resource="{{ route('portal.meeting.score-game.qr-code.qr-code', ['meeting' => $meeting->id, 'score_game' => $score_game->id, 'qr_code' => $qr_code->id]) }}" data-id="{{ $qr_code->id }}">
                                                 <span class="fa-regular fa-qrcode"></span>
                                             </button>
                                         </div>
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.edit') }}">
-                                            <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#qr-code-edit-modal" data-route="{{ route('portal.meeting.score-game.qr-code.update', ['meeting' => $meeting->id, 'score_game' => $score_game->id, 'qr_code' =>$qr_code->id]) }}" data-resource="{{ route('portal.meeting.score-game.qr-code.edit', ['meeting' => $meeting->id, 'score_game' => $score_game->id, 'qr_code' =>$qr_code->id]) }}" data-id="{{ $qr_code->id }}">
+                                            <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="offcanvas" data-bs-target="#qr-code-edit-modal" data-route="{{ route('portal.meeting.score-game.qr-code.update', ['meeting' => $meeting->id, 'score_game' => $score_game->id, 'qr_code' =>$qr_code->id]) }}" data-resource="{{ route('portal.meeting.score-game.qr-code.edit', ['meeting' => $meeting->id, 'score_game' => $score_game->id, 'qr_code' =>$qr_code->id]) }}" data-id="{{ $qr_code->id }}">
                                                 <span class="fa-regular fa-pen-to-square"></span>
                                             </button>
                                         </div>
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
-                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#qr-code-delete-modal" data-route="{{ route('portal.meeting.score-game.qr-code.destroy', ['meeting' => $meeting->id, 'score_game' => $score_game->id, 'qr_code' =>$qr_code->id]) }}" data-record="{{ $qr_code->title }}">
+                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="offcanvas" data-bs-target="#qr-code-delete-modal" data-route="{{ route('portal.meeting.score-game.qr-code.destroy', ['meeting' => $meeting->id, 'score_game' => $score_game->id, 'qr_code' =>$qr_code->id]) }}" data-record="{{ $qr_code->title }}">
                                                 <span class="fa-regular fa-trash"></span>
                                             </button>
                                         </div>
@@ -112,7 +112,7 @@
             </div>
         </div>
         <div class="card-footer d-flex justify-content-center">
-            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#qr-code-create-modal" data-route="{{ route('portal.meeting.score-game.qr-code.store', ['meeting' => $meeting->id, 'score_game' => $score_game->id]) }}">
+            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="offcanvas" data-bs-target="#qr-code-create-modal" data-route="{{ route('portal.meeting.score-game.qr-code.store', ['meeting' => $meeting->id, 'score_game' => $score_game->id]) }}">
                 <i class="fa-solid fa-plus"></i> {{ __('common.add-new-qr-code') }}
             </button>
         </div>

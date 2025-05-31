@@ -434,4 +434,11 @@ return [
     'you-will-be-informed-via-sms-as-soon-as-possible' => 'En kısa sürede sms ile bilgilendirileceksiniz!',
     'your-account-has-been-locked' => 'Hesabın kilitlendi!',
     'your-credentials-do-not-match' => 'Kimlik bilgileriniz eşleşmiyor!',
+    'meeting_info' => 'Toplantı Bilgileri',
+    'overview' => 'Genel Bakış',
+    'schedule' => 'Zaman Çizelgesi',
+    'creation_details' => 'Oluşturma Detayları',
+    'created_at' => 'Oluşturulma Tarihi',
+    'view_details' => 'Detayları Görüntüle',
+    'manage_meeting' => 'Toplantıyı Yönet',
 ];

@@ -27,33 +27,44 @@ class DocumentController extends Controller
         ];
         return view('portal.meeting.document.index', compact(['meeting', 'documents', 'sharing_via_emails', 'statuses']));
     }
-    public function store(DocumentRequest $request, int $meeting)
+    public function store(DocumentRequest $request, Meeting $meeting)
     {
         if ($request->validated()) {
-            $document = new Document();
-            $document->meeting_id = $meeting;
-            if ($request->hasFile('file')) {
-                $file = $request->file('file');
-                $file_name = Str::uuid()->toString();
-                $file_extension = $file->getClientOriginalExtension();
-                if(Storage::putFileAs('public/documents', $request->file('file'), $file_name.'.'.$file_extension)) {
-                    $document->file_name = $file_name;
-                    $document->file_extension = $file_extension;
-                    $document->file_size = $request->file('file')->getSize();
-                } else {
-                    return back()->with('create_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
-                }
-            }
+            $document = new Document;
+            $document->meeting_id = $request->meeting_id;
             $document->title = $request->input('title');
-            $document->allowed_to_review = $request->input('allowed_to_review');
+            if ($request->hasFile('file')) {
+                $file_name = $meeting->id . '-' . time() . '.' . $request->file('file')->extension();
+                $file_path = $request->file('file')->storeAs('meetings/' . $meeting->id . '/documents', $file_name, 'public');
+                $document->file_name = $file_name;
+                $document->file_path = $file_path;
+            }
             $document->sharing_via_email = $request->input('sharing_via_email');
+            $document->allowed_to_review = $request->input('allowed_to_review');
             $document->status = $request->input('status');
+            $document->created_by = Auth::user()->id;
+
             if ($document->save()) {
-                $document->created_by = Auth::user()->id;
-                $document->save();
-                return back()->with('success', __('common.created-successfully'));
+                // AJAX yanıtı
+                if ($request->ajax()) {
+                    return response()->json([
+                        'success' => true,
+                        'message' => __('common.created-successfully'),
+                        'document' => $document
+                    ]);
+                }
+                
+                // Normal yanıt
+                return redirect()->back()->with('success', __('common.created-successfully'));
             } else {
-                return back()->with('create_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
+                if ($request->ajax()) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => __('common.a-system-error-has-occurred')
+                    ]);
+                }
+                
+                return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();
             }
         }
     }
@@ -69,45 +80,78 @@ class DocumentController extends Controller
         $document = $meeting->documents()->findOrFail($id);
         return new DocumentResource($document);
     }
-    public function update(DocumentRequest $request, int $meeting, int $id)
+    public function update(DocumentRequest $request, Meeting $meeting, Document $document)
     {
         if ($request->validated()) {
-            $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
-            $document = $meeting->documents()->findOrFail($id);
-            if ($request->hasFile('file')) {
-                $file = $request->file('file');
-                $file_name = $document->file_name;
-                $file_extension = $file->getClientOriginalExtension();
-                if (Storage::putFileAs('public/documents', $request->file('file'), $file_name.'.'.$file_extension)) {
-                    $document->file_name = $file_name;
-                    $document->file_extension = $file_extension;
-                    $document->file_size = $request->file('file')->getSize();
-                } else {
-                    return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
-                }
-            }
             $document->title = $request->input('title');
-            $document->allowed_to_review = $request->input('allowed_to_review');
+            
+            if ($request->hasFile('file')) {
+                // Eski dosya varsa sil
+                if ($document->file_path && Storage::disk('public')->exists($document->file_path)) {
+                    Storage::disk('public')->delete($document->file_path);
+                }
+                
+                // Yeni dosyayı yükle
+                $file_name = $meeting->id . '-' . time() . '.' . $request->file('file')->extension();
+                $file_path = $request->file('file')->storeAs('meetings/' . $meeting->id . '/documents', $file_name, 'public');
+                $document->file_name = $file_name;
+                $document->file_path = $file_path;
+            }
+            
             $document->sharing_via_email = $request->input('sharing_via_email');
+            $document->allowed_to_review = $request->input('allowed_to_review');
             $document->status = $request->input('status');
+            $document->updated_by = Auth::user()->id;
+
             if ($document->save()) {
-                $document->updated_by = Auth::user()->id;
-                $document->save();
-                return back()->with('success',__('common.edited-successfully'));
+                // AJAX yanıtı
+                if ($request->ajax()) {
+                    return response()->json([
+                        'success' => true,
+                        'message' => __('common.edited-successfully'),
+                        'document' => $document
+                    ]);
+                }
+                
+                // Normal yanıt
+                return redirect()->back()->with('success', __('common.edited-successfully'));
             } else {
-                return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
+                if ($request->ajax()) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => __('common.a-system-error-has-occurred')
+                    ]);
+                }
+                
+                return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();
             }
         }
     }
-    public function destroy(int $meeting, int $id)
+    public function destroy(Meeting $meeting, Document $document)
     {
-        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
-        $document = $meeting->documents()->findOrFail($id);
         if ($document->delete()) {
             $document->deleted_by = Auth::user()->id;
             $document->save();
-            return back()->with('success', __('common.deleted-successfully'));
+            
+            // AJAX yanıtı
+            if (request()->ajax()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => __('common.deleted-successfully'),
+                    'deletedItemId' => 'document-row-' . $document->id
+                ]);
+            }
+            
+            // Normal yanıt
+            return redirect()->back()->with('success', __('common.deleted-successfully'));
         } else {
+            if (request()->ajax()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => __('common.a-system-error-has-occurred')
+                ]);
+            }
+            
             return back()->with('error', __('common.a-system-error-has-occurred'))->withInput();
         }
     }

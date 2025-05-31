@@ -9,6 +9,107 @@
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
     @vite(['resources/sass/app.scss'])
     @vite(['resources/js/app.js'])
+    <style>
+        :root {
+            --kongre-primary: #2c3e50;
+            --kongre-secondary: #34495e;
+            --kongre-accent: #3498db;
+            --kongre-accent-hover: #2980b9;
+            --kongre-light: #ecf0f1;
+            --kongre-dark: #1a2530;
+            --kongre-success: #27ae60;
+            --kongre-danger: #e74c3c;
+            --kongre-warning: #f39c12;
+            --kongre-info: #3498db;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+        }
+        
+        .bg-kongre-primary {
+            background-color: var(--kongre-primary) !important;
+        }
+        
+        .bg-kongre-secondary {
+            background-color: var(--kongre-secondary) !important;
+        }
+        
+        .bg-kongre-dark {
+            background-color: var(--kongre-dark) !important;
+        }
+        
+        .text-kongre-light {
+            color: var(--kongre-light) !important;
+        }
+        
+        .border-kongre {
+            border-color: rgba(255, 255, 255, 0.15) !important;
+        }
+        
+        .btn-kongre-accent {
+            background-color: var(--kongre-accent);
+            border-color: var(--kongre-accent);
+            color: white;
+        }
+        
+        .btn-kongre-accent:hover {
+            background-color: var(--kongre-accent-hover);
+            border-color: var(--kongre-accent-hover);
+            color: white;
+        }
+        
+        .stats-card {
+            background-color: var(--kongre-secondary);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stats-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .stats-label {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .card {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        
+        .card-header {
+            background-color: rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            color: white !important;
+        }
+        
+        .card-header i, 
+        .card-header span, 
+        .card-header .fa-duotone, 
+        .card-header .fa-fade {
+            color: white !important;
+        }
+        
+        .card-header h1, 
+        .card-header h2, 
+        .card-header h3, 
+        .card-header h4, 
+        .card-header h5, 
+        .card-header h6,
+        .card-header a,
+        .card-header * {
+            color: white !important;
+        }
+    </style>
 </head>
 <body class="d-flex flex-column h-100">
 <div id="kp-loading" class="d-flex align-items-center justify-content-center">
@@ -24,6 +125,9 @@
             {{ config('app.name') }}
         @endif
     </a>
+    <button id="toggle-main-menu" class="btn btn-sm btn-link text-light d-none d-md-block" title="{{ __('common.toggle_menu') }}">
+        <i class="fa-duotone fa-bars-staggered"></i>
+    </button>
     <div class="w-100">
         @yield('search_bar')
     </div>
@@ -53,7 +157,7 @@
                         {{ __('common.dashboard') }}
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item d-none">
                     <a class="nav-link" aria-current="page" href="{{ route("portal.meeting.index") }}">
                         <span class="nav-icon fa-duotone fa-bee fa-fade"></span>
                         {{ __('common.meetings') }}
@@ -99,12 +203,7 @@
             </form>
         </nav>
         <main class="col-md-9 col-lg-10 ms-sm-auto px-md-4 flex-shrink-0" id="kp-main">
-            <nav style="--bs-breadcrumb-divider: '/'; --bs-breadcrumb-divider-color: white ;" aria-label="breadcrumb" class="bg-dark p-2">
-                <ol class="breadcrumb m-3 text-white">
-                    <li class="breadcrumb-item"><a href="{{ route("portal.dashboard.index") }}" class=""><span class="nav-icon fa-duotone fa-house text-white"></span></a></li>
-                    @yield('breadcrumb')
-                </ol>
-            </nav>
+           
             @yield('body')
         </main>
     </div>
@@ -112,10 +211,54 @@
 <x-common.popup.default />
 @yield('footer')
 <script>
-    document.querySelectorAll(".nav-link").forEach((link) => {
-        if (link.href == window.location.href) {
-            link.classList.add("active")
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll(".nav-link").forEach((link) => {
+            if (link.href == window.location.href) {
+                link.classList.add("active");
+            }
+        });
+        
+        // Tüm kart başlıklarını ve içindeki öğeleri beyaz yapın
+        document.querySelectorAll('.card-header').forEach(header => {
+            header.style.color = 'white';
+            header.querySelectorAll('h1, h2, h3, h4, h5, h6, span, i, a').forEach(element => {
+                element.style.color = 'white';
+            });
+        });
+        
+        // Toggle main menu functionality
+        const toggleMainMenuBtn = document.getElementById('toggle-main-menu');
+        const mainMenu = document.getElementById('kp-menu');
+        const mainContent = document.getElementById('kp-main');
+        
+        // Check if menu state is stored in localStorage
+        const menuHidden = localStorage.getItem('kp_main_menu_hidden') === 'true';
+        
+        // Apply initial state
+        if (menuHidden) {
+            mainMenu.classList.add('d-none');
+            mainMenu.classList.remove('d-md-block');
+            mainContent.classList.add('col-md-12');
+            mainContent.classList.remove('col-md-9', 'col-lg-10', 'ms-sm-auto');
         }
+        
+        toggleMainMenuBtn.addEventListener('click', function() {
+            if (mainMenu.classList.contains('d-none')) {
+                // Show menu
+                mainMenu.classList.remove('d-none');
+                mainMenu.classList.add('d-md-block');
+                mainContent.classList.remove('col-md-12');
+                mainContent.classList.add('col-md-9', 'col-lg-10', 'ms-sm-auto');
+                localStorage.setItem('kp_main_menu_hidden', 'false');
+            } else {
+                // Hide menu
+                mainMenu.classList.add('d-none');
+                mainMenu.classList.remove('d-md-block');
+                mainContent.classList.add('col-md-12');
+                mainContent.classList.remove('col-md-9', 'col-lg-10', 'ms-sm-auto');
+                localStorage.setItem('kp_main_menu_hidden', 'true');
+            }
+        });
     });
 </script>
 </body>

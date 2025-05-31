@@ -44,12 +44,12 @@
                                             <span class="fa-regular fa-eye"></span>
                                         </a>
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.edit') }}">
-                                            <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#user-role-edit-modal" data-route="{{ route('portal.user-role.update', $user_role->id) }}" data-resource="{{ route('portal.user-role.edit', $user_role->id) }}" data-id="{{ $user_role->id }}">
+                                            <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="offcanvas" data-bs-target="#user-role-edit-modal" data-route="{{ route('portal.user-role.update', $user_role->id) }}" data-resource="{{ route('portal.user-role.edit', $user_role->id) }}" data-id="{{ $user_role->id }}">
                                                 <span class="fa-regular fa-pen-to-square"></span>
                                             </button>
                                         </div>
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
-                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="modal" data-bs-target="#user-role-delete-modal" data-route="{{ route('portal.user-role.destroy', $user_role->id) }}" data-record="{{ $user_role->title}}">
+                                            <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="offcanvas" data-bs-target="#user-role-delete-modal" data-route="{{ route('portal.user-role.destroy', $user_role->id) }}" data-record="{{ $user_role->title}}">
                                                 <span class="fa-regular fa-trash"></span>
                                             </button>
                                         </div>
@@ -62,7 +62,7 @@
             </div>
         </div>
         <div class="card-footer d-flex justify-content-center">
-            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#user-role-create-modal" data-route="{{ route('portal.user-role.store') }}">
+            <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="offcanvas" data-bs-target="#user-role-create-modal" data-route="{{ route('portal.user-role.store') }}">
                 <i class="fa-solid fa-plus"></i> {{ __('common.create-new-user-role') }}
             </button>
         </div>

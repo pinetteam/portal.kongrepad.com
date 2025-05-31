@@ -70,7 +70,7 @@
                                         <td>{{ $setting->value }}</td>
                                         <td class="text-end">
                                             <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.edit') }}">
-                                                <button class="btn btn-warning btn-sm w-100" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#edit-modal-{{ $setting->variable }}" data-id="{{ $setting->variable }}">
+                                                <button class="btn btn-warning btn-sm w-100" title="{{ __('common.edit') }}" data-bs-toggle="offcanvas" data-bs-target="#edit-modal-{{ $setting->variable }}" data-id="{{ $setting->variable }}">
                                                     <span class="fa-regular fa-pen-to-square"></span>
                                                 </button>
                                             </div>

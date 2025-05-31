@@ -18,7 +18,7 @@
         <span class="fa-regular fa-eye"></span> {{__('common.resend-sms')}}
     </a>
     <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.edit') }}">
-        <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="modal" data-bs-target="#user-edit-modal" data-route="{{ route('portal.phone.update') }}" data-resource="{{ route('portal.user.get-phone', \Illuminate\Support\Facades\Auth::user()->id) }}" data-id="{{ \Illuminate\Support\Facades\Auth::user()->id }}">
+        <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="offcanvas" data-bs-target="#user-edit-modal" data-route="{{ route('portal.phone.update') }}" data-resource="{{ route('portal.user.get-phone', \Illuminate\Support\Facades\Auth::user()->id) }}" data-id="{{ \Illuminate\Support\Facades\Auth::user()->id }}">
             <span class="fa-regular fa-pen-to-square"></span> {{__('common.edit-phone-number')}}
         </button>
     </div>
