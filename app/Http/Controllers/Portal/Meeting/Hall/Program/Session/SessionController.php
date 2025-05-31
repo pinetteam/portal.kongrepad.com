@@ -43,7 +43,8 @@ class SessionController extends Controller
     public function show(int $meeting, int $hall, int $program, int $id)
     {
         $session = Auth::user()->customer->programSessions()->findOrFail($id);
-        return view('portal.meeting.hall.program.session.show', compact(['session']));
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        return view('portal.meeting.hall.program.session.show', compact(['session', 'meeting']));
     }
     public function edit(int $meeting, int $hall, int $program, int $id)
     {

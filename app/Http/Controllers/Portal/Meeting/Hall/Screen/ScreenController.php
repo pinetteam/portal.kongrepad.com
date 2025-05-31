@@ -16,6 +16,7 @@ class ScreenController extends Controller
     public function index(int $meeting, int $hall)
     {
         $hall = Auth::user()->customer->halls()->findOrFail($hall);
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
         $screens = $hall->screens()->paginate(10);
         $types = [
             'chair' => ['value' => 'chair', 'title' => __('common.chair')],
@@ -37,7 +38,7 @@ class ScreenController extends Controller
             'passive' => ['value' => 0, 'title' => __('common.passive'), 'color' => 'danger'],
             'active' => ['value' => 1, 'title' => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.meeting.hall.screen.index', compact(['hall', 'fonts', 'screens', 'types', 'statuses']));
+        return view('portal.meeting.hall.screen.index', compact(['hall', 'meeting', 'fonts', 'screens', 'types', 'statuses']));
     }
     public function store(ScreenRequest $request, int $meeting, int $hall)
     {
@@ -80,8 +81,9 @@ class ScreenController extends Controller
     public function show(int $meeting, int $hall, int $id)
     {
         $hall = Auth::user()->customer->halls()->findOrFail($hall);
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
         $screen = $hall->screens()->findOrFail($id);
-        return view('portal.meeting.hall.screen.show', compact(['screen']));
+        return view('portal.meeting.hall.screen.show', compact(['screen', 'hall', 'meeting']));
     }
     public function edit(int $meeting, int $hall, int $id)
     {

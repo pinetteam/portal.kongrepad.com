@@ -37,7 +37,7 @@ class ProgramController extends Controller
             'passive' => ['value' => 0, 'title' => __('common.passive'), 'color' => 'danger'],
             'active' => ['value' => 1, 'title' => __('common.active'), 'color' => 'success'],
         ];
-        return view('portal.meeting.hall.program.index', compact(['programs', 'hall', 'types', 'statuses', 'speakers', 'documents', 'questions', 'questions_auto_start']));
+        return view('portal.meeting.hall.program.index', compact(['programs', 'hall', 'meeting', 'types', 'statuses', 'speakers', 'documents', 'questions', 'questions_auto_start']));
     }
     public function store(ProgramRequest $request, int $meeting, int $hall)
     {
@@ -99,7 +99,7 @@ class ProgramController extends Controller
                 'chair' => ['value' => 'chair', 'title' => __('common.chair')],
                 'moderator' => ['value' => 'moderator', 'title' => __('common.moderator')],
             ];
-            return view('portal.meeting.hall.program.show-session', compact(['documents', 'chairs', 'chair_types', 'speakers', 'program', 'program_chairs', 'program_sessions', 'questions', 'questions_auto_start', 'statuses']));
+            return view('portal.meeting.hall.program.show-session', compact(['meeting', 'documents', 'chairs', 'chair_types', 'speakers', 'program', 'program_chairs', 'program_sessions', 'questions', 'questions_auto_start', 'statuses']));
         } else if($program->type == 'debate') {
             $debates = $program->debates()->get();
             $chairs = $meeting->participants()->whereNotIn('meeting_participants.id', $program->programChairs()->pluck('meeting_hall_program_chairs.chair_id'))->whereNot('meeting_participants.type', 'team')->get();
@@ -108,9 +108,9 @@ class ProgramController extends Controller
                 'chair' => ['value' => 'chair', 'title' => __('common.chair')],
                 'moderator' => ['value' => 'moderator', 'title' => __('common.moderator')],
             ];
-            return view('portal.meeting.hall.program.show-debate', compact(['program', 'chair_types', 'program_chairs', 'chairs', 'debates', 'statuses']));
+            return view('portal.meeting.hall.program.show-debate', compact(['meeting', 'program', 'chair_types', 'program_chairs', 'chairs', 'debates', 'statuses']));
         } else if($program->type == 'other') {
-            return view('portal.meeting.hall.program.show-other', compact(['program', 'statuses']));
+            return view('portal.meeting.hall.program.show-other', compact(['meeting', 'program', 'statuses']));
         }
     }
     public function edit(int $meeting, int $hall, int $id)

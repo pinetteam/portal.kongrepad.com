@@ -10,8 +10,9 @@ class SessionController extends Controller
     public function index(int $meeting, int $hall)
     {
         $hall = Auth::user()->customer->halls()->findOrFail($hall);
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
         $programs = $hall->programs()->orderBy('sort_order', 'ASC')->orderBy('start_at', 'ASC')->get();
-        return view('portal.meeting.hall.report.session.index', compact(['programs', 'hall']));
+        return view('portal.meeting.hall.report.session.index', compact(['programs', 'hall', 'meeting']));
     }
 
 

@@ -10,7 +10,8 @@ class QuestionController extends Controller
     public function index(int $meeting, int $hall, int $session)
     {
         $session = Auth::user()->customer->programSessions()->findOrFail($session);
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
         $questions = $session->questions()->orderBy('created_at', 'ASC')->paginate(10);
-        return view('portal.meeting.hall.report.session.question.index', compact(['session', 'questions']));
+        return view('portal.meeting.hall.report.session.question.index', compact(['session', 'questions', 'meeting']));
     }
 }
