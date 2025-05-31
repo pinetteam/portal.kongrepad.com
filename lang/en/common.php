@@ -443,4 +443,5 @@ return [
     'created_at' => 'Created At',
     'view_details' => 'View Details',
     'manage_meeting' => 'Manage Meeting',
+    'keypad-is-not-active' => 'Keypad is not active! The voting must be active to resend.',
 ];

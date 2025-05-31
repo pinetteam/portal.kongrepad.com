@@ -45,7 +45,8 @@ class TeamController extends Controller
     public function show(int $meeting, int $hall, int $program, int $debate, int $id)
     {
         $team = Auth::user()->customer->teams()->findOrFail($id);
-        return view('portal.meeting.hall.program.debate.team.show', compact(['team']));
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        return view('portal.meeting.hall.program.debate.team.show', compact(['team', 'meeting']));
     }
     public function edit(int $meeting, int $hall, int $program, int $debate, int $id)
     {

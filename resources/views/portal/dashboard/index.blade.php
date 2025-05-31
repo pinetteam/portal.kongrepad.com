@@ -11,7 +11,7 @@
         </div>
 
         @if(isset($meetings) && $meetings->count() > 0)
-            @foreach($meetings as $meeting)
+                    @foreach($meetings as $meeting)
                 <div class="card bg-kongre-secondary shadow-sm mb-4">
                     <div class="card-header bg-kongre-primary d-flex justify-content-between align-items-center py-3">
                         <h3 class="m-0 text-white">
@@ -20,7 +20,7 @@
                         <a href="{{ route('portal.meeting.show', $meeting->id) }}" class="btn btn-kongre-accent btn-sm">
                             <i class="fa-regular fa-eye me-1"></i> {{ __('common.view_details') }}
                         </a>
-                    </div>
+                        </div>
                     <div class="card-body p-4">
                         <div class="row g-4">
                             <!-- Meeting Stats -->
@@ -33,9 +33,9 @@
                                                 <div class="d-flex align-items-center justify-content-between mb-2">
                                                     <span class="stats-label">{{ __('common.documents') }}</span>
                                                     <i class="fa-duotone fa-folder-open fa-fade" style="color: var(--kongre-accent);"></i>
-                                                </div>
+                                                            </div>
                                                 <div class="stats-value">{{ isset($meeting->documents) ? $meeting->documents->count() : 0 }}</div>
-                                            </div>
+                                                        </div>
                                         </a>
                                     </div>
                                     
@@ -59,9 +59,9 @@
                                                 <div class="d-flex align-items-center justify-content-between mb-2">
                                                     <span class="stats-label">{{ __('common.announcements') }}</span>
                                                     <i class="fa-duotone fa-megaphone fa-fade" style="color: var(--kongre-accent);"></i>
-                                                </div>
+                                                            </div>
                                                 <div class="stats-value">{{ isset($meeting->announcements) ? $meeting->announcements->count() : 0 }}</div>
-                                            </div>
+                                                        </div>
                                         </a>
                                     </div>
                                     
@@ -76,7 +76,7 @@
                                                 <div class="stats-value">{{ isset($meeting->surveys) ? $meeting->surveys->count() : 0 }}</div>
                                             </div>
                                         </a>
-                                    </div>
+                                                            </div>
                                     
                                     <!-- Score Games -->
                                     <div class="col-md-4 col-sm-6">
@@ -85,11 +85,11 @@
                                                 <div class="d-flex align-items-center justify-content-between mb-2">
                                                     <span class="stats-label">{{ __('common.score-games') }}</span>
                                                     <i class="fa-duotone fa-hundred-points fa-fade" style="color: var(--kongre-accent);"></i>
-                                                </div>
+                                                        </div>
                                                 <div class="stats-value">{{ isset($meeting->scoreGames) ? $meeting->scoreGames->count() : 0 }}</div>
                                             </div>
                                         </a>
-                                    </div>
+                                                            </div>
                                     
                                     <!-- Halls -->
                                     <div class="col-md-4 col-sm-6">
@@ -98,7 +98,7 @@
                                                 <div class="d-flex align-items-center justify-content-between mb-2">
                                                     <span class="stats-label">{{ __('common.halls') }}</span>
                                                     <i class="fa-duotone fa-hotel fa-fade" style="color: var(--kongre-accent);"></i>
-                                                </div>
+                                                        </div>
                                                 <div class="stats-value">{{ isset($meeting->halls) ? $meeting->halls->count() : 0 }}</div>
                                             </div>
                                         </a>
@@ -113,7 +113,7 @@
                                         <h5 class="m-0 text-white">
                                             <i class="fa-duotone fa-hotel me-2"></i> {{ __('common.halls') }}
                                         </h5>
-                                    </div>
+                                                            </div>
                                     <div class="card-body p-0">
                                         <div class="list-group list-group-flush">
                                             @if(isset($meeting->halls) && $meeting->halls->count() > 0)
@@ -142,14 +142,14 @@
                                             @else
                                                 <div class="list-group-item bg-kongre-primary text-light text-center">
                                                     {{ __('common.no_halls_found') }}
-                                                </div>
+                                            </div>
                                             @endif
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                                                             </div>
                     <div class="card-footer bg-kongre-primary">
                         <div class="row">
                             <div class="col-md-6">
@@ -158,18 +158,18 @@
                                     <span class="text-light">
                                         {{ __('common.created_at') }}: 
                                         {{ isset($meeting->created_at) ? $meeting->created_at->format('d.m.Y') : __('common.unspecified') }}
-                                    </span>
-                                </div>
-                            </div>
+                                                  </span>
+                                                 </div>
+                                         </div>
                             <div class="col-md-6 text-end">
                                 <a href="{{ route('portal.meeting.show', $meeting->id) }}" class="btn btn-sm btn-kongre-accent">
                                     <i class="fa-solid fa-arrow-right me-1"></i> {{ __('common.manage_meeting') }}
                                 </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                    @endforeach
         @else
             <div class="card bg-kongre-secondary">
                 <div class="card-body text-center p-5">

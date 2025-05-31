@@ -441,4 +441,5 @@ return [
     'created_at' => 'Oluşturulma Tarihi',
     'view_details' => 'Detayları Görüntüle',
     'manage_meeting' => 'Toplantıyı Yönet',
+    'keypad-is-not-active' => 'Keypad aktif değil! Yeniden göndermek için oylama aktif olmalıdır.',
 ];

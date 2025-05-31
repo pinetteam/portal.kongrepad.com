@@ -35,8 +35,8 @@ class DebateController extends Controller
     public function show(int $meeting, int $hall, int $program, int $id)
     {
         $debate = Auth::user()->customer->debates()->findOrFail($id);
-        return view('portal.meeting.hall.program.debate.show', compact(['debate']));
-
+        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+        return view('portal.meeting.hall.program.debate.show', compact(['debate', 'meeting']));
     }
     public function edit(int $meeting, int $hall, int $program, int $id)
     {

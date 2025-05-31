@@ -16,7 +16,7 @@ class PointResource extends JsonResource
             'qr_code_id' => $this->qr_code_id,
             'participant_id' => $this->participant_id,
             'point' => $this->point,
-            'title' => $this->qrCode->title,
+            'title' => $this->qrCode ? $this->qrCode->title : null,
             'created_at' => Carbon::parse($this->created_at)->translatedFormat('H:i, d F'),
         ];
     }

@@ -18,11 +18,21 @@ class ScoreGameController extends Controller
             $meeting = $request->user()->meeting;
             $this->logParticipantAction($request->user()->id, "get-score-games", __('common.meeting') . ': ' . $meeting->title);
             $this->logParticipantAction($request->user(), "get-score-games", __('common.meeting') . ': ' . $meeting->title);
-            return [
-                'data' => new ScoreGameResource($meeting->scoreGames()->first()),
-                'status' => true,
-                'errors' => null
-            ];
+            
+            $scoreGame = $meeting->scoreGames()->first();
+            if ($scoreGame) {
+                return [
+                    'data' => new ScoreGameResource($scoreGame),
+                    'status' => true,
+                    'errors' => null
+                ];
+            } else {
+                return [
+                    'data' => null,
+                    'status' => false,
+                    'errors' => [__('common.no-score-game-found')]
+                ];
+            }
         } catch (\Throwable $e){
             return [
                 'data' => null,
