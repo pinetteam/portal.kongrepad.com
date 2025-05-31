@@ -385,7 +385,7 @@
                                                 @foreach($sessions as $session)
                                                     <tr>
                                                         <td class="text-center">
-                                                            <a href="" title="{{ __('common.start-stop') }}" data-bs-toggle="modal" data-bs-target="#start-session-confirmation-modal" data-route="{{ route('portal.meeting.hall.program.session.start-stop', ['meeting' => $program->hall->meeting_id, 'hall' => $program->hall->id, 'program' => $program->id, 'session' => $session->id]) }}" data-record="{{ $session->title }}" data-start-stop="{{ $session->on_air }} " data-bs-title="{{ __('common.start-stop') }}">
+                                                            <a href="javascript:void(0);" title="{{ __('common.start-stop') }}" data-bs-toggle="modal" data-bs-target="#start-session-confirmation-modal" data-route="{{ route('portal.meeting.hall.program.session.start-stop', ['meeting' => $program->hall->meeting_id, 'hall' => $program->hall->id, 'program' => $program->id, 'session' => $session->id]) }}" data-record="{{ $session->title }}" data-start-stop="{{ $session->on_air }} " data-bs-title="{{ __('common.start-stop') }}">
                                                                 @if($session->on_air)
                                                                     <i class="fa-regular fa-toggle-on"></i>
                                                                 @else
@@ -485,7 +485,7 @@
                                                             <td>
                                                                 <div class="d-flex gap-2 align-items-center">
                                                                     @if($session->on_air)
-                                                                    <a href ="" class="me-2" title="{{ __('common.start-stop-voting') }}" data-bs-toggle="modal" data-bs-target="#start-keypad-confirmation-modal" data-route="{{ route('portal.meeting.hall.program.session.keypad.start-stop-voting',['meeting'=>$session->program->hall->meeting_id, 'keypad'=> $keypad->id,'session'=> $session->id,'program'=>$session->program_id, 'hall'=>$session->program->hall_id]) }}" data-record="{{ $keypad->keypad }}" data-start-stop="{{ $keypad->on_vote }}">
+                                                                    <a href="javascript:void(0);" class="me-2" title="{{ __('common.start-stop-voting') }}" data-bs-toggle="modal" data-bs-target="#start-keypad-confirmation-modal" data-route="{{ route('portal.meeting.hall.program.session.keypad.start-stop-voting',['meeting'=>$session->program->hall->meeting_id, 'keypad'=> $keypad->id,'session'=> $session->id,'program'=>$session->program_id, 'hall'=>$session->program->hall_id]) }}" data-record="{{ $keypad->keypad }}" data-start-stop="{{ $keypad->on_vote }}">
                                                                         @if($keypad->on_vote)
                                                                             <i class="fa-regular fa-toggle-on"></i>
                                                                         @else
@@ -496,7 +496,7 @@
                                                                         <span class="badge bg-secondary">{{ __('common.first-you-should-start-session') }}</span>
                                                                     @endif
                                                                     @if($session->on_air && $keypad->on_vote)
-                                                                    <a href ="" title="{{ __('common.resend-voting') }}" data-bs-toggle="modal" data-bs-target="#start-keypad-confirmation-modal" data-route="{{ route('portal.meeting.hall.program.session.keypad.resend-voting',['meeting'=>$session->program->hall->meeting_id, 'keypad'=> $keypad->id,'session'=> $session->id,'program'=>$session->program_id, 'hall'=>$session->program->hall_id]) }}" data-record="{{ $keypad->keypad }}" data-start-stop="{{ $keypad->on_vote }}">
+                                                                    <a href="javascript:void(0);" title="{{ __('common.resend-voting') }}" data-bs-toggle="modal" data-bs-target="#start-keypad-confirmation-modal" data-route="{{ route('portal.meeting.hall.program.session.keypad.resend-voting',['meeting'=>$session->program->hall->meeting_id, 'keypad'=> $keypad->id,'session'=> $session->id,'program'=>$session->program_id, 'hall'=>$session->program->hall_id]) }}" data-record="{{ $keypad->keypad }}" data-start-stop="{{ $keypad->on_vote }}" data-action-type="resend">
                                                                         <span class="badge bg-primary"><i class="fa-regular fa-recycle me-1"></i> {{ __('common.resend') }}</span>
                                                                     </a>
                                                                     @endif
@@ -555,10 +555,18 @@
                                         clearInterval(countdown);
                                         document.getElementById('start-keypad-confirmation-form').action = button.getAttribute('data-route');
                                         confirmationModal.querySelector('#start-keypad-confirmation-record').textContent = button.getAttribute('data-record');
-                                        if(button.getAttribute('data-start-stop') == 0)
-                                            confirmationModal.querySelector('#start-keypad-start-stop-record').textContent = '{{ __('common.are-you-sure-you-want-to-stop-voting-other-keypads-and-start-voting') }}';
-                                        else
-                                            confirmationModal.querySelector('#start-keypad-start-stop-record').textContent = '{{ __('common.are-you-sure-you-want-to-stop-voting') }}';
+                                        
+                                        // Check if this is a resend action
+                                        if(button.getAttribute('data-action-type') === 'resend') {
+                                            confirmationModal.querySelector('#start-keypad-start-stop-record').textContent = '{{ __('common.are-you-sure-you-want-to-resend-voting') }}';
+                                        } else {
+                                            // Normal start/stop action
+                                            if(button.getAttribute('data-start-stop') == 0)
+                                                confirmationModal.querySelector('#start-keypad-start-stop-record').textContent = '{{ __('common.are-you-sure-you-want-to-stop-voting-other-keypads-and-start-voting') }}';
+                                            else
+                                                confirmationModal.querySelector('#start-keypad-start-stop-record').textContent = '{{ __('common.are-you-sure-you-want-to-stop-voting') }}';
+                                        }
+                                        
                                         countdown = setInterval(function() {
                                             confirmationFormSubmit.innerHTML = '<i class="fa-solid fa-check me-1"></i> {{ __('common.yes') }} (' + (--waitForSeconds) + ')';
                                             if (waitForSeconds <= 0) {
@@ -664,7 +672,7 @@
                                                         <td><span class="d-inline-block text-truncate" style="max-width: 200px;">{{ $debate->title }}</span></td>
                                                         <td><span class="d-inline-block text-truncate" style="max-width: 300px;">{{ $debate->description }}</span></td>
                                                         <td class="text-center">
-                                                            <a href ="" title="{{ __('common.start-stop') }}" data-bs-toggle="modal" data-bs-target="#start-debate-confirmation-modal" data-route="{{ route('portal.meeting.hall.program.debate.start-stop-voting', ['meeting' => $meeting_hall->meeting_id, 'hall' => $meeting_hall->id, 'program' => $program->id, 'debate' => $debate->id]) }}" data-record="{{ $debate->title }}" data-start-stop="{{ $debate->on_vote }}">
+                                                            <a href="javascript:void(0);" title="{{ __('common.start-stop') }}" data-bs-toggle="modal" data-bs-target="#start-debate-confirmation-modal" data-route="{{ route('portal.meeting.hall.program.debate.start-stop-voting', ['meeting' => $meeting_hall->meeting_id, 'hall' => $meeting_hall->id, 'program' => $program->id, 'debate' => $debate->id]) }}" data-record="{{ $debate->title }}" data-start-stop="{{ $debate->on_vote }}">
                                                                 @if($debate->on_vote)
                                                                 <i class="fa-regular fa-toggle-on"></i>
                                                                 @else

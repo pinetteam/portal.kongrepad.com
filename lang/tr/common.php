@@ -47,6 +47,7 @@ return [
     'are-you-sure-you-want-to-stop-voting' => 'Oylamayı durdurmak istediğinizden emin misiniz?',
     'are-you-sure-you-want-to-stop-voting-other-debates-and-start-voting' => 'Diğer münazaralara oy vermeyi bırakıp bu münazarayı oylamaya başlamak istediğinizden emin misiniz: ',
     'are-you-sure-you-want-to-stop-voting-other-keypads-and-start-voting' => 'Are you sure you want to stop voting other keypads and start voting:',
+    'are-you-sure-you-want-to-resend-voting' => 'Bu keypad için oylamayı yeniden göndermek istediğinizden emin misiniz:',
     'ask-question' => ' Konuşmacıya soru iletti',
     'asking_question' => 'Soru sorma',
     'attendance-reports' => ' Katılım Raporları',

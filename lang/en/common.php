@@ -47,6 +47,7 @@ return [
     'are-you-sure-you-want-to-stop-voting' => 'Are you sure you want to stop voting:',
     'are-you-sure-you-want-to-stop-voting-other-debates-and-start-voting' => 'Are you sure you want to stop voting other debates and start voting:',
     'are-you-sure-you-want-to-stop-voting-other-keypads-and-start-voting' => 'Are you sure you want to stop voting other keypads and start voting:',
+    'are-you-sure-you-want-to-resend-voting' => 'Are you sure you want to resend the voting for:',
     'ask-question' => ' Konuşmacıya soru iletti',
     'asking_question' => 'Asking Question',
     'attendance-reports' => ' Attendance Reports',

@@ -177,6 +177,7 @@ class KeypadController extends Controller
     public function resend_voting(int $meeting, int $hall, int $program, int $session, int $id)
     {
         try {
+            // Find models
             $session_model = Auth::user()->customer->programSessions()->findOrFail($session);
             $hall_model = Auth::user()->customer->halls()->findOrFail($hall);
             $keypad = Auth::user()->customer->keypads()->findOrFail($id);
@@ -209,9 +210,10 @@ class KeypadController extends Controller
                 'keypad_id' => $id,
                 'user_id' => Auth::id(),
                 'error' => $e->getMessage(),
-                'trace' => $e->getTraceAsString()
+                'file' => $e->getFile(),
+                'line' => $e->getLine()
             ]);
-            return back()->with('error', __('common.a-system-error-has-occurred') . ': ' . $e->getMessage());
+            return back()->with('error', __('common.a-system-error-has-occurred'));
         }
     }
 }
