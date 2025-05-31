@@ -29,3 +29,43 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
         Route::resource('/hall/{hall}/session-question', \App\Http\Controllers\API\Meeting\Hall\Program\Session\Question\QuestionController::class)->only(['store']);
         });
 });
+
+// Pusher Test Routes
+Route::get('/pusher-config', function () {
+    try {
+        $config = config('broadcasting.connections.pusher');
+        
+        return response()->json([
+            'success' => true,
+            'config' => [
+                'app_id' => !empty($config['app_id']),
+                'key' => $config['key'],
+                'secret' => !empty($config['secret']),
+                'options' => [
+                    'cluster' => $config['options']['cluster'] ?? null,
+                ]
+            ]
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'success' => false,
+            'message' => $e->getMessage()
+        ], 500);
+    }
+});
+
+Route::post('/send-test-event', function () {
+    try {
+        \App\Events\PusherTestEvent::dispatch('Bu bir test mesajıdır! Zaman: ' . now()->format('H:i:s'));
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'Test event gönderildi: ' . now()
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'success' => false,
+            'message' => $e->getMessage()
+        ], 500);
+    }
+});

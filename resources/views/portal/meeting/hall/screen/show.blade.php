@@ -1,4 +1,4 @@
-@extends('layout.portal.common')
+@extends('layout.portal.meeting-detail')
 @section('title', $screen->title . ' | ' . __('common.participant'))
 @section('breadcrumb')
     <li class="breadcrumb-item text-white"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none text-white">{{ __('common.meetings') }}</a></li>
@@ -8,7 +8,7 @@
     <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.hall.screen.index', ['meeting' => $screen->hall->meeting->id, 'hall' => $screen->hall->id]) }}" class="text-decoration-none text-white">{{ __('common.screens') }}</a></li>
     <li class="breadcrumb-item active text-white text-decoration-underline" aria-current="page">{{ $screen->title }}</li>
 @endsection
-@section('body')
+@section('meeting_content')
     <div class="card text-bg-dark">
         <div class="card-header">
             <h1 class="text-center"><span class="fa-duotone fa-presentation-screen fa-fade"></span> <small>"{{ $screen->title }}"</small></h1>

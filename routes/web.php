@@ -160,3 +160,8 @@ Route::prefix('portal')->name('portal.')->group(function () {
         Route::get('/session-question-on-screen/{id}', [\App\Http\Controllers\Portal\Meeting\Hall\Program\Session\Question\QuestionController::class,'on_screen'])->name('session-question.on-screen');
     });
 });
+
+// Pusher Test Page
+// Route::get('/test/pusher', function () {
+//     return view('tests.pusher');
+// });

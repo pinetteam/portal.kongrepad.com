@@ -1,4 +1,4 @@
-@extends('layout.portal.common')
+@extends('layout.portal.meeting-detail')
 @section('title', $program->title)
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none text-white">{{ __('common.meetings') }}</a></li>
@@ -8,7 +8,7 @@
     <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.hall.program.index', ['meeting' => $program->hall->meeting->id, 'hall' => $program->hall->id]) }}" class="text-decoration-none text-white">{{ __('common.programs') }}</a></li>
     <li class="breadcrumb-item active text-white text-decoration-underline" aria-current="page">{{ $program->title }}</li>
 @endsection
-@section('body')
+@section('meeting_content')
     <div class="card text-bg-dark">
         <div class="card-header">
             <h1 class="m-0 text-center"><span class="fa-duotone fa-newspaper fa-fade"></span> <small>"{{ $program->title }}"</small> </h1>

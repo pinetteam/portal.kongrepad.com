@@ -1,4 +1,4 @@
-@extends('layout.portal.common')
+@extends('layout.portal.meeting-detail')
 @section('title', $virtual_stand->title . ' | ' . __('common.virtual-stand'))
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none text-white">{{ __('common.meetings') }}</a></li>
@@ -6,7 +6,7 @@
     <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.virtual-stand.index', ['meeting' => $virtual_stand->meeting->id]) }}" class="text-decoration-none text-white">{{ __('common.virtual-stands') }}</a></li>
     <li class="breadcrumb-item active text-white text-decoration-underline" aria-current="page">{{ $virtual_stand->title }}</li>
 @endsection
-@section('body')
+@section('meeting_content')
     <div class="card text-bg-dark">
         <div class="card-header">
             <h1 class="m-0 text-center">{{'"' . $virtual_stand->title . '" ' . __('common.virtual-stand')}}</h1>
