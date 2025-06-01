@@ -1,20 +1,20 @@
-@extends('layout.portal.common')
+@extends('layout.portal.meeting-detail')
 @section('title', $debate->title . ' | ' . __('common.report'))
 @section('breadcrumb')
-    <li class="breadcrumb-item text-white"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none text-white">{{ __('common.meetings') }}</a></li>
-    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.show', $debate->program->hall->meeting->id) }}" class="text-decoration-none text-white">{{ $debate->program->hall->meeting->title }}</a></li>
-    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.report.debate.index', ['meeting' => $debate->program->hall->meeting->id]) }}" class="text-decoration-none text-white">{{ __('common.debate-reports') }}</a></li>
-    <li class="breadcrumb-item active text-white text-decoration-underline" aria-current="page">{{ $debate->title }}</li>
+    <li class="breadcrumb-item"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none">{{ __('common.meetings') }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.show', $debate->program->hall->meeting->id) }}" class="text-decoration-none">{{ $debate->program->hall->meeting->title }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.report.debate.index', ['meeting' => $debate->program->hall->meeting->id]) }}" class="text-decoration-none">{{ __('common.debate-reports') }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ $debate->title }}</li>
 @endsection
-@section('body')
-    <div class="card text-bg-dark" xmlns="http://www.w3.org/1999/html">
+@section('meeting_content')
+    <div class="card bg-kongre-secondary" xmlns="http://www.w3.org/1999/html">
         <div class="card-header">
             <h1 class="text-center">
                 <span class="fa-regular fa-square-poll-vertical fa-fade"></span> <small>"{{ $debate->title }}"</small> {{ __('common.report') }}
             </h1>
         </div>
     </div>
-    <div class="card text-bg-dark">
+    <div class="card bg-kongre-secondary">
         <div class="card-body">
             <div class="ms-2 w-100 overflow-hidden">
                 <div class="fw-bold text-center">{{ $debate->title }}</div>

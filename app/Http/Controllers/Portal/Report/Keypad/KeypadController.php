@@ -27,7 +27,8 @@ class KeypadController extends Controller
     public function showReport(int $meeting, int $id)
     {
         $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
-        $keypad = $meeting->keypads()->findOrFail($id);
-        return view('portal.meeting.report.keypad.report', compact(['keypad']));
+        $question = $meeting->keypads()->findOrFail($id);
+        $options = $question->options;
+        return view('portal.meeting.report.keypad.report', compact(['question', 'options']));
     }
 }

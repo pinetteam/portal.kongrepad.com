@@ -1,15 +1,15 @@
-@extends('layout.portal.common')
+@extends('layout.portal.meeting-detail')
 @section('title', $document->title . ' | ' . __('common.document'))
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none text-white">{{ __('common.meetings') }}</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.show', $meeting->id) }}" class="text-decoration-none text-white">{{ $meeting->title }}</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.document.index', ['meeting' => $meeting->id]) }}" class="text-decoration-none text-white">{{ __('common.documents') }}</a></li>
-    <li class="breadcrumb-item active text-white text-decoration-underline" aria-current="page">{{ $document->title }}</li>
+    <li class="breadcrumb-item"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none">{{ __('common.meetings') }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.show', $meeting->id) }}" class="text-decoration-none">{{ $meeting->title }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.document.index', ['meeting' => $meeting->id]) }}" class="text-decoration-none">{{ __('common.documents') }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ $document->title }}</li>
 @endsection
-@section('body')
-    <div class="card text-bg-dark">
+@section('meeting_content')
+    <div class="card bg-kongre-secondary">
         <div class="card-header">
-            <h1 class="text-center"><span class="fa-duotone fa-bee fa-fade"></span> <small>"{{ $document->title }}"</small> {{ __('common.document') }}</h1>
+            <h1 class="text-center"><span class="fa-duotone fa-folder-open fa-fade"></span> <small>"{{ $document->title }}"</small> {{ __('common.document') }}</h1>
             <div class="table-responsive">
                 <table class="table table-dark table-striped-columns table-bordered">
                     <tr>

@@ -1,13 +1,13 @@
-@extends('layout.portal.common')
+@extends('layout.portal.meeting-detail')
 @section('title', $survey->title . ' | ' . __('common.survey'))
 @section('breadcrumb')
-    <li class="breadcrumb-item text-white"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none text-white">{{ __('common.meetings') }}</a></li>
-    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.show', $survey->meeting->id) }}" class="text-decoration-none text-white">{{ $survey->meeting->title }}</a></li>
-    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.survey.index', ['meeting' => $survey->meeting->id]) }}" class="text-decoration-none text-white">{{ __('common.surveys') }}</a></li>
-    <li class="breadcrumb-item active text-white text-decoration-underline" aria-current="page">{{ $survey->title }}</li>
+    <li class="breadcrumb-item"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none">{{ __('common.meetings') }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.show', $survey->meeting->id) }}" class="text-decoration-none">{{ $survey->meeting->title }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.survey.index', ['meeting' => $survey->meeting->id]) }}" class="text-decoration-none">{{ __('common.surveys') }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ $survey->title }}</li>
 @endsection
-@section('body')
-    <div class="card text-bg-dark">
+@section('meeting_content')
+    <div class="card bg-kongre-secondary">
         <div class="card-header">
             <h1 class="text-center">
                 <span class="fa-regular fa-square-poll-vertical fa-fade"></span> <small class="p-2">"{{ $survey->title }}"</small>
@@ -19,9 +19,9 @@
                         <th scope="row" class="text-end w-25">{{ __('common.survey') }}:</th>
                         <td class="text-start w-25">
                             @if($survey->status)
-                                <i style="color:green" class="fa-regular fa-toggle-on"></i>
+                                <i style="color:var(--kongre-success)" class="fa-regular fa-toggle-on"></i>
                             @else
-                                <i style="color:red" class="fa-regular fa-toggle-off"></i>
+                                <i style="color:var(--kongre-danger)" class="fa-regular fa-toggle-off"></i>
                             @endif
                             {{ $survey->title }}
                         </td>
@@ -56,14 +56,14 @@
             </div>
         </div>
     </div>
-    <div class="card text-bg-dark">
+    <div class="card bg-kongre-secondary">
         <div class="card-header">
             <h2 class="text-center">
                 <span class="fa-regular fa-circle-question fa-fade p-2"> </span>{{ __('common.questions') }}
             </h2>
         </div>
         <div class="card-body p-0">
-            <div class="card text-bg-dark mt-2">
+            <div class="card bg-kongre-secondary mt-2">
                 @foreach($survey->questions as $question)
                     <div class="table-responsive">
                         <table class="table table-dark table-striped table-hover">
@@ -80,14 +80,14 @@
                             <tbody>
                             <tr>
                                 <td rowspan="2" style="width: 2%"></td>
-                                <td rowspan="1">{{ $question->question }}</td>
+                                <td rowspan="1">{{ $question->title }}</td>
                                 <td rowspan="1">{{ $question->sort_order }}</td>
                                 <td rowspan="1">{{ $question->options->count() }}</td>
                                 <td rowspan="1">
                                     @if($question->status)
-                                        <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
+                                        <i style="color:var(--kongre-success)" class="fa-regular fa-toggle-on fa-xg"></i>
                                     @else
-                                        <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
+                                        <i style="color:var(--kongre-danger)" class="fa-regular fa-toggle-off fa-xg"></i>
                                     @endif
                                 </td>
                                 <td class="text-end" rowspan="1">
@@ -104,7 +104,7 @@
                                                 <span class="fa-plus" style="white-space: nowrap"> {{ __('common.add-option') }}</span>
                                             </button>
                                         </div>
-                                        <a class="btn btn-info btn-sm"
+                                        <a class="btn btn-kongre-accent btn-sm"
                                            href="{{ route('portal.meeting.survey.question.show', ['meeting' => $survey->meeting_id, 'survey' => $survey->id, 'question' => $question->id]) }}"
                                            title="{{ __('common.show') }}"
                                            data-bs-toggle="tooltip"
@@ -134,7 +134,7 @@
                                                     data-bs-toggle="offcanvas"
                                                     data-bs-target="#question-delete-modal"
                                                     data-route="{{ route('portal.meeting.survey.question.destroy', ['meeting'=> $survey->meeting_id, 'survey' => $survey->id, 'question' => $question->id]) }}"
-                                                    data-record="{{ $question->question }}">
+                                                    data-record="{{ $question->title }}">
                                                 <span class="fa-regular fa-trash"></span>
                                             </button>
                                         </div>
@@ -160,9 +160,9 @@
                                                     <td>{{ $option->sort_order }}</td>
                                                     <td>
                                                         @if($option->status)
-                                                            <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
+                                                            <i style="color:var(--kongre-success)" class="fa-regular fa-toggle-on fa-xg"></i>
                                                         @else
-                                                            <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
+                                                            <i style="color:var(--kongre-danger)" class="fa-regular fa-toggle-off fa-xg"></i>
                                                         @endif
                                                     </td>
                                                     <td class="text-end">
@@ -211,15 +211,15 @@
         @endsection
     </x-crud.form.common.create>
     <x-crud.form.common.delete name="option"/>
-    <x-crud.form.common.edit method="e-o" name="option">
+    <x-crud.form.common.edit name="option">
         @section('option-edit-form')
-            <x-input.hidden method="e-o" name="survey_id" :value="$survey->id"/>
-            <x-input.text method="e-o" name="option" title="option" icon="list-dropdown"/>
-            <x-input.number method="e-o" name="sort_order" title="sort" icon="circle-sort"/>
-            <x-input.radio method="e-o" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on"/>
+            <x-input.hidden method="e" name="survey_id" :value="$survey->id"/>
+            <x-input.hidden method="e" name="question_id" value="1"/>
+            <x-input.text method="e" name="option" title="option" icon="list-dropdown"/>
+            <x-input.number method="e" name="sort_order" title="sort" icon="circle-sort"/>
+            <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on"/>
         @endsection
     </x-crud.form.common.edit>
-
 
     <x-crud.form.common.create name="question">
         @section('question-create-form')
@@ -229,9 +229,7 @@
             <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on"/>
         @endsection
     </x-crud.form.common.create>
-
     <x-crud.form.common.delete name="question"/>
-
     <x-crud.form.common.edit name="question">
         @section('question-edit-form')
             <x-input.hidden method="e" name="survey_id" :value="$survey->id"/>

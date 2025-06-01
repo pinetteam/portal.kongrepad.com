@@ -1,13 +1,13 @@
-@extends('layout.portal.common')
+@extends('layout.portal.meeting-detail')
 @section('title', $survey->title . ' | ' . __('common.report'))
 @section('breadcrumb')
-    <li class="breadcrumb-item text-white"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none text-white">{{ __('common.meetings') }}</a></li>
-    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.show', $survey->meeting->id) }}" class="text-decoration-none text-white">{{ $survey->meeting->title }}</a></li>
-    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.report.survey.index', ['meeting' => $survey->meeting->id]) }}" class="text-decoration-none text-white">{{ __('common.survey-reports') }}</a></li>
-    <li class="breadcrumb-item active text-white text-decoration-underline" aria-current="page">{{ $survey->title }}</li>
+    <li class="breadcrumb-item"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none">{{ __('common.meetings') }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.show', $survey->meeting->id) }}" class="text-decoration-none">{{ $survey->meeting->title }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.report.survey.index', ['meeting' => $survey->meeting->id]) }}" class="text-decoration-none">{{ __('common.survey-reports') }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ $survey->title }}</li>
 @endsection
-@section('body')
-    <div class="card text-bg-dark" xmlns="http://www.w3.org/1999/html">
+@section('meeting_content')
+    <div class="card bg-kongre-secondary" xmlns="http://www.w3.org/1999/html">
         <div class="card-header">
             <h1 class="text-center">
                 <span class="fa-regular fa-square-poll-vertical fa-fade"></span> <small>"{{ $survey->title }}"</small> {{ __('common.report') }}
@@ -37,33 +37,29 @@
             </div>
         </div>
     </div>
-    <div class="card text-bg-dark">
-        <div class="card-body">
-            <ol class="list-group list-group-numbered">
-                @foreach($survey->questions as $question)
-                    <li class="list-group-item d-flex justify-content-between align-items-start bg-dark border-dark-subtle text-white">
-                        <div class="ms-2 w-100 overflow-hidden">
-                            <div class="fw-bold">{{ $question->question }}</div>
-                            <hr />
-                            @foreach($question->options as $option)
-                                @if($question->votes->count() != 0)
-                                    <div class="progress mt-2 h-25" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success text-black text-center p-2 overflow-visible" style="width: {{ $option->votes->count() / $question->votes->count()*100 }}%">
-                                            {{ $option->option }} ({{round($option->votes->count() / $question->votes->count()*100,2)}}%)
-                                        </div>
-                                    </div>
-                                @elseif($question->votes->count() == 0)
-                                    <div class="progress mt-2 h-25" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success text-black text-center p-2 overflow-visible" style="width: {{ $option->votes->count()}}%">
-                                            {{ $option->option }} ({{ $option->votes->count() }}%)
-                                        </div>
-                                    </div>
-                                @endif
-                            @endforeach
-                        </div>
-                    </li>
-                @endforeach
-            </ol>
+    @foreach($survey->questions as $question)
+        <div class="card bg-kongre-secondary">
+            <div class="card-body">
+                <div class="ms-2 w-100 overflow-hidden">
+                    <div class="fw-bold text-center">{{ $question->title }}</div>
+                    <hr />
+                    @foreach($question->options as $option)
+                        @if($question->votes->count() != 0)
+                            <div class="progress mt-2 h-25" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success text-black text-center p-2 overflow-visible" style="width: {{ $option->votes->count() / $question->votes->count()*100 }}%">
+                                    {{ $option->option }} ({{round($option->votes->count() / $question->votes->count()*100,2)}}%)
+                                </div>
+                            </div>
+                        @elseif($question->votes->count() == 0)
+                            <div class="progress mt-2 h-25" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success text-black text-center p-2 overflow-visible" style="width: {{ $option->votes->count()}}%">
+                                    {{ $option->option }} ({{ $option->votes->count() }}%)
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+            </div>
         </div>
-    </div>
+    @endforeach
 @endsection

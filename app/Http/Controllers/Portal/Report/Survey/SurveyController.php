@@ -35,7 +35,7 @@ class SurveyController extends Controller
     {
         $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
         $survey = $meeting->surveys()->findOrFail($id);
-        $votes = \App\Models\Meeting\Survey\Vote\Vote::where('survey_id', $survey->id)->groupBy('participant_id')->get();
+        $votes = \App\Models\Meeting\Survey\Vote\Vote::where('survey_id', $survey->id)->paginate(20);
         return view('portal.meeting.report.survey.participant.index', compact(['survey', 'votes']));
     }
     public function showReport(int $meeting, int $id){

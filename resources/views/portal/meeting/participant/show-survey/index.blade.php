@@ -1,7 +1,14 @@
-@extends('layout.portal.common')
+@extends('layout.portal.meeting-detail')
 @section('title', $participant->fullname . ' | '. $survey->title . ' | ' . __('common.votes'))
-@section('body')
-    <div class="card text-bg-dark">
+@section('breadcrumb')
+    <li class="breadcrumb-item"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none">{{ __('common.meetings') }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.show', $survey->meeting->id) }}" class="text-decoration-none">{{ $survey->meeting->title }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.participant.index', ['meeting' => $survey->meeting->id]) }}" class="text-decoration-none">{{ __('common.participants') }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.participant.show', ['meeting' => $survey->meeting->id, 'participant' => $participant->id]) }}" class="text-decoration-none">{{ $participant->fullname }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ $survey->title }}</li>
+@endsection
+@section('meeting_content')
+    <div class="card bg-kongre-secondary">
         <div class="card-header">
             <h1 class="text-center">
                 <span class="fa-regular fa-square-poll-vertical fa-fade"></span> <small>"{{ $survey->title }}"</small> {{ __('common.survey') }}
@@ -12,9 +19,9 @@
                         <th scope="row" class="text-end w-25">{{ __('common.survey') }}:</th>
                         <td class="text-start w-25">
                             @if($survey->status)
-                                <i style="color:green" class="fa-regular fa-toggle-on"></i>
+                                <i style="color:var(--kongre-success)" class="fa-regular fa-toggle-on"></i>
                             @else
-                                <i style="color:red" class="fa-regular fa-toggle-off"></i>
+                                <i style="color:var(--kongre-danger)" class="fa-regular fa-toggle-off"></i>
                             @endif
                             {{ $survey->title }}
                         </td>
@@ -31,7 +38,7 @@
             </div>
         </div>
     </div>
-    <div class="card text-bg-dark">
+    <div class="card bg-kongre-secondary">
         <div class="card-header">
             <h1 class="m-0 text-center"><span class="fa-duotone fa-option fa-fade"></span> <small>"{{ $participant->fullname }}"</small> {{ __('common.votes') }}</h1>
         </div>
@@ -39,7 +46,7 @@
             <ol class="list-group list-group-numbered">
                 @foreach($survey_votes as $vote)
                     <li class="list-group-item bg-dark border-0 text-white fw-bold">
-                        {{ $vote->question->question }}
+                        {{ $vote->question->title }}
                         <ol class="list-group list-group-numbered list-group">
                             @foreach($vote->question->options as $option)
                                 @if($vote->option == $option)

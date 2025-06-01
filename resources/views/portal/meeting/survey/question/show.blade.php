@@ -1,23 +1,23 @@
-@extends('layout.portal.common')
-@section('title', $question->question . ' | ' . __('common.question'))
+@extends('layout.portal.meeting-detail')
+@section('title', $question->title . ' | ' . __('common.question'))
 @section('breadcrumb')
-    <li class="breadcrumb-item text-white"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none text-white">{{ __('common.meetings') }}</a></li>
-    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.show', $question->survey->meeting->id) }}" class="text-decoration-none text-white">{{ $question->survey->meeting->title }}</a></li>
-    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.survey.index', ['meeting' => $question->survey->meeting->id]) }}" class="text-decoration-none text-white">{{ __('common.surveys') }}</a></li>
-    <li class="breadcrumb-item text-white"><a href="{{ route('portal.meeting.survey.show', ['meeting' => $question->survey->meeting->id, $question->survey->id, ]) }}" class="text-decoration-none text-white">{{ $question->survey->title }}</a></li>
-    <li class="breadcrumb-item active text-white text-decoration-underline" aria-current="page">{{ $question->question }}</li>
+    <li class="breadcrumb-item"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none">{{ __('common.meetings') }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.show', $question->survey->meeting->id) }}" class="text-decoration-none">{{ $question->survey->meeting->title }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.survey.index', ['meeting' => $question->survey->meeting->id]) }}" class="text-decoration-none">{{ __('common.surveys') }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.survey.show', ['meeting' => $question->survey->meeting->id, $question->survey->id, ]) }}" class="text-decoration-none">{{ $question->survey->title }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ $question->title }}</li>
 @endsection
-@section('body')
-    <div class="card text-bg-dark">
+@section('meeting_content')
+    <div class="card bg-kongre-secondary">
         <div class="card-header">
             <h1 class="text-center">
                 <span class="fa-regular fa-square-poll-vertical fa-fade"></span>
                 @if($question->status)
-                    <i style="color:green" class="fa-regular fa-toggle-on"></i>
+                    <i style="color:var(--kongre-success)" class="fa-regular fa-toggle-on"></i>
                 @else
-                    <i style="color:red" class="fa-regular fa-toggle-off"></i>
+                    <i style="color:var(--kongre-danger)" class="fa-regular fa-toggle-off"></i>
                 @endif
-                <small>"{{ $question->question }}"</small>
+                <small>"{{ $question->title }}"</small>
             </h1>
             <div class="table-responsive">
                 <table class="table table-dark table-striped-columns table-bordered">
@@ -29,7 +29,7 @@
                     </tr>
                 </table>
             </div>
-            <div class="card text-bg-dark mt-2">
+            <div class="card bg-kongre-secondary mt-2">
                 <div class="card-header">
                     <h2 class="m-0 text-center">{{ __('common.options') }}</h2>
                 </div>
@@ -58,9 +58,9 @@
                                     <td>{{ $option->sort_order }}</td>
                                     <td>
                                         @if($option->status)
-                                            <i style="color:green" class="fa-regular fa-toggle-on fa-xg"></i>
+                                            <i style="color:var(--kongre-success)" class="fa-regular fa-toggle-on fa-xg"></i>
                                         @else
-                                            <i style="color:red" class="fa-regular fa-toggle-off fa-xg"></i>
+                                            <i style="color:var(--kongre-danger)" class="fa-regular fa-toggle-off fa-xg"></i>
                                         @endif
                                     </td>
                                     <td class="text-end">

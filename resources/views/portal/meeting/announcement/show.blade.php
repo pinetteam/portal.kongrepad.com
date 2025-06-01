@@ -1,13 +1,13 @@
-@extends('layout.portal.common')
+@extends('layout.portal.meeting-detail')
 @section('title', $announcement->title . ' | ' . __('common.announcement'))
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none text-white">{{ __('common.meetings') }}</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.show', $meeting->id) }}" class="text-decoration-none text-white">{{ $meeting->title }}</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.announcement.index', ['meeting' => $meeting->id]) }}" class="text-decoration-none text-white">{{ __('common.announcements') }}</a></li>
-    <li class="breadcrumb-item active text-white text-decoration-underline" aria-current="page">{{ $announcement->title }}</li>
+    <li class="breadcrumb-item"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none">{{ __('common.meetings') }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.show', $meeting->id) }}" class="text-decoration-none">{{ $meeting->title }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.announcement.index', ['meeting' => $meeting->id]) }}" class="text-decoration-none">{{ __('common.announcements') }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ $announcement->title }}</li>
 @endsection
-@section('body')
-<div class="card text-bg-dark">
+@section('meeting_content')
+<div class="card bg-kongre-secondary">
     <div class="card-header">
         <h1 class="text-center"><span class="fa-duotone fa-megaphone fa-fade"></span> <small>"{{ $announcement->title }}"</small></h1>
         <div class="table-responsive">
@@ -18,9 +18,9 @@
                     <th scope="row" class="text-end w-25">{{ __('common.title') }}:</th>
                     <td class="text-start w-25">
                         @if($announcement->status)
-                            <i style="color:green" class="fa-regular fa-toggle-on"></i>
+                            <i style="color:var(--kongre-success)" class="fa-regular fa-toggle-on"></i>
                         @else
-                            <i style="color:red" class="fa-regular fa-toggle-off"></i>
+                            <i style="color:var(--kongre-danger)" class="fa-regular fa-toggle-off"></i>
                         @endif
                         {{ $announcement->title }}
                     </td>
@@ -35,9 +35,9 @@
                     <th scope="row" class="text-end w-25">{{ __('common.is-published') }}:</th>
                     <td class="text-start w-25">
                     @if($announcement->is_published)
-                        <i style="color:green" class="fa-regular fa-toggle-on"></i>
+                        <i style="color:var(--kongre-success)" class="fa-regular fa-toggle-on"></i>
                     @else
-                        <i style="color:red" class="fa-regular fa-toggle-off"></i>
+                        <i style="color:var(--kongre-danger)" class="fa-regular fa-toggle-off"></i>
                     @endif
                     </td>
                     <th scope="row" class="text-end w-25">{{ __('common.publish-at') }}:</th>
