@@ -115,216 +115,110 @@
 
         /* Modern Sidebar Styles */
         .sidebar {
-            background: linear-gradient(180deg, var(--kongre-primary) 0%, var(--kongre-secondary) 100%);
-            border-right: 1px solid rgba(var(--kongre-accent-rgb), 0.1);
-            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
+            background-color: #343a40;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .sidebar-heading {
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(255, 255, 255, 0.75);
             font-size: 0.75rem;
-            font-weight: 700;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
-            padding: 0.8rem 1.5rem 0.5rem;
-            margin-top: 0.5rem;
-            position: relative;
-            display: flex;
-            align-items: center;
+            letter-spacing: 0.5px;
+            padding: 0.75rem 1rem 0.25rem;
+            margin-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .sidebar-heading:first-child {
             margin-top: 0;
-        }
-
-        .sidebar-heading .nav-icon {
-            margin-right: 0.5rem;
-            color: var(--kongre-accent);
-            font-size: 0.7rem;
-        }
-
-        .sidebar-heading::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: linear-gradient(90deg, var(--kongre-accent), transparent);
-            margin-left: 0.8rem;
+            border-top: none;
         }
 
         .nav-tabs {
             border: none;
-            margin-bottom: 0.3rem;
         }
 
         .nav-tabs .nav-link {
             background: none;
             border: none;
-            color: rgba(255, 255, 255, 0.8);
-            padding: 0.7rem 1.5rem;
-            margin: 0.1rem 0.5rem;
-            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.75);
+            padding: 0.6rem 1rem;
+            border-radius: 0;
             display: flex;
             align-items: center;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .nav-tabs .nav-link::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 3px;
-            height: 100%;
-            background: var(--kongre-accent);
-            transform: scaleY(0);
-            transition: transform 0.3s ease;
+            font-weight: 400;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
         }
 
         .nav-tabs .nav-link:hover {
-            background: rgba(var(--kongre-accent-rgb), 0.15);
+            background-color: rgba(255, 255, 255, 0.1);
             color: white;
-            transform: translateX(5px);
-            box-shadow: 0 4px 15px rgba(var(--kongre-accent-rgb), 0.2);
-        }
-
-        .nav-tabs .nav-link:hover::before {
-            transform: scaleY(1);
         }
 
         .nav-tabs .nav-link.active {
-            background: linear-gradient(135deg, var(--kongre-accent), var(--kongre-accent-hover));
+            background-color: rgba(0, 123, 255, 0.2);
             color: white;
-            box-shadow: 0 4px 15px rgba(var(--kongre-accent-rgb), 0.3);
-            transform: translateX(5px);
-        }
-
-        .nav-tabs .nav-link.active::before {
-            transform: scaleY(1);
-            background: white;
+            border-left: 3px solid #007bff;
         }
 
         .nav-icon {
-            margin-right: 0.75rem;
-            font-size: 1rem;
-            width: 20px;
+            margin-right: 0.6rem;
+            font-size: 0.85rem;
+            width: 18px;
             text-align: center;
-            transition: all 0.3s ease;
         }
 
-        .nav-tabs .nav-link:hover .nav-icon {
-            transform: scale(1.1);
-        }
-
-        .nav-tabs .nav-link.active .nav-icon {
-            transform: scale(1.1);
-            color: white;
-        }
-
-        /* Header Navbar Modernization */
+        /* Header Navbar */
         .navbar-brand {
-            background: linear-gradient(135deg, var(--kongre-accent), var(--kongre-accent-hover));
+            background: linear-gradient(135deg, var(--kongre-primary), var(--kongre-secondary));
             color: white !important;
-            font-weight: 700;
-            font-size: 1.1rem;
-            border-radius: 0 0 8px 0;
-            transition: all 0.3s ease;
+            font-weight: 600;
+            border-radius: 0;
+            transition: all 0.2s ease;
         }
 
         .navbar-brand:hover {
-            background: linear-gradient(135deg, var(--kongre-accent-hover), var(--kongre-accent));
+            background: linear-gradient(135deg, var(--kongre-secondary), var(--kongre-primary));
             color: white !important;
             text-decoration: none;
         }
 
         .navbar-dark {
-            background: linear-gradient(90deg, var(--kongre-dark) 0%, var(--kongre-primary) 100%) !important;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Modern Toggle Menu Button */
-        #toggle-main-menu {
-         
-            border-radius: 8px;
-            padding: 0.6rem 0.8rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        #toggle-main-menu::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s ease;
-        }
-
-        #toggle-main-menu:hover {
-            background: var(--kongre-accent);
-            border-color: var(--kongre-accent);
-            color: white !important;
-            transform: scale(1.05);
-            box-shadow: 0 4px 15px rgba(var(--kongre-accent-rgb), 0.3);
-        }
-
-        #toggle-main-menu:hover::before {
-            left: 100%;
-        }
-
-        #toggle-main-menu i {
-            font-size: 1rem;
-            transition: transform 0.3s ease;
-        }
-
-        #toggle-main-menu:hover i {
-            transform: rotate(180deg);
+            background-color: #343a40 !important;
         }
 
         /* Language Selector */
         select.bg-color2 {
-            background: var(--kongre-accent) !important;
-            border: 1px solid var(--kongre-accent-hover);
-            border-radius: 6px;
-            padding: 0.3rem 0.8rem;
-            font-size: 0.85rem;
-            font-weight: 600;
+            background: #495057 !important;
+            border: 1px solid #6c757d;
+            border-radius: 4px;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.8rem;
         }
 
         select.bg-color2 option {
-            background: var(--kongre-primary);
+            background: #495057;
             color: white;
         }
 
         /* Responsive Adjustments */
         @media (max-width: 768px) {
             .sidebar-heading {
-                padding: 0.6rem 1rem 0.3rem;
+                padding: 0.5rem 0.8rem 0.25rem;
                 font-size: 0.7rem;
             }
 
-            .sidebar-heading .nav-icon {
-                font-size: 0.65rem;
-            }
-
             .nav-tabs .nav-link {
-                padding: 0.6rem 1rem;
-                margin: 0.1rem 0.3rem;
-                font-size: 0.9rem;
+                padding: 0.5rem 0.8rem;
+                font-size: 0.85rem;
             }
 
             .nav-icon {
-                font-size: 0.9rem;
+                font-size: 0.8rem;
                 margin-right: 0.5rem;
-            }
-
-            #toggle-main-menu {
-                padding: 0.5rem 0.7rem;
+                width: 16px;
             }
         }
     </style>
@@ -343,9 +237,6 @@
             {{ config('app.name') }}
         @endif
     </a>
-    <button id="toggle-main-menu" class="btn btn-sm btn-link text-light d-none d-md-block" title="{{ __('common.toggle_menu') }}">
-        <i class="fa-duotone fa-sidebar-flip"></i>
-    </button>
     <div class="w-100">
         @yield('search_bar')
     </div>
@@ -442,40 +333,6 @@
             header.querySelectorAll('h1, h2, h3, h4, h5, h6, span, i, a').forEach(element => {
                 element.style.color = 'white';
             });
-        });
-        
-        // Toggle main menu functionality
-        const toggleMainMenuBtn = document.getElementById('toggle-main-menu');
-        const mainMenu = document.getElementById('kp-menu');
-        const mainContent = document.getElementById('kp-main');
-        
-        // Check if menu state is stored in localStorage
-        const menuHidden = localStorage.getItem('kp_main_menu_hidden') === 'true';
-        
-        // Apply initial state
-        if (menuHidden) {
-            mainMenu.classList.add('d-none');
-            mainMenu.classList.remove('d-md-block');
-            mainContent.classList.add('col-md-12');
-            mainContent.classList.remove('col-md-9', 'col-lg-10', 'ms-sm-auto');
-        }
-        
-        toggleMainMenuBtn.addEventListener('click', function() {
-            if (mainMenu.classList.contains('d-none')) {
-                // Show menu
-                mainMenu.classList.remove('d-none');
-                mainMenu.classList.add('d-md-block');
-                mainContent.classList.remove('col-md-12');
-                mainContent.classList.add('col-md-9', 'col-lg-10', 'ms-sm-auto');
-                localStorage.setItem('kp_main_menu_hidden', 'false');
-            } else {
-                // Hide menu
-                mainMenu.classList.add('d-none');
-                mainMenu.classList.remove('d-md-block');
-                mainContent.classList.add('col-md-12');
-                mainContent.classList.remove('col-md-9', 'col-lg-10', 'ms-sm-auto');
-                localStorage.setItem('kp_main_menu_hidden', 'true');
-            }
         });
     });
 </script>

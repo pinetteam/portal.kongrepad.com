@@ -20,7 +20,7 @@
                         </div>
                         <div class="cta-text">
                             <h3 class="cta-title">{{ __('common.create-new-meeting') }}</h3>
-                            <p class="cta-subtitle">Start organizing your next congress or meeting</p>
+                            <p class="cta-subtitle">{{ __('common.start-organizing-subtitle') }}</p>
                         </div>
                         <div class="cta-action">
                             <a href="{{ route('portal.meeting.index') }}" class="btn btn-create-meeting">

@@ -47,12 +47,59 @@
         </div>
         <div class="card-body p-0">
             @if(isset($document->file_name) && isset($document->file_extension))
-                <div class="ratio ratio-16x9">
-                    <iframe src="{{ asset('storage/documents/' . $document->file_name . '.' . $document->file_extension) }}"></iframe>
+                <div class="document-preview-container" style="min-height: 80vh;">
+                    <iframe src="{{ asset('storage/meetings/' . $meeting->id . '/documents/' . $document->file_name) }}" 
+                            style="border: none; width: 100%; height: 80vh; min-height: 800px;"
+                            title="{{ $document->title }}">
+                    </iframe>
+                </div>
+                <div class="p-3 text-center bg-dark">
+                    <a href="{{ route('portal.meeting.document.download', ['meeting' => $meeting->id, 'document' => $document->file_name]) }}" class="btn btn-kongre-accent btn-lg">
+                        <span class="fa-regular fa-file-arrow-down"></span> {{ __('common.download') }}
+                    </a>
+                    <button class="btn btn-outline-light btn-lg ms-2" onclick="toggleFullscreen()">
+                        <span class="fa-regular fa-expand"></span> {{ __('common.fullscreen') ?? 'Tam Ekran' }}
+                    </button>
                 </div>
             @else
-                <i class="text-info">{{ __('common.unspecified') }}</i>
+                <div class="p-5 text-center">
+                    <i class="text-info fa-regular fa-file-slash fa-3x mb-3"></i>
+                    <h4 class="text-info">{{ __('common.unspecified') }}</h4>
+                    <p class="text-muted">{{ __('common.no-file-available') ?? 'Görüntülenecek dosya yok' }}</p>
+                </div>
             @endif
         </div>
     </div>
+
+<script>
+function toggleFullscreen() {
+    const iframe = document.querySelector('iframe');
+    if (iframe.requestFullscreen) {
+        iframe.requestFullscreen();
+    } else if (iframe.webkitRequestFullscreen) {
+        iframe.webkitRequestFullscreen();
+    } else if (iframe.msRequestFullscreen) {
+        iframe.msRequestFullscreen();
+    }
+}
+</script>
+
+<style>
+.document-preview-container {
+    background: #f8f9fa;
+    border-radius: 0;
+}
+
+.document-preview-container iframe {
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .document-preview-container iframe {
+        height: 60vh !important;
+        min-height: 400px !important;
+    }
+}
+</style>
 @endsection

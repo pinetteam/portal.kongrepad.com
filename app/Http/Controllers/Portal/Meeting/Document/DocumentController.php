@@ -34,10 +34,12 @@ class DocumentController extends Controller
             $document->meeting_id = $request->meeting_id;
             $document->title = $request->input('title');
             if ($request->hasFile('file')) {
-                $file_name = $meeting->id . '-' . time() . '.' . $request->file('file')->extension();
-                $file_path = $request->file('file')->storeAs('meetings/' . $meeting->id . '/documents', $file_name, 'public');
+                $file = $request->file('file');
+                $file_name = $meeting->id . '-' . time() . '.' . $file->extension();
+                $file_path = $file->storeAs('meetings/' . $meeting->id . '/documents', $file_name, 'public');
                 $document->file_name = $file_name;
-                $document->file_path = $file_path;
+                $document->file_extension = $file->extension();
+                $document->file_size = round($file->getSize() / 1024); // KB cinsinden
             }
             $document->sharing_via_email = $request->input('sharing_via_email');
             $document->allowed_to_review = $request->input('allowed_to_review');
@@ -87,15 +89,17 @@ class DocumentController extends Controller
             
             if ($request->hasFile('file')) {
                 // Eski dosya varsa sil
-                if ($document->file_path && Storage::disk('public')->exists($document->file_path)) {
-                    Storage::disk('public')->delete($document->file_path);
+                if ($document->file_name && Storage::disk('public')->exists('meetings/' . $meeting->id . '/documents/' . $document->file_name)) {
+                    Storage::disk('public')->delete('meetings/' . $meeting->id . '/documents/' . $document->file_name);
                 }
                 
                 // Yeni dosyayı yükle
-                $file_name = $meeting->id . '-' . time() . '.' . $request->file('file')->extension();
-                $file_path = $request->file('file')->storeAs('meetings/' . $meeting->id . '/documents', $file_name, 'public');
+                $file = $request->file('file');
+                $file_name = $meeting->id . '-' . time() . '.' . $file->extension();
+                $file_path = $file->storeAs('meetings/' . $meeting->id . '/documents', $file_name, 'public');
                 $document->file_name = $file_name;
-                $document->file_path = $file_path;
+                $document->file_extension = $file->extension();
+                $document->file_size = round($file->getSize() / 1024); // KB cinsinden
             }
             
             $document->sharing_via_email = $request->input('sharing_via_email');
@@ -157,13 +161,28 @@ class DocumentController extends Controller
     }
     public function download(int $meeting, string $document)
     {
-        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
-        $file = $meeting->documents()->where('file_name', $document)->first();
+        $meetingObj = Auth::user()->customer->meetings()->findOrFail($meeting);
+        $file = $meetingObj->documents()->where('file_name', $document)->first();
+        
         if ($file) {
             try {
-                return Storage::download('public/documents/' . $file->file_name . '.' . $file->file_extension);
+                $file_path = 'meetings/' . $meeting . '/documents/' . $file->file_name;
+                
+                // Debug: Dosya yolunu ve var olup olmadığını kontrol et
+                \Log::info('Download attempt', [
+                    'file_path' => $file_path,
+                    'file_exists' => Storage::disk('public')->exists($file_path),
+                    'full_path' => storage_path('app/public/' . $file_path)
+                ]);
+                
+                if (!Storage::disk('public')->exists($file_path)) {
+                    return back()->with('error', 'File not found at: ' . $file_path)->withInput();
+                }
+                
+                return Storage::disk('public')->download($file_path, $file->title . '.' . $file->file_extension);
             } catch (\Exception $e) {
-                return back()->with('error', __('common.file-not-found'))->withInput();
+                \Log::error('Download error', ['error' => $e->getMessage()]);
+                return back()->with('error', __('common.file-not-found') . ' - ' . $e->getMessage())->withInput();
             }
         } else {
             return back()->with('error', __('common.there-is-no-such-file'))->withInput();
