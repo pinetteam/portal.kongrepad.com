@@ -167,3 +167,16 @@ Route::prefix('portal')->name('portal.')->group(function () {
 // Route::get('/test/pusher', function () {
 //     return view('tests.pusher');
 // });
+
+Route::get('/test-locale', function () {
+    // Session'dan locale'i kaldır
+    session()->forget('locale');
+    
+    // Locale'i Türkçe'ye ayarla
+    session()->put('locale', 'tr');
+    app()->setLocale('tr');
+    
+    return "Locale: " . app()->getLocale() . "<br>" . 
+           "Translation: " . __('common.live-stats') . "<br>" .
+           "Session locale: " . session()->get('locale', 'not set');
+});
