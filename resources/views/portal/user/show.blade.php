@@ -1,17 +1,13 @@
 @extends('layout.portal.common')
 @section('title', $user->full_name)
 
-@section('body')
-<div class="breadcrumb-container">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route("portal.dashboard.index") }}"><i class="fa-solid fa-house"></i></a></li>
-            <li class="breadcrumb-item"><a href="{{ route("portal.user.index") }}">{{ __('common.users') }}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{ $user->full_name }}</li>
-        </ol>
-    </nav>
-</div>
+@section('breadcrumb')
+    <li class="breadcrumb-item"><a href="{{ route("portal.dashboard.index") }}"><i class="fa-solid fa-house"></i></a></li>
+    <li class="breadcrumb-item"><a href="{{ route("portal.user.index") }}" class="text-decoration-none">{{ __('common.users') }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ $user->full_name }}</li>
+@endsection
 
+@section('body')
 <!-- Modern Hero Card -->
 <div class="modern-hero-card">
     <div class="hero-content">

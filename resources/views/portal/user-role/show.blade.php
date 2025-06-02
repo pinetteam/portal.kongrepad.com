@@ -1,13 +1,17 @@
 @extends('layout.portal.common')
-@section('title', __('common.user-roles') . ' | ' . $user_role->title)
+@section('title', $user_role->title)
+
+@section('breadcrumb')
+    <li class="breadcrumb-item"><a href="{{ route("portal.dashboard.index") }}"><i class="fa-solid fa-house"></i></a></li>
+    <li class="breadcrumb-item"><a href="{{ route("portal.user-role.index") }}" class="text-decoration-none">{{ __('common.user-roles') }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ $user_role->title }}</li>
+@endsection
 
 @section('body')
 <div class="breadcrumb-container">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route("portal.dashboard.index") }}"><i class="fa-solid fa-house"></i></a></li>
-            <li class="breadcrumb-item"><a href="{{ route("portal.user-role.index") }}">{{ __('common.user-roles') }}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{ $user_role->title }}</li>
+            @yield('breadcrumb')
         </ol>
     </nav>
 </div>

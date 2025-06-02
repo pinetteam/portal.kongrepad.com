@@ -1,18 +1,12 @@
 @extends('layout.portal.meeting-detail')
-@section('title', __('common.score-game') . ' | ' . $score_game->title)
+@section('title', $meeting->title . ' | ' . $scoreGame->title)
 
 @section('breadcrumb')
-    <div class="breadcrumb-container px-0 py-3">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route("portal.dashboard.index") }}"><i class="fa-solid fa-house"></i></a></li>
-                <li class="breadcrumb-item"><a href="{{ route("portal.meeting.index") }}">{{ __('common.meetings') }}</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('portal.meeting.show', $score_game->meeting->id) }}">{{ $score_game->meeting->title }}</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('portal.meeting.report.score-game.index', ['meeting' => $score_game->meeting->id]) }}">{{ __('common.score-game-reports') }}</a></li>
-                <li class="breadcrumb-item active" aria-current="page">{{ $score_game->title }}</li>
-            </ol>
-        </nav>
-    </div>
+    <li class="breadcrumb-item"><a href="{{ route("portal.dashboard.index") }}"><i class="fa-solid fa-house"></i></a></li>
+    <li class="breadcrumb-item"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none">{{ __('common.meetings') }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.show', $meeting->id) }}" class="text-decoration-none">{{ $meeting->title }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.report.score-game.index', $meeting->id) }}" class="text-decoration-none">{{ __('common.score-game-reports') }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ $scoreGame->title }}</li>
 @endsection
 
 @push('styles')
@@ -29,12 +23,12 @@
                         <i class="fa-duotone fa-trophy fa-fade"></i>
                     </div>
                     <div class="hero-text">
-                        <h1 class="hero-title">{{ $score_game->title }}</h1>
-                        <p class="hero-subtitle">{{ __('common.score-game-participants-results') ?? 'Puan oyunu katılımcı sonuçlarını ve sıralamalarını görüntüleyin.' }} - {{ $score_game->meeting->title }}</p>
+                        <h1 class="hero-title">{{ $scoreGame->title }}</h1>
+                        <p class="hero-subtitle">{{ __('common.score-game-participants-results') ?? 'Puan oyunu katılımcı sonuçlarını ve sıralamalarını görüntüleyin.' }} - {{ $meeting->title }}</p>
                         <div class="hero-stats">
                             <span class="stat-item">
                                 <i class="fa-regular fa-users me-1"></i>
-                                {{ $score_game_points->total() }} {{ __('common.participants') }}
+                                {{ $scoreGamePoints->total() }} {{ __('common.participants') }}
                             </span>
                             <span class="stat-item">
                                 <i class="fa-regular fa-chart-line me-1"></i>
@@ -43,7 +37,7 @@
                         </div>
                     </div>
                     <div class="hero-actions">
-                        <a href="{{ route('portal.meeting.report.score-game.index', ['meeting' => $score_game->meeting->id]) }}" 
+                        <a href="{{ route('portal.meeting.report.score-game.index', ['meeting' => $meeting->id]) }}" 
                            class="btn btn-outline-light">
                             <i class="fa-regular fa-arrow-left me-2"></i>
                             {{ __('common.back-to-list') }}
@@ -66,12 +60,12 @@
                     <div class="header-actions">
                         <span class="badge bg-warning">
                             <i class="fa-regular fa-trophy me-1"></i>
-                            {{ $score_game_points->total() }} {{ __('common.participants') }}
+                            {{ $scoreGamePoints->total() }} {{ __('common.participants') }}
                         </span>
                     </div>
                 </div>
                 
-                @if($score_game_points->count() > 0)
+                @if($scoreGamePoints->count() > 0)
                     <div class="card-body p-0">
                         <div class="table-responsive">
                             <table class="modern-table">
@@ -92,10 +86,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($score_game_points as $index => $score_game_point)
+                                    @foreach($scoreGamePoints as $index => $scoreGamePoint)
                                         @php
-                                            $participant = \App\Models\Meeting\Participant\Participant::findOrFail($score_game_point->participant_id);
-                                            $rank = ($score_game_points->currentPage() - 1) * $score_game_points->perPage() + $index + 1;
+                                            $participant = \App\Models\Meeting\Participant\Participant::findOrFail($scoreGamePoint->participant_id);
+                                            $rank = ($scoreGamePoints->currentPage() - 1) * $scoreGamePoints->perPage() + $index + 1;
                                         @endphp
                                         <tr>
                                             <td>
@@ -113,7 +107,7 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <a href="{{ route('portal.meeting.participant.show', ['meeting' => $score_game->meeting->id, 'participant' => $participant->id]) }}" 
+                                                <a href="{{ route('portal.meeting.participant.show', ['meeting' => $meeting->id, 'participant' => $participant->id]) }}" 
                                                    class="participant-link">
                                                     <div class="item-name">{{ $participant->full_name }}</div>
                                                 </a>
@@ -121,7 +115,7 @@
                                             <td>
                                                 <span class="score-badge">
                                                     <i class="fa-regular fa-hundred-points me-1"></i>
-                                                    {{ number_format($score_game_point->total_points) }} {{ __('common.points') }}
+                                                    {{ number_format($scoreGamePoint->total_points) }} {{ __('common.points') }}
                                                 </span>
                                             </td>
                                         </tr>
@@ -132,10 +126,10 @@
                     </div>
                     
                     <!-- Pagination -->
-                    @if($score_game_points->hasPages())
+                    @if($scoreGamePoints->hasPages())
                         <div class="card-footer">
                             <div class="d-flex justify-content-center">
-                                {{ $score_game_points->links() }}
+                                {{ $scoreGamePoints->links() }}
                             </div>
                         </div>
                     @endif

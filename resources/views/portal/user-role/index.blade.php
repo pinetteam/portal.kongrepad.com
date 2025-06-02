@@ -1,6 +1,11 @@
 @extends('layout.portal.common')
 @section('title', __('common.user-roles'))
 
+@section('breadcrumb')
+    <li class="breadcrumb-item"><a href="{{ route("portal.dashboard.index") }}"><i class="fa-solid fa-house"></i></a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ __('common.user-roles') }}</li>
+@endsection
+
 @section('body')
 <div class="breadcrumb-container">
     <nav aria-label="breadcrumb">
