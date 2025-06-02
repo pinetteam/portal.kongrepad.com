@@ -188,33 +188,9 @@ class LanguageController extends Controller
 
     public function export(Language $language)
     {
-        $translations = $language->translations()->get()->groupBy('group');
-        
-        foreach ($translations as $group => $items) {
-            $data = [];
-            foreach ($items as $item) {
-                $data[$item->key] = $item->value;
-            }
-            
-            // Eğer dil dizini yoksa oluştur
-            $langPath = resource_path('lang/' . $language->code);
-            if (!File::exists($langPath)) {
-                File::makeDirectory($langPath, 0755, true);
-            }
-            
-            // Dosyayı oluştur
-            $filePath = $langPath . '/' . $group . '.php';
-            $content = "<?php\n\nreturn " . var_export($data, true) . ";\n";
-            File::put($filePath, $content);
-        }
-        
-        return redirect()->route('portal.language.index')
-            ->with('success', __('common.language-exported-successfully'));
-    }
-
-    public function import(Language $language)
-    {
+        // Tüm çeviri dosyalarını al
         $langPath = resource_path('lang/' . $language->code);
+        $allTranslations = [];
         
         if (File::exists($langPath)) {
             $langFiles = File::files($langPath);
@@ -224,8 +200,87 @@ class LanguageController extends Controller
                 $translations = Lang::get($group, [], $language->code);
                 
                 if (is_array($translations)) {
+                    $allTranslations[$group] = $translations;
+                }
+            }
+        }
+        
+        // Veritabanından da çevirileri al ve birleştir
+        $dbTranslations = $language->translations()->get()->groupBy('group');
+        foreach ($dbTranslations as $group => $items) {
+            if (!isset($allTranslations[$group])) {
+                $allTranslations[$group] = [];
+            }
+            
+            foreach ($items as $item) {
+                $allTranslations[$group][$item->key] = $item->value;
+            }
+        }
+        
+        // JSON formatında export et
+        $exportData = [
+            'language' => [
+                'name' => $language->name,
+                'code' => $language->code,
+                'is_active' => $language->is_active,
+                'is_default' => $language->is_default,
+            ],
+            'translations' => $allTranslations,
+            'exported_at' => now()->toISOString(),
+            'exported_by' => auth()->user()->name ?? 'System'
+        ];
+        
+        $fileName = 'translations_' . $language->code . '_' . date('Y-m-d_H-i-s') . '.json';
+        
+        return response()->json($exportData)
+            ->header('Content-Type', 'application/json')
+            ->header('Content-Disposition', 'attachment; filename="' . $fileName . '"');
+    }
+
+    public function import(Request $request, Language $language)
+    {
+        $request->validate([
+            'import_file' => 'required|file|mimes:json|max:10240', // 10MB max
+        ]);
+        
+        try {
+            $file = $request->file('import_file');
+            $content = file_get_contents($file->getPathname());
+            $data = json_decode($content, true);
+            
+            if (!$data || !isset($data['translations'])) {
+                return redirect()->back()
+                    ->with('error', __('common.invalid-import-file-format'));
+            }
+            
+            $importedCount = 0;
+            
+            // Çevirileri dosyalara kaydet
+            foreach ($data['translations'] as $group => $translations) {
+                if (is_array($translations)) {
+                    // Dil dosyası yolu
+                    $langPath = resource_path('lang/' . $language->code);
+                    if (!File::exists($langPath)) {
+                        File::makeDirectory($langPath, 0755, true);
+                    }
+                    
+                    $filePath = $langPath . '/' . $group . '.php';
+                    
+                    // Mevcut dosyayı al (varsa)
+                    $existingTranslations = [];
+                    if (File::exists($filePath)) {
+                        $existingTranslations = include $filePath;
+                    }
+                    
+                    // Yeni çevirileri birleştir
+                    $mergedTranslations = array_merge($existingTranslations, $translations);
+                    
+                    // Dosyayı kaydet
+                    $this->saveTranslationFile($filePath, $mergedTranslations);
+                    
+                    // Veritabanına da kaydet
                     foreach ($translations as $key => $value) {
-                        if (is_string($value)) {
+                        if (is_string($value) && !empty($value)) {
                             Translation::updateOrCreate(
                                 [
                                     'language_id' => $language->id,
@@ -236,17 +291,160 @@ class LanguageController extends Controller
                                     'value' => $value,
                                 ]
                             );
+                            $importedCount++;
                         }
                     }
                 }
             }
             
-            return redirect()->route('portal.language.index')
-                ->with('success', __('common.language-imported-successfully'));
+            return redirect()->back()
+                ->with('success', __('common.translations-imported-successfully', ['count' => $importedCount]));
+                
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', __('common.import-failed') . ': ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Excel formatında export et
+     */
+    public function exportExcel(Language $language)
+    {
+        // Tüm çeviri dosyalarını al
+        $langPath = resource_path('lang/' . $language->code);
+        $baseLanguage = Language::where('is_default', true)->first();
+        $baseLangPath = resource_path('lang/' . $baseLanguage->code);
+        
+        $exportData = [];
+        $exportData[] = ['Group', 'Key', 'Original (' . $baseLanguage->code . ')', 'Translation (' . $language->code . ')'];
+        
+        if (File::exists($baseLangPath)) {
+            $langFiles = File::files($baseLangPath);
+            
+            foreach ($langFiles as $file) {
+                $group = pathinfo($file->getFilename(), PATHINFO_FILENAME);
+                
+                // Temel dil çevirilerini al
+                $baseTranslations = Lang::get($group, [], $baseLanguage->code);
+                
+                // Hedef dil çevirilerini al
+                $targetTranslations = Lang::get($group, [], $language->code);
+                
+                if (is_array($baseTranslations)) {
+                    foreach ($baseTranslations as $key => $originalValue) {
+                        if (is_string($originalValue)) {
+                            $translatedValue = isset($targetTranslations[$key]) ? $targetTranslations[$key] : '';
+                            $exportData[] = [$group, $key, $originalValue, $translatedValue];
+                        }
+                    }
+                }
+            }
         }
         
-        return redirect()->route('portal.language.index')
-            ->with('error', __('common.language-files-not-found'));
+        // CSV formatında oluştur
+        $fileName = 'translations_' . $language->code . '_' . date('Y-m-d_H-i-s') . '.csv';
+        
+        $callback = function() use ($exportData) {
+            $file = fopen('php://output', 'w');
+            
+            // UTF-8 BOM ekle (Excel için)
+            fprintf($file, chr(0xEF).chr(0xBB).chr(0xBF));
+            
+            foreach ($exportData as $row) {
+                fputcsv($file, $row, ';'); // Excel için noktalı virgül kullan
+            }
+            
+            fclose($file);
+        };
+        
+        return response()->stream($callback, 200, [
+            'Content-Type' => 'text/csv; charset=UTF-8',
+            'Content-Disposition' => 'attachment; filename="' . $fileName . '"',
+        ]);
+    }
+
+    /**
+     * CSV dosyasından import et
+     */
+    public function importCsv(Request $request, Language $language)
+    {
+        $request->validate([
+            'csv_file' => 'required|file|mimes:csv,txt|max:10240', // 10MB max
+        ]);
+        
+        try {
+            $file = $request->file('csv_file');
+            $handle = fopen($file->getPathname(), 'r');
+            
+            // İlk satırı atla (başlık)
+            fgetcsv($handle, 1000, ';');
+            
+            $importedCount = 0;
+            $groupedTranslations = [];
+            
+            while (($data = fgetcsv($handle, 1000, ';')) !== FALSE) {
+                if (count($data) >= 4) {
+                    $group = trim($data[0]);
+                    $key = trim($data[1]);
+                    $translation = trim($data[3]); // 4. sütun çeviri
+                    
+                    if (!empty($group) && !empty($key) && !empty($translation)) {
+                        if (!isset($groupedTranslations[$group])) {
+                            $groupedTranslations[$group] = [];
+                        }
+                        $groupedTranslations[$group][$key] = $translation;
+                    }
+                }
+            }
+            
+            fclose($handle);
+            
+            // Çevirileri kaydet
+            foreach ($groupedTranslations as $group => $translations) {
+                // Dil dosyası yolu
+                $langPath = resource_path('lang/' . $language->code);
+                if (!File::exists($langPath)) {
+                    File::makeDirectory($langPath, 0755, true);
+                }
+                
+                $filePath = $langPath . '/' . $group . '.php';
+                
+                // Mevcut dosyayı al (varsa)
+                $existingTranslations = [];
+                if (File::exists($filePath)) {
+                    $existingTranslations = include $filePath;
+                }
+                
+                // Yeni çevirileri birleştir
+                $mergedTranslations = array_merge($existingTranslations, $translations);
+                
+                // Dosyayı kaydet
+                $this->saveTranslationFile($filePath, $mergedTranslations);
+                
+                // Veritabanına da kaydet
+                foreach ($translations as $key => $value) {
+                    Translation::updateOrCreate(
+                        [
+                            'language_id' => $language->id,
+                            'key' => $key,
+                            'group' => $group,
+                        ],
+                        [
+                            'value' => $value,
+                        ]
+                    );
+                    $importedCount++;
+                }
+            }
+            
+            return redirect()->back()
+                ->with('success', __('common.csv-imported-successfully', ['count' => $importedCount]));
+                
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', __('common.csv-import-failed') . ': ' . $e->getMessage());
+        }
     }
 
     /**

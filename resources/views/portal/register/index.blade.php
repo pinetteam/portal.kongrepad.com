@@ -17,8 +17,11 @@
     <form action="{{ route('change.locale') }}" method="POST">
         @csrf
         <select class="bg-color2 text-light mx-4 mx-lg-3 mt-lg-0 mt-2 mb-2 mb-lg-0" name="locale" onchange="this.form.submit()">
-            <option value="en" {{ session('locale') == 'en' ? 'selected' : '' }}>EN</option>
-            <option value="tr" {{ session('locale') == 'tr' ? 'selected' : '' }}>TR</option>
+            @foreach($activeLanguages as $language)
+                <option value="{{ $language->code }}" {{ session('locale') == $language->code ? 'selected' : '' }}>
+                    {{ strtoupper($language->code) }}
+                </option>
+            @endforeach
         </select>
     </form>
 </header>

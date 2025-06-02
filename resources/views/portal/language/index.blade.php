@@ -75,12 +75,30 @@
                             <a href="{{ route('portal.language.translations', $language->id) }}" class="btn btn-primary btn-sm" title="{{ __('common.translations') }}">
                                 <i class="fa-duotone fa-globe"></i>
                             </a>
-                            <a href="{{ route('portal.language.export', $language->id) }}" class="btn btn-info btn-sm" title="{{ __('common.export') }}">
-                                <i class="fa-duotone fa-file-export"></i>
-                            </a>
-                            <a href="{{ route('portal.language.import', $language->id) }}" class="btn btn-success btn-sm" title="{{ __('common.import') }}">
+                            
+                            <!-- Export Dropdown -->
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-info btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" title="{{ __('common.export') }}">
+                                    <i class="fa-duotone fa-file-export"></i>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{{ route('portal.language.export', $language->id) }}">
+                                        <i class="fa-duotone fa-file-code me-2"></i>{{ __('common.export-json') }}
+                                    </a></li>
+                                    <li><a class="dropdown-item" href="{{ route('portal.language.export-excel', $language->id) }}">
+                                        <i class="fa-duotone fa-file-excel me-2"></i>{{ __('common.export-excel') }}
+                                    </a></li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Import Button -->
+                            <button class="btn btn-success btn-sm" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#import-modal-{{ $language->id }}" 
+                                    title="{{ __('common.import') }}">
                                 <i class="fa-duotone fa-file-import"></i>
-                            </a>
+                            </button>
+                            
                             <a href="{{ route('portal.language.edit', $language->id) }}" class="btn btn-warning btn-sm" title="{{ __('common.edit') }}">
                                 <i class="fa-duotone fa-pen-to-square"></i>
                             </a>
@@ -133,6 +151,42 @@
     </div>
 </div>
 @endif
+@endforeach
+
+<!-- Import Modals -->
+@foreach($languages as $language)
+<div class="modal fade" id="import-modal-{{ $language->id }}" tabindex="-1" aria-labelledby="import-modal-label-{{ $language->id }}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="import-modal-label-{{ $language->id }}">
+                    {{ __('common.import-translations') }} - {{ $language->name }}
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('portal.language.import', $language->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="import-file-{{ $language->id }}" class="form-label">{{ __('common.select-file') }}</label>
+                        <input type="file" class="form-control" id="import-file-{{ $language->id }}" name="file" accept=".json,.csv" required>
+                        <div class="form-text">{{ __('common.supported-formats') }}: JSON, CSV</div>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="overwrite-{{ $language->id }}" name="overwrite" value="1">
+                        <label class="form-check-label" for="overwrite-{{ $language->id }}">
+                            {{ __('common.overwrite-existing-translations') }}
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('common.cancel') }}</button>
+                    <button type="submit" class="btn btn-success">{{ __('common.import') }}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 @endforeach
 
 @if(session('success'))

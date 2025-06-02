@@ -78,6 +78,40 @@
     </div>
 </div>
 
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                @php
+                    $totalEmptyTranslations = collect($translations)->flatten(1)->where('translated', '')->count();
+                @endphp
+                @if($totalEmptyTranslations > 0)
+                <div class="alert alert-info d-flex align-items-center">
+                    <i class="fa-duotone fa-info-circle me-2"></i>
+                    <span>{{ $totalEmptyTranslations }} {{ __('common.empty-translations') }} {{ __('common.found') }}</span>
+                </div>
+                @endif
+            </div>
+            <div>
+                @if($totalEmptyTranslations > 0)
+                <form action="{{ route('portal.language.auto-translate', $language->id) }}" method="POST" class="d-inline">
+                    @csrf
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa-duotone fa-wand-magic-sparkles me-2"></i>{{ __('common.translate-from-english') }}
+                    </button>
+                </form>
+                @endif
+                
+                <form action="{{ route('portal.language.list-empty-translations', $language->id) }}" method="GET" class="d-inline ms-2">
+                    <button type="submit" class="btn btn-outline-secondary">
+                        <i class="fa-duotone fa-list me-2"></i>{{ __('common.empty-translations') }}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 @foreach($translations as $group => $items)
 <div class="row mb-4 translation-group" data-group="{{ $group }}">
     <div class="col-md-12">
@@ -89,12 +123,27 @@
                         $missingCount = collect($items)->where('is_missing', true)->count();
                         $translatedCount = collect($items)->where('exists', true)->count();
                         $totalCount = count($items);
+                        $emptyCount = collect($items)->where('translated', '')->count();
                     @endphp
                     <span class="badge bg-info">{{ $totalCount }} {{ __('common.keys') }}</span>
                     @if($missingCount > 0)
                         <span class="badge bg-warning">{{ $missingCount }} {{ __('common.missing') }}</span>
                     @endif
+                    @if($emptyCount > 0)
+                        <span class="badge bg-secondary">{{ $emptyCount }} {{ __('common.empty-translations') }}</span>
+                    @endif
                     <span class="badge bg-success">{{ $translatedCount }} {{ __('common.translated') }}</span>
+                    
+                    <!-- Auto Translate Button -->
+                    @if($emptyCount > 0)
+                    <form action="{{ route('portal.language.auto-translate', $language->id) }}" method="POST" class="d-inline ms-2">
+                        @csrf
+                        <input type="hidden" name="group" value="{{ $group }}">
+                        <button type="submit" class="btn btn-primary btn-sm" title="{{ __('common.auto-translate') }}">
+                            <i class="fa-duotone fa-wand-magic-sparkles me-1"></i>{{ __('common.auto-translate') }}
+                        </button>
+                    </form>
+                    @endif
                 </div>
             </div>
             <div class="card-body p-0">

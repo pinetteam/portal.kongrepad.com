@@ -165,8 +165,12 @@ Route::prefix('portal')->name('portal.')->group(function () {
         Route::get('/language/{language}/translations', [\App\Http\Controllers\Portal\Language\LanguageController::class, 'translations'])->name('language.translations');
         Route::post('/language/{language}/translations', [\App\Http\Controllers\Portal\Language\LanguageController::class, 'updateTranslation'])->name('language.translations.update');
         Route::post('/language/{language}/add-missing-keys', [\App\Http\Controllers\Portal\Language\LanguageController::class, 'addMissingKeys'])->name('language.add-missing-keys');
+        Route::post('/language/{language}/auto-translate', [\App\Http\Controllers\Portal\Language\LanguageController::class, 'autoTranslate'])->name('language.auto-translate');
+        Route::get('/language/{language}/list-empty-translations', [\App\Http\Controllers\Portal\Language\LanguageController::class, 'listEmptyTranslations'])->name('language.list-empty-translations');
         Route::get('/language/{language}/export', [\App\Http\Controllers\Portal\Language\LanguageController::class, 'export'])->name('language.export');
-        Route::get('/language/{language}/import', [\App\Http\Controllers\Portal\Language\LanguageController::class, 'import'])->name('language.import');
+        Route::get('/language/{language}/export-excel', [\App\Http\Controllers\Portal\Language\LanguageController::class, 'exportExcel'])->name('language.export-excel');
+        Route::post('/language/{language}/import', [\App\Http\Controllers\Portal\Language\LanguageController::class, 'import'])->name('language.import');
+        Route::post('/language/{language}/import-csv', [\App\Http\Controllers\Portal\Language\LanguageController::class, 'importCsv'])->name('language.import-csv');
         
         Route::get('/session-question-on-screen/{id}', [\App\Http\Controllers\Portal\Meeting\Hall\Program\Session\Question\QuestionController::class,'on_screen'])->name('session-question.on-screen');
     });
