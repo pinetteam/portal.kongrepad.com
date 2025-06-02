@@ -29,7 +29,7 @@
                                 <i class="fa-regular fa-hotel me-1"></i>
                                 {{ $halls->total() }} {{ __('common.halls') }}
                             </span>
-                            <span class="badge-status status-active">
+                            <span class="stat-item">
                                 <i class="fa-regular fa-toggle-on me-1"></i>
                                 {{ $halls->where('status', true)->count() }} {{ __('common.active') }}
                             </span>

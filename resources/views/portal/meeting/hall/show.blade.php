@@ -29,7 +29,7 @@
                                 <i class="fa-regular fa-calendar-week me-1"></i>
                                 {{ $hall->programs->count() }} {{ __('common.programs') }}
                             </span>
-                            <span class="badge-status {{ $hall->status ? 'status-active' : 'status-inactive' }}">
+                            <span class="stat-item">
                                 <i class="fa-regular fa-{{ $hall->status ? 'toggle-on' : 'toggle-off' }} me-1"></i>
                                 {{ $hall->status ? __('common.active') : __('common.inactive') }}
                             </span>
