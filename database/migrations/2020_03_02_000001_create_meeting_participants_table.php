@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('last_login_agent', 511)->nullable();
             $table->dateTime('last_login_datetime')->nullable();
             $table->timestamp('last_activity')->nullable();
+            $table->timestamp('last_activity_at')->nullable()->after('last_activity')->index();
             $table->enum('type', ['agent', 'attendee', 'team'])->default('attendee');
             $table->boolean('requested_all_documents')->default(0)->comment('0=no;1=yes');
             $table->boolean('enrolled')->default(0)->comment('0=no;1=yes');
