@@ -20,6 +20,28 @@
     </div>
 </div>
 
+@if(!empty($missingKeys))
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="alert alert-warning d-flex align-items-center justify-content-between">
+            <div>
+                <i class="fa-duotone fa-triangle-exclamation me-2"></i>
+                <strong>{{ __('common.missing-translation-keys-found') }}</strong>
+                <span class="ms-2">
+                    {{ __('common.found-missing-keys-count', ['count' => collect($missingKeys)->flatten()->count()]) }}
+                </span>
+            </div>
+            <form action="{{ route('portal.language.add-missing-keys', $language->id) }}" method="POST" class="d-inline">
+                @csrf
+                <button type="submit" class="btn btn-warning btn-sm">
+                    <i class="fa-duotone fa-plus me-2"></i>{{ __('common.add-missing-keys-automatically') }}
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+@endif
+
 <div class="row mb-4">
     <div class="col-md-12">
         <div class="modern-main-card">
@@ -43,6 +65,7 @@
                             <option value="">{{ __('common.all') }}</option>
                             <option value="translated">{{ __('common.translated') }}</option>
                             <option value="untranslated">{{ __('common.untranslated') }}</option>
+                            <option value="missing">{{ __('common.missing-keys') }}</option>
                         </select>
                     </div>
                     <div class="col-md-6 mb-3">
@@ -62,7 +85,16 @@
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h4 class="mb-0"><i class="fa-duotone fa-layer-group me-2"></i>{{ $group }}</h4>
                 <div>
-                    <span class="badge bg-info">{{ count($items) }} {{ __('common.keys') }}</span>
+                    @php
+                        $missingCount = collect($items)->where('is_missing', true)->count();
+                        $translatedCount = collect($items)->where('exists', true)->count();
+                        $totalCount = count($items);
+                    @endphp
+                    <span class="badge bg-info">{{ $totalCount }} {{ __('common.keys') }}</span>
+                    @if($missingCount > 0)
+                        <span class="badge bg-warning">{{ $missingCount }} {{ __('common.missing') }}</span>
+                    @endif
+                    <span class="badge bg-success">{{ $translatedCount }} {{ __('common.translated') }}</span>
                 </div>
             </div>
             <div class="card-body p-0">
@@ -78,19 +110,30 @@
                         </thead>
                         <tbody>
                             @foreach($items as $key => $item)
-                            <tr class="translation-row {{ $item['exists'] ? 'translated-item' : 'untranslated-item' }}">
+                            <tr class="translation-row {{ $item['exists'] ? 'translated-item' : 'untranslated-item' }} {{ isset($item['is_missing']) && $item['is_missing'] ? 'missing-item' : '' }}">
                                 <td>
-                                    <div class="fw-semibold text-kongre-primary">{{ $key }}</div>
+                                    <div class="fw-semibold text-kongre-primary d-flex align-items-center">
+                                        {{ $key }}
+                                        @if(isset($item['is_missing']) && $item['is_missing'])
+                                            <span class="badge bg-warning ms-2" title="{{ __('common.missing-key-found-in-code') }}">
+                                                <i class="fa-duotone fa-triangle-exclamation"></i>
+                                            </span>
+                                        @endif
+                                    </div>
                                 </td>
                                 <td>
-                                    <div class="text-muted">{{ $item['original'] }}</div>
+                                    @if(isset($item['is_missing']) && $item['is_missing'])
+                                        <div class="text-muted fst-italic">{{ __('common.key-found-in-code-but-not-defined') }}</div>
+                                    @else
+                                        <div class="text-muted">{{ $item['original'] }}</div>
+                                    @endif
                                 </td>
                                 <td>
                                     <form id="translation-form-{{ $group }}-{{ $key }}" action="{{ route('portal.language.translations.update', $language->id) }}" method="POST">
                                         @csrf
                                         <input type="hidden" name="key" value="{{ $key }}">
                                         <input type="hidden" name="group" value="{{ $group }}">
-                                        <textarea name="value" class="form-control">{{ $item['translated'] }}</textarea>
+                                        <textarea name="value" class="form-control" placeholder="{{ isset($item['is_missing']) && $item['is_missing'] ? __('common.enter-translation-for-missing-key') : '' }}">{{ $item['translated'] }}</textarea>
                                     </form>
                                 </td>
                                 <td class="text-end">
@@ -131,6 +174,17 @@
 </script>
 @endif
 
+<style>
+.missing-item {
+    background-color: rgba(255, 193, 7, 0.1) !important;
+    border-left: 4px solid #ffc107;
+}
+
+.missing-item:hover {
+    background-color: rgba(255, 193, 7, 0.2) !important;
+}
+</style>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Save translation AJAX
@@ -162,7 +216,9 @@
                     row.style.display = '';
                 } else if (selectedStatus === 'translated' && row.classList.contains('translated-item')) {
                     row.style.display = '';
-                } else if (selectedStatus === 'untranslated' && row.classList.contains('untranslated-item')) {
+                } else if (selectedStatus === 'untranslated' && row.classList.contains('untranslated-item') && !row.classList.contains('missing-item')) {
+                    row.style.display = '';
+                } else if (selectedStatus === 'missing' && row.classList.contains('missing-item')) {
                     row.style.display = '';
                 } else {
                     row.style.display = 'none';

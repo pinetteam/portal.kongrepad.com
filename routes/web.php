@@ -164,6 +164,7 @@ Route::prefix('portal')->name('portal.')->group(function () {
         Route::resource('/language', \App\Http\Controllers\Portal\Language\LanguageController::class);
         Route::get('/language/{language}/translations', [\App\Http\Controllers\Portal\Language\LanguageController::class, 'translations'])->name('language.translations');
         Route::post('/language/{language}/translations', [\App\Http\Controllers\Portal\Language\LanguageController::class, 'updateTranslation'])->name('language.translations.update');
+        Route::post('/language/{language}/add-missing-keys', [\App\Http\Controllers\Portal\Language\LanguageController::class, 'addMissingKeys'])->name('language.add-missing-keys');
         Route::get('/language/{language}/export', [\App\Http\Controllers\Portal\Language\LanguageController::class, 'export'])->name('language.export');
         Route::get('/language/{language}/import', [\App\Http\Controllers\Portal\Language\LanguageController::class, 'import'])->name('language.import');
         
