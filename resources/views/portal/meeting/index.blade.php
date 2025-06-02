@@ -4,6 +4,16 @@
     <li class="breadcrumb-item active" aria-current="page">{{__('common.meetings')}}</li>
 @endsection
 @section('body')
+    <!-- Breadcrumb Navigation -->
+    <div class="breadcrumb-container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route("portal.dashboard.index") }}"><i class="fa-solid fa-house"></i></a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ __('common.meetings') }}</li>
+            </ol>
+        </nav>
+    </div>
+
     <!-- Meetings Hero Section -->
     <div class="row mb-4">
         <div class="col-12">

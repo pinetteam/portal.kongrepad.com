@@ -2,17 +2,11 @@
 @section('title', $virtual_stand->title . ' | ' . __('common.virtual-stand'))
 
 @section('breadcrumb')
-    <div class="breadcrumb-container px-0 py-3">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route("portal.dashboard.index") }}"><i class="fa-solid fa-house"></i></a></li>
-                <li class="breadcrumb-item"><a href="{{ route("portal.meeting.index") }}">{{ __('common.meetings') }}</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('portal.meeting.show', $virtual_stand->meeting->id) }}">{{ $virtual_stand->meeting->title }}</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('portal.meeting.virtual-stand.index', ['meeting' => $virtual_stand->meeting->id]) }}">{{ __('common.virtual-stands') }}</a></li>
-                <li class="breadcrumb-item active" aria-current="page">{{ $virtual_stand->title }}</li>
-            </ol>
-        </nav>
-    </div>
+    <li class="breadcrumb-item"><a href="{{ route("portal.dashboard.index") }}"><i class="fa-solid fa-house"></i></a></li>
+    <li class="breadcrumb-item"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none">{{ __('common.meetings') }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.show', $virtual_stand->meeting->id) }}" class="text-decoration-none">{{ $virtual_stand->meeting->title }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.virtual-stand.index', ['meeting' => $virtual_stand->meeting->id]) }}" class="text-decoration-none">{{ __('common.virtual-stands') }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ $virtual_stand->title }}</li>
 @endsection
 
 @push('styles')

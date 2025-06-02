@@ -16,94 +16,7 @@
     <!-- Meeting Styles - Consolidated CSS -->
     <link rel="stylesheet" href="{{ asset('css/meeting-pages-theme.css') }}">
     
-    <style>
-        body {
-            background-color: #f5f5f5;
-        }
-        
-        /* Header Navbar */
-        #kp-header {
-            background-color: var(--kongre-primary) !important;
-        }
-        
-        .navbar-brand {
-            background: linear-gradient(135deg, var(--kongre-primary), var(--kongre-secondary));
-            color: white !important;
-            font-weight: 600;
-            border-radius: 0;
-            transition: all 0.2s ease;
-        }
-
-        .navbar-brand:hover {
-            background: linear-gradient(135deg, var(--kongre-secondary), var(--kongre-primary));
-            color: white !important;
-            text-decoration: none;
-        }
-        
-        /* Sidebar */
-        .sidebar {
-            background-color: var(--kongre-primary);
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .sidebar-heading {
-            color: rgba(255, 255, 255, 0.75);
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            padding: 0.75rem 1rem 0.25rem;
-            margin-top: 1rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .sidebar-heading:first-child {
-            margin-top: 0;
-            border-top: none;
-        }
-
-        .nav-tabs {
-            border: none;
-        }
-
-        .nav-tabs .nav-link {
-            background: none;
-            border: none;
-            color: rgba(255, 255, 255, 0.75);
-            padding: 0.6rem 1rem;
-            border-radius: 0;
-            display: flex;
-            align-items: center;
-            font-weight: 400;
-            transition: all 0.2s ease;
-            font-size: 0.9rem;
-        }
-
-        .nav-tabs .nav-link:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-        }
-
-        .nav-tabs .nav-link.active {
-            background-color: var(--kongre-accent);
-            color: white;
-            border-left: 3px solid var(--kongre-accent);
-        }
-
-        .nav-icon {
-            margin-right: 0.6rem;
-            font-size: 0.85rem;
-            width: 18px;
-            text-align: center;
-        }
-        
-        /* Essential overrides only */
-        .card {
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 0.5rem;
-            overflow: hidden;
-        }
-    </style>
+  
 </head>
 <body class="d-flex flex-column h-100">
 <div id="kp-loading" class="d-flex align-items-center justify-content-center">
@@ -277,7 +190,15 @@
         </nav>
         <main class="col-md-9 col-lg-10 ms-sm-auto px-md-4 flex-shrink-0" id="kp-main">
             <!-- Breadcrumb -->
-            @if(!View::hasSection('breadcrumb'))
+            @if(View::hasSection('breadcrumb'))
+                <div class="breadcrumb-container px-0 py-3">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            @yield('breadcrumb')
+                        </ol>
+                    </nav>
+                </div>
+            @else
                 <!-- Default Breadcrumb for Meeting Pages -->
                 <div class="breadcrumb-container px-0 py-3">
                     <nav aria-label="breadcrumb">
@@ -291,8 +212,6 @@
                         </ol>
                     </nav>
                 </div>
-            @else
-                @yield('breadcrumb')
             @endif
 
             @yield('meeting_content')

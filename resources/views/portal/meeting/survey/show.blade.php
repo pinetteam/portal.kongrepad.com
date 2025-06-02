@@ -1,27 +1,11 @@
 @extends('layout.portal.meeting-detail')
 @section('title', $meeting->title . ' | ' . $survey->title)
 @section('breadcrumb')
-    <div class="breadcrumb-container">
-        <nav aria-label="breadcrumb" class="breadcrumb-nav">
-            <ol class="breadcrumb bg-transparent mb-0">
-                <li class="breadcrumb-item">
-                    <a href="{{ route('portal.index') }}" class="breadcrumb-link">
-                        <i class="fas fa-home me-1"></i>{{ __('common.dashboard') }}
-                    </a>
-                </li>
-                <li class="breadcrumb-item">
-                    <a href="{{ route("portal.meeting.index") }}" class="breadcrumb-link">{{ __('common.meetings') }}</a>
-                </li>
-                <li class="breadcrumb-item">
-                    <a href="{{ route('portal.meeting.show', $meeting->id) }}" class="breadcrumb-link">{{ $meeting->title }}</a>
-                </li>
-                <li class="breadcrumb-item">
-                    <a href="{{ route('portal.meeting.survey.index', $meeting->id) }}" class="breadcrumb-link">{{ __('common.surveys') }}</a>
-                </li>
-                <li class="breadcrumb-item active" aria-current="page">{{ $survey->title }}</li>
-            </ol>
-        </nav>
-    </div>
+    <li class="breadcrumb-item"><a href="{{ route("portal.dashboard.index") }}"><i class="fa-solid fa-house"></i></a></li>
+    <li class="breadcrumb-item"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none">{{ __('common.meetings') }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.show', $meeting->id) }}" class="text-decoration-none">{{ $meeting->title }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.survey.index', $meeting->id) }}" class="text-decoration-none">{{ __('common.surveys') }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ $survey->title }}</li>
 @endsection
 
 @push('styles')
