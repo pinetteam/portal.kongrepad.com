@@ -8,6 +8,7 @@ use App\Models\Translation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Lang;
+use Google\Cloud\Translate\V2\TranslateClient;
 
 class LanguageController extends Controller
 {
@@ -649,5 +650,840 @@ class LanguageController extends Controller
     {
         $content = "<?php\n\nreturn " . var_export($translations, true) . ";\n";
         File::put($filePath, $content);
+    }
+
+    /**
+     * Otomatik çeviri yap
+     */
+    public function autoTranslate(Request $request, Language $language)
+    {
+        try {
+            $baseLanguage = Language::where('is_default', true)->first();
+            if (!$baseLanguage) {
+                return redirect()->back()
+                    ->with('error', __('common.no-base-language-found'));
+            }
+
+            $group = $request->input('group');
+            $translatedCount = 0;
+
+            // Boş çevirileri bul
+            $emptyTranslations = $this->findEmptyTranslations($language->code, $baseLanguage->code);
+
+            if ($group) {
+                // Sadece belirtilen grup için çeviri yap
+                if (isset($emptyTranslations[$group])) {
+                    $translatedCount += $this->translateGroup($group, $emptyTranslations[$group], $language, $baseLanguage);
+                }
+            } else {
+                // Tüm gruplar için çeviri yap
+                foreach ($emptyTranslations as $groupName => $keys) {
+                    $translatedCount += $this->translateGroup($groupName, $keys, $language, $baseLanguage);
+                }
+            }
+
+            if ($translatedCount > 0) {
+                return redirect()->back()
+                    ->with('success', __('common.translation-completed') . ' (' . $translatedCount . ' ' . __('common.translations') . ')');
+            } else {
+                return redirect()->back()
+                    ->with('info', __('common.no-empty-translations-found'));
+            }
+
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', __('common.translation-failed') . ': ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Boş çevirileri listele
+     */
+    public function listEmptyTranslations(Language $language)
+    {
+        try {
+            \Log::info('listEmptyTranslations called for language: ' . $language->code);
+            
+            $baseLanguage = Language::where('is_default', true)->first();
+            
+            // Eğer default language yoksa, 'en' kodlu dili kullan
+            if (!$baseLanguage) {
+                $baseLanguage = Language::where('code', 'en')->first();
+                \Log::warning('No default language found, using English as base');
+            }
+            
+            // Hala yoksa, ilk dili kullan
+            if (!$baseLanguage) {
+                $baseLanguage = Language::first();
+                \Log::warning('No English language found, using first available language');
+            }
+            
+            if (!$baseLanguage) {
+                \Log::error('No languages found in database');
+                return redirect()->back()
+                    ->with('error', 'No languages found in the system');
+            }
+            
+            \Log::info('Base language: ' . $baseLanguage->code);
+            
+            // Eğer aynı dil ise, boş çeviri bulunamaz
+            if ($language->code === $baseLanguage->code) {
+                $emptyTranslations = [];
+                $debugInfo = [
+                    'language' => $language,
+                    'baseLanguage' => $baseLanguage,
+                    'emptyTranslationsCount' => 0,
+                    'groups' => [],
+                    'totalEmptyKeys' => 0,
+                    'message' => 'Cannot find empty translations for the same language as base language'
+                ];
+                
+                return view('portal.language.empty-translations', compact('language', 'emptyTranslations', 'debugInfo'));
+            }
+            
+            $emptyTranslations = $this->findEmptyTranslations($language->code, $baseLanguage->code);
+            
+            \Log::info('Empty translations found: ' . count($emptyTranslations));
+            \Log::info('Empty translations data: ' . json_encode($emptyTranslations));
+
+            // Debug bilgileri ekle
+            $debugInfo = [
+                'language' => $language,
+                'baseLanguage' => $baseLanguage,
+                'emptyTranslationsCount' => count($emptyTranslations),
+                'groups' => array_keys($emptyTranslations),
+                'totalEmptyKeys' => array_sum(array_map('count', $emptyTranslations))
+            ];
+
+            return view('portal.language.empty-translations', compact('language', 'emptyTranslations', 'debugInfo'));
+        } catch (\Exception $e) {
+            \Log::error('Error in listEmptyTranslations: ' . $e->getMessage());
+            \Log::error('Stack trace: ' . $e->getTraceAsString());
+            
+            // Debug view'ı göster
+            $debugInfo = [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+                'language' => $language ?? null
+            ];
+            
+            $emptyTranslations = [];
+            
+            return view('portal.language.empty-translations', compact('language', 'debugInfo', 'emptyTranslations'))
+                ->with('error', 'An error occurred: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Boş çevirileri bul
+     */
+    private function findEmptyTranslations($targetLanguageCode, $baseLanguageCode)
+    {
+        $emptyTranslations = [];
+        $baseLangPath = resource_path('lang/' . $baseLanguageCode);
+
+        \Log::info('Finding empty translations for target: ' . $targetLanguageCode . ', base: ' . $baseLanguageCode);
+        \Log::info('Base language path: ' . $baseLangPath);
+
+        if (File::exists($baseLangPath)) {
+            $langFiles = File::files($baseLangPath);
+            \Log::info('Found ' . count($langFiles) . ' language files');
+
+            foreach ($langFiles as $file) {
+                $group = pathinfo($file->getFilename(), PATHINFO_FILENAME);
+                \Log::info('Processing group: ' . $group);
+                
+                // Temel dil çevirilerini al
+                $baseTranslations = Lang::get($group, [], $baseLanguageCode);
+                
+                // Hedef dil çevirilerini al
+                $targetTranslations = Lang::get($group, [], $targetLanguageCode);
+
+                \Log::info('Base translations count for ' . $group . ': ' . (is_array($baseTranslations) ? count($baseTranslations) : 'not array'));
+                \Log::info('Target translations count for ' . $group . ': ' . (is_array($targetTranslations) ? count($targetTranslations) : 'not array'));
+
+                if (is_array($baseTranslations)) {
+                    $emptyCount = 0;
+                    foreach ($baseTranslations as $key => $value) {
+                        if (is_string($value) && !empty($value)) {
+                            $targetValue = isset($targetTranslations[$key]) ? $targetTranslations[$key] : '';
+                            
+                            // Boş veya eksik çeviri
+                            if (empty($targetValue)) {
+                                if (!isset($emptyTranslations[$group])) {
+                                    $emptyTranslations[$group] = [];
+                                }
+                                $emptyTranslations[$group][$key] = $value;
+                                $emptyCount++;
+                            }
+                        }
+                    }
+                    \Log::info('Empty translations found in ' . $group . ': ' . $emptyCount);
+                }
+            }
+        } else {
+            \Log::error('Base language path does not exist: ' . $baseLangPath);
+        }
+
+        \Log::info('Total empty translation groups: ' . count($emptyTranslations));
+        return $emptyTranslations;
+    }
+
+    /**
+     * Grup çevirisi yap
+     */
+    private function translateGroup($group, $keys, $language, $baseLanguage)
+    {
+        $translatedCount = 0;
+        $groupTranslations = [];
+
+        foreach ($keys as $key => $originalText) {
+            $translatedText = $this->translateText($originalText, $baseLanguage->code, $language->code);
+            
+            if ($translatedText && $translatedText !== $originalText) {
+                $groupTranslations[$key] = $translatedText;
+                $translatedCount++;
+
+                // Veritabanına kaydet
+                Translation::updateOrCreate(
+                    [
+                        'language_id' => $language->id,
+                        'key' => $key,
+                        'group' => $group,
+                    ],
+                    [
+                        'value' => $translatedText,
+                    ]
+                );
+            }
+        }
+
+        // Dosyaya kaydet
+        if (!empty($groupTranslations)) {
+            $langPath = resource_path('lang/' . $language->code);
+            if (!File::exists($langPath)) {
+                File::makeDirectory($langPath, 0755, true);
+            }
+
+            $filePath = $langPath . '/' . $group . '.php';
+            
+            // Mevcut çevirileri al
+            $existingTranslations = [];
+            if (File::exists($filePath)) {
+                $existingTranslations = include $filePath;
+            }
+
+            // Yeni çevirileri birleştir
+            $mergedTranslations = array_merge($existingTranslations, $groupTranslations);
+            
+            // Dosyayı kaydet
+            $this->saveTranslationFile($filePath, $mergedTranslations);
+        }
+
+        return $translatedCount;
+    }
+
+    /**
+     * Metin çevirisi yap
+     */
+    private function translateText($text, $fromLang, $toLang)
+    {
+        try {
+            // Önce akıllı anahtar çevirisi dene
+            $intelligentTranslation = $this->intelligentKeyTranslation($text, $fromLang, $toLang);
+            if ($intelligentTranslation && $intelligentTranslation !== $text) {
+                return $intelligentTranslation;
+            }
+
+            // Önce MyMemory API'yi dene (ücretsiz)
+            $myMemoryResult = $this->myMemoryTranslate($text, $fromLang, $toLang);
+            if ($myMemoryResult && $myMemoryResult !== $text) {
+                return $myMemoryResult;
+            }
+
+            // Google Translate API kullan (ücretli)
+            if (config('google-translate.api_key')) {
+                $translate = new TranslateClient([
+                    'key' => config('google-translate.api_key')
+                ]);
+
+                // Dil kodlarını Google Translate formatına çevir
+                $mappings = config('google-translate.language_mappings');
+                $sourceLanguage = $mappings[$fromLang] ?? $fromLang;
+                $targetLanguage = $mappings[$toLang] ?? $toLang;
+
+                $result = $translate->translate($text, [
+                    'source' => $sourceLanguage,
+                    'target' => $targetLanguage,
+                    'format' => config('google-translate.options.format', 'text'),
+                    'model' => config('google-translate.options.model', 'base'),
+                ]);
+
+                return $result['text'] ?? $text;
+            }
+            
+            // Fallback: Basit çeviri sistemi
+            return $this->simpleTranslate($text, $fromLang, $toLang);
+            
+        } catch (\Exception $e) {
+            // Hata durumunda basit çeviri dene
+            return $this->simpleTranslate($text, $fromLang, $toLang);
+        }
+    }
+
+    /**
+     * Akıllı anahtar çevirisi - anahtar isimlerini anlamlı metne çevirir
+     */
+    private function intelligentKeyTranslation($key, $fromLang, $toLang)
+    {
+        try {
+            // Eğer key bir anahtar ismi gibi görünüyorsa (tire, alt çizgi içeriyorsa)
+            if (preg_match('/^[a-z0-9\-_]+$/', $key) && (strpos($key, '-') !== false || strpos($key, '_') !== false)) {
+                
+                // Anahtar ismini anlamlı metne çevir
+                $meaningfulText = $this->convertKeyToMeaningfulText($key);
+                
+                // Anlamlı metni çevir
+                if ($meaningfulText !== $key) {
+                    return $this->translateMeaningfulText($meaningfulText, $fromLang, $toLang);
+                }
+            }
+            
+            return null;
+        } catch (\Exception $e) {
+            \Log::warning('Intelligent Key Translation Error: ' . $e->getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * Anahtar ismini anlamlı metne çevir
+     */
+    private function convertKeyToMeaningfulText($key)
+    {
+        // Özel anahtar çevirileri
+        $specialKeys = [
+            'virtual-stands-management-subtitle' => 'Virtual Stands Management Subtitle',
+            'participant-logs-description' => 'Participant Logs Description',
+            'there-is-not-active-keypad' => 'There is no active keypad',
+            'meeting-hall-management' => 'Meeting Hall Management',
+            'user-management-system' => 'User Management System',
+            'document-sharing-platform' => 'Document Sharing Platform',
+            'live-streaming-service' => 'Live Streaming Service',
+            'virtual-booth-setup' => 'Virtual Booth Setup',
+            'participant-registration' => 'Participant Registration',
+            'session-management' => 'Session Management',
+            'speaker-management' => 'Speaker Management',
+            'agenda-management' => 'Agenda Management',
+            'poll-voting-system' => 'Poll Voting System',
+            'qa-session-management' => 'Q&A Session Management',
+            'networking-features' => 'Networking Features',
+            'chat-messaging-system' => 'Chat Messaging System',
+            'file-download-center' => 'File Download Center',
+            'certificate-generation' => 'Certificate Generation',
+            'attendance-tracking' => 'Attendance Tracking',
+            'analytics-dashboard' => 'Analytics Dashboard',
+            'notification-system' => 'Notification System',
+            'email-integration' => 'Email Integration',
+            'social-media-sharing' => 'Social Media Sharing',
+            'mobile-app-support' => 'Mobile App Support',
+            'multi-language-support' => 'Multi Language Support',
+            'custom-branding-options' => 'Custom Branding Options',
+            'security-settings' => 'Security Settings',
+            'backup-restore-system' => 'Backup Restore System',
+            'api-integration' => 'API Integration',
+            'third-party-plugins' => 'Third Party Plugins',
+        ];
+
+        // Özel anahtar varsa onu kullan
+        if (isset($specialKeys[$key])) {
+            return $specialKeys[$key];
+        }
+
+        // Genel dönüşüm kuralları
+        $text = $key;
+        
+        // Alt çizgi ve tireleri boşluğa çevir
+        $text = str_replace(['_', '-'], ' ', $text);
+        
+        // Her kelimenin ilk harfini büyük yap
+        $text = ucwords($text);
+        
+        // Yaygın kısaltmaları düzelt
+        $abbreviations = [
+            'Qa' => 'Q&A',
+            'Api' => 'API',
+            'Url' => 'URL',
+            'Html' => 'HTML',
+            'Css' => 'CSS',
+            'Js' => 'JavaScript',
+            'Pdf' => 'PDF',
+            'Sms' => 'SMS',
+            'Id' => 'ID',
+            'Ui' => 'UI',
+            'Ux' => 'UX',
+            'Db' => 'Database',
+            'Admin' => 'Administrator',
+            'Config' => 'Configuration',
+            'Auth' => 'Authentication',
+            'Login' => 'Login',
+            'Logout' => 'Logout',
+            'Signup' => 'Sign Up',
+            'Signin' => 'Sign In',
+        ];
+
+        foreach ($abbreviations as $abbr => $full) {
+            $text = str_replace($abbr, $full, $text);
+        }
+
+        return $text;
+    }
+
+    /**
+     * Anlamlı metni çevir
+     */
+    private function translateMeaningfulText($text, $fromLang, $toLang)
+    {
+        // Önce basit çeviri sözlüğünden bak
+        $simpleTranslation = $this->simpleTranslate($text, $fromLang, $toLang);
+        if ($simpleTranslation !== $text) {
+            return $simpleTranslation;
+        }
+
+        // Kelime kelime çeviri yap
+        return $this->wordByWordTranslation($text, $fromLang, $toLang);
+    }
+
+    /**
+     * Kelime kelime çeviri
+     */
+    private function wordByWordTranslation($text, $fromLang, $toLang)
+    {
+        if ($fromLang !== 'en' || $toLang !== 'tr') {
+            return $text; // Şimdilik sadece İngilizce -> Türkçe
+        }
+
+        $wordTranslations = [
+            'virtual' => 'sanal',
+            'stands' => 'standlar',
+            'management' => 'yönetimi',
+            'subtitle' => 'alt başlık',
+            'participant' => 'katılımcı',
+            'logs' => 'kayıtlar',
+            'description' => 'açıklama',
+            'there' => 'burada',
+            'is' => '',
+            'no' => 'hiç',
+            'not' => 'değil',
+            'active' => 'aktif',
+            'keypad' => 'tuş takımı',
+            'meeting' => 'toplantı',
+            'hall' => 'salon',
+            'user' => 'kullanıcı',
+            'system' => 'sistem',
+            'document' => 'belge',
+            'sharing' => 'paylaşım',
+            'platform' => 'platform',
+            'live' => 'canlı',
+            'streaming' => 'yayın',
+            'service' => 'hizmet',
+            'booth' => 'stand',
+            'setup' => 'kurulum',
+            'registration' => 'kayıt',
+            'session' => 'oturum',
+            'speaker' => 'konuşmacı',
+            'agenda' => 'ajanda',
+            'poll' => 'anket',
+            'voting' => 'oylama',
+            'question' => 'soru',
+            'answer' => 'cevap',
+            'networking' => 'ağ oluşturma',
+            'features' => 'özellikler',
+            'chat' => 'sohbet',
+            'messaging' => 'mesajlaşma',
+            'file' => 'dosya',
+            'download' => 'indirme',
+            'center' => 'merkez',
+            'certificate' => 'sertifika',
+            'generation' => 'oluşturma',
+            'attendance' => 'katılım',
+            'tracking' => 'takip',
+            'analytics' => 'analitik',
+            'dashboard' => 'kontrol paneli',
+            'notification' => 'bildirim',
+            'email' => 'e-posta',
+            'integration' => 'entegrasyon',
+            'social' => 'sosyal',
+            'media' => 'medya',
+            'mobile' => 'mobil',
+            'app' => 'uygulama',
+            'support' => 'destek',
+            'multi' => 'çoklu',
+            'language' => 'dil',
+            'custom' => 'özel',
+            'branding' => 'marka',
+            'options' => 'seçenekler',
+            'security' => 'güvenlik',
+            'settings' => 'ayarlar',
+            'backup' => 'yedekleme',
+            'restore' => 'geri yükleme',
+            'third' => 'üçüncü',
+            'party' => 'taraf',
+            'plugins' => 'eklentiler',
+        ];
+
+        $words = explode(' ', strtolower($text));
+        $translatedWords = [];
+
+        foreach ($words as $word) {
+            $cleanWord = trim($word, '.,!?;:');
+            if (isset($wordTranslations[$cleanWord])) {
+                $translation = $wordTranslations[$cleanWord];
+                if (!empty($translation)) {
+                    $translatedWords[] = $translation;
+                }
+            } else {
+                $translatedWords[] = $word;
+            }
+        }
+
+        return ucfirst(implode(' ', $translatedWords));
+    }
+
+    /**
+     * MyMemory API ile ücretsiz çeviri (günde 10,000 karakter)
+     */
+    private function myMemoryTranslate($text, $fromLang, $toLang)
+    {
+        try {
+            $url = "https://api.mymemory.translated.net/get";
+            $params = [
+                'q' => $text,
+                'langpair' => $fromLang . '|' . $toLang,
+                'de' => 'info@kongrepad.com' // E-posta adresi daha yüksek limit için
+            ];
+
+            // cURL kullanarak daha güvenilir istek
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url . '?' . http_build_query($params));
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+            curl_setopt($ch, CURLOPT_USERAGENT, 'KongrePad Translation System');
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            
+            $response = curl_exec($ch);
+            $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_close($ch);
+
+            if ($httpCode !== 200 || !$response) {
+                return null;
+            }
+
+            $data = json_decode($response, true);
+
+            if (isset($data['responseData']['translatedText'])) {
+                $translatedText = $data['responseData']['translatedText'];
+                
+                // Kalite kontrolü - eğer çeviri orijinal metinle aynıysa ve match düşükse reddet
+                if ($translatedText === $text && isset($data['responseData']['match']) && $data['responseData']['match'] < 0.8) {
+                    return null;
+                }
+
+                // Quota kontrolü
+                if (isset($data['quotaFinished']) && $data['quotaFinished'] === true) {
+                    \Log::warning('MyMemory API quota finished');
+                    return null;
+                }
+
+                // Eğer matches varsa en iyi kaliteli çeviriyi al
+                if (isset($data['matches']) && is_array($data['matches']) && count($data['matches']) > 0) {
+                    $bestMatch = null;
+                    $bestQuality = 0;
+
+                    foreach ($data['matches'] as $match) {
+                        $quality = is_numeric($match['quality']) ? (float)$match['quality'] : 0;
+                        $matchScore = isset($match['match']) ? (float)$match['match'] : 0;
+                        
+                        // Kalite ve match skorunu birleştir
+                        $totalScore = ($quality * 0.7) + ($matchScore * 100 * 0.3);
+                        
+                        if ($totalScore > $bestQuality && $match['translation'] !== $text) {
+                            $bestQuality = $totalScore;
+                            $bestMatch = $match['translation'];
+                        }
+                    }
+
+                    if ($bestMatch && $bestQuality > 50) { // Minimum kalite eşiği
+                        return $bestMatch;
+                    }
+                }
+
+                // Eğer matches yoksa veya kaliteli match yoksa, ana çeviriyi kullan
+                if ($translatedText !== $text) {
+                    return $translatedText;
+                }
+            }
+
+            return null;
+        } catch (\Exception $e) {
+            \Log::warning('MyMemory API Error: ' . $e->getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * LibreTranslate API ile ücretsiz çeviri (kendi sunucunuzda)
+     */
+    private function libreTranslate($text, $fromLang, $toLang)
+    {
+        try {
+            $url = config('google-translate.libre_translate_url', 'https://libretranslate.de/translate');
+            
+            $data = [
+                'q' => $text,
+                'source' => $fromLang,
+                'target' => $toLang,
+                'format' => 'text'
+            ];
+
+            $options = [
+                'http' => [
+                    'header' => "Content-type: application/json\r\n",
+                    'method' => 'POST',
+                    'content' => json_encode($data)
+                ]
+            ];
+
+            $context = stream_context_create($options);
+            $response = file_get_contents($url, false, $context);
+            $result = json_decode($response, true);
+
+            if (isset($result['translatedText'])) {
+                return $result['translatedText'];
+            }
+
+            return null;
+        } catch (\Exception $e) {
+            \Log::warning('LibreTranslate API Error: ' . $e->getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * Basit çeviri sistemi (fallback)
+     */
+    private function simpleTranslate($text, $fromLang, $toLang)
+    {
+        // Konfigürasyon dosyasından çeviri sözlüğünü al
+        $translations = config('google-translate.fallback_translations');
+
+        if (isset($translations[$fromLang][$toLang][$text])) {
+            return $translations[$fromLang][$toLang][$text];
+        }
+
+        // Çeviri bulunamazsa orijinal metni döndür
+        return $text;
+    }
+
+    /**
+     * AJAX: Original metni kaydet
+     */
+    public function saveOriginalText(Request $request, Language $language)
+    {
+        try {
+            $request->validate([
+                'group' => 'required|string',
+                'key' => 'required|string',
+                'value' => 'required|string',
+            ]);
+
+            $group = $request->input('group');
+            $key = $request->input('key');
+            $value = $request->input('value');
+
+            // Temel dil dosyasını güncelle
+            $baseLanguage = Language::where('is_default', true)->first();
+            if (!$baseLanguage) {
+                return response()->json(['message' => 'No base language found'], 400);
+            }
+
+            $baseLangPath = resource_path('lang/' . $baseLanguage->code . '/' . $group . '.php');
+            
+            // Mevcut çevirileri al
+            $translations = [];
+            if (File::exists($baseLangPath)) {
+                $translations = include $baseLangPath;
+            }
+
+            // Yeni değeri ekle/güncelle
+            $translations[$key] = $value;
+
+            // Dosyayı kaydet
+            $this->saveTranslationFile($baseLangPath, $translations);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Original text saved successfully'
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error saving original text: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
+     * AJAX: Tek anahtar için otomatik çeviri
+     */
+    public function autoTranslateKey(Request $request, Language $language)
+    {
+        try {
+            $request->validate([
+                'group' => 'required|string',
+                'key' => 'required|string',
+                'original_text' => 'required|string',
+            ]);
+
+            $baseLanguage = Language::where('is_default', true)->first();
+            if (!$baseLanguage) {
+                return response()->json(['message' => 'No base language found'], 400);
+            }
+
+            $originalText = $request->input('original_text');
+            $translatedText = $this->translateText($originalText, $baseLanguage->code, $language->code);
+
+            if ($translatedText && $translatedText !== $originalText) {
+                return response()->json([
+                    'success' => true,
+                    'translation' => $translatedText,
+                    'message' => 'Translation generated successfully'
+                ]);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Could not generate translation'
+                ], 400);
+            }
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error generating translation: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
+     * AJAX: Çeviri anahtarını sil
+     */
+    public function deleteKey(Request $request, Language $language)
+    {
+        try {
+            $request->validate([
+                'group' => 'required|string',
+                'key' => 'required|string',
+            ]);
+
+            $group = $request->input('group');
+            $key = $request->input('key');
+
+            // Veritabanından sil
+            Translation::where('language_id', $language->id)
+                ->where('group', $group)
+                ->where('key', $key)
+                ->delete();
+
+            // Dosyadan da sil
+            $langPath = resource_path('lang/' . $language->code . '/' . $group . '.php');
+            if (File::exists($langPath)) {
+                $translations = include $langPath;
+                if (isset($translations[$key])) {
+                    unset($translations[$key]);
+                    $this->saveTranslationFile($langPath, $translations);
+                }
+            }
+
+            // Temel dil dosyasından da sil (isteğe bağlı)
+            $baseLanguage = Language::where('is_default', true)->first();
+            if ($baseLanguage) {
+                $baseLangPath = resource_path('lang/' . $baseLanguage->code . '/' . $group . '.php');
+                if (File::exists($baseLangPath)) {
+                    $baseTranslations = include $baseLangPath;
+                    if (isset($baseTranslations[$key])) {
+                        unset($baseTranslations[$key]);
+                        $this->saveTranslationFile($baseLangPath, $baseTranslations);
+                    }
+                }
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Translation key deleted successfully'
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error deleting key: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
+     * AJAX: Çeviri güncelle (JSON response)
+     */
+    public function updateTranslationAjax(Request $request, Language $language)
+    {
+        try {
+            $request->validate([
+                'key' => 'required|string',
+                'value' => 'nullable|string',
+                'group' => 'required|string',
+            ]);
+
+            Translation::updateOrCreate(
+                [
+                    'language_id' => $language->id,
+                    'key' => $request->key,
+                    'group' => $request->group,
+                ],
+                [
+                    'value' => $request->value,
+                ]
+            );
+
+            // Dosyaya da kaydet
+            $langPath = resource_path('lang/' . $language->code);
+            if (!File::exists($langPath)) {
+                File::makeDirectory($langPath, 0755, true);
+            }
+
+            $filePath = $langPath . '/' . $request->group . '.php';
+            
+            // Mevcut çevirileri al
+            $existingTranslations = [];
+            if (File::exists($filePath)) {
+                $existingTranslations = include $filePath;
+            }
+
+            // Yeni çeviriyi ekle
+            $existingTranslations[$request->key] = $request->value;
+            
+            // Dosyayı kaydet
+            $this->saveTranslationFile($filePath, $existingTranslations);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Translation updated successfully'
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error updating translation: ' . $e->getMessage()
+            ], 500);
+        }
     }
 } 

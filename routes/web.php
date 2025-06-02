@@ -172,6 +172,12 @@ Route::prefix('portal')->name('portal.')->group(function () {
         Route::post('/language/{language}/import', [\App\Http\Controllers\Portal\Language\LanguageController::class, 'import'])->name('language.import');
         Route::post('/language/{language}/import-csv', [\App\Http\Controllers\Portal\Language\LanguageController::class, 'importCsv'])->name('language.import-csv');
         
+        // AJAX routes for enhanced translation management
+        Route::post('/language/{language}/save-original-text', [\App\Http\Controllers\Portal\Language\LanguageController::class, 'saveOriginalText'])->name('language.save-original-text');
+        Route::post('/language/{language}/auto-translate-key', [\App\Http\Controllers\Portal\Language\LanguageController::class, 'autoTranslateKey'])->name('language.auto-translate-key');
+        Route::delete('/language/{language}/delete-key', [\App\Http\Controllers\Portal\Language\LanguageController::class, 'deleteKey'])->name('language.delete-key');
+        Route::post('/language/{language}/translations-ajax', [\App\Http\Controllers\Portal\Language\LanguageController::class, 'updateTranslationAjax'])->name('language.translations.update-ajax');
+        
         Route::get('/session-question-on-screen/{id}', [\App\Http\Controllers\Portal\Meeting\Hall\Program\Session\Question\QuestionController::class,'on_screen'])->name('session-question.on-screen');
     });
 });
