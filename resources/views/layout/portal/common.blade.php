@@ -94,6 +94,12 @@
                         {{ __('common.settings') }}
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route("portal.language.index") }}">
+                        <span class="nav-icon fa-duotone fa-language fa-fade"></span>
+                        {{ __('common.languages') }}
+                    </a>
+                </li>
             </ul>
             <form id="logout-form" action="{{ route('auth.logout.store') }}" method="POST" class="d-none">
                 @csrf
