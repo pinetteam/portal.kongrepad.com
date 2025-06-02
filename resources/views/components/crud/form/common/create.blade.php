@@ -1,10 +1,12 @@
 @props(['name' => 'default'])
-<div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="{{ $name }}-create-modal" aria-labelledby="{{ $name }}-create-modal-label">
-    <div class="offcanvas-header bg-kongre-primary text-white">
-        <h5 class="offcanvas-title" id="{{ $name }}-create-modal-label">{{ __('common.create') }}</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+<div class="offcanvas offcanvas-end modern-offcanvas" data-bs-backdrop="static" tabindex="-1" id="{{ $name }}-create-modal" aria-labelledby="{{ $name }}-create-modal-label">
+    <div class="offcanvas-header modern-offcanvas-header">
+        <h5 class="offcanvas-title modern-offcanvas-title" id="{{ $name }}-create-modal-label">
+            <i class="fas fa-plus me-2"></i>{{ __('common.create') }}
+        </h5>
+        <button type="button" class="btn-close modern-btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-    <div class="offcanvas-body bg-kongre-secondary text-white">
+    <div class="offcanvas-body modern-offcanvas-body">
         <form method="POST" action="" name="{{ $name }}-create-form" id="{{ $name }}-create-form" enctype="multipart/form-data" autocomplete="nope" class="h-100 d-flex flex-column">
             @csrf
             <div class="flex-grow-1 overflow-auto">
@@ -14,10 +16,14 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-3 pt-3 border-top border-dark">
+            <div class="mt-3 pt-3 border-top modern-border-top">
                 <div class="btn-group w-100" role="group" aria-label="{{ __('common.processes') }}">
-                    <button type="button" class="btn btn-danger w-25" data-bs-dismiss="offcanvas">{{__('common.close')}}</button>
-                    <button type="submit" class="btn btn-success w-75" id="{{ $name }}-create-form-submit">{{ __('common.create') }}</button>
+                    <button type="button" class="btn btn-outline-secondary w-25" data-bs-dismiss="offcanvas">
+                        <i class="fas fa-times me-1"></i>{{__('common.close')}}
+                    </button>
+                    <button type="submit" class="btn btn-primary w-75" id="{{ $name }}-create-form-submit">
+                        <i class="fas fa-save me-1"></i>{{ __('common.create') }}
+                    </button>
                 </div>
             </div>
         </form>

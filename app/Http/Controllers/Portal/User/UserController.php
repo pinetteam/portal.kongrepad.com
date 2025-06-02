@@ -47,7 +47,13 @@ class UserController extends Controller
     public function show(int $id)
     {
         $user = Auth::user()->customer->users()->findOrFail($id);
-        return view('portal.user.show', compact(['user']));
+        $user_roles = Auth::user()->customer->userRoles()->where('status', 1)->get();
+        $phone_countries = Country::get();
+        $statuses = [
+            'passive' => ['value' => 0, 'title' => __('common.passive'), 'color' => 'danger'],
+            'active' => ['value' => 1, 'title' => __('common.active'), 'color' => 'success'],
+        ];
+        return view('portal.user.show', compact(['user', 'user_roles', 'phone_countries', 'statuses']));
     }
     public function edit(int $id)
     {

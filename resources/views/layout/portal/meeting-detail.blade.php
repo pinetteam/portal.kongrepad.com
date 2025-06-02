@@ -21,6 +21,82 @@
             background-color: #f5f5f5;
         }
         
+        /* Header Navbar */
+        #kp-header {
+            background-color: var(--kongre-primary) !important;
+        }
+        
+        .navbar-brand {
+            background: linear-gradient(135deg, var(--kongre-primary), var(--kongre-secondary));
+            color: white !important;
+            font-weight: 600;
+            border-radius: 0;
+            transition: all 0.2s ease;
+        }
+
+        .navbar-brand:hover {
+            background: linear-gradient(135deg, var(--kongre-secondary), var(--kongre-primary));
+            color: white !important;
+            text-decoration: none;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            background-color: var(--kongre-primary);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-heading {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 0.75rem 1rem 0.25rem;
+            margin-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-heading:first-child {
+            margin-top: 0;
+            border-top: none;
+        }
+
+        .nav-tabs {
+            border: none;
+        }
+
+        .nav-tabs .nav-link {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.75);
+            padding: 0.6rem 1rem;
+            border-radius: 0;
+            display: flex;
+            align-items: center;
+            font-weight: 400;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+        }
+
+        .nav-tabs .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .nav-tabs .nav-link.active {
+            background-color: var(--kongre-accent);
+            color: white;
+            border-left: 3px solid var(--kongre-accent);
+        }
+
+        .nav-icon {
+            margin-right: 0.6rem;
+            font-size: 0.85rem;
+            width: 18px;
+            text-align: center;
+        }
+        
         /* Essential overrides only */
         .card {
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -64,7 +140,7 @@
 </header>
 <div class="container-fluid h-100">
     <div class="row h-100">
-        <nav id="kp-menu" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse overflow-auto">
+        <nav id="kp-menu" class="col-md-3 col-lg-2 d-md-block  collapse overflow-auto">
             <ul class="nav nav-tabs flex-column">
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="{{ route("portal.dashboard.index") }}">

@@ -9,217 +9,7 @@
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
     @vite(['resources/sass/app.scss'])
     @vite(['resources/js/app.js'])
-    <style>
-        :root {
-            --kongre-primary: #2c3e50;
-            --kongre-primary-rgb: 44, 62, 80;
-            --kongre-secondary: #34495e;
-            --kongre-secondary-rgb: 52, 73, 94;
-            --kongre-accent: #3498db;
-            --kongre-accent-rgb: 52, 152, 219;
-            --kongre-accent-hover: #2980b9;
-            --kongre-light: #ecf0f1;
-            --kongre-dark: #1a2530;
-            --kongre-success: #27ae60;
-            --kongre-danger: #e74c3c;
-            --kongre-warning: #f39c12;
-            --kongre-info: #3498db;
-        }
-        
-        body {
-            background-color: #f5f5f5;
-        }
-        
-        .bg-kongre-primary {
-            background-color: var(--kongre-primary) !important;
-        }
-        
-        .bg-kongre-secondary {
-            background-color: var(--kongre-secondary) !important;
-        }
-        
-        .bg-kongre-dark {
-            background-color: var(--kongre-dark) !important;
-        }
-        
-        .text-kongre-light {
-            color: var(--kongre-light) !important;
-        }
-        
-        .border-kongre {
-            border-color: rgba(255, 255, 255, 0.15) !important;
-        }
-        
-        .btn-kongre-accent {
-            background-color: var(--kongre-accent);
-            border-color: var(--kongre-accent);
-            color: white;
-        }
-        
-        .btn-kongre-accent:hover {
-            background-color: var(--kongre-accent-hover);
-            border-color: var(--kongre-accent-hover);
-            color: white;
-        }
-        
-        .stats-card {
-            background-color: var(--kongre-secondary);
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        
-        .stats-value {
-            font-size: 2rem;
-            font-weight: 700;
-            color: white;
-        }
-        
-        .stats-label {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .card {
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 0.5rem;
-            overflow: hidden;
-        }
-        
-        .card-header {
-            background-color: rgba(0, 0, 0, 0.2);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 1rem;
-            color: white !important;
-        }
-        
-        .card-header i, 
-        .card-header span, 
-        .card-header .fa-duotone, 
-        .card-header .fa-fade {
-            color: white !important;
-        }
-        
-        .card-header h1, 
-        .card-header h2, 
-        .card-header h3, 
-        .card-header h4, 
-        .card-header h5, 
-        .card-header h6,
-        .card-header a,
-        .card-header * {
-            color: white !important;
-        }
-
-        /* Modern Sidebar Styles */
-        .sidebar {
-            background-color: #343a40;
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .sidebar-heading {
-            color: rgba(255, 255, 255, 0.75);
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            padding: 0.75rem 1rem 0.25rem;
-            margin-top: 1rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .sidebar-heading:first-child {
-            margin-top: 0;
-            border-top: none;
-        }
-
-        .nav-tabs {
-            border: none;
-        }
-
-        .nav-tabs .nav-link {
-            background: none;
-            border: none;
-            color: rgba(255, 255, 255, 0.75);
-            padding: 0.6rem 1rem;
-            border-radius: 0;
-            display: flex;
-            align-items: center;
-            font-weight: 400;
-            transition: all 0.2s ease;
-            font-size: 0.9rem;
-        }
-
-        .nav-tabs .nav-link:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-        }
-
-        .nav-tabs .nav-link.active {
-            background-color: rgba(0, 123, 255, 0.2);
-            color: white;
-            border-left: 3px solid #007bff;
-        }
-
-        .nav-icon {
-            margin-right: 0.6rem;
-            font-size: 0.85rem;
-            width: 18px;
-            text-align: center;
-        }
-
-        /* Header Navbar */
-        .navbar-brand {
-            background: linear-gradient(135deg, var(--kongre-primary), var(--kongre-secondary));
-            color: white !important;
-            font-weight: 600;
-            border-radius: 0;
-            transition: all 0.2s ease;
-        }
-
-        .navbar-brand:hover {
-            background: linear-gradient(135deg, var(--kongre-secondary), var(--kongre-primary));
-            color: white !important;
-            text-decoration: none;
-        }
-
-    
-
-        /* Language Selector */
-        select.bg-color2 {
-            background: #495057 !important;
-            border: 1px solid #6c757d;
-            border-radius: 4px;
-            padding: 0.25rem 0.5rem;
-            font-size: 0.8rem;
-        }
-
-        select.bg-color2 option {
-            background: #495057;
-            color: white;
-        }
-
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            .sidebar-heading {
-                padding: 0.5rem 0.8rem 0.25rem;
-                font-size: 0.7rem;
-            }
-
-            .nav-tabs .nav-link {
-                padding: 0.5rem 0.8rem;
-                font-size: 0.85rem;
-            }
-
-            .nav-icon {
-                font-size: 0.8rem;
-                margin-right: 0.5rem;
-                width: 16px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/meeting-pages-theme.css') }}">
 </head>
 <body class="d-flex flex-column h-100">
 <div id="kp-loading" class="d-flex align-items-center justify-content-center">
@@ -256,7 +46,7 @@
 </header>
 <div class="container-fluid h-100">
     <div class="row h-100">
-        <nav id="kp-menu" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse overflow-auto">
+        <nav id="kp-menu" class="col-md-3 col-lg-2 d-md-block   collapse overflow-auto">
             <ul class="nav nav-tabs flex-column">
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="{{ route("portal.dashboard.index") }}">
@@ -272,7 +62,7 @@
                 </li>
             </ul>
             <div class="sidebar-heading">
-                <span class="nav-icon fa-duotone fa-arrow-turn-down-right"></span> {{ __('common.statistic') }}
+                <span class="nav-icon fa-duotone fa-arrow-turn-down-right"></span> {{ __('common.real-time-monitoring') }}
             </div>
             <ul class="nav nav-tabs flex-column">
                 <li class="nav-item">
@@ -283,7 +73,7 @@
                 </li>
             </ul>
             <div class="sidebar-heading">
-                <span class="nav-icon fa-duotone fa-arrow-turn-down-right"></span> {{ __('common.system') }}
+                <span class="nav-icon fa-duotone fa-arrow-turn-down-right"></span> {{ __('common.manage-system-users-and-permissions') }}
             </div>
             <ul class="nav nav-tabs flex-column">
                 <li class="nav-item">

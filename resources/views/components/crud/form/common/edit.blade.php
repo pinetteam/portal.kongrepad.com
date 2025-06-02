@@ -1,10 +1,12 @@
 @props(['name' => 'default', 'method' => 'e'])
-<div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="{{ $name }}-edit-modal" aria-labelledby="{{ $name }}-edit-modal-label">
-    <div class="offcanvas-header bg-kongre-primary text-white">
-        <h5 class="offcanvas-title" id="{{ $name }}-edit-modal-label">{{ __('common.edit') }}</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+<div class="offcanvas offcanvas-end modern-offcanvas" data-bs-backdrop="static" tabindex="-1" id="{{ $name }}-edit-modal" aria-labelledby="{{ $name }}-edit-modal-label">
+    <div class="offcanvas-header modern-offcanvas-header">
+        <h5 class="offcanvas-title modern-offcanvas-title" id="{{ $name }}-edit-modal-label">
+            <i class="fas fa-edit me-2"></i>{{ __('common.edit') }}
+        </h5>
+        <button type="button" class="btn-close modern-btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-    <div class="offcanvas-body bg-kongre-secondary text-white">
+    <div class="offcanvas-body modern-offcanvas-body">
         <form method="POST" action="" name="{{ $name }}-edit-form" id="{{ $name }}-edit-form" enctype="multipart/form-data" autocomplete="nope" class="h-100 d-flex flex-column">
             @csrf
             <input name="_method" type="hidden" value="PATCH" />
@@ -15,10 +17,14 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-3 pt-3 border-top border-dark">
+            <div class="mt-3 pt-3 border-top modern-border-top">
                 <div class="btn-group w-100" role="group" aria-label="{{ __('common.processes') }}">
-                    <button type="button" class="btn btn-danger w-25" data-bs-dismiss="offcanvas">{{ __('common.close') }}</button>
-                    <button type="submit" class="btn btn-success w-75" id="{{ $name }}-edit-form-submit">{{ __('common.edit') }}</button>
+                    <button type="button" class="btn btn-outline-secondary w-25" data-bs-dismiss="offcanvas">
+                        <i class="fas fa-times me-1"></i>{{ __('common.close') }}
+                    </button>
+                    <button type="submit" class="btn btn-warning w-75" id="{{ $name }}-edit-form-submit">
+                        <i class="fas fa-save me-1"></i>{{ __('common.edit') }}
+                    </button>
                 </div>
             </div>
         </form>

@@ -565,4 +565,91 @@ return [
     'total-points' => 'Total Points',
     'no-screens-found' => 'No Screens Found',
     'create-your-first-screen' => 'Create your first screen to get started',
+    
+    // Document related translations
+    'document-preview' => 'Document Preview',
+    'document-details' => 'Document Details',
+    
+    // Virtual stands related translations
+    'virtual-stands-management' => 'Virtual Stands Management',
+    'total-virtual-stands' => 'Total Virtual Stands',
+    'no-virtual-stands-found-description' => 'No virtual stands have been created yet.',
+    'virtual-stands-management-subtitle' => 'Manage virtual stands and sponsor displays',
+    
+    // Attendance related translations
+    'attendance-details' => 'Attendance Details',
+    'no-attendance-data' => 'No Attendance Data',
+    'no-attendance-description' => 'No attendance data has been recorded yet.',
+    'attendance-reports-description' => 'View and manage participant attendance tracking and reports',
+    
+    // Activity logs related translations
+    'activity-logs' => 'Activity Logs',
+    'total-logs' => 'Total Logs',
+    'real-time-tracking' => 'Real-time Tracking',
+    'no-logs-description' => 'No activity logs have been recorded yet.',
+    
+    // Keypad related translations
+    'registered-participants' => 'Registered Participants',
+    'keypad-sessions' => 'Keypad Sessions',
+    'total-keypads' => 'Total Keypads',
+    'keypad-reports-description' => 'View keypad session results and participant interactions',
+    'total-votes' => 'Total Votes',
+    'no-keypads-description' => 'No keypad sessions have been created yet.',
+    
+    // Debate related translations
+    'debate-reports-description' => 'View debate session results and voting statistics',
+    'no-debates-description' => 'No debate sessions have been created yet.',
+    'debate-sessions' => 'Debate Sessions',
+    'total-debates' => 'Total Debates',
+    
+    // Score game related translations
+    'score-games-management' => 'Score Games Management',
+    'total-games' => 'Total Games',
+    'participant-scores' => 'Participant Scores',
+    'score-results' => 'Score Results',
+    'no-scores-found' => 'No Scores Found',
+    'no-scores-description' => 'No score records have been found yet.',
+    'score-game-participants-results' => 'Score Game Participants Results',
+    
+    // Debate Participants Keys
+    'debate-participants' => 'Debate Participants',
+    'participants-who-voted' => 'Participants Who Voted',
+    'total-participants' => 'Total Participants',
+    'debate-vote-results' => 'Debate Vote Results',
+    'participant' => 'Participant',
+    'voted-at' => 'Voted At',
+    'online' => 'Online',
+    'offline' => 'Offline',
+    'no-participants-found' => 'No Participants Found',
+    'no-participants-voted-yet' => 'No participants have voted in this debate yet.',
+    
+    // Registration related translations
+    'registration-reports-description' => 'View and manage participant registration reports and statistics',
+    
+    // Survey related translations  
+    'survey-reports-description' => 'View survey results, responses and statistical analysis',
+    'total-surveys' => 'Total Surveys',
+    'survey-management' => 'Survey Management',
+    'enrollment-statistics' => 'Enrollment Statistics',
+    'activity-statistics' => 'Activity Statistics',
+    'last-15-minutes' => 'Last 15 minutes',
+    'system' => 'System',
+    'user-information' => 'User Information',
+    'activity-stats' => 'Activity Statistics',
+    'last-activity' => 'Last Activity',
+    'role-permissions' => 'Role Permissions',
+    'access-level' => 'Access Level',
+    'member-since' => 'Member Since',
+    'account-age' => 'Account Age',
+    'never' => 'Never',
+    'no-description' => 'No description',
+    'manage-system-users-and-permissions' => 'Manage users and permissions',
+    'real-time-monitoring' => 'Real-time monitoring',
+    'live' => 'Live',
+    'no-logged-in-participants' => 'No Logged In Participants',
+    'no-participants-currently-logged-in' => 'No participants are currently logged in',
+    'no-meetings-found' => 'No Meetings Found',
+    'no-meetings-available-for-stats' => 'No meetings available for statistics',
+    'create-meeting' => 'Create Meeting',
+    'unknown' => 'Unknown',
 ];

@@ -1,10 +1,27 @@
 @extends('layout.portal.meeting-detail')
 @section('title', $score_game->title . ' | ' . __('common.score-game'))
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route("portal.meeting.index") }}">{{ __('common.meetings') }}</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.show', $meeting->id) }}">{{ $meeting->title }}</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.score-game.index', ['meeting' => $meeting->id]) }}">{{ __('common.score-games') }}</a></li>
-    <li class="breadcrumb-item active" aria-current="page">{{ $score_game->title }}</li>
+    <div class="breadcrumb-container">
+        <nav aria-label="breadcrumb" class="breadcrumb-nav">
+            <ol class="breadcrumb bg-transparent mb-0">
+                <li class="breadcrumb-item">
+                    <a href="{{ route('portal.index') }}" class="breadcrumb-link">
+                        <i class="fas fa-home me-1"></i>{{ __('common.dashboard') }}
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{{ route("portal.meeting.index") }}" class="breadcrumb-link">{{ __('common.meetings') }}</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{{ route('portal.meeting.show', $meeting->id) }}" class="breadcrumb-link">{{ $meeting->title }}</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{{ route('portal.meeting.score-game.index', ['meeting' => $meeting->id]) }}" class="breadcrumb-link">{{ __('common.score-games') }}</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">{{ $score_game->title }}</li>
+            </ol>
+        </nav>
+    </div>
 @endsection
 
 @push('styles')
