@@ -1,15 +1,28 @@
 @extends('layout.portal.meeting-detail')
 @section('title', $meeting->title . ' | ' . __('common.participants'))
+
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route("portal.meeting.index") }}">{{ __('common.meetings') }}</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.show', $meeting->id) }}">{{ $meeting->title }}</a></li>
-    <li class="breadcrumb-item active" aria-current="page">{{ __('common.participants') }}</li>
+    <div class="breadcrumb-container px-0 py-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route("portal.dashboard.index") }}"><i class="fa-solid fa-house"></i></a></li>
+                <li class="breadcrumb-item"><a href="{{ route("portal.meeting.index") }}">{{ __('common.meetings') }}</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('portal.meeting.show', $meeting->id) }}">{{ $meeting->title }}</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ __('common.participants') }}</li>
+            </ol>
+        </nav>
+    </div>
 @endsection
+
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/meeting-pages-theme.css') }}">
+@endpush
+
 @section('meeting_content')
     <!-- Modern Hero Section -->
     <div class="row mb-4">
         <div class="col-12">
-            <div class="modern-participants-hero-card">
+            <div class="modern-hero-card">
                 <div class="hero-content">
                     <div class="hero-icon">
                         <i class="fa-duotone fa-screen-users fa-fade"></i>
@@ -41,7 +54,7 @@
     <!-- Modern Participants Card -->
     <div class="row">
         <div class="col-12">
-            <div class="modern-participants-card">
+            <div class="modern-main-card">
                 <div class="card-header">
                     <h3 class="card-header-title">
                         <i class="fa-duotone fa-screen-users me-2"></i>
@@ -51,7 +64,7 @@
                 <div class="card-body p-0">
                     @if($participants->count() > 0)
                         <div class="table-responsive">
-                            <table class="modern-participants-table">
+                            <table class="modern-table">
                                 <thead>
                                     <tr>
                                         <th>
@@ -88,7 +101,7 @@
                                     @foreach($participants as $participant)
                                         <tr>
                                             <td>
-                                                <div class="participant-info">
+                                                <div class="item-info">
                                                     <div class="activity-indicator">
                                                         @if($participant->activity_status)
                                                             <div class="status-dot status-active" title="{{ __('common.active') }}"></div>
@@ -96,7 +109,7 @@
                                                             <div class="status-dot status-inactive" title="{{ __('common.passive') }}"></div>
                                                         @endif
                                                     </div>
-                                                    <div class="participant-name">
+                                                    <div class="item-name">
                                                         {{ $participant->last_name }}, {{ $participant->first_name }}
                                                         <small class="text-muted d-block">{{ __('common.'.$participant->type) }}</small>
                                                     </div>
@@ -237,310 +250,6 @@
             <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.edit>
-
-    <style>
-        /* Modern Participants Page Styles - Congress Theme */
-        .modern-participants-hero-card {
-            background: linear-gradient(135deg, var(--kongre-primary) 0%, var(--kongre-accent) 100%);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 15px 35px rgba(var(--kongre-primary-rgb), 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .modern-participants-hero-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
-            pointer-events: none;
-        }
-
-        .hero-content {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-icon {
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 20px;
-            width: 80px;
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: white;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .hero-text {
-            flex: 1;
-            color: white;
-        }
-
-        .hero-title {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: white;
-        }
-
-        .hero-subtitle {
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            opacity: 0.9;
-        }
-
-        .hero-stats {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .stat-item {
-            display: flex;
-            align-items: center;
-            font-size: 0.95rem;
-            opacity: 0.9;
-        }
-
-        .btn-hero-create {
-            background: rgba(255, 255, 255, 0.15);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            padding: 0.75rem 2rem;
-            border-radius: 50px;
-            font-weight: 600;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .btn-hero-create:hover {
-            background: rgba(255, 255, 255, 0.25);
-            border-color: rgba(255, 255, 255, 0.5);
-            transform: translateY(-2px);
-            color: white;
-        }
-
-        .modern-participants-card {
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(var(--kongre-primary-rgb), 0.1);
-            overflow: hidden;
-        }
-
-        .modern-participants-card .card-header {
-            background: linear-gradient(135deg, var(--kongre-primary) 0%, var(--kongre-secondary) 100%);
-            color: white;
-            padding: 1.5rem 2rem;
-            border: none;
-        }
-
-        .modern-participants-table {
-            width: 100%;
-            margin: 0;
-            border-collapse: collapse;
-        }
-
-        .modern-participants-table thead th {
-            background: var(--kongre-primary);
-            color: white;
-            padding: 1rem 1.5rem;
-            font-weight: 600;
-            border: none;
-            text-align: left;
-        }
-
-        .modern-participants-table tbody tr {
-            border-bottom: 1px solid #f0f0f0;
-            transition: all 0.2s ease;
-        }
-
-        .modern-participants-table tbody tr:hover {
-            background: rgba(var(--kongre-primary-rgb), 0.05);
-        }
-
-        .modern-participants-table tbody td {
-            padding: 1rem 1.5rem;
-            vertical-align: middle;
-        }
-
-        .participant-info {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .activity-indicator {
-            display: flex;
-            align-items: center;
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            display: inline-block;
-        }
-
-        .status-dot.status-active {
-            background: #28a745;
-            box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
-        }
-
-        .status-dot.status-inactive {
-            background: #dc3545;
-            box-shadow: 0 0 10px rgba(220, 53, 69, 0.5);
-        }
-
-        .participant-name {
-            font-weight: 500;
-        }
-
-        .id-badge {
-            background: linear-gradient(135deg, var(--kongre-primary) 0%, var(--kongre-accent) 100%);
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            font-family: 'Monaco', monospace;
-        }
-
-        .email-link {
-            color: var(--kongre-primary);
-            text-decoration: none;
-            transition: all 0.2s ease;
-        }
-
-        .email-link:hover {
-            color: var(--kongre-accent);
-            text-decoration: underline;
-        }
-
-        .phone-text {
-            font-family: 'Monaco', monospace;
-            font-size: 0.9rem;
-            color: #6c757d;
-        }
-
-        .status-badges {
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
-        }
-
-        .status-badge {
-            padding: 0.2rem 0.6rem;
-            border-radius: 15px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            white-space: nowrap;
-        }
-
-        .status-active {
-            background: rgba(40, 167, 69, 0.1);
-            color: #28a745;
-            border: 1px solid rgba(40, 167, 69, 0.2);
-        }
-
-        .status-inactive {
-            background: rgba(220, 53, 69, 0.1);
-            color: #dc3545;
-            border: 1px solid rgba(220, 53, 69, 0.2);
-        }
-
-        .modern-participants-card .card-footer {
-            background: #f8f9fa;
-            padding: 1.5rem 2rem;
-            border: none;
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 4rem 2rem;
-            color: #6c757d;
-        }
-
-        .empty-state-icon {
-            font-size: 4rem;
-            color: var(--kongre-primary);
-            margin-bottom: 1.5rem;
-            opacity: 0.7;
-        }
-
-        .empty-state-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--kongre-primary);
-        }
-
-        .empty-state-text {
-            font-size: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .hero-content {
-                flex-direction: column;
-                text-align: center;
-                gap: 1.5rem;
-            }
-
-            .hero-icon {
-                width: 60px;
-                height: 60px;
-                font-size: 1.5rem;
-            }
-
-            .hero-title {
-                font-size: 1.5rem;
-            }
-
-            .hero-stats {
-                justify-content: center;
-                flex-wrap: wrap;
-            }
-
-            .btn-hero-create {
-                width: 100%;
-            }
-
-            .modern-participants-table thead th,
-            .modern-participants-table tbody td {
-                padding: 0.75rem 0.5rem;
-                font-size: 0.8rem;
-            }
-
-            .btn-group .btn {
-                padding: 0.25rem 0.4rem;
-                font-size: 0.7rem;
-            }
-
-            .status-badges {
-                flex-direction: row;
-                flex-wrap: wrap;
-            }
-
-            .participant-info {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.5rem;
-            }
-        }
-    </style>
 
     <script>
         function showQRCode(participantId) {

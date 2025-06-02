@@ -15,7 +15,7 @@ class OptionResource extends JsonResource
             'question_id' => ['value' => $this->question_id, 'type' => 'hidden'],
             'option' => ['value' => $this->option, 'type' => 'text'],
             'status' => ['value' => $this->status, 'type' => 'radio'],
-            'route' => route('portal.meeting.survey.option.update', [$this->question->survey->meeting_id, $this->question->survey_id, $this->question_id, $this->id]),
+            'route' => route('portal.meeting.survey.question.option.update', ['meeting' => $this->question->survey->meeting_id, 'survey' => $this->question->survey_id, 'question' => $this->question_id, 'option' => $this->id]),
         ];
     }
 }

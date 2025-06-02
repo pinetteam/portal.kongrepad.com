@@ -81,10 +81,21 @@ class QRCodeController extends Controller
     public function download(int $meeting, int $score_game, int $id){
         $score_game = Auth::user()->customer->scoreGames()->findOrFail($score_game);
         $qr_code = $score_game->qrCodes()->findOrFail($id);
-        $path = storage_path('app/qrcodes/' . $qr_code->code . '.svg');
+        
+        // Ensure the qrcodes directory exists
+        $directory = storage_path('app/qrcodes');
+        if (!file_exists($directory)) {
+            mkdir($directory, 0755, true);
+        }
+        
+        $path = $directory . '/' . $qr_code->code . '.svg';
         $contents = \SimpleSoftwareIO\QrCode\Facades\QrCode::size(200)->generate($qr_code->code);
+        
         file_put_contents($path, $contents);
-        return response()->download($path)->deleteFileAfterSend();
+        
+        $filename = $qr_code->title . '_QRCode.svg';
+        
+        return response()->download($path, $filename)->deleteFileAfterSend();
     }
     public function qrCode(int $meeting, int $score_game, int $id)
     {

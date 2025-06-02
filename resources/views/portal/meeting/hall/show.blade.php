@@ -1,290 +1,264 @@
 @extends('layout.portal.meeting-detail')
 @section('title', __('common.hall') . ' | ' . $hall->title)
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route("portal.meeting.index") }}">{{ __('common.meetings') }}</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.show', $hall->meeting->id) }}">{{ $hall->meeting->title }}</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.hall.index', ['meeting' => $hall->meeting->id]) }}">{{ __('common.halls') }}</a></li>
-    <li class="breadcrumb-item active" aria-current="page">{{ $hall->title }}</li>
+    <div class="breadcrumb-container px-0 py-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route("portal.dashboard.index") }}"><i class="fa-solid fa-house"></i></a></li>
+                <li class="breadcrumb-item"><a href="{{ route("portal.meeting.index") }}">{{ __('common.meetings') }}</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('portal.meeting.show', $hall->meeting->id) }}">{{ $hall->meeting->title }}</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('portal.meeting.hall.index', ['meeting' => $hall->meeting->id]) }}">{{ __('common.halls') }}</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ $hall->title }}</li>
+            </ol>
+        </nav>
+    </div>
 @endsection
+
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/meeting-pages-theme.css') }}">
+@endpush
+
 @section('meeting_content')
-
-<!-- Modern Hero Section -->
-<div class="hero-section mb-4">
-    <div class="hero-content p-4 text-white">
-        <div class="d-flex align-items-center justify-content-between">
-            <div class="d-flex align-items-center">
-                <div class="hero-icon me-3">
-                    <i class="fa-solid fa-door-open fa-2x"></i>
-                </div>
-                <div>
-                    <h2 class="mb-1">{{ $hall->title }}</h2>
-                    <p class="mb-0 opacity-75">{{ __('common.hall') }} Management</p>
-                </div>
-            </div>
-            <div class="status-badge">
-                @if($hall->status)
-                    <span class="badge bg-success rounded-pill px-3 py-2">
-                        <i class="fa-solid fa-toggle-on me-1"></i>Active
-                    </span>
-                @else
-                    <span class="badge bg-danger rounded-pill px-3 py-2">
-                        <i class="fa-solid fa-toggle-off me-1"></i>Inactive
-                    </span>
-                @endif
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Stats Section -->
-<div class="row g-3 mb-4">
-    <div class="col-md-4">
-        <div class="stats-card">
-            <div class="stats-icon">
-                <i class="fa-solid fa-calendar-week text-white"></i>
-            </div>
-            <div class="stats-content">
-                <h3 class="stats-number">{{ $hall->programs->count() }}</h3>
-                <p class="stats-label">{{ __('common.programs') }}</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="stats-card">
-            <div class="stats-icon" style="background: linear-gradient(45deg, #e74c3c, #f39c12);">
-                <i class="fa-solid fa-tv text-white"></i>
-            </div>
-            <div class="stats-content">
-                <h3 class="stats-number">--</h3>
-                <p class="stats-label">{{ __('common.screens') }}</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="stats-card">
-            <div class="stats-icon" style="background: linear-gradient(45deg, #9b59b6, #8e44ad);">
-                <i class="fa-solid fa-users text-white"></i>
-            </div>
-            <div class="stats-content">
-                <h3 class="stats-number">--</h3>
-                <p class="stats-label">Sessions</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Main Content -->
-<div class="row g-4">
-    <!-- Hall Information -->
-    <div class="col-lg-8">
-        <div class="modern-card">
-            <div class="card-header">
-                <h5 class="mb-0">
-                    <i class="fa-solid fa-info-circle me-2"></i>{{ __('common.hall') }} Information
-                </h5>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-borderless">
-                        <tr>
-                            <th scope="row" class="text-muted w-25 py-3">{{ __('common.meeting-title') }}:</th>
-                            <td class="py-3">
-                                @if($hall->status)
-                                    <i class="fa-solid fa-toggle-on text-success me-2"></i>
-                                @else
-                                    <i class="fa-solid fa-toggle-off text-danger me-2"></i>
-                                @endif
-                                <strong>{{ $hall->title }}</strong>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="text-muted py-3">{{ __('common.hall-program-count') }}:</th>
-                            <td class="py-3">
-                                <span class="badge bg-primary rounded-pill">{{ $hall->programs->count() }}</span>
-                                {{ __('common.programs') }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="text-muted py-3">{{ __('common.created-by') }}:</th>
-                            <td class="py-3">
-                                <i class="fa-solid fa-user text-muted me-2"></i>{{ $hall->created_by_name }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="text-muted py-3">{{ __('common.created-at') }}:</th>
-                            <td class="py-3">
-                                <i class="fa-solid fa-calendar text-muted me-2"></i>{{ $hall->created_at }}
-                            </td>
-                        </tr>
-                    </table>
+    <!-- Modern Hero Section for Hall Detail -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="modern-hero-card">
+                <div class="hero-content">
+                    <div class="hero-icon">
+                        <i class="fa-duotone fa-hotel fa-fade"></i>
+                    </div>
+                    <div class="hero-text">
+                        <h1 class="hero-title">{{ $hall->title }}</h1>
+                        <p class="hero-subtitle">{{ __('common.hall-management-subtitle') }} - {{ $hall->meeting->title }}</p>
+                        <div class="hero-stats">
+                            <span class="stat-item">
+                                <i class="fa-regular fa-calendar-week me-1"></i>
+                                {{ $hall->programs->count() }} {{ __('common.programs') }}
+                            </span>
+                            <span class="badge-status {{ $hall->status ? 'status-active' : 'status-inactive' }}">
+                                <i class="fa-regular fa-{{ $hall->status ? 'toggle-on' : 'toggle-off' }} me-1"></i>
+                                {{ $hall->status ? __('common.active') : __('common.inactive') }}
+                            </span>
+                            <span class="stat-item">
+                                <i class="fa-regular fa-calendar me-1"></i>
+                                {{ $hall->created_at->format('d.m.Y') }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="hero-action">
+                        <a href="{{ route('portal.meeting.hall.index', ['meeting' => $hall->meeting->id]) }}" class="btn btn-hero-create">
+                            <i class="fa-solid fa-arrow-left me-2"></i>{{ __('common.back-to-halls') }}
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    
-    <!-- Quick Actions -->
-    <div class="col-lg-4">
-        <div class="modern-card">
-            <div class="card-header">
-                <h5 class="mb-0">
-                    <i class="fa-solid fa-bolt me-2"></i>Quick Actions
-                </h5>
-            </div>
-            <div class="card-body">
-                <div class="d-grid gap-3">
-                    <!-- Programs Section -->
-                    <div class="action-group">
-                        <h6 class="action-title">
-                            <span class="badge bg-primary me-2">1</span>{{ __('common.programs') }}
+
+    <div class="row g-4">
+        <!-- Quick Actions Card - Now on the left -->
+        <div class="col-lg-4">
+            <div class="modern-main-card">
+                <div class="card-header">
+                    <h3 class="card-header-title">
+                        <i class="fa-duotone fa-bolt me-2"></i>
+                        {{ __('common.quick-actions') }}
+                    </h3>
+                </div>
+                <div class="card-body p-3">
+                    <!-- Management Actions -->
+                    <div class="mb-3">
+                        <h6 class="text-muted mb-2 fs-7">
+                            <i class="fa-regular fa-gear me-1"></i>{{ __('common.management') }}
                         </h6>
-                        <a class="btn btn-primary w-100" href="{{ route('portal.meeting.hall.program.index', ['meeting' => $meeting->id, 'hall' => $hall->id]) }}">
-                            <i class="fa-solid fa-calendar-week me-2"></i>{{ __('common.programs') }}
-                        </a>
-                        <a class="btn btn-outline-secondary w-100 mt-2" href="{{ route('portal.meeting.hall.report.session.index', ['meeting' => $meeting->id, 'hall' => $hall->id]) }}">
-                            <i class="fa-solid fa-chart-bar me-2"></i>{{ __('common.session-reports') }}
-                        </a>
+                        <div class="d-grid gap-1">
+                            <a href="{{ route('portal.meeting.hall.program.index', ['meeting' => $hall->meeting->id, 'hall' => $hall->id]) }}" class="btn btn-outline-primary btn-sm">
+                                <i class="fa-regular fa-calendar-week me-2"></i>{{ __('common.programs') }}
+                                <span class="badge bg-primary ms-auto">{{ $hall->programs->count() }}</span>
+                            </a>
+                            <a href="{{ route('portal.meeting.hall.screen.index', ['meeting' => $hall->meeting->id, 'hall' => $hall->id]) }}" class="btn btn-outline-warning btn-sm">
+                                <i class="fa-regular fa-tv me-2"></i>{{ __('common.screens') }}
+                            </a>
+                            <a href="{{ route('portal.meeting.hall.report.session.index', ['meeting' => $hall->meeting->id, 'hall' => $hall->id]) }}" class="btn btn-outline-info btn-sm">
+                                <i class="fa-regular fa-chart-bar me-2"></i>{{ __('common.reports') }}
+                            </a>
+                        </div>
                     </div>
                     
-                    <!-- Screens Section -->
-                    <div class="action-group">
-                        <h6 class="action-title">
-                            <span class="badge bg-warning me-2">2</span>{{ __('common.screens') }}
+                    <!-- External Boards -->
+                    <div>
+                        <h6 class="text-muted mb-2 fs-7">
+                            <i class="fa-regular fa-external-link me-1"></i>{{ __('common.external-boards') }}
                         </h6>
-                        <a class="btn btn-warning w-100" href="{{ route('portal.meeting.hall.screen.index', ['meeting' => $meeting->id, 'hall' => $hall->id]) }}">
-                            <i class="fa-solid fa-tv me-2"></i>{{ __('common.screens') }}
-                        </a>
+                        <div class="row g-1">
+                            <div class="col-4">
+                                <a href="{{ route('service.operator-board.start', ['code' => $hall->code, 'program_order' => 0]) }}" class="btn btn-outline-success btn-sm w-100 py-2" target="_blank" title="{{ __('common.operator-board') }}" data-bs-toggle="tooltip">
+                                    <i class="fa-regular fa-rectangles-mixed d-block"></i>
+                                    <small>Operator</small>
+                                </a>
+                            </div>
+                            <div class="col-4">
+                                <a href="{{ route('service.screen-board.start', ['code' => $hall->code]) }}" class="btn btn-outline-secondary btn-sm w-100 py-2" target="_blank" title="{{ __('common.screen-board') }}" data-bs-toggle="tooltip">
+                                    <i class="fa-regular fa-screen-users d-block"></i>
+                                    <small>Screen</small>
+                                </a>
+                            </div>
+                            <div class="col-4">
+                                <a href="{{ route('service.question-board.start', ['code' => $hall->code]) }}" class="btn btn-outline-dark btn-sm w-100 py-2" target="_blank" title="{{ __('common.question-board') }}" data-bs-toggle="tooltip">
+                                    <i class="fa-regular fa-question d-block"></i>
+                                    <small>Question</small>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Hall Info Summary -->
+                    <div class="mt-3 pt-3 border-top">
+                        <div class="row g-2 text-center">
+                            <div class="col-6">
+                                <div class="text-muted">
+                                    <i class="fa-regular fa-user d-block mb-1"></i>
+                                    <small>{{ $hall->created_by_name }}</small>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="text-muted">
+                                    <i class="fa-regular fa-calendar d-block mb-1"></i>
+                                    <small>{{ $hall->created_at->format('d.m.Y') }}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Hall Details Card - Now on the right with better spacing -->
+        <div class="col-lg-8">
+            <div class="modern-main-card">
+                <div class="card-header">
+                    <h3 class="card-header-title">
+                        <i class="fa-duotone fa-info-circle me-2"></i>
+                        {{ __('common.hall-details') }}
+                    </h3>
+                </div>
+                <div class="card-body p-4">
+                    <!-- Main Information Table -->
+                    <div class="detail-table">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="detail-item-table">
+                                    <label class="detail-label-table">
+                                        <i class="fa-regular fa-signature me-2"></i>{{ __('common.title') }}
+                                    </label>
+                                    <div class="detail-value-table">{{ $hall->title }}</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="detail-item-table">
+                                    <label class="detail-label-table">
+                                        <i class="fa-regular fa-code me-2"></i>{{ __('common.hall-code') }}
+                                    </label>
+                                    <div class="detail-value-table">
+                                        <span class="id-badge">{{ $hall->code }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="detail-item-table">
+                                    <label class="detail-label-table">
+                                        <i class="fa-regular fa-toggle-large-on me-2"></i>{{ __('common.status') }}
+                                    </label>
+                                    <div class="detail-value-table">
+                                        <span class="status-badge {{ $hall->status ? 'status-active' : 'status-inactive' }}">
+                                            <i class="fa-regular fa-{{ $hall->status ? 'toggle-on' : 'toggle-off' }} me-1"></i>
+                                            {{ $hall->status ? __('common.active') : __('common.inactive') }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="detail-item-table">
+                                    <label class="detail-label-table">
+                                        <i class="fa-regular fa-calendar-week me-2"></i>{{ __('common.programs-count') }}
+                                    </label>
+                                    <div class="detail-value-table">
+                                        <span class="theme-badge">{{ $hall->programs->count() }} {{ __('common.programs') }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <div class="detail-item-table">
+                                    <label class="detail-label-table">
+                                        <i class="fa-regular fa-building me-2"></i>{{ __('common.meeting-title') }}
+                                    </label>
+                                    <div class="detail-value-table">{{ $hall->meeting->title }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Settings Section -->
+                        <hr class="my-4">
+                        <h6 class="text-muted mb-3">
+                            <i class="fa-regular fa-gear me-2"></i>{{ __('common.settings') }}
+                        </h6>
+                        
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="detail-setting-item">
+                                    <div class="setting-header">
+                                        <i class="fa-regular fa-calendar-check me-2"></i>
+                                        <span>{{ __('common.show-on-session') }}</span>
+                                        <span class="status-badge ms-auto {{ $hall->show_on_session ? 'status-active' : 'status-inactive' }}">
+                                            <i class="fa-regular fa-{{ $hall->show_on_session ? 'toggle-on' : 'toggle-off' }}"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="detail-setting-item">
+                                    <div class="setting-header">
+                                        <i class="fa-regular fa-comment-question me-2"></i>
+                                        <span>{{ __('common.show-on-ask-question') }}</span>
+                                        <span class="status-badge ms-auto {{ $hall->show_on_ask_question ? 'status-active' : 'status-inactive' }}">
+                                            <i class="fa-regular fa-{{ $hall->show_on_ask_question ? 'toggle-on' : 'toggle-off' }}"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="detail-setting-item">
+                                    <div class="setting-header">
+                                        <i class="fa-regular fa-calendar-days me-2"></i>
+                                        <span>{{ __('common.show-on-view-program') }}</span>
+                                        <span class="status-badge ms-auto {{ $hall->show_on_view_program ? 'status-active' : 'status-inactive' }}">
+                                            <i class="fa-regular fa-{{ $hall->show_on_view_program ? 'toggle-on' : 'toggle-off' }}"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="detail-setting-item">
+                                    <div class="setting-header">
+                                        <i class="fa-regular fa-envelope me-2"></i>
+                                        <span>{{ __('common.show-on-send-mail') }}</span>
+                                        <span class="status-badge ms-auto {{ $hall->show_on_send_mail ? 'status-active' : 'status-inactive' }}">
+                                            <i class="fa-regular fa-{{ $hall->show_on_send_mail ? 'toggle-on' : 'toggle-off' }}"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-<style>
-.hero-section {
-    background: linear-gradient(135deg, var(--kongre-primary), var(--kongre-secondary));
-    border-radius: 1rem;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-}
-
-.hero-icon {
-    background: rgba(255,255,255,0.2);
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.stats-card {
-    background: var(--kongre-secondary);
-    border-radius: 1rem;
-    padding: 1.5rem;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    display: flex;
-    align-items: center;
-    transition: transform 0.2s ease;
-}
-
-.stats-card:hover {
-    transform: translateY(-5px);
-}
-
-.stats-icon {
-    background: linear-gradient(45deg, #3498db, #2ecc71);
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 1rem;
-}
-
-.stats-content {
-    color: white;
-}
-
-.stats-number {
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 0.25rem;
-    color: white;
-}
-
-.stats-label {
-    font-size: 0.9rem;
-    opacity: 0.8;
-    margin-bottom: 0;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.modern-card {
-    background: white;
-    border-radius: 1rem;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    border: none;
-    overflow: hidden;
-}
-
-.modern-card .card-header {
-    background: linear-gradient(135deg, #e9ecef, #dee2e6);
-    border-bottom: 2px solid #ced4da;
-    padding: 1.25rem;
-    color: #212529;
-    font-weight: 700;
-    font-size: 1.1rem;
-}
-
-.modern-card .card-header h5 {
-    color: #212529;
-    font-weight: 700;
-    margin-bottom: 0;
-}
-
-.modern-card .card-header i {
-    color: #495057;
-}
-
-.action-group {
-    padding: 1rem;
-    background: #f8f9fa;
-    border-radius: 0.75rem;
-    border: 1px solid #e9ecef;
-}
-
-.action-title {
-    color: #2c3e50;
-    font-weight: 600;
-    margin-bottom: 0.75rem;
-    font-size: 0.95rem;
-}
-
-.btn {
-    border-radius: 0.5rem;
-    font-weight: 500;
-    transition: all 0.2s ease;
-}
-
-.btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-.table th {
-    color: #6c757d !important;
-    font-weight: 500;
-}
-
-.table td {
-    color: #495057 !important;
-    font-weight: 500;
-}
-
-.table strong {
-    color: #2c3e50 !important;
-}
-</style>
 @endsection
+

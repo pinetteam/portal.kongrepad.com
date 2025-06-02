@@ -13,8 +13,7 @@ class QuestionResource extends JsonResource
             'survey_id' => ['value' => $this->survey_id, 'type' => 'hidden'],
             'sort_order' => ['value' => $this->sort_order, 'type' => 'number'],
             'question' => ['value' => $this->question, 'type' => 'text'],
-            'status' => ['value' => $this->status, 'type' => 'radio'],
-            'route' => route('portal.meeting.survey.question.update', [$this->survey->meeting_id, $this->survey_id, $this->id]),
+            'route' => route('portal.meeting.survey.question.update', ['meeting' => $this->survey->meeting_id, 'survey' => $this->survey_id, 'question' => $this->id]),
         ];
     }
 }

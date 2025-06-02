@@ -1,0 +1,859 @@
+/* Survey Show Page Styles - Congress Theme */
+.modern-survey-hero-card {
+    background: linear-gradient(135deg, var(--kongre-primary) 0%, var(--kongre-accent) 100%) !important;
+    border-radius: 20px !important;
+    padding: 2rem !important;
+    margin-bottom: 1.5rem !important;
+    color: white !important;
+    box-shadow: 0 15px 35px rgba(var(--kongre-primary-rgb), 0.2) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    position: relative;
+    overflow: hidden;
+    min-height: 180px !important; /* Fixed height for consistency */
+}
+
+/* Hero Cards - Fixed Height for All Pages */
+.modern-surveys-hero-card,
+.modern-survey-hero-card,
+.modern-score-games-hero-card {
+    min-height: 180px !important;
+    max-height: 180px !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+/* Hero Content - Flex Layout for Consistent Height */
+.hero-content {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    min-height: 116px; /* Consistent content height */
+}
+
+/* Hero Stats - Fixed Dimensions */
+.hero-stats {
+    display: none !important;
+}
+
+/* Hero Badges - Compact Design Like Survey Show Page */
+.hero-badges {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+}
+
+.badge-status, 
+.badge-questions,
+.badge-info,
+.badge-success {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white !important;
+    font-size: 0.9rem;
+    font-weight: 500;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.badge-info {
+    background: rgba(23, 162, 184, 0.2);
+    border-color: rgba(23, 162, 184, 0.3);
+}
+
+.badge-success {
+    background: rgba(40, 167, 69, 0.2);
+    border-color: rgba(40, 167, 69, 0.3);
+}
+
+/* Hero Action - Consistent Positioning */
+.hero-action {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+}
+
+/* Hero Text - Consistent Sizing */
+.hero-text {
+    flex: 1;
+    color: white;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hero-title {
+    font-size: 1.8rem !important; /* Slightly smaller for consistency */
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: white;
+    line-height: 1.3;
+}
+
+.hero-subtitle {
+    font-size: 1rem !important; /* Consistent subtitle size */
+    margin-bottom: 1rem;
+    opacity: 0.9;
+    line-height: 1.4;
+}
+
+/* Hero Icon - Fixed Size */
+.hero-icon {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    width: 70px !important; /* Slightly smaller for consistency */
+    height: 70px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem !important;
+    color: white;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    flex-shrink: 0;
+}
+
+.modern-survey-hero-card .hero-content,
+.modern-survey-hero-card .hero-icon,
+.modern-survey-hero-card .hero-text,
+.modern-survey-hero-card .hero-title,
+.modern-survey-hero-card .hero-subtitle {
+    color: white !important;
+}
+
+.modern-survey-details-card .card-header,
+.modern-questions-card .card-header {
+    background: linear-gradient(135deg, var(--kongre-primary) 0%, var(--kongre-accent) 100%) !important;
+    color: white !important;
+}
+
+.modern-survey-hero-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.btn-hero-back {
+    background: rgba(255, 255, 255, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.btn-hero-back:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+    color: white;
+}
+
+.modern-survey-details-card {
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08) !important;
+    border: none;
+    overflow: hidden;
+}
+
+.modern-survey-details-card .card-header {
+    background: linear-gradient(135deg, var(--kongre-primary) 0%, var(--kongre-accent) 100%) !important;
+    color: white !important;
+    padding: 1.5rem 2rem;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-header-title {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.modern-questions-card {
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08) !important;
+    border: none;
+    overflow: hidden;
+}
+
+.modern-questions-card .card-header {
+    background: linear-gradient(135deg, var(--kongre-primary) 0%, var(--kongre-accent) 100%) !important;
+    color: white !important;
+    padding: 1.5rem 2rem;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-header-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.survey-details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem 0;
+}
+
+.detail-group .detail-box {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border-left: 4px solid var(--kongre-accent);
+    transition: all 0.3s ease;
+}
+
+.detail-group .detail-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-left-color: var(--kongre-primary);
+}
+
+.detail-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--kongre-primary), var(--kongre-accent));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    color: white;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.detail-content {
+    flex: 1;
+}
+
+.detail-title {
+    display: block;
+    font-size: 0.875rem;
+    color: #6c757d;
+    margin-bottom: 0.25rem;
+    font-weight: 500;
+}
+
+.detail-text {
+    display: block;
+    font-size: 1rem;
+    color: #333;
+    font-weight: 600;
+}
+
+.question-count-badge {
+    background: linear-gradient(135deg, var(--kongre-primary), var(--kongre-accent));
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.unspecified-text {
+    color: #6c757d;
+    font-style: italic;
+}
+
+.question-item {
+    border-bottom: 1px solid #e9ecef;
+    padding: 1.5rem;
+}
+
+.question-item:last-child {
+    border-bottom: none;
+}
+
+.question-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 1rem;
+}
+
+.question-info h5.question-title {
+    margin: 0 0 0.5rem 0;
+    color: var(--kongre-primary);
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.question-meta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.sort-order-badge {
+    background: var(--kongre-light);
+    color: var(--kongre-secondary);
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+}
+
+.status-active {
+    background: rgba(var(--kongre-success), 0.1);
+    color: var(--kongre-success);
+    border: 1px solid rgba(var(--kongre-success), 0.2);
+}
+
+.status-inactive {
+    background: rgba(var(--kongre-danger), 0.1);
+    color: var(--kongre-danger);
+    border: 1px solid rgba(var(--kongre-danger), 0.2);
+}
+
+.question-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.question-actions .btn {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+}
+
+.options-container {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border: 1px solid rgba(var(--kongre-accent-rgb), 0.1);
+}
+
+.options-title {
+    margin: 0 0 1rem 0;
+    color: var(--kongre-secondary);
+    font-size: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.option-item {
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.option-item:hover {
+    border-color: var(--kongre-accent);
+    box-shadow: 0 2px 8px rgba(var(--kongre-accent-rgb), 0.1);
+    transform: translateY(-1px);
+}
+
+.option-content {
+    flex: 1;
+}
+
+.option-text {
+    display: block;
+    font-weight: 600;
+    color: var(--kongre-primary);
+    margin-bottom: 0.5rem;
+}
+
+.option-meta {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.sort-order-text {
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+
+.option-actions {
+    display: flex;
+    gap: 0.25rem;
+    margin-left: 1rem;
+}
+
+.option-actions .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+}
+
+.no-options-message {
+    text-align: center;
+    color: #6c757d;
+    font-style: italic;
+    padding: 1rem;
+}
+
+.btn-header-create {
+    background: rgba(255, 255, 255, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.btn-header-create:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.empty-state-icon {
+    font-size: 4rem;
+    color: rgba(var(--kongre-accent-rgb), 0.3);
+    margin-bottom: 1.5rem;
+}
+
+.empty-state-title {
+    color: var(--kongre-primary);
+    margin-bottom: 1rem;
+}
+
+.empty-state-text {
+    color: var(--kongre-secondary);
+    margin-bottom: 2rem;
+}
+
+/* Additional Override Styles for Card Consistency */
+.modern-survey-details-card,
+.modern-questions-card,
+.modern-surveys-card,
+.modern-score-games-card {
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08) !important;
+}
+
+.modern-survey-hero-card .hero-content,
+.modern-survey-hero-card .hero-icon,
+.modern-survey-hero-card .hero-text,
+.modern-survey-hero-card .hero-title,
+.modern-survey-hero-card .hero-subtitle {
+    color: white !important;
+}
+
+.modern-survey-details-card .card-header,
+.modern-questions-card .card-header {
+    background: linear-gradient(135deg, var(--kongre-primary) 0%, var(--kongre-accent) 100%) !important;
+    color: white !important;
+}
+
+@media (max-width: 768px) {
+    /* Mobile Hero Cards */
+    .modern-surveys-hero-card,
+    .modern-survey-hero-card,
+    .modern-score-games-hero-card {
+        min-height: auto !important;
+        max-height: none !important;
+        padding: 1.5rem !important;
+    }
+    
+    .hero-content {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+        min-height: auto;
+    }
+
+    .hero-icon {
+        width: 60px !important;
+        height: 60px !important;
+        font-size: 1.5rem !important;
+    }
+
+    .hero-title {
+        font-size: 1.5rem !important;
+    }
+
+    .hero-subtitle {
+        font-size: 0.9rem !important;
+    }
+
+    .hero-stats {
+        justify-content: center;
+        min-height: auto;
+        gap: 0.75rem;
+    }
+
+    .stat-item {
+        display: none !important;
+    }
+
+    .stat-number {
+        display: none !important;
+    }
+
+    .stat-label {
+        display: none !important;
+    }
+
+    .btn-hero-back,
+    .btn-hero-create {
+        padding: 0.6rem 1.5rem !important;
+        font-size: 0.9rem !important;
+    }
+
+    .hero-badges {
+        justify-content: center;
+        gap: 0.75rem;
+    }
+
+    .badge-status,
+    .badge-questions,
+    .badge-info,
+    .badge-success {
+        padding: 0.4rem 0.8rem !important;
+        font-size: 0.8rem !important;
+    }
+}
+
+/* Congress Theme Navbar and Sidebar Styles */
+#kp-header.navbar {
+    background: linear-gradient(135deg, var(--kongre-primary) 0%, var(--kongre-accent) 100%) !important;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+#kp-header .navbar-brand {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 0 !important; /* Remove radius completely */
+    transition: all 0.3s ease;
+    font-weight: 600;
+    color: white !important;
+}
+
+#kp-header .navbar-brand:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateX(5px);
+}
+
+#kp-header .nav-link {
+    color: white !important;
+    transition: all 0.3s ease;
+}
+
+#kp-header .nav-link:hover {
+    color: rgba(255, 255, 255, 0.8) !important;
+    transform: scale(1.1);
+}
+
+#kp-header .navbar-toggler {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+}
+
+#kp-header .navbar-toggler:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);
+}
+
+#kp-header select.bg-color2 {
+    background: rgba(255, 255, 255, 0.15) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    padding: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+#kp-header select.bg-color2:hover {
+    background: rgba(255, 255, 255, 0.25) !important;
+}
+
+/* Congress Theme Sidebar Styles */
+#kp-menu.sidebar {
+    background: linear-gradient(180deg, var(--kongre-primary) 0%, var(--kongre-secondary) 100%) !important;
+    border-right: 2px solid rgba(255, 255, 255, 0.1);
+    /* Modern Scrollbar Styles */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+
+/* Modern Webkit Scrollbar for Sidebar */
+#kp-menu.sidebar::-webkit-scrollbar {
+    width: 8px;
+}
+
+#kp-menu.sidebar::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 4px;
+}
+
+#kp-menu.sidebar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+#kp-menu.sidebar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+#kp-menu.sidebar::-webkit-scrollbar-thumb:active {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+/* Modern Scrollbar for Other Elements */
+.overflow-auto::-webkit-scrollbar,
+.table-responsive::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.overflow-auto::-webkit-scrollbar-track,
+.table-responsive::-webkit-scrollbar-track {
+    background: rgba(var(--kongre-primary-rgb), 0.1);
+    border-radius: 4px;
+}
+
+.overflow-auto::-webkit-scrollbar-thumb,
+.table-responsive::-webkit-scrollbar-thumb {
+    background: var(--kongre-accent);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.overflow-auto::-webkit-scrollbar-thumb:hover,
+.table-responsive::-webkit-scrollbar-thumb:hover {
+    background: var(--kongre-primary);
+    box-shadow: 0 0 6px rgba(var(--kongre-primary-rgb), 0.3);
+}
+
+/* Smooth Scrolling */
+#kp-menu.sidebar,
+.overflow-auto,
+.table-responsive {
+    scroll-behavior: smooth;
+}
+
+#kp-menu .nav-link {
+    color: rgba(255, 255, 255, 0.9) !important;
+    border-radius: 10px;
+    margin: 0.25rem 0.75rem;
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+#kp-menu .nav-link:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: white !important;
+    transform: translateX(5px);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+#kp-menu .nav-link.active {
+    background: rgba(255, 255, 255, 0.15) !important;
+    color: white !important;
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    font-weight: 600;
+}
+
+#kp-menu .nav-icon {
+    margin-right: 0.75rem;
+    width: 20px;
+    display: inline-block;
+    text-align: center;
+}
+
+#kp-menu .sidebar-heading {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 1rem 1.5rem 0.5rem;
+    margin-top: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#kp-menu .sidebar-heading:first-of-type {
+    border-top: none;
+    margin-top: 0.5rem;
+}
+
+#kp-menu .sidebar-heading .nav-icon {
+    color: rgba(255, 255, 255, 0.5);
+    margin-right: 0.5rem;
+}
+
+/* Congress Theme Variables Override */
+:root {
+    --kongre-primary: #2c3e50;
+    --kongre-primary-rgb: 44, 62, 80;
+    --kongre-accent: #34495e;
+    --kongre-accent-rgb: 52, 73, 94;
+    --kongre-secondary: #1a252f;
+    --kongre-success: #27ae60;
+    --kongre-danger: #e74c3c;
+    --kongre-light: #ecf0f1;
+}
+
+/* Breadcrumb Congress Theme */
+.breadcrumb-container {
+    background: rgba(var(--kongre-primary-rgb), 0.05);
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.breadcrumb {
+    background: transparent;
+    padding: 1rem;
+    margin: 0;
+}
+
+.breadcrumb-item a {
+    color: var(--kongre-primary);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.breadcrumb-item a:hover {
+    color: var(--kongre-accent);
+    transform: translateY(-1px);
+}
+
+.breadcrumb-item.active {
+    color: var(--kongre-secondary);
+    font-weight: 600;
+}
+
+/* Survey Index Table Styles - Congress Theme (matching announcements) */
+.modern-surveys-table {
+    width: 100%;
+    margin: 0;
+    border-collapse: collapse;
+}
+
+.modern-surveys-table thead th {
+    background: var(--kongre-primary) !important;
+    color: white !important;
+    padding: 1rem 1.5rem !important;
+    font-weight: 600 !important;
+    border: none !important;
+    text-align: left !important;
+    font-size: 0.9rem !important;
+}
+
+.modern-surveys-table tbody tr {
+    border-bottom: 1px solid #f0f0f0;
+    transition: all 0.2s ease;
+}
+
+.modern-surveys-table tbody tr:hover {
+    background: rgba(var(--kongre-primary-rgb), 0.05);
+}
+
+.modern-surveys-table tbody td {
+    padding: 1rem 1.5rem;
+    vertical-align: middle;
+}
+
+.modern-surveys-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(var(--kongre-primary-rgb), 0.1);
+    overflow: hidden;
+}
+
+.modern-surveys-card .card-header {
+    background: linear-gradient(135deg, var(--kongre-primary) 0%, var(--kongre-secondary) 100%) !important;
+    color: white !important;
+    padding: 1.5rem 2rem !important;
+    border: none !important;
+}
+
+/* Survey table specific elements */
+.survey-title-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.survey-title {
+    font-weight: 500;
+    color: #333;
+    margin: 0 0 0.25rem 0;
+}
+
+.survey-description {
+    color: #6c757d;
+    font-style: italic;
+}
+
+.date-text {
+    background: rgba(var(--kongre-primary-rgb), 0.1);
+    color: var(--kongre-primary);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border: 1px solid rgba(var(--kongre-primary-rgb), 0.2);
+}
+
+/* Responsive styles for survey table */
+@media (max-width: 768px) {
+    .modern-surveys-table thead th,
+    .modern-surveys-table tbody td {
+        padding: 0.75rem 1rem !important;
+        font-size: 0.8rem !important;
+    }
+} 

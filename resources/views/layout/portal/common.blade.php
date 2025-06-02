@@ -185,9 +185,7 @@
             text-decoration: none;
         }
 
-        .navbar-dark {
-            background-color: #343a40 !important;
-        }
+    
 
         /* Language Selector */
         select.bg-color2 {

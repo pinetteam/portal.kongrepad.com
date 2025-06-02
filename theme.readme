@@ -1,0 +1,124 @@
+# Meeting Pages Modern Theme - Congress Style
+
+Bu dosya, meeting sayfalarının modernizasyonu için kullanılan tasarım şablonu hakkında bilgileri içermektedir.
+
+## Renk Paleti (CSS Variables)
+
+```css
+--kongre-primary: #2c3e50;     /* Ana koyu mavi */
+--kongre-primary-rgb: 44, 62, 80;
+--kongre-secondary: #34495e;   /* İkincil koyu gri */
+--kongre-accent: #3498db;      /* Vurgu mavisi */
+--kongre-success: #27ae60;     /* Başarı yeşili */
+--kongre-warning: #f39c12;     /* Uyarı turuncusu */
+--kongre-danger: #e74c3c;      /* Hata kırmızısı */
+--kongre-info: #3498db;        /* Bilgi mavisi */
+```
+
+## Tasarım Şablonu Yapısı
+
+### 1. Hero Section (Üst Banner)
+- **Class:** `modern-hero-card`
+- **Özellikler:** 
+  - Gradient arka plan (primary -> accent)
+  - Glassmorphism efekti
+  - İkon, başlık, alt başlık ve aksiyon butonu
+  - Hover animasyonları
+
+### 2. Ana Kart Yapısı
+- **Class:** `modern-main-card`
+- **Özellikler:**
+  - Yuvarlatılmış köşeler (16px)
+  - Gölge efekti
+  - Header gradient arka planı
+
+### 3. Tablo Tasarımı
+- **Class:** `modern-table`
+- **Özellikler:**
+  - Modern header tasarımı
+  - Hover efektleri
+  - Responsive yapı
+
+### 4. Status ve Badge Stilleri
+- **Status Dot:** Küçük durum göstergesi (aktif/pasif)
+- **Status Badge:** Metin içeren durum etiketi
+- **ID Badge:** Kimlik numarası gösterimi
+- **Theme Badge:** Tema gösterimi
+- **Date Badge:** Tarih gösterimi
+
+### 5. Empty State
+- **Class:** `empty-state`
+- **Özellikler:**
+  - Merkezi hizalama
+  - Büyük ikon
+  - Açıklayıcı metin
+  - Aksiyon butonu
+
+## Responsive Tasarım
+
+- **Tablet/Mobile:** max-width: 768px
+- **Özellikler:**
+  - Hero section dikey hizalama
+  - Tablo padding azaltması
+  - Button boyut küçültmesi
+  - Flexbox yön değişiklikleri
+
+## Kullanım Şablonu
+
+### Participant Sayfası (Referans)
+Bu sayfa baz alınarak diğer sayfalar tasarlanmalıdır:
+- `/portal/meeting/{id}/participant`
+
+### Score Game Sayfası (Güncellendi)
+Participant sayfası baz alınarak modernize edildi:
+- `/portal/meeting/{id}/score-game`
+
+## Dosya Yapısı
+
+```
+public/css/meeting-pages-theme.css  # Ana CSS dosyası
+theme.readme                        # Bu dokümantasyon
+```
+
+## Kullanım Talimatları
+
+1. Yeni sayfa oluştururken CSS dosyasını dahil edin:
+   ```html
+   <link rel="stylesheet" href="{{ asset('css/meeting-pages-theme.css') }}">
+   ```
+
+2. HTML yapısında şu class'ları kullanın:
+   - `modern-hero-card` - Hero section için
+   - `modern-main-card` - Ana içerik kartı için
+   - `modern-table` - Tablolar için
+   - `status-*` - Durum göstergeleri için
+
+3. Renkler için CSS variable'ları kullanın:
+   ```css
+   color: var(--kongre-primary);
+   background: var(--kongre-accent);
+   ```
+
+## Stil Tutarlılığı
+
+- Tüm kartlar 16px border-radius kullanır
+- Gölgeler 0 10px 30px rgba(0, 0, 0, 0.1) formatında
+- Padding değerleri 1rem, 1.5rem, 2rem katları
+- Font weight: 500 (normal), 600 (semi-bold), 700 (bold)
+- Transition: 0.2s veya 0.3s ease
+
+## Gelecek Güncellemeler
+
+Bu şablon temel alınarak şu sayfalar modernize edilecek:
+- Survey sayfaları
+- Document sayfaları
+- Announcement sayfaları
+- Virtual Stand sayfaları
+- Hall sayfaları
+
+## Notlar
+
+- FA Duotone iconlar kullanılmalı
+- Bootstrap 5 ile uyumlu
+- Modern tarayıcı desteği (CSS Grid, Flexbox, backdrop-filter)
+- Accessibility standartlarına uygun 

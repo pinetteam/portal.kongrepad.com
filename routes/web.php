@@ -98,7 +98,9 @@ Route::prefix('portal')->name('portal.')->group(function () {
             Route::resource('/{meeting}/survey', \App\Http\Controllers\Portal\Meeting\Survey\SurveyController::class)->except(['create']);
             Route::prefix('/{meeting}/survey/{survey}')->name('survey.')->group(function () {
                 Route::resource('/question', \App\Http\Controllers\Portal\Meeting\Survey\Question\QuestionController::class)->except(['create']);
-                Route::resource('/question/{question}/option', \App\Http\Controllers\Portal\Meeting\Survey\Question\Option\OptionController::class)->except(['create']);
+                Route::prefix('/question/{question}')->name('question.')->group(function () {
+                    Route::resource('/option', \App\Http\Controllers\Portal\Meeting\Survey\Question\Option\OptionController::class)->except(['create']);
+                });
             });
             Route::prefix('{meeting}/report')->name('report.')->group(function () {
                 Route::resource('/attendance', \App\Http\Controllers\Portal\Report\Attendance\AttendanceController::class)->only(['index', 'show']);

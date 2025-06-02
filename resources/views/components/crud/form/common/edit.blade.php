@@ -83,8 +83,17 @@
                         } else if(value['type'] === 'password') {
 
                         } else if(value['type'] === 'radio') {
+                            // First clear all radio buttons for this field
+                            const allRadiosForField = editModal.querySelectorAll('input[name="' + key + '"]');
+                            allRadiosForField.forEach(radio => {
+                                radio.checked = false;
+                                radio.removeAttribute('checked');
+                            });
+                            
+                            // Then set the correct one
                             const radioElement = editModal.querySelector('#{{ $method }}-' + key + '-' + value['value']);
                             if (radioElement !== null) {
+                                radioElement.checked = true;
                                 radioElement.setAttribute('checked', 'checked');
                             }
                         } else if(value['type'] === 'select') {

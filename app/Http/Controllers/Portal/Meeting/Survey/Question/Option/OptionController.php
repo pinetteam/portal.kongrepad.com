@@ -18,7 +18,7 @@ class OptionController extends Controller
             $option->survey_id = $survey;
             $option->question_id = $question;
             $option->option = $request->input('option');
-            $option->status= $request->input('status');
+            $option->status = $request->input('status', 1);
             if ($option->save()) {
                 $option->created_by = Auth::user()->id;
                 $option->save();
@@ -39,7 +39,7 @@ class OptionController extends Controller
         if ($request->validated()) {
             $option = Auth::user()->customer->surveyOptions()->findOrFail($id);
             $option->sort_order = $request->input('sort_order');
-            $option->status= $request->input('status');
+            $option->status = $request->input('status', 1);
             $option->option = $request->input('option');
             if ($option->save()) {
                 $option->updated_by = Auth::user()->id;

@@ -1,123 +1,172 @@
 @extends('layout.portal.meeting-detail')
 @section('title', $meeting->title . ' | ' . __('common.meeting'))
-@section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none">{{ __('common.meetings') }}</a></li>
-    <li class="breadcrumb-item active" aria-current="page">{{ $meeting->title }}</li>
+
+<!-- Modern Head section with stylesheet -->
+@section('head')
+<link rel="stylesheet" href="{{ asset('css/meeting-pages-theme.css') }}">
 @endsection
+
+@section('breadcrumb')
+    <div class="breadcrumb-container px-0 py-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route("portal.dashboard.index") }}"><i class="fa-solid fa-house"></i></a></li>
+                <li class="breadcrumb-item"><a href="{{ route("portal.meeting.index") }}">{{ __('common.meetings') }}</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ $meeting->title }}</li>
+            </ol>
+        </nav>
+    </div>
+@endsection
+
 @section('meeting_content')
-    <!-- Hero Section -->
-    <div class="row mb-4">
-        <div class="col-12">
-            <div class="card border-0 shadow-sm overflow-hidden bg-dark">
-                <div class="card-body text-white position-relative py-4">
-                    @if(isset($meeting->banner_name) && isset($meeting->banner_extension))
-                        <div class="position-absolute top-0 start-0 w-100 h-100" style="background-image: url('{{ asset('storage/meeting-banners/' . $meeting->banner_name . '.' . $meeting->banner_extension) }}'); background-size: cover; background-position: center; opacity: 0.2;"></div>
+    <!-- Modern Hero Section -->
+    <div class="modern-hero-card">
+        <div class="hero-content">
+            <div class="hero-icon">
+                @if(isset($meeting->banner_name) && isset($meeting->banner_extension))
+                    <img src="{{ asset('storage/meeting-banners/' . $meeting->banner_name . '.' . $meeting->banner_extension) }}" 
+                         alt="{{ $meeting->title }}" class="w-100 h-100 object-fit-cover rounded">
+                @else
+                    <i class="fa-duotone fa-calendar-check"></i>
+                @endif
+            </div>
+            <div class="hero-text">
+                <h1 class="hero-title">{{ $meeting->title }}</h1>
+                <p class="hero-subtitle">
+                    <i class="fa-regular fa-calendar me-2"></i>{{ $meeting->start_at }} - {{ $meeting->finish_at }}
+                </p>
+                <div class="hero-badges">
+                    @if($meeting->status)
+                        <div class="badge-status">
+                            <i class="fa-solid fa-broadcast-tower me-1"></i>
+                            {{ __('common.live') }}
+                        </div>
+                    @else
+                        <div class="badge-status">
+                            <i class="fa-solid fa-clock me-1"></i>
+                            {{ __('common.offline') }}
+                        </div>
                     @endif
-                    <div class="position-relative">
-                        <div class="d-flex align-items-center mb-3">
-                            @if($meeting->status)
-                                <span class="badge bg-success me-3 px-3 py-2"><i class="fa-solid fa-broadcast-tower me-1"></i>LIVE</span>
-                            @else
-                                <span class="badge bg-secondary me-3 px-3 py-2"><i class="fa-solid fa-clock me-1"></i>OFFLINE</span>
-                            @endif
-                            <small class="text-white-50">{{ __('common.' . $meeting->type) }}</small>
-                        </div>
-                        <h2 class="mb-2 fw-bold text-white">{{ $meeting->title }}</h2>
-                        <p class="mb-0 text-white-75">
-                            <i class="fa-solid fa-calendar-alt me-2"></i>{{ $meeting->start_at }} - {{ $meeting->finish_at }}
-                        </p>
+                    <div class="badge-questions">
+                        <i class="fa-regular fa-calendar-days me-1"></i>
+                        {{ __('common.' . $meeting->type) }}
                     </div>
                 </div>
+            </div>
+            <div class="hero-action">
+                <a href="{{ route('portal.meeting.participant.index', $meeting->id) }}" class="btn-hero-create">
+                    <i class="fa-regular fa-users me-1"></i>
+                    {{ __('common.participants') }}
+                </a>
             </div>
         </div>
     </div>
 
-    <!-- Stats Cards -->
+    <!-- Modern Statistics Cards -->
     <div class="row mb-4">
         <div class="col-md-3 col-6 mb-3">
-            <div class="card border-0 shadow-sm h-100">
-                <div class="card-body text-center">
-                    <div class="d-flex align-items-center justify-content-center mb-2">
-                        <div class="rounded-circle bg-primary p-3">
-                            <i class="fa-solid fa-users text-white fa-lg"></i>
-                        </div>
+            <div class="modern-stat-card">
+                <div class="stat-content">
+                    <div class="stat-icon bg-primary">
+                        <i class="fa-duotone fa-users"></i>
                     </div>
-                    <h4 class="mb-1 fw-bold text-primary">{{ $meeting->participants->count() }}</h4>
-                    <small class="text-muted">{{ __('common.participants') }}</small>
+                    <div class="stat-number">{{ $meeting->participants->count() }}</div>
+                    <div class="stat-label">{{ __('common.participants') }}</div>
                 </div>
             </div>
         </div>
         <div class="col-md-3 col-6 mb-3">
-            <div class="card border-0 shadow-sm h-100">
-                <div class="card-body text-center">
-                    <div class="d-flex align-items-center justify-content-center mb-2">
-                        <div class="rounded-circle bg-success p-3">
-                            <i class="fa-solid fa-building text-white fa-lg"></i>
-                        </div>
+            <div class="modern-stat-card">
+                <div class="stat-content">
+                    <div class="stat-icon bg-success">
+                        <i class="fa-duotone fa-building"></i>
                     </div>
-                    <h4 class="mb-1 fw-bold text-success">{{ $meeting->halls->count() }}</h4>
-                    <small class="text-muted">{{ __('common.halls') }}</small>
+                    <div class="stat-number">{{ $meeting->halls->count() }}</div>
+                    <div class="stat-label">{{ __('common.halls') }}</div>
                 </div>
             </div>
         </div>
         <div class="col-md-3 col-6 mb-3">
-            <div class="card border-0 shadow-sm h-100">
-                <div class="card-body text-center">
-                    <div class="d-flex align-items-center justify-content-center mb-2">
-                        <div class="rounded-circle bg-info p-3">
-                            <i class="fa-solid fa-file-lines text-white fa-lg"></i>
-                        </div>
+            <div class="modern-stat-card">
+                <div class="stat-content">
+                    <div class="stat-icon bg-info">
+                        <i class="fa-duotone fa-file-text"></i>
                     </div>
-                    <h4 class="mb-1 fw-bold text-info">{{ $meeting->documents->count() }}</h4>
-                    <small class="text-muted">{{ __('common.documents') }}</small>
+                    <div class="stat-number">{{ $meeting->documents->count() }}</div>
+                    <div class="stat-label">{{ __('common.documents') }}</div>
                 </div>
             </div>
         </div>
         <div class="col-md-3 col-6 mb-3">
-            <div class="card border-0 shadow-sm h-100">
-                <div class="card-body text-center">
-                    <div class="d-flex align-items-center justify-content-center mb-2">
-                        <div class="rounded-circle bg-warning p-3">
-                            <i class="fa-solid fa-poll text-white fa-lg"></i>
-                        </div>
+            <div class="modern-stat-card">
+                <div class="stat-content">
+                    <div class="stat-icon bg-warning">
+                        <i class="fa-duotone fa-poll"></i>
                     </div>
-                    <h4 class="mb-1 fw-bold text-warning">{{ $meeting->surveys->count() ?? 0 }}</h4>
-                    <small class="text-muted">{{ __('common.surveys') }}</small>
+                    <div class="stat-number">{{ $meeting->surveys->count() ?? 0 }}</div>
+                    <div class="stat-label">{{ __('common.surveys') }}</div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Details Section -->
+    <!-- Modern Details Section -->
     <div class="row">
         <div class="col-lg-8">
-            <div class="card border-0 shadow-sm mb-4">
-                <div class="card-header bg-light border-0 pb-3">
-                    <h5 class="card-title mb-0 d-flex align-items-center text-dark">
-                        <i class="fa-solid fa-circle-info text-primary me-2"></i>
+            <div class="modern-main-card">
+                <div class="card-header">
+                    <h3 class="card-header-title">
+                        <i class="fa-duotone fa-circle-info me-2"></i>
                         {{ __('common.meeting_info') }}
-                    </h5>
+                    </h3>
                 </div>
-                <div class="card-body bg-white">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <small class="text-muted text-uppercase fw-semibold">{{ __('common.meeting-title') }}</small>
-                                <p class="mb-0 fw-medium text-dark">{{ $meeting->title }}</p>
-                            </div>
-                            <div class="mb-3">
-                                <small class="text-muted text-uppercase fw-semibold">{{ __('common.type') }}</small>
-                                <p class="mb-0 fw-medium text-dark">{{ __('common.' . $meeting->type) }}</p>
+                <div class="card-body">
+                    <div class="meeting-details-grid">
+                        <div class="detail-item">
+                            <label class="detail-label">{{ __('common.meeting-title') }}</label>
+                            <div class="detail-value">{{ $meeting->title }}</div>
+                        </div>
+                        <div class="detail-item">
+                            <label class="detail-label">{{ __('common.type') }}</label>
+                            <div class="detail-value">
+                                <span class="theme-badge">
+                                    <i class="fa-regular fa-tag me-1"></i>
+                                    {{ __('common.' . $meeting->type) }}
+                                </span>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <small class="text-muted text-uppercase fw-semibold">{{ __('common.start-at') }}</small>
-                                <p class="mb-0 fw-medium text-dark">{{ $meeting->start_at }}</p>
+                        <div class="detail-item">
+                            <label class="detail-label">{{ __('common.start-at') }}</label>
+                            <div class="detail-value">
+                                <span class="date-badge">
+                                    <i class="fa-regular fa-calendar-plus me-1"></i>
+                                    {{ $meeting->start_at }}
+                                </span>
                             </div>
-                            <div class="mb-3">
-                                <small class="text-muted text-uppercase fw-semibold">{{ __('common.finish-at') }}</small>
-                                <p class="mb-0 fw-medium text-dark">{{ $meeting->finish_at }}</p>
+                        </div>
+                        <div class="detail-item">
+                            <label class="detail-label">{{ __('common.finish-at') }}</label>
+                            <div class="detail-value">
+                                <span class="date-badge">
+                                    <i class="fa-regular fa-calendar-minus me-1"></i>
+                                    {{ $meeting->finish_at }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <label class="detail-label">{{ __('common.status') }}</label>
+                            <div class="detail-value">
+                                @if($meeting->status)
+                                    <span class="status-active">
+                                        <i class="fa-solid fa-broadcast-tower me-1"></i>
+                                        {{ __('common.active') }}
+                                    </span>
+                                @else
+                                    <span class="status-inactive">
+                                        <i class="fa-solid fa-pause me-1"></i>
+                                        {{ __('common.inactive') }}
+                                    </span>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -125,21 +174,33 @@
             </div>
         </div>
         <div class="col-lg-4">
-            <div class="card border-0 shadow-sm">
-                <div class="card-header bg-light border-0 pb-3">
-                    <h5 class="card-title mb-0 d-flex align-items-center text-dark">
-                        <i class="fa-solid fa-user-gear text-secondary me-2"></i>
+            <div class="modern-main-card">
+                <div class="card-header">
+                    <h3 class="card-header-title">
+                        <i class="fa-duotone fa-user-gear me-2"></i>
                         {{ __('common.creation_details') }}
-                    </h5>
+                    </h3>
                 </div>
-                <div class="card-body bg-white">
-                    <div class="mb-3">
-                        <small class="text-muted text-uppercase fw-semibold">{{ __('common.created-by') }}</small>
-                        <p class="mb-0 fw-medium text-dark">{{ $meeting->created_by }}</p>
-                    </div>
-                    <div class="mb-0">
-                        <small class="text-muted text-uppercase fw-semibold">{{ __('common.created-at') }}</small>
-                        <p class="mb-0 fw-medium text-dark">{{ $meeting->created_at }}</p>
+                <div class="card-body">
+                    <div class="creation-details">
+                        <div class="detail-item">
+                            <label class="detail-label">{{ __('common.created-by') }}</label>
+                            <div class="detail-value">
+                                <span class="id-badge">
+                                    <i class="fa-regular fa-user me-1"></i>
+                                    {{ $meeting->created_by }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <label class="detail-label">{{ __('common.created-at') }}</label>
+                            <div class="detail-value">
+                                <span class="date-badge">
+                                    <i class="fa-regular fa-clock me-1"></i>
+                                    {{ $meeting->created_at }}
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

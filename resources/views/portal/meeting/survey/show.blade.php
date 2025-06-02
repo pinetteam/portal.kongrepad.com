@@ -1,241 +1,394 @@
 @extends('layout.portal.meeting-detail')
-@section('title', $survey->title . ' | ' . __('common.survey'))
+@section('title', $meeting->title . ' | ' . $survey->title)
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none">{{ __('common.meetings') }}</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.show', $survey->meeting->id) }}" class="text-decoration-none">{{ $survey->meeting->title }}</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.survey.index', ['meeting' => $survey->meeting->id]) }}" class="text-decoration-none">{{ __('common.surveys') }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.show', $meeting->id) }}" class="text-decoration-none">{{ $meeting->title }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('portal.meeting.survey.index', $meeting->id) }}" class="text-decoration-none">{{ __('common.surveys') }}</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{ $survey->title }}</li>
 @endsection
+
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/meeting-pages-theme.css') }}">
+@endpush
+
 @section('meeting_content')
-    <div class="card bg-kongre-secondary">
-        <div class="card-header">
-            <h1 class="text-center">
-                <span class="fa-regular fa-square-poll-vertical fa-fade"></span> <small class="p-2">"{{ $survey->title }}"</small>
-                {{ __('common.survey') }}
-            </h1>
-            <div class="table-responsive">
-                <table class="table table-dark table-striped table-hover">
-                    <tr>
-                        <th scope="row" class="text-end w-25">{{ __('common.survey') }}:</th>
-                        <td class="text-start w-25">
-                            @if($survey->status)
-                                <i style="color:var(--kongre-success)" class="fa-regular fa-toggle-on"></i>
-                            @else
-                                <i style="color:var(--kongre-danger)" class="fa-regular fa-toggle-off"></i>
-                            @endif
-                            {{ $survey->title }}
-                        </td>
-                        <th scope="row" class="text-end w-25">{{ __('common.description') }}:</th>
-                        <td class="text-start w-25">{{ $survey->description }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="text-end w-25">{{ __('common.start-at') }}:</th>
-                        <td>
-                            @if($survey->start_at)
-                                {{ $survey->start_at }}
-                            @else
-                                <i class="text-info">{{ __('common.unspecified') }}</i>
-                            @endif
-                        </td>
-                        <th scope="row" class="text-end w-25">{{ __('common.finish-at') }}:</th>
-                        <td>
-                            @if($survey->finish_at)
-                                {{ $survey->finish_at }}
-                            @else
-                                <i class="text-info">{{ __('common.unspecified') }}</i>
-                            @endif
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="text-end w-25">{{ __('common.question-count') }}:</th>
-                        <td class="text-start w-25">{{ $survey->questions->count() }}</td>
-                        <th scope="row" class="text-end w-25">{{ __('common.created-at') }}:</th>
-                        <td class="text-start w-25">{{ $survey->created_at }}</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div class="card bg-kongre-secondary">
-        <div class="card-header">
-            <h2 class="text-center">
-                <span class="fa-regular fa-circle-question fa-fade p-2"> </span>{{ __('common.questions') }}
-            </h2>
-        </div>
-        <div class="card-body p-0">
-            <div class="card bg-kongre-secondary mt-2">
-                @foreach($survey->questions as $question)
-                    <div class="table-responsive">
-                        <table class="table table-dark table-striped table-hover">
-                            <thead>
-                            <tr>
-                                <th scope="col"></th>
-                                <th scope="col"><span class="fa-regular fa-messages-question mx-1 "></span> {{ __('common.question-title') }}</th>
-                                <th scope="col"><span class="fa-regular fa-circle-sort mx-1 "></span> {{ __('common.sort-order') }}</th>
-                                <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1  "></span> {{ __('common.option-count') }}</th>
-                                <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1 "> </span> {{ __('common.status') }}</th>
-                                <th scope="col" class="text-end"></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td rowspan="2" style="width: 2%"></td>
-                                <td rowspan="1">{{ $question->title }}</td>
-                                <td rowspan="1">{{ $question->sort_order }}</td>
-                                <td rowspan="1">{{ $question->options->count() }}</td>
-                                <td rowspan="1">
-                                    @if($question->status)
-                                        <i style="color:var(--kongre-success)" class="fa-regular fa-toggle-on fa-xg"></i>
-                                    @else
-                                        <i style="color:var(--kongre-danger)" class="fa-regular fa-toggle-off fa-xg"></i>
-                                    @endif
-                                </td>
-                                <td class="text-end" rowspan="1">
-                                    <div class="btn-group" role="group"
-                                         aria-label="{{ __('common.processes') }}">
-                                        <div data-bs-toggle="tooltip" data-bs-placement="top"
-                                             data-bs-custom-class="kp-tooltip"
-                                             data-bs-title="{{ __('common.add-option')}}">
-                                            <button type="button"
-                                                    class="btn btn-outline-success btn-sm w-100  "
-                                                    data-bs-toggle="offcanvas"
-                                                    data-bs-target="#option-create-modal"
-                                                    data-route="{{ route('portal.meeting.survey.option.store',['meeting' => $survey->meeting_id, 'survey' =>  $question->survey_id, 'question' => $question->id,]) }}">
-                                                <span class="fa-plus" style="white-space: nowrap"> {{ __('common.add-option') }}</span>
-                                            </button>
-                                        </div>
-                                        <a class="btn btn-kongre-accent btn-sm"
-                                           href="{{ route('portal.meeting.survey.question.show', ['meeting' => $survey->meeting_id, 'survey' => $survey->id, 'question' => $question->id]) }}"
-                                           title="{{ __('common.show') }}"
-                                           data-bs-toggle="tooltip"
-                                           data-bs-placement="top"
-                                           data-bs-custom-class="kp-tooltip"
-                                           data-bs-title="{{ __('common.show') }}">
-                                            <span class="fa-regular fa-eye"></span>
-                                        </a>
-                                        <div data-bs-toggle="tooltip" data-bs-placement="top"
-                                             data-bs-custom-class="kp-tooltip"
-                                             data-bs-title="{{ __('common.edit')}}">
-                                            <button class="btn btn-warning btn-sm"
-                                                    title="{{ __('common.edit') }}"
-                                                    data-bs-toggle="offcanvas"
-                                                    data-bs-target="#question-edit-modal"
-                                                    data-route="{{ route('portal.meeting.survey.question.update', ['meeting' => $survey->meeting_id , 'survey' => $survey->id, 'question' => $question->id]) }}"
-                                                    data-resource="{{ route('portal.meeting.survey.question.edit', ['meeting' => $survey->meeting_id , 'survey' => $survey->id, 'question' => $question->id]) }}"
-                                                    data-id="{{ $question->id }}">
-                                                <span class="fa-regular fa-pen-to-square"></span>
-                                            </button>
-                                        </div>
-                                        <div data-bs-toggle="tooltip" data-bs-placement="top"
-                                             data-bs-custom-class="kp-tooltip"
-                                             data-bs-title="{{ __('common.delete') }}">
-                                            <button class="btn btn-danger btn-sm"
-                                                    title="{{ __('common.delete') }}"
-                                                    data-bs-toggle="offcanvas"
-                                                    data-bs-target="#question-delete-modal"
-                                                    data-route="{{ route('portal.meeting.survey.question.destroy', ['meeting'=> $survey->meeting_id, 'survey' => $survey->id, 'question' => $question->id]) }}"
-                                                    data-record="{{ $question->title }}">
-                                                <span class="fa-regular fa-trash"></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td rowspan="1" colspan="5">
-                                    <div class="table-responsive ">
-                                        <table class="table table-dark table-striped table-hover">
-                                            <thead class="thead-dark">
-                                            <tr>
-                                            <th scope="col"><span class="fa-regular fa-messages-question mx-1"></span> {{ __('common.option-title') }}</th>
-                                            <th scope="col"><span class="fa-regular fa-circle-sort mx-1"></span> {{ __('common.sort-order') }}</th>
-                                            <th scope="col"><span class="fa-regular fa-toggle-large-on mx-1"></span> {{ __('common.status') }}</th>
-                                            <th scope="col" class=""></th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            @foreach($question->options as $option)
-                                                <tr>
-                                                    <td>{{ $option->option }}</td>
-                                                    <td>{{ $option->sort_order }}</td>
-                                                    <td>
-                                                        @if($option->status)
-                                                            <i style="color:var(--kongre-success)" class="fa-regular fa-toggle-on fa-xg"></i>
-                                                        @else
-                                                            <i style="color:var(--kongre-danger)" class="fa-regular fa-toggle-off fa-xg"></i>
-                                                        @endif
-                                                    </td>
-                                                    <td class="text-end">
-                                                        <div class="btn-group" role="group" aria-label="{{ __('common.processes') }}">
-                                                            <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.edit')}}">
-                                                                <button class="btn btn-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="offcanvas" data-bs-target="#option-edit-modal" data-route="{{ route('portal.meeting.survey.option.update',['meeting' => $survey->meeting_id, 'survey' => $survey->id, 'question' => $option->question_id, 'option' => $option->id]) }}" data-resource="{{ route('portal.meeting.survey.option.edit',['meeting'=>$survey->meeting_id, 'survey' => $question->survey_id , 'question' => $question->id, 'option' => $option->id]) }}" data-id="{{ $option->id }}">
-                                                                    <span class="fa-regular fa-pen-to-square"></span>
-                                                                </button>
-                                                            </div>
-                                                            <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
-                                                                <button class="btn btn-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="offcanvas" data-bs-target="#option-delete-modal" data-route="{{ route('portal.meeting.survey.option.show', ['meeting' => $survey->meeting_id, 'survey' => $question->survey_id , 'question' => $question->id, 'option' => $option->id]) }}" data-record="{{ $option->option }}">
-                                                                    <span class="fa-regular fa-trash"></span>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                @endforeach
-                            <tr>
-                                <div class="card-footer d-flex justify-content-center">
-                                    <button type="button" class="btn btn-success btn-lg w-100" data-bs-toggle="offcanvas" data-bs-target="#question-create-modal" data-route="{{ route('portal.meeting.survey.question.store',['meeting' => $survey->meeting_id, 'survey' => $survey->id]) }}">
-                                        <i class="fa-solid fa-plus"></i> {{ __('common.create-new-question') }}
-                                    </button>
-                                </div>
-                            </tr>
+    <!-- Modern Hero Section for Survey Detail -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="modern-hero-card">
+                <div class="hero-content">
+                    <div class="hero-icon">
+                        <i class="fa-duotone fa-poll fa-fade"></i>
                     </div>
+                    <div class="hero-text">
+                        <h1 class="hero-title">{{ $survey->title }}</h1>
+                        <p class="hero-subtitle">{{ $survey->description ?: __('common.survey-details') }} - {{ $meeting->title }}</p>
+                        <div class="hero-stats">
+                            <span class="stat-item">
+                                <i class="fa-regular fa-question-circle me-1"></i>
+                                {{ $survey->questions->count() }} {{ __('common.questions') }}
+                            </span>
+                            <span class="badge-status {{ $survey->status ? 'status-active' : 'status-inactive' }}">
+                                <i class="fa-regular fa-{{ $survey->status ? 'toggle-on' : 'toggle-off' }} me-1"></i>
+                                {{ $survey->status ? __('common.active') : __('common.inactive') }}
+                            </span>
+                            @if($survey->start_at)
+                                <span class="stat-item">
+                                    <i class="fa-regular fa-calendar-arrow-up me-1"></i>
+                                    {{ \Carbon\Carbon::parse($survey->start_at)->format('d.m.Y H:i') }}
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="hero-action">
+                        <button type="button" class="btn btn-hero-create" data-bs-toggle="offcanvas" data-bs-target="#question-create-modal" data-route="{{ route('portal.meeting.survey.question.store', ['meeting' => $meeting->id, 'survey' => $survey->id]) }}">
+                            <i class="fa-solid fa-plus me-2"></i>{{ __('common.add-new-question') }}
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <x-crud.form.common.create method="c-o" name="option">
-        @section('option-create-form')
-            <x-input.hidden method="c-o" name="survey_id" :value="$survey->id"/>
-            <x-input.hidden method="c-o" name="question_id" value="1"/>
-            <x-input.text method="c-o" name="option" title="option" icon="list-dropdown"/>
-            <x-input.number method="c-o" name="sort_order" title="sort" icon="circle-sort"/>
-            <x-input.radio method="c-o" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on"/>
-        @endsection
-    </x-crud.form.common.create>
-    <x-crud.form.common.delete name="option"/>
-    <x-crud.form.common.edit name="option">
-        @section('option-edit-form')
-            <x-input.hidden method="e" name="survey_id" :value="$survey->id"/>
-            <x-input.hidden method="e" name="question_id" value="1"/>
-            <x-input.text method="e" name="option" title="option" icon="list-dropdown"/>
-            <x-input.number method="e" name="sort_order" title="sort" icon="circle-sort"/>
-            <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on"/>
+    <!-- Survey Details Card -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="modern-main-card">
+                <div class="card-header">
+                    <h3 class="card-header-title">
+                        <i class="fa-duotone fa-info-circle me-2"></i>
+                        {{ __('common.survey-information') }}
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="row g-1">
+                        <div class="col-md-6">
+                            <div class="detail-item">
+                                <label class="detail-label">
+                                    <i class="fa-regular fa-signature me-2"></i>{{ __('common.title') }}
+                                </label>
+                                <div class="detail-value">{{ $survey->title }}</div>
+                            </div>
+                        </div>
+                        @if($survey->description)
+                            <div class="col-md-6">
+                                <div class="detail-item">
+                                    <label class="detail-label">
+                                        <i class="fa-regular fa-comment-dots me-2"></i>{{ __('common.description') }}
+                                    </label>
+                                    <div class="detail-value">{{ $survey->description }}</div>
+                                </div>
+                            </div>
+                        @endif
+                        <div class="col-md-6">
+                            <div class="detail-item">
+                                <label class="detail-label">
+                                    <i class="fa-regular fa-calendar-arrow-up me-2"></i>{{ __('common.start-at') }}
+                                </label>
+                                <div class="detail-value">
+                                    @if($survey->start_at)
+                                        <span class="date-badge">
+                                            <i class="fa-regular fa-calendar me-1"></i>
+                                            {{ \Carbon\Carbon::parse($survey->start_at)->format('d.m.Y H:i') }}
+                                        </span>
+                                    @else
+                                        <span class="unspecified-text">{{ __('common.unspecified') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="detail-item">
+                                <label class="detail-label">
+                                    <i class="fa-regular fa-calendar-arrow-down me-2"></i>{{ __('common.finish-at') }}
+                                </label>
+                                <div class="detail-value">
+                                    @if($survey->finish_at)
+                                        <span class="date-badge">
+                                            <i class="fa-regular fa-calendar me-1"></i>
+                                            {{ \Carbon\Carbon::parse($survey->finish_at)->format('d.m.Y H:i') }}
+                                        </span>
+                                    @else
+                                        <span class="unspecified-text">{{ __('common.unspecified') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="detail-item">
+                                <label class="detail-label">
+                                    <i class="fa-regular fa-sort me-2"></i>{{ __('common.sort-order') }}
+                                </label>
+                                <div class="detail-value">
+                                    <span class="id-badge">
+                                        <i class="fa-regular fa-sort me-1"></i>
+                                        {{ $survey->sort_order }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="detail-item">
+                                <label class="detail-label">
+                                    <i class="fa-regular fa-toggle-large-on me-2"></i>{{ __('common.status') }}
+                                </label>
+                                <div class="detail-value">
+                                    <span class="status-badge {{ $survey->status ? 'status-active' : 'status-inactive' }}">
+                                        <i class="fa-regular fa-{{ $survey->status ? 'toggle-on' : 'toggle-off' }} me-1"></i>
+                                        {{ $survey->status ? __('common.active') : __('common.inactive') }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Questions Card -->
+    <div class="row">
+        <div class="col-12">
+            <div class="modern-main-card">
+                <div class="card-header">
+                    <h3 class="card-header-title">
+                        <i class="fa-duotone fa-question-circle me-2"></i>
+                        {{ __('common.questions') }}
+                        <span class="count-badge ms-2">{{ $survey->questions->count() }}</span>
+                    </h3>
+                </div>
+                <div class="card-body p-0">
+                    @if($survey->questions->count() > 0)
+                        <div class="table-responsive">
+                            <table class="modern-table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <i class="fa-regular fa-sort me-2"></i>
+                                            {{ __('common.sort') }}
+                                        </th>
+                                        <th>
+                                            <i class="fa-regular fa-signature me-2"></i>
+                                            {{ __('common.title') }}
+                                        </th>
+                                        <th>
+                                            <i class="fa-regular fa-list me-2"></i>
+                                            {{ __('common.type') }}
+                                        </th>
+                                        <th>
+                                            <i class="fa-regular fa-list-ul me-2"></i>
+                                            {{ __('common.options') }}
+                                        </th>
+                                        <th class="text-center">
+                                            <i class="fa-regular fa-gear me-2"></i>
+                                            {{ __('common.actions') }}
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($survey->questions as $question)
+                                        <tr>
+                                            <td>
+                                                <span class="id-badge">
+                                                    <i class="fa-regular fa-sort me-1"></i>
+                                                    {{ $question->sort_order }}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <div class="item-info">
+                                                    <div class="item-title">{{ $question->question }}</div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span class="theme-badge">
+                                                    <i class="fa-regular fa-list-check me-1"></i>
+                                                    {{ __('common.question') }}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                @if($question->options->count() > 0)
+                                                    <div class="options-container">
+                                                        @foreach($question->options as $option)
+                                                            <div class="option-item-row">
+                                                                <span class="option-order">{{ $option->sort_order }}.</span>
+                                                                <span class="option-title-text">{{ $option->option }}</span>
+                                                                <span class="option-status-badge">
+                                                                    <span class="badge bg-{{ $option->status ? 'success' : 'danger' }} badge-sm">
+                                                                        {{ $option->status ? __('common.active') : __('common.passive') }}
+                                                                    </span>
+                                                                </span>
+                                                                <div class="option-actions">
+                                                                    <button class="btn btn-outline-warning btn-xs" data-bs-toggle="offcanvas" data-bs-target="#option-edit-modal" data-route="{{ route('portal.meeting.survey.question.option.update', ['meeting' => $meeting->id, 'survey' => $survey->id, 'question' => $question->id, 'option' => $option->id]) }}" data-resource="{{ route('portal.meeting.survey.question.option.edit', ['meeting' => $meeting->id, 'survey' => $survey->id, 'question' => $question->id, 'option' => $option->id]) }}" data-id="{{ $option->id }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.edit') }}">
+                                                                        <i class="fa-regular fa-pen-to-square"></i>
+                                                                    </button>
+                                                                    <button class="btn btn-outline-danger btn-xs" data-bs-toggle="offcanvas" data-bs-target="#option-delete-modal" data-route="{{ route('portal.meeting.survey.question.option.destroy', ['meeting' => $meeting->id, 'survey' => $survey->id, 'question' => $question->id, 'option' => $option->id]) }}" data-record="{{ $option->option }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
+                                                                        <i class="fa-regular fa-trash"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                        <button type="button" class="btn btn-outline-success btn-xs mt-2" data-bs-toggle="offcanvas" data-bs-target="#option-create-modal" data-route="{{ route('portal.meeting.survey.question.option.store', ['meeting' => $meeting->id, 'survey' => $survey->id, 'question' => $question->id]) }}">
+                                                            <i class="fa-solid fa-plus me-1"></i>{{ __('common.add-option') }}
+                                                        </button>
+                                                        <div class="option-summary mt-2">
+                                                            <small class="text-muted">
+                                                                <span class="badge bg-success badge-sm me-1">{{ $question->options->where('status', 1)->count() }} {{ __('common.active') }}</span>
+                                                                <span class="badge bg-danger badge-sm">{{ $question->options->where('status', 0)->count() }} {{ __('common.passive') }}</span>
+                                                            </small>
+                                                        </div>
+                                                    </div>
+                                                @else
+                                                    <div class="no-options-state">
+                                                        <span class="unspecified-text">{{ __('common.no-options-message') }}</span>
+                                                        <button type="button" class="btn btn-outline-success btn-xs ms-2" data-bs-toggle="offcanvas" data-bs-target="#option-create-modal" data-route="{{ route('portal.meeting.survey.question.option.store', ['meeting' => $meeting->id, 'survey' => $survey->id, 'question' => $question->id]) }}">
+                                                            <i class="fa-solid fa-plus me-1"></i>{{ __('common.add-first-option') }}
+                                                        </button>
+                                                    </div>
+                                                @endif
+                                            </td>
+                                            <td class="text-center">
+                                                <div class="btn-group" role="group" aria-label="{{ __('common.actions') }}">
+                                                    <button class="btn btn-outline-warning btn-sm" title="{{ __('common.edit') }}" data-bs-toggle="offcanvas" data-bs-target="#question-edit-modal" data-route="{{ route('portal.meeting.survey.question.update', ['meeting' => $meeting->id, 'survey' => $survey->id, 'question' => $question->id]) }}" data-resource="{{ route('portal.meeting.survey.question.edit', ['meeting' => $meeting->id, 'survey' => $survey->id, 'question' => $question->id]) }}" data-id="{{ $question->id }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.edit') }}">
+                                                        <i class="fa-regular fa-pen-to-square"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-danger btn-sm" title="{{ __('common.delete') }}" data-bs-toggle="offcanvas" data-bs-target="#question-delete-modal" data-route="{{ route('portal.meeting.survey.question.destroy', ['meeting' => $meeting->id, 'survey' => $survey->id, 'question' => $question->id]) }}" data-record="{{ $question->question }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="kp-tooltip" data-bs-title="{{ __('common.delete') }}">
+                                                        <i class="fa-regular fa-trash"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    @else
+                        <div class="empty-state">
+                            <div class="empty-state-icon">
+                                <i class="fa-duotone fa-question-circle"></i>
+                            </div>
+                            <h4 class="empty-state-title">{{ __('common.no-questions-found') }}</h4>
+                            <p class="empty-state-text">{{ __('common.no-questions-message') }}</p>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#question-create-modal" data-route="{{ route('portal.meeting.survey.question.store', ['meeting' => $meeting->id, 'survey' => $survey->id]) }}">
+                                <i class="fa-solid fa-plus me-2"></i>{{ __('common.create-first-question') }}
+                            </button>
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CRUD Forms -->
+    <!-- Survey Edit/Delete Forms -->
+    <x-crud.form.common.edit name="survey">
+        @section('survey-edit-form')
+            <x-input.hidden method="e" name="meeting_id" :value="$meeting->id" />
+            <x-input.number method="e" name="sort_order" title="sort" icon="circle-sort" />
+            <x-input.text method="e" name="title" title="title" icon="pen-field" />
+            <x-input.text method="e" name="description" title="description" icon="comment-dots" />
+            <x-input.datetime method="e" name="start_at" title="start-at" icon="calendar-arrow-down" />
+            <x-input.datetime method="e" name="finish_at" title="finish-at" icon="calendar-arrow-down" />
+            <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.edit>
+    
+    <x-crud.form.common.delete name="survey" />
 
+    <!-- Question CRUD Forms -->
     <x-crud.form.common.create name="question">
         @section('question-create-form')
-            <x-input.hidden method="c" name="survey_id" :value="$survey->id"/>
-            <x-input.text method="c" name="question" title="question" icon="messages-question"/>
-            <x-input.number method="c" name="sort_order" title="sort" icon="circle-sort"/>
-            <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on"/>
+            <x-input.hidden method="c" name="survey_id" :value="$survey->id" />
+            <x-input.number method="c" name="sort_order" title="sort" icon="circle-sort" />
+            <x-input.text method="c" name="question" title="question" icon="pen-field" />
         @endsection
     </x-crud.form.common.create>
-    <x-crud.form.common.delete name="question"/>
+    
     <x-crud.form.common.edit name="question">
         @section('question-edit-form')
-            <x-input.hidden method="e" name="survey_id" :value="$survey->id"/>
-            <x-input.text method="e" name="question" title="question" icon="messages-question"/>
-            <x-input.number method="e" name="sort_order" title="sort" icon="circle-sort"/>
-            <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on"/>
+            <x-input.hidden method="e" name="survey_id" :value="$survey->id" />
+            <x-input.number method="e" name="sort_order" title="sort" icon="circle-sort" />
+            <x-input.text method="e" name="question" title="question" icon="pen-field" />
         @endsection
     </x-crud.form.common.edit>
+    
+    <x-crud.form.common.delete name="question" />
+
+    <!-- Option CRUD Forms -->
+    <x-crud.form.common.create name="option">
+        @section('option-create-form')
+            <x-input.number method="c" name="sort_order" title="sort" icon="circle-sort" />
+            <x-input.text method="c" name="option" title="option" icon="pen-field" />
+            <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
+        @endsection
+    </x-crud.form.common.create>
+    
+    <x-crud.form.common.edit name="option">
+        @section('option-edit-form')
+            <x-input.number method="e" name="sort_order" title="sort" icon="circle-sort" />
+            <x-input.text method="e" name="option" title="option" icon="pen-field" />
+            <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
+        @endsection
+    </x-crud.form.common.edit>
+    
+    <x-crud.form.common.delete name="option" />
 @endsection
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Auto-select active status for option create form
+    const optionCreateModal = document.getElementById('option-create-modal');
+    if (optionCreateModal) {
+        optionCreateModal.addEventListener('shown.bs.offcanvas', function() {
+            const activeStatusRadio = document.getElementById('c-status-1');
+            if (activeStatusRadio && !document.querySelector('input[name="status"]:checked')) {
+                activeStatusRadio.checked = true;
+            }
+        });
+    }
+    
+    // Enhanced radio button clearing in edit modals  
+    const editModals = document.querySelectorAll('[id$="-edit-modal"]');
+    editModals.forEach(modal => {
+        modal.addEventListener('hide.bs.offcanvas', function() {
+            // Clear all radio buttons in this modal
+            const radioButtons = modal.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => {
+                radio.checked = false;
+                radio.removeAttribute('checked');
+            });
+        });
+        
+        // Also clear when showing the modal (before new data loads)
+        modal.addEventListener('show.bs.offcanvas', function() {
+            const radioButtons = modal.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => {
+                radio.checked = false;
+                radio.removeAttribute('checked');
+            });
+        });
+    });
+    
+    // Fix option edit modal radio button selection
+    const optionEditModal = document.getElementById('option-edit-modal');
+    if (optionEditModal) {
+        optionEditModal.addEventListener('shown.bs.offcanvas', function() {
+            // Add a small delay to ensure data has loaded
+            setTimeout(() => {
+                // If no radio button is selected, ensure at least one is checked
+                const statusRadios = optionEditModal.querySelectorAll('input[name="status"]');
+                const checkedRadio = optionEditModal.querySelector('input[name="status"]:checked');
+                
+                if (!checkedRadio && statusRadios.length > 0) {
+                    // Default to active (value 1)
+                    const activeRadio = optionEditModal.querySelector('#e-status-1');
+                    if (activeRadio) {
+                        activeRadio.checked = true;
+                    }
+                }
+            }, 100);
+        });
+    }
+});
+</script>
+@endpush
