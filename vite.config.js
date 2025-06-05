@@ -9,6 +9,8 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/sass/app.scss',
+                'resources/css/meeting-pages-theme.css',
+                
                 'resources/js/app.js',
             ],
             refresh: true,
