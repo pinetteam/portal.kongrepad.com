@@ -9,7 +9,7 @@
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
     @vite(['resources/sass/app.scss'])
     @vite(['resources/js/app.js'])
-    <link rel="stylesheet" href="{{ asset('css/meeting-pages-theme.css') }}">
+    @vite(['resources/css/meeting-pages-theme.css'])
 </head>
 <body class="d-flex flex-column h-100">
 <div id="kp-loading" class="d-flex align-items-center justify-content-center">

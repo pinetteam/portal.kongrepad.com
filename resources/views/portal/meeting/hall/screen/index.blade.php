@@ -1,7 +1,7 @@
 @extends('layout.portal.meeting-detail')
 @section('title', $hall->title . ' | ' . __('common.screens'))
 @section('head')
-    <link rel="stylesheet" href="{{ asset('css/meeting-pages-theme.css') }}">
+    @vite(['resources/css/meeting-pages-theme.css'])
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item text-white"><a href="{{ route("portal.meeting.index") }}" class="text-decoration-none text-white">{{ __('common.meetings') }}</a></li>

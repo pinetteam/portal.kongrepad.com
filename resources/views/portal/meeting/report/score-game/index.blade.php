@@ -9,7 +9,7 @@
 @endsection
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/meeting-pages-theme.css') }}">
+    @vite(['resources/css/meeting-pages-theme.css'])
 @endpush
 
 @section('meeting_content')

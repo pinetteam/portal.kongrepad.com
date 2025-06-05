@@ -14,7 +14,7 @@
     @vite(['resources/js/app.js'])
     
     <!-- Meeting Styles - Consolidated CSS -->
-    <link rel="stylesheet" href="{{ asset('css/meeting-pages-theme.css') }}">
+    @vite(['resources/css/meeting-pages-theme.css'])
     
   
 </head>

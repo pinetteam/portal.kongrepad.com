@@ -84,7 +84,7 @@ theme.readme                        # Bu dokümantasyon
 
 1. Yeni sayfa oluştururken CSS dosyasını dahil edin:
    ```html
-   <link rel="stylesheet" href="{{ asset('css/meeting-pages-theme.css') }}">
+   @vite(['resources/css/meeting-pages-theme.css'])
    ```
 
 2. HTML yapısında şu class'ları kullanın:
