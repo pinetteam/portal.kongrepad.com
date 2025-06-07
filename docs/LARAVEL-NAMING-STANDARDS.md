@@ -196,6 +196,40 @@ class ConferenceRepository implements ConferenceRepositoryInterface
 }
 ```
 
+### Traits
+```php
+// Functionality Traits (PascalCase + descriptive behavior)
+trait HasUuid7
+{
+    protected static function bootHasUuid7(): void
+    {
+        // Boot logic
+    }
+}
+
+trait BelongsToTenant
+{
+    public function tenant(): BelongsTo
+    {
+        return $this->belongsTo(Tenant::class);
+    }
+}
+
+trait LogsActivity
+{
+    protected static function bootLogsActivity(): void
+    {
+        // Activity logging logic
+    }
+}
+
+// Usage in Models
+class Conference extends Model
+{
+    use HasUuid7, BelongsToTenant, LogsActivity;
+}
+```
+
 ---
 
 ## 🗃️ Database Naming Standards

@@ -270,9 +270,10 @@ Deliverables:
 
 Tasks:
   - Build survey creation interface
-  - Implement multiple question types
+  - Implement multiple question types (single choice, multiple choice, rating, text)
   - Create response collection system
   - Add analytics and reporting features
+  - Implement survey scheduling and automation
 ```
 
 #### Sprint 3.4 - Real-time Features Integration (Week 11)

@@ -194,17 +194,17 @@ trait HasUuid7
      */
     public static function generateUuid7(): string
     {
-        if (function_exists('uuid_create') && defined('UUID_TYPE_TIME')) {
-            // Use system UUID library if available (optimal performance)
-            return uuid_create(UUID_TYPE_TIME);
-        }
-        
+        // Use Laravel 11+ native UUID7 support if available
         if (method_exists(Str::class, 'uuid7')) {
-            // Laravel 11+ native UUID7 support
             return (string) Str::uuid7();
         }
         
-        // Fallback implementation
+        // Use system UUID library if available (optimal performance)
+        if (function_exists('uuid_create') && defined('UUID_TYPE_TIME')) {
+            return uuid_create(UUID_TYPE_TIME);
+        }
+        
+        // Fallback implementation for older systems
         return static::generateUuid7Fallback();
     }
 
