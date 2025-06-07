@@ -19,16 +19,15 @@ import {
     faRocket, faInfoCircle, faStar, faPlay, faEnvelope, faCheckCircle,
     faChevronDown, faChevronUp, faCopy, faCheck, faCog, faHome,
     faBell, faUser, faSignOutAlt, faSearch, faFilter, faEdit, 
-    faTrash, faPlus, faMinus, faSave, faCancel, faUpload, faDownload,
+    faTrash, faPlus, faMinus, faSave, faUpload, faDownload,
     faEye, faEyeSlash, faLock, faUnlock, faPrint, faShare,
     faHeart, faComment, faThumbsUp, faThumbsDown, faPoll,
     faMicrophone, faMicrophoneSlash, faVideo, faVideoSlash,
-    faScreenShare, faHandRaise, faQuestion, faExclamation,
-    faClock, faMapMarkerAlt, faPhone, faEnvelopeOpen,
-    faNewspaper, faFileAlt, faFilePdf, faFileExcel, faFileWord,
-    faImage, faMusic, faFilm, faGamepad, faTrophy, faMedal,
-    faFlag, faBullhorn, faSpeaker, faVolume, faVolumeUp, faVolumeOff,
-    faSpinner
+    faQuestion, faExclamation, faClock, faMapMarkerAlt, faPhone, 
+    faEnvelopeOpen, faNewspaper, faFileAlt, faFilePdf, faFileExcel, 
+    faFileWord, faImage, faMusic, faFilm, faGamepad, faTrophy, 
+    faMedal, faFlag, faBullhorn, faVolumeUp, faVolumeOff, faSpinner,
+    faCircle, faExclamationTriangle, faExclamationCircle
 } from '@fortawesome/pro-solid-svg-icons';
 
 import {
@@ -36,7 +35,7 @@ import {
     faBookmark as farBookmark, faCalendar as farCalendar,
     faClock as farClock, faEnvelope as farEnvelope,
     faFile as farFile, faFolder as farFolder, faImage as farImage,
-    faCopy as farCopy
+    faCopy as farCopy, faCircle as farCircle
 } from '@fortawesome/pro-regular-svg-icons';
 
 import {
@@ -48,13 +47,7 @@ import {
 
 import {
     faSparkles, faStars, faWand, faMagic, faGem, faCrown,
-    faShield, faSword, faWizard, faUnicorn, faRainbow, faButterfly,
-    faUsersGear, faGlobe as fadGlobe, faDatabase as fadDatabase,
-    faLanguage as fadLanguage, faTachometerAlt as fadTachometerAlt,
-    faCalendarAlt as fadCalendarAlt, faUsers as fadUsers,
-    faBuilding as fadBuilding, faPlug as fadPlug, faChartLine as fadChartLine,
-    faGlobeAmericas as fadGlobeAmericas, faRocket as fadRocket,
-    faInfoCircle as fadInfoCircle
+    faShield, faSword, faRainbow, faButterfly
 } from '@fortawesome/pro-duotone-svg-icons';
 
 import {
@@ -74,32 +67,28 @@ library.add(
     faRocket, faInfoCircle, faStar, faPlay, faEnvelope, faCheckCircle,
     faChevronDown, faChevronUp, faCopy, faCheck, faCog, faHome,
     faBell, faUser, faSignOutAlt, faSearch, faFilter, faEdit,
-    faTrash, faPlus, faMinus, faSave, faCancel, faUpload, faDownload,
+    faTrash, faPlus, faMinus, faSave, faUpload, faDownload,
     faEye, faEyeSlash, faLock, faUnlock, faPrint, faShare,
     faHeart, faComment, faThumbsUp, faThumbsDown, faPoll,
     faMicrophone, faMicrophoneSlash, faVideo, faVideoSlash,
-    faScreenShare, faHandRaise, faQuestion, faExclamation,
-    faClock, faMapMarkerAlt, faPhone, faEnvelopeOpen,
-    faNewspaper, faFileAlt, faFilePdf, faFileExcel, faFileWord,
-    faImage, faMusic, faFilm, faGamepad, faTrophy, faMedal,
-    faFlag, faBullhorn, faSpeaker, faVolume, faVolumeUp, faVolumeOff,
-    faSpinner,
+    faQuestion, faExclamation, faClock, faMapMarkerAlt, faPhone,
+    faEnvelopeOpen, faNewspaper, faFileAlt, faFilePdf, faFileExcel,
+    faFileWord, faImage, faMusic, faFilm, faGamepad, faTrophy,
+    faMedal, faFlag, faBullhorn, faVolumeUp, faVolumeOff, faSpinner,
+    faCircle, faExclamationTriangle, faExclamationCircle,
     
     // Regular Icons
     farUser, farHeart, farComment, farBookmark, farCalendar,
-    farClock, farEnvelope, farFile, farFolder, farImage, farCopy,
+    farClock, farEnvelope, farFile, farFolder, farImage, farCopy, farCircle,
     
     // Light Icons
     faFeather, faSun, faMoon, faCloud, faWind, faLeaf,
     faFlower, faBird, faCat, faDog, faTree, faSeedling,
     falStar, falPlay, falEnvelope, falInfoCircle, faTerminal,
     
-    // Duotone Icons
+    // Duotone Icons - Limited to available icons
     faSparkles, faStars, faWand, faMagic, faGem, faCrown,
-    faShield, faSword, faWizard, faUnicorn, faRainbow, faButterfly,
-    faUsersGear, fadGlobe, fadDatabase, fadLanguage, fadTachometerAlt,
-    fadCalendarAlt, fadUsers, fadBuilding, fadPlug, fadChartLine,
-    fadGlobeAmericas, fadRocket, fadInfoCircle,
+    faShield, faSword, faRainbow, faButterfly,
     
     // Thin Icons
     faAtom, faCode, faBug, fatTerminal, faServer, faChip,

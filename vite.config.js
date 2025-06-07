@@ -14,7 +14,10 @@ export default defineConfig({
     css: {
         preprocessorOptions: {
             scss: {
-                additionalData: `@import "bootstrap/scss/functions"; @import "bootstrap/scss/variables";`
+                // Suppress Sass deprecation warnings for Bootstrap compatibility
+                silenceDeprecations: ['import', 'global-builtin', 'color-functions'],
+                // Modern Sass API options
+                api: 'modern-compiler',
             }
         }
     },
