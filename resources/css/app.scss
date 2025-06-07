@@ -1,0 +1,333 @@
+// KongrePad Conference Management System - Bootstrap 5 Theme
+// ==========================================================
+
+// 1. Bootstrap 5 Variables Override (Custom Theme)
+// -------------------------------------------------
+
+// Brand Colors for KongrePad
+$primary: #2563eb;        // Professional Blue
+$secondary: #64748b;      // Slate Gray  
+$success: #10b981;        // Emerald Green
+$info: #06b6d4;          // Cyan
+$warning: #f59e0b;        // Amber
+$danger: #ef4444;         // Red
+$light: #f8fafc;         // Very Light Gray
+$dark: #1e293b;          // Dark Slate
+
+// Typography
+$font-family-sans-serif: 'Inter', 'Segoe UI', Roboto, -apple-system, BlinkMacSystemFont, sans-serif;
+$font-size-base: 0.95rem;
+$line-height-base: 1.6;
+
+// Spacing
+$spacer: 1rem;
+$spacers: (
+  0: 0,
+  1: $spacer * 0.25,
+  2: $spacer * 0.5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3,
+  6: $spacer * 4,
+  7: $spacer * 5
+);
+
+// Border Radius
+$border-radius: 0.5rem;
+$border-radius-sm: 0.375rem;
+$border-radius-lg: 0.75rem;
+
+// Shadows
+$box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+$box-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$box-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+// 2. Import Bootstrap 5
+// --------------------
+@import 'bootstrap/scss/bootstrap';
+
+// 3. FontAwesome Pro Styles
+// -------------------------
+// FontAwesome Pro icons will be loaded via JavaScript for better performance
+// and to enable dynamic icon switching
+
+// Icon base styles
+.fa-icon {
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+// Icon sizes for consistency
+.fa-xs { font-size: 0.75rem; }
+.fa-sm { font-size: 0.875rem; }
+.fa-lg { font-size: 1.33em; }
+.fa-xl { font-size: 1.5em; }
+.fa-2xl { font-size: 2em; }
+
+// Pro icon animations
+.fa-spin-slow {
+  animation: fa-spin 2s infinite linear;
+}
+
+.fa-pulse-slow {
+  animation: fa-spin 2s infinite steps(8);
+}
+
+@keyframes fa-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+// 4. KongrePad Custom Components
+// ------------------------------
+
+// Conference Cards
+.conference-card {
+  border: none;
+  border-radius: $border-radius-lg;
+  box-shadow: $box-shadow;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    box-shadow: $box-shadow-lg;
+    transform: translateY(-2px);
+  }
+}
+
+// Navigation Bar
+.navbar-kongrepad {
+  background: linear-gradient(135deg, $primary 0%, darken($primary, 10%) 100%);
+  backdrop-filter: blur(10px);
+  box-shadow: $box-shadow;
+}
+
+// Dashboard Stats Cards
+.stats-card {
+  background: white;
+  border-radius: $border-radius-lg;
+  box-shadow: $box-shadow-sm;
+  border-left: 4px solid $primary;
+  
+  .stats-icon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: $border-radius;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+  }
+}
+
+// Form Styling
+.form-kongrepad {
+  .form-control {
+    border-radius: $border-radius;
+    border: 1px solid #e2e8f0;
+    padding: 0.75rem;
+    
+    &:focus {
+      border-color: $primary;
+      box-shadow: 0 0 0 0.2rem rgba($primary, 0.15);
+    }
+  }
+  
+  .btn {
+    border-radius: $border-radius;
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    letter-spacing: 0.025em;
+  }
+}
+
+// Participant Badge
+.participant-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.375rem 0.75rem;
+  border-radius: $border-radius;
+  font-size: 0.875rem;
+  font-weight: 500;
+  
+  &.badge-speaker {
+    background-color: rgba($success, 0.1);
+    color: $success;
+  }
+  
+  &.badge-attendee {
+    background-color: rgba($info, 0.1);
+    color: $info;
+  }
+  
+  &.badge-moderator {
+    background-color: rgba($warning, 0.1);
+    color: $warning;
+  }
+  
+  &.badge-organizer {
+    background-color: rgba($danger, 0.1);
+    color: $danger;
+  }
+}
+
+// Timeline Component
+.timeline {
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    left: 1rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, $primary, lighten($primary, 20%));
+  }
+  
+  .timeline-item {
+    position: relative;
+    padding-left: 3rem;
+    margin-bottom: 2rem;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0.5rem;
+      top: 0.5rem;
+      width: 1rem;
+      height: 1rem;
+      border-radius: 50%;
+      background: $primary;
+      border: 3px solid white;
+      box-shadow: $box-shadow;
+    }
+  }
+}
+
+// Loading States
+.loading-skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+// FontAwesome Pro Enhancement Classes
+.icon-gradient {
+  background: linear-gradient(45deg, $primary, $info);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.icon-shadow {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.icon-bounce {
+  animation: iconBounce 2s infinite;
+}
+
+@keyframes iconBounce {
+  0%, 20%, 53%, 80%, 100% {
+    transform: translate3d(0,0,0);
+  }
+  40%, 43% {
+    transform: translate3d(0, -8px, 0);
+  }
+  70% {
+    transform: translate3d(0, -4px, 0);
+  }
+  90% {
+    transform: translate3d(0, -1px, 0);
+  }
+}
+
+// Pro Icon Specific Styles
+.pro-icon-duotone {
+  --fa-primary-color: #{$primary};
+  --fa-secondary-color: #{lighten($primary, 30%)};
+  --fa-secondary-opacity: 0.4;
+}
+
+.pro-icon-light {
+  font-weight: 300;
+}
+
+.pro-icon-thin {
+  font-weight: 100;
+}
+
+// Responsive Design Helpers
+@media (max-width: 768px) {
+  .stats-card {
+    margin-bottom: 1rem;
+  }
+  
+  .conference-card {
+    margin-bottom: 1.5rem;
+  }
+  
+  .fa-lg {
+    font-size: 1.2em;
+  }
+  
+  .fa-2xl {
+    font-size: 1.75em;
+  }
+}
+
+// RTL Language Support (Arabic)
+[dir="rtl"] {
+  .timeline {
+    &::before {
+      left: auto;
+      right: 1rem;
+    }
+    
+    .timeline-item {
+      padding-left: 0;
+      padding-right: 3rem;
+      
+      &::before {
+        left: auto;
+        right: 0.5rem;
+      }
+    }
+  }
+  
+  .stats-card {
+    border-left: none;
+    border-right: 4px solid $primary;
+  }
+}
+
+// Print Styles
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .conference-card {
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+  
+  .fa-icon,
+  [class^="fa-"],
+  [class*=" fa-"] {
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+  }
+} 
