@@ -1194,10 +1194,11 @@ stages:
 
 ---
 
-**📅 Last Updated**: 2024-01-15  
+**📅 Last Updated**: 2024-01-15 16:45 UTC  
 **👨‍💻 Maintained By**: KongrePad Development Team  
 **📝 Version**: 2.0.0  
 **🔗 Related Documents**: 
-- [Module Specifications](./MODULES-SPECIFICATION.md)
+- [Module Specifications](./MODULE-SPECIFICATIONS.md)
 - [Migration Implementation Guide](./MIGRATION-IMPLEMENTATION-GUIDE.md)
-- [Laravel Naming Standards](../README-LARAVEL-NAMING-STANDARDS.md) 
+- [Laravel Naming Standards](./LARAVEL-NAMING-STANDARDS.md)
+- [Development Workflow](./DEVELOPMENT-WORKFLOW.md) 
