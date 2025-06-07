@@ -5,8 +5,9 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
+                // Main App Assets
                 'resources/css/app.scss',
-                'resources/js/app.js'
+                'resources/js/app.js',
             ],
             refresh: true,
         }),
@@ -24,7 +25,25 @@ export default defineConfig({
     resolve: {
         alias: {
             '~bootstrap': 'bootstrap',
+            '@': '/resources',
+            '@css': '/resources/css',
+            '@js': '/resources/js',
         }
+    },
+    build: {
+        rollupOptions: {
+            output: {
+                manualChunks: {
+                    // Vendor chunks
+                    'vendor-bootstrap': ['bootstrap'],
+                    'vendor-alpine': [
+                        'alpinejs'
+                    ],
+                }
+            }
+        },
+        // Increase chunk size warning limit
+        chunkSizeWarningLimit: 1000,
     },
     server: {
         host: 'localhost',
@@ -33,4 +52,10 @@ export default defineConfig({
             host: 'localhost',
         },
     },
+    optimizeDeps: {
+        include: [
+            'bootstrap',
+            'alpinejs'
+        ]
+    }
 });

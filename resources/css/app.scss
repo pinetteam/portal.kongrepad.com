@@ -1,333 +1,435 @@
-// KongrePad Conference Management System - Bootstrap 5 Theme
-// ==========================================================
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-// 1. Bootstrap 5 Variables Override (Custom Theme)
-// -------------------------------------------------
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
 
-// Brand Colors for KongrePad
-$primary: #2563eb !default;        // Professional Blue
-$secondary: #64748b !default;      // Slate Gray  
-$success: #10b981 !default;        // Emerald Green
-$info: #06b6d4 !default;          // Cyan
-$warning: #f59e0b !default;        // Amber
-$danger: #ef4444 !default;         // Red
-$light: #f8fafc !default;         // Very Light Gray
-$dark: #1e293b !default;          // Dark Slate
+// FontAwesome - Use CDN for reliable loading
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css');
 
-// Typography
-$font-family-sans-serif: 'Inter', 'Segoe UI', Roboto, -apple-system, BlinkMacSystemFont, sans-serif !default;
-$font-size-base: 0.95rem !default;
-$line-height-base: 1.6 !default;
-
-// Spacing
-$spacer: 1rem !default;
-$spacers: (
-  0: 0,
-  1: $spacer * 0.25,
-  2: $spacer * 0.5,
-  3: $spacer,
-  4: $spacer * 1.5,
-  5: $spacer * 3,
-  6: $spacer * 4,
-  7: $spacer * 5
-) !default;
-
-// Border Radius
-$border-radius: 0.5rem !default;
-$border-radius-sm: 0.375rem !default;
-$border-radius-lg: 0.75rem !default;
-
-// Shadows
-$box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06) !default;
-$box-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !default;
-$box-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !default;
-
-// 2. Import Bootstrap 5
-// --------------------
-@import 'bootstrap';
-
-// 3. FontAwesome Pro Styles
-// -------------------------
-// FontAwesome Pro icons will be loaded via JavaScript for better performance
-// and to enable dynamic icon switching
-
-// Icon base styles
-.fa-icon {
-  display: inline-block;
-  font-style: normal;
-  font-variant: normal;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
+// Variables
+:root {
+    --primary-color: #3b82f6;
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --danger-color: #ef4444;
+    --info-color: #06b6d4;
+    --light-color: #f8fafc;
+    --dark-color: #1f2937;
+    --gray-color: #6b7280;
 }
 
-// Icon sizes for consistency
-.fa-xs { font-size: 0.75rem; }
-.fa-sm { font-size: 0.875rem; }
-.fa-lg { font-size: 1.33em; }
-.fa-xl { font-size: 1.5em; }
-.fa-2xl { font-size: 2em; }
-
-// Pro icon animations
-.fa-spin-slow {
-  animation: fa-spin 2s infinite linear;
+// Base Styles
+* {
+    box-sizing: border-box;
 }
 
-.fa-pulse-slow {
-  animation: fa-spin 2s infinite steps(8);
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: var(--dark-color);
+    background-color: var(--light-color);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-@keyframes fa-spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+// Layout Components
+.app-header {
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    .navbar-brand {
+        font-weight: 700;
+        font-size: 1.25rem;
+    }
+
+    .nav-link {
+        font-weight: 500;
+        padding: 0.75rem 1rem;
+        border-radius: 6px;
+        margin: 0 0.25rem;
+        transition: all 0.2s ease;
+
+        &.active,
+        &:hover {
+            background-color: rgba(59, 130, 246, 0.1);
+            color: var(--primary-color);
+        }
+    }
+
+    .dropdown-menu {
+        border: none;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        border-radius: 12px;
+        margin-top: 0.5rem;
+    }
+
+    .dropdown-item {
+        padding: 0.75rem 1rem;
+        font-weight: 500;
+        transition: all 0.2s ease;
+
+        &:hover {
+            background-color: rgba(59, 130, 246, 0.1);
+        }
+    }
 }
 
-// 4. KongrePad Custom Components
-// ------------------------------
+.app-footer {
+    margin-top: auto;
+}
+
+// Page Layouts
+.welcome-page {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+    }
+
+    .welcome-content {
+        position: relative;
+        z-index: 2;
+        color: white;
+
+        h1 {
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .lead {
+            color: rgba(255, 255, 255, 0.9);
+        }
+    }
+
+    .btn-primary {
+        background: rgba(255, 255, 255, 0.2);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        color: white;
+        backdrop-filter: blur(10px);
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            color: white;
+        }
+    }
+
+    .btn-outline-primary {
+        border: 2px solid rgba(255, 255, 255, 0.5);
+        color: white;
+        background: transparent;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.7);
+            color: white;
+        }
+    }
+}
+
+// Auth Pages
+.auth-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+
+    .auth-card {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        padding: 2rem;
+        width: 100%;
+        max-width: 450px;
+        margin: 0 auto;
+    }
+
+    .auth-header {
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .auth-title {
+        color: #374151;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+
+    .auth-subtitle {
+        color: #6b7280;
+        margin-bottom: 0;
+    }
+
+    .password-field {
+        position: relative;
+
+        .password-toggle {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #6b7280;
+            cursor: pointer;
+            padding: 5px;
+
+            &:hover {
+                color: #374151;
+            }
+        }
+    }
+}
+
+// Dashboard Pages
+.dashboard-page,
+.conferences-page,
+.create-conference-page {
+    background: #f8fafc;
+    min-height: calc(100vh - 70px);
+}
+
+// Cards
+.card {
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+
+    .card-header {
+        background: #fff;
+        border-bottom: 1px solid #e9ecef;
+        border-radius: 12px 12px 0 0;
+        padding: 1rem 1.5rem;
+
+        .card-title {
+            color: #374151;
+            font-weight: 600;
+            margin-bottom: 0;
+        }
+    }
+
+    .card-body {
+        padding: 1.5rem;
+    }
+}
+
+// Stats Cards
+.stat-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .stat-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+    }
+}
 
 // Conference Cards
 .conference-card {
-  border: none;
-  border-radius: $border-radius-lg;
-  box-shadow: $box-shadow;
-  transition: all 0.3s ease;
-  
-  &:hover {
-    box-shadow: $box-shadow-lg;
-    transform: translateY(-2px);
-  }
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .conference-meta {
+        margin-top: 1rem;
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    .badge {
+        font-size: 0.75rem;
+        padding: 0.5rem 0.75rem;
+    }
 }
 
-// Navigation Bar
-.navbar-kongrepad {
-  background: linear-gradient(135deg, $primary 0%, #{darken($primary, 10%)} 100%);
-  backdrop-filter: blur(10px);
-  box-shadow: $box-shadow;
-}
-
-// Dashboard Stats Cards
-.stats-card {
-  background: white;
-  border-radius: $border-radius-lg;
-  box-shadow: $box-shadow-sm;
-  border-left: 4px solid $primary;
-  
-  .stats-icon {
-    width: 3rem;
-    height: 3rem;
-    border-radius: $border-radius;
+// Activity Items
+.activity-item {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.25rem;
-  }
+    align-items: flex-start;
+    padding: 1rem 0;
+    border-bottom: 1px solid #e9ecef;
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    .activity-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+        flex-shrink: 0;
+    }
+
+    .activity-content {
+        h6 {
+            margin-bottom: 0.25rem;
+            font-weight: 600;
+        }
+
+        p {
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+    }
 }
 
-// Form Styling
-.form-kongrepad {
-  .form-control {
-    border-radius: $border-radius;
-    border: 1px solid #e2e8f0;
-    padding: 0.75rem;
-    
-    &:focus {
-      border-color: $primary;
-      box-shadow: 0 0 0 0.2rem rgba($primary, 0.15);
-    }
-  }
-  
-  .btn {
-    border-radius: $border-radius;
-    padding: 0.75rem 1.5rem;
+// Buttons
+.btn {
+    border-radius: 8px;
     font-weight: 500;
-    letter-spacing: 0.025em;
-  }
-}
+    padding: 0.625rem 1.25rem;
+    transition: all 0.2s ease;
 
-// Participant Badge
-.participant-badge {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.375rem 0.75rem;
-  border-radius: $border-radius;
-  font-size: 0.875rem;
-  font-weight: 500;
-  
-  &.badge-speaker {
-    background-color: rgba($success, 0.1);
-    color: $success;
-  }
-  
-  &.badge-attendee {
-    background-color: rgba($info, 0.1);
-    color: $info;
-  }
-  
-  &.badge-moderator {
-    background-color: rgba($warning, 0.1);
-    color: $warning;
-  }
-  
-  &.badge-organizer {
-    background-color: rgba($danger, 0.1);
-    color: $danger;
-  }
-}
-
-// Timeline Component
-.timeline {
-  position: relative;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    left: 1rem;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: linear-gradient(to bottom, $primary, #{lighten($primary, 20%)});
-  }
-  
-  .timeline-item {
-    position: relative;
-    padding-left: 3rem;
-    margin-bottom: 2rem;
-    
-    &::before {
-      content: '';
-      position: absolute;
-      left: 0.5rem;
-      top: 0.5rem;
-      width: 1rem;
-      height: 1rem;
-      border-radius: 50%;
-      background: $primary;
-      border: 3px solid white;
-      box-shadow: $box-shadow;
+    &.btn-sm {
+        padding: 0.375rem 0.75rem;
+        font-size: 0.875rem;
     }
-  }
+
+    &.btn-lg {
+        padding: 0.75rem 1.5rem;
+        font-size: 1.125rem;
+    }
+}
+
+// Forms
+.form-label {
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 0.5rem;
+}
+
+.form-control {
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    padding: 0.625rem 0.75rem;
+    transition: all 0.2s ease;
+
+    &:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+}
+
+.form-select {
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    padding: 0.625rem 0.75rem;
+
+    &:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+}
+
+// Utilities
+.text-primary { color: var(--primary-color) !important; }
+.text-success { color: var(--success-color) !important; }
+.text-warning { color: var(--warning-color) !important; }
+.text-danger { color: var(--danger-color) !important; }
+.text-info { color: var(--info-color) !important; }
+
+.bg-primary { background-color: var(--primary-color) !important; }
+.bg-success { background-color: var(--success-color) !important; }
+.bg-warning { background-color: var(--warning-color) !important; }
+.bg-danger { background-color: var(--danger-color) !important; }
+.bg-info { background-color: var(--info-color) !important; }
+
+// Responsive Design
+@media (max-width: 768px) {
+    .auth-card {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+
+    .dashboard-page .container-fluid {
+        padding: 1rem;
+    }
+
+    .stat-card .card-body {
+        padding: 1rem;
+    }
+
+    .conference-card .card-body {
+        padding: 1rem;
+    }
+}
+
+// Animations
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.6s ease-out;
 }
 
 // Loading States
-.loading-skeleton {
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-  background-size: 200% 100%;
-  animation: loading 1.5s infinite;
-}
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+    position: relative;
 
-@keyframes loading {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
-}
-
-// FontAwesome Pro Enhancement Classes
-.icon-gradient {
-  background: linear-gradient(45deg, $primary, $info);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.icon-shadow {
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
-}
-
-.icon-bounce {
-  animation: iconBounce 2s infinite;
-}
-
-@keyframes iconBounce {
-  0%, 20%, 53%, 80%, 100% {
-    transform: translate3d(0,0,0);
-  }
-  40%, 43% {
-    transform: translate3d(0, -8px, 0);
-  }
-  70% {
-    transform: translate3d(0, -4px, 0);
-  }
-  90% {
-    transform: translate3d(0, -1px, 0);
-  }
-}
-
-// Pro Icon Specific Styles
-.pro-icon-duotone {
-  --fa-primary-color: #{$primary};
-  --fa-secondary-color: #{lighten($primary, 30%)};
-  --fa-secondary-opacity: 0.4;
-}
-
-.pro-icon-light {
-  font-weight: 300;
-}
-
-.pro-icon-thin {
-  font-weight: 100;
-}
-
-// Responsive Design Helpers
-@media (max-width: 768px) {
-  .stats-card {
-    margin-bottom: 1rem;
-  }
-  
-  .conference-card {
-    margin-bottom: 1.5rem;
-  }
-  
-  .fa-lg {
-    font-size: 1.2em;
-  }
-  
-  .fa-2xl {
-    font-size: 1.75em;
-  }
-}
-
-// RTL Language Support (Arabic)
-[dir="rtl"] {
-  .timeline {
-    &::before {
-      left: auto;
-      right: 1rem;
+    &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 20px;
+        height: 20px;
+        border: 2px solid #ccc;
+        border-top-color: var(--primary-color);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
     }
-    
-    .timeline-item {
-      padding-left: 0;
-      padding-right: 3rem;
-      
-      &::before {
-        left: auto;
-        right: 0.5rem;
-      }
-    }
-  }
-  
-  .stats-card {
-    border-left: none;
-    border-right: 4px solid $primary;
-  }
 }
 
-// Print Styles
-@media print {
-  .no-print {
-    display: none !important;
-  }
-  
-  .conference-card {
-    box-shadow: none;
-    border: 1px solid #ddd;
-  }
-  
-  .fa-icon,
-  [class^="fa-"],
-  [class*=" fa-"] {
-    -webkit-print-color-adjust: exact;
-    color-adjust: exact;
-  }
+@keyframes spin {
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
 } 

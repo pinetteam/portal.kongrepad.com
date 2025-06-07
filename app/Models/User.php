@@ -68,6 +68,22 @@ class User extends Authenticatable
     }
 
     /**
+     * Get user's full name
+     */
+    public function getFullNameAttribute(): string
+    {
+        return trim($this->first_name . ' ' . $this->last_name);
+    }
+
+    /**
+     * Get user's display name (full name or username)
+     */
+    public function getDisplayNameAttribute(): string
+    {
+        return $this->full_name ?: $this->username ?: $this->email;
+    }
+
+    /**
      * Relationships
      */
     public function tenant()
