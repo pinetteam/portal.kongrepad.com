@@ -1,519 +1,1046 @@
 # 🗃️ KongrePad Migration Implementation Guide
 
-> **Database şeması implementasyonu ve en iyi uygulamalar rehberi**
+> **Enterprise Database Schema Implementation & Best Practices Guide**
 
-[![Migrations](https://img.shields.io/badge/Migrations-42-blue.svg)](#)
-[![UUID7](https://img.shields.io/badge/UUID-Version%207-green.svg)](#)
-[![Multi-Tenant](https://img.shields.io/badge/Multi--Tenant-Ready-orange.svg)](#)
-
----
-
-## 📋 İçindekiler
-
-1. [Migration Stratejisi](#-migration-stratejisi)
-2. [UUID7 Implementation](#-uuid7-implementation)
-3. [Multi-Tenant Schema](#-multi-tenant-schema)
-4. [Foreign Key Patterns](#-foreign-key-patterns)
-5. [Index Optimization](#-index-optimization)
-6. [Data Types ve Constraints](#-data-types-ve-constraints)
-7. [Migration Best Practices](#-migration-best-practices)
-8. [Performance Considerations](#-performance-considerations)
-9. [Migration Examples](#-migration-examples)
-10. [Rollback Strategies](#-rollback-strategies)
+[![Migrations](https://img.shields.io/badge/Migrations-42-2563EB?style=for-the-badge)](docs/PROJECT-ARCHITECTURE.md)
+[![UUID7](https://img.shields.io/badge/UUID-Version%207-10B981?style=for-the-badge)](https://datatracker.ietf.org/doc/draft-peabody-dispatch-new-uuid-format/)
+[![Multi-Tenant](https://img.shields.io/badge/Multi--Tenant-Enterprise-F59E0B?style=for-the-badge)](#multi-tenant-architecture)
+[![Performance](https://img.shields.io/badge/Performance-Optimized-EF4444?style=for-the-badge)](#performance-optimization)
 
 ---
 
-## 🚀 Migration Stratejisi
+## 📋 Table of Contents
 
-### Numaralandırma Sistemi
+1. [Migration Architecture](#-migration-architecture)
+2. [UUID7 Implementation Strategy](#-uuid7-implementation-strategy)
+3. [Multi-Tenant Schema Design](#-multi-tenant-schema-design)
+4. [Advanced Indexing Strategies](#-advanced-indexing-strategies)
+5. [Data Types & Constraints](#-data-types--constraints)
+6. [Migration Best Practices](#-migration-best-practices)
+7. [Performance Optimization](#-performance-optimization)
+8. [Production Migration Examples](#-production-migration-examples)
+9. [Rollback & Recovery Strategies](#-rollback--recovery-strategies)
+10. [Testing & Validation](#-testing--validation)
+11. [Monitoring & Maintenance](#-monitoring--maintenance)
+
+---
+
+## 🏗️ Migration Architecture
+
+### Enterprise Migration Strategy
+The KongrePad migration system follows a **dependency-driven, phase-based approach** designed for zero-downtime deployments and enterprise-scale operations.
+
+### Migration Taxonomy & Numbering
+```yaml
+Format: YYYY_MM_DD_HHNN_action_resource_table.php
+
+Category System:
+  00xx: System Foundation
+    - Cache infrastructure (00-09)
+    - Job processing (10-19)
+    - Session management (20-29)
+    - Internationalization (30-39)
+    
+  01xx: Multi-Tenant Infrastructure
+    - Tenant management (00-19)
+    - User authentication (20-39)
+    - Role & permissions (40-59)
+    - System settings (60-79)
+    
+  02xx: Conference Core Domain
+    - Conference entities (00-19)
+    - Venue management (20-39)
+    - Program structure (40-59)
+    - Speaker coordination (60-79)
+    
+  03xx: Session & Participant Management
+    - Session lifecycle (00-19)
+    - Participant registration (20-39)
+    - Speaker assignments (40-59)
+    - Attendance tracking (60-79)
+    
+  04xx: Interactive Engagement
+    - Q&A systems (00-19)
+    - Real-time polling (20-39)
+    - Survey management (40-59)
+    - Response analytics (60-79)
+    
+  05xx: Content & Communication
+    - Document management (00-19)
+    - Notification systems (20-39)
+    - Communication logs (40-59)
+    - Media handling (60-79)
+    
+  06xx: Display & Presentation
+    - Digital signage (00-19)
+    - Timer systems (20-39)
+    - Screen management (40-59)
+    - Layout configuration (60-79)
+    
+  07xx: Analytics & Intelligence
+    - Activity logging (00-19)
+    - Performance metrics (20-39)
+    - Business intelligence (40-59)
+    - Reporting systems (60-79)
+    
+  08xx: Gamification & Engagement
+    - Game mechanics (00-19)
+    - Virtual exhibitions (20-39)
+    - Achievement systems (40-59)
+    - Social features (60-79)
+    
+  09xx: API & Security Infrastructure
+    - Authentication tokens (00-19)
+    - Rate limiting (20-39)
+    - Audit trails (40-59)
+    - Security policies (60-79)
 ```
-Format: YYYY_MM_DD_HHNN_action_table_table.php
 
-Kategoriler:
-00xx - System Foundation (Cache, Jobs, Sessions)
-01xx - Core Infrastructure (Tenants, Users, Settings)
-02xx - Conference Management (Conferences, Venues, Programs)
-03xx - Session & Speaker Management
-04xx - Interactive Features (Q&A, Polls, Surveys)
-05xx - Document & Notification Management
-06xx - Display Management (Screens, Timers)
-07xx - Analytics & Logging
-08xx - Gamification (Debates, Games, Virtual Stands)
-09xx - API & Authentication
-```
-
-### Migration Order (Dependency-based)
+### Dependency Graph Implementation
 ```bash
-# Phase 1: Foundation
+# Phase 1: Foundation Layer (Critical Path)
 2024_01_01_0001_create_system_cache_table.php
 2024_01_01_0002_create_system_sessions_table.php
 2024_01_01_0003_create_system_jobs_table.php
 2024_01_01_0004_create_system_failed_jobs_table.php
-2024_01_01_0005_create_system_countries_table.php
-2024_01_01_0006_create_system_languages_table.php
-2024_01_01_0007_create_system_routes_table.php
+2024_01_01_0030_create_system_countries_table.php
+2024_01_01_0031_create_system_languages_table.php
+2024_01_01_0035_create_system_routes_table.php
 
-# Phase 2: Core
-2024_01_01_0101_create_tenants_table.php
-2024_01_01_0102_create_users_table.php
-2024_01_01_0103_create_user_roles_table.php
-2024_01_01_0104_create_system_settings_table.php
-2024_01_01_0105_create_tenant_settings_table.php
-2024_01_01_0106_create_password_reset_tokens_table.php
+# Phase 2: Multi-Tenant Core (High Priority)
+2024_01_01_0100_create_tenants_table.php
+2024_01_01_0101_create_tenant_settings_table.php
+2024_01_01_0120_create_users_table.php
+2024_01_01_0121_create_user_roles_table.php
+2024_01_01_0160_create_system_settings_table.php
+2024_01_01_0170_create_password_reset_tokens_table.php
 
-# Phase 3: Conference Core
-2024_01_01_0201_create_conferences_table.php
-2024_01_01_0202_create_conference_venues_table.php
-# ... ve devamı
+# Phase 3: Conference Domain (Business Critical)
+2024_01_01_0200_create_conferences_table.php
+2024_01_01_0220_create_conference_venues_table.php
+2024_01_01_0240_create_conference_programs_table.php
+2024_01_01_0241_create_conference_program_chairs_table.php
+
+# Continue with remaining phases...
 ```
 
 ---
 
-## 🔑 UUID7 Implementation
+## 🔑 UUID7 Implementation Strategy
 
-### UUID7 Trait
+### UUID7 Technical Specification
+```yaml
+Format Structure:
+  - Length: 36 characters (with hyphens) / 32 hex characters
+  - Pattern: XXXXXXXX-XXXX-7XXX-XXXX-XXXXXXXXXXXX
+  - Time Component: First 48 bits (timestamp in milliseconds)
+  - Version: 4 bits (always '7')
+  - Random Component: 74 bits of randomness
+  
+Advantages Over UUID4:
+  - Time-ordered: Natural clustering in B-tree indexes
+  - Performance: 40% faster range queries
+  - Scalability: Simplified database sharding
+  - Debugging: Chronological ordering for troubleshooting
+  
+Database Compatibility:
+  - MySQL 8.0+: Native UUID functions
+  - PostgreSQL 13+: UUID extension support
+  - SQLite 3.38+: Built-in UUID support
+```
+
+### Production UUID7 Trait Implementation
 ```php
-// app/Traits/HasUuid7.php
 <?php
 
-namespace App\Traits;
+namespace App\Foundation\Traits;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 trait HasUuid7
 {
+    /**
+     * Boot the UUID7 trait for the model
+     */
     protected static function bootHasUuid7(): void
     {
         static::creating(function (Model $model) {
             if (empty($model->{$model->getKeyName()})) {
-                $model->{$model->getKeyName()} = self::generateUuid7();
+                $model->{$model->getKeyName()} = static::generateUuid7();
             }
         });
     }
 
+    /**
+     * Get the value indicating whether the IDs are incrementing
+     */
     public function getIncrementing(): bool
     {
         return false;
     }
 
+    /**
+     * Get the auto-incrementing key type
+     */
     public function getKeyType(): string
     {
         return 'string';
     }
 
+    /**
+     * Generate a new UUID7 identifier
+     */
     public static function generateUuid7(): string
     {
-        // UUID7 implementation
-        return Str::uuid7();
+        if (function_exists('uuid_create') && defined('UUID_TYPE_TIME')) {
+            // Use system UUID library if available (optimal performance)
+            return uuid_create(UUID_TYPE_TIME);
+        }
+        
+        if (method_exists(Str::class, 'uuid7')) {
+            // Laravel 11+ native UUID7 support
+            return (string) Str::uuid7();
+        }
+        
+        // Fallback implementation
+        return static::generateUuid7Fallback();
+    }
+
+    /**
+     * Fallback UUID7 implementation for older systems
+     */
+    private static function generateUuid7Fallback(): string
+    {
+        // Get current timestamp in milliseconds
+        $timestamp = intval(microtime(true) * 1000);
+        
+        // Convert to 48-bit hex (6 bytes)
+        $timestampHex = str_pad(dechex($timestamp), 12, '0', STR_PAD_LEFT);
+        
+        // Generate 12 bytes of random data
+        $randomBytes = random_bytes(12);
+        $randomHex = bin2hex($randomBytes);
+        
+        // Set version to 7
+        $randomHex[0] = '7';
+        
+        // Set variant bits (RFC 4122)
+        $randomHex[16] = dechex(hexdec($randomHex[16]) & 0x3 | 0x8);
+        
+        // Format as UUID
+        return sprintf(
+            '%s-%s-%s-%s-%s',
+            substr($timestampHex, 0, 8),
+            substr($timestampHex, 8, 4),
+            substr($randomHex, 0, 4),
+            substr($randomHex, 4, 4),
+            substr($randomHex, 8, 12)
+        );
+    }
+
+    /**
+     * Validate UUID7 format
+     */
+    public static function isValidUuid7(string $uuid): bool
+    {
+        $pattern = '/^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i';
+        return preg_match($pattern, $uuid) === 1;
+    }
+
+    /**
+     * Extract timestamp from UUID7
+     */
+    public static function extractTimestamp(string $uuid7): ?\DateTimeImmutable
+    {
+        if (!static::isValidUuid7($uuid7)) {
+            return null;
+        }
+        
+        $hex = str_replace('-', '', $uuid7);
+        $timestampHex = substr($hex, 0, 12);
+        $timestamp = hexdec($timestampHex) / 1000;
+        
+        return new \DateTimeImmutable('@' . $timestamp);
     }
 }
 ```
 
-### Migration Template
+### Migration Template with UUID7
 ```php
 <?php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
+    /**
+     * Run the migrations
+     */
     public function up(): void
     {
-        Schema::create('table_name', function (Blueprint $table) {
-            // Primary Key - UUID7
-            $table->uuid('id')->primary();
+        Schema::create('example_table', function (Blueprint $table) {
+            // UUID7 Primary Key
+            $table->uuid('id')->primary()->comment('UUID7 primary identifier');
             
-            // Foreign Keys - UUID7
-            $table->uuid('tenant_id');
-            $table->uuid('parent_id')->nullable();
+            // Multi-tenant isolation (always required)
+            $table->uuid('tenant_id')->comment('Tenant isolation key');
             
-            // Content fields
-            // ...
+            // Foreign key relationships
+            $table->uuid('parent_id')->nullable()->comment('Parent resource reference');
             
-            // Timestamps
+            // Business data columns
+            $table->string('title')->comment('Resource title');
+            $table->text('description')->nullable()->comment('Detailed description');
+            $table->enum('status', ['draft', 'active', 'archived'])->default('draft');
+            
+            // Audit trail
+            $table->uuid('created_by')->nullable()->comment('Creator user ID');
+            $table->uuid('updated_by')->nullable()->comment('Last modifier user ID');
             $table->timestamps();
+            $table->softDeletes();
             
-            // Foreign Key Constraints
-            $table->foreign('tenant_id')->references('id')->on('tenants')->onDelete('cascade');
-            $table->foreign('parent_id')->references('id')->on('parent_table')->onDelete('cascade');
+            // Foreign key constraints with proper cascading
+            $table->foreign('tenant_id')
+                  ->references('id')
+                  ->on('tenants')
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
+                  
+            $table->foreign('parent_id')
+                  ->references('id')
+                  ->on('example_table')
+                  ->onDelete('cascade');
+                  
+            $table->foreign('created_by')
+                  ->references('id')
+                  ->on('users')
+                  ->onDelete('set null');
             
-            // Indexes
-            $table->index(['tenant_id']);
-            $table->index(['created_at']);
+            // Performance-optimized indexes
+            $table->index(['tenant_id', 'status', 'created_at'], 'idx_tenant_status_date');
+            $table->index(['tenant_id', 'parent_id'], 'idx_tenant_hierarchy');
+            $table->index(['created_at'], 'idx_chronological');
+            $table->index(['updated_at'], 'idx_last_modified');
+            
+            // Full-text search index
+            $table->fullText(['title', 'description'], 'ft_content_search');
         });
+        
+        // Add table comment
+        DB::statement("ALTER TABLE example_table COMMENT = 'Example table with UUID7 and multi-tenant support'");
     }
 
+    /**
+     * Reverse the migrations
+     */
     public function down(): void
     {
-        Schema::dropIfExists('table_name');
+        Schema::dropIfExists('example_table');
     }
 };
 ```
 
 ---
 
-## 🏢 Multi-Tenant Schema
+## 🏢 Multi-Tenant Schema Design
 
-### Tenant Isolation Pattern
+### Tenant Isolation Strategies
+
+#### 1. Schema-Per-Tenant (Recommended for Large Tenants)
 ```php
-// Her tabloda tenant_id zorunlu
-Schema::create('conferences', function (Blueprint $table) {
-    $table->uuid('id')->primary();
-    $table->uuid('tenant_id'); // Her zaman gerekli
-    
-    // Content fields
-    $table->string('title');
-    $table->text('description')->nullable();
-    
-    // Timestamps
-    $table->timestamps();
-    
-    // Foreign Keys
-    $table->foreign('tenant_id')->references('id')->on('tenants')->onDelete('cascade');
-    
-    // Tenant-based Indexes
-    $table->index(['tenant_id', 'created_at']);
-    $table->index(['tenant_id', 'status']);
-    
-    // Unique Constraints (tenant-scoped)
-    $table->unique(['tenant_id', 'slug']);
-});
+// Dynamic schema selection based on tenant
+class TenantAwareConnection
+{
+    public function connection(string $tenantId): \Illuminate\Database\Connection
+    {
+        $schemaName = "tenant_{$tenantId}";
+        
+        return DB::connection('mysql')->useDatabase($schemaName);
+    }
+}
 ```
 
-### Global Scope Implementation
+#### 2. Row-Level Security (Recommended for Small-Medium Tenants)
+```sql
+-- Every business table includes tenant_id with strict isolation
+CREATE TABLE conferences (
+    id UUID PRIMARY KEY,
+    tenant_id UUID NOT NULL COMMENT 'Mandatory tenant isolation',
+    
+    -- Business columns --
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    status ENUM('draft', 'published', 'ongoing', 'completed', 'cancelled') DEFAULT 'draft',
+    
+    -- Timestamps
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    
+    -- Multi-tenant constraints
+    FOREIGN KEY (tenant_id) REFERENCES tenants(id) ON DELETE CASCADE,
+    
+    -- Tenant-optimized indexes
+    INDEX idx_tenant_primary (tenant_id, created_at),
+    INDEX idx_tenant_status (tenant_id, status),
+    INDEX idx_tenant_title (tenant_id, title(50)),
+    
+    -- Tenant-scoped unique constraints
+    UNIQUE KEY unique_tenant_slug (tenant_id, slug)
+) ENGINE=InnoDB 
+  PARTITION BY HASH(tenant_id) 
+  PARTITIONS 16
+  COMMENT='Conference management with tenant isolation';
+```
+
+### Tenant-Aware Model Implementation
 ```php
-// app/Models/Conference.php
 <?php
 
-namespace App\Models;
+namespace App\Foundation\Models;
 
-use App\Traits\HasUuid7;
-use App\Scopes\TenantScope;
+use App\Foundation\Traits\HasUuid7;
+use App\Foundation\Traits\BelongsToTenant;
+use App\Foundation\Scopes\TenantScope;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Conference extends Model
+abstract class TenantAwareModel extends Model
 {
-    use HasUuid7;
+    use HasUuid7, BelongsToTenant, SoftDeletes;
 
+    /**
+     * Boot the model with tenant scope
+     */
     protected static function booted(): void
     {
         static::addGlobalScope(new TenantScope);
+        
+        static::creating(function (Model $model) {
+            if (!$model->tenant_id && auth()->check()) {
+                $model->tenant_id = auth()->user()->tenant_id;
+            }
+        });
     }
 
-    // Relationships
-    public function tenant()
+    /**
+     * Get the tenant that owns the record
+     */
+    public function tenant(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Tenant::class);
+    }
+
+    /**
+     * Scope query to current tenant
+     */
+    public function scopeForTenant($query, string $tenantId)
+    {
+        return $query->where('tenant_id', $tenantId);
+    }
+
+    /**
+     * Override delete to ensure tenant isolation
+     */
+    public function delete(): ?bool
+    {
+        if (auth()->user()->tenant_id !== $this->tenant_id) {
+            throw new \Illuminate\Auth\Access\AuthorizationException(
+                'Cannot delete record from different tenant'
+            );
+        }
+        
+        return parent::delete();
+    }
+}
+```
+
+### Global Scope for Tenant Isolation
+```php
+<?php
+
+namespace App\Foundation\Scopes;
+
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Scope;
+
+class TenantScope implements Scope
+{
+    /**
+     * Apply the scope to a given Eloquent query builder
+     */
+    public function apply(Builder $builder, Model $model): void
+    {
+        if (auth()->check() && auth()->user()->tenant_id) {
+            $builder->where($model->getTable() . '.tenant_id', auth()->user()->tenant_id);
+        }
+    }
+
+    /**
+     * Extend the query builder with the needed functions
+     */
+    public function extend(Builder $builder): void
+    {
+        $builder->macro('withoutTenantScope', function (Builder $builder) {
+            return $builder->withoutGlobalScope($this);
+        });
+
+        $builder->macro('withTenant', function (Builder $builder, string $tenantId) {
+            return $builder->withoutGlobalScope($this)
+                          ->where($builder->getModel()->getTable() . '.tenant_id', $tenantId);
+        });
     }
 }
 ```
 
 ---
 
-## 🔗 Foreign Key Patterns
+## 📊 Advanced Indexing Strategies
 
-### Standard Foreign Key
-```php
-Schema::create('conference_sessions', function (Blueprint $table) {
-    $table->uuid('id')->primary();
-    $table->uuid('conference_id');
-    $table->uuid('venue_id')->nullable();
-    
-    // Content
-    $table->string('title');
-    $table->text('description')->nullable();
-    
-    $table->timestamps();
-    
-    // Foreign Key Constraints with Cascade
-    $table->foreign('conference_id')
-          ->references('id')
-          ->on('conferences')
-          ->onDelete('cascade');
-          
-    $table->foreign('venue_id')
-          ->references('id')
-          ->on('conference_venues')
-          ->onDelete('set null');
-});
+### Performance-Critical Index Patterns
+
+#### 1. Composite Indexes for Multi-Tenant Queries
+```sql
+-- Tenant-first indexing (most common pattern)
+CREATE INDEX idx_tenant_status_date ON conferences (tenant_id, status, created_at);
+CREATE INDEX idx_tenant_conference_session ON conference_sessions (tenant_id, conference_id, start_time);
+
+-- Analytics-optimized indexes
+CREATE INDEX idx_participant_activity ON conference_participant_logs 
+  (conference_id, participant_id, occurred_at);
+
+-- Search and filter optimization
+CREATE INDEX idx_conference_search ON conferences 
+  (tenant_id, status, start_date, max_participants);
 ```
 
-### Polymorphic Relationships
-```php
-Schema::create('conference_logs', function (Blueprint $table) {
-    $table->uuid('id')->primary();
-    $table->uuid('tenant_id');
-    
-    // Polymorphic fields
-    $table->string('loggable_type');
-    $table->uuid('loggable_id');
-    
-    $table->string('action');
-    $table->json('data')->nullable();
-    $table->timestamp('occurred_at');
-    
-    $table->timestamps();
-    
-    // Indexes for polymorphic relationship
-    $table->index(['loggable_type', 'loggable_id']);
-    $table->index(['tenant_id', 'occurred_at']);
-});
+#### 2. Covering Indexes for Read Performance
+```sql
+-- Include commonly selected columns in index
+CREATE INDEX idx_conference_list_covering ON conferences 
+  (tenant_id, status, start_date)
+  INCLUDE (id, title, max_participants, created_at);
+  
+-- Session lookup optimization  
+CREATE INDEX idx_session_speakers_covering ON conference_session_speakers
+  (session_id, type)
+  INCLUDE (participant_id, order_index, bio);
 ```
 
-### Pivot Tables
-```php
-Schema::create('conference_session_speakers', function (Blueprint $table) {
-    $table->uuid('id')->primary();
-    $table->uuid('session_id');
-    $table->uuid('participant_id');
-    
-    // Pivot specific fields
-    $table->enum('type', ['primary', 'co-speaker', 'moderator', 'panelist'])->default('primary');
-    $table->integer('order_index')->default(0);
-    $table->text('bio')->nullable();
-    $table->json('social_links')->nullable();
-    
-    $table->timestamps();
-    
-    // Foreign Keys
-    $table->foreign('session_id')->references('id')->on('conference_sessions')->onDelete('cascade');
-    $table->foreign('participant_id')->references('id')->on('conference_participants')->onDelete('cascade');
-    
-    // Unique constraint to prevent duplicates
-    $table->unique(['session_id', 'participant_id']);
-    
-    // Indexes
-    $table->index(['session_id']);
-    $table->index(['participant_id']);
-});
+#### 3. Partial Indexes for Selective Filtering
+```sql
+-- Index only active records (MySQL 8.0+ / PostgreSQL)
+CREATE INDEX idx_active_conferences ON conferences (tenant_id, start_date)
+  WHERE status IN ('published', 'ongoing');
+
+-- Index only failed jobs for monitoring
+CREATE INDEX idx_failed_jobs_recent ON system_failed_jobs (failed_at, queue)
+  WHERE failed_at >= DATE_SUB(NOW(), INTERVAL 7 DAY);
 ```
 
----
+#### 4. Full-Text Search Optimization
+```sql
+-- Multi-column full-text search
+ALTER TABLE conferences 
+ADD FULLTEXT idx_conference_content (title, description, tags);
 
-## 📊 Index Optimization
+-- Language-specific full-text (MySQL 8.0+)
+ALTER TABLE conferences 
+ADD FULLTEXT idx_conference_english (title, description) WITH PARSER ngram;
 
-### Primary Indexes
-```php
-// Performance-critical indexes
-$table->index(['tenant_id']); // Tenant filtering
-$table->index(['created_at']); // Sorting
-$table->index(['updated_at']); // Recent changes
-$table->index(['status']); // Status filtering
+-- Search with relevance scoring
+SELECT 
+    id, title, description,
+    MATCH(title, description) AGAINST('technology conference' IN NATURAL LANGUAGE MODE) as relevance_score
+FROM conferences 
+WHERE MATCH(title, description) AGAINST('technology conference' IN NATURAL LANGUAGE MODE)
+    AND tenant_id = ?
+ORDER BY relevance_score DESC;
 ```
 
-### Composite Indexes
-```php
-// Multi-column indexes for complex queries
-$table->index(['tenant_id', 'conference_id']); // Tenant + Conference filtering
-$table->index(['tenant_id', 'status', 'created_at']); // Tenant + Status + Time
-$table->index(['conference_id', 'start_time']); // Conference sessions by time
-$table->index(['participant_id', 'created_at']); // User activity timeline
-```
+### Index Monitoring and Optimization
+```sql
+-- Monitor index usage (MySQL)
+SELECT 
+    object_schema,
+    object_name,
+    index_name,
+    count_read,
+    count_write,
+    sum_timer_read / count_read as avg_read_time
+FROM performance_schema.table_io_waits_summary_by_index_usage
+WHERE object_schema = 'kongrepad'
+ORDER BY count_read DESC;
 
-### Full-Text Search Indexes
-```php
-// For search functionality
-Schema::create('conferences', function (Blueprint $table) {
-    // ... other columns
-    
-    $table->string('title');
-    $table->text('description')->nullable();
-    $table->json('tags')->nullable();
-    
-    // Full-text search index
-    $table->fullText(['title', 'description']);
-});
+-- Identify unused indexes
+SELECT 
+    t.TABLE_SCHEMA,
+    t.TABLE_NAME,
+    s.INDEX_NAME,
+    s.CARDINALITY
+FROM information_schema.TABLES t
+LEFT JOIN information_schema.STATISTICS s ON t.TABLE_SCHEMA = s.TABLE_SCHEMA 
+    AND t.TABLE_NAME = s.TABLE_NAME
+LEFT JOIN performance_schema.table_io_waits_summary_by_index_usage i 
+    ON s.TABLE_SCHEMA = i.OBJECT_SCHEMA 
+    AND s.TABLE_NAME = i.OBJECT_NAME 
+    AND s.INDEX_NAME = i.INDEX_NAME
+WHERE t.TABLE_SCHEMA = 'kongrepad'
+    AND s.INDEX_NAME IS NOT NULL
+    AND (i.count_read IS NULL OR i.count_read = 0)
+ORDER BY t.TABLE_NAME, s.INDEX_NAME;
 ```
 
 ---
 
-## 📝 Data Types ve Constraints
+## 📝 Data Types & Constraints
 
-### String Fields
-```php
-// Optimized string lengths
-$table->string('title', 255); // Standard title
-$table->string('slug', 255); // URL slug
-$table->string('email', 320); // RFC compliant email
-$table->string('phone', 20); // International phone
-$table->char('language_code', 2); // ISO language code
-$table->char('country_code', 2); // ISO country code
-$table->string('timezone', 50); // Timezone identifier
+### Optimized Data Type Selection
+
+#### String Fields with Proper Sizing
+```sql
+-- Email addresses (RFC 5322 compliant)
+email VARCHAR(320) NOT NULL COMMENT 'Max email length per RFC 5322',
+
+-- International phone numbers
+phone VARCHAR(20) NULL COMMENT 'E.164 format: +[country][number]',
+
+-- URLs and file paths
+website_url VARCHAR(2048) NULL COMMENT 'RFC 3986 compliant URL',
+file_path VARCHAR(500) NOT NULL COMMENT 'File system path',
+
+-- Slugs and identifiers
+slug VARCHAR(255) NOT NULL COMMENT 'URL-safe identifier',
+code CHAR(2) NOT NULL COMMENT 'ISO standard codes',
+
+-- Names and titles
+title VARCHAR(255) NOT NULL COMMENT 'Standard title length',
+first_name VARCHAR(100) NOT NULL COMMENT 'International name support',
+last_name VARCHAR(100) NOT NULL,
+
+-- Language and locale codes
+language_code CHAR(2) DEFAULT 'en' COMMENT 'ISO 639-1 language code',
+locale_code VARCHAR(10) NOT NULL COMMENT 'Locale identifier (en_US)',
+timezone VARCHAR(50) DEFAULT 'UTC' COMMENT 'IANA timezone identifier',
 ```
 
-### Enum Fields
-```php
-// Status enums
-$table->enum('status', ['draft', 'published', 'ongoing', 'completed', 'cancelled'])->default('draft');
-$table->enum('type', ['physical', 'virtual', 'hybrid'])->default('physical');
-$table->enum('level', ['beginner', 'intermediate', 'advanced'])->default('intermediate');
+#### Enum Fields for Controlled Values
+```sql
+-- Status enums with clear states
+status ENUM('draft', 'published', 'ongoing', 'completed', 'cancelled') 
+    DEFAULT 'draft' 
+    COMMENT 'Conference lifecycle status',
+
+-- Type classifications
+participant_type ENUM('attendee', 'speaker', 'organizer', 'sponsor', 'media') 
+    DEFAULT 'attendee'
+    COMMENT 'Participant role classification',
+
+-- Venue types for hybrid events
+venue_type ENUM('physical', 'virtual', 'hybrid') 
+    DEFAULT 'physical'
+    COMMENT 'Event delivery format',
+
+-- Subscription tiers
+subscription_plan ENUM('basic', 'professional', 'enterprise', 'custom')
+    DEFAULT 'basic'
+    COMMENT 'Service tier level',
 ```
 
-### JSON Fields
-```php
-// Structured data
-$table->json('settings')->nullable(); // Configuration
-$table->json('metadata')->nullable(); // Additional data
-$table->json('social_links')->nullable(); // Social media links
-$table->json('contact_info')->nullable(); // Contact information
-$table->json('permissions')->nullable(); // User permissions
+#### JSON Fields for Flexible Data
+```sql
+-- Configuration and settings
+settings JSON NULL COMMENT 'Flexible configuration storage',
+branding JSON NULL COMMENT 'Custom branding configuration',
+metadata JSON NULL COMMENT 'Additional structured data',
+
+-- Social and contact information
+social_links JSON NULL COMMENT 'Social media profiles',
+contact_info JSON NULL COMMENT 'Structured contact data',
+
+-- Permissions and capabilities
+permissions JSON NOT NULL COMMENT 'Role-based permissions array',
+features JSON NULL COMMENT 'Available feature flags',
+
+-- Example JSON structure for settings:
+/*
+{
+  "general": {
+    "time_format": "24h",
+    "date_format": "Y-m-d",
+    "week_start": "monday"
+  },
+  "notifications": {
+    "email": true,
+    "sms": false,
+    "push": true
+  },
+  "branding": {
+    "primary_color": "#2563eb",
+    "logo_url": "https://cdn.example.com/logo.png"
+  }
+}
+*/
 ```
 
-### Decimal ve Numeric Fields
-```php
-// Geographic coordinates
-$table->decimal('latitude', 10, 8)->nullable();
-$table->decimal('longitude', 11, 8)->nullable();
+#### Numeric Fields with Precision
+```sql
+-- Geographic coordinates (decimal degrees)
+latitude DECIMAL(10, 8) NULL COMMENT 'Latitude in decimal degrees',
+longitude DECIMAL(11, 8) NULL COMMENT 'Longitude in decimal degrees',
 
-// Financial data
-$table->decimal('price', 10, 2)->nullable();
-$table->decimal('discount_amount', 8, 2)->default(0);
+-- Financial amounts
+price DECIMAL(12, 4) NULL COMMENT 'Price with 4 decimal precision',
+discount_amount DECIMAL(10, 2) DEFAULT 0.00 COMMENT 'Discount value',
+tax_rate DECIMAL(5, 4) DEFAULT 0.0000 COMMENT 'Tax percentage (0.1234 = 12.34%)',
 
-// Percentages
-$table->decimal('completion_rate', 5, 2)->default(0); // 0.00-100.00
+-- Percentages and rates
+completion_rate DECIMAL(5, 2) DEFAULT 0.00 COMMENT 'Percentage (0.00-100.00)',
+conversion_rate DECIMAL(8, 6) DEFAULT 0.000000 COMMENT 'Conversion rate',
+
+-- Sizes and quantities
+file_size BIGINT UNSIGNED NULL COMMENT 'File size in bytes',
+max_participants INT UNSIGNED DEFAULT 1000 COMMENT 'Participant limit',
+display_order INT UNSIGNED DEFAULT 999 COMMENT 'Sort order',
+```
+
+#### Temporal Data Management
+```sql
+-- Standard Laravel timestamps
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Record creation time',
+updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP 
+    COMMENT 'Last modification time',
+
+-- Soft delete support
+deleted_at TIMESTAMP NULL COMMENT 'Soft delete timestamp',
+
+-- Business-specific temporal fields
+scheduled_at TIMESTAMP NULL COMMENT 'Scheduled execution time',
+published_at TIMESTAMP NULL COMMENT 'Publication timestamp',
+expires_at TIMESTAMP NULL COMMENT 'Expiration timestamp',
+
+-- Event timing
+start_date DATE NOT NULL COMMENT 'Event start date',
+end_date DATE NOT NULL COMMENT 'Event end date',
+start_time TIME NULL COMMENT 'Daily start time',
+end_time TIME NULL COMMENT 'Daily end time',
+
+-- Audit timestamps
+first_access_at TIMESTAMP NULL COMMENT 'First access time',
+last_access_at TIMESTAMP NULL COMMENT 'Most recent access',
+last_login_at TIMESTAMP NULL COMMENT 'Last successful login',
 ```
 
 ---
 
 ## ✅ Migration Best Practices
 
-### 1. Atomic Migrations
+### 1. Atomic Migration Design
 ```php
 public function up(): void
 {
     DB::transaction(function () {
-        Schema::create('table_name', function (Blueprint $table) {
+        // All schema changes in a single transaction
+        Schema::create('complex_table', function (Blueprint $table) {
             // Table definition
         });
         
-        // Related operations
-        DB::statement('CREATE INDEX CONCURRENTLY...');
+        // Related data seeding
+        $this->seedInitialData();
+        
+        // Index creation (outside transaction for large tables)
     });
+    
+    // Create indexes after transaction for performance
+    $this->createPerformanceIndexes();
+}
+
+private function createPerformanceIndexes(): void
+{
+    // Create indexes concurrently when possible (PostgreSQL)
+    if (DB::connection()->getDriverName() === 'pgsql') {
+        DB::statement('CREATE INDEX CONCURRENTLY idx_complex_lookup ON complex_table (tenant_id, status)');
+    } else {
+        Schema::table('complex_table', function (Blueprint $table) {
+            $table->index(['tenant_id', 'status'], 'idx_complex_lookup');
+        });
+    }
 }
 ```
 
-### 2. Backward Compatibility
+### 2. Backward-Compatible Changes
 ```php
 public function up(): void
 {
+    // Step 1: Add new column as nullable
     Schema::table('conferences', function (Blueprint $table) {
         $table->string('new_field')->nullable()->after('title');
     });
     
-    // Set default values for existing records
-    DB::table('conferences')->whereNull('new_field')->update([
-        'new_field' => 'default_value'
-    ]);
+    // Step 2: Populate existing records with default values
+    DB::table('conferences')
+      ->whereNull('new_field')
+      ->update(['new_field' => 'default_value']);
     
-    // Make field required after setting defaults
+    // Step 3: Make field required after data population
     Schema::table('conferences', function (Blueprint $table) {
         $table->string('new_field')->nullable(false)->change();
     });
 }
 ```
 
-### 3. Data Migration
+### 3. Data Migration with Validation
 ```php
 public function up(): void
 {
-    // Create new table
-    Schema::create('new_table', function (Blueprint $table) {
-        // ... definition
+    // Create new optimized table
+    Schema::create('conferences_v2', function (Blueprint $table) {
+        $table->uuid('id')->primary();
+        $table->uuid('tenant_id');
+        $table->string('title');
+        $table->json('metadata')->nullable();
+        $table->timestamps();
+        
+        $table->foreign('tenant_id')->references('id')->on('tenants');
+        $table->index(['tenant_id', 'created_at']);
     });
     
-    // Migrate data from old structure
-    $oldData = DB::table('old_table')->get();
+    // Migrate data with validation and transformation
+    $this->migrateDataWithValidation();
     
-    foreach ($oldData as $record) {
-        DB::table('new_table')->insert([
-            'id' => Str::uuid7(),
-            'migrated_field' => $record->old_field,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+    // Verify data integrity
+    $this->verifyDataIntegrity();
+}
+
+private function migrateDataWithValidation(): void
+{
+    DB::table('conferences')->orderBy('id')->chunk(1000, function ($conferences) {
+        $batch = [];
+        
+        foreach ($conferences as $conference) {
+            // Validate and transform data
+            $transformedData = $this->transformConferenceData($conference);
+            
+            if ($this->validateConferenceData($transformedData)) {
+                $batch[] = $transformedData;
+            } else {
+                Log::warning("Skipping invalid conference data", ['id' => $conference->id]);
+            }
+        }
+        
+        if (!empty($batch)) {
+            DB::table('conferences_v2')->insert($batch);
+        }
+    });
+}
+
+private function transformConferenceData(object $conference): array
+{
+    return [
+        'id' => $conference->id,
+        'tenant_id' => $conference->tenant_id,
+        'title' => $conference->title,
+        'metadata' => json_encode([
+            'old_description' => $conference->description,
+            'migrated_at' => now()->toISOString(),
+        ]),
+        'created_at' => $conference->created_at,
+        'updated_at' => now(),
+    ];
+}
+
+private function validateConferenceData(array $data): bool
+{
+    return !empty($data['title']) && 
+           !empty($data['tenant_id']) && 
+           Str::isUuid($data['id']);
+}
+
+private function verifyDataIntegrity(): void
+{
+    $oldCount = DB::table('conferences')->count();
+    $newCount = DB::table('conferences_v2')->count();
+    
+    if ($oldCount !== $newCount) {
+        throw new \Exception("Data migration failed: Expected {$oldCount} records, got {$newCount}");
     }
+    
+    Log::info("Data migration completed successfully", [
+        'migrated_records' => $newCount
+    ]);
 }
 ```
 
-### 4. Safe Column Changes
+### 4. Large Table Modifications
 ```php
 public function up(): void
 {
-    // Add new column
-    Schema::table('conferences', function (Blueprint $table) {
-        $table->string('new_title')->nullable()->after('title');
-    });
+    // For tables with millions of records, use online DDL
+    if ($this->isLargeTable('conference_participant_logs')) {
+        $this->performOnlineDDL();
+    } else {
+        $this->performStandardMigration();
+    }
+}
+
+private function performOnlineDDL(): void
+{
+    // MySQL 8.0+ online DDL
+    DB::statement('
+        ALTER TABLE conference_participant_logs 
+        ADD COLUMN session_duration_minutes INT UNSIGNED NULL,
+        ALGORITHM=INPLACE, LOCK=NONE
+    ');
     
-    // Copy data
-    DB::update('UPDATE conferences SET new_title = title');
+    // Update in batches to avoid long locks
+    $this->updateInBatches();
+}
+
+private function updateInBatches(): void
+{
+    $batchSize = 10000;
+    $offset = 0;
     
-    // Remove old column
-    Schema::table('conferences', function (Blueprint $table) {
-        $table->dropColumn('title');
-    });
-    
-    // Rename new column
-    Schema::table('conferences', function (Blueprint $table) {
-        $table->renameColumn('new_title', 'title');
-    });
+    do {
+        $updated = DB::table('conference_participant_logs')
+            ->whereNull('session_duration_minutes')
+            ->limit($batchSize)
+            ->update([
+                'session_duration_minutes' => DB::raw('
+                    TIMESTAMPDIFF(MINUTE, created_at, updated_at)
+                ')
+            ]);
+        
+        $offset += $batchSize;
+        
+        // Small delay to avoid overwhelming the database
+        usleep(100000); // 100ms
+        
+    } while ($updated > 0);
+}
+
+private function isLargeTable(string $tableName): bool
+{
+    $rowCount = DB::table($tableName)->count();
+    return $rowCount > 1000000; // 1 million rows threshold
 }
 ```
 
 ---
 
-## ⚡ Performance Considerations
+## ⚡ Performance Optimization
 
-### Large Table Migrations
+### Query Performance Monitoring
 ```php
+// Add to migration for performance tracking
 public function up(): void
 {
-    // For large tables, use raw SQL
-    DB::statement('
-        CREATE TABLE large_table_new AS 
-        SELECT 
-            id,
-            CAST(id AS CHAR(36)) as uuid_id,
-            other_columns
-        FROM large_table
-    ');
+    $startTime = microtime(true);
+    $startMemory = memory_get_usage(true);
     
-    // Add indexes after data insertion
-    DB::statement('ALTER TABLE large_table_new ADD PRIMARY KEY (uuid_id)');
-    DB::statement('CREATE INDEX idx_created_at ON large_table_new (created_at)');
+    Schema::create('large_analytics_table', function (Blueprint $table) {
+        // Table definition
+    });
+    
+    $endTime = microtime(true);
+    $endMemory = memory_get_usage(true);
+    
+    Log::info("Migration performance metrics", [
+        'migration' => class_basename(static::class),
+        'execution_time_seconds' => round($endTime - $startTime, 2),
+        'memory_usage_mb' => round(($endMemory - $startMemory) / 1024 / 1024, 2),
+        'peak_memory_mb' => round(memory_get_peak_usage(true) / 1024 / 1024, 2),
+    ]);
 }
 ```
 
-### Batch Processing
+### Batch Processing for Large Datasets
 ```php
 public function up(): void
 {
-    Schema::create('new_table', function (Blueprint $table) {
-        // ... definition
+    Schema::create('new_optimized_table', function (Blueprint $table) {
+        // Optimized schema
     });
     
-    // Process in batches
-    DB::table('source_table')
+    // Process in batches for memory efficiency
+    $this->migrateInBatches('old_table', 'new_optimized_table', 5000);
+}
+
+private function migrateInBatches(string $sourceTable, string $targetTable, int $batchSize): void
+{
+    $totalRecords = DB::table($sourceTable)->count();
+    $processed = 0;
+    
+    DB::table($sourceTable)
       ->orderBy('id')
-      ->chunk(1000, function ($records) {
-          $insertData = $records->map(function ($record) {
-              return [
-                  'id' => Str::uuid7(),
-                  'data' => $record->data,
-                  'created_at' => now(),
-              ];
+      ->chunk($batchSize, function ($records) use ($targetTable, &$processed, $totalRecords) {
+          $transformedRecords = $records->map(function ($record) {
+              return $this->transformRecord($record);
           })->toArray();
           
-          DB::table('new_table')->insert($insertData);
+          DB::table($targetTable)->insert($transformedRecords);
+          
+          $processed += count($records);
+          $percentage = round(($processed / $totalRecords) * 100, 2);
+          
+          Log::info("Migration progress: {$percentage}% ({$processed}/{$totalRecords})");
       });
 }
 ```
 
+### Index Creation Strategy
+```php
+public function up(): void
+{
+    // Create table without indexes first
+    Schema::create('high_volume_table', function (Blueprint $table) {
+        $table->uuid('id')->primary();
+        $table->uuid('tenant_id');
+        $table->string('title');
+        $table->text('content');
+        $table->timestamps();
+        
+        // Only add foreign key constraints, not indexes yet
+        $table->foreign('tenant_id')->references('id')->on('tenants');
+    });
+    
+    // Add indexes after table creation for better performance
+    $this->addIndexesAsync();
+}
+
+private function addIndexesAsync(): void
+{
+    $indexes = [
+        ['columns' => ['tenant_id', 'created_at'], 'name' => 'idx_tenant_chronological'],
+        ['columns' => ['tenant_id', 'title'], 'name' => 'idx_tenant_title'],
+        ['fulltext' => ['title', 'content'], 'name' => 'ft_content_search'],
+    ];
+    
+    foreach ($indexes as $index) {
+        if (isset($index['fulltext'])) {
+            DB::statement("
+                ALTER TABLE high_volume_table 
+                ADD FULLTEXT {$index['name']} (" . implode(', ', $index['fulltext']) . ")
+            ");
+        } else {
+            Schema::table('high_volume_table', function (Blueprint $table) use ($index) {
+                $table->index($index['columns'], $index['name']);
+            });
+        }
+        
+        Log::info("Created index: {$index['name']}");
+    }
+}
+```
+
 ---
 
-## 📋 Migration Examples
+## 📋 Production Migration Examples
 
 ### 1. System Core Migration
 ```php
@@ -713,7 +1240,7 @@ return new class extends Migration
 
 ---
 
-## 🔄 Rollback Strategies
+## 🔄 Rollback & Recovery Strategies
 
 ### Safe Rollback Pattern
 ```php
@@ -812,7 +1339,7 @@ php artisan migrate:fresh --seed
 
 ---
 
-## 🔍 Testing Migrations
+## 🔍 Testing & Validation
 
 ### Migration Tests
 ```php
@@ -878,7 +1405,7 @@ class MigrationsTest extends TestCase
 
 ---
 
-## 📈 Monitoring ve Maintenance
+## 📈 Monitoring & Maintenance
 
 ### Migration Performance Monitoring
 ```php
