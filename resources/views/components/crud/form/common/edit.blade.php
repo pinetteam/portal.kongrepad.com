@@ -70,7 +70,12 @@
                                 emailElement.value = value['value'];
                             }
                         } else if(value['type'] === 'file') {
-
+                            // File inputs cannot be pre-filled for security reasons
+                            // Just clear any validation errors
+                            const fileElement = editModal.querySelector('#{{ $method }}-' + key);
+                            if (fileElement !== null) {
+                                fileElement.classList.remove('is-invalid');
+                            }
                         } else if(value['type'] === 'hidden') {
                             const hiddenElement = editModal.querySelector('#{{ $method }}-' + key);
                             if (hiddenElement !== null) {
@@ -95,7 +100,7 @@
                                 radio.checked = false;
                                 radio.removeAttribute('checked');
                             });
-                            
+
                             // Then set the correct one
                             const radioElement = editModal.querySelector('#{{ $method }}-' + key + '-' + value['value']);
                             if (radioElement !== null) {
