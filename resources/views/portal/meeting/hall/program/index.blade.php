@@ -104,7 +104,7 @@
                                                 </div>
                                                 <div class="program-actions">
                                                     @if($program->type == "session")
-                                                        <button type="button" class="btn btn-outline-success btn-sm me-1" data-bs-toggle="offcanvas" data-bs-target="#session-create-modal" data-route="{{ route('portal.meeting.hall.program.session.store', ['meeting' => $program->hall->meeting_id, 'hall' => $program->hall->id, 'program' => $program->id]) }}" title="{{ __('common.add-session') }}">
+                                                        <button type="button" class="btn btn-outline-success btn-sm me-1" data-bs-toggle="offcanvas" data-bs-target="#session-create-modal" data-route="{{ route('portal.meeting.hall.program.session.store', ['meeting' => $program->hall->meeting_id, 'hall' => $program->hall->id, 'program' => $program->id]) }}" data-program-id="{{ $program->id }}" title="{{ __('common.add-session') }}">
                                                             <i class="fa-solid fa-plus"></i>
                                                         </button>
                                                     @elseif($program->type == "debate")
@@ -308,7 +308,7 @@
     <!-- Session Modals -->
     <x-crud.form.common.create name="session">
         @section('session-create-form')
-            <x-input.hidden method="c" name="program_id" :value="1"/>
+            <x-input.hidden method="c" name="program_id" :value="0" id="c-session-program_id"/>
             <x-input.number method="c" name="sort_order" title="sort" icon="circle-sort"/>
             
             <div class="col form-group mb-3">
@@ -375,6 +375,7 @@
             
             <div class="col form-group mb-3">
                 <div class="form-check form-switch">
+                    <input type="hidden" name="questions_allowed" value="0">
                     <input type="checkbox" name="questions_allowed" class="form-check-input @error('questions_allowed')is-invalid @enderror" id="c-session-questions_allowed" value="1" {{ old('questions_allowed') ? 'checked' : '' }}>
                     <label class="form-check-label" for="c-session-questions_allowed">
                         <i class="fa-regular fa-circle-question me-1"></i>{{ __('common.questions-allowed') }}
@@ -389,6 +390,7 @@
 
             <div class="col form-group mb-3">
                 <div class="form-check form-switch">
+                    <input type="hidden" name="questions_auto_start" value="0">
                     <input type="checkbox" name="questions_auto_start" class="form-check-input @error('questions_auto_start')is-invalid @enderror" id="c-session-questions_auto_start" value="1" {{ old('questions_auto_start') ? 'checked' : '' }}>
                     <label class="form-check-label" for="c-session-questions_auto_start">
                         <i class="fa-regular fa-play me-1"></i>{{ __('common.questions-auto-start') }}
@@ -401,7 +403,8 @@
 
             <div class="col form-group mb-3">
                 <div class="form-check form-switch">
-                    <input type="checkbox" name="status" class="form-check-input @error('status')is-invalid @enderror" id="c-session-status" value="1" {{ old('status', '1') ? 'checked' : '' }}>
+                    <input type="hidden" name="status" value="0">
+                    <input type="checkbox" name="status" class="form-check-input @error('status')is-invalid @enderror" id="c-session-status" value="1" {{ old('status', '1') == '1' ? 'checked' : '' }}>
                     <label class="form-check-label" for="c-session-status">
                         <i class="fa-regular fa-toggle-large-on me-1"></i>{{ __('common.status') }}
                     </label>
@@ -417,7 +420,7 @@
 
     <x-crud.form.common.edit name="session">
         @section('session-edit-form')
-            <x-input.hidden method="e" name="program_id" :value="1"/>
+            <x-input.hidden method="e" name="program_id" :value="0" id="e-session-program_id"/>
             <x-input.number method="e" name="sort_order" title="sort" icon="circle-sort"/>
             
             <div class="col form-group mb-3">
@@ -484,6 +487,7 @@
             
             <div class="col form-group mb-3">
                 <div class="form-check form-switch">
+                    <input type="hidden" name="questions_allowed" value="0">
                     <input type="checkbox" name="questions_allowed" class="form-check-input @error('questions_allowed')is-invalid @enderror" id="e-session-questions_allowed" value="1" {{ old('questions_allowed') ? 'checked' : '' }}>
                     <label class="form-check-label" for="e-session-questions_allowed">
                         <i class="fa-regular fa-circle-question me-1"></i>{{ __('common.questions-allowed') }}
@@ -498,6 +502,7 @@
 
             <div class="col form-group mb-3">
                 <div class="form-check form-switch">
+                    <input type="hidden" name="questions_auto_start" value="0">
                     <input type="checkbox" name="questions_auto_start" class="form-check-input @error('questions_auto_start')is-invalid @enderror" id="e-session-questions_auto_start" value="1" {{ old('questions_auto_start') ? 'checked' : '' }}>
                     <label class="form-check-label" for="e-session-questions_auto_start">
                         <i class="fa-regular fa-play me-1"></i>{{ __('common.questions-auto-start') }}
@@ -510,7 +515,8 @@
 
             <div class="col form-group mb-3">
                 <div class="form-check form-switch">
-                    <input type="checkbox" name="status" class="form-check-input @error('status')is-invalid @enderror" id="e-session-status" value="1" {{ old('status') ? 'checked' : '' }}>
+                    <input type="hidden" name="status" value="0">
+                    <input type="checkbox" name="status" class="form-check-input @error('status')is-invalid @enderror" id="e-session-status" value="1" {{ old('status') == '1' ? 'checked' : '' }}>
                     <label class="form-check-label" for="e-session-status">
                         <i class="fa-regular fa-toggle-large-on me-1"></i>{{ __('common.status') }}
                     </label>
@@ -562,4 +568,16 @@
             </div>
         @endsection
     </x-crud.form.common.edit>
+
+    <script type="module">
+        // Handle session create modal
+        const sessionCreateModal = document.getElementById('session-create-modal');
+        sessionCreateModal.addEventListener('show.bs.offcanvas', event => {
+            const button = event.relatedTarget;
+            if(button && button.hasAttribute('data-program-id')) {
+                const programId = button.getAttribute('data-program-id');
+                document.getElementById('c-session-program_id').value = programId;
+            }
+        });
+    </script>
 @endsection
