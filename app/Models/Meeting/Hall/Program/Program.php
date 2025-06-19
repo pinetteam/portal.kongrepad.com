@@ -73,6 +73,13 @@ class Program extends Model
     {
         return isset($this->created_by) ? User::findOrFail($this->created_by)->full_name : __('common.unspecified');
     }
+    public function getLogoAttribute()
+    {
+        if ($this->logo_name && $this->logo_extension) {
+            return 'program-logos/' . $this->logo_name . '.' . $this->logo_extension;
+        }
+        return null;
+    }
     public function hall()
     {
         return $this->belongsTo(Hall::class, 'hall_id', 'id');
