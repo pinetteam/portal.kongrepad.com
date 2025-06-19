@@ -73,11 +73,16 @@ class SessionController extends Controller
     }
     public function edit(int $meeting, int $hall, int $program, int $id)
     {
-        $program_session = Auth::user()->customer->programSessions()->findOrFail($id);
-        
-        // Ana program sayfasındaki JavaScript ile uyumlu format
-        $sessionResource = new SessionResource($program_session);
-        return response()->json($sessionResource->toArray(request()));
+        try {
+            $program_session = Auth::user()->customer->programSessions()->findOrFail($id);
+            
+            // Ana program sayfasındaki JavaScript ile uyumlu format
+            $sessionResource = new SessionResource($program_session);
+            return response()->json($sessionResource->toArray(request()));
+        } catch (\Exception $e) {
+            \Log::error('Session edit error: ' . $e->getMessage());
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
     public function update(SessionRequest $request, int $meeting, int $hall, int $program, int $id)
     {

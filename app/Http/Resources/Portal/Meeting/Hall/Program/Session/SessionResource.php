@@ -22,6 +22,21 @@ class SessionResource extends JsonResource
             $finishAtFormatted = Carbon::createFromFormat('Y-m-d H:i:s', $this->getRawOriginal('finish_at'))->format('Y-m-d\TH:i');
         }
         
+        // Safely generate route
+        $route = null;
+        try {
+            if ($this->program && $this->program->hall) {
+                $route = route('portal.meeting.hall.program.session.update', [
+                    'meeting' => $this->program->hall->meeting_id, 
+                    'hall' => $this->program->hall->id, 
+                    'program' => $this->program->id, 
+                    'session' => $this->id
+                ]);
+            }
+        } catch (\Exception $e) {
+            \Log::warning('Route generation failed in SessionResource: ' . $e->getMessage());
+        }
+        
         return [
             'sort_order' => ['value' => $this->sort_order, 'type' => 'number'],
             'program_id' => ['value' => $this->program_id, 'type' => 'hidden'],
@@ -37,7 +52,7 @@ class SessionResource extends JsonResource
             'questions_limit' => ['value' => $this->questions_limit, 'type' => 'number'],
             'questions_auto_start' => ['value' => $this->questions_auto_start, 'type' => 'radio'],
             'status' => ['value' => $this->status, 'type' => 'radio'],
-            'route' => route('portal.meeting.hall.program.session.update', ['meeting' => $this->program->hall->meeting_id, 'hall' => $this->program->hall->id, 'program' => $this->program->id, 'session' => $this->id]),
+            'route' => $route,
         ];
     }
 }
