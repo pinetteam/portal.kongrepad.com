@@ -24,8 +24,13 @@ class SessionController extends Controller
             $program_session->code = $request->input('code');
             $program_session->title = $request->input('title');
             $program_session->description = $request->input('description');
-            $program_session->start_at = $request->input('start_at');
-            $program_session->finish_at = $request->input('finish_at');
+            // Bypass accessors for datetime fields
+            if ($request->input('start_at')) {
+                $program_session->setAttribute('start_at', Carbon::createFromFormat('Y-m-d\TH:i', $request->input('start_at'))->format('Y-m-d H:i:s'));
+            }
+            if ($request->input('finish_at')) {
+                $program_session->setAttribute('finish_at', Carbon::createFromFormat('Y-m-d\TH:i', $request->input('finish_at'))->format('Y-m-d H:i:s'));
+            }
             $program_session->questions_allowed = $request->input('questions_allowed');
             $program_session->questions_limit = $request->input('questions_limit');
             $program_session->questions_auto_start = $request->input('questions_auto_start');
@@ -41,7 +46,8 @@ class SessionController extends Controller
             }
         } catch (\Exception $e) {
             \Log::error('Session creation error: ' . $e->getMessage());
-            return back()->with('create_modal', true)->with('error', 'Debug Error: ' . $e->getMessage())->withInput();
+            \Log::error('Request data: ' . json_encode($request->all()));
+            return back()->with('create_modal', true)->with('error', 'Debug Error: ' . $e->getMessage() . ' | Data: ' . json_encode($request->all()))->withInput();
         }
     }
     public function show(int $meeting, int $hall, int $program, int $id)
@@ -65,8 +71,13 @@ class SessionController extends Controller
             $program_session->code = $request->input('code');
             $program_session->title = $request->input('title');
             $program_session->description = $request->input('description');
-            $program_session->start_at = $request->input('start_at');
-            $program_session->finish_at = $request->input('finish_at');
+            // Bypass accessors for datetime fields
+            if ($request->input('start_at')) {
+                $program_session->setAttribute('start_at', Carbon::createFromFormat('Y-m-d\TH:i', $request->input('start_at'))->format('Y-m-d H:i:s'));
+            }
+            if ($request->input('finish_at')) {
+                $program_session->setAttribute('finish_at', Carbon::createFromFormat('Y-m-d\TH:i', $request->input('finish_at'))->format('Y-m-d H:i:s'));
+            }
             $program_session->questions_allowed = $request->input('questions_allowed');
             $program_session->questions_auto_start = $request->input('questions_auto_start');
             $program_session->is_questions_started = $request->input('questions_auto_start');
