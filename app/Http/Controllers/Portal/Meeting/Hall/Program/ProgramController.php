@@ -15,29 +15,40 @@ class ProgramController extends Controller
 {
     public function index(int $meeting, int $hall)
     {
-        $hall = Auth::user()->customer->halls()->findOrFail($hall);
-        $programs = $hall->programs()->orderBy('sort_order', 'ASC')->orderBy('start_at', 'ASC')->get();
-        $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
-        $speakers = $meeting->participants()->whereNot('meeting_participants.type', 'team')->get();
-        $documents = $meeting->documents()->get();
-        $questions = [
-            'passive' => ['value' => 0, 'title' => __('common.passive'), 'color' => 'danger'],
-            'active' => ['value' => 1, 'title' => __('common.active'), 'color' => 'success'],
-        ];
-        $questions_auto_start = [
-            'no' => ['value' => 0, 'title' => __('common.no'), 'color' => 'danger'],
-            'yes' => ['value' => 1, 'title' => __('common.yes'), 'color' => 'success'],
-        ];
-        $types = [
-            'debate' => ['value' => 'debate', 'title' => __('common.debate')],
-            'other' => ['value' => 'other', 'title' => __('common.other')],
-            'session' => ['value' => 'session', 'title' => __('common.session')],
-        ];
-        $statuses = [
-            'passive' => ['value' => 0, 'title' => __('common.passive'), 'color' => 'danger'],
-            'active' => ['value' => 1, 'title' => __('common.active'), 'color' => 'success'],
-        ];
-        return view('portal.meeting.hall.program.index', compact(['programs', 'hall', 'meeting', 'types', 'statuses', 'speakers', 'documents', 'questions', 'questions_auto_start']));
+        try {
+            $hall = Auth::user()->customer->halls()->findOrFail($hall);
+            $programs = $hall->programs()->orderBy('sort_order', 'ASC')->orderBy('start_at', 'ASC')->get();
+            $meeting = Auth::user()->customer->meetings()->findOrFail($meeting);
+            $speakers = $meeting->participants()->whereNot('meeting_participants.type', 'team')->get();
+            $documents = $meeting->documents()->get();
+            $questions = [
+                'passive' => ['value' => 0, 'title' => __('common.passive'), 'color' => 'danger'],
+                'active' => ['value' => 1, 'title' => __('common.active'), 'color' => 'success'],
+            ];
+            $questions_auto_start = [
+                'no' => ['value' => 0, 'title' => __('common.no'), 'color' => 'danger'],
+                'yes' => ['value' => 1, 'title' => __('common.yes'), 'color' => 'success'],
+            ];
+            $types = [
+                'debate' => ['value' => 'debate', 'title' => __('common.debate')],
+                'other' => ['value' => 'other', 'title' => __('common.other')],
+                'session' => ['value' => 'session', 'title' => __('common.session')],
+            ];
+            $statuses = [
+                'passive' => ['value' => 0, 'title' => __('common.passive'), 'color' => 'danger'],
+                'active' => ['value' => 1, 'title' => __('common.active'), 'color' => 'success'],
+            ];
+            return view('portal.meeting.hall.program.index', compact(['programs', 'hall', 'meeting', 'types', 'statuses', 'speakers', 'documents', 'questions', 'questions_auto_start']));
+        } catch (\Exception $e) {
+            \Log::error('ProgramController index error for hall ' . $hall . ': ' . $e->getMessage(), [
+                'trace' => $e->getTraceAsString(),
+                'user_id' => Auth::id(),
+                'hall_id' => $hall,
+                'meeting_id' => $meeting
+            ]);
+            // Debugging için direkt hata göster
+            return response('Hall 3 Error: ' . $e->getMessage() . '<br><br>File: ' . $e->getFile() . ':' . $e->getLine(), 500);
+        }
     }
     public function store(ProgramRequest $request, int $meeting, int $hall)
     {
