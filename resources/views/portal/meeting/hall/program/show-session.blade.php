@@ -721,4 +721,97 @@
             </form>
         </div>
     </div>
+
+    <script type="module">
+        // Handle session create modal
+        const sessionCreateModal = document.getElementById('session-create-modal');
+        if (sessionCreateModal) {
+            sessionCreateModal.addEventListener('show.bs.offcanvas', event => {
+                const button = event.relatedTarget;
+                if(button && button.hasAttribute('data-route')) {
+                    const routeUrl = button.getAttribute('data-route');
+                    document.getElementById('session-create-form').action = routeUrl;
+                }
+            });
+        }
+
+        // Handle session edit modal
+        const sessionEditModal = document.getElementById('session-edit-modal');
+        if (sessionEditModal) {
+            sessionEditModal.addEventListener('show.bs.offcanvas', event => {
+                const button = event.relatedTarget;
+                if(button && button.hasAttribute('data-resource')) {
+                    const resourceUrl = button.getAttribute('data-resource');
+                    
+                    // Clear all fields first
+                    const form = sessionEditModal.querySelector('form');
+                    form.reset();
+                    
+                    // Fetch session data via AJAX
+                    fetch(resourceUrl)
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log('Session data:', data);
+                            
+                            // Update form action
+                            if (data.route) {
+                                form.action = data.route;
+                            }
+                            
+                            // Populate all form fields
+                            Object.keys(data).forEach(key => {
+                                if (key === 'route') return; // Skip route field
+                                
+                                const fieldData = data[key];
+                                console.log(`Field ${key}:`, fieldData);
+                                
+                                if (fieldData && fieldData.value !== null && fieldData.value !== undefined) {
+                                    
+                                    if (fieldData.type === 'text' || fieldData.type === 'number' || fieldData.type === 'hidden' || fieldData.type === 'datetime') {
+                                        // Handle input fields
+                                        const input = form.querySelector(`[name="${key}"]`);
+                                        if (input) {
+                                            input.value = fieldData.value || '';
+                                        }
+                                    } else if (fieldData.type === 'textarea') {
+                                        // Handle textarea fields
+                                        const textarea = form.querySelector(`textarea[name="${key}"]`);
+                                        if (textarea) {
+                                            textarea.value = fieldData.value || '';
+                                        }
+                                    } else if (fieldData.type === 'select') {
+                                        // Handle select fields
+                                        const select = form.querySelector(`[name="${key}"]`);
+                                        if (select) {
+                                            select.value = fieldData.value || '';
+                                        }
+                                    } else if (fieldData.type === 'radio') {
+                                        // Handle radio fields
+                                        const radio = form.querySelector(`[name="${key}"][value="${fieldData.value}"]`);
+                                        if (radio) {
+                                            radio.checked = true;
+                                        }
+                                    }
+                                }
+                            });
+                        })
+                        .catch(error => {
+                            console.error('Error fetching session data:', error);
+                        });
+                }
+            });
+        }
+
+        // Handle session delete modal
+        const sessionDeleteModal = document.getElementById('session-delete-modal');
+        if (sessionDeleteModal) {
+            sessionDeleteModal.addEventListener('show.bs.offcanvas', event => {
+                const button = event.relatedTarget;
+                if(button && button.hasAttribute('data-route')) {
+                    const routeUrl = button.getAttribute('data-route');
+                    document.getElementById('session-delete-form').action = routeUrl;
+                }
+            });
+        }
+    </script>
 @endsection
