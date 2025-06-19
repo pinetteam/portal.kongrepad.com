@@ -24,13 +24,15 @@ class SessionController extends Controller
             $program_session->code = $request->input('code');
             $program_session->title = $request->input('title');
             $program_session->description = $request->input('description');
-            $program_session->start_at = $request->input('start_at');
-            $program_session->finish_at = $request->input('finish_at');
-            $program_session->questions_allowed = $request->input('questions_allowed');
-            $program_session->questions_limit = $request->input('questions_limit');
-            $program_session->questions_auto_start = $request->input('questions_auto_start');
-            $program_session->is_questions_started = $request->input('questions_auto_start');
-            $program_session->status = $request->input('status');
+            $program_session->start_at = $request->input('start_at') ? 
+                Carbon::createFromFormat('Y-m-d\TH:i', $request->input('start_at'))->format('Y-m-d H:i:s') : null;
+            $program_session->finish_at = $request->input('finish_at') ? 
+                Carbon::createFromFormat('Y-m-d\TH:i', $request->input('finish_at'))->format('Y-m-d H:i:s') : null;
+            $program_session->questions_allowed = $request->input('questions_allowed') ? 1 : 0;
+            $program_session->questions_limit = $request->input('questions_limit') ?: 0;
+            $program_session->questions_auto_start = $request->input('questions_auto_start') ? 1 : 0;
+            $program_session->is_questions_started = $request->input('questions_auto_start') ? 1 : 0;
+            $program_session->status = $request->input('status') ? 1 : 0;
             if ($program_session->save()) {
                 $program_session->created_by = Auth::user()->id;
                 $program_session->save();
@@ -61,13 +63,15 @@ class SessionController extends Controller
             $program_session->code = $request->input('code');
             $program_session->title = $request->input('title');
             $program_session->description = $request->input('description');
-            $program_session->start_at = $request->input('start_at');
-            $program_session->finish_at = $request->input('finish_at');
-            $program_session->questions_allowed = $request->input('questions_allowed');
-            $program_session->questions_auto_start = $request->input('questions_auto_start');
-            $program_session->is_questions_started = $request->input('questions_auto_start');
-            $program_session->questions_limit = $request->input('questions_limit');
-            $program_session->status = $request->input('status');
+            $program_session->start_at = $request->input('start_at') ? 
+                Carbon::createFromFormat('Y-m-d\TH:i', $request->input('start_at'))->format('Y-m-d H:i:s') : null;
+            $program_session->finish_at = $request->input('finish_at') ? 
+                Carbon::createFromFormat('Y-m-d\TH:i', $request->input('finish_at'))->format('Y-m-d H:i:s') : null;
+            $program_session->questions_allowed = $request->input('questions_allowed') ? 1 : 0;
+            $program_session->questions_auto_start = $request->input('questions_auto_start') ? 1 : 0;
+            $program_session->is_questions_started = $request->input('questions_auto_start') ? 1 : 0;
+            $program_session->questions_limit = $request->input('questions_limit') ?: 0;
+            $program_session->status = $request->input('status') ? 1 : 0;
             if ($program_session->save()) {
                 $program_session->updated_by = Auth::user()->id;
                 $program_session->save();

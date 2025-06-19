@@ -25,11 +25,11 @@ class SessionRequest extends FormRequest
                     'code' => 'nullable|max:255',
                     'title' => 'required|max:255',
                     'description' => 'nullable|max:65535',
-                    'start_at' => 'required|date_format:Y-m-d H:i|before_or_equal:finish_at|required_with:finish_at',
-                    'finish_at' => 'required|date_format:Y-m-d H:i|after_or_equal:start_at|required_with:start_at',
-                    'questions_allowed' => 'boolean|required',
-                    'questions_limit' => 'required_if:questions,1|integer',
-                    'questions_auto_start' => 'boolean|required_if:questions,1',
+                    'start_at' => 'required|date_format:Y-m-d\TH:i|before_or_equal:finish_at|required_with:finish_at',
+                    'finish_at' => 'required|date_format:Y-m-d\TH:i|after_or_equal:start_at|required_with:start_at',
+                    'questions_allowed' => 'boolean',
+                    'questions_limit' => 'nullable|integer',
+                    'questions_auto_start' => 'boolean',
                     'status' => 'boolean|required',
                 ];
             }
