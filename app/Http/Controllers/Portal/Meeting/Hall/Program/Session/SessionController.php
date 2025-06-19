@@ -11,47 +11,50 @@ use App\Models\Meeting\Hall\Program\Session\Session;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\System\Setting\Variable\Variable;
+use App\Models\Customer\Customer;
 
 class SessionController extends Controller
 {
     public function store(SessionRequest $request, int $meeting, int $hall, int $program)
     {
         try {
-            // Prepare data array for raw SQL insert
-            $data = [
-                'sort_order' => $request->input('sort_order'),
-                'program_id' => $request->input('program_id'),
-                'speaker_id' => $request->input('speaker_id'),
-                'document_id' => $request->input('document_id'),
-                'code' => $request->input('code'),
-                'title' => $request->input('title'),
-                'description' => $request->input('description'),
-                'questions_allowed' => $request->input('questions_allowed'),
-                'questions_limit' => $request->input('questions_limit'),
-                'questions_auto_start' => $request->input('questions_auto_start'),
-                'is_questions_started' => $request->input('questions_auto_start'),
-                'status' => $request->input('status'),
-                'created_by' => Auth::user()->id,
-                'created_at' => now(),
-                'updated_at' => now()
-            ];
+            // Get user's date time format
+            $time_format = Variable::where('variable','time_format')->first()->settings()->where('customer_id', Auth::user()->customer->id ?? Customer::first()->id)->first()->value == '24H' ? ' H:i' : ' g:i A';
+            $date_time_format = Variable::where('variable','date_format')->first()->settings()->where('customer_id', Auth::user()->customer->id ?? Customer::first()->id)->first()->value . $time_format;
             
-            // Handle datetime fields with simple string replacement
+            $program_session = new Session();
+            $program_session->sort_order = $request->input('sort_order');
+            $program_session->program_id = $request->input('program_id');
+            $program_session->speaker_id = $request->input('speaker_id');
+            $program_session->document_id = $request->input('document_id');
+            $program_session->code = $request->input('code');
+            $program_session->title = $request->input('title');
+            $program_session->description = $request->input('description');
+            
+            // Convert datetime-local format to user's date_time_format for model accessors
             if ($request->input('start_at')) {
                 $startAtValue = $request->input('start_at');
-                // Convert datetime-local format to MySQL datetime format
-                $data['start_at'] = str_replace('T', ' ', $startAtValue) . ':00';
+                // Convert from "2025-06-19T12:47" to user's format (e.g., "19/06/2025 12:47")
+                $carbon = Carbon::createFromFormat('Y-m-d\TH:i', $startAtValue);
+                $program_session->start_at = $carbon->format($date_time_format);
             }
             if ($request->input('finish_at')) {
                 $finishAtValue = $request->input('finish_at');
-                // Convert datetime-local format to MySQL datetime format
-                $data['finish_at'] = str_replace('T', ' ', $finishAtValue) . ':00';
+                // Convert from "2025-06-19T12:47" to user's format (e.g., "19/06/2025 12:47")
+                $carbon = Carbon::createFromFormat('Y-m-d\TH:i', $finishAtValue);
+                $program_session->finish_at = $carbon->format($date_time_format);
             }
             
-            // Insert using raw SQL to bypass model accessors completely
-            $sessionId = DB::table('meeting_hall_program_sessions')->insertGetId($data);
+            $program_session->questions_allowed = $request->input('questions_allowed');
+            $program_session->questions_limit = $request->input('questions_limit');
+            $program_session->questions_auto_start = $request->input('questions_auto_start');
+            $program_session->is_questions_started = $request->input('questions_auto_start');
+            $program_session->status = $request->input('status');
             
-            if ($sessionId) {
+            if ($program_session->save()) {
+                $program_session->created_by = Auth::user()->id;
+                $program_session->save();
                 return back()->with('success', __('common.created-successfully'));
             } else {
                 return back()->with('create_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
@@ -76,44 +79,41 @@ class SessionController extends Controller
     public function update(SessionRequest $request, int $meeting, int $hall, int $program, int $id)
     {
         try {
-            // Verify session exists
+            // Get user's date time format
+            $time_format = Variable::where('variable','time_format')->first()->settings()->where('customer_id', Auth::user()->customer->id ?? Customer::first()->id)->first()->value == '24H' ? ' H:i' : ' g:i A';
+            $date_time_format = Variable::where('variable','date_format')->first()->settings()->where('customer_id', Auth::user()->customer->id ?? Customer::first()->id)->first()->value . $time_format;
+            
             $program_session = Auth::user()->customer->programSessions()->findOrFail($id);
+            $program_session->sort_order = $request->input('sort_order');
+            $program_session->speaker_id = $request->input('speaker_id');
+            $program_session->document_id = $request->input('document_id');
+            $program_session->code = $request->input('code');
+            $program_session->title = $request->input('title');
+            $program_session->description = $request->input('description');
             
-            // Prepare data array for raw SQL update
-            $data = [
-                'sort_order' => $request->input('sort_order'),
-                'speaker_id' => $request->input('speaker_id'),
-                'document_id' => $request->input('document_id'),
-                'code' => $request->input('code'),
-                'title' => $request->input('title'),
-                'description' => $request->input('description'),
-                'questions_allowed' => $request->input('questions_allowed'),
-                'questions_auto_start' => $request->input('questions_auto_start'),
-                'is_questions_started' => $request->input('questions_auto_start'),
-                'questions_limit' => $request->input('questions_limit'),
-                'status' => $request->input('status'),
-                'updated_by' => Auth::user()->id,
-                'updated_at' => now()
-            ];
-            
-            // Handle datetime fields with simple string replacement
+            // Convert datetime-local format to user's date_time_format for model accessors
             if ($request->input('start_at')) {
                 $startAtValue = $request->input('start_at');
-                // Convert datetime-local format to MySQL datetime format
-                $data['start_at'] = str_replace('T', ' ', $startAtValue) . ':00';
+                // Convert from "2025-06-19T12:47" to user's format (e.g., "19/06/2025 12:47")
+                $carbon = Carbon::createFromFormat('Y-m-d\TH:i', $startAtValue);
+                $program_session->start_at = $carbon->format($date_time_format);
             }
             if ($request->input('finish_at')) {
                 $finishAtValue = $request->input('finish_at');
-                // Convert datetime-local format to MySQL datetime format
-                $data['finish_at'] = str_replace('T', ' ', $finishAtValue) . ':00';
+                // Convert from "2025-06-19T12:47" to user's format (e.g., "19/06/2025 12:47")
+                $carbon = Carbon::createFromFormat('Y-m-d\TH:i', $finishAtValue);
+                $program_session->finish_at = $carbon->format($date_time_format);
             }
             
-            // Update using raw SQL to bypass model accessors completely
-            $updated = DB::table('meeting_hall_program_sessions')
-                ->where('id', $id)
-                ->update($data);
+            $program_session->questions_allowed = $request->input('questions_allowed');
+            $program_session->questions_auto_start = $request->input('questions_auto_start');
+            $program_session->is_questions_started = $request->input('questions_auto_start');
+            $program_session->questions_limit = $request->input('questions_limit');
+            $program_session->status = $request->input('status');
             
-            if ($updated) {
+            if ($program_session->save()) {
+                $program_session->updated_by = Auth::user()->id;
+                $program_session->save();
                 return back()->with('success', __('common.edited-successfully'));
             } else {
                 return back()->with('edit_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
