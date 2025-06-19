@@ -309,11 +309,63 @@
     <x-crud.form.common.create name="session">
         @section('session-create-form')
             <x-input.hidden method="c" name="program_id" :value="1"/>
-            <x-input.text method="c" name="title" title="title" icon="input-text"/>
+            <x-input.number method="c" name="sort_order" title="sort" icon="circle-sort"/>
+            
+            <div class="col form-group mb-3">
+                <label for="c-session-speaker_id" class="form-label">
+                    <i class="fa-regular fa-person-chalkboard"></i> {{ __('common.speaker') }}
+                </label>
+                <select name="speaker_id" class="form-select" id="c-session-speaker_id">
+                    <option value="">{{ __('common.select-speaker') }}</option>
+                    @foreach($speakers as $speaker)
+                        <option value="{{ $speaker->id }}">{{ $speaker->full_name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="col form-group mb-3">
+                <label for="c-session-document_id" class="form-label">
+                    <i class="fa-regular fa-presentation-screen"></i> {{ __('common.document') }}
+                </label>
+                <select name="document_id" class="form-select" id="c-session-document_id">
+                    <option value="">{{ __('common.select-document') }}</option>
+                    @foreach($documents as $document)
+                        <option value="{{ $document->id }}">{{ $document->title }}</option>
+                    @endforeach
+                </select>
+            </div>
+
             <x-input.text method="c" name="code" title="code" icon="code"/>
+            <x-input.text method="c" name="title" title="title" icon="input-text"/>
+            <div class="col form-group mb-3">
+                <label for="c-session-description" class="form-label">
+                    <i class="fa-regular fa-comment-dots"></i> {{ __('common.description') }}
+                </label>
+                <textarea name="description" class="form-control" id="c-session-description" rows="3"></textarea>
+            </div>
             <x-input.datetime method="c" name="start_at" title="start-at" icon="calendar"/>
             <x-input.datetime method="c" name="finish_at" title="finish-at" icon="calendar"/>
-            <x-input.number method="c" name="sort_order" title="sort" icon="circle-sort"/>
+            
+            <div class="col form-group mb-3">
+                <div class="form-check form-switch">
+                    <input type="checkbox" name="questions_allowed" class="form-check-input" id="c-session-questions_allowed" value="1">
+                    <label class="form-check-label" for="c-session-questions_allowed">
+                        <i class="fa-regular fa-circle-question me-1"></i>{{ __('common.questions-allowed') }}
+                    </label>
+                </div>
+            </div>
+
+            <x-input.number method="c" name="questions_limit" title="questions-limit" icon="hashtag"/>
+
+            <div class="col form-group mb-3">
+                <div class="form-check form-switch">
+                    <input type="checkbox" name="questions_auto_start" class="form-check-input" id="c-session-questions_auto_start" value="1">
+                    <label class="form-check-label" for="c-session-questions_auto_start">
+                        <i class="fa-regular fa-play me-1"></i>{{ __('common.questions-auto-start') }}
+                    </label>
+                </div>
+            </div>
+
             <div class="col form-group mb-3">
                 <div class="form-check form-switch">
                     <input type="checkbox" name="status" class="form-check-input" id="c-session-status" value="1" checked>
@@ -330,11 +382,63 @@
     <x-crud.form.common.edit name="session">
         @section('session-edit-form')
             <x-input.hidden method="e" name="program_id" :value="1"/>
-            <x-input.text method="e" name="title" title="title" icon="input-text"/>
+            <x-input.number method="e" name="sort_order" title="sort" icon="circle-sort"/>
+            
+            <div class="col form-group mb-3">
+                <label for="e-session-speaker_id" class="form-label">
+                    <i class="fa-regular fa-person-chalkboard"></i> {{ __('common.speaker') }}
+                </label>
+                <select name="speaker_id" class="form-select" id="e-session-speaker_id">
+                    <option value="">{{ __('common.select-speaker') }}</option>
+                    @foreach($speakers as $speaker)
+                        <option value="{{ $speaker->id }}">{{ $speaker->full_name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="col form-group mb-3">
+                <label for="e-session-document_id" class="form-label">
+                    <i class="fa-regular fa-presentation-screen"></i> {{ __('common.document') }}
+                </label>
+                <select name="document_id" class="form-select" id="e-session-document_id">
+                    <option value="">{{ __('common.select-document') }}</option>
+                    @foreach($documents as $document)
+                        <option value="{{ $document->id }}">{{ $document->title }}</option>
+                    @endforeach
+                </select>
+            </div>
+
             <x-input.text method="e" name="code" title="code" icon="code"/>
+            <x-input.text method="e" name="title" title="title" icon="input-text"/>
+            <div class="col form-group mb-3">
+                <label for="e-session-description" class="form-label">
+                    <i class="fa-regular fa-comment-dots"></i> {{ __('common.description') }}
+                </label>
+                <textarea name="description" class="form-control" id="e-session-description" rows="3"></textarea>
+            </div>
             <x-input.datetime method="e" name="start_at" title="start-at" icon="calendar"/>
             <x-input.datetime method="e" name="finish_at" title="finish-at" icon="calendar"/>
-            <x-input.number method="e" name="sort_order" title="sort" icon="circle-sort"/>
+            
+            <div class="col form-group mb-3">
+                <div class="form-check form-switch">
+                    <input type="checkbox" name="questions_allowed" class="form-check-input" id="e-session-questions_allowed" value="1">
+                    <label class="form-check-label" for="e-session-questions_allowed">
+                        <i class="fa-regular fa-circle-question me-1"></i>{{ __('common.questions-allowed') }}
+                    </label>
+                </div>
+            </div>
+
+            <x-input.number method="e" name="questions_limit" title="questions-limit" icon="hashtag"/>
+
+            <div class="col form-group mb-3">
+                <div class="form-check form-switch">
+                    <input type="checkbox" name="questions_auto_start" class="form-check-input" id="e-session-questions_auto_start" value="1">
+                    <label class="form-check-label" for="e-session-questions_auto_start">
+                        <i class="fa-regular fa-play me-1"></i>{{ __('common.questions-auto-start') }}
+                    </label>
+                </div>
+            </div>
+
             <div class="col form-group mb-3">
                 <div class="form-check form-switch">
                     <input type="checkbox" name="status" class="form-check-input" id="e-session-status" value="1">
