@@ -73,16 +73,11 @@ class SessionController extends Controller
     }
     public function edit(int $meeting, int $hall, int $program, int $id)
     {
-        // Load session with relationships - verify it belongs to customer
-        $program_session = Session::with(['speaker', 'document', 'program.hall.meeting.customer'])
-            ->findOrFail($id);
-            
-        // Security check: ensure session belongs to current user's customer
-        if ($program_session->program->hall->meeting->customer_id !== Auth::user()->customer_id) {
-            abort(403, 'Unauthorized access to session');
-        }
+        $program_session = Auth::user()->customer->programSessions()->findOrFail($id);
         
-        return new SessionResource($program_session);
+        // Ana program sayfasındaki JavaScript ile uyumlu format
+        $sessionResource = new SessionResource($program_session);
+        return response()->json($sessionResource->toArray(request()));
     }
     public function update(SessionRequest $request, int $meeting, int $hall, int $program, int $id)
     {
