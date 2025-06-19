@@ -15,24 +15,18 @@ class SessionController extends Controller
 {
     public function store(SessionRequest $request, int $meeting, int $hall, int $program)
     {
-        if ($request->validated()) {
+        try {
             $program_session = new Session();
-            $program_session->sort_order = $request->input('sort_order');
-            $program_session->program_id = $program;
-            $program_session->speaker_id = $request->input('speaker_id');
-            $program_session->document_id = $request->input('document_id');
-            $program_session->code = $request->input('code');
+            $program_session->program_id = $request->input('program_id');
             $program_session->title = $request->input('title');
-            $program_session->description = $request->input('description');
-            $program_session->start_at = $request->input('start_at') ? 
-                Carbon::createFromFormat('Y-m-d\TH:i', $request->input('start_at'))->format('Y-m-d H:i:s') : null;
-            $program_session->finish_at = $request->input('finish_at') ? 
-                Carbon::createFromFormat('Y-m-d\TH:i', $request->input('finish_at'))->format('Y-m-d H:i:s') : null;
-            $program_session->questions_allowed = $request->input('questions_allowed') ? 1 : 0;
-            $program_session->questions_limit = $request->input('questions_limit') ?: 0;
-            $program_session->questions_auto_start = $request->input('questions_auto_start') ? 1 : 0;
-            $program_session->is_questions_started = $request->input('questions_auto_start') ? 1 : 0;
-            $program_session->status = $request->input('status') ? 1 : 0;
+            $program_session->start_at = $request->input('start_at');
+            $program_session->finish_at = $request->input('finish_at');
+            $program_session->questions_allowed = 0;
+            $program_session->questions_limit = 0;
+            $program_session->questions_auto_start = 0;
+            $program_session->is_questions_started = 0;
+            $program_session->status = 1;
+            
             if ($program_session->save()) {
                 $program_session->created_by = Auth::user()->id;
                 $program_session->save();
@@ -40,6 +34,9 @@ class SessionController extends Controller
             } else {
                 return back()->with('create_modal', true)->with('error', __('common.a-system-error-has-occurred'))->withInput();
             }
+        } catch (\Exception $e) {
+            \Log::error('Session creation error: ' . $e->getMessage());
+            return back()->with('create_modal', true)->with('error', 'Debug Error: ' . $e->getMessage())->withInput();
         }
     }
     public function show(int $meeting, int $hall, int $program, int $id)

@@ -18,19 +18,13 @@ class SessionRequest extends FormRequest
             case 'POST' || 'PATCH' || 'PUT':
             {
                 return [
-                    'sort_order' => 'nullable|integer',
-                    'program_id' => 'required|exists:meeting_hall_programs,id',
-                    'speaker_id' => 'nullable|exists:meeting_participants,id',
-                    'document_id' => 'nullable|exists:meeting_documents,id',
-                    'code' => 'nullable|max:255',
+                    'program_id' => 'required|integer',
                     'title' => 'required|max:255',
-                    'description' => 'nullable|max:65535',
-                    'start_at' => 'required|date_format:Y-m-d\TH:i|before_or_equal:finish_at|required_with:finish_at',
-                    'finish_at' => 'required|date_format:Y-m-d\TH:i|after_or_equal:start_at|required_with:start_at',
-                    'questions_allowed' => 'boolean',
-                    'questions_limit' => 'nullable|integer',
-                    'questions_auto_start' => 'boolean',
-                    'status' => 'boolean|required',
+                    'start_at' => 'required',
+                    'finish_at' => 'required',
+                    'questions_allowed' => 'nullable',
+                    'questions_auto_start' => 'nullable',
+                    'status' => 'nullable',
                 ];
             }
             default:break;
@@ -56,6 +50,6 @@ class SessionRequest extends FormRequest
     }
     public function failedValidation(Validator $validator)
     {
-        return back()->with('method', $this->method())->with('name', 'session')->with('route', url()->current())->withErrors($this->validator)->withInput();
+        return back()->with('method', $this->method())->with('name', 'session')->with('route', url()->current())->withErrors($validator)->withInput();
     }
 }

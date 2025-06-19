@@ -308,50 +308,9 @@
     <!-- Session Modals -->
     <x-crud.form.common.create name="session">
         @section('session-create-form')
-            <x-input.hidden method="c" name="program_id" :value="0" id="c-session-program_id"/>
-            <x-input.number method="c" name="sort_order" title="sort" icon="circle-sort"/>
+            <input type="hidden" name="program_id" value="0" id="c-session-program_id"/>
             
-            <div class="col form-group mb-3">
-                <label for="c-session-speaker_id" class="form-label">
-                    <i class="fa-regular fa-person-chalkboard"></i> {{ __('common.speaker') }}
-                </label>
-                <select name="speaker_id" class="form-select @error('speaker_id')is-invalid @enderror" id="c-session-speaker_id">
-                    <option value="">{{ __('common.select-speaker') }}</option>
-                    @foreach($speakers as $speaker)
-                        <option value="{{ $speaker->id }}" {{ old('speaker_id') == $speaker->id ? 'selected' : '' }}>{{ $speaker->full_name }}</option>
-                    @endforeach
-                </select>
-                @error('speaker_id')
-                    <div class="invalid-feedback d-block">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <div class="col form-group mb-3">
-                <label for="c-session-document_id" class="form-label">
-                    <i class="fa-regular fa-presentation-screen"></i> {{ __('common.document') }}
-                </label>
-                <select name="document_id" class="form-select @error('document_id')is-invalid @enderror" id="c-session-document_id">
-                    <option value="">{{ __('common.select-document') }}</option>
-                    @foreach($documents as $document)
-                        <option value="{{ $document->id }}" {{ old('document_id') == $document->id ? 'selected' : '' }}>{{ $document->title }}</option>
-                    @endforeach
-                </select>
-                @error('document_id')
-                    <div class="invalid-feedback d-block">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <x-input.text method="c" name="code" title="code" icon="code"/>
             <x-input.text method="c" name="title" title="title" icon="input-text"/>
-            <div class="col form-group mb-3">
-                <label for="c-session-description" class="form-label">
-                    <i class="fa-regular fa-comment-dots"></i> {{ __('common.description') }}
-                </label>
-                <textarea name="description" class="form-control @error('description')is-invalid @enderror" id="c-session-description" rows="3">{{ old('description') }}</textarea>
-                @error('description')
-                    <div class="invalid-feedback d-block">{{ $message }}</div>
-                @enderror
-            </div>
             
             <div class="col form-group mb-3">
                 <label for="c-session-start_at" class="form-label">
@@ -372,47 +331,10 @@
                     <div class="invalid-feedback d-block">{{ $message }}</div>
                 @enderror
             </div>
-            
-            <div class="col form-group mb-3">
-                <div class="form-check form-switch">
-                    <input type="hidden" name="questions_allowed" value="0">
-                    <input type="checkbox" name="questions_allowed" class="form-check-input @error('questions_allowed')is-invalid @enderror" id="c-session-questions_allowed" value="1" {{ old('questions_allowed') ? 'checked' : '' }}>
-                    <label class="form-check-label" for="c-session-questions_allowed">
-                        <i class="fa-regular fa-circle-question me-1"></i>{{ __('common.questions-allowed') }}
-                    </label>
-                </div>
-                @error('questions_allowed')
-                    <div class="invalid-feedback d-block">{{ $message }}</div>
-                @enderror
-            </div>
 
-            <x-input.number method="c" name="questions_limit" title="questions-limit" icon="hashtag"/>
-
-            <div class="col form-group mb-3">
-                <div class="form-check form-switch">
-                    <input type="hidden" name="questions_auto_start" value="0">
-                    <input type="checkbox" name="questions_auto_start" class="form-check-input @error('questions_auto_start')is-invalid @enderror" id="c-session-questions_auto_start" value="1" {{ old('questions_auto_start') ? 'checked' : '' }}>
-                    <label class="form-check-label" for="c-session-questions_auto_start">
-                        <i class="fa-regular fa-play me-1"></i>{{ __('common.questions-auto-start') }}
-                    </label>
-                </div>
-                @error('questions_auto_start')
-                    <div class="invalid-feedback d-block">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <div class="col form-group mb-3">
-                <div class="form-check form-switch">
-                    <input type="hidden" name="status" value="0">
-                    <input type="checkbox" name="status" class="form-check-input @error('status')is-invalid @enderror" id="c-session-status" value="1" {{ old('status', '1') == '1' ? 'checked' : '' }}>
-                    <label class="form-check-label" for="c-session-status">
-                        <i class="fa-regular fa-toggle-large-on me-1"></i>{{ __('common.status') }}
-                    </label>
-                </div>
-                @error('status')
-                    <div class="invalid-feedback d-block">{{ $message }}</div>
-                @enderror
-            </div>
+            <input type="hidden" name="questions_allowed" value="0">
+            <input type="hidden" name="questions_auto_start" value="0">
+            <input type="hidden" name="status" value="1">
         @endsection
     </x-crud.form.common.create>
 
