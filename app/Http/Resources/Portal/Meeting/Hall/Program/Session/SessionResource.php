@@ -29,7 +29,7 @@ class SessionResource extends JsonResource
             'document_id' => ['value' => $this->document_id, 'type' => 'select'],
             'code' => ['value' => $this->code, 'type' => 'text'],
             'title' => ['value' => $this->title, 'type' => 'text'],
-            'description' => ['value' => $this->description, 'type' => 'text'],
+            'description' => ['value' => $this->description, 'type' => 'textarea'],
             'start_at' => ['value' => $startAtFormatted, 'type' => 'datetime'],
             'finish_at' => ['value' => $finishAtFormatted, 'type' => 'datetime'],
             'on_air' => ['value' => $this->on_air, 'type' => 'radio'],
