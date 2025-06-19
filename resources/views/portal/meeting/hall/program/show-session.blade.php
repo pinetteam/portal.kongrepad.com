@@ -723,6 +723,8 @@
     </div>
 
     <script type="module">
+        console.log('Session edit JavaScript loaded!');
+        
         // Handle session create modal
         const sessionCreateModal = document.getElementById('session-create-modal');
         if (sessionCreateModal) {
@@ -738,102 +740,141 @@
         // Handle session edit modal
         const sessionEditModal = document.getElementById('session-edit-modal');
         if (sessionEditModal) {
+            console.log('Session edit modal found!');
             sessionEditModal.addEventListener('show.bs.offcanvas', event => {
+                console.log('Session edit modal opened!');
                 const button = event.relatedTarget;
                 if(button && button.hasAttribute('data-resource')) {
                     const resourceUrl = button.getAttribute('data-resource');
                     console.log('Resource URL:', resourceUrl);
                     
-                    // Get the form specifically
-                    const form = document.getElementById('session-edit-form');
-                    if (!form) {
-                        console.error('Session edit form not found!');
-                        return;
-                    }
-                    
-                    // Clear all fields first
-                    form.reset();
-                    
                     // Fetch session data via AJAX
                     fetch(resourceUrl)
                         .then(response => {
-                            console.log('Response status:', response.status);
+                            console.log('Response received, status:', response.status);
                             return response.json();
                         })
                         .then(data => {
-                            console.log('Session data received:', data);
+                            console.log('Full response data:', data);
                             
-                            // Update form action
-                            if (data.route) {
+                            // Set form action
+                            const form = document.getElementById('session-edit-form');
+                            if (data.route && form) {
                                 form.action = data.route;
                                 console.log('Form action set to:', data.route);
                             }
                             
-                            // Populate all form fields
-                            Object.keys(data).forEach(key => {
-                                if (key === 'route') return; // Skip route field
-                                
-                                const fieldData = data[key];
-                                console.log(`Processing field ${key}:`, fieldData);
-                                
-                                if (fieldData && fieldData.value !== null && fieldData.value !== undefined) {
-                                    
-                                    if (fieldData.type === 'text' || fieldData.type === 'number' || fieldData.type === 'hidden') {
-                                        // Handle input fields
-                                        const input = form.querySelector(`input[name="${key}"]`);
-                                        if (input) {
-                                            input.value = fieldData.value || '';
-                                            console.log(`Set ${key} to:`, fieldData.value);
-                                        } else {
-                                            console.log(`Input field ${key} not found`);
-                                        }
-                                    } else if (fieldData.type === 'datetime') {
-                                        // Handle datetime fields
-                                        const input = form.querySelector(`input[name="${key}"][type="datetime-local"]`);
-                                        if (input) {
-                                            input.value = fieldData.value || '';
-                                            console.log(`Set datetime ${key} to:`, fieldData.value);
-                                        } else {
-                                            console.log(`Datetime field ${key} not found`);
-                                        }
-                                    } else if (fieldData.type === 'textarea') {
-                                        // Handle textarea fields
-                                        const textarea = form.querySelector(`textarea[name="${key}"]`);
-                                        if (textarea) {
-                                            textarea.value = fieldData.value || '';
-                                            console.log(`Set textarea ${key} to:`, fieldData.value);
-                                        } else {
-                                            console.log(`Textarea field ${key} not found`);
-                                        }
-                                    } else if (fieldData.type === 'select') {
-                                        // Handle select fields
-                                        const select = form.querySelector(`select[name="${key}"]`);
-                                        if (select) {
-                                            select.value = fieldData.value || '';
-                                            console.log(`Set select ${key} to:`, fieldData.value);
-                                        } else {
-                                            console.log(`Select field ${key} not found`);
-                                        }
-                                    } else if (fieldData.type === 'radio') {
-                                        // Handle radio fields
-                                        const radio = form.querySelector(`input[name="${key}"][value="${fieldData.value}"]`);
-                                        if (radio) {
-                                            radio.checked = true;
-                                            console.log(`Set radio ${key} to:`, fieldData.value);
-                                        } else {
-                                            console.log(`Radio field ${key} with value ${fieldData.value} not found`);
-                                        }
-                                    }
-                                } else {
-                                    console.log(`Field ${key} has no value or null value`);
+                            // Manual field setting for debugging
+                            console.log('Setting title field...');
+                            const titleField = document.querySelector('#session-edit-modal input[name="title"]');
+                            console.log('Title field found:', titleField);
+                            if (titleField && data.title && data.title.value) {
+                                titleField.value = data.title.value;
+                                console.log('Title set to:', data.title.value);
+                            }
+                            
+                            console.log('Setting sort_order field...');
+                            const sortOrderField = document.querySelector('#session-edit-modal input[name="sort_order"]');
+                            console.log('Sort order field found:', sortOrderField);
+                            if (sortOrderField && data.sort_order && data.sort_order.value) {
+                                sortOrderField.value = data.sort_order.value;
+                                console.log('Sort order set to:', data.sort_order.value);
+                            }
+                            
+                            console.log('Setting code field...');
+                            const codeField = document.querySelector('#session-edit-modal input[name="code"]');
+                            console.log('Code field found:', codeField);
+                            if (codeField && data.code && data.code.value) {
+                                codeField.value = data.code.value;
+                                console.log('Code set to:', data.code.value);
+                            }
+                            
+                            console.log('Setting description field...');
+                            const descriptionField = document.querySelector('#session-edit-modal textarea[name="description"]');
+                            console.log('Description field found:', descriptionField);
+                            if (descriptionField && data.description && data.description.value) {
+                                descriptionField.value = data.description.value;
+                                console.log('Description set to:', data.description.value);
+                            }
+                            
+                            console.log('Setting start_at field...');
+                            const startAtField = document.querySelector('#session-edit-modal input[name="start_at"]');
+                            console.log('Start at field found:', startAtField);
+                            if (startAtField && data.start_at && data.start_at.value) {
+                                startAtField.value = data.start_at.value;
+                                console.log('Start at set to:', data.start_at.value);
+                            }
+                            
+                            console.log('Setting finish_at field...');
+                            const finishAtField = document.querySelector('#session-edit-modal input[name="finish_at"]');
+                            console.log('Finish at field found:', finishAtField);
+                            if (finishAtField && data.finish_at && data.finish_at.value) {
+                                finishAtField.value = data.finish_at.value;
+                                console.log('Finish at set to:', data.finish_at.value);
+                            }
+                            
+                            console.log('Setting speaker_id field...');
+                            const speakerField = document.querySelector('#session-edit-modal select[name="speaker_id"]');
+                            console.log('Speaker field found:', speakerField);
+                            if (speakerField && data.speaker_id && data.speaker_id.value) {
+                                speakerField.value = data.speaker_id.value;
+                                console.log('Speaker set to:', data.speaker_id.value);
+                            }
+                            
+                            console.log('Setting document_id field...');
+                            const documentField = document.querySelector('#session-edit-modal select[name="document_id"]');
+                            console.log('Document field found:', documentField);
+                            if (documentField && data.document_id && data.document_id.value) {
+                                documentField.value = data.document_id.value;
+                                console.log('Document set to:', data.document_id.value);
+                            }
+                            
+                            console.log('Setting questions_limit field...');
+                            const questionsLimitField = document.querySelector('#session-edit-modal input[name="questions_limit"]');
+                            console.log('Questions limit field found:', questionsLimitField);
+                            if (questionsLimitField && data.questions_limit && data.questions_limit.value) {
+                                questionsLimitField.value = data.questions_limit.value;
+                                console.log('Questions limit set to:', data.questions_limit.value);
+                            }
+                            
+                            // Radio buttons
+                            console.log('Setting radio buttons...');
+                            if (data.questions_allowed && data.questions_allowed.value !== null) {
+                                const questionsAllowedRadio = document.querySelector(`#session-edit-modal input[name="questions_allowed"][value="${data.questions_allowed.value}"]`);
+                                console.log('Questions allowed radio found:', questionsAllowedRadio);
+                                if (questionsAllowedRadio) {
+                                    questionsAllowedRadio.checked = true;
+                                    console.log('Questions allowed set to:', data.questions_allowed.value);
                                 }
-                            });
+                            }
+                            
+                            if (data.questions_auto_start && data.questions_auto_start.value !== null) {
+                                const questionsAutoStartRadio = document.querySelector(`#session-edit-modal input[name="questions_auto_start"][value="${data.questions_auto_start.value}"]`);
+                                console.log('Questions auto start radio found:', questionsAutoStartRadio);
+                                if (questionsAutoStartRadio) {
+                                    questionsAutoStartRadio.checked = true;
+                                    console.log('Questions auto start set to:', data.questions_auto_start.value);
+                                }
+                            }
+                            
+                            if (data.status && data.status.value !== null) {
+                                const statusRadio = document.querySelector(`#session-edit-modal input[name="status"][value="${data.status.value}"]`);
+                                console.log('Status radio found:', statusRadio);
+                                if (statusRadio) {
+                                    statusRadio.checked = true;
+                                    console.log('Status set to:', data.status.value);
+                                }
+                            }
+                            
+                            console.log('All fields processed!');
                         })
                         .catch(error => {
                             console.error('Error fetching session data:', error);
                         });
                 }
             });
+        } else {
+            console.error('Session edit modal not found!');
         }
 
         // Handle session delete modal
