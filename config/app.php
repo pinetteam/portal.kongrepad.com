@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'https://app.kongrepad.com'),
+    'url' => env('APP_URL', 'https://portal.kongrepad.com'),
 
     'asset_url' => env('ASSET_URL'),
 
