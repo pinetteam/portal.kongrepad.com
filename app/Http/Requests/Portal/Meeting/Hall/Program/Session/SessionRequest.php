@@ -18,13 +18,19 @@ class SessionRequest extends FormRequest
             case 'POST' || 'PATCH' || 'PUT':
             {
                 return [
+                    'sort_order' => 'nullable|integer',
                     'program_id' => 'required|integer',
+                    'speaker_id' => 'nullable|exists:meeting_participants,id',
+                    'document_id' => 'nullable|exists:meeting_documents,id',
+                    'code' => 'nullable|max:255',
                     'title' => 'required|max:255',
-                    'start_at' => 'required',
-                    'finish_at' => 'required',
-                    'questions_allowed' => 'nullable',
-                    'questions_auto_start' => 'nullable',
-                    'status' => 'nullable',
+                    'description' => 'nullable|max:65535',
+                    'start_at' => 'nullable',
+                    'finish_at' => 'nullable',
+                    'questions_allowed' => 'required|in:0,1',
+                    'questions_limit' => 'nullable|integer',
+                    'questions_auto_start' => 'required|in:0,1',
+                    'status' => 'required|in:0,1',
                 ];
             }
             default:break;

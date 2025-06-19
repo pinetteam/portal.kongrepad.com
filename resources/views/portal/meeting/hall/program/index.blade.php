@@ -310,46 +310,21 @@
         @section('session-create-form')
             <input type="hidden" name="program_id" value="0" id="c-session-program_id"/>
             
-            <x-input.text method="c" name="title" title="title" icon="input-text"/>
-            
             <div class="col form-group mb-3">
-                <label for="c-session-start_at" class="form-label">
-                    <i class="fa-regular fa-calendar"></i> {{ __('common.start-at') }}
+                <label class="form-label">
+                    <i class="fa-regular fa-circle-sort me-2"></i>{{ __('common.sort') }}
                 </label>
-                <input type="datetime-local" name="start_at" class="form-control @error('start_at')is-invalid @enderror" id="c-session-start_at" value="{{ old('start_at') }}" required>
-                @error('start_at')
-                    <div class="invalid-feedback d-block">{{ $message }}</div>
-                @enderror
-            </div>
-            
-            <div class="col form-group mb-3">
-                <label for="c-session-finish_at" class="form-label">
-                    <i class="fa-regular fa-calendar"></i> {{ __('common.finish-at') }}
-                </label>
-                <input type="datetime-local" name="finish_at" class="form-control @error('finish_at')is-invalid @enderror" id="c-session-finish_at" value="{{ old('finish_at') }}" required>
-                @error('finish_at')
+                <input type="number" name="sort_order" class="form-control @error('sort_order')is-invalid @enderror" value="{{ old('sort_order') }}">
+                @error('sort_order')
                     <div class="invalid-feedback d-block">{{ $message }}</div>
                 @enderror
             </div>
 
-            <input type="hidden" name="questions_allowed" value="0">
-            <input type="hidden" name="questions_auto_start" value="0">
-            <input type="hidden" name="status" value="1">
-        @endsection
-    </x-crud.form.common.create>
-
-    <x-crud.form.common.delete name="session"/>
-
-    <x-crud.form.common.edit name="session">
-        @section('session-edit-form')
-            <x-input.hidden method="e" name="program_id" :value="0" id="e-session-program_id"/>
-            <x-input.number method="e" name="sort_order" title="sort" icon="circle-sort"/>
-            
             <div class="col form-group mb-3">
-                <label for="e-session-speaker_id" class="form-label">
-                    <i class="fa-regular fa-person-chalkboard"></i> {{ __('common.speaker') }}
+                <label class="form-label">
+                    <i class="fa-regular fa-person-chalkboard me-2"></i>{{ __('common.speaker') }}
                 </label>
-                <select name="speaker_id" class="form-select @error('speaker_id')is-invalid @enderror" id="e-session-speaker_id">
+                <select name="speaker_id" class="form-select @error('speaker_id')is-invalid @enderror">
                     <option value="">{{ __('common.select-speaker') }}</option>
                     @foreach($speakers as $speaker)
                         <option value="{{ $speaker->id }}" {{ old('speaker_id') == $speaker->id ? 'selected' : '' }}>{{ $speaker->full_name }}</option>
@@ -361,10 +336,10 @@
             </div>
 
             <div class="col form-group mb-3">
-                <label for="e-session-document_id" class="form-label">
-                    <i class="fa-regular fa-presentation-screen"></i> {{ __('common.document') }}
+                <label class="form-label">
+                    <i class="fa-regular fa-presentation-screen me-2"></i>{{ __('common.document') }}
                 </label>
-                <select name="document_id" class="form-select @error('document_id')is-invalid @enderror" id="e-session-document_id">
+                <select name="document_id" class="form-select @error('document_id')is-invalid @enderror">
                     <option value="">{{ __('common.select-document') }}</option>
                     @foreach($documents as $document)
                         <option value="{{ $document->id }}" {{ old('document_id') == $document->id ? 'selected' : '' }}>{{ $document->title }}</option>
@@ -375,60 +350,94 @@
                 @enderror
             </div>
 
-            <x-input.text method="e" name="code" title="code" icon="code"/>
-            <x-input.text method="e" name="title" title="title" icon="input-text"/>
             <div class="col form-group mb-3">
-                <label for="e-session-description" class="form-label">
-                    <i class="fa-regular fa-comment-dots"></i> {{ __('common.description') }}
+                <label class="form-label">
+                    <i class="fa-regular fa-code-simple me-2"></i>{{ __('common.code') }}
                 </label>
-                <textarea name="description" class="form-control @error('description')is-invalid @enderror" id="e-session-description" rows="3">{{ old('description') }}</textarea>
+                <input type="text" name="code" class="form-control @error('code')is-invalid @enderror" value="{{ old('code') }}">
+                @error('code')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="col form-group mb-3">
+                <label class="form-label">
+                    <i class="fa-regular fa-input-text me-2"></i>{{ __('common.title') }}
+                </label>
+                <input type="text" name="title" class="form-control @error('title')is-invalid @enderror" value="{{ old('title') }}" required>
+                @error('title')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="col form-group mb-3">
+                <label class="form-label">
+                    <i class="fa-regular fa-comment-dots me-2"></i>{{ __('common.description') }}
+                </label>
+                <textarea name="description" class="form-control @error('description')is-invalid @enderror" rows="3">{{ old('description') }}</textarea>
                 @error('description')
                     <div class="invalid-feedback d-block">{{ $message }}</div>
                 @enderror
             </div>
-            
+
             <div class="col form-group mb-3">
-                <label for="e-session-start_at" class="form-label">
-                    <i class="fa-regular fa-calendar"></i> {{ __('common.start-at') }}
+                <label class="form-label">
+                    <i class="fa-regular fa-calendar-arrow-down me-2"></i>{{ __('common.start-at') }}
                 </label>
-                <input type="datetime-local" name="start_at" class="form-control @error('start_at')is-invalid @enderror" id="e-session-start_at" value="{{ old('start_at') }}" required>
+                <input type="datetime-local" name="start_at" class="form-control @error('start_at')is-invalid @enderror" value="{{ old('start_at') }}">
                 @error('start_at')
                     <div class="invalid-feedback d-block">{{ $message }}</div>
                 @enderror
             </div>
-            
+
             <div class="col form-group mb-3">
-                <label for="e-session-finish_at" class="form-label">
-                    <i class="fa-regular fa-calendar"></i> {{ __('common.finish-at') }}
+                <label class="form-label">
+                    <i class="fa-regular fa-calendar-arrow-down me-2"></i>{{ __('common.finish-at') }}
                 </label>
-                <input type="datetime-local" name="finish_at" class="form-control @error('finish_at')is-invalid @enderror" id="e-session-finish_at" value="{{ old('finish_at') }}" required>
+                <input type="datetime-local" name="finish_at" class="form-control @error('finish_at')is-invalid @enderror" value="{{ old('finish_at') }}">
                 @error('finish_at')
                     <div class="invalid-feedback d-block">{{ $message }}</div>
                 @enderror
             </div>
-            
+
             <div class="col form-group mb-3">
-                <div class="form-check form-switch">
-                    <input type="hidden" name="questions_allowed" value="0">
-                    <input type="checkbox" name="questions_allowed" class="form-check-input @error('questions_allowed')is-invalid @enderror" id="e-session-questions_allowed" value="1" {{ old('questions_allowed') ? 'checked' : '' }}>
-                    <label class="form-check-label" for="e-session-questions_allowed">
-                        <i class="fa-regular fa-circle-question me-1"></i>{{ __('common.questions-allowed') }}
-                    </label>
+                <label class="form-label">
+                    <i class="fa-regular fa-block-question me-2"></i>{{ __('common.questions') }}
+                </label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="questions_allowed" value="1" id="c-questions-yes" {{ old('questions_allowed') == '1' ? 'checked' : '' }}>
+                    <label class="form-check-label" for="c-questions-yes">{{ __('common.yes') }}</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="questions_allowed" value="0" id="c-questions-no" {{ old('questions_allowed', '0') == '0' ? 'checked' : '' }}>
+                    <label class="form-check-label" for="c-questions-no">{{ __('common.no') }}</label>
                 </div>
                 @error('questions_allowed')
                     <div class="invalid-feedback d-block">{{ $message }}</div>
                 @enderror
             </div>
 
-            <x-input.number method="e" name="questions_limit" title="questions-limit" icon="hashtag"/>
+            <div class="col form-group mb-3">
+                <label class="form-label">
+                    <i class="fa-regular fa-circle-1 me-2"></i>{{ __('common.question-limit') }}
+                </label>
+                <input type="number" name="questions_limit" class="form-control @error('questions_limit')is-invalid @enderror" value="{{ old('questions_limit') }}">
+                @error('questions_limit')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                @enderror
+            </div>
 
             <div class="col form-group mb-3">
-                <div class="form-check form-switch">
-                    <input type="hidden" name="questions_auto_start" value="0">
-                    <input type="checkbox" name="questions_auto_start" class="form-check-input @error('questions_auto_start')is-invalid @enderror" id="e-session-questions_auto_start" value="1" {{ old('questions_auto_start') ? 'checked' : '' }}>
-                    <label class="form-check-label" for="e-session-questions_auto_start">
-                        <i class="fa-regular fa-play me-1"></i>{{ __('common.questions-auto-start') }}
-                    </label>
+                <label class="form-label">
+                    <i class="fa-regular fa-block-question me-2"></i>{{ __('common.questions-auto-start') }}
+                </label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="questions_auto_start" value="1" id="c-auto-start-yes" {{ old('questions_auto_start') == '1' ? 'checked' : '' }}>
+                    <label class="form-check-label" for="c-auto-start-yes">{{ __('common.yes') }}</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="questions_auto_start" value="0" id="c-auto-start-no" {{ old('questions_auto_start', '0') == '0' ? 'checked' : '' }}>
+                    <label class="form-check-label" for="c-auto-start-no">{{ __('common.no') }}</label>
                 </div>
                 @error('questions_auto_start')
                     <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -436,12 +445,175 @@
             </div>
 
             <div class="col form-group mb-3">
-                <div class="form-check form-switch">
-                    <input type="hidden" name="status" value="0">
-                    <input type="checkbox" name="status" class="form-check-input @error('status')is-invalid @enderror" id="e-session-status" value="1" {{ old('status') == '1' ? 'checked' : '' }}>
-                    <label class="form-check-label" for="e-session-status">
-                        <i class="fa-regular fa-toggle-large-on me-1"></i>{{ __('common.status') }}
-                    </label>
+                <label class="form-label">
+                    <i class="fa-regular fa-toggle-large-on me-2"></i>{{ __('common.status') }}
+                </label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="status" value="1" id="c-status-active" {{ old('status', '1') == '1' ? 'checked' : '' }}>
+                    <label class="form-check-label" for="c-status-active">{{ __('common.active') }}</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="status" value="0" id="c-status-inactive" {{ old('status') == '0' ? 'checked' : '' }}>
+                    <label class="form-check-label" for="c-status-inactive">{{ __('common.inactive') }}</label>
+                </div>
+                @error('status')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                @enderror
+            </div>
+        @endsection
+    </x-crud.form.common.create>
+
+    <x-crud.form.common.delete name="session"/>
+
+    <x-crud.form.common.edit name="session">
+        @section('session-edit-form')
+            <input type="hidden" name="program_id" value="0" id="e-session-program_id"/>
+            
+            <div class="col form-group mb-3">
+                <label class="form-label">
+                    <i class="fa-regular fa-circle-sort me-2"></i>{{ __('common.sort') }}
+                </label>
+                <input type="number" name="sort_order" class="form-control @error('sort_order')is-invalid @enderror" value="{{ old('sort_order') }}">
+                @error('sort_order')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="col form-group mb-3">
+                <label class="form-label">
+                    <i class="fa-regular fa-person-chalkboard me-2"></i>{{ __('common.speaker') }}
+                </label>
+                <select name="speaker_id" class="form-select @error('speaker_id')is-invalid @enderror">
+                    <option value="">{{ __('common.select-speaker') }}</option>
+                    @foreach($speakers as $speaker)
+                        <option value="{{ $speaker->id }}" {{ old('speaker_id') == $speaker->id ? 'selected' : '' }}>{{ $speaker->full_name }}</option>
+                    @endforeach
+                </select>
+                @error('speaker_id')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="col form-group mb-3">
+                <label class="form-label">
+                    <i class="fa-regular fa-presentation-screen me-2"></i>{{ __('common.document') }}
+                </label>
+                <select name="document_id" class="form-select @error('document_id')is-invalid @enderror">
+                    <option value="">{{ __('common.select-document') }}</option>
+                    @foreach($documents as $document)
+                        <option value="{{ $document->id }}" {{ old('document_id') == $document->id ? 'selected' : '' }}>{{ $document->title }}</option>
+                    @endforeach
+                </select>
+                @error('document_id')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="col form-group mb-3">
+                <label class="form-label">
+                    <i class="fa-regular fa-code-simple me-2"></i>{{ __('common.code') }}
+                </label>
+                <input type="text" name="code" class="form-control @error('code')is-invalid @enderror" value="{{ old('code') }}">
+                @error('code')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="col form-group mb-3">
+                <label class="form-label">
+                    <i class="fa-regular fa-input-text me-2"></i>{{ __('common.title') }}
+                </label>
+                <input type="text" name="title" class="form-control @error('title')is-invalid @enderror" value="{{ old('title') }}" required>
+                @error('title')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="col form-group mb-3">
+                <label class="form-label">
+                    <i class="fa-regular fa-comment-dots me-2"></i>{{ __('common.description') }}
+                </label>
+                <textarea name="description" class="form-control @error('description')is-invalid @enderror" rows="3">{{ old('description') }}</textarea>
+                @error('description')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="col form-group mb-3">
+                <label class="form-label">
+                    <i class="fa-regular fa-calendar-arrow-down me-2"></i>{{ __('common.start-at') }}
+                </label>
+                <input type="datetime-local" name="start_at" class="form-control @error('start_at')is-invalid @enderror" value="{{ old('start_at') }}">
+                @error('start_at')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="col form-group mb-3">
+                <label class="form-label">
+                    <i class="fa-regular fa-calendar-arrow-down me-2"></i>{{ __('common.finish-at') }}
+                </label>
+                <input type="datetime-local" name="finish_at" class="form-control @error('finish_at')is-invalid @enderror" value="{{ old('finish_at') }}">
+                @error('finish_at')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="col form-group mb-3">
+                <label class="form-label">
+                    <i class="fa-regular fa-block-question me-2"></i>{{ __('common.questions') }}
+                </label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="questions_allowed" value="1" id="e-questions-yes" {{ old('questions_allowed') == '1' ? 'checked' : '' }}>
+                    <label class="form-check-label" for="e-questions-yes">{{ __('common.yes') }}</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="questions_allowed" value="0" id="e-questions-no" {{ old('questions_allowed', '0') == '0' ? 'checked' : '' }}>
+                    <label class="form-check-label" for="e-questions-no">{{ __('common.no') }}</label>
+                </div>
+                @error('questions_allowed')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="col form-group mb-3">
+                <label class="form-label">
+                    <i class="fa-regular fa-circle-1 me-2"></i>{{ __('common.question-limit') }}
+                </label>
+                <input type="number" name="questions_limit" class="form-control @error('questions_limit')is-invalid @enderror" value="{{ old('questions_limit') }}">
+                @error('questions_limit')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="col form-group mb-3">
+                <label class="form-label">
+                    <i class="fa-regular fa-block-question me-2"></i>{{ __('common.questions-auto-start') }}
+                </label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="questions_auto_start" value="1" id="e-auto-start-yes" {{ old('questions_auto_start') == '1' ? 'checked' : '' }}>
+                    <label class="form-check-label" for="e-auto-start-yes">{{ __('common.yes') }}</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="questions_auto_start" value="0" id="e-auto-start-no" {{ old('questions_auto_start', '0') == '0' ? 'checked' : '' }}>
+                    <label class="form-check-label" for="e-auto-start-no">{{ __('common.no') }}</label>
+                </div>
+                @error('questions_auto_start')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="col form-group mb-3">
+                <label class="form-label">
+                    <i class="fa-regular fa-toggle-large-on me-2"></i>{{ __('common.status') }}
+                </label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="status" value="1" id="e-status-active" {{ old('status', '1') == '1' ? 'checked' : '' }}>
+                    <label class="form-check-label" for="e-status-active">{{ __('common.active') }}</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="status" value="0" id="e-status-inactive" {{ old('status') == '0' ? 'checked' : '' }}>
+                    <label class="form-check-label" for="e-status-inactive">{{ __('common.inactive') }}</label>
                 </div>
                 @error('status')
                     <div class="invalid-feedback d-block">{{ $message }}</div>
