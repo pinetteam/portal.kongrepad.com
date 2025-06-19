@@ -742,20 +742,31 @@
                 const button = event.relatedTarget;
                 if(button && button.hasAttribute('data-resource')) {
                     const resourceUrl = button.getAttribute('data-resource');
+                    console.log('Resource URL:', resourceUrl);
+                    
+                    // Get the form specifically
+                    const form = document.getElementById('session-edit-form');
+                    if (!form) {
+                        console.error('Session edit form not found!');
+                        return;
+                    }
                     
                     // Clear all fields first
-                    const form = sessionEditModal.querySelector('form');
                     form.reset();
                     
                     // Fetch session data via AJAX
                     fetch(resourceUrl)
-                        .then(response => response.json())
+                        .then(response => {
+                            console.log('Response status:', response.status);
+                            return response.json();
+                        })
                         .then(data => {
-                            console.log('Session data:', data);
+                            console.log('Session data received:', data);
                             
                             // Update form action
                             if (data.route) {
                                 form.action = data.route;
+                                console.log('Form action set to:', data.route);
                             }
                             
                             // Populate all form fields
@@ -763,35 +774,58 @@
                                 if (key === 'route') return; // Skip route field
                                 
                                 const fieldData = data[key];
-                                console.log(`Field ${key}:`, fieldData);
+                                console.log(`Processing field ${key}:`, fieldData);
                                 
                                 if (fieldData && fieldData.value !== null && fieldData.value !== undefined) {
                                     
-                                    if (fieldData.type === 'text' || fieldData.type === 'number' || fieldData.type === 'hidden' || fieldData.type === 'datetime') {
+                                    if (fieldData.type === 'text' || fieldData.type === 'number' || fieldData.type === 'hidden') {
                                         // Handle input fields
-                                        const input = form.querySelector(`[name="${key}"]`);
+                                        const input = form.querySelector(`input[name="${key}"]`);
                                         if (input) {
                                             input.value = fieldData.value || '';
+                                            console.log(`Set ${key} to:`, fieldData.value);
+                                        } else {
+                                            console.log(`Input field ${key} not found`);
+                                        }
+                                    } else if (fieldData.type === 'datetime') {
+                                        // Handle datetime fields
+                                        const input = form.querySelector(`input[name="${key}"][type="datetime-local"]`);
+                                        if (input) {
+                                            input.value = fieldData.value || '';
+                                            console.log(`Set datetime ${key} to:`, fieldData.value);
+                                        } else {
+                                            console.log(`Datetime field ${key} not found`);
                                         }
                                     } else if (fieldData.type === 'textarea') {
                                         // Handle textarea fields
                                         const textarea = form.querySelector(`textarea[name="${key}"]`);
                                         if (textarea) {
                                             textarea.value = fieldData.value || '';
+                                            console.log(`Set textarea ${key} to:`, fieldData.value);
+                                        } else {
+                                            console.log(`Textarea field ${key} not found`);
                                         }
                                     } else if (fieldData.type === 'select') {
                                         // Handle select fields
-                                        const select = form.querySelector(`[name="${key}"]`);
+                                        const select = form.querySelector(`select[name="${key}"]`);
                                         if (select) {
                                             select.value = fieldData.value || '';
+                                            console.log(`Set select ${key} to:`, fieldData.value);
+                                        } else {
+                                            console.log(`Select field ${key} not found`);
                                         }
                                     } else if (fieldData.type === 'radio') {
                                         // Handle radio fields
-                                        const radio = form.querySelector(`[name="${key}"][value="${fieldData.value}"]`);
+                                        const radio = form.querySelector(`input[name="${key}"][value="${fieldData.value}"]`);
                                         if (radio) {
                                             radio.checked = true;
+                                            console.log(`Set radio ${key} to:`, fieldData.value);
+                                        } else {
+                                            console.log(`Radio field ${key} with value ${fieldData.value} not found`);
                                         }
                                     }
+                                } else {
+                                    console.log(`Field ${key} has no value or null value`);
                                 }
                             });
                         })
