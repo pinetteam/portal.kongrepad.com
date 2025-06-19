@@ -24,14 +24,15 @@ class SessionController extends Controller
             $program_session->code = $request->input('code');
             $program_session->title = $request->input('title');
             $program_session->description = $request->input('description');
-            // Handle datetime fields with proper format
+            // Handle datetime fields - bypass model accessors completely
             if ($request->input('start_at')) {
                 $startAtValue = $request->input('start_at');
                 // Add seconds if not present
                 if (strlen($startAtValue) === 16) {
                     $startAtValue .= ':00';
                 }
-                $program_session->setAttribute('start_at', Carbon::createFromFormat('Y-m-d\TH:i:s', $startAtValue)->format('Y-m-d H:i:s'));
+                // Set directly to attributes array to bypass accessors
+                $program_session->attributes['start_at'] = Carbon::createFromFormat('Y-m-d\TH:i:s', $startAtValue)->format('Y-m-d H:i:s');
             }
             if ($request->input('finish_at')) {
                 $finishAtValue = $request->input('finish_at');
@@ -39,7 +40,8 @@ class SessionController extends Controller
                 if (strlen($finishAtValue) === 16) {
                     $finishAtValue .= ':00';
                 }
-                $program_session->setAttribute('finish_at', Carbon::createFromFormat('Y-m-d\TH:i:s', $finishAtValue)->format('Y-m-d H:i:s'));
+                // Set directly to attributes array to bypass accessors
+                $program_session->attributes['finish_at'] = Carbon::createFromFormat('Y-m-d\TH:i:s', $finishAtValue)->format('Y-m-d H:i:s');
             }
             $program_session->questions_allowed = $request->input('questions_allowed');
             $program_session->questions_limit = $request->input('questions_limit');
@@ -81,14 +83,15 @@ class SessionController extends Controller
             $program_session->code = $request->input('code');
             $program_session->title = $request->input('title');
             $program_session->description = $request->input('description');
-            // Handle datetime fields with proper format
+            // Handle datetime fields - bypass model accessors completely
             if ($request->input('start_at')) {
                 $startAtValue = $request->input('start_at');
                 // Add seconds if not present
                 if (strlen($startAtValue) === 16) {
                     $startAtValue .= ':00';
                 }
-                $program_session->setAttribute('start_at', Carbon::createFromFormat('Y-m-d\TH:i:s', $startAtValue)->format('Y-m-d H:i:s'));
+                // Set directly to attributes array to bypass accessors
+                $program_session->attributes['start_at'] = Carbon::createFromFormat('Y-m-d\TH:i:s', $startAtValue)->format('Y-m-d H:i:s');
             }
             if ($request->input('finish_at')) {
                 $finishAtValue = $request->input('finish_at');
@@ -96,7 +99,8 @@ class SessionController extends Controller
                 if (strlen($finishAtValue) === 16) {
                     $finishAtValue .= ':00';
                 }
-                $program_session->setAttribute('finish_at', Carbon::createFromFormat('Y-m-d\TH:i:s', $finishAtValue)->format('Y-m-d H:i:s'));
+                // Set directly to attributes array to bypass accessors
+                $program_session->attributes['finish_at'] = Carbon::createFromFormat('Y-m-d\TH:i:s', $finishAtValue)->format('Y-m-d H:i:s');
             }
             $program_session->questions_allowed = $request->input('questions_allowed');
             $program_session->questions_auto_start = $request->input('questions_auto_start');
