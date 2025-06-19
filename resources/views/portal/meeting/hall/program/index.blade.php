@@ -315,24 +315,30 @@
                 <label for="c-session-speaker_id" class="form-label">
                     <i class="fa-regular fa-person-chalkboard"></i> {{ __('common.speaker') }}
                 </label>
-                <select name="speaker_id" class="form-select" id="c-session-speaker_id">
+                <select name="speaker_id" class="form-select @error('speaker_id')is-invalid @enderror" id="c-session-speaker_id">
                     <option value="">{{ __('common.select-speaker') }}</option>
                     @foreach($speakers as $speaker)
-                        <option value="{{ $speaker->id }}">{{ $speaker->full_name }}</option>
+                        <option value="{{ $speaker->id }}" {{ old('speaker_id') == $speaker->id ? 'selected' : '' }}>{{ $speaker->full_name }}</option>
                     @endforeach
                 </select>
+                @error('speaker_id')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="col form-group mb-3">
                 <label for="c-session-document_id" class="form-label">
                     <i class="fa-regular fa-presentation-screen"></i> {{ __('common.document') }}
                 </label>
-                <select name="document_id" class="form-select" id="c-session-document_id">
+                <select name="document_id" class="form-select @error('document_id')is-invalid @enderror" id="c-session-document_id">
                     <option value="">{{ __('common.select-document') }}</option>
                     @foreach($documents as $document)
-                        <option value="{{ $document->id }}">{{ $document->title }}</option>
+                        <option value="{{ $document->id }}" {{ old('document_id') == $document->id ? 'selected' : '' }}>{{ $document->title }}</option>
                     @endforeach
                 </select>
+                @error('document_id')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                @enderror
             </div>
 
             <x-input.text method="c" name="code" title="code" icon="code"/>
@@ -341,38 +347,68 @@
                 <label for="c-session-description" class="form-label">
                     <i class="fa-regular fa-comment-dots"></i> {{ __('common.description') }}
                 </label>
-                <textarea name="description" class="form-control" id="c-session-description" rows="3"></textarea>
+                <textarea name="description" class="form-control @error('description')is-invalid @enderror" id="c-session-description" rows="3">{{ old('description') }}</textarea>
+                @error('description')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                @enderror
             </div>
-            <x-input.datetime method="c" name="start_at" title="start-at" icon="calendar"/>
-            <x-input.datetime method="c" name="finish_at" title="finish-at" icon="calendar"/>
+            
+            <div class="col form-group mb-3">
+                <label for="c-session-start_at" class="form-label">
+                    <i class="fa-regular fa-calendar"></i> {{ __('common.start-at') }}
+                </label>
+                <input type="datetime-local" name="start_at" class="form-control @error('start_at')is-invalid @enderror" id="c-session-start_at" value="{{ old('start_at') }}" required>
+                @error('start_at')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                @enderror
+            </div>
+            
+            <div class="col form-group mb-3">
+                <label for="c-session-finish_at" class="form-label">
+                    <i class="fa-regular fa-calendar"></i> {{ __('common.finish-at') }}
+                </label>
+                <input type="datetime-local" name="finish_at" class="form-control @error('finish_at')is-invalid @enderror" id="c-session-finish_at" value="{{ old('finish_at') }}" required>
+                @error('finish_at')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                @enderror
+            </div>
             
             <div class="col form-group mb-3">
                 <div class="form-check form-switch">
-                    <input type="checkbox" name="questions_allowed" class="form-check-input" id="c-session-questions_allowed" value="1">
+                    <input type="checkbox" name="questions_allowed" class="form-check-input @error('questions_allowed')is-invalid @enderror" id="c-session-questions_allowed" value="1" {{ old('questions_allowed') ? 'checked' : '' }}>
                     <label class="form-check-label" for="c-session-questions_allowed">
                         <i class="fa-regular fa-circle-question me-1"></i>{{ __('common.questions-allowed') }}
                     </label>
                 </div>
+                @error('questions_allowed')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                @enderror
             </div>
 
             <x-input.number method="c" name="questions_limit" title="questions-limit" icon="hashtag"/>
 
             <div class="col form-group mb-3">
                 <div class="form-check form-switch">
-                    <input type="checkbox" name="questions_auto_start" class="form-check-input" id="c-session-questions_auto_start" value="1">
+                    <input type="checkbox" name="questions_auto_start" class="form-check-input @error('questions_auto_start')is-invalid @enderror" id="c-session-questions_auto_start" value="1" {{ old('questions_auto_start') ? 'checked' : '' }}>
                     <label class="form-check-label" for="c-session-questions_auto_start">
                         <i class="fa-regular fa-play me-1"></i>{{ __('common.questions-auto-start') }}
                     </label>
                 </div>
+                @error('questions_auto_start')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="col form-group mb-3">
                 <div class="form-check form-switch">
-                    <input type="checkbox" name="status" class="form-check-input" id="c-session-status" value="1" checked>
+                    <input type="checkbox" name="status" class="form-check-input @error('status')is-invalid @enderror" id="c-session-status" value="1" {{ old('status', '1') ? 'checked' : '' }}>
                     <label class="form-check-label" for="c-session-status">
                         <i class="fa-regular fa-toggle-large-on me-1"></i>{{ __('common.status') }}
                     </label>
                 </div>
+                @error('status')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                @enderror
             </div>
         @endsection
     </x-crud.form.common.create>
@@ -388,24 +424,30 @@
                 <label for="e-session-speaker_id" class="form-label">
                     <i class="fa-regular fa-person-chalkboard"></i> {{ __('common.speaker') }}
                 </label>
-                <select name="speaker_id" class="form-select" id="e-session-speaker_id">
+                <select name="speaker_id" class="form-select @error('speaker_id')is-invalid @enderror" id="e-session-speaker_id">
                     <option value="">{{ __('common.select-speaker') }}</option>
                     @foreach($speakers as $speaker)
-                        <option value="{{ $speaker->id }}">{{ $speaker->full_name }}</option>
+                        <option value="{{ $speaker->id }}" {{ old('speaker_id') == $speaker->id ? 'selected' : '' }}>{{ $speaker->full_name }}</option>
                     @endforeach
                 </select>
+                @error('speaker_id')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="col form-group mb-3">
                 <label for="e-session-document_id" class="form-label">
                     <i class="fa-regular fa-presentation-screen"></i> {{ __('common.document') }}
                 </label>
-                <select name="document_id" class="form-select" id="e-session-document_id">
+                <select name="document_id" class="form-select @error('document_id')is-invalid @enderror" id="e-session-document_id">
                     <option value="">{{ __('common.select-document') }}</option>
                     @foreach($documents as $document)
-                        <option value="{{ $document->id }}">{{ $document->title }}</option>
+                        <option value="{{ $document->id }}" {{ old('document_id') == $document->id ? 'selected' : '' }}>{{ $document->title }}</option>
                     @endforeach
                 </select>
+                @error('document_id')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                @enderror
             </div>
 
             <x-input.text method="e" name="code" title="code" icon="code"/>
@@ -414,38 +456,68 @@
                 <label for="e-session-description" class="form-label">
                     <i class="fa-regular fa-comment-dots"></i> {{ __('common.description') }}
                 </label>
-                <textarea name="description" class="form-control" id="e-session-description" rows="3"></textarea>
+                <textarea name="description" class="form-control @error('description')is-invalid @enderror" id="e-session-description" rows="3">{{ old('description') }}</textarea>
+                @error('description')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                @enderror
             </div>
-            <x-input.datetime method="e" name="start_at" title="start-at" icon="calendar"/>
-            <x-input.datetime method="e" name="finish_at" title="finish-at" icon="calendar"/>
+            
+            <div class="col form-group mb-3">
+                <label for="e-session-start_at" class="form-label">
+                    <i class="fa-regular fa-calendar"></i> {{ __('common.start-at') }}
+                </label>
+                <input type="datetime-local" name="start_at" class="form-control @error('start_at')is-invalid @enderror" id="e-session-start_at" value="{{ old('start_at') }}" required>
+                @error('start_at')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                @enderror
+            </div>
+            
+            <div class="col form-group mb-3">
+                <label for="e-session-finish_at" class="form-label">
+                    <i class="fa-regular fa-calendar"></i> {{ __('common.finish-at') }}
+                </label>
+                <input type="datetime-local" name="finish_at" class="form-control @error('finish_at')is-invalid @enderror" id="e-session-finish_at" value="{{ old('finish_at') }}" required>
+                @error('finish_at')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                @enderror
+            </div>
             
             <div class="col form-group mb-3">
                 <div class="form-check form-switch">
-                    <input type="checkbox" name="questions_allowed" class="form-check-input" id="e-session-questions_allowed" value="1">
+                    <input type="checkbox" name="questions_allowed" class="form-check-input @error('questions_allowed')is-invalid @enderror" id="e-session-questions_allowed" value="1" {{ old('questions_allowed') ? 'checked' : '' }}>
                     <label class="form-check-label" for="e-session-questions_allowed">
                         <i class="fa-regular fa-circle-question me-1"></i>{{ __('common.questions-allowed') }}
                     </label>
                 </div>
+                @error('questions_allowed')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                @enderror
             </div>
 
             <x-input.number method="e" name="questions_limit" title="questions-limit" icon="hashtag"/>
 
             <div class="col form-group mb-3">
                 <div class="form-check form-switch">
-                    <input type="checkbox" name="questions_auto_start" class="form-check-input" id="e-session-questions_auto_start" value="1">
+                    <input type="checkbox" name="questions_auto_start" class="form-check-input @error('questions_auto_start')is-invalid @enderror" id="e-session-questions_auto_start" value="1" {{ old('questions_auto_start') ? 'checked' : '' }}>
                     <label class="form-check-label" for="e-session-questions_auto_start">
                         <i class="fa-regular fa-play me-1"></i>{{ __('common.questions-auto-start') }}
                     </label>
                 </div>
+                @error('questions_auto_start')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="col form-group mb-3">
                 <div class="form-check form-switch">
-                    <input type="checkbox" name="status" class="form-check-input" id="e-session-status" value="1">
+                    <input type="checkbox" name="status" class="form-check-input @error('status')is-invalid @enderror" id="e-session-status" value="1" {{ old('status') ? 'checked' : '' }}>
                     <label class="form-check-label" for="e-session-status">
                         <i class="fa-regular fa-toggle-large-on me-1"></i>{{ __('common.status') }}
                     </label>
                 </div>
+                @error('status')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                @enderror
             </div>
         @endsection
     </x-crud.form.common.edit>
