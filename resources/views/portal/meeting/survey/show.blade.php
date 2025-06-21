@@ -181,6 +181,10 @@
                                             {{ __('common.options') }}
                                         </th>
                                         <th class="text-center">
+                                            <i class="fa-regular fa-toggle-large-on me-2"></i>
+                                            {{ __('common.status') }}
+                                        </th>
+                                        <th class="text-center">
                                             <i class="fa-regular fa-gear me-2"></i>
                                             {{ __('common.actions') }}
                                         </th>
@@ -246,6 +250,12 @@
                                                         </button>
                                                     </div>
                                                 @endif
+                                            </td>
+                                            <td class="text-center">
+                                                <span class="status-badge {{ $question->status ? 'status-active' : 'status-inactive' }}">
+                                                    <i class="fa-regular fa-{{ $question->status ? 'toggle-on' : 'toggle-off' }} me-1"></i>
+                                                    {{ $question->status ? __('common.active') : __('common.passive') }}
+                                                </span>
                                             </td>
                                             <td class="text-center">
                                                 <div class="btn-group" role="group" aria-label="{{ __('common.actions') }}">
@@ -398,21 +408,39 @@ document.addEventListener('DOMContentLoaded', function() {
     // Fix question edit modal radio button selection
     const questionEditModal = document.getElementById('question-edit-modal');
     if (questionEditModal) {
+        // Listen for when the modal is about to show
+        questionEditModal.addEventListener('show.bs.offcanvas', function() {
+            console.log('Question Edit Modal - Show event triggered');
+            // Clear any previous radio button states
+            const statusRadios = questionEditModal.querySelectorAll('input[name="status"]');
+            console.log('Question Edit Modal - Clearing radios:', statusRadios.length);
+            statusRadios.forEach(radio => {
+                radio.checked = false;
+                radio.removeAttribute('checked');
+            });
+        });
+        
         questionEditModal.addEventListener('shown.bs.offcanvas', function() {
-            // Add a small delay to ensure data has loaded
+            // Add a delay to ensure AJAX data has loaded
             setTimeout(() => {
-                // If no radio button is selected, ensure at least one is checked
-                const statusRadios = questionEditModal.querySelectorAll('input[name="status"]');
+                // Check if any radio button is selected after data load
                 const checkedRadio = questionEditModal.querySelector('input[name="status"]:checked');
+                const allStatusRadios = questionEditModal.querySelectorAll('input[name="status"]');
                 
-                if (!checkedRadio && statusRadios.length > 0) {
-                    // Default to active (value 1)
+                console.log('Question Edit Modal - Status radios found:', allStatusRadios.length);
+                console.log('Question Edit Modal - Checked radio:', checkedRadio);
+                
+                // If no radio button is selected, default to active
+                if (!checkedRadio) {
                     const activeRadio = questionEditModal.querySelector('#e-status-1');
+                    console.log('Question Edit Modal - Active radio element:', activeRadio);
                     if (activeRadio) {
                         activeRadio.checked = true;
+                        activeRadio.setAttribute('checked', 'checked');
+                        console.log('Question Edit Modal - Set active radio to checked');
                     }
                 }
-            }, 100);
+            }, 300);
         });
     }
 });
