@@ -45,7 +45,19 @@
                 .then((data) => {
                     const resource = data.data;
                     document.getElementById('{{ $name }}-edit-form').action = resource.route;
+                    console.log('Resource data:', resource); // Debug için
+                    
+                    // First handle status field specifically (for checkbox conversion)
+                    if (resource.status) {
+                        const statusCheckbox = editModal.querySelector('#{{ $method }}-status');
+                        if (statusCheckbox && statusCheckbox.type === 'checkbox') {
+                            statusCheckbox.checked = (resource.status.value == 1 || resource.status.value === true);
+                            console.log('Status checkbox set to:', statusCheckbox.checked, 'from value:', resource.status.value);
+                        }
+                    }
+                    
                     for (const [key, value] of Object.entries(resource)) {
+                        console.log('Processing:', key, value); // Debug için
                         if(value['type'] === 'checkbox') {
                             value['value'].forEach(title => {
                                 const checkboxElement = editModal.querySelector('#{{ $method }}-' + key + '-' + title.replaceAll('.',"\\."));
@@ -113,6 +125,15 @@
                             const checkboxElement = editModal.querySelector('#{{ $method }}-' + key);
                             if (checkboxElement !== null) {
                                 checkboxElement.checked = (value['value'] == 1 || value['value'] === true);
+                            }
+                        }
+                        
+                        // Special handling for status field (might come as radio but we use checkbox)
+                        if (key === 'status') {
+                            const statusCheckbox = editModal.querySelector('#{{ $method }}-status');
+                            if (statusCheckbox && statusCheckbox.type === 'checkbox') {
+                                statusCheckbox.checked = (value['value'] == 1 || value['value'] === true);
+                                console.log('Status checkbox set to:', statusCheckbox.checked, 'from value:', value['value']);
                             }
                         } else if(value['type'] === 'select') {
                             const selectElement = editModal.querySelector('#{{ $method }}-' + key);
