@@ -1,6 +1,5 @@
 @props(['method' => 'm', 'name', 'title', 'options', 'option_value', 'option_name', 'icon' => 'question', 'fade' => 'off'])
 <div class="col form-group mb-3">
-    <input type="hidden" name="{{ $name }}" />
     <label for="{{ $method }}-{{ $name }}-{{ reset($options)[$option_value] }}" class="form-label">
         <i class="fa-regular fa-{{ $icon }}{{ $fade=='on' ? ' fa-fade' : '' }}"></i> {{ __('common.'.$title) }}
     </label>

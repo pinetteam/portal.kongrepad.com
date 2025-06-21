@@ -349,6 +349,26 @@
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // General radio button fix for Bootstrap btn-check
+    document.addEventListener('click', function(e) {
+        if (e.target.matches('label[for*="status"]')) {
+            const radioId = e.target.getAttribute('for');
+            const radio = document.getElementById(radioId);
+            if (radio && radio.type === 'radio') {
+                // Clear all other radio buttons with the same name
+                const allRadios = document.querySelectorAll(`input[name="${radio.name}"]`);
+                allRadios.forEach(r => {
+                    r.checked = false;
+                    r.removeAttribute('checked');
+                });
+                
+                // Set the clicked radio as checked
+                radio.checked = true;
+                radio.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+        }
+    });
+    
     // Auto-select active status for option create form
     const optionCreateModal = document.getElementById('option-create-modal');
     if (optionCreateModal) {
@@ -390,8 +410,14 @@ document.addEventListener('DOMContentLoaded', function() {
         optionEditModal.addEventListener('shown.bs.offcanvas', function() {
             // Add a small delay to ensure data has loaded
             setTimeout(() => {
-                // If no radio button is selected, ensure at least one is checked
+                // Clear all radio buttons first to reset state
                 const statusRadios = optionEditModal.querySelectorAll('input[name="status"]');
+                statusRadios.forEach(radio => {
+                    radio.checked = false;
+                    radio.removeAttribute('checked');
+                });
+                
+                // If no radio button is selected, ensure at least one is checked
                 const checkedRadio = optionEditModal.querySelector('input[name="status"]:checked');
                 
                 if (!checkedRadio && statusRadios.length > 0) {
@@ -399,9 +425,20 @@ document.addEventListener('DOMContentLoaded', function() {
                     const activeRadio = optionEditModal.querySelector('#e-status-1');
                     if (activeRadio) {
                         activeRadio.checked = true;
+                        // Trigger change event to ensure proper state
+                        activeRadio.dispatchEvent(new Event('change', { bubbles: true }));
                     }
                 }
             }, 100);
+        });
+        
+        // Clear radio buttons when modal is hidden
+        optionEditModal.addEventListener('hidden.bs.offcanvas', function() {
+            const statusRadios = optionEditModal.querySelectorAll('input[name="status"]');
+            statusRadios.forEach(radio => {
+                radio.checked = false;
+                radio.removeAttribute('checked');
+            });
         });
     }
     
@@ -412,9 +449,15 @@ document.addEventListener('DOMContentLoaded', function() {
         questionEditModal.addEventListener('shown.bs.offcanvas', function() {
             // Add a delay to ensure the default AJAX call has completed
             setTimeout(() => {
+                // Clear all radio buttons first to reset state
+                const allRadios = questionEditModal.querySelectorAll('input[name="status"]');
+                allRadios.forEach(radio => {
+                    radio.checked = false;
+                    radio.removeAttribute('checked');
+                });
+                
                 // Check if status radio is properly set
                 const checkedRadio = questionEditModal.querySelector('input[name="status"]:checked');
-                const allRadios = questionEditModal.querySelectorAll('input[name="status"]');
                 
                 // If no radio is checked, something went wrong with the default handler
                 // Let's try to fix it by checking the resource data again
@@ -436,7 +479,8 @@ document.addEventListener('DOMContentLoaded', function() {
                                     
                                     if (targetRadio) {
                                         targetRadio.checked = true;
-                                        targetRadio.setAttribute('checked', 'checked');
+                                        // Trigger change event to ensure proper state
+                                        targetRadio.dispatchEvent(new Event('change', { bubbles: true }));
                                     }
                                 }
                             })
@@ -446,6 +490,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
             }, 500);
+        });
+        
+        // Clear radio buttons when modal is hidden
+        questionEditModal.addEventListener('hidden.bs.offcanvas', function() {
+            const statusRadios = questionEditModal.querySelectorAll('input[name="status"]');
+            statusRadios.forEach(radio => {
+                radio.checked = false;
+                radio.removeAttribute('checked');
+            });
         });
     }
 });
