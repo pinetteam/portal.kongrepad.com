@@ -349,26 +349,6 @@
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // General radio button fix for Bootstrap btn-check
-    document.addEventListener('click', function(e) {
-        if (e.target.matches('label[for*="status"]')) {
-            const radioId = e.target.getAttribute('for');
-            const radio = document.getElementById(radioId);
-            if (radio && radio.type === 'radio') {
-                // Clear all other radio buttons with the same name
-                const allRadios = document.querySelectorAll(`input[name="${radio.name}"]`);
-                allRadios.forEach(r => {
-                    r.checked = false;
-                    r.removeAttribute('checked');
-                });
-                
-                // Set the clicked radio as checked
-                radio.checked = true;
-                radio.dispatchEvent(new Event('change', { bubbles: true }));
-            }
-        }
-    });
-    
     // Auto-select active status for option create form
     const optionCreateModal = document.getElementById('option-create-modal');
     if (optionCreateModal) {
@@ -404,103 +384,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Fix option edit modal radio button selection
-    const optionEditModal = document.getElementById('option-edit-modal');
-    if (optionEditModal) {
-        optionEditModal.addEventListener('shown.bs.offcanvas', function() {
-            // Add a small delay to ensure data has loaded
-            setTimeout(() => {
-                // Clear all radio buttons first to reset state
-                const statusRadios = optionEditModal.querySelectorAll('input[name="status"]');
-                statusRadios.forEach(radio => {
-                    radio.checked = false;
-                    radio.removeAttribute('checked');
-                });
-                
-                // If no radio button is selected, ensure at least one is checked
-                const checkedRadio = optionEditModal.querySelector('input[name="status"]:checked');
-                
-                if (!checkedRadio && statusRadios.length > 0) {
-                    // Default to active (value 1)
-                    const activeRadio = optionEditModal.querySelector('#e-status-1');
-                    if (activeRadio) {
-                        activeRadio.checked = true;
-                        // Trigger change event to ensure proper state
-                        activeRadio.dispatchEvent(new Event('change', { bubbles: true }));
-                    }
-                }
-            }, 100);
-        });
-        
-        // Clear radio buttons when modal is hidden
-        optionEditModal.addEventListener('hidden.bs.offcanvas', function() {
-            const statusRadios = optionEditModal.querySelectorAll('input[name="status"]');
-            statusRadios.forEach(radio => {
-                radio.checked = false;
-                radio.removeAttribute('checked');
-            });
-        });
-    }
+
     
-        // Fix question edit modal radio button selection
-    const questionEditModal = document.getElementById('question-edit-modal');
-    if (questionEditModal) {
-        // Listen after modal is shown and data is loaded
-        questionEditModal.addEventListener('shown.bs.offcanvas', function() {
-            // Add a delay to ensure the default AJAX call has completed
-            setTimeout(() => {
-                // Clear all radio buttons first to reset state
-                const allRadios = questionEditModal.querySelectorAll('input[name="status"]');
-                allRadios.forEach(radio => {
-                    radio.checked = false;
-                    radio.removeAttribute('checked');
-                });
-                
-                // Check if status radio is properly set
-                const checkedRadio = questionEditModal.querySelector('input[name="status"]:checked');
-                
-                // If no radio is checked, something went wrong with the default handler
-                // Let's try to fix it by checking the resource data again
-                if (!checkedRadio && allRadios.length > 0) {
-                    // Get the form action to extract the question ID
-                    const form = questionEditModal.querySelector('#question-edit-form');
-                    if (form && form.action) {
-                        const actionUrl = form.action;
-                        const resourceUrl = actionUrl.replace('/update', '/edit');
-                        
-                        // Fetch the resource data again
-                        fetch(resourceUrl)
-                            .then(response => response.json())
-                            .then(data => {
-                                const resource = data.data;
-                                
-                                if (resource.status) {
-                                    const targetRadio = questionEditModal.querySelector('#e-status-' + resource.status.value);
-                                    
-                                    if (targetRadio) {
-                                        targetRadio.checked = true;
-                                        // Trigger change event to ensure proper state
-                                        targetRadio.dispatchEvent(new Event('change', { bubbles: true }));
-                                    }
-                                }
-                            })
-                            .catch(error => {
-                                console.error('Question Edit Modal - Error re-fetching:', error);
-                            });
-                    }
-                }
-            }, 500);
-        });
-        
-        // Clear radio buttons when modal is hidden
-        questionEditModal.addEventListener('hidden.bs.offcanvas', function() {
-            const statusRadios = questionEditModal.querySelectorAll('input[name="status"]');
-            statusRadios.forEach(radio => {
-                radio.checked = false;
-                radio.removeAttribute('checked');
-            });
-        });
-    }
+
 });
 </script>
 @endpush

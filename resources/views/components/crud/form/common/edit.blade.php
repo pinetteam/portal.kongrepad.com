@@ -105,7 +105,8 @@
                             const radioElement = editModal.querySelector('#{{ $method }}-' + key + '-' + value['value']);
                             if (radioElement !== null) {
                                 radioElement.checked = true;
-                                radioElement.setAttribute('checked', 'checked');
+                                // Trigger change event for Bootstrap btn-check compatibility
+                                radioElement.dispatchEvent(new Event('change', { bubbles: true }));
                             }
                         } else if(value['type'] === 'select') {
                             const selectElement = editModal.querySelector('#{{ $method }}-' + key);
