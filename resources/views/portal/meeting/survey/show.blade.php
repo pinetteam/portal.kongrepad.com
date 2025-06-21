@@ -405,42 +405,57 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Fix question edit modal radio button selection
+        // Fix question edit modal radio button selection
     const questionEditModal = document.getElementById('question-edit-modal');
     if (questionEditModal) {
-        // Listen for when the modal is about to show
-        questionEditModal.addEventListener('show.bs.offcanvas', function() {
-            console.log('Question Edit Modal - Show event triggered');
-            // Clear any previous radio button states
-            const statusRadios = questionEditModal.querySelectorAll('input[name="status"]');
-            console.log('Question Edit Modal - Clearing radios:', statusRadios.length);
-            statusRadios.forEach(radio => {
-                radio.checked = false;
-                radio.removeAttribute('checked');
-            });
-        });
-        
+        // Listen after modal is shown and data is loaded
         questionEditModal.addEventListener('shown.bs.offcanvas', function() {
-            // Add a delay to ensure AJAX data has loaded
+            console.log('Question Edit Modal - Shown event triggered');
+            
+            // Add a delay to ensure the default AJAX call has completed
             setTimeout(() => {
-                // Check if any radio button is selected after data load
+                // Check if status radio is properly set
                 const checkedRadio = questionEditModal.querySelector('input[name="status"]:checked');
-                const allStatusRadios = questionEditModal.querySelectorAll('input[name="status"]');
+                const allRadios = questionEditModal.querySelectorAll('input[name="status"]');
                 
-                console.log('Question Edit Modal - Status radios found:', allStatusRadios.length);
+                console.log('Question Edit Modal - All radios:', allRadios.length);
                 console.log('Question Edit Modal - Checked radio:', checkedRadio);
                 
-                // If no radio button is selected, default to active
-                if (!checkedRadio) {
-                    const activeRadio = questionEditModal.querySelector('#e-status-1');
-                    console.log('Question Edit Modal - Active radio element:', activeRadio);
-                    if (activeRadio) {
-                        activeRadio.checked = true;
-                        activeRadio.setAttribute('checked', 'checked');
-                        console.log('Question Edit Modal - Set active radio to checked');
+                // If no radio is checked, something went wrong with the default handler
+                // Let's try to fix it by checking the resource data again
+                if (!checkedRadio && allRadios.length > 0) {
+                    console.log('Question Edit Modal - No radio checked, trying to fix...');
+                    
+                    // Get the form action to extract the question ID
+                    const form = questionEditModal.querySelector('#question-edit-form');
+                    if (form && form.action) {
+                        const actionUrl = form.action;
+                        const resourceUrl = actionUrl.replace('/update', '/edit');
+                        
+                        // Fetch the resource data again
+                        fetch(resourceUrl)
+                            .then(response => response.json())
+                            .then(data => {
+                                const resource = data.data;
+                                console.log('Question Edit Modal - Re-fetched resource:', resource);
+                                
+                                if (resource.status) {
+                                    const targetRadio = questionEditModal.querySelector('#e-status-' + resource.status.value);
+                                    console.log('Question Edit Modal - Target radio:', targetRadio);
+                                    
+                                    if (targetRadio) {
+                                        targetRadio.checked = true;
+                                        targetRadio.setAttribute('checked', 'checked');
+                                        console.log('Question Edit Modal - Fixed radio selection');
+                                    }
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Question Edit Modal - Error re-fetching:', error);
+                            });
                     }
                 }
-            }, 300);
+            }, 500);
         });
     }
 });
