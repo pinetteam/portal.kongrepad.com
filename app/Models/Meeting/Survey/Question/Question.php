@@ -32,6 +32,9 @@ class Question extends Model
         'updated_at' => 'datetime',
         'deleted_at' => 'datetime',
     ];
+    protected $attributes = [
+        'status' => 0,
+    ];
     public function getCreatedByNameAttribute()
     {
         return isset($this->created_by) ? User::findOrFail($this->created_by)->full_name : __('common.unspecified');

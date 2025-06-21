@@ -301,6 +301,7 @@
             <x-input.hidden method="c" name="survey_id" :value="$survey->id" />
             <x-input.number method="c" name="sort_order" title="sort" icon="circle-sort" />
             <x-input.text method="c" name="question" title="question" icon="pen-field" />
+            <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.create>
     
@@ -309,6 +310,7 @@
             <x-input.hidden method="e" name="survey_id" :value="$survey->id" />
             <x-input.number method="e" name="sort_order" title="sort" icon="circle-sort" />
             <x-input.text method="e" name="question" title="question" icon="pen-field" />
+            <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.edit>
     
@@ -341,6 +343,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const optionCreateModal = document.getElementById('option-create-modal');
     if (optionCreateModal) {
         optionCreateModal.addEventListener('shown.bs.offcanvas', function() {
+            const activeStatusRadio = document.getElementById('c-status-1');
+            if (activeStatusRadio && !document.querySelector('input[name="status"]:checked')) {
+                activeStatusRadio.checked = true;
+            }
+        });
+    }
+    
+    // Auto-select active status for question create form
+    const questionCreateModal = document.getElementById('question-create-modal');
+    if (questionCreateModal) {
+        questionCreateModal.addEventListener('shown.bs.offcanvas', function() {
             const activeStatusRadio = document.getElementById('c-status-1');
             if (activeStatusRadio && !document.querySelector('input[name="status"]:checked')) {
                 activeStatusRadio.checked = true;
