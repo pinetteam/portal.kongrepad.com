@@ -410,22 +410,15 @@ document.addEventListener('DOMContentLoaded', function() {
     if (questionEditModal) {
         // Listen after modal is shown and data is loaded
         questionEditModal.addEventListener('shown.bs.offcanvas', function() {
-            console.log('Question Edit Modal - Shown event triggered');
-            
             // Add a delay to ensure the default AJAX call has completed
             setTimeout(() => {
                 // Check if status radio is properly set
                 const checkedRadio = questionEditModal.querySelector('input[name="status"]:checked');
                 const allRadios = questionEditModal.querySelectorAll('input[name="status"]');
                 
-                console.log('Question Edit Modal - All radios:', allRadios.length);
-                console.log('Question Edit Modal - Checked radio:', checkedRadio);
-                
                 // If no radio is checked, something went wrong with the default handler
                 // Let's try to fix it by checking the resource data again
                 if (!checkedRadio && allRadios.length > 0) {
-                    console.log('Question Edit Modal - No radio checked, trying to fix...');
-                    
                     // Get the form action to extract the question ID
                     const form = questionEditModal.querySelector('#question-edit-form');
                     if (form && form.action) {
@@ -437,16 +430,13 @@ document.addEventListener('DOMContentLoaded', function() {
                             .then(response => response.json())
                             .then(data => {
                                 const resource = data.data;
-                                console.log('Question Edit Modal - Re-fetched resource:', resource);
                                 
                                 if (resource.status) {
                                     const targetRadio = questionEditModal.querySelector('#e-status-' + resource.status.value);
-                                    console.log('Question Edit Modal - Target radio:', targetRadio);
                                     
                                     if (targetRadio) {
                                         targetRadio.checked = true;
                                         targetRadio.setAttribute('checked', 'checked');
-                                        console.log('Question Edit Modal - Fixed radio selection');
                                     }
                                 }
                             })
