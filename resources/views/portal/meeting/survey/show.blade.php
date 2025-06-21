@@ -365,16 +365,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const editModals = document.querySelectorAll('[id$="-edit-modal"]');
     editModals.forEach(modal => {
         modal.addEventListener('hide.bs.offcanvas', function() {
-            // Clear all radio buttons in this modal
-            const radioButtons = modal.querySelectorAll('input[type="radio"]');
-            radioButtons.forEach(radio => {
-                radio.checked = false;
-                radio.removeAttribute('checked');
-            });
-        });
-        
-        // Also clear when showing the modal (before new data loads)
-        modal.addEventListener('show.bs.offcanvas', function() {
+            // Clear all radio buttons in this modal when closing
             const radioButtons = modal.querySelectorAll('input[type="radio"]');
             radioButtons.forEach(radio => {
                 radio.checked = false;
@@ -396,6 +387,27 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (!checkedRadio && statusRadios.length > 0) {
                     // Default to active (value 1)
                     const activeRadio = optionEditModal.querySelector('#e-status-1');
+                    if (activeRadio) {
+                        activeRadio.checked = true;
+                    }
+                }
+            }, 100);
+        });
+    }
+    
+    // Fix question edit modal radio button selection
+    const questionEditModal = document.getElementById('question-edit-modal');
+    if (questionEditModal) {
+        questionEditModal.addEventListener('shown.bs.offcanvas', function() {
+            // Add a small delay to ensure data has loaded
+            setTimeout(() => {
+                // If no radio button is selected, ensure at least one is checked
+                const statusRadios = questionEditModal.querySelectorAll('input[name="status"]');
+                const checkedRadio = questionEditModal.querySelector('input[name="status"]:checked');
+                
+                if (!checkedRadio && statusRadios.length > 0) {
+                    // Default to active (value 1)
+                    const activeRadio = questionEditModal.querySelector('#e-status-1');
                     if (activeRadio) {
                         activeRadio.checked = true;
                     }
