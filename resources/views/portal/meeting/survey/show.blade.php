@@ -299,7 +299,7 @@
             <x-input.text method="e" name="description" title="description" icon="comment-dots" />
             <x-input.datetime method="e" name="start_at" title="start-at" icon="calendar-arrow-down" />
             <x-input.datetime method="e" name="finish_at" title="finish-at" icon="calendar-arrow-down" />
-            <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
+            <x-input.status-checkbox method="e" name="status" title="status" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.edit>
     
@@ -311,7 +311,7 @@
             <x-input.hidden method="c" name="survey_id" :value="$survey->id" />
             <x-input.number method="c" name="sort_order" title="sort" icon="circle-sort" />
             <x-input.text method="c" name="question" title="question" icon="pen-field" />
-            <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
+            <x-input.status-checkbox method="c" name="status" title="status" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.create>
     
@@ -320,7 +320,7 @@
             <x-input.hidden method="e" name="survey_id" :value="$survey->id" />
             <x-input.number method="e" name="sort_order" title="sort" icon="circle-sort" />
             <x-input.text method="e" name="question" title="question" icon="pen-field" />
-            <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
+            <x-input.status-checkbox method="e" name="status" title="status" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.edit>
     
@@ -331,7 +331,7 @@
         @section('option-create-form')
             <x-input.number method="c" name="sort_order" title="sort" icon="circle-sort" />
             <x-input.text method="c" name="option" title="option" icon="pen-field" />
-            <x-input.radio method="c" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
+            <x-input.status-checkbox method="c" name="status" title="status" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.create>
     
@@ -339,7 +339,7 @@
         @section('option-edit-form')
             <x-input.number method="e" name="sort_order" title="sort" icon="circle-sort" />
             <x-input.text method="e" name="option" title="option" icon="pen-field" />
-            <x-input.radio method="e" name="status" title="status" :options="$statuses" option_value="value" option_name="title" icon="toggle-large-on" />
+            <x-input.status-checkbox method="e" name="status" title="status" icon="toggle-large-on" />
         @endsection
     </x-crud.form.common.edit>
     
@@ -349,44 +349,16 @@
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Auto-select active status for option create form
-    const optionCreateModal = document.getElementById('option-create-modal');
-    if (optionCreateModal) {
-        optionCreateModal.addEventListener('shown.bs.offcanvas', function() {
-            const activeStatusRadio = document.getElementById('c-status-1');
-            if (activeStatusRadio && !document.querySelector('input[name="status"]:checked')) {
-                activeStatusRadio.checked = true;
+    // Auto-check active status for create forms (default to active)
+    const createModals = document.querySelectorAll('[id$="-create-modal"]');
+    createModals.forEach(modal => {
+        modal.addEventListener('shown.bs.offcanvas', function() {
+            const statusCheckbox = modal.querySelector('input[name="status"][type="checkbox"]');
+            if (statusCheckbox) {
+                statusCheckbox.checked = true; // Default to active
             }
-        });
-    }
-    
-    // Auto-select active status for question create form
-    const questionCreateModal = document.getElementById('question-create-modal');
-    if (questionCreateModal) {
-        questionCreateModal.addEventListener('shown.bs.offcanvas', function() {
-            const activeStatusRadio = document.getElementById('c-status-1');
-            if (activeStatusRadio && !document.querySelector('input[name="status"]:checked')) {
-                activeStatusRadio.checked = true;
-            }
-        });
-    }
-    
-    // Enhanced radio button clearing in edit modals  
-    const editModals = document.querySelectorAll('[id$="-edit-modal"]');
-    editModals.forEach(modal => {
-        modal.addEventListener('hide.bs.offcanvas', function() {
-            // Clear all radio buttons in this modal when closing
-            const radioButtons = modal.querySelectorAll('input[type="radio"]');
-            radioButtons.forEach(radio => {
-                radio.checked = false;
-                radio.removeAttribute('checked');
-            });
         });
     });
-    
-
-    
-
 });
 </script>
 @endpush

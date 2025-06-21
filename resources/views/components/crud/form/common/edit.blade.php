@@ -108,6 +108,12 @@
                                 // Trigger change event for Bootstrap btn-check compatibility
                                 radioElement.dispatchEvent(new Event('change', { bubbles: true }));
                             }
+                        } else if(value['type'] === 'checkbox') {
+                            // Handle single checkbox (like status checkbox)
+                            const checkboxElement = editModal.querySelector('#{{ $method }}-' + key);
+                            if (checkboxElement !== null) {
+                                checkboxElement.checked = (value['value'] == 1 || value['value'] === true);
+                            }
                         } else if(value['type'] === 'select') {
                             const selectElement = editModal.querySelector('#{{ $method }}-' + key);
                             if (selectElement !== null) {
